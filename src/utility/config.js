@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
+const shell = require('shelljs');
 
 class ConfigDataProject {
   constructor(id, accountSid) {
@@ -38,6 +39,7 @@ class ConfigData {
 
 class Config {
   constructor(configDir) {
+    this.configDir = configDir;
     this.filePath = path.join(configDir, 'config.json');
   }
 
@@ -53,7 +55,8 @@ class Config {
   }
 
   async save(userConfig) {
-    await fs.writeJSON(this.filePath, userConfig);
+    shell.mkdir('-p', this.configDir);
+    await fs.writeJSON(this.filePath, userConfig, { flag: 'w' });
   }
 }
 
