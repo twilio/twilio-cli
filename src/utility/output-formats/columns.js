@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const columnify = require('columnify');
 
 function headingTransform(heading) {
@@ -9,7 +10,7 @@ function headingTransform(heading) {
     .split(' ')
     .map(word => (capitalizeWords.indexOf(word) > -1 ? word.toUpperCase() : word))
     .join(' ');
-  return heading;
+  return chalk.bold(heading);
 }
 
 module.exports = (fullData, limitedData) => {
