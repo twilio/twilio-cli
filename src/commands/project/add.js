@@ -67,6 +67,7 @@ class ProjectAdd extends BaseCommand {
 
   async promptForCredentials() {
     if (this.questions) {
+      this.logger.info('You can find your Account SID and Auth Token at https://www.twilio.com/console');
       const answers = await this.inquirer.prompt(this.questions);
       this.accountSid = answers.accountSid || this.accountSid;
       this.authToken = answers.authToken || this.authToken;
