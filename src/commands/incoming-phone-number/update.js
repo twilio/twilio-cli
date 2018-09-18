@@ -1,3 +1,4 @@
+const { URL } = require('url');
 const { flags } = require('@oclif/command');
 const TwilioClientCommand = require('../../base-commands/twilio-client-command');
 const IncomingPhoneNumberHelper = require('../../utility/resource-helpers/api/v2010/incoming-phone-number');
@@ -8,33 +9,41 @@ class NumberUpdate extends TwilioClientCommand {
     const helper = new IncomingPhoneNumberHelper(this);
     const phoneNumber = await helper.findPhoneNumber(this.args['phone-number']);
 
-    const updatedProperties = this.parseProperties();
-    this.logger.debug(updatedProperties);
+    this.tunnels = [];
+    const results = await this.updateResource(this.twilioClient.incomingPhoneNumbers, phoneNumber.sid, props => {
+      props = this.checkForLocalhost(props, 'smsUrl');
+      props = this.checkForLocalhost(props, 'voiceUrl');
+      return props;
+    });
 
-    const results = {
-      sid: phoneNumber.sid,
-      result: '?'
-    };
-
-    if (updatedProperties) {
-      try {
-        await this.twilioClient.incomingPhoneNumbers(phoneNumber.sid).update(updatedProperties);
-        results.result = 'Success';
-      } catch (err) {
-        this.logger.error(err.message);
-        results.result = 'Error';
-      }
-    } else {
-      this.logger.warn('Nothing to update.');
-      results.result = 'Nothing to update';
+    if (this.tunnels.length > 0) {
+      this.logger.debug('TODO: Spin up ngrok!!');
+      this.logger.debug(this.tunnels);
     }
 
     this.output(results);
+  }
+
+  checkForLocalhost(props, propName) {
+    if (props[propName]) {
+      const url = new URL(props[propName]);
+      if (['localhost', '127.0.0.1'].indexOf(url.hostname) > -1) {
+        const newTunnel = {
+          name: propName,
+          originalUrl: url,
+          newUrl: new URL('https://asdfasdfasd.ngrok.io' + url.pathname + url.search)
+        };
+        this.tunnels.push(newTunnel);
+        props[propName] = newTunnel.newUrl.toString();
+      }
+    }
+    return props;
   }
 }
 
 NumberUpdate.aliases = ['number:update', 'phone-number:update'];
 NumberUpdate.description = 'Update the properties of a Twilio phone number';
+
 NumberUpdate.PropertyFlags = {
   'friendly-name': flags.string({
     description: 'A human readable descriptive text for this resource, up to 64 characters long'

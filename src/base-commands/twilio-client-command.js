@@ -42,6 +42,34 @@ class TwilioClientCommand extends BaseCommand {
 
     return updatedProperties;
   }
+
+  async updateResource(resource, resourceSid, propertiesCallback) {
+    const results = {
+      sid: resourceSid,
+      result: '?'
+    };
+
+    let updatedProperties = this.parseProperties();
+    if (propertiesCallback) {
+      updatedProperties = propertiesCallback(updatedProperties) || updatedProperties;
+    }
+    this.logger.debug(updatedProperties);
+
+    if (updatedProperties) {
+      try {
+        await resource(resourceSid).update(updatedProperties);
+        results.result = 'Success';
+      } catch (err) {
+        this.logger.error(err.message);
+        results.result = 'Error';
+      }
+    } else {
+      this.logger.warn('Nothing to update.');
+      results.result = 'Nothing to update';
+    }
+
+    return results;
+  }
 }
 
 TwilioClientCommand.flags = Object.assign(
