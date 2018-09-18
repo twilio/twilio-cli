@@ -43,16 +43,13 @@ class TwilioClientCommand extends BaseCommand {
     return updatedProperties;
   }
 
-  async updateResource(resource, resourceSid, propertiesCallback) {
+  async updateResource(resource, resourceSid, updatedProperties) {
     const results = {
       sid: resourceSid,
       result: '?'
     };
 
-    let updatedProperties = this.parseProperties();
-    if (propertiesCallback) {
-      updatedProperties = propertiesCallback(updatedProperties) || updatedProperties;
-    }
+    updatedProperties = updatedProperties || this.parseProperties();
     this.logger.debug(updatedProperties);
 
     if (updatedProperties) {

@@ -1,3 +1,4 @@
+const ngrok = require('ngrok');
 const { URL } = require('url');
 const { flags } = require('@oclif/command');
 const TwilioClientCommand = require('../../base-commands/twilio-client-command');
@@ -9,35 +10,38 @@ class NumberUpdate extends TwilioClientCommand {
     const helper = new IncomingPhoneNumberHelper(this);
     const phoneNumber = await helper.findPhoneNumber(this.args['phone-number']);
 
-    this.tunnels = [];
-    const results = await this.updateResource(this.twilioClient.incomingPhoneNumbers, phoneNumber.sid, props => {
-      props = this.checkForLocalhost(props, 'smsUrl');
-      props = this.checkForLocalhost(props, 'voiceUrl');
-      return props;
-    });
+    const props = this.parseProperties();
+    this.tunnels = {};
+    await this.checkForLocalhost(props, 'smsUrl');
+    await this.checkForLocalhost(props, 'smsFallbackUrl');
+    await this.checkForLocalhost(props, 'voiceUrl');
+    await this.checkForLocalhost(props, 'voiceFallbackUrl');
 
-    if (this.tunnels.length > 0) {
-      this.logger.debug('TODO: Spin up ngrok!!');
+    const results = await this.updateResource(this.twilioClient.incomingPhoneNumbers, phoneNumber.sid, props);
+    this.output(results);
+
+    if (Object.keys(this.tunnels).length > 0) {
+      this.logger.info('ngrok is running. Press CTRL-C to stop.');
       this.logger.debug(this.tunnels);
     }
-
-    this.output(results);
   }
 
-  checkForLocalhost(props, propName) {
+  async checkForLocalhost(props, propName) {
     if (props[propName]) {
       const url = new URL(props[propName]);
-      if (['localhost', '127.0.0.1'].indexOf(url.hostname) > -1) {
-        const newTunnel = {
-          name: propName,
-          originalUrl: url,
-          newUrl: new URL('https://asdfasdfasd.ngrok.io' + url.pathname + url.search)
-        };
-        this.tunnels.push(newTunnel);
-        props[propName] = newTunnel.newUrl.toString();
+      if (['localhost', '127.0.0.1'].indexOf(url.hostname) > -1 && url.protocol === 'http:') {
+        let newBaseUrl = this.tunnels[url.port];
+        if (!newBaseUrl) {
+          const newTunnel = {
+            proto: 'http',
+            addr: url.port
+          };
+          newBaseUrl = await ngrok.connect(newTunnel);
+          this.tunnels[url.port] = newBaseUrl;
+        }
+        props[propName] = newBaseUrl + url.pathname + url.search;
       }
     }
-    return props;
   }
 }
 
