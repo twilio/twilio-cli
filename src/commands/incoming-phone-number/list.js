@@ -4,13 +4,13 @@ const TwilioClientCommand = require('../../base-commands/twilio-client-command')
 class NumberList extends TwilioClientCommand {
   async run() {
     await super.run();
-    const { flags } = this.parse(NumberList);
 
     const fullData = await this.twilioClient.incomingPhoneNumbers.list();
-    this.output(fullData, flags.properties);
+    this.output(fullData, this.flags.properties);
   }
 }
 
+NumberList.aliases = ['number:list', 'phone-number:list'];
 NumberList.description = 'Show what Twilio phone numbers you have configured';
 
 NumberList.flags = Object.assign(

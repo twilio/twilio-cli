@@ -12,7 +12,8 @@ class BaseCommand extends Command {
   }
 
   async run() {
-    const { flags } = this.parse(this.constructor);
+    const { args, flags } = this.parse(this.constructor);
+    this.args = args;
     this.flags = flags;
     await this.loadConfig();
 

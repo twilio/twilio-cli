@@ -14,13 +14,12 @@ class TwilioClientCommand extends BaseCommand {
   async run() {
     await super.run();
 
-    const { flags } = this.parse(this.constructor);
-    this.logger.debug('Using project: ' + flags.project);
-    this.currentProject = this.userConfig.getProjectById(flags.project);
+    this.logger.debug('Using project: ' + this.flags.project);
+    this.currentProject = this.userConfig.getProjectById(this.flags.project);
 
     if (!this.currentProject) {
-      this.logger.error('No project "' + flags.project + '" configured.');
-      const projParam = flags.project === 'default' ? '' : ' -p ' + flags.project;
+      this.logger.error('No project "' + this.flags.project + '" configured.');
+      const projParam = this.flags.project === 'default' ? '' : ' -p ' + this.flags.project;
       this.logger.error('To add project, run: twilio login' + projParam);
       this.exit(1);
       return;
@@ -28,6 +27,20 @@ class TwilioClientCommand extends BaseCommand {
 
     const { apiKey, apiSecret } = await secureStorage.getCredentials(this.currentProject.id);
     this.twilioClient = twilio(apiKey, apiSecret, { accountSid: this.currentProject.accountSid });
+  }
+
+  parseProperties() {
+    let updatedProperties = null;
+    Object.keys(this.constructor.PropertyFlags).forEach(propName => {
+      if (this.flags[propName]) {
+        updatedProperties = updatedProperties || {};
+        // Convert kebab-case to camelCase
+        const paramName = propName.replace(/-([a-z])/g, g => g[1].toUpperCase());
+        updatedProperties[paramName] = this.flags[propName];
+      }
+    });
+
+    return updatedProperties;
   }
 }
 

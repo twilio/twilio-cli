@@ -38,12 +38,10 @@ class ProjectAdd extends BaseCommand {
   }
 
   loadArguments() {
-    const { args, flags } = this.parse(ProjectAdd);
-
-    this.accountSid = args.accountSid;
-    this.authToken = flags['auth-token'];
-    this.projectId = flags.project;
-    this.force = flags.force;
+    this.accountSid = this.args['account-sid'];
+    this.authToken = this.flags['auth-token'];
+    this.projectId = this.flags.project;
+    this.force = this.flags.force;
   }
 
   validateAccountSid() {
@@ -150,7 +148,7 @@ ProjectAdd.flags = Object.assign(
 
 ProjectAdd.args = [
   {
-    name: 'accountSid',
+    name: 'account-sid',
     description: 'The Account SID for your Twilio project'
   }
 ];
