@@ -34,7 +34,8 @@ class NumberUpdate extends TwilioClientCommand {
         if (!newBaseUrl) {
           const newTunnel = {
             proto: 'http',
-            addr: url.port
+            addr: url.port,
+            host_header: url.host // eslint-disable-line camelcase
           };
           newBaseUrl = await ngrok.connect(newTunnel);
           this.tunnels[url.port] = newBaseUrl;
