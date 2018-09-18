@@ -42,7 +42,7 @@ class ProjectAdd extends BaseCommand {
 
     this.accountSid = args.accountSid;
     this.authToken = flags['auth-token'];
-    this.projectId = flags.projectId;
+    this.projectId = flags.project;
     this.force = flags.force;
   }
 
@@ -133,7 +133,7 @@ class ProjectAdd extends BaseCommand {
 }
 
 ProjectAdd.aliases = ['login'];
-ProjectAdd.description = 'Add credentials for an existing Twilio project.';
+ProjectAdd.description = 'Add credentials for an existing Twilio project';
 
 ProjectAdd.flags = Object.assign(
   {
@@ -142,7 +142,7 @@ ProjectAdd.flags = Object.assign(
     }),
     force: flags.boolean({
       char: 'f',
-      description: 'Force overwriting existing project credentials.'
+      description: 'Force overwriting existing project credentials'
     })
   },
   TwilioClientCommand.flags // Yes! We _do_ want the same flags as TwilioClientCommand
@@ -151,7 +151,7 @@ ProjectAdd.flags = Object.assign(
 ProjectAdd.args = [
   {
     name: 'accountSid',
-    description: 'The Account SID for your Twilio project.'
+    description: 'The Account SID for your Twilio project'
   }
 ];
 

@@ -70,14 +70,14 @@ BaseCommand.flags = {
     char: 'l',
     default: 'info',
     options: Object.keys(LoggingLevel),
-    description: 'Level of logging messages.'
+    description: 'Level of logging messages'
   }),
 
   'output-format': flags.enum({
     char: 'o',
     default: 'columns',
     options: Object.keys(OutputFormats),
-    description: 'Format of command output.'
+    description: 'Format of command output'
   })
 };
 
