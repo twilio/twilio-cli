@@ -61,6 +61,21 @@ NumberUpdate.PropertyFlags = {
   'sms-fallback-method': flags.enum({
     options: ['GET', 'POST'],
     description: 'The HTTP method that should be used to request the SmsFallbackUrl'
+  }),
+  'voice-url': flags.string({
+    description: 'The URL that Twilio should request when somebody dials the phone number'
+  }),
+  'voice-method': flags.enum({
+    options: ['GET', 'POST'],
+    description: 'The HTTP method Twilio will use when making requests to the VoiceUrl'
+  }),
+  'voice-fallback-url': flags.string({
+    description:
+      'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by VoiceUrl'
+  }),
+  'voice-fallback-method': flags.enum({
+    options: ['GET', 'POST'],
+    description: 'The HTTP method Twilio will use when requesting the VoiceFallbackUrl'
   })
 };
 
