@@ -15,7 +15,7 @@ class TwilioClientCommand extends BaseCommand {
     await super.run();
 
     const { flags } = this.parse(this.constructor);
-    this.currentProject = this.userConfig.getProjectById(flags.projectId);
+    this.currentProject = this.userConfig.getProjectById(flags.project);
 
     const { apiKey, apiSecret } = await secureStorage.getCredentials(this.currentProject.id);
     this.twilioClient = twilio(apiKey, apiSecret, { accountSid: this.currentProject.accountSid });
@@ -24,10 +24,10 @@ class TwilioClientCommand extends BaseCommand {
 
 TwilioClientCommand.flags = Object.assign(
   {
-    projectId: flags.string({
+    project: flags.string({
       char: 'p',
       default: 'default',
-      description: 'Shorthand identifier for your Twilio project'
+      description: 'Shorthand identifier for your Twilio project.'
     })
   },
   BaseCommand.flags

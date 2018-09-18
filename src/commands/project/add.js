@@ -41,7 +41,7 @@ class ProjectAdd extends BaseCommand {
     const { args, flags } = this.parse(ProjectAdd);
 
     this.accountSid = args.accountSid;
-    this.authToken = flags.authToken;
+    this.authToken = flags['auth-token'];
     this.projectId = flags.projectId;
     this.force = flags.force;
   }
@@ -61,7 +61,7 @@ class ProjectAdd extends BaseCommand {
       this.questions.push({
         type: 'password',
         name: 'authToken',
-        message: ProjectAdd.flags.authToken.description,
+        message: ProjectAdd.flags['auth-token'].description,
         validate: input => Boolean(input)
       });
     }
@@ -137,7 +137,7 @@ ProjectAdd.description = 'Add credentials for an existing Twilio project.';
 
 ProjectAdd.flags = Object.assign(
   {
-    authToken: flags.string({
+    'auth-token': flags.string({
       description: 'Your Twilio Auth Token for your Twilio project'
     }),
     force: flags.boolean({
@@ -151,7 +151,7 @@ ProjectAdd.flags = Object.assign(
 ProjectAdd.args = [
   {
     name: 'accountSid',
-    description: 'The Account SID for your Twilio project'
+    description: 'The Account SID for your Twilio project.'
   }
 ];
 

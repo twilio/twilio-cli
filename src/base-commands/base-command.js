@@ -17,7 +17,7 @@ class BaseCommand extends Command {
     await this.loadConfig();
 
     this.logger = new Logger({
-      level: LoggingLevel[flags.logLevel]
+      level: LoggingLevel[flags['log-level']]
     });
 
     this.logger.debug('Config File: ' + this.configFile.filePath);
@@ -60,18 +60,21 @@ class BaseCommand extends Command {
         });
       }
     }
-    process.stdout.write(OutputFormats[this.flags.outputFormat](dataArray, limitedData || dataArray) + '\n');
+    const processOutput = OutputFormats[this.flags['output-format']];
+    process.stdout.write(processOutput(dataArray, limitedData || dataArray) + '\n');
   }
 }
 
 BaseCommand.flags = {
-  logLevel: flags.enum({
+  'log-level': flags.enum({
+    char: 'l',
     default: 'info',
     options: Object.keys(LoggingLevel),
     description: 'Level of logging messages.'
   }),
 
-  outputFormat: flags.enum({
+  'output-format': flags.enum({
+    char: 'o',
     default: 'columns',
     options: Object.keys(OutputFormats),
     description: 'Format of command output.'
