@@ -1,0 +1,11 @@
+{
+  "extends": "oclif",
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "object-curly-spacing": ["error", "always"],
+    "comma-dangle": ["error", "never"]
+  }
+}

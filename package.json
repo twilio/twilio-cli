@@ -1,0 +1,67 @@
+{
+  "name": "twilio-cli",
+  "description": "Harness the power of Twilio from your command prompt.",
+  "version": "0.0.1",
+  "author": "Twilio @twilio",
+  "bin": {
+    "twilio": "./bin/run"
+  },
+  "bugs": "https://github.com/twilio/twilio-cli/issues",
+  "dependencies": {
+    "@oclif/command": "^1.4.36",
+    "@oclif/config": "^1.6.33",
+    "@oclif/plugin-help": "^2.0.5",
+    "chalk": "^2.4.1",
+    "columnify": "^1.5.4",
+    "fs-extra": "^7.0.0",
+    "inquirer": "^6.1.0",
+    "keytar": "^4.2.1",
+    "twilio": "^3.19.1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.15.4",
+    "@oclif/test": "^1.1.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-oclif": "^1.5.1",
+    "globby": "^8.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "rimraf": "^2.6.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/twilio/twilio-cli",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "twilio",
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
+    "topics": {
+      "project": {
+        "description": "Manage credentials for Twilio projects."
+      }
+    }
+  },
+  "repository": "twilio/twilio-cli",
+  "scripts": {
+    "postpack": "rimraf oclif.manifest.json npm-shrinkwrap.json",
+    "posttest": "eslint .",
+    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
+    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}

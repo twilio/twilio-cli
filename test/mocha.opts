@@ -1,0 +1,4 @@
+--require test/helpers/init.js
+--recursive
+--reporter spec
+--timeout 5000
