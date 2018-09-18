@@ -5,8 +5,9 @@ Super-early preview.
 ## Set up to explore
 
 1. Clone the repo.
-2. From the working directory, run `npm install . -g`.
-3. Run `twilio` from anywhere to use the CLI.
+2. From the working directory, run `npm install`.
+3. From the working directory, run `npm install . -g`.
+4. Run `twilio` from anywhere to use the CLI.
 
 ## Set up for development
 
