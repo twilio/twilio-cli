@@ -38,9 +38,9 @@ twilio
 Lists all available commands.
 
 ```
-twilio incomingPhoneNumber:list
+twilio incoming-phone-number:list
 ```
 
 Lists all your phone numbers.
 
-Add `--help` to any command to get help (e.g. `twilio incomingPhoneNumber:list --help`)
+Add `--help` to any command to get help (e.g. `twilio incoming-phone-number:list --help`)
