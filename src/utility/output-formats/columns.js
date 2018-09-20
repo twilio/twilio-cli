@@ -14,6 +14,10 @@ function headingTransform(heading) {
 }
 
 module.exports = (fullData, limitedData) => {
+  if (limitedData.length === 0) {
+    return '';
+  }
+
   const columns = Object.keys(limitedData[0])
     .map(key => ({ key, value: { headingTransform } }))
     .reduce((map, obj) => {

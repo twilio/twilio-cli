@@ -1,9 +1,14 @@
+const chalk = require('chalk');
 const BaseCommand = require('../../base-commands/base-command');
 
 class ProjectList extends BaseCommand {
   async run() {
     await super.run();
-    this.output(this.userConfig.projects);
+    if (this.userConfig.projects.length > 0) {
+      this.output(this.userConfig.projects);
+    } else {
+      this.logger.warn('No projects have been configured. Run ' + chalk.whiteBright('twilio login') + ' to add one!');
+    }
   }
 }
 
