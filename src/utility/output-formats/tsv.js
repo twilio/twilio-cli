@@ -1,7 +1,9 @@
-const columnify = require('columnify');
+const TSV = require('tsv');
 
 module.exports = (fullData, limitedData) => {
-  return columnify(limitedData, {
-    columnSplitter: '\t'
-  });
+  if (limitedData.length === 0) {
+    return '';
+  }
+
+  return TSV.stringify(limitedData);
 };

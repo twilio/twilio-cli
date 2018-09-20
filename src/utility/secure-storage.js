@@ -8,7 +8,7 @@ class SecureStorage {
 
   async getCredentials(projectId) {
     const credentials = await keytar.getPassword('twilio-cli', projectId);
-    const [apiKey, apiSecret] = credentials.split('|');
+    const [apiKey, apiSecret] = credentials ? credentials.split('|') : ['error', 'error'];
 
     return {
       apiKey,

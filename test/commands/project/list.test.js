@@ -9,7 +9,7 @@ describe('commands', () => {
         .stdout()
         .stderr()
         .command(['project:list'])
-        .it('runs project:list', ctx => {
+        .it('runs project:list with no projects', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('No projects have been configured');
         });
@@ -23,7 +23,7 @@ describe('commands', () => {
         .stdout()
         .stderr()
         .command(['project:list'])
-        .it('runs project:list', ctx => {
+        .it('runs project:list with 1 project', ctx => {
           expect(ctx.stdout).to.contain('default');
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
           expect(ctx.stderr).to.equal('');

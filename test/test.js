@@ -35,6 +35,8 @@ module.exports = {
   test: twilioTest,
   logger,
   constants: {
-    FAKE_ACCOUNT_SID: 'AC1234567890abcdef1234567890abcdef'
+    FAKE_ACCOUNT_SID: 'AC1234567890abcdef1234567890abcdef',
+    FAKE_API_KEY: 'SK67890abcdef1234567890abcdef12345',
+    FAKE_API_SECRET: 'fake password'
   }
 };

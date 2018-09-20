@@ -1,14 +1,14 @@
+const chalk = require('chalk');
 const { flags } = require('@oclif/command');
 const twilio = require('twilio');
-
-const BaseCommand = require('./base-command');
 const { SecureStorage } = require('../utility/secure-storage');
-const secureStorage = new SecureStorage();
+const BaseCommand = require('./base-command');
 
 class TwilioClientCommand extends BaseCommand {
-  constructor(argv, config) {
+  constructor(argv, config, secureStorage) {
     super(argv, config);
     this.twilioClient = undefined;
+    this.secureStorage = secureStorage || new SecureStorage();
   }
 
   async run() {
@@ -17,19 +17,33 @@ class TwilioClientCommand extends BaseCommand {
     this.logger.debug('Using project: ' + this.flags.project);
     this.currentProject = this.userConfig.getProjectById(this.flags.project);
 
+    const reportUnconfigured = verb => {
+      const projParam = this.flags.project === 'default' ? '' : ' -p ' + this.flags.project;
+      this.logger.error('To ' + verb + ' project, run: ' + chalk.whiteBright('twilio login' + projParam));
+      this.exit(1);
+    };
+
     if (!this.currentProject) {
       this.logger.error('No project "' + this.flags.project + '" configured.');
-      const projParam = this.flags.project === 'default' ? '' : ' -p ' + this.flags.project;
-      this.logger.error('To add project, run: twilio login' + projParam);
-      this.exit(1);
+      reportUnconfigured('add');
       return;
     }
 
-    const { apiKey, apiSecret } = await secureStorage.getCredentials(this.currentProject.id);
+    const { apiKey, apiSecret } = await this.secureStorage.getCredentials(this.currentProject.id);
+    if (apiKey === 'error') {
+      this.logger.error('Could not get credentials for project "' + this.flags.project + '".');
+      reportUnconfigured('reconfigure');
+      return;
+    }
+
     this.twilioClient = twilio(apiKey, apiSecret, { accountSid: this.currentProject.accountSid });
   }
 
   parseProperties() {
+    if (!this.constructor.PropertyFlags) {
+      return null;
+    }
+
     let updatedProperties = null;
     Object.keys(this.constructor.PropertyFlags).forEach(propName => {
       if (this.flags[propName]) {

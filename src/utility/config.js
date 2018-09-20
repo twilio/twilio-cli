@@ -20,6 +20,12 @@ class ConfigData {
     });
   }
 
+  removeProject(projectToRemove) {
+    this.projects = this.projects.filter(project => {
+      return project.id !== projectToRemove.id;
+    });
+  }
+
   addProject(id, accountSid) {
     const existing = this.getProjectById(id);
     if (existing) {

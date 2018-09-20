@@ -18,6 +18,7 @@
     "keytar": "^4.2.1",
     "ngrok": "^3.0.1",
     "shelljs": "^0.8.2",
+    "tsv": "^0.2.0",
     "twilio": "^3.19.1"
   },
   "devDependencies": {
@@ -29,8 +30,10 @@
     "eslint-plugin-mocha": "^5.2.0",
     "globby": "^8.0.1",
     "mocha": "^5.2.0",
+    "nock": "^10.0.0",
     "nyc": "^12.0.2",
     "rimraf": "^2.6.2",
+    "sinon": "^6.3.4",
     "tmp": "0.0.33"
   },
   "engines": {
