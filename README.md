@@ -1,5 +1,7 @@
 # twilio-cli
 
+[![Build Status](https://travis-ci.com/twilio/twilio-cli.svg?token=8pBrDtYneMQqFq8wVpYP&branch=master)](https://travis-ci.com/twilio/twilio-cli)
+
 Super-early preview.
 
 ## Set up to explore
