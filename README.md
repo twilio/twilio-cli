@@ -9,6 +9,14 @@ Super-early preview.
 3. From the working directory, run `npm install . -g`.
 4. Run `twilio` from anywhere to use the CLI.
 
+### Running on Linux?
+
+You may need to run the following to avoid errors during step 2 above:
+
+```
+sudo apt-get install -y libsecret-1-dev
+```
+
 ## Set up for development
 
 1. Clone the repo.
@@ -45,3 +53,7 @@ twilio incoming-phone-number:list
 Lists all your phone numbers.
 
 Add `--help` to any command to get help (e.g. `twilio incoming-phone-number:list --help`)
+
+```
+
+```
