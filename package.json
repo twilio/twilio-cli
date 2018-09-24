@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "description": "Harness the power of Twilio from your command prompt.",
+  "description": "Unleash the power of Twilio from your command prompt.",
   "version": "0.0.1",
   "author": "Twilio @twilio",
   "bin": {
