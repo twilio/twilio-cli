@@ -7,7 +7,13 @@ class SecureStorage {
   }
 
   async getCredentials(projectId) {
-    const credentials = await keytar.getPassword('twilio-cli', projectId);
+    let credentials = null;
+    try {
+      credentials = await keytar.getPassword('twilio-cli', projectId);
+    } catch (e) {
+      return { apiKey: 'error', apiSecret: e.message };
+    }
+
     const [apiKey, apiSecret] = credentials ? credentials.split('|') : ['error', 'error'];
 
     return {
