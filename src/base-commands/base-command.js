@@ -9,6 +9,7 @@ class BaseCommand extends Command {
     super(argv, config);
     this.configFile = new Config('');
     this.userConfig = new ConfigData();
+    this.inquirer = inquirer;
   }
 
   async run() {
@@ -22,8 +23,6 @@ class BaseCommand extends Command {
     });
 
     this.logger.debug('Config File: ' + this.configFile.filePath);
-
-    this.inquirer = inquirer;
 
     // Replace oclif's output commands
     this.log = this.logger.info;
