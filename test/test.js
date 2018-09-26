@@ -1,3 +1,4 @@
+const sinon = require('sinon');
 const OclifConfig = require('@oclif/config');
 const { expect, test } = require('@oclif/test');
 const tmp = require('tmp');
@@ -28,7 +29,9 @@ async function createCommand(ctx, CommandClass, args) {
         apiKey: constants.FAKE_API_KEY,
         apiSecret: constants.FAKE_API_SECRET + projectId
       };
-    }
+    },
+
+    saveCredentials: sinon.fake.resolves(true)
   });
 }
 

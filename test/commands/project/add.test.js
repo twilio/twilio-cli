@@ -1,10 +1,7 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
-// const nock = require('nock');
 const { expect, test, constants } = require('../../test');
 const ProjectAdd = require('../../../src/commands/project/add');
-
-// nock.recorder.rec();
 
 describe('commands', () => {
   describe('project', () => {
