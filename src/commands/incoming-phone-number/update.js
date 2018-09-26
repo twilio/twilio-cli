@@ -1,10 +1,15 @@
-const ngrok = require('ngrok');
+const chalk = require('chalk');
 const { URL } = require('url');
 const { flags } = require('@oclif/command');
 const TwilioClientCommand = require('../../base-commands/twilio-client-command');
 const IncomingPhoneNumberHelper = require('../../utility/resource-helpers/api/v2010/incoming-phone-number');
 
 class NumberUpdate extends TwilioClientCommand {
+  constructor(argv, config, secureStorage, ngrok) {
+    super(argv, config, secureStorage);
+    this.ngrok = ngrok || require('ngrok');
+  }
+
   async run() {
     await super.run();
     const helper = new IncomingPhoneNumberHelper(this);
@@ -21,7 +26,10 @@ class NumberUpdate extends TwilioClientCommand {
     this.output(results);
 
     if (Object.keys(this.tunnels).length > 0) {
-      this.logger.info('ngrok is running. Press CTRL-C to stop.');
+      this.logger.info(
+        'ngrok is running. Open ' + chalk.blueBright('http://localhost:4040/') + ' to view tunnel activity.'
+      );
+      this.logger.info('Press CTRL-C to stop.');
       this.logger.debug(this.tunnels);
     }
   }
@@ -37,7 +45,7 @@ class NumberUpdate extends TwilioClientCommand {
             addr: url.port,
             host_header: url.host // eslint-disable-line camelcase
           };
-          newBaseUrl = await ngrok.connect(newTunnel);
+          newBaseUrl = await this.ngrok.connect(newTunnel);
           this.tunnels[url.port] = newBaseUrl;
         }
         props[propName] = newBaseUrl + url.pathname + url.search;

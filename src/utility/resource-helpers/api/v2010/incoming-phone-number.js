@@ -28,7 +28,7 @@ class IncomingPhoneNumberHelper {
       this.command.exit(1);
     }
 
-    if (matches.length > 0) return matches[0];
+    if (matches && matches.length > 0) return matches[0];
 
     this.logger.error('Could not find phone number ' + userInput);
     this.command.exit(1);
