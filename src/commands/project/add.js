@@ -4,6 +4,7 @@ const twilio = require('twilio');
 
 const BaseCommand = require('../../base-commands/base-command');
 const TwilioClientCommand = require('../../base-commands/twilio-client-command');
+const CLIRequestClient = require('../../utility/cli-http-client');
 
 class ProjectAdd extends BaseCommand {
   constructor(argv, config, secureStorage) {
@@ -96,8 +97,14 @@ class ProjectAdd extends BaseCommand {
     return overwrite;
   }
 
+  getTwilioClient() {
+    return twilio(this.accountSid, this.authToken, {
+      httpClient: new CLIRequestClient(this.id, this.logger)
+    });
+  }
+
   async validateCredentials() {
-    const twilioClient = twilio(this.accountSid, this.authToken);
+    const twilioClient = this.getTwilioClient();
     try {
       const account = await twilioClient.api.accounts(this.accountSid).fetch();
       this.logger.debug(account);
@@ -113,7 +120,7 @@ class ProjectAdd extends BaseCommand {
     const apiKeyFriendlyName = 'Twilio CLI on ' + os.hostname();
     let apiKey = null;
 
-    const twilioClient = twilio(this.accountSid, this.authToken);
+    const twilioClient = this.getTwilioClient();
     try {
       apiKey = await twilioClient.newKeys.create({ friendlyName: apiKeyFriendlyName });
       this.logger.debug(apiKey);
