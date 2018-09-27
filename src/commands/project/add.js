@@ -4,12 +4,10 @@ const twilio = require('twilio');
 
 const BaseCommand = require('../../base-commands/base-command');
 const TwilioClientCommand = require('../../base-commands/twilio-client-command');
-const { SecureStorage } = require('../../utility/secure-storage');
-const secureStorage = new SecureStorage();
 
 class ProjectAdd extends BaseCommand {
-  constructor(argv, config) {
-    super(argv, config);
+  constructor(argv, config, secureStorage) {
+    super(argv, config, secureStorage);
 
     this.accountSid = undefined;
     this.authToken = undefined;
@@ -126,7 +124,7 @@ class ProjectAdd extends BaseCommand {
     }
 
     this.userConfig.addProject(this.projectId, this.accountSid);
-    await secureStorage.saveCredentials(this.projectId, apiKey.sid, apiKey.secret);
+    await this.secureStorage.saveCredentials(this.projectId, apiKey.sid, apiKey.secret);
     await this.configFile.save(this.userConfig);
   }
 }

@@ -1,14 +1,12 @@
 const chalk = require('chalk');
 const { flags } = require('@oclif/command');
 const twilio = require('twilio');
-const { SecureStorage } = require('../utility/secure-storage');
 const BaseCommand = require('./base-command');
 
 class TwilioClientCommand extends BaseCommand {
   constructor(argv, config, secureStorage) {
-    super(argv, config);
+    super(argv, config, secureStorage);
     this.twilioClient = undefined;
-    this.secureStorage = secureStorage || new SecureStorage();
   }
 
   async run() {

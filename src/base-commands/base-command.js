@@ -3,13 +3,15 @@ const { Command, flags } = require('@oclif/command');
 const { Config, ConfigData } = require('../utility/config');
 const { Logger, LoggingLevel } = require('../utility/logging');
 const { OutputFormats } = require('../utility/output-formats');
+const { SecureStorage } = require('../utility/secure-storage');
 
 class BaseCommand extends Command {
-  constructor(argv, config) {
+  constructor(argv, config, secureStorage) {
     super(argv, config);
     this.configFile = new Config('');
     this.userConfig = new ConfigData();
     this.inquirer = inquirer;
+    this.secureStorage = secureStorage || new SecureStorage();
   }
 
   async run() {
