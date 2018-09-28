@@ -5,7 +5,7 @@
 ## Prerequisites
 
 1. [Node.js](https://nodejs.org/) >= 8.0
-1. Running on Linux? Depending on your distribution, you will need to run the following command:
+1. Running on Linux? Depending on your distribution, you will need to run the following command: <br>
    **Debian/Ubuntu**: `sudo apt-get install libsecret-1-dev` <br>
    **Red Hat-based**: `sudo yum install libsecret-devel` <br>
    **Arch Linux**: `sudo pacman -S libsecret`
