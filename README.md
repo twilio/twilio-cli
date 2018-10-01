@@ -1,6 +1,12 @@
-# The Twilio CLI
+# A Twilio CLI
 
 [![Build Status](https://travis-ci.com/twilio/twilio-cli.svg?token=8pBrDtYneMQqFq8wVpYP&branch=master)](https://travis-ci.com/twilio/twilio-cli)
+
+## ⚠⚠⚠⚠ Pre-release software warning ⚠⚠⚠⚠
+
+This software is in pre-release status and not currently supported. We are looking for community feedback on what type of CLI tool would be the most useful for Twilio users.
+
+⚠⚠⚠⚠
 
 ## Prerequisites
 
@@ -14,13 +20,11 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 
 ## Setup
 
-1. Go to [the releases](https://code.hq.twilio.com/deved/twilio-cli/releases).
-1. Download the latest release `tgz` file (e.g. `twilio-cli-x.x.x.tgz`).
-1. Install the CLI globally using `npm install -g twilio-cli-x.x.x.tgz`
+1. Install the CLI globally using `npm install -g twilio-cli`
 
 ## Setup, if you want to hack on the project
 
-1. Clone this repo.
+1. Clone [this repo](https://github.com/twilio/twilio-cli).
 1. From the repo directory, run: `npm install`
 1. Run `./bin/run` from the repo directory to run the CLI.
 
