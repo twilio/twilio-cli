@@ -14,10 +14,15 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 
 ## Setup
 
+1. Go to [the releases](https://code.hq.twilio.com/deved/twilio-cli/releases).
+1. Download the latest release `tgz` file (e.g. `twilio-cli-x.x.x.tgz`).
+1. Install the CLI globally using `npm install -g twilio-cli-x.x.x.tgz`
+
+## Setup, if you want to hack on the project
+
 1. Clone this repo.
 1. From the repo directory, run: `npm install`
-1. From the repo directory, run: `npm install . -g`
-1. Run `twilio` from anywhere to use the CLI.
+1. Run `./bin/run` from the repo directory to run the CLI.
 
 ## Basic usage
 
