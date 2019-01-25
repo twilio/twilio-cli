@@ -11,6 +11,7 @@
     "@oclif/command": "^1.4.36",
     "@oclif/config": "^1.6.33",
     "@oclif/plugin-help": "^2.0.5",
+    "await-exec": "^0.1.2",
     "chalk": "^2.4.1",
     "columnify": "^1.5.4",
     "fs-extra": "^7.0.0",
