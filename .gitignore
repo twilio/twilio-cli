@@ -7,3 +7,4 @@
 node_modules
 coverage
 ZORK1.DAT
+*.glksave
