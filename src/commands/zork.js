@@ -1,23 +1,28 @@
 const BaseCommand = require('../base-commands/base-command');
 
 class Zork extends BaseCommand {
+  constructor(argv, config, secureStorage) {
+    super(argv, config, secureStorage);
+    this.exec = require('await-exec');
+    this.findZork = () => require('zorkjs'); // eslint-disable-line node/no-extraneous-require
+  }
+
   async run() {
     await super.run();
 
     let launchZork = null;
     try {
-      launchZork = require('zorkjs');
+      launchZork = this.findZork();
     } catch (error) {
       // We'll need to load the zorkjs module
     }
 
     if (!launchZork) {
       this.logger.warn('Standby, loading the dungeon...');
-      const exec = require('await-exec');
-      await exec('npm install zorkjs');
+      await this.exec('npm install --no-save zorkjs');
 
       try {
-        launchZork = require('zorkjs');
+        launchZork = this.findZork();
       } catch (error) {
         // I guess it didn't work :(
       }
