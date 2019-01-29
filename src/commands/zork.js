@@ -4,7 +4,7 @@ class Zork extends BaseCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
     this.exec = require('await-exec');
-    this.findZork = () => require('zorkjs'); // eslint-disable-line node/no-extraneous-require
+    this.findZork = () => require('zorkjs'); // eslint-disable-line node/no-extraneous-require,node/no-missing-require
   }
 
   async run() {
