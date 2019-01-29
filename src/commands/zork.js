@@ -3,37 +3,38 @@ const BaseCommand = require('../base-commands/base-command');
 class Zork extends BaseCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
-    this.exec = require('await-exec');
-    this.findZork = () => require('zorkjs'); // eslint-disable-line node/no-extraneous-require,node/no-missing-require
+    this.exec = require('../utility/await-exec');
+
+    // We don't have a direct dependency on the zorkjs module,
+    // but eslint tries to make sure you don't reference packages
+    // that aren't in your package.json. The comment below is how
+    // you disable specific linter rules for a single line of code.
+
+    // eslint-disable-next-line node/no-extraneous-require,node/no-missing-require
+    this.findZork = () => require('zorkjs');
   }
 
   async run() {
     await super.run();
 
-    let launchZork = null;
     try {
-      launchZork = this.findZork();
+      this.runZork();
     } catch (error) {
-      // We'll need to load the zorkjs module
-    }
-
-    if (!launchZork) {
       this.logger.warn('Standby, loading the dungeon...');
-      await this.exec('npm install --no-save zorkjs');
 
       try {
-        launchZork = this.findZork();
+        await this.exec('npm install --no-save zorkjs');
+        this.runZork();
       } catch (error) {
-        // I guess it didn't work :(
+        this.logger.error('I don\'t know the word "zork".');
+        this.exit(1);
       }
     }
+  }
 
-    if (launchZork) {
-      launchZork();
-    } else {
-      this.logger.error('I don\'t know the word "zork".');
-      this.exit(1);
-    }
+  runZork() {
+    const launchZork = this.findZork();
+    launchZork();
   }
 }
 

@@ -8,9 +8,9 @@ describe('commands', () => {
       .twilioCliEnv()
       .twilioCreateCommand(Zork, [])
       .do(ctx => {
-        ctx.testCmd.exec = sinon.stub().resolves();
+        ctx.testCmd.exec = sinon.stub().throws('simulated error installing module');
+        ctx.testCmd.findZork = sinon.stub().throws('simulated error finding module');
         ctx.testCmd.exit = sinon.fake();
-        ctx.testCmd.findZork = sinon.stub().returns(null);
       })
       .stdout()
       .stderr()
@@ -28,7 +28,7 @@ describe('commands', () => {
         ctx.testCmd.findZork = sinon
           .stub()
           .onFirstCall()
-          .returns(null)
+          .throws('simulated error finding module')
           .onSecondCall()
           .returns(() => ctx.testCmd.logger.info('Running zork'));
       })
