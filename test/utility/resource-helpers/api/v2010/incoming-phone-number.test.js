@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
 const { expect, test, constants, getFakeSid } = require('../../../../test');
-const IncomingPhoneNumberHelper = require('../../../../../src/utility/resource-helpers/api/v2010/incoming-phone-number');
+const IncomingPhoneNumberHelper = require('../../../../../src/services/resource-helpers/api/v2010/incoming-phone-number');
 const TwilioClientCommand = require('../../../../../src/base-commands/twilio-client-command');
 
 const fakeNumber = '+12095551212';

@@ -4,7 +4,7 @@ const twilio = require('twilio');
 
 const BaseCommand = require('../../base-commands/base-command');
 const TwilioClientCommand = require('../../base-commands/twilio-client-command');
-const CLIRequestClient = require('../../utility/cli-http-client');
+const CLIRequestClient = require('../../services/cli-http-client');
 
 class ProjectAdd extends BaseCommand {
   constructor(argv, config, secureStorage) {

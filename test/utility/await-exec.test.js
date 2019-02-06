@@ -1,4 +1,4 @@
-const exec = require('../../src/utility/await-exec');
+const exec = require('../../src/services/await-exec');
 const { expect, test } = require('../test');
 
 describe('utility', () => {

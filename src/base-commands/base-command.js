@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
 const { Command, flags } = require('@oclif/command');
-const { Config, ConfigData } = require('../utility/config');
-const { Logger, LoggingLevel } = require('../utility/logging');
-const { OutputFormats } = require('../utility/output-formats');
-const { SecureStorage } = require('../utility/secure-storage');
+const { Config, ConfigData } = require('../services/config');
+const { Logger, LoggingLevel } = require('../services/logging');
+const { OutputFormats } = require('../services/output-formats');
+const { SecureStorage } = require('../services/secure-storage');
 
 class BaseCommand extends Command {
   constructor(argv, config, secureStorage) {
