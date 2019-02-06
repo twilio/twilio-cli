@@ -1,5 +1,5 @@
 const { expect, test, constants } = require('../../test');
-const { ConfigData } = require('../../../src/utility/config');
+const { ConfigData } = require('../../../src/services/config');
 
 describe('commands', () => {
   describe('project', () => {

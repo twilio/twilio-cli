@@ -2,8 +2,8 @@ const sinon = require('sinon');
 const OclifConfig = require('@oclif/config');
 const { expect, test } = require('@oclif/test');
 const tmp = require('tmp');
-const { Logger, LoggingLevel } = require('../src/utility/logging');
-const { Config, ConfigData } = require('../src/utility/config');
+const { Logger, LoggingLevel } = require('../src/services/logging');
+const { Config, ConfigData } = require('../src/services/config');
 
 const logger = new Logger({ level: LoggingLevel.debug });
 

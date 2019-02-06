@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const { flags } = require('@oclif/command');
 const twilio = require('twilio');
 const BaseCommand = require('./base-command');
-const CLIRequestClient = require('../utility/cli-http-client');
+const CLIRequestClient = require('../services/cli-http-client');
 
 class TwilioClientCommand extends BaseCommand {
   constructor(argv, config, secureStorage) {

@@ -3,7 +3,7 @@ const BaseCommand = require('../base-commands/base-command');
 class Zork extends BaseCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
-    this.exec = require('../utility/await-exec');
+    this.exec = require('../services/await-exec');
 
     // We don't have a direct dependency on the zorkjs module,
     // but eslint tries to make sure you don't reference packages

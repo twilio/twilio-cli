@@ -2,7 +2,7 @@
 const sinon = require('sinon');
 const { expect, test, constants } = require('../test');
 const TwilioClientCommand = require('../../src/base-commands/twilio-client-command');
-const { ConfigData } = require('../../src/utility/config');
+const { ConfigData } = require('../../src/services/config');
 
 describe('base-commands', () => {
   describe('twilio-client-command', () => {
