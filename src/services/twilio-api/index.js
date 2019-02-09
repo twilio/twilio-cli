@@ -70,7 +70,10 @@ class TwilioApiBrowser {
 
       const resources = domains[domain].versions[version].resources;
       if (!Object.prototype.hasOwnProperty.call(resources, resourcePath)) {
-        resources[resourcePath] = { actions: {} };
+        resources[resourcePath] = {
+          actions: {},
+          description: this.apiSpec.paths[path].description.replace(/(\r\n|\n|\r)/gm, ' ')
+        };
       }
 
       const actions = resources[resourcePath].actions;

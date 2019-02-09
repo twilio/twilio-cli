@@ -20,14 +20,16 @@ describe('services', () => {
                 {
                   url: 'https://api.twilio.com'
                 }
-              ]
+              ],
+              description: 'Widgets here\nsecond line of text'
             },
             '/v1/Gadgets.json': {
               servers: [
                 {
                   url: 'https://neato.twilio.com'
                 }
-              ]
+              ],
+              description: 'v1 Gadgets here'
             },
             '/v2/Gadgets.json': {
               servers: [
@@ -36,7 +38,8 @@ describe('services', () => {
                 }
               ],
               post: { createStuff: '' },
-              get: { listStuff: '' }
+              get: { listStuff: '' },
+              description: 'v2 Gadgets here'
             },
             '/v2/Gadgets/{Sid}.json': {
               servers: [
@@ -46,7 +49,8 @@ describe('services', () => {
               ],
               post: { updateStuff: '' },
               get: { fetchStuff: '' },
-              delete: { removeStuff: '' }
+              delete: { removeStuff: '' },
+              description: 'v2 Gadgets here (should be same)'
             }
           }
         });
@@ -56,7 +60,7 @@ describe('services', () => {
             versions: {
               v2010: {
                 resources: {
-                  '/Widgets': { actions: {} }
+                  '/Widgets': { actions: {}, description: 'Widgets here second line of text' }
                 }
               }
             }
@@ -65,7 +69,7 @@ describe('services', () => {
             versions: {
               v1: {
                 resources: {
-                  '/Gadgets': { actions: {} }
+                  '/Gadgets': { actions: {}, description: 'v1 Gadgets here' }
                 }
               },
               v2: {
@@ -77,7 +81,8 @@ describe('services', () => {
                       list: { listStuff: '' },
                       update: { updateStuff: '' },
                       remove: { removeStuff: '' }
-                    }
+                    },
+                    description: 'v2 Gadgets here'
                   }
                 }
               }
