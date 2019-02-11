@@ -26,19 +26,20 @@ class TwilioRestApiPlugin extends Plugin {
   }
 
   get topics() {
-    // Hard-coding one resource/action for now.
+    // TODO: Hard-coding one resource/action for now.
     const resource = this.apiBrowser.domains.api.versions.v2010.resources['/Accounts/{AccountSid}/Calls'];
     return [{ name: 'call', description: resource.description }];
   }
 
   get commandIDs() {
+    // TODO: Hard-coding one resource/action for now.
     return ['call:create'];
   }
 
   get commands() {
     const commands = [];
 
-    // Hard-coding one resource/action for now.
+    // TODO: Hard-coding one resource/action for now.
     const resource = this.apiBrowser.domains.api.versions.v2010.resources['/Accounts/{AccountSid}/Calls'];
     const action = resource.actions.create;
     const cmd = class extends TwilioClientCommand {
@@ -48,13 +49,14 @@ class TwilioRestApiPlugin extends Plugin {
 
         Object.keys(flags).forEach(key => {
           if (Object.prototype.hasOwnProperty.call(cmd.flags[key], 'x-schema')) {
-            console.log(key, cmd.flags[key]['x-schema']);
+            const schema = cmd.flags[key]['x-schema'];
             // TODO: Run param validation for minLength, maxLength, and pattern
+            this.logger.debug(`Schema for ${key}: ` + JSON.stringify(schema));
           }
         });
 
-        this.logger.info('running command');
-        console.log(flags);
+        this.logger.info('TODO: Implement the API call based on provided flags.');
+        this.logger.debug('Provided flags: ' + JSON.stringify(flags));
       }
     };
 
