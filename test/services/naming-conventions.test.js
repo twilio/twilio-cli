@@ -1,4 +1,4 @@
-const { kebabCase, camelCase } = require('../../src/services/namingConventions');
+const { kebabCase, camelCase } = require('../../src/services/naming-conventions');
 
 const { expect, test } = require('../test');
 
