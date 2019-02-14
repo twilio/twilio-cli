@@ -6,6 +6,7 @@ const { flags } = require('@oclif/command');
 const TwilioClientCommand = require('./twilio-client-command');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
 const { doesObjectHaveProperty } = require('../services/javascript-utilities');
+const ResourcePathParser = require('../services/resource-path-parser');
 
 // Open API type to oclif flag type mapping
 const typeMap = {
@@ -54,18 +55,23 @@ class TwilioApiCommand extends TwilioClientCommand {
     // the Node.js object in the Twilio Helper library.
     // Example: twilioClient.api.v2010.accounts('ACxxxx').calls
     const helperVersion = this.twilioClient[domainName][versionName];
-    const pathNodes = currentPath.split('/');
-    pathNodes.splice(0, 1); // Remove first empty node
+    const resourcePathParser = new ResourcePathParser(currentPath);
     let endpoint = helperVersion;
-    pathNodes.forEach(pathNode => {
-      if (pathNode.startsWith('{')) {
+
+    resourcePathParser.forEachPathNode(pathNode => {
+      if (resourcePathParser.isPathVariable(pathNode)) {
         const paramName = kebabCase(pathNode.replace(/[{}]/g, ''));
         let value = '';
-        if (Object.hasOwnProperty.call(receivedFlags, paramName)) {
+
+        if (doesObjectHaveProperty(receivedFlags, paramName)) {
           value = receivedFlags[paramName];
         } else if (paramName === ACCOUNT_SID_FLAG) {
           value = this.twilioClient.accountSid;
         }
+
+        // Since this part of the path has a parameter, we invoke
+        // the current endpoint as a function, passing the parameter
+        // and then use it's result as the new endpoint.
         endpoint = endpoint(value);
       } else {
         endpoint = endpoint[camelCase(pathNode)];

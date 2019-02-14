@@ -1,6 +1,7 @@
 const url = require('url');
 const apiSpecFromDisk = require('./twilio_api.json');
 const { doesObjectHaveProperty } = require('../javascript-utilities');
+const ResourcePathParser = require('../resource-path-parser');
 
 function translateLegacyVersions(domain, version) {
   // In the Node helper library, api.twilio.com/2010-04-01 is represented as "v2010"
@@ -47,10 +48,11 @@ class TwilioApiBrowser {
       const serverUrl = new url.URL(this.apiSpec.paths[path].servers[0].url);
       const domain = serverUrl.host.split('.')[0]; // e.g. 'api' from 'api.twilio.com'
 
-      const version = translateLegacyVersions(
-        domain,
-        path.split('/')[1] // e.g. 'v1' from '/v1/foo/bar'
-      );
+      const resourcePathParser = new ResourcePathParser(path);
+      resourcePathParser.normalizePath(); // e.g /v1/foo/bar/{Sid}.json --> /foo/bar
+      const resourcePath = resourcePathParser.getFullPath();
+
+      const version = translateLegacyVersions(domain, resourcePathParser.version);
 
       if (!doesObjectHaveProperty(domains, domain)) {
         domains[domain] = { versions: {} };
@@ -59,15 +61,6 @@ class TwilioApiBrowser {
       if (!doesObjectHaveProperty(domains[domain].versions, version)) {
         domains[domain].versions[version] = { resources: {} };
       }
-
-      const isInstanceResource = path.endsWith('}.json');
-
-      const pathParts = path.split('/');
-      pathParts.splice(1, 1); // e.g. '/v1/foo' becomes '/foo'
-      if (isInstanceResource) {
-        pathParts.splice(pathParts.length - 1, 1); // e.g. /foo/{Sid} becomes /foo
-      }
-      const resourcePath = pathParts.join('/').replace('.json', '');
 
       const resources = domains[domain].versions[version].resources;
       if (!doesObjectHaveProperty(resources, resourcePath)) {
@@ -78,7 +71,7 @@ class TwilioApiBrowser {
       }
 
       const actions = resources[resourcePath].actions;
-      const methodMap = isInstanceResource ? instanceResourceMethodMap : listResourceMethodMap;
+      const methodMap = resourcePathParser.isInstanceResource ? instanceResourceMethodMap : listResourceMethodMap;
       Object.keys(methodMap).forEach(method => {
         if (doesObjectHaveProperty(this.apiSpec.paths[path], method)) {
           actions[methodMap[method]] = this.apiSpec.paths[path][method];
