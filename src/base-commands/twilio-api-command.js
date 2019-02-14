@@ -13,30 +13,37 @@ const typeMap = {
 };
 
 // AccountSid is a special snowflake
-const accountSidFlag = 'account-sid';
+const ACCOUNT_SID_FLAG = 'account-sid';
 
 class TwilioApiCommand extends TwilioClientCommand {
   async run() {
     await super.run();
 
+    // "this.constructor" is the class used for this command.
+    // Because oclif is constructing the object for us,
+    // we can't pass the actionDefinition in through
+    // the constructor, so we make it a static property
+    // of the command class.
     const cmd = this.constructor;
     const domainName = cmd.actionDefinition.domainName;
     const versionName = cmd.actionDefinition.versionName;
     const currentPath = cmd.actionDefinition.path;
 
-    const { flags } = this.parse(this.constructor);
+    const { flags: receivedFlags } = this.parse(this.constructor);
 
     // TODO: Possible extender event: "beforeValidateParameters"
 
-    Object.keys(flags).forEach(key => {
+    const camelCasedFlags = {};
+    Object.keys(receivedFlags).forEach(key => {
       if (Object.prototype.hasOwnProperty.call(cmd.flags[key], 'apiDetails')) {
         const schema = cmd.flags[key].apiDetails.parameter.schema;
         // TODO: Run param validation for minLength, maxLength, and pattern
         this.logger.debug(`Schema for ${key}: ` + JSON.stringify(schema));
       }
+      camelCasedFlags[camelCase(key)] = receivedFlags[key];
     });
 
-    this.logger.debug('Provided flags: ' + JSON.stringify(flags));
+    this.logger.debug('Provided flags: ' + JSON.stringify(receivedFlags));
 
     // TODO: Possible extender event: "afterValidateParameters"
 
@@ -53,20 +60,15 @@ class TwilioApiCommand extends TwilioClientCommand {
       if (pathNode.startsWith('{')) {
         const paramName = kebabCase(pathNode.replace(/[{}]/g, ''));
         let value = '';
-        if (Object.hasOwnProperty.call(flags, paramName)) {
-          value = flags[paramName];
-        } else if (paramName === accountSidFlag) {
+        if (Object.hasOwnProperty.call(receivedFlags, paramName)) {
+          value = receivedFlags[paramName];
+        } else if (paramName === ACCOUNT_SID_FLAG) {
           value = this.twilioClient.accountSid;
         }
         endpoint = endpoint(value);
       } else {
         endpoint = endpoint[camelCase(pathNode)];
       }
-    });
-
-    const camelCasedFlags = {};
-    Object.keys(flags).forEach(key => {
-      camelCasedFlags[camelCase(key)] = flags[key];
     });
 
     let response;
@@ -91,6 +93,9 @@ class TwilioApiCommand extends TwilioClientCommand {
 
 TwilioApiCommand.flags = TwilioClientCommand.flags;
 
+// A static function to help us add the other static
+// fields required by oclif on our dynamically created
+// command class.
 TwilioApiCommand.setUpApiCommandOptions = cmd => {
   const domainName = cmd.actionDefinition.domainName;
   const versionName = cmd.actionDefinition.versionName;
@@ -100,26 +105,26 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
   // Parameters
   const cmdFlags = {};
   const isApi2010 = domainName === 'api' && versionName === 'v2010';
-  action.parameters.forEach(p => {
-    const flagName = kebabCase(p.name);
+  action.parameters.forEach(param => {
+    const flagName = kebabCase(param.name);
     const flagConfig = {
-      description: p.description,
+      description: param.description,
       // AccountSid on api.v2010 not required, we can get from the current project
-      required: flagName === accountSidFlag && isApi2010 ? false : p.required,
-      multiple: p.schema.type === 'array',
+      required: flagName === ACCOUNT_SID_FLAG && isApi2010 ? false : param.required,
+      multiple: param.schema.type === 'array',
       apiDetails: {
-        parameter: p,
+        parameter: param,
         action: action,
         resource: resource
       }
     };
 
     let flagType = flags.string;
-    if (Object.prototype.hasOwnProperty.call(typeMap, p.schema.type)) {
-      flagType = typeMap[p.schema.type];
-    } else if (Object.prototype.hasOwnProperty.call(p.schema, 'enums')) {
+    if (Object.prototype.hasOwnProperty.call(typeMap, param.schema.type)) {
+      flagType = typeMap[param.schema.type];
+    } else if (Object.prototype.hasOwnProperty.call(param.schema, 'enums')) {
       flagType = flags.enum;
-      flagConfig.options = p.schema.enums
+      flagConfig.options = param.schema.enums
         .map(value => value.toLowerCase()) // standardize the enum values
         .filter((value, index, self) => self.indexOf(value) === index); // remove duplicates
     }

@@ -13,15 +13,15 @@ class TwilioRestApiPlugin extends Plugin {
     this.apiBrowser = apiBrowser || new TwilioApiBrowser();
 
     // TODO: Hard-coding one resource/action for now.
-    const resourcePath = '/Accounts/{AccountSid}/Calls';
-    const resource = this.apiBrowser.domains.api.versions.v2010.resources[resourcePath];
+    const CALL_RESOURCE_PATH = '/Accounts/{AccountSid}/Calls';
+    const resource = this.apiBrowser.domains.api.versions.v2010.resources[CALL_RESOURCE_PATH];
     this.actions = [
       {
         domainName: 'api',
         versionName: 'v2010',
         topicName: 'call',
         commandName: 'create',
-        path: resourcePath,
+        path: CALL_RESOURCE_PATH,
         resource: resource,
         action: resource.actions.create
       }
@@ -29,6 +29,7 @@ class TwilioRestApiPlugin extends Plugin {
   }
 
   get hooks() {
+    // This plugin doesn't introduce any other hooks. Return empty object.
     return {};
   }
 
@@ -45,6 +46,10 @@ class TwilioRestApiPlugin extends Plugin {
 
   get commands() {
     return this.actions.map(actionDefinition => {
+      // Because oclif is constructing the object for us,
+      // we can't pass the actionDefinition in through
+      // the constructor, so we make it a static property
+      // of the newly created command class.
       const cmd = class extends TwilioApiCommand {};
       cmd.actionDefinition = actionDefinition;
       TwilioApiCommand.setUpApiCommandOptions(cmd);
