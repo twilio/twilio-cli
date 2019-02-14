@@ -5,6 +5,7 @@
 const { flags } = require('@oclif/command');
 const TwilioClientCommand = require('./twilio-client-command');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
+const { doesObjectHaveProperty } = require('../services/javascript-utilities');
 
 // Open API type to oclif flag type mapping
 const typeMap = {
@@ -35,7 +36,7 @@ class TwilioApiCommand extends TwilioClientCommand {
 
     const camelCasedFlags = {};
     Object.keys(receivedFlags).forEach(key => {
-      if (Object.prototype.hasOwnProperty.call(cmd.flags[key], 'apiDetails')) {
+      if (doesObjectHaveProperty(cmd.flags[key], 'apiDetails')) {
         const schema = cmd.flags[key].apiDetails.parameter.schema;
         // TODO: Run param validation for minLength, maxLength, and pattern
         this.logger.debug(`Schema for ${key}: ` + JSON.stringify(schema));
@@ -120,9 +121,9 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
     };
 
     let flagType = flags.string;
-    if (Object.prototype.hasOwnProperty.call(typeMap, param.schema.type)) {
+    if (doesObjectHaveProperty(typeMap, param.schema.type)) {
       flagType = typeMap[param.schema.type];
-    } else if (Object.prototype.hasOwnProperty.call(param.schema, 'enums')) {
+    } else if (doesObjectHaveProperty(param.schema, 'enums')) {
       flagType = flags.enum;
       flagConfig.options = param.schema.enums
         .map(value => value.toLowerCase()) // standardize the enum values

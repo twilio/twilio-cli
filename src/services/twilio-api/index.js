@@ -1,5 +1,6 @@
 const url = require('url');
 const apiSpecFromDisk = require('./twilio_api.json');
+const { doesObjectHaveProperty } = require('../javascript-utilities');
 
 function translateLegacyVersions(domain, version) {
   // In the Node helper library, api.twilio.com/2010-04-01 is represented as "v2010"
@@ -51,11 +52,11 @@ class TwilioApiBrowser {
         path.split('/')[1] // e.g. 'v1' from '/v1/foo/bar'
       );
 
-      if (!Object.prototype.hasOwnProperty.call(domains, domain)) {
+      if (!doesObjectHaveProperty(domains, domain)) {
         domains[domain] = { versions: {} };
       }
 
-      if (!Object.prototype.hasOwnProperty.call(domains[domain].versions, version)) {
+      if (!doesObjectHaveProperty(domains[domain].versions, version)) {
         domains[domain].versions[version] = { resources: {} };
       }
 
@@ -69,7 +70,7 @@ class TwilioApiBrowser {
       const resourcePath = pathParts.join('/').replace('.json', '');
 
       const resources = domains[domain].versions[version].resources;
-      if (!Object.prototype.hasOwnProperty.call(resources, resourcePath)) {
+      if (!doesObjectHaveProperty(resources, resourcePath)) {
         resources[resourcePath] = {
           actions: {},
           description: this.apiSpec.paths[path].description.replace(/(\r\n|\n|\r)/gm, ' ')
@@ -79,7 +80,7 @@ class TwilioApiBrowser {
       const actions = resources[resourcePath].actions;
       const methodMap = isInstanceResource ? instanceResourceMethodMap : listResourceMethodMap;
       Object.keys(methodMap).forEach(method => {
-        if (Object.prototype.hasOwnProperty.call(this.apiSpec.paths[path], method)) {
+        if (doesObjectHaveProperty(this.apiSpec.paths[path], method)) {
           actions[methodMap[method]] = this.apiSpec.paths[path][method];
         }
       });
