@@ -22,7 +22,7 @@
     "twilio": "^3.19.1"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "^1.15.4",
+    "@oclif/dev-cli": "^1.21.0",
     "@oclif/test": "^1.1.0",
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
@@ -31,7 +31,7 @@
     "globby": "^8.0.1",
     "mocha": "^5.2.0",
     "nock": "^10.0.0",
-    "nyc": "^12.0.2",
+    "nyc": "^13.3.0",
     "rimraf": "^2.6.2",
     "sinon": "^6.3.4",
     "tmp": "0.0.33"
@@ -61,12 +61,15 @@
       "project": {
         "description": "Manage credentials for Twilio projects."
       }
+    },
+    "hooks": {
+      "init": "./src/hooks/init/twilio-api"
     }
   },
   "repository": "twilio/twilio-cli",
   "scripts": {
     "postpack": "rimraf oclif.manifest.json npm-shrinkwrap.json",
-    "posttest": "eslint --ignore-path .gitignore .",
+    "posttest": "eslint --ignore-path .gitignore . && npm audit",
     "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
     "test": "nyc --check-coverage --lines 90 --reporter=html --reporter=text mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md"
