@@ -2,6 +2,9 @@ const TwilioApiCommand = require('../../src/base-commands/twilio-api-command');
 const { expect, test, constants } = require('../test');
 const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
 
+const NUMBER_OF_BASE_COMMAND_FLAGS = 4;
+const NUMBER_OF_PARAMS_FOR_CALL_CREATE = fakeResource.actions.create.parameters.length;
+
 describe('base-commands', () => {
   describe('twilio-api-command', () => {
     describe('TwilioApiCommand', () => {
@@ -40,7 +43,7 @@ describe('base-commands', () => {
         expect(cmd.flags.method.options).to.eql(['head', 'get', 'post', 'patch', 'put', 'delete']);
         expect(cmd.flags.record.type).to.equal('boolean');
 
-        expect(Object.keys(cmd.flags).length).to.equal(29);
+        expect(Object.keys(cmd.flags).length).to.equal(NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS);
       });
 
       test
