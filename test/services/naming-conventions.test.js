@@ -13,6 +13,10 @@ describe('services', () => {
         expect(kebabCase('  one  ')).to.equal('one');
       });
 
+      test.it('trims leading and trailing symbols', () => {
+        expect(kebabCase('__one__')).to.equal('one');
+      });
+
       test.it('handles words with spaces', () => {
         expect(kebabCase('one two')).to.equal('one-two');
         expect(kebabCase('one two three')).to.equal('one-two-three');
@@ -51,6 +55,10 @@ describe('services', () => {
 
       test.it('trims leading and trailing spaces', () => {
         expect(camelCase('  one  ')).to.equal('one');
+      });
+
+      test.it('trims leading and trailing symbols', () => {
+        expect(kebabCase('__one__')).to.equal('one');
       });
 
       test.it('handles words with spaces', () => {
