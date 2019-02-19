@@ -11,7 +11,9 @@ const ResourcePathParser = require('../services/resource-path-parser');
 // Open API type to oclif flag type mapping
 const typeMap = {
   boolean: flags.boolean,
-  integer: flags.integer
+  integer: flags.integer,
+  string: flags.string,
+  array: flags.string
 };
 
 // AccountSid is a special snowflake
@@ -126,14 +128,21 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
       }
     };
 
-    let flagType = flags.string;
-    if (doesObjectHaveProperty(typeMap, param.schema.type)) {
-      flagType = typeMap[param.schema.type];
-    } else if (doesObjectHaveProperty(param.schema, 'enums')) {
+    let flagType;
+    if (doesObjectHaveProperty(param.schema, 'enums')) {
       flagType = flags.enum;
       flagConfig.options = param.schema.enums
         .map(value => value.toLowerCase()) // standardize the enum values
         .filter((value, index, self) => self.indexOf(value) === index); // remove duplicates
+    } else {
+      flagType = typeMap[param.schema.type];
+    }
+
+    if (!flagType) {
+      const unknownParameterTypeError = {
+        message: `Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`
+      };
+      throw unknownParameterTypeError;
     }
 
     cmdFlags[flagName] = flagType(flagConfig);
