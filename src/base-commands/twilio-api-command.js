@@ -129,9 +129,9 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
     };
 
     let flagType;
-    if (doesObjectHaveProperty(param.schema, 'enums')) {
+    if (doesObjectHaveProperty(param.schema, 'enum')) {
       flagType = flags.enum;
-      flagConfig.options = param.schema.enums
+      flagConfig.options = param.schema.enum
         .map(value => value.toLowerCase()) // standardize the enum values
         .filter((value, index, self) => self.indexOf(value) === index); // remove duplicates
     } else {

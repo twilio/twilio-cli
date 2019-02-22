@@ -31,7 +31,7 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enums: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
           }
         },
         {
@@ -48,7 +48,7 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enums: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
           }
         },
         {
@@ -72,7 +72,7 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enums: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
           }
         },
         { name: 'SendDigits', in: 'query', description: 'Digits to send', required: false, schema: { type: 'string' } },
@@ -112,7 +112,7 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enums: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
           }
         },
         { name: 'SipAuthUsername', in: 'query', description: null, required: false, schema: { type: 'string' } },
