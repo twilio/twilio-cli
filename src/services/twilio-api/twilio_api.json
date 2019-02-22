@@ -90,7 +90,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "gcm",
                 "apn",
                 "fcm"
@@ -692,7 +692,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "active",
                 "suspended",
                 "closed"
@@ -825,7 +825,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "active",
                 "suspended",
                 "closed"
@@ -1341,7 +1341,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1374,7 +1374,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1407,7 +1407,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1449,7 +1449,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1482,7 +1482,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1774,7 +1774,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1807,7 +1807,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1840,7 +1840,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1882,7 +1882,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -1915,7 +1915,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4051,7 +4051,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4084,7 +4084,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4129,7 +4129,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4206,7 +4206,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4380,7 +4380,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "ringing",
                 "in-progress",
@@ -4608,7 +4608,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4631,7 +4631,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "canceled",
                 "completed"
               ]
@@ -4654,7 +4654,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4687,7 +4687,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -4774,7 +4774,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "audio-latency",
                   "digits-not-captured",
                   "dropped-call",
@@ -4919,7 +4919,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -5345,7 +5345,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -5542,7 +5542,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "paused",
                 "stopped",
@@ -5752,7 +5752,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "init",
                 "in-progress",
                 "completed"
@@ -5900,7 +5900,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "completed"
               ]
             }
@@ -5922,7 +5922,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -6109,7 +6109,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "paused",
                 "stopped",
@@ -6443,7 +6443,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -6506,7 +6506,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "get-all",
                   "post-all"
                 ]
@@ -6785,7 +6785,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -6818,7 +6818,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -6861,7 +6861,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -6905,7 +6905,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -6938,7 +6938,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -6971,7 +6971,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "Active",
                 "Inactive"
               ]
@@ -7032,7 +7032,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "voice",
                 "fax"
               ]
@@ -7256,7 +7256,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7289,7 +7289,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7332,7 +7332,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7376,7 +7376,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7409,7 +7409,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7651,7 +7651,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7684,7 +7684,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7727,7 +7727,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7771,7 +7771,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -7804,7 +7804,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -8046,7 +8046,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -8079,7 +8079,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -8122,7 +8122,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -8166,7 +8166,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -8199,7 +8199,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -8756,7 +8756,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -8908,7 +8908,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "retain",
                 "discard"
               ]
@@ -8921,7 +8921,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "retain",
                 "discard"
               ]
@@ -9306,7 +9306,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "confirmed",
                 "umconfirmed"
               ]
@@ -9829,7 +9829,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -10085,7 +10085,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -10184,7 +10184,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -10253,7 +10253,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -10307,7 +10307,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -10367,7 +10367,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -10663,7 +10663,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -10696,7 +10696,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -12241,7 +12241,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -12274,7 +12274,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -14517,7 +14517,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -14550,7 +14550,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -14583,7 +14583,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -14722,7 +14722,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -14755,7 +14755,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -14778,7 +14778,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -16321,7 +16321,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -16677,7 +16677,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -17033,7 +17033,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -17389,7 +17389,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -17745,7 +17745,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -18101,7 +18101,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -18457,7 +18457,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -18813,7 +18813,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -19169,7 +19169,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -19544,7 +19544,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -19794,7 +19794,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -19826,7 +19826,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "daily",
                 "monthly",
                 "yearly",
@@ -19841,7 +19841,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "count",
                 "usage",
                 "price"
@@ -19888,7 +19888,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "daily",
                 "monthly",
                 "yearly",
@@ -19903,7 +19903,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "count",
                 "usage",
                 "price"
@@ -19917,7 +19917,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -20301,7 +20301,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -20456,7 +20456,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "public",
                 "private"
               ]
@@ -20504,7 +20504,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "public",
                   "private"
                 ]
@@ -21679,7 +21679,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "asc",
                 "desc"
               ]
@@ -21977,7 +21977,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "channel",
                 "deployment"
               ]
@@ -22604,7 +22604,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22649,7 +22649,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22691,7 +22691,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22733,7 +22733,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22775,7 +22775,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22817,7 +22817,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22859,7 +22859,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22901,7 +22901,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22943,7 +22943,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -22985,7 +22985,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23027,7 +23027,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23069,7 +23069,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23111,7 +23111,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23153,7 +23153,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23195,7 +23195,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23237,7 +23237,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23279,7 +23279,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -23787,7 +23787,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "gcm",
                   "apn",
                   "fcm"
@@ -24018,7 +24018,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "public",
                 "private"
               ]
@@ -24095,7 +24095,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "public",
                   "private"
                 ]
@@ -24482,7 +24482,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "webhook",
                 "trigger",
                 "studio"
@@ -24505,7 +24505,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "GET",
                 "POST"
               ]
@@ -24694,7 +24694,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "GET",
                 "POST"
               ]
@@ -24896,7 +24896,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "gcm",
                 "apn",
                 "fcm"
@@ -26052,7 +26052,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "asc",
                 "desc"
               ]
@@ -26388,7 +26388,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "channel",
                 "deployment"
               ]
@@ -27060,7 +27060,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -27528,7 +27528,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "gcm",
                   "apn",
                   "fcm"
@@ -27916,7 +27916,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "default",
                 "muted"
               ]
@@ -29958,7 +29958,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "reserved",
                 "assigned",
@@ -30498,7 +30498,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "FIFO",
                 "LIFO"
               ]
@@ -30684,7 +30684,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "FIFO",
                 "LIFO"
               ]
@@ -31192,7 +31192,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "accepted",
                 "rejected",
@@ -31371,7 +31371,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "accepted",
                 "rejected",
@@ -31593,7 +31593,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -31618,7 +31618,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "initiated",
                   "ringing",
                   "answered",
@@ -31698,7 +31698,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -31749,7 +31749,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -31774,7 +31774,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "start",
                   "end",
                   "join",
@@ -31830,7 +31830,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -31863,7 +31863,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -31937,7 +31937,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "monitor",
                 "whisper",
                 "barge"
@@ -32746,7 +32746,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "accepted",
                 "rejected",
@@ -32925,7 +32925,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "accepted",
                 "rejected",
@@ -33147,7 +33147,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -33172,7 +33172,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "initiated",
                   "ringing",
                   "answered",
@@ -33252,7 +33252,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -33303,7 +33303,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -33328,7 +33328,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "start",
                   "end",
                   "join",
@@ -33384,7 +33384,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -33417,7 +33417,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -34510,7 +34510,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "FIFO",
                 "LIFO"
               ]
@@ -34658,7 +34658,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "FIFO",
                 "LIFO"
               ]
@@ -36000,7 +36000,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -36023,7 +36023,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "do-not-record",
                 "record-from-ringing",
                 "record-from-answer"
@@ -36248,7 +36248,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -36271,7 +36271,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "do-not-record",
                 "record-from-ringing",
                 "record-from-answer"
@@ -36391,7 +36391,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "processing",
                 "completed",
                 "deleted",
@@ -36453,7 +36453,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "audio",
                 "video",
                 "data"
@@ -36676,7 +36676,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "peer-to-peer",
                 "group",
                 "group-small"
@@ -36709,7 +36709,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -36752,7 +36752,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "VP8",
                   "H264"
                 ]
@@ -36796,7 +36796,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "completed",
                 "failed"
@@ -36951,7 +36951,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "completed",
                 "failed"
@@ -37006,7 +37006,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "connected",
                 "disconnected"
               ]
@@ -37184,7 +37184,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "connected",
                 "disconnected"
               ]
@@ -37450,7 +37450,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "audio",
                 "video",
                 "data"
@@ -37571,7 +37571,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "audio",
                 "video",
                 "data"
@@ -37585,7 +37585,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "subscribe",
                 "unsubscribe"
               ]
@@ -37639,7 +37639,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "processing",
                 "completed",
                 "deleted",
@@ -37931,7 +37931,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "sent",
                 "delivered",
@@ -37947,7 +37947,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "from_sim",
                 "to_sim"
               ]
@@ -37960,7 +37960,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "sms",
                 "ip"
               ]
@@ -38050,7 +38050,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -38083,7 +38083,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "text",
                 "binary"
               ]
@@ -38630,7 +38630,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "new",
                 "ready",
                 "active",
@@ -38806,7 +38806,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -38860,7 +38860,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "new",
                 "ready",
                 "active",
@@ -38879,7 +38879,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -38912,7 +38912,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -38945,7 +38945,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -38978,7 +38978,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -39011,7 +39011,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -39138,7 +39138,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "hourly",
                 "daily",
                 "all"
@@ -40522,7 +40522,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "active",
                 "suspended",
                 "closed"
@@ -40543,7 +40543,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "Trial",
                 "Full"
               ]
@@ -40687,7 +40687,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -40712,7 +40712,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -40749,7 +40749,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -40779,7 +40779,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -40804,7 +40804,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -40883,7 +40883,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "get-all",
                   "post-all"
                 ]
@@ -41646,7 +41646,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "ringing",
                 "in-progress",
@@ -41713,7 +41713,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "audio-latency",
                   "digits-not-captured",
                   "dropped-call",
@@ -41823,7 +41823,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "in-progress",
                 "completed",
@@ -41896,7 +41896,7 @@
           "request_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -41997,7 +41997,7 @@
           "request_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42134,7 +42134,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "paused",
                 "stopped",
@@ -42152,7 +42152,7 @@
           "source": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "DialVerb",
                 "Conference",
                 "OutboundAPI",
@@ -42224,7 +42224,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "init",
                 "in-progress",
                 "completed"
@@ -42323,7 +42323,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "paused",
                 "stopped",
@@ -42341,7 +42341,7 @@
           "source": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "DialVerb",
                 "Conference",
                 "OutboundAPI",
@@ -42402,7 +42402,7 @@
           "deauthorize_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42445,7 +42445,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "get-all",
                   "post-all"
                 ]
@@ -42506,7 +42506,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42525,7 +42525,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42565,7 +42565,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42590,7 +42590,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42615,7 +42615,7 @@
           "address_requirements": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "none",
                 "any",
                 "local",
@@ -42637,7 +42637,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42685,7 +42685,7 @@
           "emergency_status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "Active",
                 "Inactive"
               ]
@@ -42729,7 +42729,7 @@
           "address_requirements": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "none",
                 "any",
                 "local",
@@ -42815,7 +42815,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42840,7 +42840,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42871,7 +42871,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42917,7 +42917,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42942,7 +42942,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -42967,7 +42967,7 @@
           "emergency_status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "Active",
                 "Inactive"
               ]
@@ -43005,7 +43005,7 @@
           "address_requirements": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "none",
                 "any",
                 "local",
@@ -43091,7 +43091,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43116,7 +43116,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43147,7 +43147,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43193,7 +43193,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43218,7 +43218,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43264,7 +43264,7 @@
           "address_requirements": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "none",
                 "any",
                 "local",
@@ -43350,7 +43350,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43375,7 +43375,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43406,7 +43406,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43452,7 +43452,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43477,7 +43477,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43523,7 +43523,7 @@
           "address_requirements": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "none",
                 "any",
                 "local",
@@ -43609,7 +43609,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43634,7 +43634,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43665,7 +43665,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43711,7 +43711,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43736,7 +43736,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -43911,7 +43911,7 @@
           "direction": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "inbound",
                 "outbound-api",
                 "outbound-call",
@@ -43973,7 +43973,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "sending",
                 "sent",
@@ -44031,7 +44031,7 @@
           "outcome": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "confirmed",
                 "umconfirmed"
               ]
@@ -44183,7 +44183,7 @@
           "request_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -44284,7 +44284,7 @@
           "request_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -44444,7 +44444,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "connecting",
                 "ringing",
@@ -44592,7 +44592,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "paused",
                 "stopped",
@@ -44610,7 +44610,7 @@
           "source": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "DialVerb",
                 "Conference",
                 "OutboundAPI",
@@ -44679,7 +44679,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "canceled",
                 "completed",
                 "deleted",
@@ -44898,7 +44898,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "completed",
                 "failed"
@@ -44970,7 +44970,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -44995,7 +44995,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -45451,7 +45451,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -45476,7 +45476,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -45495,7 +45495,7 @@
           "voice_status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -45750,7 +45750,7 @@
           "direction": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "inbound",
                 "outbound-api",
                 "outbound-call",
@@ -45784,7 +45784,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "sending",
                 "sent",
@@ -45916,7 +45916,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "completed",
                 "failed"
@@ -45964,7 +45964,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -46292,7 +46292,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -46620,7 +46620,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -46948,7 +46948,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -47276,7 +47276,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -47604,7 +47604,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -47932,7 +47932,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -48260,7 +48260,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -48588,7 +48588,7 @@
           "category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -48916,7 +48916,7 @@
           "callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -48966,7 +48966,7 @@
           "recurring": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "daily",
                 "monthly",
                 "yearly",
@@ -48985,7 +48985,7 @@
           "trigger_by": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "count",
                 "usage",
                 "price"
@@ -49006,7 +49006,7 @@
           "usage_category": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "agent-conference",
                 "answering-machine-detection",
                 "authy-authentications",
@@ -49337,7 +49337,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "public",
                 "private"
               ]
@@ -49416,7 +49416,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "gcm",
                 "apn",
                 "fcm"
@@ -49730,7 +49730,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "channel",
                 "deployment"
               ]
@@ -50035,7 +50035,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "joined",
                 "invited",
                 "not_participating"
@@ -50139,7 +50139,7 @@
           "binding_type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "gcm",
                 "apn",
                 "fcm"
@@ -50218,7 +50218,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "public",
                 "private"
               ]
@@ -50362,7 +50362,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "gcm",
                 "apn",
                 "fcm"
@@ -50696,7 +50696,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "channel",
                 "deployment"
               ]
@@ -51041,7 +51041,7 @@
           "binding_type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "gcm",
                 "apn",
                 "fcm"
@@ -51110,7 +51110,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "joined",
                 "invited",
                 "not_participating"
@@ -51161,7 +51161,7 @@
           "notification_level": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "default",
                 "muted"
               ]
@@ -51200,7 +51200,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "ok",
                 "inprogress",
                 "notstarted"
@@ -51486,7 +51486,7 @@
           "request_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -51589,7 +51589,7 @@
           "request_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -52597,7 +52597,7 @@
           "assignment_status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "reserved",
                 "assigned",
@@ -52861,7 +52861,7 @@
           "task_order": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "FIFO",
                 "LIFO"
               ]
@@ -53207,7 +53207,7 @@
           "reservation_status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "accepted",
                 "rejected",
@@ -53521,7 +53521,7 @@
           "reservation_status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "pending",
                 "accepted",
                 "rejected",
@@ -54149,7 +54149,7 @@
           "prioritize_queue_order": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "FIFO",
                 "LIFO"
               ]
@@ -54589,7 +54589,7 @@
           "address_requirements": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "none",
                 "any",
                 "local",
@@ -54664,7 +54664,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -54689,7 +54689,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -54720,7 +54720,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -54766,7 +54766,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -54791,7 +54791,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -54834,7 +54834,7 @@
           "disaster_recovery_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -54953,7 +54953,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "processing",
                 "completed",
                 "deleted",
@@ -54997,7 +54997,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "audio",
                 "video",
                 "data"
@@ -55019,7 +55019,7 @@
           "container_format": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "mka",
                 "mkv"
               ]
@@ -55028,7 +55028,7 @@
           "codec": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "VP8",
                 "H264",
                 "OPUS",
@@ -55089,7 +55089,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "in-progress",
                 "completed",
                 "failed"
@@ -55135,7 +55135,7 @@
           "status_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -55172,7 +55172,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "peer-to-peer",
                 "group",
                 "group-small"
@@ -55194,7 +55194,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enums": [
+                "enum": [
                   "VP8",
                   "H264"
                 ]
@@ -55255,7 +55255,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "connected",
                 "disconnected"
               ]
@@ -55373,7 +55373,7 @@
           "kind": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "audio",
                 "video",
                 "data"
@@ -55448,7 +55448,7 @@
           "kind": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "audio",
                 "video",
                 "data"
@@ -55471,7 +55471,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "processing",
                 "completed",
                 "deleted",
@@ -55515,7 +55515,7 @@
           "type": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "audio",
                 "video",
                 "data"
@@ -55537,7 +55537,7 @@
           "container_format": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "mka",
                 "mkv"
               ]
@@ -55546,7 +55546,7 @@
           "codec": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "VP8",
                 "H264",
                 "OPUS",
@@ -55636,7 +55636,7 @@
           "command_mode": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "text",
                 "binary"
               ]
@@ -55645,7 +55645,7 @@
           "transport": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "sms",
                 "ip"
               ]
@@ -55659,7 +55659,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "queued",
                 "sent",
                 "delivered",
@@ -55671,7 +55671,7 @@
           "direction": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "from_sim",
                 "to_sim"
               ]
@@ -55936,7 +55936,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "new",
                 "ready",
                 "active",
@@ -55957,7 +55957,7 @@
           "commands_callback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -55976,7 +55976,7 @@
           "sms_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -56001,7 +56001,7 @@
           "sms_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -56026,7 +56026,7 @@
           "voice_fallback_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -56051,7 +56051,7 @@
           "voice_method": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "head",
                 "get",
                 "post",
@@ -56193,7 +56193,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "active",
                 "ended"
               ]
@@ -56318,7 +56318,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "active",
                 "ended"
               ]
@@ -56556,7 +56556,7 @@
           "status": {
             "type": {
               "type": "string",
-              "enums": [
+              "enum": [
                 "draft",
                 "published"
               ]
