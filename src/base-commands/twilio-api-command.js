@@ -4,16 +4,18 @@
 
 const { flags } = require('@oclif/command');
 const TwilioClientCommand = require('./twilio-client-command');
+const { validateSchema } = require('../services/api-schema/schema-validator');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
 const { doesObjectHaveProperty } = require('../services/javascript-utilities');
 const ResourcePathParser = require('../services/resource-path-parser');
 
-// Open API type to oclif flag type mapping
+// Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
+  array: flags.string,
   boolean: flags.boolean,
-  integer: flags.integer,
-  string: flags.string,
-  array: flags.string
+  integer: flags.string,
+  number: flags.string,
+  string: flags.string
 };
 
 // AccountSid is a special snowflake
@@ -38,16 +40,37 @@ class TwilioApiCommand extends TwilioClientCommand {
     // TODO: Possible extender event: "beforeValidateParameters"
 
     const camelCasedFlags = {};
+    const flagErrors = {};
     Object.keys(receivedFlags).forEach(key => {
+      const flagValue = receivedFlags[key];
+
       if (doesObjectHaveProperty(cmd.flags[key], 'apiDetails')) {
         const schema = cmd.flags[key].apiDetails.parameter.schema;
-        // TODO: Run param validation for minLength, maxLength, and pattern
-        this.logger.debug(`Schema for ${key}: ` + JSON.stringify(schema));
+        this.logger.debug(`Schema for "${key}": ` + JSON.stringify(schema));
+
+        const validationErrors = validateSchema(schema, flagValue, this.logger);
+
+        if (validationErrors.length > 0) {
+          flagErrors[key] = validationErrors;
+        }
       }
-      camelCasedFlags[camelCase(key)] = receivedFlags[key];
+
+      camelCasedFlags[camelCase(key)] = flagValue;
     });
 
     this.logger.debug('Provided flags: ' + JSON.stringify(receivedFlags));
+
+    // If there were any errors validating the flag values, log them by flag
+    // key and exit with a non-zero code.
+    if (Object.keys(flagErrors).length > 0) {
+      this.logger.error('Flag value validation errors:');
+      Object.keys(flagErrors).forEach(key => {
+        flagErrors[key].forEach(error => {
+          this.logger.error(`  ${key}: ${error}`);
+        });
+      });
+      this.exit(1);
+    }
 
     // TODO: Possible extender event: "afterValidateParameters"
 

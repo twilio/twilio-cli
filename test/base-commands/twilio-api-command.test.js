@@ -64,6 +64,25 @@ describe('base-commands', () => {
         .it('creates a call', ctx => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
         });
+
+      test
+        .twilioFakeProject()
+        .twilioCliEnv()
+        .stderr()
+        .twilioCommand(getCommandClass(), [
+          '--from',
+          '+15555555555',
+          '--to',
+          '+14155555555',
+          '--url',
+          'http://example.com/',
+          '--account-sid',
+          'ac12345678901234567890123456789012' // Lower-cased 'ac'
+        ])
+        .exit(1)
+        .it('exits with a failure code and prints validation errors', ctx => {
+          expect(ctx.stderr).to.contain('validation errors');
+        });
     });
   });
 });
