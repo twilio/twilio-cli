@@ -15,7 +15,9 @@ const typeMap = {
   boolean: flags.boolean,
   integer: flags.string,
   number: flags.string,
-  string: flags.string
+  string: flags.string,
+  object: flags.string,
+  undefined: flags.string // TODO: Handle "anyOf" case more explicitly
 };
 
 // AccountSid is a special snowflake
@@ -172,13 +174,10 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
     }
 
     if (!flagType) {
-      const unknownParameterTypeError = {
-        message: `Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`
-      };
-      throw unknownParameterTypeError;
+      console.error(`Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`);
+    } else {
+      cmdFlags[flagName] = flagType(flagConfig);
     }
-
-    cmdFlags[flagName] = flagType(flagConfig);
   });
 
   cmdFlags.properties = flags.string({

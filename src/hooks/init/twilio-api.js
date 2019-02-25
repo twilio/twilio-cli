@@ -15,17 +15,17 @@ class TwilioRestApiPlugin extends Plugin {
 
     this.actions = [];
     Object.keys(this.apiBrowser.domains).forEach(domainName => {
-      if (domainName !== 'chat') return;
+      // if (domainName !== 'chat') return;
       const domain = this.apiBrowser.domains[domainName];
       Object.keys(domain.versions).forEach(versionName => {
-        if (versionName === 'v1') return;
+        // if (versionName === 'v1') return;
         const version = domain.versions[versionName];
         Object.keys(version.resources).forEach(resourcePath => {
-          if (!resourcePath.startsWith('/Services/{ServiceSid}/Channels/{ChannelSid}/Mem')) return;
+          // if (!resourcePath.startsWith('/Services/{ServiceSid}/Channels/{ChannelSid}/Mem')) return;
           const resource = version.resources[resourcePath];
           Object.keys(resource.actions).forEach(actionName => {
-            if (['update', 'create'].includes(actionName)) return;
-            console.log(resourcePath, actionName);
+            // if (!['update', 'create'].includes(actionName)) return;
+            // console.log(resourcePath, actionName);
             this.actions.push({
               domainName,
               versionName,
