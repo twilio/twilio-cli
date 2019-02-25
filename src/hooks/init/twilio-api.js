@@ -5,6 +5,7 @@
 const { Plugin } = require('@oclif/config');
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
 const { TwilioApiBrowser } = require('../../services/twilio-api');
+const { kebabCase } = require('../../services/naming-conventions');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
@@ -12,20 +13,34 @@ class TwilioRestApiPlugin extends Plugin {
     super(config);
     this.apiBrowser = apiBrowser || new TwilioApiBrowser();
 
-    // TODO: Hard-coding one resource/action for now.
-    const CALL_RESOURCE_PATH = '/Accounts/{AccountSid}/Calls';
-    const resource = this.apiBrowser.domains.api.versions.v2010.resources[CALL_RESOURCE_PATH];
-    this.actions = [
-      {
-        domainName: 'api',
-        versionName: 'v2010',
-        topicName: 'call',
-        commandName: 'create',
-        path: CALL_RESOURCE_PATH,
-        resource: resource,
-        action: resource.actions.create
-      }
-    ];
+    this.actions = [];
+    Object.keys(this.apiBrowser.domains).forEach(domainName => {
+      if (domainName !== 'chat') return;
+      const domain = this.apiBrowser.domains[domainName];
+      Object.keys(domain.versions).forEach(versionName => {
+        if (versionName === 'v1') return;
+        const version = domain.versions[versionName];
+        Object.keys(version.resources).forEach(resourcePath => {
+          if (!resourcePath.startsWith('/Services/{ServiceSid}/Channels/{ChannelSid}/Mem')) return;
+          const resource = version.resources[resourcePath];
+          Object.keys(resource.actions).forEach(actionName => {
+            if (['update', 'create'].includes(actionName)) return;
+            console.log(resourcePath, actionName);
+            this.actions.push({
+              domainName,
+              versionName,
+              // TODO: We need a much better way to get a good topic name
+              topicName: domainName + '-' + versionName + '-' + kebabCase(resourcePath.replace(/[\/\{\}]+/g, '-')),
+              commandName: actionName,
+              path: resourcePath,
+              resource: resource,
+              actionName,
+              action: resource.actions[actionName]
+            });
+          });
+        });
+      });
+    });
   }
 
   get hooks() {
@@ -50,6 +65,7 @@ class TwilioRestApiPlugin extends Plugin {
       // we can't pass the actionDefinition in through
       // the constructor, so we make it a static property
       // of the newly created command class.
+      // console.log(actionDefinition);
       const cmd = class extends TwilioApiCommand {};
       cmd.actionDefinition = actionDefinition;
       TwilioApiCommand.setUpApiCommandOptions(cmd);

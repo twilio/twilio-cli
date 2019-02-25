@@ -53,6 +53,10 @@ describe('services', () => {
         expect(camelCase('one')).to.equal('one');
       });
 
+      test.it('handles all caps word', () => {
+        expect(camelCase('ONE')).to.equal('one');
+      });
+
       test.it('trims leading and trailing spaces', () => {
         expect(camelCase('  one  ')).to.equal('one');
       });

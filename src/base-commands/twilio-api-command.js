@@ -34,6 +34,7 @@ class TwilioApiCommand extends TwilioClientCommand {
     const domainName = cmd.actionDefinition.domainName;
     const versionName = cmd.actionDefinition.versionName;
     const currentPath = cmd.actionDefinition.path;
+    const actionName = cmd.actionDefinition.actionName;
 
     const { flags: receivedFlags } = this.parse(this.constructor);
 
@@ -98,14 +99,23 @@ class TwilioApiCommand extends TwilioClientCommand {
         // the current endpoint as a function, passing the parameter
         // and then use it's result as the new endpoint.
         endpoint = endpoint(value);
+        this.logger.debug(`pathNode=${pathNode}, value=${value}, endpoint=${typeof endpoint}`);
       } else {
         endpoint = endpoint[camelCase(pathNode)];
+        this.logger.debug(`pathNode=${pathNode}, endpoint=${typeof endpoint}`);
       }
     });
 
+    if (isInstanceAction(actionName)) {
+      endpoint = endpoint(receivedFlags.sid);
+      delete receivedFlags.sid;
+      this.logger.debug(`endpoint=${typeof endpoint}`);
+    }
+    this.logger.debug(`actionName=${actionName}, endpoint[actionName]=${typeof endpoint[actionName]}`);
+
     let response;
     try {
-      response = await endpoint.create(camelCasedFlags);
+      response = await endpoint[actionName](camelCasedFlags);
     } catch (error) {
       if (error.moreInfo) {
         this.logger.error(`Error ${error.code} response from Twilio: ${error.message}`);
@@ -117,7 +127,7 @@ class TwilioApiCommand extends TwilioClientCommand {
     }
 
     // TODO: Figure out sane default output columns
-    this.output([response], this.flags.properties);
+    this.output(Array.isArray(response) ? response : [response], this.flags.properties);
 
     // TODO: Possible extender event: "afterInvokeApi"
   }
@@ -183,5 +193,7 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
   cmd.description = action.description;
   cmd.load = () => cmd;
 };
+
+const isInstanceAction = actionName => ['fetch', 'remove', 'update'].includes(actionName);
 
 module.exports = TwilioApiCommand;
