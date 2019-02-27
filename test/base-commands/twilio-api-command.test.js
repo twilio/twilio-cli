@@ -33,7 +33,7 @@ describe('base-commands', () => {
       test.it('setUpApiCommandOptions', async () => {
         const cmd = getCommandClass();
 
-        expect(cmd.id).to.equal('api-v2010-accounts-account-sid-calls:create');
+        expect(cmd.id).to.equal('api-v2010-accounts-calls:create');
         expect(cmd.description).to.equal(fakeResource.actions.create.description);
         expect(cmd.load()).to.equal(cmd);
 
