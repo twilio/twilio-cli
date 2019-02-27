@@ -9,6 +9,8 @@ const { kebabCase, camelCase } = require('../services/naming-conventions');
 const { doesObjectHaveProperty } = require('../services/javascript-utilities');
 const ResourcePathParser = require('../services/resource-path-parser');
 
+const isInstanceAction = actionName => ['fetch', 'remove', 'update'].includes(actionName);
+
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
   array: flags.string,
@@ -173,10 +175,13 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
       flagType = typeMap[param.schema.type];
     }
 
-    if (!flagType) {
-      console.error(`Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`);
-    } else {
+    if (flagType) {
       cmdFlags[flagName] = flagType(flagConfig);
+    } else {
+      // We don't have a logger in this context and our build process should ensure this
+      // error condition isn't possible.
+      // eslint-disable-next-line no-console
+      console.error(`Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`);
     }
   });
 
@@ -192,7 +197,5 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
   cmd.description = action.description;
   cmd.load = () => cmd;
 };
-
-const isInstanceAction = actionName => ['fetch', 'remove', 'update'].includes(actionName);
 
 module.exports = TwilioApiCommand;

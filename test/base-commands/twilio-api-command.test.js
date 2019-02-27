@@ -1,4 +1,5 @@
 const TwilioApiCommand = require('../../src/base-commands/twilio-api-command');
+const { getTopicName } = require('../../src/services/twilio-api');
 const { expect, test, constants } = require('../test');
 const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
 
@@ -13,12 +14,17 @@ describe('base-commands', () => {
         cmd.actionDefinition = {
           domainName: 'api',
           versionName: 'v2010',
-          topicName: 'call',
           commandName: 'create',
           path: '/Accounts/{AccountSid}/Calls',
           resource: fakeResource,
+          actionName: 'create',
           action: fakeResource.actions.create
         };
+        cmd.actionDefinition.topicName = getTopicName(
+          cmd.actionDefinition.domainName,
+          cmd.actionDefinition.versionName,
+          cmd.actionDefinition.path
+        );
         TwilioApiCommand.setUpApiCommandOptions(cmd);
 
         return cmd;
@@ -27,7 +33,7 @@ describe('base-commands', () => {
       test.it('setUpApiCommandOptions', async () => {
         const cmd = getCommandClass();
 
-        expect(cmd.id).to.equal('call:create');
+        expect(cmd.id).to.equal('api-v2010-accounts-account-sid-calls:create');
         expect(cmd.description).to.equal(fakeResource.actions.create.description);
         expect(cmd.load()).to.equal(cmd);
 

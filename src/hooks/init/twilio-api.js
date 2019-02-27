@@ -4,8 +4,7 @@
 
 const { Plugin } = require('@oclif/config');
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
-const { TwilioApiBrowser } = require('../../services/twilio-api');
-const { kebabCase } = require('../../services/naming-conventions');
+const { TwilioApiBrowser, getTopicName } = require('../../services/twilio-api');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
@@ -30,7 +29,7 @@ class TwilioRestApiPlugin extends Plugin {
               domainName,
               versionName,
               // TODO: We need a much better way to get a good topic name
-              topicName: domainName + '-' + versionName + '-' + kebabCase(resourcePath.replace(/[\/\{\}]+/g, '-')),
+              topicName: getTopicName(domainName, versionName, resourcePath),
               commandName: actionName,
               path: resourcePath,
               resource: resource,
@@ -49,10 +48,12 @@ class TwilioRestApiPlugin extends Plugin {
   }
 
   get topics() {
-    return this.actions.map(a => ({
-      name: a.topicName,
-      description: a.resource.description
-    }));
+    return this.actions
+      .filter((value, index, self) => self.findIndex(a => a.topicName === value.topicName) === index) // Uniques
+      .map(a => ({
+        name: a.topicName,
+        description: a.resource.description
+      }));
   }
 
   get commandIDs() {
