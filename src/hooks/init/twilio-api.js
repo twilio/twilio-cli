@@ -8,37 +8,39 @@ const { TwilioApiBrowser, getTopicName } = require('../../services/twilio-api');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
-  scanAction(actionName) {
-    this.actionName = actionName;
-    this.actions.push({
-      domainName: this.domainName,
-      versionName: this.versionName,
-      // TODO: We need a much better way to get a good topic name
-      topicName: getTopicName(this.domainName, this.versionName, this.resourcePath),
-      commandName: this.actionName,
-      path: this.resourcePath,
-      resource: this.resource,
-      actionName: this.actionName,
-      action: this.resource.actions[this.actionName]
-    });
+  scanAction(actionDefinition) {
+    actionDefinition.commandName = actionDefinition.actionName;
+    actionDefinition.action = actionDefinition.resource.actions[actionDefinition.actionName];
+    this.actions.push(actionDefinition);
   }
 
-  scanResource(resourcePath) {
-    this.resourcePath = resourcePath;
-    this.resource = this.version.resources[resourcePath];
-    Object.keys(this.resource.actions).forEach(this.scanAction, this);
+  scanResource(actionDefinition) {
+    actionDefinition.resource = actionDefinition.version.resources[actionDefinition.path];
+    actionDefinition.topicName = getTopicName(actionDefinition);
+    Object.keys(actionDefinition.resource.actions).forEach(actionName => {
+      actionDefinition.actionName = actionName;
+      this.scanAction(actionDefinition);
+    }, this);
   }
 
-  scanVersion(versionName) {
-    this.versionName = versionName;
-    this.version = this.domain.versions[versionName];
-    Object.keys(this.version.resources).forEach(this.scanResource, this);
+  scanVersion(actionDefinition) {
+    actionDefinition.version = actionDefinition.domain.versions[actionDefinition.versionName];
+    Object.keys(actionDefinition.version.resources).forEach(resourcePath => {
+      actionDefinition.path = resourcePath;
+      this.scanResource(actionDefinition);
+    }, this);
   }
 
   scanDomain(domainName) {
-    this.domainName = domainName;
-    this.domain = this.apiBrowser.domains[domainName];
-    Object.keys(this.domain.versions).forEach(this.scanVersion, this);
+    const actionDefinition = {
+      domainName,
+      domain: this.apiBrowser.domains[domainName]
+    };
+
+    Object.keys(actionDefinition.domain.versions).forEach(versionName => {
+      actionDefinition.versionName = versionName;
+      this.scanVersion(actionDefinition);
+    }, this);
   }
 
   constructor(config, apiBrowser) {

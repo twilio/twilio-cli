@@ -20,11 +20,7 @@ describe('base-commands', () => {
           actionName: 'create',
           action: fakeResource.actions.create
         };
-        cmd.actionDefinition.topicName = getTopicName(
-          cmd.actionDefinition.domainName,
-          cmd.actionDefinition.versionName,
-          cmd.actionDefinition.path
-        );
+        cmd.actionDefinition.topicName = getTopicName(cmd.actionDefinition);
         TwilioApiCommand.setUpApiCommandOptions(cmd);
 
         return cmd;
