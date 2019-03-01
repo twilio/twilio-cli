@@ -12,7 +12,7 @@ const camelCase = input => {
   return input
     .trim()
     .replace(/^[A-Z]/, g => g[0].toLowerCase()) // from PascalCase
-    .replace(/[A-Z]{2,}/g, g => g.toLowerCase()) // consecutive caps (e.g. "AWS")
+    .replace(/[A-Z]{2,}/g, g => g.toLowerCase()) // consecutive caps (e.g. "AWS")  TODO: What about AWSRoute53?
     .replace(/[-_ ]([a-z])/g, g => g[1].toUpperCase()) // from kebab-case or snake_case (or spaces)
     .replace(/ /g, ''); // remove any remaining spaces
 };

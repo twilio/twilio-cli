@@ -43,7 +43,7 @@ class BaseCommand extends Command {
     let limitedData = null;
     if (properties) {
       const propNames = properties.split(',').map(p => p.trim());
-      limitedData = fullData.map(fullItem => {
+      limitedData = dataArray.map(fullItem => {
         const limitedItem = {};
         propNames.forEach(p => {
           if (fullItem[p] === undefined) {

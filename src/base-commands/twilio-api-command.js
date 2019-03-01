@@ -131,7 +131,7 @@ class TwilioApiCommand extends TwilioClientCommand {
     }
 
     // TODO: Figure out sane default output columns
-    this.output(Array.isArray(response) ? response : [response], this.flags.properties);
+    this.output(response, this.flags.properties);
 
     // TODO: Possible extender event: "afterInvokeApi"
   }
