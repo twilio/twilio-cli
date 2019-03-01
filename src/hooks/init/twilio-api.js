@@ -12,7 +12,6 @@ class TwilioRestApiPlugin extends Plugin {
     actionDefinition.commandName = actionDefinition.actionName;
     actionDefinition.action = actionDefinition.resource.actions[actionDefinition.actionName];
     this.actions.push(Object.assign({}, actionDefinition));
-    this.topicsSet.add(actionDefinition.topicName);
   }
 
   scanResource(actionDefinition) {
@@ -49,7 +48,6 @@ class TwilioRestApiPlugin extends Plugin {
     this.apiBrowser = apiBrowser || new TwilioApiBrowser();
 
     this.actions = [];
-    this.topicsSet = new Set();
     Object.keys(this.apiBrowser.domains).forEach(this.scanDomain, this);
   }
 
