@@ -11,7 +11,7 @@ class TwilioRestApiPlugin extends Plugin {
   scanAction(actionDefinition) {
     actionDefinition.commandName = actionDefinition.actionName;
     actionDefinition.action = actionDefinition.resource.actions[actionDefinition.actionName];
-    this.actions.push(actionDefinition);
+    this.actions.push(Object.assign({}, actionDefinition));
   }
 
   scanResource(actionDefinition) {
