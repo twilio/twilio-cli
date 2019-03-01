@@ -1,4 +1,4 @@
-const { TwilioApiBrowser } = require('../../src/services/twilio-api');
+const { TwilioApiBrowser, getTopicName } = require('../../src/services/twilio-api');
 
 const { expect, test } = require('../test');
 
@@ -89,6 +89,18 @@ describe('services', () => {
             }
           }
         });
+      });
+    });
+
+    describe('getTopicName', () => {
+      test.it('handles a simple, non-nested resource path', () => {
+        expect(getTopicName({ domainName: 'foo', versionName: 'v1', path: '/Bars' })).to.equal('foo-v1-bars');
+      });
+
+      test.it('handles a nested resource path with parameters', () => {
+        expect(getTopicName({ domainName: 'foo', versionName: 'v1', path: '/Bars/{BarId}/SubBars' })).to.equal(
+          'foo-v1-bars-sub-bars'
+        );
       });
     });
   });

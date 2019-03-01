@@ -9,13 +9,17 @@ const { kebabCase, camelCase } = require('../services/naming-conventions');
 const { doesObjectHaveProperty } = require('../services/javascript-utilities');
 const ResourcePathParser = require('../services/resource-path-parser');
 
+const isInstanceAction = actionName => ['fetch', 'remove', 'update'].includes(actionName);
+
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
   array: flags.string,
   boolean: flags.boolean,
   integer: flags.string,
   number: flags.string,
-  string: flags.string
+  string: flags.string,
+  object: flags.string,
+  undefined: flags.string // TODO: Handle "anyOf" case more explicitly
 };
 
 // AccountSid is a special snowflake
@@ -34,6 +38,7 @@ class TwilioApiCommand extends TwilioClientCommand {
     const domainName = cmd.actionDefinition.domainName;
     const versionName = cmd.actionDefinition.versionName;
     const currentPath = cmd.actionDefinition.path;
+    const actionName = cmd.actionDefinition.actionName;
 
     const { flags: receivedFlags } = this.parse(this.constructor);
 
@@ -98,14 +103,23 @@ class TwilioApiCommand extends TwilioClientCommand {
         // the current endpoint as a function, passing the parameter
         // and then use it's result as the new endpoint.
         endpoint = endpoint(value);
+        this.logger.debug(`pathNode=${pathNode}, value=${value}, endpoint=${typeof endpoint}`);
       } else {
         endpoint = endpoint[camelCase(pathNode)];
+        this.logger.debug(`pathNode=${pathNode}, endpoint=${typeof endpoint}`);
       }
     });
 
+    if (isInstanceAction(actionName)) {
+      endpoint = endpoint(receivedFlags.sid);
+      delete receivedFlags.sid;
+      this.logger.debug(`endpoint=${typeof endpoint}`);
+    }
+    this.logger.debug(`actionName=${actionName}, endpoint[actionName]=${typeof endpoint[actionName]}`);
+
     let response;
     try {
-      response = await endpoint.create(camelCasedFlags);
+      response = await endpoint[actionName](camelCasedFlags);
     } catch (error) {
       if (error.moreInfo) {
         this.logger.error(`Error ${error.code} response from Twilio: ${error.message}`);
@@ -117,7 +131,7 @@ class TwilioApiCommand extends TwilioClientCommand {
     }
 
     // TODO: Figure out sane default output columns
-    this.output([response], this.flags.properties);
+    this.output(response, this.flags.properties);
 
     // TODO: Possible extender event: "afterInvokeApi"
   }
@@ -161,14 +175,14 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
       flagType = typeMap[param.schema.type];
     }
 
-    if (!flagType) {
-      const unknownParameterTypeError = {
-        message: `Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`
-      };
-      throw unknownParameterTypeError;
+    if (flagType) {
+      cmdFlags[flagName] = flagType(flagConfig);
+    } else {
+      // We don't have a logger in this context and our build process should ensure this
+      // error condition isn't possible.
+      // eslint-disable-next-line no-console
+      console.error(`Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`);
     }
-
-    cmdFlags[flagName] = flagType(flagConfig);
   });
 
   cmdFlags.properties = flags.string({

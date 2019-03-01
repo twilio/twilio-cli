@@ -4,28 +4,51 @@
 
 const { Plugin } = require('@oclif/config');
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
-const { TwilioApiBrowser } = require('../../services/twilio-api');
+const { TwilioApiBrowser, getTopicName } = require('../../services/twilio-api');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
+  scanAction(actionDefinition) {
+    actionDefinition.commandName = actionDefinition.actionName;
+    actionDefinition.action = actionDefinition.resource.actions[actionDefinition.actionName];
+    this.actions.push(actionDefinition);
+  }
+
+  scanResource(actionDefinition) {
+    actionDefinition.resource = actionDefinition.version.resources[actionDefinition.path];
+    actionDefinition.topicName = getTopicName(actionDefinition);
+    Object.keys(actionDefinition.resource.actions).forEach(actionName => {
+      actionDefinition.actionName = actionName;
+      this.scanAction(actionDefinition);
+    }, this);
+  }
+
+  scanVersion(actionDefinition) {
+    actionDefinition.version = actionDefinition.domain.versions[actionDefinition.versionName];
+    Object.keys(actionDefinition.version.resources).forEach(resourcePath => {
+      actionDefinition.path = resourcePath;
+      this.scanResource(actionDefinition);
+    }, this);
+  }
+
+  scanDomain(domainName) {
+    const actionDefinition = {
+      domainName,
+      domain: this.apiBrowser.domains[domainName]
+    };
+
+    Object.keys(actionDefinition.domain.versions).forEach(versionName => {
+      actionDefinition.versionName = versionName;
+      this.scanVersion(actionDefinition);
+    }, this);
+  }
+
   constructor(config, apiBrowser) {
     super(config);
     this.apiBrowser = apiBrowser || new TwilioApiBrowser();
 
-    // TODO: Hard-coding one resource/action for now.
-    const CALL_RESOURCE_PATH = '/Accounts/{AccountSid}/Calls';
-    const resource = this.apiBrowser.domains.api.versions.v2010.resources[CALL_RESOURCE_PATH];
-    this.actions = [
-      {
-        domainName: 'api',
-        versionName: 'v2010',
-        topicName: 'call',
-        commandName: 'create',
-        path: CALL_RESOURCE_PATH,
-        resource: resource,
-        action: resource.actions.create
-      }
-    ];
+    this.actions = [];
+    Object.keys(this.apiBrowser.domains).forEach(this.scanDomain, this);
   }
 
   get hooks() {
@@ -34,10 +57,12 @@ class TwilioRestApiPlugin extends Plugin {
   }
 
   get topics() {
-    return this.actions.map(a => ({
-      name: a.topicName,
-      description: a.resource.description
-    }));
+    return this.actions
+      .filter((value, index, self) => self.findIndex(a => a.topicName === value.topicName) === index) // Uniques
+      .map(a => ({
+        name: a.topicName,
+        description: a.resource.description
+      }));
   }
 
   get commandIDs() {

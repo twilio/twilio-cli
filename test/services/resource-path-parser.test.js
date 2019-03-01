@@ -18,7 +18,11 @@ describe('services', () => {
       });
 
       test.it('should remove the last part if it\'s a {PathParameter}', () => {
-        const parser = new ResourcePathParser('/v1/foo/bar/{blah}.json');
+        let parser = new ResourcePathParser('/v1/foo/bar/{blah}.json');
+        parser.normalizePath();
+        expect(parser.getFullPath()).to.equal('/foo/bar');
+
+        parser = new ResourcePathParser('/v1/foo/bar/{blah}');
         parser.normalizePath();
         expect(parser.getFullPath()).to.equal('/foo/bar');
       });
@@ -35,9 +39,11 @@ describe('services', () => {
 
     describe('isPathVariable', () => {
       test.it('should identify if a path node string is a variable identifier', () => {
-        const parser = new ResourcePathParser('/foo/{AccountSid}/bar');
+        const parser = new ResourcePathParser('/foo/{AccountSid}/{Bar}/{Sid}');
         expect(parser.isPathVariable('foo')).to.be.false;
         expect(parser.isPathVariable('{AccountSid}')).to.be.true;
+        expect(parser.isPathVariable('{Bar}')).to.be.true;
+        expect(parser.isPathVariable('{Sid}')).to.be.true;
       });
     });
   });

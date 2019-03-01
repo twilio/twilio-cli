@@ -2,7 +2,7 @@ class ResourcePathParser {
   constructor(pathString) {
     this.originalPathString = pathString;
     this.pathParts = pathString.split('/');
-    this.isInstanceResource = pathString.endsWith('}.json');
+    this.isInstanceResource = pathString.endsWith('}.json') || pathString.endsWith('}');
     this.version = this.pathParts[1];
   }
 
