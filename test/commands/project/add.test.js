@@ -1,13 +1,14 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
-const { expect, test, constants } = require('../../test');
+const { expect, test, constants } = require('@twilio/cli-test');
 const ProjectAdd = require('../../../src/commands/project/add');
+const { Config } = require('@twilio/cli-core').services.config;
 
 describe('commands', () => {
   describe('project', () => {
     describe('add', () => {
       test
-        .twilioCliEnv()
+        .twilioCliEnv(Config)
         .twilioCreateCommand(ProjectAdd, [])
         .do(ctx => {
           const fakePrompt = sinon.stub();

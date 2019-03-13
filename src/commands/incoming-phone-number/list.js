@@ -1,5 +1,5 @@
 const { flags } = require('@oclif/command');
-const TwilioClientCommand = require('../../base-commands/twilio-client-command');
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 
 class NumberList extends TwilioClientCommand {
   async run() {

@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const { URL } = require('url');
 const { flags } = require('@oclif/command');
-const TwilioClientCommand = require('../../base-commands/twilio-client-command');
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const IncomingPhoneNumberHelper = require('../../services/resource-helpers/api/v2010/incoming-phone-number');
 
 class NumberUpdate extends TwilioClientCommand {

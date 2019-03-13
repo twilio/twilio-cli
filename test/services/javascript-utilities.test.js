@@ -1,6 +1,6 @@
 const { doesObjectHaveProperty } = require('../../src/services/javascript-utilities');
 
-const { expect, test } = require('../test');
+const { expect, test } = require('@twilio/cli-test');
 
 describe('services', () => {
   describe('javascript-utilities', () => {

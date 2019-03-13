@@ -1,6 +1,6 @@
 const { kebabCase, camelCase } = require('../../src/services/naming-conventions');
 
-const { expect, test } = require('../test');
+const { expect, test } = require('@twilio/cli-test');
 
 describe('services', () => {
   describe('namingConventions', () => {

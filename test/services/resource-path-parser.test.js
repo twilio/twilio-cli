@@ -1,6 +1,6 @@
 const ResourcePathParser = require('../../src/services/resource-path-parser');
 
-const { expect, test } = require('../test');
+const { expect, test } = require('@twilio/cli-test');
 
 describe('services', () => {
   describe('path-parser', () => {

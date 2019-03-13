@@ -1,8 +1,9 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
-const { expect, test, constants, getFakeSid } = require('../../../../test');
+const { expect, test, constants, getFakeSid } = require('@twilio/cli-test');
 const IncomingPhoneNumberHelper = require('../../../../../src/services/resource-helpers/api/v2010/incoming-phone-number');
-const TwilioClientCommand = require('../../../../../src/base-commands/twilio-client-command');
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
+const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 const fakeNumber = '+12095551212';
 const fakeNumberSid = getFakeSid('PN');
@@ -18,8 +19,8 @@ const fakeNumberLookupUrl = `/2010-04-01/Accounts/${
 
 function runTests() {
   const helperTest = test
-    .twilioFakeProject()
-    .twilioCliEnv()
+    .twilioFakeProject(ConfigData)
+    .twilioCliEnv(Config)
     .stderr()
     .twilioCreateCommand(TwilioClientCommand, [])
     .do(async ctx => {

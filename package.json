@@ -1,7 +1,7 @@
 {
-  "name": "twilio-cli",
+  "name": "@twilio/cli",
   "description": "Unleash the power of Twilio from your command prompt.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Twilio @twilio",
   "bin": {
     "twilio": "./bin/run"
@@ -19,18 +19,20 @@
     "ngrok": "^3.0.1",
     "shelljs": "^0.8.2",
     "tsv": "^0.2.0",
-    "twilio": "^3.19.1"
+    "twilio": "^3.19.1",
+    "@twilio/cli-core": "^0.1.2"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.21.0",
     "@oclif/test": "^1.1.0",
+    "@twilio/cli-test": "^0.1.2",
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-config-oclif": "^1.5.1",
     "eslint-plugin-mocha": "^5.2.0",
     "globby": "^8.0.1",
     "mocha": "^5.2.0",
-    "nock": "^10.0.0",
+    "nock": "^10.0.6",
     "nyc": "^13.3.0",
     "rimraf": "^2.6.2",
     "sinon": "^6.3.4",

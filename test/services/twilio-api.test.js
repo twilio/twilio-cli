@@ -1,6 +1,6 @@
 const { TwilioApiBrowser, getTopicName } = require('../../src/services/twilio-api');
 
-const { expect, test } = require('../test');
+const { expect, test } = require('@twilio/cli-test');
 
 describe('services', () => {
   describe('twilio-api', () => {

@@ -1,11 +1,12 @@
 const sinon = require('sinon');
-const { expect, test } = require('../test');
+const { expect, test } = require('@twilio/cli-test');
+const { Config } = require('@twilio/cli-core').services.config;
 const Zork = require('../../src/commands/zork');
 
 describe('commands', () => {
   describe('zork', () => {
     test
-      .twilioCliEnv()
+      .twilioCliEnv(Config)
       .twilioCreateCommand(Zork, [])
       .do(ctx => {
         ctx.testCmd.exec = sinon.stub().throws('simulated error installing module');
@@ -21,7 +22,7 @@ describe('commands', () => {
       });
 
     test
-      .twilioCliEnv()
+      .twilioCliEnv(Config)
       .twilioCreateCommand(Zork, [])
       .do(ctx => {
         ctx.testCmd.exec = sinon.stub().resolves();
@@ -41,7 +42,7 @@ describe('commands', () => {
       });
 
     test
-      .twilioCliEnv()
+      .twilioCliEnv(Config)
       .twilioCreateCommand(Zork, [])
       .do(ctx => {
         ctx.testCmd.findZork = sinon.stub().returns(() => ctx.testCmd.logger.info('Running zork'));
