@@ -20,12 +20,12 @@
     "shelljs": "^0.8.2",
     "tsv": "^0.2.0",
     "twilio": "^3.19.1",
-    "@twilio/cli-core": "^0.1.2"
+    "@twilio/cli-core": "git+ssh://git@code.hq.twilio.com:twilio/cli-core.git"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.21.0",
     "@oclif/test": "^1.1.0",
-    "@twilio/cli-test": "^0.1.2",
+    "@twilio/cli-test": "git+ssh://git@code.hq.twilio.com:twilio/cli-test.git",
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-config-oclif": "^1.5.1",
