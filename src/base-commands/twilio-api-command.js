@@ -3,7 +3,7 @@
 // is free of TODO's.
 
 const { flags } = require('@oclif/command');
-const TwilioClientCommand = require('./twilio-client-command');
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { validateSchema } = require('../services/api-schema/schema-validator');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
 const { doesObjectHaveProperty } = require('../services/javascript-utilities');

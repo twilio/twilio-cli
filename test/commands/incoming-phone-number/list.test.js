@@ -1,13 +1,14 @@
-const { expect, test, constants } = require('../../test');
+const { expect, test, constants } = require('@twilio/cli-test');
 const NumberList = require('../../../src/commands/incoming-phone-number/list');
+const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 describe('commands', () => {
   describe('incoming-phone-number', () => {
     describe('list', () => {
       const setUpTest = (args = []) => {
         return test
-          .twilioFakeProject()
-          .twilioCliEnv()
+          .twilioFakeProject(ConfigData)
+          .twilioCliEnv(Config)
           .stdout()
           .nock('https://api.twilio.com', api =>
             api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/IncomingPhoneNumbers.json`).reply(200, {

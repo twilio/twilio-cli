@@ -1,6 +1,6 @@
 const TwilioSchemaValidator = require('../../../src/services/api-schema/twilio-validator');
 
-const { expect, test, logger } = require('../../test');
+const { expect, test, logger } = require('@twilio/cli-test');
 
 const validateSchema = (schema, value) => {
   const schemaValidator = new TwilioSchemaValidator(logger);

@@ -1,4 +1,4 @@
-const BaseCommand = require('../base-commands/base-command');
+const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 
 class Zork extends BaseCommand {
   constructor(argv, config, secureStorage) {

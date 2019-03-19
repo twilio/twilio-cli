@@ -1,8 +1,10 @@
 const JSONSchemaValidator = require('../../../src/services/api-schema/json-validator');
 
-const { expect, test, logger } = require('../../test');
+const { expect, test } = require('@twilio/cli-test');
+const { Logger, LoggingLevel } = require('@twilio/cli-core').services.logging;
 
 const validateSchema = (schema, value) => {
+  const logger = new Logger({ level: LoggingLevel.debug });
   const schemaValidator = new JSONSchemaValidator(logger);
   schemaValidator.validateSchema(schema, value);
   return schemaValidator.errors;

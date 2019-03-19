@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const BaseCommand = require('../../base-commands/base-command');
+const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 
 class ProjectList extends BaseCommand {
   async run() {

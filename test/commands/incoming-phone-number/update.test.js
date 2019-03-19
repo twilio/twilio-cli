@@ -1,7 +1,7 @@
-/* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
-const { expect, test, constants, getFakeSid } = require('../../test');
+const { expect, test, constants, getFakeSid } = require('@twilio/cli-test');
 const NumberUpdate = require('../../../src/commands/incoming-phone-number/update');
+const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 const fakeNumber = '+12095551212';
 const fakeNumberSid = getFakeSid('PN');
@@ -39,8 +39,8 @@ describe('commands', () => {
     describe('update', () => {
       const setUpTest = (args = [], useFakeNgrok = false) => {
         return test
-          .twilioFakeProject()
-          .twilioCliEnv()
+          .twilioFakeProject(ConfigData)
+          .twilioCliEnv(Config)
           .stdout()
           .do(ctx => createCommand(ctx, args, useFakeNgrok));
       };

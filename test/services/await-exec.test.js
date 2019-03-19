@@ -1,5 +1,5 @@
 const exec = require('../../src/services/await-exec');
-const { expect, test } = require('../test');
+const { expect, test } = require('@twilio/cli-test');
 
 describe('utility', () => {
   describe('await-exec', () => {

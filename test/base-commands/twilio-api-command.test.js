@@ -1,7 +1,8 @@
 const TwilioApiCommand = require('../../src/base-commands/twilio-api-command');
 const { getTopicName } = require('../../src/services/twilio-api');
-const { expect, test, constants } = require('../test');
+const { expect, test, constants } = require('@twilio/cli-test');
 const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
+const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 const NUMBER_OF_BASE_COMMAND_FLAGS = 4;
 const NUMBER_OF_PARAMS_FOR_CALL_CREATE = fakeResource.actions.create.parameters.length;
@@ -49,8 +50,8 @@ describe('base-commands', () => {
       });
 
       test
-        .twilioFakeProject()
-        .twilioCliEnv()
+        .twilioFakeProject(ConfigData)
+        .twilioCliEnv(Config)
         .stdout()
         .nock('https://api.twilio.com', api =>
           api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json`).reply(200, fakeCallResponse)
@@ -68,8 +69,8 @@ describe('base-commands', () => {
         });
 
       test
-        .twilioFakeProject()
-        .twilioCliEnv()
+        .twilioFakeProject(ConfigData)
+        .twilioCliEnv(Config)
         .stderr()
         .twilioCommand(getCommandClass(), [
           '--from',
