@@ -115,6 +115,24 @@ When you run `twilio login`, it stores your credentials under a project called `
 
 To add a second project after the default project, you can run `twilio login -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio number:list -p my_other_proj`).
 
+## Plugins
+
+Plugins for the CLI can be installed using the `twilio plugins` command. Until we are publishing the plugins, they will need to be installed by first cloning the plugin repository locally.
+
+1. Clone the plugin repository.
+
+2. "Install" the plugin referencing your plugin's local folder like so:
+
+    ```
+    twilio plugins:link ../plugin-<my-spectacular-plugin>
+    ```
+
+3. Now, you can run your plugin command from the cli:
+
+    ```
+    twilio my-new-topic:my-new-command --help
+    ```
+
 ## Feedback
 
 Please file a GitHub issue in this repository for any feedback you may have.
