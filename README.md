@@ -14,7 +14,11 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 
 ## Setup
 
-1. Install the CLI globally using `npm install -g twilio-cli`
+1. Clone [this repo](https://github.com/twilio/twilio-cli): `git clone git@code.hq.twilio.com:twilio/cli.git`
+1. Change to the project directory: `cd cli`
+1. Run: `npm install`
+1. Install the CLI globally using `npm install -g .`
+1. Now you can run the CLI from anywhere using the `twilio` command.
 
 ## Plugins
 
