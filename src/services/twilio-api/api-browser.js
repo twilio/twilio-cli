@@ -1,6 +1,6 @@
 const url = require('url');
 const apiSpecFromDisk = require('./twilio_api.json');
-const { doesObjectHaveProperty } = require('../javascript-utilities');
+const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const ResourcePathParser = require('../resource-path-parser');
 
 function translateLegacyVersions(domain, version) {

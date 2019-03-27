@@ -4,9 +4,9 @@
 
 const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
+const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { validateSchema } = require('../services/api-schema/schema-validator');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
-const { doesObjectHaveProperty } = require('../services/javascript-utilities');
 const ResourcePathParser = require('../services/resource-path-parser');
 
 const isInstanceAction = actionName => ['fetch', 'remove', 'update'].includes(actionName);
