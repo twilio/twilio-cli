@@ -14,4 +14,7 @@ const getTopicName = actionDefinition => {
   ).replace(new RegExp(TOPIC_SEPARATOR + '+', 'g'), TOPIC_SEPARATOR); // Remove duplicate separators;
 };
 
-module.exports = getTopicName;
+module.exports = {
+  getTopicName,
+  TOPIC_SEPARATOR
+};

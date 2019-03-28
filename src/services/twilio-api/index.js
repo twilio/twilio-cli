@@ -1,4 +1,4 @@
 const TwilioApiBrowser = require('./api-browser');
-const getTopicName = require('./get-topic-name');
+const { getTopicName, TOPIC_SEPARATOR } = require('./get-topic-name');
 
-module.exports = { TwilioApiBrowser, getTopicName };
+module.exports = { TwilioApiBrowser, getTopicName, TOPIC_SEPARATOR };

@@ -1,6 +1,6 @@
 const { Plugin } = require('@oclif/config');
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
-const { TwilioApiBrowser, getTopicName } = require('../../services/twilio-api');
+const { TwilioApiBrowser, getTopicName, TOPIC_SEPARATOR } = require('../../services/twilio-api');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
@@ -25,6 +25,12 @@ class TwilioRestApiPlugin extends Plugin {
       actionDefinition.path = resourcePath;
       this.scanResource(actionDefinition);
     }, this);
+
+    const shortVersion = actionDefinition.versionName.replace(/v/g, '');
+    this.versionTopics.push({
+      name: actionDefinition.domainName + TOPIC_SEPARATOR + actionDefinition.versionName,
+      description: `Version ${shortVersion} of the API.`
+    });
   }
 
   scanDomain(domainName) {
@@ -37,6 +43,11 @@ class TwilioRestApiPlugin extends Plugin {
       actionDefinition.versionName = versionName;
       this.scanVersion(actionDefinition);
     }, this);
+
+    this.domainTopics.push({
+      name: domainName,
+      description: `API resources under ${domainName}.twilio.com.`
+    });
   }
 
   constructor(config, apiBrowser) {
@@ -44,6 +55,8 @@ class TwilioRestApiPlugin extends Plugin {
     this.apiBrowser = apiBrowser || new TwilioApiBrowser();
 
     this.actions = [];
+    this.domainTopics = [];
+    this.versionTopics = [];
     Object.keys(this.apiBrowser.domains).forEach(this.scanDomain, this);
   }
 
@@ -58,7 +71,9 @@ class TwilioRestApiPlugin extends Plugin {
       .map(a => ({
         name: a.topicName,
         description: a.resource.description
-      }));
+      }))
+      .concat(this.domainTopics)
+      .concat(this.versionTopics);
   }
 
   get commandIDs() {
