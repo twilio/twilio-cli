@@ -1,4 +1,4 @@
-const { kebabCase, camelCase } = require('../../src/services/naming-conventions');
+const { kebabCase, camelCase, capitalize } = require('../../src/services/naming-conventions');
 
 const { expect, test } = require('@twilio/cli-test');
 
@@ -93,6 +93,20 @@ describe('services', () => {
       test.it('handles kebab-case', () => {
         expect(camelCase('one-two')).to.equal('oneTwo');
         expect(camelCase('one-two-three')).to.equal('oneTwoThree');
+      });
+    });
+
+    describe('capitalize', () => {
+      test.it('handles single word', () => {
+        expect(capitalize('one')).to.equal('One');
+      });
+
+      test.it('handles multiple words', () => {
+        expect(capitalize('one two three')).to.equal('One two three');
+      });
+
+      test.it('trims leading and trailing spaces', () => {
+        expect(capitalize('  one  ')).to.equal('One');
       });
     });
   });

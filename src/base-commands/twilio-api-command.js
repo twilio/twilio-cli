@@ -8,6 +8,7 @@ const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { validateSchema } = require('../services/api-schema/schema-validator');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
 const ResourcePathParser = require('../services/resource-path-parser');
+const { getActionDescription } = require('../services/twilio-api');
 
 const isInstanceAction = actionName => ['fetch', 'remove', 'update'].includes(actionName);
 
@@ -194,7 +195,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   NewCommandClass.id = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
   NewCommandClass.args = [];
   NewCommandClass.flags = Object.assign(cmdFlags, TwilioApiCommand.flags);
-  NewCommandClass.description = action.description;
+  NewCommandClass.description = getActionDescription(NewCommandClass.actionDefinition);
   NewCommandClass.load = () => NewCommandClass;
 };
 
