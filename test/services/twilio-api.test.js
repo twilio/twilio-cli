@@ -1,4 +1,4 @@
-const { TwilioApiBrowser, getTopicName } = require('../../src/services/twilio-api');
+const { TwilioApiBrowser, getTopicName, getActionDescription } = require('../../src/services/twilio-api');
 
 const { expect, test } = require('@twilio/cli-test');
 
@@ -94,13 +94,68 @@ describe('services', () => {
 
     describe('getTopicName', () => {
       test.it('handles a simple, non-nested resource path', () => {
-        expect(getTopicName({ domainName: 'foo', versionName: 'v1', path: '/Bars' })).to.equal('foo-v1-bars');
+        expect(getTopicName({ domainName: 'foo', versionName: 'v1', path: '/Bars' })).to.equal('foo:v1:bars');
       });
 
       test.it('handles a nested resource path with parameters', () => {
         expect(getTopicName({ domainName: 'foo', versionName: 'v1', path: '/Bars/{BarId}/SubBars' })).to.equal(
-          'foo-v1-bars-sub-bars'
+          'foo:v1:bars:sub-bars'
         );
+      });
+    });
+
+    describe('getActionDescription', () => {
+      test.it('returns existing action description', () => {
+        const result = getActionDescription({
+          action: {
+            description: 'Hey there!'
+          }
+        });
+        expect(result).to.equal('Hey there!');
+      });
+
+      test.it('returns a default List action description', () => {
+        const result = getActionDescription({
+          action: {
+            description: null
+          },
+          actionName: 'list',
+          path: '/Foo/Bar'
+        });
+        expect(result).to.equal('List multiple Bar resources.');
+      });
+
+      test.it('returns a default Create action description', () => {
+        const result = getActionDescription({
+          action: {
+            description: null
+          },
+          actionName: 'create',
+          path: '/Foo/Bar'
+        });
+        expect(result).to.equal('Create a Bar resource.');
+      });
+
+      test.it('returns a default Fetch action description', () => {
+        const result = getActionDescription({
+          action: {
+            description: null
+          },
+          actionName: 'fetch',
+          path: '/Foo/Bar/{BarSid}'
+        });
+        expect(result).to.equal('Fetch a Bar resource.');
+      });
+
+      test.it('returns a default Remove action description', () => {
+        const result = getActionDescription({
+          action: {
+            description: null
+          },
+          actionName: 'remove',
+          path: '/Foo/Bar/excellentSubResource'
+        });
+        expect(result).to.equal('Remove an ExcellentSubResource resource.');
       });
     });
   });

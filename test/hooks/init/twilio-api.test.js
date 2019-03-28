@@ -15,6 +15,13 @@ describe('hooks', () => {
         expect(plugin.topics.length).to.be.greaterThan(20);
         expect(plugin.commandIDs.length).to.be.greaterThan(plugin.topics.length);
         expect(plugin.commands.length).to.equal(plugin.commandIDs.length);
+
+        /* eslint-disable max-nested-callbacks */
+        const domainTopic = plugin.topics.find(t => t.name === 'api');
+        const versionTopic = plugin.topics.find(t => t.name === 'api:v2010');
+
+        expect(domainTopic.description).to.equal('API resources under api.twilio.com.');
+        expect(versionTopic.description).to.equal('Version 2010 of the API.');
       });
     });
   });

@@ -17,7 +17,12 @@ const camelCase = input => {
     .replace(/ /g, ''); // remove any remaining spaces
 };
 
+const capitalize = input => {
+  return input.trim().replace(/^[a-z]/, g => g[0].toUpperCase()); // upper the first character
+};
+
 module.exports = {
   kebabCase,
-  camelCase
+  camelCase,
+  capitalize
 };
