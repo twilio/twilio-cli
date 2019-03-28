@@ -11,8 +11,8 @@ describe('base-commands', () => {
   describe('twilio-api-command', () => {
     describe('TwilioApiCommand', () => {
       const getCommandClass = () => {
-        const cmd = class extends TwilioApiCommand {};
-        cmd.actionDefinition = {
+        const NewCommandClass = class extends TwilioApiCommand {};
+        NewCommandClass.actionDefinition = {
           domainName: 'api',
           versionName: 'v2010',
           commandName: 'create',
@@ -21,32 +21,40 @@ describe('base-commands', () => {
           actionName: 'create',
           action: fakeResource.actions.create
         };
-        cmd.actionDefinition.topicName = getTopicName(cmd.actionDefinition);
-        TwilioApiCommand.setUpApiCommandOptions(cmd);
+        NewCommandClass.actionDefinition.topicName = getTopicName(NewCommandClass.actionDefinition);
+        TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
 
-        return cmd;
+        return NewCommandClass;
       };
 
-      test.it('setUpApiCommandOptions', async () => {
-        const cmd = getCommandClass();
+      test.it('setUpNewCommandClass', async () => {
+        const NewCommandClass = getCommandClass();
 
-        expect(cmd.id).to.equal('api:v2010:accounts:calls:create');
-        expect(cmd.description).to.equal(fakeResource.actions.create.description);
-        expect(cmd.load()).to.equal(cmd);
+        expect(NewCommandClass.id).to.equal('api:v2010:accounts:calls:create');
+        expect(NewCommandClass.description).to.equal(fakeResource.actions.create.description);
+        expect(NewCommandClass.load()).to.equal(NewCommandClass);
 
-        expect(cmd.flags['account-sid'].required).to.be.false;
-        expect(cmd.flags['account-sid'].apiDetails.parameter.name).to.equal('AccountSid');
-        expect(cmd.flags['account-sid'].apiDetails.action).to.equal(cmd.actionDefinition.action);
-        expect(cmd.flags['account-sid'].apiDetails.resource).to.equal(cmd.actionDefinition.resource);
-        expect(cmd.flags.to.required).to.be.true;
-        expect(cmd.flags.to.description).to.equal('Phone number, SIP address, or client identifier to call');
-        expect(cmd.flags.from.required).to.be.true;
-        expect(cmd.flags.method.required).to.be.false;
-        expect(cmd.flags.method.optionType).to.equal('enum');
-        expect(cmd.flags.method.options).to.eql(['head', 'get', 'post', 'patch', 'put', 'delete']);
-        expect(cmd.flags.record.type).to.equal('boolean');
+        expect(NewCommandClass.flags['account-sid'].required).to.be.false;
+        expect(NewCommandClass.flags['account-sid'].apiDetails.parameter.name).to.equal('AccountSid');
+        expect(NewCommandClass.flags['account-sid'].apiDetails.action).to.equal(
+          NewCommandClass.actionDefinition.action
+        );
+        expect(NewCommandClass.flags['account-sid'].apiDetails.resource).to.equal(
+          NewCommandClass.actionDefinition.resource
+        );
+        expect(NewCommandClass.flags.to.required).to.be.true;
+        expect(NewCommandClass.flags.to.description).to.equal(
+          'Phone number, SIP address, or client identifier to call'
+        );
+        expect(NewCommandClass.flags.from.required).to.be.true;
+        expect(NewCommandClass.flags.method.required).to.be.false;
+        expect(NewCommandClass.flags.method.optionType).to.equal('enum');
+        expect(NewCommandClass.flags.method.options).to.eql(['head', 'get', 'post', 'patch', 'put', 'delete']);
+        expect(NewCommandClass.flags.record.type).to.equal('boolean');
 
-        expect(Object.keys(cmd.flags).length).to.equal(NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS);
+        expect(Object.keys(NewCommandClass.flags).length).to.equal(
+          NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS
+        );
       });
 
       test

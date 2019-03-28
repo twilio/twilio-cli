@@ -34,11 +34,11 @@ class TwilioApiCommand extends TwilioClientCommand {
     // we can't pass the actionDefinition in through
     // the constructor, so we make it a static property
     // of the command class.
-    const cmd = this.constructor;
-    const domainName = cmd.actionDefinition.domainName;
-    const versionName = cmd.actionDefinition.versionName;
-    const currentPath = cmd.actionDefinition.path;
-    const actionName = cmd.actionDefinition.actionName;
+    const ThisCommandClass = this.constructor;
+    const domainName = ThisCommandClass.actionDefinition.domainName;
+    const versionName = ThisCommandClass.actionDefinition.versionName;
+    const currentPath = ThisCommandClass.actionDefinition.path;
+    const actionName = ThisCommandClass.actionDefinition.actionName;
 
     const { flags: receivedFlags } = this.parse(this.constructor);
 
@@ -49,8 +49,8 @@ class TwilioApiCommand extends TwilioClientCommand {
     Object.keys(receivedFlags).forEach(key => {
       const flagValue = receivedFlags[key];
 
-      if (doesObjectHaveProperty(cmd.flags[key], 'apiDetails')) {
-        const schema = cmd.flags[key].apiDetails.parameter.schema;
+      if (doesObjectHaveProperty(ThisCommandClass.flags[key], 'apiDetails')) {
+        const schema = ThisCommandClass.flags[key].apiDetails.parameter.schema;
         this.logger.debug(`Schema for "${key}": ` + JSON.stringify(schema));
 
         const validationErrors = validateSchema(schema, flagValue, this.logger);
@@ -142,11 +142,11 @@ TwilioApiCommand.flags = TwilioClientCommand.flags;
 // A static function to help us add the other static
 // fields required by oclif on our dynamically created
 // command class.
-TwilioApiCommand.setUpApiCommandOptions = cmd => {
-  const domainName = cmd.actionDefinition.domainName;
-  const versionName = cmd.actionDefinition.versionName;
-  const resource = cmd.actionDefinition.resource;
-  const action = cmd.actionDefinition.action;
+TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
+  const domainName = NewCommandClass.actionDefinition.domainName;
+  const versionName = NewCommandClass.actionDefinition.versionName;
+  const resource = NewCommandClass.actionDefinition.resource;
+  const action = NewCommandClass.actionDefinition.action;
 
   // Parameters
   const cmdFlags = {};
@@ -191,11 +191,11 @@ TwilioApiCommand.setUpApiCommandOptions = cmd => {
   });
 
   // Class statics
-  cmd.id = cmd.actionDefinition.topicName + ':' + cmd.actionDefinition.commandName;
-  cmd.args = [];
-  cmd.flags = Object.assign(cmdFlags, TwilioApiCommand.flags);
-  cmd.description = action.description;
-  cmd.load = () => cmd;
+  NewCommandClass.id = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
+  NewCommandClass.args = [];
+  NewCommandClass.flags = Object.assign(cmdFlags, TwilioApiCommand.flags);
+  NewCommandClass.description = action.description;
+  NewCommandClass.load = () => NewCommandClass;
 };
 
 module.exports = TwilioApiCommand;

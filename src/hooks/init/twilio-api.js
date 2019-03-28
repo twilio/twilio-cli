@@ -71,10 +71,10 @@ class TwilioRestApiPlugin extends Plugin {
       // we can't pass the actionDefinition in through
       // the constructor, so we make it a static property
       // of the newly created command class.
-      const cmd = class extends TwilioApiCommand {};
-      cmd.actionDefinition = actionDefinition;
-      TwilioApiCommand.setUpApiCommandOptions(cmd);
-      return cmd;
+      const NewCommandClass = class extends TwilioApiCommand {};
+      NewCommandClass.actionDefinition = actionDefinition;
+      TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
+      return NewCommandClass;
     });
   }
 }
