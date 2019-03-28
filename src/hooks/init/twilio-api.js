@@ -1,7 +1,3 @@
-/* eslint no-warning-comments: "off" */
-// TODO: Remove the above eslint directive when this file
-// is free of TODO's.
-
 const { Plugin } = require('@oclif/config');
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
 const { TwilioApiBrowser, getTopicName } = require('../../services/twilio-api');
