@@ -56,6 +56,19 @@ twilio project:add -p default
 
 This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "Twilio CLI on [hostname]" in the console) and stored in your system's keychain.
 
+#### Want to use environment variables?
+
+You can also use credentials stored in environment variables:
+
+##### OPTION 1 (recommended)
+- `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
+- `TWILIO_API_KEY` = an API Key created in [your console](https://twil.io/get-api-key)
+- `TWILIO_API_SECRET` = the secret for the API Key
+
+##### OPTION 2
+- `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
+- `TWILIO_AUTH_TOKEN` = your Auth Token from [your console](https://www.twilio.com/console)
+
 ### Step 2 - Explore
 
 ```
