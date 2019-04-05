@@ -150,6 +150,16 @@ When you run `twilio login`, it stores your credentials under a project called `
 
 To add a second project after the default project, you can run `twilio login -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio number:list -p my_other_proj`).
 
+### Autocomplete
+
+To enable autocomplete of CLI commands in bash or zsh, run:
+
+```
+twilio autocomplete
+```
+
+And follow the instructions.
+
 ## Contributing
 
 1. Clone [this repo](https://github.com/twilio/twilio-cli).
@@ -161,6 +171,10 @@ To add a second project after the default project, you can run `twilio login -p 
 Please file a GitHub issue in this repository for any feedback you may have. For questions, see the #help-dev-interfaces Slack channel.
 
 ## Release Notes
+
+### v0.1.4
+
+Added [autocomplete support](#autocomplete).
 
 ### v0.1.3
 
