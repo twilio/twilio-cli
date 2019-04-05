@@ -69,6 +69,14 @@ You can also use credentials stored in environment variables:
 - `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
 - `TWILIO_AUTH_TOKEN` = your Auth Token from [your console](https://www.twilio.com/console)
 
+#### Precedence of stored credentials
+
+The CLI will attempt to load credentials in the following order of priority:
+
+1. From the project specified with the `-p` parameter.
+2. From the default project, if it exists.
+3. From environment variables.
+
 ### Step 2 - Explore
 
 ```
