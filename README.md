@@ -69,7 +69,7 @@ You can also use credentials stored in environment variables:
 - `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
 - `TWILIO_AUTH_TOKEN` = your Auth Token from [your console](https://www.twilio.com/console)
 
-_NOTE: We only recommend using option 2 in cases where you are unable to make use of option 1 (which are uncommon)._
+_NOTE: Option 2 should only be used in cases where you are unable to make use of option 1 (which are uncommon)._
 
 #### Precedence of stored credentials
 
