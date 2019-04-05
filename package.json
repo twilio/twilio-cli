@@ -10,6 +10,7 @@
   "dependencies": {
     "@oclif/command": "^1.4.36",
     "@oclif/config": "^1.6.33",
+    "@oclif/plugin-autocomplete": "^0.1.0",
     "@oclif/plugin-help": "^2.1.6",
     "@oclif/plugin-plugins": "^1.7.7",
     "@twilio/cli-core": "git+ssh://git@code.hq.twilio.com:twilio/cli-core.git",
@@ -60,7 +61,8 @@
     "scope": "twilio",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-plugins",
+      "@oclif/plugin-autocomplete"
     ],
     "topics": {
       "project": {
