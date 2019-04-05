@@ -56,6 +56,29 @@ twilio project:add -p default
 
 This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "Twilio CLI on [hostname]" in the console) and stored in your system's keychain.
 
+#### Want to use environment variables?
+
+You can also use credentials stored in environment variables:
+
+##### OPTION 1 (recommended)
+- `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
+- `TWILIO_API_KEY` = an API Key created in [your console](https://twil.io/get-api-key)
+- `TWILIO_API_SECRET` = the secret for the API Key
+
+##### OPTION 2
+- `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
+- `TWILIO_AUTH_TOKEN` = your Auth Token from [your console](https://www.twilio.com/console)
+
+_NOTE: Option 2 should only be used in cases where you are unable to make use of option 1 (which are uncommon)._
+
+#### Precedence of stored credentials
+
+The CLI will attempt to load credentials in the following order of priority:
+
+1. From the project specified with the `-p` parameter.
+2. From the default project, if it exists.
+3. From environment variables.
+
 ### Step 2 - Explore
 
 ```
@@ -135,7 +158,17 @@ To add a second project after the default project, you can run `twilio login -p 
 
 ## Feedback
 
-Please file a GitHub issue in this repository for any feedback you may have.
+Please file a GitHub issue in this repository for any feedback you may have. For questions, see the #help-dev-interfaces Slack channel.
+
+## Release Notes
+
+### v0.1.3
+
+Added support for [credentials in environment variables](#want-to-use-environment-variables).
+
+### v0.1.2
+
+Initial pilot release.
 
 ## License
 
