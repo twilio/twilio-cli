@@ -158,7 +158,17 @@ To add a second project after the default project, you can run `twilio login -p 
 
 ## Feedback
 
-Please file a GitHub issue in this repository for any feedback you may have.
+Please file a GitHub issue in this repository for any feedback you may have. For questions, see the #help-dev-interfaces Slack channel.
+
+## Release Notes
+
+### v0.1.3
+
+Added support for [credentials in environment variables](#want-to-use-environment-variables).
+
+### v0.1.2
+
+Initial pilot release.
 
 ## License
 
