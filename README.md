@@ -30,6 +30,8 @@ Plugins for the CLI can be installed using the `twilio plugins` command. Until w
 
     ```
     twilio plugins:link ../plugin-debugger
+    cd ../plugin-debugger
+    npm install
     ```
 
 3. Now, you can run your plugin command from the cli:
