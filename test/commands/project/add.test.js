@@ -40,6 +40,10 @@ describe('commands', () => {
           await ctx.testCmd.run();
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('Saved default.');
+          expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret `);
+          expect(ctx.stderr).to.contain(
+            `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`
+          );
         });
     });
   });

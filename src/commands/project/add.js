@@ -116,7 +116,7 @@ class ProjectAdd extends BaseCommand {
   }
 
   async saveCredentials() {
-    const apiKeyFriendlyName = 'Twilio CLI on ' + os.hostname();
+    const apiKeyFriendlyName = `Twilio CLI for ${os.userInfo().username} on ${os.hostname()}`;
     let apiKey = null;
 
     const twilioClient = this.getTwilioClient();
@@ -132,6 +132,11 @@ class ProjectAdd extends BaseCommand {
     this.userConfig.addProject(this.projectId, this.accountSid);
     await this.secureStorage.saveCredentials(this.projectId, apiKey.sid, apiKey.secret);
     await this.configFile.save(this.userConfig);
+
+    this.logger.info(
+      `Created API Key ${apiKey.sid} and stored the secret ${this.secureStorage.platformDescription}.` +
+        ` See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`
+    );
   }
 }
 
