@@ -172,6 +172,10 @@ Please file a GitHub issue in this repository for any feedback you may have. For
 
 ## Release Notes
 
+### v0.1.5
+
+Move config from `~/.config/@twilio/cli` (Unix) and `%LOCALAPPDATA%\@twilio\cli` (Windows) to `~/.twilio` and `%USERPROFILE%\.twilio`, respectively.
+
 ### v0.1.4
 
 Added [autocomplete support](#autocomplete).
