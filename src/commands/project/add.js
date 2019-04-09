@@ -6,6 +6,8 @@ const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCom
 const { CLIRequestClient } = require('@twilio/cli-core').services;
 const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
 
+const helpMessages = require('../../services/messaging/help-messages');
+
 const FRIENDLY_STORAGE_LOCATIONS = {
   [STORAGE_LOCATIONS.KEYCHAIN]: 'in your keychain',
   [STORAGE_LOCATIONS.WIN_CRED_VAULT]: 'in the Windows credential vault',
@@ -72,7 +74,8 @@ class ProjectAdd extends BaseCommand {
 
   async promptForCredentials() {
     if (this.questions) {
-      this.logger.info('You can find your Account SID and Auth Token at https://www.twilio.com/console');
+      this.logger.info(helpMessages.WHERE_TO_FIND_ACCOUNT_SID);
+      this.logger.error(helpMessages.AUTH_TOKEN_NOT_SAVED);
       const answers = await this.inquirer.prompt(this.questions);
       this.accountSid = answers.accountSid || this.accountSid;
       this.authToken = answers.authToken || this.authToken;
