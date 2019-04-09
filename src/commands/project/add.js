@@ -4,6 +4,13 @@ const twilio = require('twilio');
 
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CLIRequestClient } = require('@twilio/cli-core').services;
+const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
+
+const FRIENDLY_STORAGE_LOCATIONS = {
+  [STORAGE_LOCATIONS.KEYCHAIN]: 'in your keychain',
+  [STORAGE_LOCATIONS.WIN_CRED_VAULT]: 'in the Windows credential vault',
+  [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret'
+};
 
 class ProjectAdd extends BaseCommand {
   constructor(argv, config, secureStorage) {
@@ -134,8 +141,9 @@ class ProjectAdd extends BaseCommand {
     await this.configFile.save(this.userConfig);
 
     this.logger.info(
-      `Created API Key ${apiKey.sid} and stored the secret ${this.secureStorage.platformDescription}.` +
-        ` See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`
+      `Created API Key ${apiKey.sid} and stored the secret ${
+        FRIENDLY_STORAGE_LOCATIONS[this.secureStorage.storageLocation]
+      }. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`
     );
   }
 }
