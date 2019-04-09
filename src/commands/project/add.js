@@ -134,6 +134,7 @@ class ProjectAdd extends BaseCommand {
       this.logger.error('Could not create an API Key.');
       this.logger.debug(err);
       this.exit(1);
+      return;
     }
 
     this.userConfig.addProject(this.projectId, this.accountSid);
