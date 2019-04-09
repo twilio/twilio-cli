@@ -20,6 +20,14 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 1. Install the CLI globally using `npm install -g .`
 1. Now you can run the CLI from anywhere using the `twilio` command.
 
+### Updating
+
+1. Change to the project directory: `cd cli`
+1. Download the latest updates: `git pull`
+1. Remove locally cached modules: `rm -rf node_modules`
+1. Run: `npm install`
+1. Install the CLI globally using `npm install -g .`
+
 ## Plugins
 
 Plugins for the CLI can be installed using the `twilio plugins` command. Until we are publishing the plugins to npm, they will need to be installed by first cloning the plugin repository locally.
