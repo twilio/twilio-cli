@@ -7,7 +7,7 @@ const { Config } = require('@twilio/cli-core').services.config;
 describe('commands', () => {
   describe('project', () => {
     describe('add', () => {
-      test
+      const addTest = test
         .twilioCliEnv(Config)
         .twilioCreateCommand(ProjectAdd, [])
         .do(ctx => {
@@ -24,7 +24,9 @@ describe('commands', () => {
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
           ctx.testCmd.exit = sinon.fake();
-        })
+        });
+
+      addTest
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
             sid: constants.FAKE_ACCOUNT_SID
@@ -40,6 +42,43 @@ describe('commands', () => {
           await ctx.testCmd.run();
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('Saved default.');
+          expect(ctx.stderr).to.contain(
+            `Created API Key ${constants.FAKE_API_KEY} and stored the secret using libsecret`
+          );
+          expect(ctx.stderr).to.contain(
+            `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`
+          );
+        });
+
+      addTest
+        .nock('https://api.twilio.com', api => {
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(500, {
+            error: 'oops'
+          });
+        })
+        .stdout()
+        .stderr()
+        .it('runs project:add with invalid credentials', async ctx => {
+          await ctx.testCmd.run();
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('Could not validate the provided credentials');
+        });
+
+      addTest
+        .nock('https://api.twilio.com', api => {
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
+            sid: constants.FAKE_ACCOUNT_SID
+          });
+          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(500, {
+            error: 'oops'
+          });
+        })
+        .stdout()
+        .stderr()
+        .it('runs project:add but fails to create api key', async ctx => {
+          await ctx.testCmd.run();
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('Could not create an API Key');
         });
     });
   });

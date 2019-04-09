@@ -4,6 +4,13 @@ const twilio = require('twilio');
 
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CLIRequestClient } = require('@twilio/cli-core').services;
+const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
+
+const FRIENDLY_STORAGE_LOCATIONS = {
+  [STORAGE_LOCATIONS.KEYCHAIN]: 'in your keychain',
+  [STORAGE_LOCATIONS.WIN_CRED_VAULT]: 'in the Windows credential vault',
+  [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret'
+};
 
 class ProjectAdd extends BaseCommand {
   constructor(argv, config, secureStorage) {
@@ -116,7 +123,7 @@ class ProjectAdd extends BaseCommand {
   }
 
   async saveCredentials() {
-    const apiKeyFriendlyName = 'Twilio CLI on ' + os.hostname();
+    const apiKeyFriendlyName = `Twilio CLI for ${os.userInfo().username} on ${os.hostname()}`;
     let apiKey = null;
 
     const twilioClient = this.getTwilioClient();
@@ -127,11 +134,18 @@ class ProjectAdd extends BaseCommand {
       this.logger.error('Could not create an API Key.');
       this.logger.debug(err);
       this.exit(1);
+      return;
     }
 
     this.userConfig.addProject(this.projectId, this.accountSid);
     await this.secureStorage.saveCredentials(this.projectId, apiKey.sid, apiKey.secret);
     await this.configFile.save(this.userConfig);
+
+    this.logger.info(
+      `Created API Key ${apiKey.sid} and stored the secret ${
+        FRIENDLY_STORAGE_LOCATIONS[this.secureStorage.storageLocation]
+      }. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`
+    );
   }
 }
 

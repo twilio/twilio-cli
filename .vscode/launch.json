@@ -6,6 +6,14 @@
       "name": "Launch Program",
       "program": "${workspaceFolder}/bin/run",
       "console": "externalTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": ["-u", "tdd", "--timeout", "999999", "--colors", "${workspaceFolder}/test/**/*.test.js"],
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }
