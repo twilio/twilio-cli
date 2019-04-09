@@ -139,13 +139,14 @@ class ProjectAdd extends BaseCommand {
 
     this.userConfig.addProject(this.projectId, this.accountSid);
     await this.secureStorage.saveCredentials(this.projectId, apiKey.sid, apiKey.secret);
-    await this.configFile.save(this.userConfig);
+    const configSavedMessage = await this.configFile.save(this.userConfig);
 
     this.logger.info(
       `Created API Key ${apiKey.sid} and stored the secret ${
         FRIENDLY_STORAGE_LOCATIONS[this.secureStorage.storageLocation]
       }. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`
     );
+    this.logger.info(configSavedMessage);
   }
 }
 
