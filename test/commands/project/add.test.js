@@ -1,8 +1,9 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
-const ProjectAdd = require('../../../src/commands/project/add');
 const { Config } = require('@twilio/cli-core').services.config;
+const ProjectAdd = require('../../../src/commands/project/add');
+const helpMessages = require('../../../src/services/messaging/help-messages');
 
 describe('commands', () => {
   describe('project', () => {
@@ -41,6 +42,7 @@ describe('commands', () => {
         .it('runs project:add', async ctx => {
           await ctx.testCmd.run();
           expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
           expect(ctx.stderr).to.contain(
             `Created API Key ${constants.FAKE_API_KEY} and stored the secret using libsecret`
