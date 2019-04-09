@@ -44,6 +44,7 @@ describe('commands', () => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
+          expect(ctx.stderr).to.contain('configuration saved');
           expect(ctx.stderr).to.contain(
             `Created API Key ${constants.FAKE_API_KEY} and stored the secret using libsecret`
           );
