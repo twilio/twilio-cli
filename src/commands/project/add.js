@@ -96,7 +96,7 @@ class ProjectAdd extends BaseCommand {
           {
             type: 'confirm',
             name: 'overwrite',
-            message: `Overwrite exsting project credentials for "${this.projectId}"?`,
+            message: `Overwrite existing project credentials for "${this.projectId}"?`,
             default: false
           }
         ]);
