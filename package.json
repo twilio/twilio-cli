@@ -40,6 +40,9 @@
     "sinon": "^6.3.4",
     "tmp": "0.0.33"
   },
+  "resolutions": {
+    "handlebars": "^4.1.2"
+  },
   "engines": {
     "node": ">=8.0.0"
   },
