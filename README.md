@@ -34,7 +34,7 @@ Plugins for the CLI can be installed using the `twilio plugins` command. Until w
 
 1. Clone the plugin repository. [Example debugger plugin](https://code.hq.twilio.com/twilio/plugin-debugger/).
 
-2. "Install" the plugin referencing your plugin's local folder like so:
+1. "Install" the plugin referencing your plugin's local folder like so:
 
     ```
     twilio plugins:link ../plugin-debugger
@@ -42,7 +42,7 @@ Plugins for the CLI can be installed using the `twilio plugins` command. Until w
     npm install
     ```
 
-3. Now, you can run your plugin command from the cli:
+1. Now, you can run your plugin command from the cli:
 
     ```
     twilio debugger:logs:list --help
@@ -55,7 +55,7 @@ Want to write your own plugin? [See this document](docs/plugins.md).
 ### Step 1 - Login (aka add a project)
 
 ```
-twilio login
+twilio project:add
 ```
 
 which is an alias for:
@@ -86,8 +86,8 @@ _NOTE: Option 2 should only be used in cases where you are unable to make use of
 The CLI will attempt to load credentials in the following order of priority:
 
 1. From the project specified with the `-p` parameter.
-2. From the default project, if it exists.
-3. From environment variables.
+1. From the default project, if it exists.
+1. From environment variables.
 
 ### Step 2 - Explore
 
@@ -98,29 +98,29 @@ twilio
 Lists all available commands.
 
 ```
-twilio number:list
+twilio incoming-phone-number:list
 ```
 
-Lists all your phone numbers. (`number` is a shorthand alias for the full resource name, `incoming-phone-number`).
+Lists all your phone numbers.
 
-Add `--help` to any command to get help (e.g. `twilio number:list --help`)
+Add `--help` to any command to get help (e.g. `twilio incoming-phone-number:list --help`)
 
 ### Webhooks
 
 You can set a webhook on a phone number like so:
 
 ```
-twilio number:update [PN sid or E.164] --sms-url http://url
+twilio incoming-phone-number:update [PN sid or E.164] --sms-url http://url
 ```
 
-That sets the primary SMS url. There are also options for setting the voice url, fallback url's, and methods for each. Run `twilio number:update --help` for a full list of options.
+That sets the primary SMS url. There are also options for setting the voice url, fallback url's, and methods for each. Run `twilio incoming-phone-number:update --help` for a full list of options.
 
 ### Ngrok integration
 
 When you set a webhook, if you specify a URL that uses the host name of `localhost` or `127.0.0.1`, the Twilio CLI will automatically create an ngrok tunnel for you and set your webhook to the new ngrok URL. For example:
 
 ```
-twilio number:update [PN sid or E.164] --sms-url http://localhost:5000/handle_sms
+twilio incoming-phone-number:update [PN sid or E.164] --sms-url http://localhost:5000/handle_sms
 ```
 
 ### Output formats
@@ -156,9 +156,9 @@ All debug, informational, warning, and error information is sent to `stderr`. Th
 
 To store credentials for multiple projects, you can use a shorthand "project id" which is just an easy to remember, short string to identify the project. (If you've used `git` before, it's like the name you assign to a remote like "origin".)
 
-When you run `twilio login`, it stores your credentials under a project called `default`. This is the project that will be used for all subsequent commands.
+When you run `twilio project:add`, it stores your credentials under a project called `default`. This is the project that will be used for all subsequent commands.
 
-To add a second project after the default project, you can run `twilio login -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio number:list -p my_other_proj`).
+To add a second project after the default project, you can run `twilio project:add -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`).
 
 ### Autocomplete
 
