@@ -29,7 +29,7 @@ class TwilioRestApiPlugin extends Plugin {
     const shortVersion = actionDefinition.versionName.replace(/v/g, '');
     this.versionTopics.push({
       name: actionDefinition.domainName + TOPIC_SEPARATOR + actionDefinition.versionName,
-      description: `Version ${shortVersion} of the API.`
+      description: `Version ${shortVersion} of the API`
     });
   }
 
@@ -46,7 +46,7 @@ class TwilioRestApiPlugin extends Plugin {
 
     this.domainTopics.push({
       name: domainName,
-      description: `API resources under ${domainName}.twilio.com.`
+      description: `API resources under ${domainName}.twilio.com`
     });
   }
 
