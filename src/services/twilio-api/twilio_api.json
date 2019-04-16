@@ -25383,7 +25383,444 @@
       ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json": {
-      "description": "Incoming toll free phone numbers on a Twilio account/project",
+      "delete": {
+        "description": "Delete a phone-numbers belonging to the account used to make the request.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to delete",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "Incoming phone numbers on a Twilio account/project",
+      "get": {
+        "description": "Fetch an incoming-phone-number belonging to the account used to make the request.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resource to fetch",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.incoming_phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Update an incoming-phone-number instance.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resource to update",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Account that created the resource to update",
+            "in": "query",
+            "name": "AccountSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The API version to use for incoming calls made to the phone number",
+            "in": "query",
+            "name": "ApiVersion",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique string that identifies the application",
+            "in": "query",
+            "name": "SmsApplicationSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HTTP method used with sms_fallback_url",
+            "in": "query",
+            "name": "SmsFallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we call when an error occurs while executing TwiML",
+            "in": "query",
+            "name": "SmsFallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The HTTP method to use with sms_url",
+            "in": "query",
+            "name": "SmsMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we should call when the phone number receives an incoming SMS message",
+            "in": "query",
+            "name": "SmsUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we should call to send status information to your application",
+            "in": "query",
+            "name": "StatusCallback",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The HTTP method we should use to call status_callback",
+            "in": "query",
+            "name": "StatusCallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the application to handle the phone number",
+            "in": "query",
+            "name": "VoiceApplicationSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether to lookup the caller's name",
+            "in": "query",
+            "name": "VoiceCallerIdLookup",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The HTTP method used with fallback_url",
+            "in": "query",
+            "name": "VoiceFallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we will call when an error occurs in TwiML",
+            "in": "query",
+            "name": "VoiceFallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The HTTP method used with the voice_url",
+            "in": "query",
+            "name": "VoiceMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we should call when the phone number receives a call",
+            "in": "query",
+            "name": "VoiceUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether the phone number is enabled for emergency calling",
+            "in": "query",
+            "name": "EmergencyStatus",
+            "required": false,
+            "schema": {
+              "enum": [
+                "Active",
+                "Inactive"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The emergency address configuration to use for emergency calling",
+            "in": "query",
+            "name": "EmergencyAddressSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "SID of the trunk to handle phone calls to the phone number",
+            "in": "query",
+            "name": "TrunkSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Incoming call type: fax or voice",
+            "in": "query",
+            "name": "VoiceReceiveMode",
+            "required": false,
+            "schema": {
+              "enum": [
+                "voice",
+                "fax"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique string that identifies the identity associated with number",
+            "in": "query",
+            "name": "IdentitySid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Address resource associated with the phone number",
+            "in": "query",
+            "name": "AddressSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.incoming_phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
       "servers": [
         {
           "url": "https://api.twilio.com"
@@ -25391,7 +25828,76 @@
       ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Keys.json": {
-      "description": "Create a new API key",
+      "description": "API keys",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to read",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "end": {
+                      "type": "integer"
+                    },
+                    "first_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "keys": {
+                      "items": {
+                        "$ref": "#/components/schemas/api.v2010.account.key"
+                      },
+                      "type": "array"
+                    },
+                    "next_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "previous_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "start": {
+                      "type": "integer"
+                    },
+                    "uri": {
+                      "format": "uri",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
       "post": {
         "description": null,
         "parameters": [
@@ -25441,7 +25947,151 @@
       ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json": {
-      "description": "Create a new API key",
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to delete",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "API keys",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resource to fetch",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.key"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to update",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.key"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
       "servers": [
         {
           "url": "https://api.twilio.com"
@@ -26357,7 +27007,94 @@
       ]
     },
     "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds.json": {
-      "description": "Caller ID validation requests",
+      "description": "Verified numbers that may be used as caller ID",
+      "get": {
+        "description": "Retrieve a list of outgoing-caller-ids belonging to the account used to make the request",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to read",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The phone number of the OutgoingCallerId resources to read",
+            "in": "query",
+            "name": "PhoneNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The string that identifies the OutgoingCallerId resources to read",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "end": {
+                      "type": "integer"
+                    },
+                    "first_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "next_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "outgoing_caller_ids": {
+                      "items": {
+                        "$ref": "#/components/schemas/api.v2010.account.outgoing_caller_id"
+                      },
+                      "type": "array"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "previous_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "start": {
+                      "type": "integer"
+                    },
+                    "uri": {
+                      "format": "uri",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
       "post": {
         "description": null,
         "parameters": [
@@ -28106,14 +28843,6 @@
         }
       ]
     },
-    "/2010-04-01/Accounts/{AccountSid}/SIP.json": {
-      "description": "TODO: Resource-level docs",
-      "servers": [
-        {
-          "url": "https://api.twilio.com"
-        }
-      ]
-    },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists.json": {
       "description": "Lists of SIP credentials",
       "get": {
@@ -28961,22 +29690,6 @@
         }
       ]
     },
-    "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth.json": {
-      "description": "TODO: Resource-level docs",
-      "servers": [
-        {
-          "url": "https://api.twilio.com"
-        }
-      ]
-    },
-    "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls.json": {
-      "description": "TODO: Resource-level docs",
-      "servers": [
-        {
-          "url": "https://api.twilio.com"
-        }
-      ]
-    },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings.json": {
       "description": "TODO: Resource-level docs",
       "get": {
@@ -29507,14 +30220,6 @@
           }
         ]
       },
-      "servers": [
-        {
-          "url": "https://api.twilio.com"
-        }
-      ]
-    },
-    "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations.json": {
-      "description": "TODO: Resource-level docs",
       "servers": [
         {
           "url": "https://api.twilio.com"
@@ -31599,14 +32304,6 @@
         }
       ]
     },
-    "/2010-04-01/Accounts/{AccountSid}/SMS.json": {
-      "description": "TODO: Resource-level docs",
-      "servers": [
-        {
-          "url": "https://api.twilio.com"
-        }
-      ]
-    },
     "/2010-04-01/Accounts/{AccountSid}/SMS/Messages.json": {
       "description": "TODO: Resource-level docs",
       "get": {
@@ -32204,6 +32901,48 @@
           }
         ]
       },
+      "post": {
+        "description": "Create a new Signing Key for the account making the request.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that will be responsible for the new Key resource",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.new_signing_key"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
       "servers": [
         {
           "url": "https://api.twilio.com"
@@ -32581,14 +33320,6 @@
           }
         ]
       },
-      "servers": [
-        {
-          "url": "https://api.twilio.com"
-        }
-      ]
-    },
-    "/2010-04-01/Accounts/{AccountSid}/Usage.json": {
-      "description": "TODO: Resource-level docs",
       "servers": [
         {
           "url": "https://api.twilio.com"
@@ -40353,14 +41084,6 @@
         }
       ]
     },
-    "/v1/Messaging": {
-      "description": "TODO: Resource-level docs",
-      "servers": [
-        {
-          "url": "https://pricing.twilio.com"
-        }
-      ]
-    },
     "/v1/Messaging/Countries": {
       "description": "TODO: Resource-level docs",
       "get": {
@@ -40459,14 +41182,6 @@
           }
         ]
       },
-      "servers": [
-        {
-          "url": "https://pricing.twilio.com"
-        }
-      ]
-    },
-    "/v1/PhoneNumbers": {
-      "description": "TODO: Resource-level docs",
       "servers": [
         {
           "url": "https://pricing.twilio.com"
@@ -41486,14 +42201,6 @@
           }
         ]
       },
-      "servers": [
-        {
-          "url": "https://numbers.twilio.com"
-        }
-      ]
-    },
-    "/v1/RegulatoryCompliance/Identities/{IdentitySid}/Documents/{Sid}": {
-      "description": "TODO: Resource-level docs",
       "servers": [
         {
           "url": "https://numbers.twilio.com"
@@ -48463,14 +49170,6 @@
         }
       ]
     },
-    "/v1/Voice": {
-      "description": "TODO: Resource-level docs",
-      "servers": [
-        {
-          "url": "https://pricing.twilio.com"
-        }
-      ]
-    },
     "/v1/Voice/Countries": {
       "description": "TODO: Resource-level docs",
       "get": {
@@ -48569,14 +49268,6 @@
           }
         ]
       },
-      "servers": [
-        {
-          "url": "https://pricing.twilio.com"
-        }
-      ]
-    },
-    "/v1/Voice/Numbers": {
-      "description": "TODO: Resource-level docs",
       "servers": [
         {
           "url": "https://pricing.twilio.com"
@@ -58834,14 +59525,6 @@
         }
       ]
     },
-    "/v2/Voice": {
-      "description": "TODO: Resource-level docs",
-      "servers": [
-        {
-          "url": "https://pricing.twilio.com"
-        }
-      ]
-    },
     "/v2/Voice/Countries": {
       "description": "TODO: Resource-level docs",
       "get": {
@@ -58940,14 +59623,6 @@
           }
         ]
       },
-      "servers": [
-        {
-          "url": "https://pricing.twilio.com"
-        }
-      ]
-    },
-    "/v2/Voice/Numbers": {
-      "description": "TODO: Resource-level docs",
       "servers": [
         {
           "url": "https://pricing.twilio.com"
