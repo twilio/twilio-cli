@@ -3590,7 +3590,7 @@
             "type": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -3663,7 +3663,7 @@
             "type": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -3708,7 +3708,7 @@
             "type": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -5431,7 +5431,7 @@
             "type": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^SM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -26398,7 +26398,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -26464,7 +26464,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -26562,7 +26562,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -26620,7 +26620,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -26684,7 +26684,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           }
@@ -26730,7 +26730,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           }
@@ -26775,7 +26775,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^MM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           },
@@ -32525,7 +32525,7 @@
             "schema": {
               "maxLength": 34,
               "minLength": 34,
-              "pattern": "^SM[0-9a-fA-F]{32}$",
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
               "type": "string"
             }
           }
