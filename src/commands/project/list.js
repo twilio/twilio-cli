@@ -12,7 +12,7 @@ class ProjectList extends BaseCommand {
   }
 }
 
-ProjectList.description = 'Show what Twilio projects you have configured.';
+ProjectList.description = 'show what Twilio projects you have configured';
 ProjectList.flags = BaseCommand.flags;
 
 module.exports = ProjectList;

@@ -154,7 +154,7 @@ class ProjectAdd extends BaseCommand {
 }
 
 ProjectAdd.aliases = ['login'];
-ProjectAdd.description = 'Add credentials for an existing Twilio project';
+ProjectAdd.description = 'add credentials for an existing Twilio project';
 
 ProjectAdd.flags = Object.assign(
   {

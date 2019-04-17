@@ -20,8 +20,8 @@ describe('hooks', () => {
         const domainTopic = plugin.topics.find(t => t.name === 'api');
         const versionTopic = plugin.topics.find(t => t.name === 'api:v2010');
 
-        expect(domainTopic.description).to.equal('API resources under api.twilio.com');
-        expect(versionTopic.description).to.equal('Version 2010 of the API');
+        expect(domainTopic.description).to.equal('resources under api.twilio.com');
+        expect(versionTopic.description).to.equal('version 2010 of the API');
       });
     });
   });

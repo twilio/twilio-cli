@@ -1,6 +1,6 @@
 {
   "name": "@twilio/cli",
-  "description": "Unleash the power of Twilio from your command prompt",
+  "description": "unleash the power of Twilio from your command prompt",
   "version": "0.1.5",
   "author": "Twilio @twilio",
   "bin": {
@@ -69,7 +69,7 @@
     ],
     "topics": {
       "project": {
-        "description": "Manage credentials for Twilio projects"
+        "description": "manage credentials for Twilio projects"
       }
     },
     "hooks": {

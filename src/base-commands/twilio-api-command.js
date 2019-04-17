@@ -188,7 +188,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
 
   cmdFlags.properties = flags.string({
     default: 'sid',
-    description: 'The properties you would like to display (JSON output always shows all properties)'
+    description: 'The properties you would like to display (JSON output always shows all properties).'
   });
 
   // Class statics

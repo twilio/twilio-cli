@@ -17,6 +17,6 @@ class Feedback extends Command {
   }
 }
 
-Feedback.description = 'Provide feedback to the CLI team';
+Feedback.description = 'provide feedback to the CLI team';
 
 module.exports = Feedback;
