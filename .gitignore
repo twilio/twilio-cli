@@ -10,3 +10,6 @@ ZORK1.DAT
 *.glksave
 twilio-cli-*.tgz
 .DS_Store
+twilio.env
+*.env
+.env

@@ -1,4 +1,4 @@
-# A Twilio CLI
+# A CLI for Twilio
 
 [![Travis Build Status](https://travis-ci.com/twilio/twilio-cli.svg?token=8pBrDtYneMQqFq8wVpYP&branch=master)](https://travis-ci.com/twilio/twilio-cli)[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/48hf89rslhjhn7ca?svg=true)](https://ci.appveyor.com/project/TwilioAPI/twilio-cli)[![codecov](https://codecov.io/gh/twilio/twilio-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/twilio/twilio-cli)
 
@@ -64,7 +64,7 @@ which is an alias for:
 twilio project:add -p default
 ```
 
-This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "Twilio CLI on [hostname]" in the console) and stored in your system's keychain.
+This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "twilio-cli for [username] on [hostname]" in the console) and stored in your system's keychain.
 
 #### Want to use environment variables?
 
@@ -117,7 +117,7 @@ That sets the primary SMS url. There are also options for setting the voice url,
 
 ### Ngrok integration
 
-When you set a webhook, if you specify a URL that uses the host name of `localhost` or `127.0.0.1`, the Twilio CLI will automatically create an ngrok tunnel for you and set your webhook to the new ngrok URL. For example:
+When you set a webhook, if you specify a URL that uses the host name of `localhost` or `127.0.0.1`, the twilio-cli will automatically create an ngrok tunnel for you and set your webhook to the new ngrok URL. For example:
 
 ```
 twilio incoming-phone-number:update [PN sid or E.164] --sms-url http://localhost:5000/handle_sms

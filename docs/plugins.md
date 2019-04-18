@@ -1,18 +1,18 @@
-# Creating Plugins for the Twilio CLI
+# Creating Plugins for the twilio-cli
 
 ## 1. Familiarize yourself with the architecture and oclif
 
-The Twilio CLI is built using the [Open CLI Framework](https://oclif.io/) (oclif). It is using the "Multi-command" project type.
+The twilio-cli is built using the [Open CLI Framework](https://oclif.io/) (oclif). It is using the "Multi-command" project type.
 You will specifically want to review the docs:
 
 - [Introduction](https://oclif.io/docs/introduction)
 - [Topics](https://oclif.io/docs/topics)
 - [Plugins](https://oclif.io/docs/plugins)
-- [Twilio CLI Design Doc](https://docs.google.com/document/d/1wGgJO_CmNIdbRYxhob3IF82TbNxl5MGKE_7mNGZncEs/edit)
+- [twilio-cli Design Doc](https://docs.google.com/document/d/1wGgJO_CmNIdbRYxhob3IF82TbNxl5MGKE_7mNGZncEs/edit)
 
 ## 2. Clone the starter repo
 
-Start by cloning [this repo of an example plugin](https://code.hq.twilio.com/twilio/plugin-cloudtail).
+Start by cloning [this repo of an example plugin](https://code.hq.twilio.com/twilio/plugin-debugger).
 
 ## 3. Add your [topics](https://oclif.io/docs/topics) and [commands](https://oclif.io/docs/commands)
 

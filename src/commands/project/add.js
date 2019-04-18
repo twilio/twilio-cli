@@ -126,7 +126,7 @@ class ProjectAdd extends BaseCommand {
   }
 
   async saveCredentials() {
-    const apiKeyFriendlyName = `Twilio CLI for ${os.userInfo().username} on ${os.hostname()}`;
+    const apiKeyFriendlyName = `twilio-cli for ${os.userInfo().username} on ${os.hostname()}`;
     let apiKey = null;
 
     const twilioClient = this.getTwilioClient();
