@@ -7,11 +7,12 @@ const getTopicName = actionDefinition => {
     actionDefinition.domainName +
     TOPIC_SEPARATOR +
     actionDefinition.versionName +
-    TOPIC_SEPARATOR +
     kebabCase(
-      actionDefinition.path.replace(/\/+|{.+?}/g, TOPIC_SEPARATOR) // Separate paths with topic separator
+      actionDefinition.path
+        .replace(/\/{.+?}/g, '') // Drop every {PathParameter}
+        .replace(/\/+/g, TOPIC_SEPARATOR) // Separate paths with topic separator
     )
-  ).replace(new RegExp(TOPIC_SEPARATOR + '+', 'g'), TOPIC_SEPARATOR); // Remove duplicate separators;
+  );
 };
 
 module.exports = {

@@ -12,28 +12,18 @@ describe('services', () => {
       });
 
       test.it('should strip off .json', () => {
-        const parser = new ResourcePathParser('/v1/foo/bar.json');
+        const parser = new ResourcePathParser('/v1/foo/bar/{blah}.json');
         parser.normalizePath();
-        expect(parser.getFullPath()).to.equal('/foo/bar');
-      });
-
-      test.it('should remove the last part if it\'s a {PathParameter}', () => {
-        let parser = new ResourcePathParser('/v1/foo/bar/{blah}.json');
-        parser.normalizePath();
-        expect(parser.getFullPath()).to.equal('/foo/bar');
-
-        parser = new ResourcePathParser('/v1/foo/bar/{blah}');
-        parser.normalizePath();
-        expect(parser.getFullPath()).to.equal('/foo/bar');
+        expect(parser.getFullPath()).to.equal('/foo/bar/{blah}');
       });
     });
 
     describe('forEachPathNode', () => {
       test.it('should enumerate each non-empty item in the path nodes', () => {
-        const parser = new ResourcePathParser('/foo/bar');
+        const parser = new ResourcePathParser('/foo/bar/{blah}');
         const collectedNodes = [];
         parser.forEachPathNode(pathNode => collectedNodes.push(pathNode)); // eslint-disable-line max-nested-callbacks
-        expect(collectedNodes).to.eql(['foo', 'bar']);
+        expect(collectedNodes).to.eql(['foo', 'bar', '{blah}']);
       });
     });
 

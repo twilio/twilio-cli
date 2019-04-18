@@ -10,8 +10,6 @@ const { kebabCase, camelCase } = require('../services/naming-conventions');
 const ResourcePathParser = require('../services/resource-path-parser');
 const { getActionDescription } = require('../services/twilio-api');
 
-const isInstanceAction = actionName => ['fetch', 'remove', 'update'].includes(actionName);
-
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
   array: flags.string,
@@ -111,11 +109,6 @@ class TwilioApiCommand extends TwilioClientCommand {
       }
     });
 
-    if (isInstanceAction(actionName)) {
-      endpoint = endpoint(receivedFlags.sid);
-      delete receivedFlags.sid;
-      this.logger.debug(`endpoint=${typeof endpoint}`);
-    }
     this.logger.debug(`actionName=${actionName}, endpoint[actionName]=${typeof endpoint[actionName]}`);
 
     let response;

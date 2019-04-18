@@ -9,7 +9,7 @@ describe('services', () => {
         const browser = new TwilioApiBrowser();
         // Check some known api endpoints that should be relatively stable
         expect(browser.domains.api.versions.v2010.resources['/Accounts/{AccountSid}/Calls'].actions.create).to.exist;
-        expect(browser.domains.api.versions.v2010.resources['/Accounts/{AccountSid}/Calls'].actions.fetch).to.exist;
+        expect(browser.domains.api.versions.v2010.resources['/Accounts/{AccountSid}/Calls/{Sid}'].actions.fetch).to.exist;
       });
 
       test.it('loads a specific api spec', () => {
@@ -39,7 +39,7 @@ describe('services', () => {
               ],
               post: { createStuff: '' },
               get: { listStuff: '' },
-              description: 'v2 Gadgets here'
+              description: 'v2 list Gadgets here'
             },
             '/v2/Gadgets/{Sid}.json': {
               servers: [
@@ -50,7 +50,7 @@ describe('services', () => {
               post: { updateStuff: '' },
               get: { fetchStuff: '' },
               delete: { removeStuff: '' },
-              description: 'v2 Gadgets here (should be same)'
+              description: 'v2 instance Gadgets here'
             }
           }
         });
@@ -77,12 +77,17 @@ describe('services', () => {
                   '/Gadgets': {
                     actions: {
                       create: { createStuff: '' },
+                      list: { listStuff: '' }
+                    },
+                    description: 'v2 list Gadgets here'
+                  },
+                  '/Gadgets/{Sid}': {
+                    actions: {
                       fetch: { fetchStuff: '' },
-                      list: { listStuff: '' },
                       update: { updateStuff: '' },
                       remove: { removeStuff: '' }
                     },
-                    description: 'v2 Gadgets here'
+                    description: 'v2 instance Gadgets here'
                   }
                 }
               }
@@ -94,13 +99,19 @@ describe('services', () => {
 
     describe('getTopicName', () => {
       test.it('handles a simple, non-nested resource path', () => {
-        expect(getTopicName({ domainName: 'foo', versionName: 'v1', path: '/Bars' })).to.equal('foo:v1:bars');
+        expect(getTopicName({
+          domainName: 'foo',
+          versionName: 'v1',
+          path: '/Bars'
+        })).to.equal('foo:v1:bars');
       });
 
       test.it('handles a nested resource path with parameters', () => {
-        expect(getTopicName({ domainName: 'foo', versionName: 'v1', path: '/Bars/{BarId}/SubBars' })).to.equal(
-          'foo:v1:bars:sub-bars'
-        );
+        expect(getTopicName({
+          domainName: 'foo',
+          versionName: 'v1',
+          path: '/Bars/{BarId}/SubBars/{SubBarId}'
+        })).to.equal('foo:v1:bars:sub-bars');
       });
     });
 
