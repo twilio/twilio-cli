@@ -17099,7 +17099,7 @@
             }
           },
           {
-            "description": "The `customer_name` of the Address resources to read",
+            "description": "The 'customer_name' of the Address resources to read",
             "in": "query",
             "name": "CustomerName",
             "required": false,
@@ -20350,7 +20350,7 @@
             }
           },
           {
-            "description": "Phone number or Client identifier to filter `from` on",
+            "description": "Phone number or Client identifier to filter 'from' on",
             "in": "query",
             "name": "From",
             "required": false,
@@ -20563,7 +20563,7 @@
             }
           },
           {
-            "description": "The call progress events that we send to the `status_callback` URL.",
+            "description": "The call progress events that we send to the 'status_callback' URL.",
             "in": "query",
             "name": "StatusCallbackEvent",
             "required": false,
@@ -20643,7 +20643,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use when calling the `recording_status_callback` URL",
+            "description": "The HTTP method we should use when calling the 'recording_status_callback' URL",
             "in": "query",
             "name": "RecordingStatusCallbackMethod",
             "required": false,
@@ -20675,7 +20675,7 @@
             }
           },
           {
-            "description": "The password required to authenticate the user account specified in `sip_auth_username`.",
+            "description": "The password required to authenticate the user account specified in 'sip_auth_username'.",
             "in": "query",
             "name": "SipAuthPassword",
             "required": false,
@@ -20702,7 +20702,7 @@
             }
           },
           {
-            "description": "The recording status events that will trigger calls to the URL specified in `recording_status_callback`",
+            "description": "The recording status events that will trigger calls to the URL specified in 'recording_status_callback'",
             "in": "query",
             "name": "RecordingStatusCallbackEvent",
             "required": false,
@@ -20723,7 +20723,7 @@
             }
           },
           {
-            "description": "The phone number, SIP address, or Client identifier that made this call. Phone numbers are in E.164 format (e.g., +16175551212). SIP addresses are formatted as `name@company.com`.",
+            "description": "The phone number, SIP address, or Client identifier that made this call. Phone numbers are in E.164 format (e.g., +16175551212). SIP addresses are formatted as 'name@company.com'.",
             "in": "query",
             "name": "CallerId",
             "required": false,
@@ -20842,7 +20842,7 @@
             }
           },
           {
-            "description": "`true` includes feedback from the specified account and its subaccounts",
+            "description": "'true' includes feedback from the specified account and its subaccounts",
             "in": "query",
             "name": "IncludeSubaccounts",
             "required": false,
@@ -21394,7 +21394,7 @@
             }
           },
           {
-            "description": "The `YYYY-MM-DD` value of the resources to read",
+            "description": "The 'YYYY-MM-DD' value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -21507,7 +21507,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call `recording_status_callback`",
+            "description": "The HTTP method we should use to call 'recording_status_callback'",
             "in": "query",
             "name": "RecordingStatusCallbackMethod",
             "required": false,
@@ -21688,7 +21688,7 @@
         ]
       },
       "post": {
-        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: Pass `Twilio.CURRENT` instead of recording sid to reference current active recording.",
+        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: Pass 'Twilio.CURRENT' instead of recording sid to reference current active recording.",
         "parameters": [
           {
             "description": "The SID of the Account that created the resource to update",
@@ -22049,7 +22049,7 @@
             }
           },
           {
-            "description": "The `YYYY-MM-DD` value of the resources to read",
+            "description": "The 'YYYY-MM-DD' value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -22059,7 +22059,7 @@
             }
           },
           {
-            "description": "The `YYYY-MM-DD` value of the resources to read",
+            "description": "The 'YYYY-MM-DD' value of the resources to read",
             "in": "query",
             "name": "DateUpdated",
             "required": false,
@@ -22289,7 +22289,7 @@
             }
           },
           {
-            "description": "The `from` phone number used to invite a participant",
+            "description": "The 'from' phone number used to invite a participant",
             "in": "query",
             "name": "From",
             "required": true,
@@ -22317,7 +22317,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call `status_callback`",
+            "description": "The HTTP method we should use to call 'status_callback'",
             "in": "query",
             "name": "StatusCallbackMethod",
             "required": false,
@@ -22416,7 +22416,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call `wait_url`",
+            "description": "The HTTP method we should use to call 'wait_url'",
             "in": "query",
             "name": "WaitMethod",
             "required": false,
@@ -22485,7 +22485,7 @@
             }
           },
           {
-            "description": "HTTP method for requesting `conference_status_callback` URL",
+            "description": "HTTP method for requesting 'conference_status_callback' URL",
             "in": "query",
             "name": "ConferenceStatusCallbackMethod",
             "required": false,
@@ -22508,7 +22508,7 @@
             }
           },
           {
-            "description": "The conference state changes that should generate a call to `conference_status_callback`",
+            "description": "The conference state changes that should generate a call to 'conference_status_callback'",
             "in": "query",
             "name": "ConferenceStatusCallbackEvent",
             "required": false,
@@ -22520,7 +22520,7 @@
             }
           },
           {
-            "description": "Specify `mono` or `dual` recording channels",
+            "description": "Specify 'mono' or 'dual' recording channels",
             "in": "query",
             "name": "RecordingChannels",
             "required": false,
@@ -22529,7 +22529,7 @@
             }
           },
           {
-            "description": "The URL that we should call using the `recording_status_callback_method` when the recording status changes",
+            "description": "The URL that we should call using the 'recording_status_callback_method' when the recording status changes",
             "in": "query",
             "name": "RecordingStatusCallback",
             "required": false,
@@ -22539,7 +22539,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use when we call `recording_status_callback`",
+            "description": "The HTTP method we should use when we call 'recording_status_callback'",
             "in": "query",
             "name": "RecordingStatusCallbackMethod",
             "required": false,
@@ -22589,7 +22589,7 @@
             }
           },
           {
-            "description": "The URL we should call using the `conference_recording_status_callback_method` when the conference recording is available",
+            "description": "The URL we should call using the 'conference_recording_status_callback_method' when the conference recording is available",
             "in": "query",
             "name": "ConferenceRecordingStatusCallback",
             "required": false,
@@ -22599,7 +22599,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call `conference_recording_status_callback`",
+            "description": "The HTTP method we should use to call 'conference_recording_status_callback'",
             "in": "query",
             "name": "ConferenceRecordingStatusCallbackMethod",
             "required": false,
@@ -22622,7 +22622,7 @@
             }
           },
           {
-            "description": "The recording state changes that should generate a call to `recording_status_callback`",
+            "description": "The recording state changes that should generate a call to 'recording_status_callback'",
             "in": "query",
             "name": "RecordingStatusCallbackEvent",
             "required": false,
@@ -22634,7 +22634,7 @@
             }
           },
           {
-            "description": "The conference recording state changes that should generate a call to `conference_recording_status_callback`",
+            "description": "The conference recording state changes that should generate a call to 'conference_recording_status_callback'",
             "in": "query",
             "name": "ConferenceRecordingStatusCallbackEvent",
             "required": false,
@@ -22655,7 +22655,7 @@
             }
           },
           {
-            "description": "The SID of the participant who is being `coached`",
+            "description": "The SID of the participant who is being 'coached'",
             "in": "query",
             "name": "CallSidToCoach",
             "required": false,
@@ -22864,7 +22864,7 @@
             }
           },
           {
-            "description": "The URL we call using the `hold_method` for  music that plays when the participant is on hold",
+            "description": "The URL we call using the 'hold_method' for  music that plays when the participant is on hold",
             "in": "query",
             "name": "HoldUrl",
             "required": false,
@@ -22897,7 +22897,7 @@
             }
           },
           {
-            "description": "The URL we call using the `announce_method` for an announcement to the participant",
+            "description": "The URL we call using the 'announce_method' for an announcement to the participant",
             "in": "query",
             "name": "AnnounceUrl",
             "required": false,
@@ -22940,7 +22940,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call `wait_url`",
+            "description": "The HTTP method we should use to call 'wait_url'",
             "in": "query",
             "name": "WaitMethod",
             "required": false,
@@ -22990,7 +22990,7 @@
             }
           },
           {
-            "description": "The SID of the participant who is being `coached`",
+            "description": "The SID of the participant who is being 'coached'",
             "in": "query",
             "name": "CallSidToCoach",
             "required": false,
@@ -23055,7 +23055,7 @@
             }
           },
           {
-            "description": "The `YYYY-MM-DD` value of the resources to read",
+            "description": "The 'YYYY-MM-DD' value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -23241,7 +23241,7 @@
         ]
       },
       "post": {
-        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: To use `Twilio.CURRENT`, pass it as recording sid.",
+        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: To use 'Twilio.CURRENT', pass it as recording sid.",
         "parameters": [
           {
             "description": "The SID of the Account that created the resource to update",
@@ -26469,7 +26469,7 @@
             }
           },
           {
-            "description": "The `YYYY-MM-DD` value of the resources to read",
+            "description": "The 'YYYY-MM-DD' value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -27906,7 +27906,7 @@
             }
           },
           {
-            "description": "The `YYYY-MM-DD` value of the resources to read",
+            "description": "The 'YYYY-MM-DD' value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -29635,7 +29635,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call `voice_status_callback_url`",
+            "description": "The HTTP method we should use to call 'voice_status_callback_url'",
             "in": "query",
             "name": "VoiceStatusCallbackMethod",
             "required": false,
@@ -38224,7 +38224,7 @@
     "/v1/Compositions/{CompositionSid}/Media": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieves the media file associated to a given Composition Instance resource identified by a `CompositionSid`.",
+        "description": "Retrieves the media file associated to a given Composition Instance resource identified by a 'CompositionSid'.",
         "parameters": [
           {
             "description": "The Composition Sid that uniquely identifies the Composition media to fetch.",
@@ -38239,7 +38239,7 @@
             }
           },
           {
-            "description": "Duration in seconds for which the `redirect_to` URL can be used.",
+            "description": "Duration in seconds for which the 'redirect_to' URL can be used.",
             "in": "query",
             "name": "Ttl",
             "required": false,
@@ -38248,7 +38248,7 @@
             }
           },
           {
-            "description": "Sets the `Content-Disposition` header of the `redirect_to` URL.",
+            "description": "Sets the 'Content-Disposition' header of the 'redirect_to' URL.",
             "in": "query",
             "name": "ContentDisposition",
             "required": false,
@@ -41838,7 +41838,7 @@
     "/v1/Recordings/{RecordingSid}/Media": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieves the media file associated to a given Recording Instance resource identified by a `RecordingSid`.",
+        "description": "Retrieves the media file associated to a given Recording Instance resource identified by a 'RecordingSid'.",
         "parameters": [
           {
             "description": "The Recording Sid that uniquely identifies the Recording media to fetch.",
@@ -41853,7 +41853,7 @@
             }
           },
           {
-            "description": "Duration in seconds for which the `redirect_to` URL can be used.",
+            "description": "Duration in seconds for which the 'redirect_to' URL can be used.",
             "in": "query",
             "name": "Ttl",
             "required": false,
@@ -41862,7 +41862,7 @@
             }
           },
           {
-            "description": "Sets the `Content-Disposition` header of the `redirect_to` URL.",
+            "description": "Sets the 'Content-Disposition' header of the 'redirect_to' URL.",
             "in": "query",
             "name": "ContentDisposition",
             "required": false,
@@ -42788,7 +42788,7 @@
     "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Returns a list of tracks associated with a given Participant. Only `currently` Published Tracks are in the list resource.",
+        "description": "Returns a list of tracks associated with a given Participant. Only 'currently' Published Tracks are in the list resource.",
         "parameters": [
           {
             "description": "Unique Room identifier where this Track is published.",
@@ -42879,7 +42879,7 @@
     "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks/{Sid}": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Returns a single Track resource represented by `TrackNameOrSid`.",
+        "description": "Returns a single Track resource represented by 'TrackNameOrSid'.",
         "parameters": [
           {
             "description": "Unique Room identifier where this Track is published.",
@@ -55787,7 +55787,7 @@
             }
           },
           {
-            "description": "The `identity` value of the resources to read",
+            "description": "The 'identity' value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -56185,7 +56185,7 @@
             }
           },
           {
-            "description": "The `identity` value of the resources to read",
+            "description": "The 'identity' value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -56280,7 +56280,7 @@
             }
           },
           {
-            "description": "The `identity` value that identifies the new resource's User",
+            "description": "The 'identity' value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -56476,7 +56476,7 @@
             }
           },
           {
-            "description": "The `identity` value of the resources to read",
+            "description": "The 'identity' value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -56571,7 +56571,7 @@
             }
           },
           {
-            "description": "The `identity` value that identifies the new resource's User",
+            "description": "The 'identity' value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -57504,7 +57504,7 @@
             }
           },
           {
-            "description": "The HTTP method used to call `configuration.url`",
+            "description": "The HTTP method used to call 'configuration.url'",
             "in": "query",
             "name": "Configuration.method",
             "required": false,
@@ -57750,7 +57750,7 @@
             }
           },
           {
-            "description": "The HTTP method used to call `configuration.url`",
+            "description": "The HTTP method used to call 'configuration.url'",
             "in": "query",
             "name": "Configuration.method",
             "required": false,
@@ -58420,7 +58420,7 @@
             }
           },
           {
-            "description": "The `identity` value that identifies the new resource's User",
+            "description": "The 'identity' value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -59484,7 +59484,7 @@
             }
           },
           {
-            "description": "The number of times calls to the `post_webhook_url` will be retried",
+            "description": "The number of times calls to the 'post_webhook_url' will be retried",
             "in": "query",
             "name": "PostWebhookRetryCount",
             "required": false,
