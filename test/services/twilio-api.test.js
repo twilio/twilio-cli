@@ -13,7 +13,7 @@ describe('services', () => {
       });
 
       test.it('loads a specific api spec', () => {
-        const browser = new TwilioApiBrowser({
+        const browser = new TwilioApiBrowser([{
           paths: {
             '/2010-04-01/Widgets.json': {
               servers: [
@@ -53,7 +53,7 @@ describe('services', () => {
               description: 'v2 instance Gadgets here'
             }
           }
-        });
+        }]);
 
         expect(browser.domains).to.deep.equal({
           api: {
