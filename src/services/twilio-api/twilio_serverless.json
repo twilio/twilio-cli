@@ -1,0 +1,28 @@
+{
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "accountSid_authToken": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "support@twilio.com",
+      "name": "Twilio Support",
+      "url": "https://support.twilio.com"
+    },
+    "description": "This is the public Twilio REST API.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "title": "Twilio REST API",
+    "version": "81ff5a4"
+  },
+  "openapi": "3.0.1",
+  "paths": {}
+}

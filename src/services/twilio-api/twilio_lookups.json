@@ -1,0 +1,157 @@
+{
+  "components": {
+    "schemas": {
+      "lookups.v1.phone_number": {
+        "properties": {
+          "add_ons": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "caller_name": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "carrier": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "country_code": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "national_format": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "phone_number": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "accountSid_authToken": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "support@twilio.com",
+      "name": "Twilio Support",
+      "url": "https://support.twilio.com"
+    },
+    "description": "This is the public Twilio REST API.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "title": "Twilio REST API",
+    "version": "81ff5a4"
+  },
+  "openapi": "3.0.1",
+  "paths": {
+    "/v1/PhoneNumbers/{PhoneNumber}": {
+      "description": "Phone numbers to lookup",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The phone number to fetch in E.164 format",
+            "in": "path",
+            "name": "PhoneNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO country code of the phone number",
+            "in": "query",
+            "name": "CountryCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The type of information to return",
+            "in": "query",
+            "name": "Type",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "The unique_name of an Add-on you would like to invoke",
+            "in": "query",
+            "name": "AddOns",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Data specific to the add-on you would like to invoke",
+            "in": "query",
+            "name": "AddOnsData",
+            "required": false,
+            "schema": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/lookups.v1.phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://lookups.twilio.com"
+        }
+      ]
+    }
+  }
+}

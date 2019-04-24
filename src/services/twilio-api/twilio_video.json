@@ -1,0 +1,2293 @@
+{
+  "components": {
+    "schemas": {
+      "video.v1.composition.composition_media": {
+        "properties": {
+          "redirect_to": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.recording": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "codec": {
+            "type": {
+              "enum": [
+                "VP8",
+                "H264",
+                "OPUS",
+                "PCMU"
+              ],
+              "type": "string"
+            }
+          },
+          "container_format": {
+            "type": {
+              "enum": [
+                "mka",
+                "mkv"
+              ],
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "duration": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "grouping_sids": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "offset": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "size": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "source_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "processing",
+                "completed",
+                "deleted",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          "track_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": {
+              "enum": [
+                "audio",
+                "video",
+                "data"
+              ],
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.recording.recording_media": {
+        "properties": {
+          "redirect_to": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.room": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "duration": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "enable_turn": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "end_time": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "max_participants": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "media_region": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "record_participants_on_connect": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "in-progress",
+                "completed",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          "status_callback": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "status_callback_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": {
+              "enum": [
+                "peer-to-peer",
+                "group",
+                "group-small"
+              ],
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "video_codecs": {
+            "type": {
+              "items": {
+                "enum": [
+                  "VP8",
+                  "H264"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.room.room_participant": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "duration": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "end_time": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "identity": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "room_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "start_time": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "connected",
+                "disconnected"
+              ],
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.room.room_participant.room_participant_published_track": {
+        "properties": {
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "kind": {
+            "type": {
+              "enum": [
+                "audio",
+                "video",
+                "data"
+              ],
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "room_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.room.room_participant.room_participant_subscribed_track": {
+        "properties": {
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "kind": {
+            "type": {
+              "enum": [
+                "audio",
+                "video",
+                "data"
+              ],
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "publisher_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "room_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "subscriber_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.room.room_recording": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "codec": {
+            "type": {
+              "enum": [
+                "VP8",
+                "H264",
+                "OPUS",
+                "PCMU"
+              ],
+              "type": "string"
+            }
+          },
+          "container_format": {
+            "type": {
+              "enum": [
+                "mka",
+                "mkv"
+              ],
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "duration": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "grouping_sids": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "offset": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "room_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "size": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "source_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "processing",
+                "completed",
+                "deleted",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          "track_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": {
+              "enum": [
+                "audio",
+                "video",
+                "data"
+              ],
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.room.room_recording.room_recording_media": {
+        "properties": {
+          "redirect_to": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "accountSid_authToken": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "support@twilio.com",
+      "name": "Twilio Support",
+      "url": "https://support.twilio.com"
+    },
+    "description": "This is the public Twilio REST API.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "title": "Twilio REST API",
+    "version": "81ff5a4"
+  },
+  "openapi": "3.0.1",
+  "paths": {
+    "/v1/Compositions/{CompositionSid}/Media": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieves the media file associated to a given Composition Instance resource identified by a 'CompositionSid'.",
+        "parameters": [
+          {
+            "description": "The Composition Sid that uniquely identifies the Composition media to fetch.",
+            "in": "path",
+            "name": "CompositionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CJ[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Duration in seconds for which the 'redirect_to' URL can be used.",
+            "in": "query",
+            "name": "Ttl",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Sets the 'Content-Disposition' header of the 'redirect_to' URL.",
+            "in": "query",
+            "name": "ContentDisposition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition.composition_media"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Recordings": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "List of all Track Recordings.",
+        "parameters": [
+          {
+            "description": "Only show Recordings with the given status.",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "processing",
+                "completed",
+                "deleted",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show the Recordings with the given source Sid.",
+            "in": "query",
+            "name": "SourceSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Recordings that have this GroupingSid.",
+            "in": "query",
+            "name": "GroupingSid",
+            "required": false,
+            "schema": {
+              "items": {
+                "maxLength": 34,
+                "minLength": 34,
+                "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Only show Recordings that started on or after this ISO8601 date-time with timezone.",
+            "in": "query",
+            "name": "DateCreatedAfter",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Recordings that started before this ISO8601 date-time with timezone.",
+            "in": "query",
+            "name": "DateCreatedBefore",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Recordings that have this media type.",
+            "in": "query",
+            "name": "MediaType",
+            "required": false,
+            "schema": {
+              "enum": [
+                "audio",
+                "video",
+                "data"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "recordings": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.recording"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Recordings/{RecordingSid}/Media": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieves the media file associated to a given Recording Instance resource identified by a 'RecordingSid'.",
+        "parameters": [
+          {
+            "description": "The Recording Sid that uniquely identifies the Recording media to fetch.",
+            "in": "path",
+            "name": "RecordingSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Duration in seconds for which the 'redirect_to' URL can be used.",
+            "in": "query",
+            "name": "Ttl",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Sets the 'Content-Disposition' header of the 'redirect_to' URL.",
+            "in": "query",
+            "name": "ContentDisposition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.recording.recording_media"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Recordings/{Sid}": {
+      "delete": {
+        "description": "Delete a Recording Instance resource identified by a RecordingSid.",
+        "parameters": [
+          {
+            "description": "The Recording Sid that uniquely identifies the Recording to delete.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns a single Recording Instance resource identified by a RecordingSid.",
+        "parameters": [
+          {
+            "description": "The Recording Sid that uniquely identifies the Recording to fetch.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.recording"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "Only show Rooms with the given status.",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "in-progress",
+                "completed",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Rooms with the provided Name.",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Rooms that started on or after this date, given as YYYY-MM-DD.",
+            "in": "query",
+            "name": "DateCreatedAfter",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Rooms that started before this date, given as YYYY-MM-DD.",
+            "in": "query",
+            "name": "DateCreatedBefore",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "rooms": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.room"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "Use Twilio Network Traversal for TURN service.",
+            "in": "query",
+            "name": "EnableTurn",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Type of room, either peer-to-peer, group-small or group.",
+            "in": "query",
+            "name": "Type",
+            "required": false,
+            "schema": {
+              "enum": [
+                "peer-to-peer",
+                "group",
+                "group-small"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Name of the Room.",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A URL that Twilio sends asynchronous webhook requests to on every room event.",
+            "in": "query",
+            "name": "StatusCallback",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HTTP method Twilio should use when requesting the above URL.",
+            "in": "query",
+            "name": "StatusCallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of Participants in the Room.",
+            "in": "query",
+            "name": "MaxParticipants",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Start Participant recording when connected.",
+            "in": "query",
+            "name": "RecordParticipantsOnConnect",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "An array of video codecs supported when publishing a Track in the Room.",
+            "in": "query",
+            "name": "VideoCodecs",
+            "required": false,
+            "schema": {
+              "items": {
+                "enum": [
+                  "VP8",
+                  "H264"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Region for the media server in Group Rooms.",
+            "in": "query",
+            "name": "MediaRegion",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Participants": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Participants with the given Status.",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "connected",
+                "disconnected"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Participants that connected to the Room using the provided Identity.",
+            "in": "query",
+            "name": "Identity",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Participants that started after this date, given as an UTC ISO 8601 Timestamp.",
+            "in": "query",
+            "name": "DateCreatedAfter",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Participants that started before this date, given as an UTC ISO 8601 Timestamp.",
+            "in": "query",
+            "name": "DateCreatedBefore",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "participants": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.room.room_participant"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns a list of tracks associated with a given Participant. Only 'currently' Published Tracks are in the list resource.",
+        "parameters": [
+          {
+            "description": "Unique Room identifier where this Track is published.",
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique Participant identifier that publishes this Track.",
+            "in": "path",
+            "name": "ParticipantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "published_tracks": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.room.room_participant.room_participant_published_track"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks/{Sid}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns a single Track resource represented by 'TrackNameOrSid'.",
+        "parameters": [
+          {
+            "description": "Unique Room identifier where this Track is published.",
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique Participant identifier that publishes this Track.",
+            "in": "path",
+            "name": "ParticipantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A 34 character string that uniquely identifies this resource.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_participant.room_participant_published_track"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Participants/{Sid}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_participant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set to disconnected to remove participant.",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "connected",
+                "disconnected"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_participant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Participants/{SubscriberSid}/SubscribedTracks": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "path",
+            "name": "SubscriberSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "DateCreatedAfter",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "DateCreatedBefore",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Track",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Publisher",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Kind",
+            "required": false,
+            "schema": {
+              "enum": [
+                "audio",
+                "video",
+                "data"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "subscribed_tracks": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.room.room_participant.room_participant_subscribed_track"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "path",
+            "name": "SubscriberSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Track",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Publisher",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Kind",
+            "required": false,
+            "schema": {
+              "enum": [
+                "audio",
+                "video",
+                "data"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "subscribe",
+                "unsubscribe"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_participant.room_participant_subscribed_track"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Recordings": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "processing",
+                "completed",
+                "deleted",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "SourceSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "DateCreatedAfter",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "DateCreatedBefore",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "recordings": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.room.room_recording"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Recordings/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_recording"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Recordings/{Sid}/Media": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RT[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Ttl",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "ContentDisposition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_recording.room_recording_media"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    },
+    "/v1/Rooms/{Sid}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The Room Sid or name that uniquely identifies this resource.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The Room Sid or name that uniquely identifies this resource.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set to completed to end the Room.",
+            "in": "query",
+            "name": "Status",
+            "required": true,
+            "schema": {
+              "enum": [
+                "in-progress",
+                "completed",
+                "failed"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ]
+    }
+  }
+}

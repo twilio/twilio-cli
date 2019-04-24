@@ -1,0 +1,2313 @@
+{
+  "components": {
+    "schemas": {
+      "trunking.v1.trunk": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "auth_type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "auth_type_set": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "cnam_lookup_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "disaster_recovery_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "disaster_recovery_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "domain_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "recording": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "secure": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "trunking.v1.trunk.credential_list": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "trunk_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "trunking.v1.trunk.ip_access_control_list": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "trunk_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "trunking.v1.trunk.origination_url": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "priority": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^OU[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sip_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "trunk_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "weight": {
+            "type": {
+              "type": "integer"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "trunking.v1.trunk.phone_number": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "address_requirements": {
+            "type": {
+              "enum": [
+                "none",
+                "any",
+                "local",
+                "foreign"
+              ],
+              "type": "string"
+            }
+          },
+          "api_version": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "beta": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "capabilities": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "phone_number": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sms_application_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sms_fallback_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "sms_fallback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "sms_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "sms_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "status_callback": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "status_callback_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "trunk_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "voice_application_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "voice_caller_id_lookup": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "voice_fallback_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "voice_fallback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "voice_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "voice_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "trunking.v1.trunk.terminating_sip_domain": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "api_version": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "auth_type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "domain_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sip_registration": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "trunk_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "voice_fallback_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "voice_fallback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "voice_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "voice_status_callback_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "voice_status_callback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "voice_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "accountSid_authToken": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "support@twilio.com",
+      "name": "Twilio Support",
+      "url": "https://support.twilio.com"
+    },
+    "description": "This is the public Twilio REST API.",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "https://www.twilio.com/legal/tos",
+    "title": "Twilio REST API",
+    "version": "81ff5a4"
+  },
+  "openapi": "3.0.1",
+  "paths": {
+    "/v1/Trunks": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "trunks": {
+                      "items": {
+                        "$ref": "#/components/schemas/trunking.v1.trunk"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique address you reserve on Twilio to which you route your SIP traffic",
+            "in": "query",
+            "name": "DomainName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The HTTP URL that we should call if an error occurs while sending SIP traffic towards your configured Origination URL",
+            "in": "query",
+            "name": "DisasterRecoveryUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The HTTP method we should use to call the disaster_recovery_url",
+            "in": "query",
+            "name": "DisasterRecoveryMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The recording settings for the trunk",
+            "in": "query",
+            "name": "Recording",
+            "required": false,
+            "schema": {
+              "enum": [
+                "do-not-record",
+                "record-from-ringing",
+                "record-from-answer"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether Secure Trunking is enabled for the trunk",
+            "in": "query",
+            "name": "Secure",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Whether Caller ID Name (CNAM) lookup should be enabled for the trunk",
+            "in": "query",
+            "name": "CnamLookupEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique address you reserve on Twilio to which you route your SIP traffic",
+            "in": "query",
+            "name": "DomainName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The HTTP URL that we should call if an error occurs while sending SIP traffic towards your configured Origination URL",
+            "in": "query",
+            "name": "DisasterRecoveryUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The HTTP method we should use to call the disaster_recovery_url",
+            "in": "query",
+            "name": "DisasterRecoveryMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The recording settings for the trunk",
+            "in": "query",
+            "name": "Recording",
+            "required": false,
+            "schema": {
+              "enum": [
+                "do-not-record",
+                "record-from-ringing",
+                "record-from-answer"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether Secure Trunking is enabled for the trunk",
+            "in": "query",
+            "name": "Secure",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Whether Caller ID Name (CNAM) lookup should be enabled for the trunk",
+            "in": "query",
+            "name": "CnamLookupEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/CredentialLists": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to read the credential lists",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "credential_lists": {
+                      "items": {
+                        "$ref": "#/components/schemas/trunking.v1.trunk.credential_list"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk to associate the credential list with",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Credential List that you want to associate with the trunk",
+            "in": "query",
+            "name": "CredentialListSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.credential_list"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/CredentialLists/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to delete the credential list",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to fetch the credential list",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.credential_list"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/IpAccessControlLists": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "List all IP Access Control Lists for a Trunk",
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to read the IP Access Control Lists",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "ip_access_control_lists": {
+                      "items": {
+                        "$ref": "#/components/schemas/trunking.v1.trunk.ip_access_control_list"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Associate an IP Access Control List with a Trunk",
+        "parameters": [
+          {
+            "description": "The SID of the Trunk to associate the IP Access Control List with",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the IP Access Control List that you want to associate with the trunk",
+            "in": "query",
+            "name": "IpAccessControlListSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.ip_access_control_list"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/IpAccessControlLists/{Sid}": {
+      "delete": {
+        "description": "Remove an associated IP Access Control List from a Trunk",
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to delete the IP Access Control List",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to fetch the IP Access Control List",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AL[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.ip_access_control_list"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/OriginationUrls": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to read the OriginationUrl",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "origination_urls": {
+                      "items": {
+                        "$ref": "#/components/schemas/trunking.v1.trunk.origination_url"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk to associate the resource with",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The value that determines the relative load the URI should receive compared to others with the same priority",
+            "in": "query",
+            "name": "Weight",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The relative importance of the URI",
+            "in": "query",
+            "name": "Priority",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Whether the URL is enabled",
+            "in": "query",
+            "name": "Enabled",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SIP address you want Twilio to route your Origination calls to",
+            "in": "query",
+            "name": "SipUrl",
+            "required": true,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.origination_url"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/OriginationUrls/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to delete the OriginationUrl",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^OU[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to fetch the OriginationUrl",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^OU[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.origination_url"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to update the OriginationUrl",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^OU[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The value that determines the relative load the URI should receive compared to others with the same priority",
+            "in": "query",
+            "name": "Weight",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The relative importance of the URI",
+            "in": "query",
+            "name": "Priority",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Whether the URL is enabled",
+            "in": "query",
+            "name": "Enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SIP address you want Twilio to route your Origination calls to",
+            "in": "query",
+            "name": "SipUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.origination_url"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/PhoneNumbers": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to read the PhoneNumber resources",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "phone_numbers": {
+                      "items": {
+                        "$ref": "#/components/schemas/trunking.v1.trunk.phone_number"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk to associate the phone number with",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Incoming Phone Number that you want to associate with the trunk",
+            "in": "query",
+            "name": "PhoneNumberSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/PhoneNumbers/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to delete the PhoneNumber resource",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Trunk from which to fetch the PhoneNumber resource",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/TerminatingSipDomains": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "List SIP Domains associated with the Trunk",
+        "parameters": [
+          {
+            "description": "The SID of the Trunk with the resources to read",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "sip_domains": {
+                      "items": {
+                        "$ref": "#/components/schemas/trunking.v1.trunk.terminating_sip_domain"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Associate a SIP Domain with the Trunk",
+        "parameters": [
+          {
+            "description": "The SID of the Trunk to which we should route calls",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the SIP Domain to associate with the trunk",
+            "in": "query",
+            "name": "SipDomainSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.terminating_sip_domain"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    },
+    "/v1/Trunks/{TrunkSid}/TerminatingSipDomains/{Sid}": {
+      "delete": {
+        "description": "Disassociate a SIP Domain from the Trunk",
+        "parameters": [
+          {
+            "description": "The SID of the Trunk with the resources to disassociate",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource to disassociate",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch the details of an associated SIP Domain",
+        "parameters": [
+          {
+            "description": "The SID of the Trunk with the resource to fetch",
+            "in": "path",
+            "name": "TrunkSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^TR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/trunking.v1.trunk.terminating_sip_domain"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://trunking.twilio.com"
+        }
+      ]
+    }
+  }
+}
