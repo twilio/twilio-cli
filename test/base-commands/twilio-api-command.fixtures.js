@@ -1,7 +1,7 @@
 const fakeResource = {
   actions: {
     create: {
-      description: 'Create a new outgoing call to phones, SIP-enabled endpoints or Twilio Client connections',
+      description: 'Create a new outgoing call to phones, SIP-enabled endpoints or `Twilio Client` connections',
       parameters: [
         {
           name: 'AccountSid',
@@ -13,7 +13,7 @@ const fakeResource = {
         {
           name: 'To',
           in: 'query',
-          description: 'Phone number, SIP address, or client identifier to call',
+          description: 'Phone number, SIP address, or `client identifier` to call',
           required: true,
           schema: { type: 'string' }
         },

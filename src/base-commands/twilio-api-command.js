@@ -142,13 +142,21 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   const resource = NewCommandClass.actionDefinition.resource;
   const action = NewCommandClass.actionDefinition.action;
 
+  const sanitizeDescription = description => {
+    if (description) {
+      // Replace all backticks with single-quotes. We don't want them mistaken
+      // for statements that need to be evaluated (think zsh autocomplete).
+      return description.replace(/`/g, '\'');
+    }
+  };
+
   // Parameters
   const cmdFlags = {};
   const isApi2010 = domainName === 'api' && versionName === 'v2010';
   action.parameters.forEach(param => {
     const flagName = kebabCase(param.name);
     const flagConfig = {
-      description: param.description,
+      description: sanitizeDescription(param.description),
       // AccountSid on api.v2010 not required, we can get from the current project
       required: flagName === ACCOUNT_SID_FLAG && isApi2010 ? false : param.required,
       multiple: param.schema.type === 'array',
@@ -188,7 +196,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   NewCommandClass.id = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
   NewCommandClass.args = [];
   NewCommandClass.flags = Object.assign(cmdFlags, TwilioApiCommand.flags);
-  NewCommandClass.description = getActionDescription(NewCommandClass.actionDefinition);
+  NewCommandClass.description = sanitizeDescription(getActionDescription(NewCommandClass.actionDefinition));
   NewCommandClass.load = () => NewCommandClass;
 };
 

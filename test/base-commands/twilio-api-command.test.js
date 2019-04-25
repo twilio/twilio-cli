@@ -31,7 +31,7 @@ describe('base-commands', () => {
         const NewCommandClass = getCommandClass();
 
         expect(NewCommandClass.id).to.equal('api:v2010:accounts:calls:create');
-        expect(NewCommandClass.description).to.equal(fakeResource.actions.create.description);
+        expect(NewCommandClass.description).to.contain('\'Twilio Client\' connections');
         expect(NewCommandClass.load()).to.equal(NewCommandClass);
 
         expect(NewCommandClass.flags['account-sid'].required).to.be.false;
@@ -44,7 +44,7 @@ describe('base-commands', () => {
         );
         expect(NewCommandClass.flags.to.required).to.be.true;
         expect(NewCommandClass.flags.to.description).to.equal(
-          'Phone number, SIP address, or client identifier to call'
+          'Phone number, SIP address, or \'client identifier\' to call'
         );
         expect(NewCommandClass.flags.from.required).to.be.true;
         expect(NewCommandClass.flags.method.required).to.be.false;
