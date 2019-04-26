@@ -63,7 +63,7 @@ class TwilioApiBrowser {
         const version = translateLegacyVersions(domain, resourcePathParser.version);
 
         if (!doesObjectHaveProperty(domains, domain)) {
-          domains[domain] = { versions: {} };
+          domains[domain] = { versions: {}, tags: spec.tags };
         }
 
         if (!doesObjectHaveProperty(domains[domain].versions, version)) {

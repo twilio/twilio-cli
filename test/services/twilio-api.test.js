@@ -52,11 +52,23 @@ describe('services', () => {
               delete: { removeStuff: '' },
               description: 'v2 instance Gadgets here'
             }
-          }
+          },
+          tags: [
+            {
+              name: 'GA',
+              description: 'Generally Available!'
+            }
+          ]
         }]);
 
         expect(browser.domains).to.deep.equal({
           api: {
+            tags: [
+              {
+                name: 'GA',
+                description: 'Generally Available!'
+              }
+            ],
             versions: {
               v2010: {
                 resources: {
@@ -66,6 +78,12 @@ describe('services', () => {
             }
           },
           neato: {
+            tags: [
+              {
+                name: 'GA',
+                description: 'Generally Available!'
+              }
+            ],
             versions: {
               v1: {
                 resources: {
@@ -133,7 +151,7 @@ describe('services', () => {
           actionName: 'list',
           path: '/Foo/Bar'
         });
-        expect(result).to.equal('List multiple Bar resources.');
+        expect(result).to.equal('list multiple Bar resources');
       });
 
       test.it('returns a default Create action description', () => {
@@ -144,7 +162,7 @@ describe('services', () => {
           actionName: 'create',
           path: '/Foo/Bar'
         });
-        expect(result).to.equal('Create a Bar resource.');
+        expect(result).to.equal('create a Bar resource');
       });
 
       test.it('returns a default Fetch action description', () => {
@@ -155,7 +173,7 @@ describe('services', () => {
           actionName: 'fetch',
           path: '/Foo/Bar/{BarSid}'
         });
-        expect(result).to.equal('Fetch a Bar resource.');
+        expect(result).to.equal('fetch a Bar resource');
       });
 
       test.it('returns a default Remove action description', () => {
@@ -166,7 +184,64 @@ describe('services', () => {
           actionName: 'remove',
           path: '/Foo/Bar/excellentSubResource'
         });
-        expect(result).to.equal('Remove an ExcellentSubResource resource.');
+        expect(result).to.equal('remove an ExcellentSubResource resource');
+      });
+
+      test.it('handles actions with tags', () => {
+        const result = getActionDescription({
+          action: {
+            description: 'Beeta!',
+            tags: ['beta']
+          },
+          domain: {}
+        });
+        expect(result).to.equal('[BETA] Beeta!');
+      });
+
+      test.it('ignores GA tags', () => {
+        const result = getActionDescription({
+          action: {
+            description: 'Generally Beta!',
+            tags: ['beta', 'ga']
+          },
+          domain: {}
+        });
+        expect(result).to.equal('[BETA] Generally Beta!');
+      });
+
+      test.it('handles actions with tags and descriptions', () => {
+        const result = getActionDescription({
+          action: {
+            description: 'Pree-vue!',
+            tags: ['preview']
+          },
+          domain: {
+            tags: [{
+              name: 'preview',
+              description: 'shhhh'
+            }]
+          }
+        });
+        expect(result).to.equal('[PREVIEW] Pree-vue!\n\nshhhh');
+      });
+
+      test.it('handles actions with multiple tags and description', () => {
+        const result = getActionDescription({
+          action: {
+            description: 'Pre-beta!',
+            tags: ['beta', 'preview']
+          },
+          domain: {
+            tags: [{
+              name: 'beta',
+              description: '???'
+            }, {
+              name: 'preview',
+              description: 'shhhh'
+            }]
+          }
+        });
+        expect(result).to.equal('[BETA] [PREVIEW] Pre-beta!\n\n???\n\nshhhh');
       });
     });
   });
