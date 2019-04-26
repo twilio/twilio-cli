@@ -2080,6 +2080,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2160,13 +2163,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{Sid}": {
       "delete": {
@@ -2200,6 +2207,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -2234,6 +2244,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2341,13 +2354,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Activities": {
       "description": "TODO: Resource-level docs",
@@ -2438,6 +2455,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2489,13 +2509,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Activities/{Sid}": {
       "delete": {
@@ -2541,6 +2565,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -2587,6 +2614,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2641,13 +2671,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/CumulativeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -2729,13 +2763,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Events": {
       "description": "TODO: Resource-level docs",
@@ -2927,13 +2965,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Events/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -2980,13 +3022,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/RealTimeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -3030,13 +3076,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Statistics": {
       "description": "TODO: Resource-level docs",
@@ -3118,13 +3168,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskChannels": {
       "description": "TODO: Resource-level docs",
@@ -3197,6 +3251,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3248,13 +3305,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskChannels/{Sid}": {
       "delete": {
@@ -3300,6 +3361,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -3346,6 +3410,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3400,13 +3467,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskQueues": {
       "description": "TODO: Resource-level docs",
@@ -3509,6 +3580,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3606,13 +3680,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskQueues/Statistics": {
       "description": "TODO: Resource-level docs",
@@ -3741,13 +3819,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{Sid}": {
       "delete": {
@@ -3793,6 +3875,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -3839,6 +3924,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3948,13 +4036,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/CumulativeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -4048,13 +4140,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/RealTimeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -4110,13 +4206,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/Statistics": {
       "description": "TODO: Resource-level docs",
@@ -4210,13 +4310,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Tasks": {
       "description": "TODO: Resource-level docs",
@@ -4379,6 +4483,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -4460,13 +4567,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Tasks/{Sid}": {
       "delete": {
@@ -4512,6 +4623,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -4558,6 +4672,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -4656,13 +4773,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations": {
       "description": "TODO: Resource-level docs",
@@ -4766,13 +4887,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -4831,6 +4956,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -5495,13 +5623,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers": {
       "description": "TODO: Resource-level docs",
@@ -5643,6 +5775,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -5706,13 +5841,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/CumulativeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -5785,13 +5924,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/RealTimeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -5835,13 +5978,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/Statistics": {
       "description": "TODO: Resource-level docs",
@@ -5944,13 +6091,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/{Sid}": {
       "delete": {
@@ -5996,6 +6147,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -6042,6 +6196,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -6126,13 +6283,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels": {
       "description": "TODO: Resource-level docs",
@@ -6217,13 +6378,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -6282,6 +6447,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -6357,13 +6525,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations": {
       "description": "TODO: Resource-level docs",
@@ -6467,13 +6639,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -6532,6 +6708,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -7173,13 +7352,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Statistics": {
       "description": "TODO: Resource-level docs",
@@ -7264,13 +7447,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workflows": {
       "description": "TODO: Resource-level docs",
@@ -7352,6 +7539,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -7432,13 +7622,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workflows/{Sid}": {
       "delete": {
@@ -7484,6 +7678,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -7530,6 +7727,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -7622,13 +7822,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/CumulativeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -7722,13 +7926,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/RealTimeStatistics": {
       "description": "TODO: Resource-level docs",
@@ -7784,13 +7992,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/Statistics": {
       "description": "TODO: Resource-level docs",
@@ -7884,13 +8096,23 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://taskrouter.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
 }

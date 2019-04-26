@@ -688,6 +688,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -791,13 +794,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Commands/{Sid}": {
       "delete": {
@@ -831,6 +838,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -865,13 +875,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/RatePlans": {
       "description": "TODO: Resource-level docs",
@@ -931,6 +945,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1054,13 +1071,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/RatePlans/{Sid}": {
       "delete": {
@@ -1094,6 +1115,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -1128,6 +1152,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1179,13 +1206,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Sims": {
       "description": "TODO: Resource-level docs",
@@ -1301,13 +1332,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Sims/{Sid}": {
       "delete": {
@@ -1341,6 +1376,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -1375,6 +1413,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1667,13 +1708,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Sims/{SimSid}/DataSessions": {
       "description": "TODO: Resource-level docs",
@@ -1766,13 +1811,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Sims/{SimSid}/UsageRecords": {
       "description": "TODO: Resource-level docs",
@@ -1879,13 +1928,23 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://wireless.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
 }

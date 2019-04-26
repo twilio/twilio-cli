@@ -751,13 +751,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Messaging/Countries/{IsoCountry}": {
       "description": "TODO: Resource-level docs",
@@ -789,13 +793,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/PhoneNumbers/Countries": {
       "description": "TODO: Resource-level docs",
@@ -855,13 +863,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/PhoneNumbers/Countries/{IsoCountry}": {
       "description": "TODO: Resource-level docs",
@@ -893,13 +905,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Voice/Countries": {
       "description": "TODO: Resource-level docs",
@@ -959,13 +975,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Voice/Countries/{IsoCountry}": {
       "description": "TODO: Resource-level docs",
@@ -997,13 +1017,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Voice/Numbers/{Number}": {
       "description": "TODO: Resource-level docs",
@@ -1035,13 +1059,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Voice/Countries": {
       "description": "TODO: Resource-level docs",
@@ -1101,13 +1129,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Voice/Countries/{IsoCountry}": {
       "description": "TODO: Resource-level docs",
@@ -1139,13 +1171,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Voice/Numbers/{DestinationNumber}": {
       "description": "TODO: Resource-level docs",
@@ -1186,13 +1222,23 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://pricing.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
 }

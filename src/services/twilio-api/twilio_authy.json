@@ -1,6 +1,398 @@
 {
   "components": {
-    "schemas": {},
+    "schemas": {
+      "authy.v1.form": {
+        "properties": {
+          "form_meta": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "form_type": {
+            "type": {
+              "enum": [
+                "form-app-push",
+                "form-sms",
+                "form-totp"
+              ],
+              "type": "string"
+            }
+          },
+          "forms": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "authy.v1.service": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "authy.v1.service.entity": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "identity": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "authy.v1.service.entity.factor": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "entity_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "factor_strength": {
+            "type": {
+              "enum": [
+                "unknown",
+                "very_low",
+                "low",
+                "medium",
+                "high",
+                "very_high"
+              ],
+              "type": "string"
+            }
+          },
+          "factor_type": {
+            "type": {
+              "enum": [
+                "app-push",
+                "sms",
+                "totp"
+              ],
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "identity": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "unverified",
+                "verified"
+              ],
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "authy.v1.service.entity.factor.challenge": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_responded": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "details": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "entity_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "expiration_date": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "factor_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "factor_strength": {
+            "type": {
+              "enum": [
+                "unknown",
+                "very_low",
+                "low",
+                "medium",
+                "high",
+                "very_high"
+              ],
+              "type": "string"
+            }
+          },
+          "factor_type": {
+            "type": {
+              "enum": [
+                "app-push",
+                "sms",
+                "totp"
+              ],
+              "type": "string"
+            }
+          },
+          "hidden_details": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "identity": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "responded_reason": {
+            "type": {
+              "enum": [
+                "none",
+                "not_needed",
+                "not_requested"
+              ],
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "pending",
+                "expired",
+                "approved",
+                "denied"
+              ],
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
     "securitySchemes": {
       "accountSid_authToken": {
         "scheme": "basic",
@@ -24,5 +416,1183 @@
     "version": "81ff5a4"
   },
   "openapi": "3.0.1",
-  "paths": {}
+  "paths": {
+    "/v1/Forms/{FormType}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch the forms for a specific Form Type.",
+        "parameters": [
+          {
+            "description": "The Type of this Form",
+            "in": "path",
+            "name": "FormType",
+            "required": true,
+            "schema": {
+              "enum": [
+                "form-app-push",
+                "form-sms",
+                "form-totp"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.form"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Services for an Account.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "services": {
+                      "items": {
+                        "$ref": "#/components/schemas/authy.v1.service"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Create a new Service for the Account",
+        "parameters": [
+          {
+            "description": "A human readable description of this resource.",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Entities": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Entities for a Service.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "entities": {
+                      "items": {
+                        "$ref": "#/components/schemas/authy.v1.service.entity"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Create a new Entity for the Service",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "query",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Entities/{Identity}": {
+      "delete": {
+        "description": "Delete a specific Entity.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Entity.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Factors for an Entity.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "factors": {
+                      "items": {
+                        "$ref": "#/components/schemas/authy.v1.service.entity.factor"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Create a new Factor for the Entity",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A unique binding for this Factor",
+            "in": "query",
+            "name": "Binding",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The friendly name of this Factor",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Type of this Factor",
+            "in": "query",
+            "name": "FactorType",
+            "required": true,
+            "schema": {
+              "enum": [
+                "app-push",
+                "sms",
+                "totp"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity.factor"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors/{FactorSid}/Challenges": {
+      "description": "TODO: Resource-level docs",
+      "post": {
+        "description": "Create a new Challenge for the Factor",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Factor Sid.",
+            "in": "path",
+            "name": "FactorSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The future date in which this Challenge will expire",
+            "in": "query",
+            "name": "ExpirationDate",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Public details provided to contextualize the Challenge",
+            "in": "query",
+            "name": "Details",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hidden details provided to contextualize the Challenge",
+            "in": "query",
+            "name": "HiddenDetails",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity.factor.challenge"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors/{FactorSid}/Challenges/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Challenge.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Factor Sid.",
+            "in": "path",
+            "name": "FactorSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string that uniquely identifies this Challenge.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Challenge.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Factor Sid.",
+            "in": "path",
+            "name": "FactorSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string that uniquely identifies this Challenge, or `latest`.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity.factor.challenge"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Verify a specific Challenge.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Factor Sid.",
+            "in": "path",
+            "name": "FactorSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string that uniquely identifies this Challenge, or `latest`.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional payload to verify the Challenge",
+            "in": "query",
+            "name": "AuthPayload",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity.factor.challenge"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Factor.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string that uniquely identifies this Factor.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Factor.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string that uniquely identifies this Factor.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity.factor"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Update a specific Factor. This endpoint can be used to Verify a Factor if passed an `AuthPayload` param.",
+        "parameters": [
+          {
+            "description": "Service Sid.",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identity of the Entity",
+            "in": "path",
+            "name": "Identity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string that uniquely identifies this Factor.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^YF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional payload to verify the Factor for the first time",
+            "in": "query",
+            "name": "AuthPayload",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service.entity.factor"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Service.",
+        "parameters": [
+          {
+            "description": "A string that uniquely identifies this Service.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Service.",
+        "parameters": [
+          {
+            "description": "A string that uniquely identifies this Service.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Update a specific Service.",
+        "parameters": [
+          {
+            "description": "A string that uniquely identifies this Service.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A human readable description of this resource.",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authy.v1.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://authy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    }
+  },
+  "tags": [
+    {
+      "description": "PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.",
+      "name": "Preview"
+    }
+  ]
 }

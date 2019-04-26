@@ -1,9 +1,338 @@
 {
   "components": {
     "schemas": {
+      "video.v1.composition": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "audio_sources": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "audio_sources_excluded": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "bitrate": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "date_completed": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_deleted": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "duration": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "format": {
+            "type": {
+              "enum": [
+                "mp4",
+                "webm"
+              ],
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "resolution": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "room_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CJ[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "size": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "enqueued",
+                "processing",
+                "completed",
+                "deleted",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          "trim": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "video_layout": {
+            "type": {
+              "type": "object"
+            }
+          }
+        },
+        "type": "object"
+      },
       "video.v1.composition.composition_media": {
         "properties": {
           "redirect_to": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.composition_hook": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "audio_sources": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "audio_sources_excluded": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "format": {
+            "type": {
+              "enum": [
+                "mp4",
+                "webm"
+              ],
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "resolution": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^HK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status_callback": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "format": "uri",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "status_callback_method": {
+            "type": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          "trim": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "video_layout": {
+            "type": {
+              "type": "object"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.composition_settings": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "aws_credentials_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "aws_s3_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "aws_storage_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "encryption_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "encryption_key_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
             "type": {
               "format": "uri",
               "type": "string"
@@ -140,6 +469,62 @@
       "video.v1.recording.recording_media": {
         "properties": {
           "redirect_to": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "video.v1.recording_settings": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "aws_credentials_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "aws_s3_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "aws_storage_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "encryption_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "encryption_key_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
             "type": {
               "format": "uri",
               "type": "string"
@@ -699,10 +1084,862 @@
   },
   "openapi": "3.0.1",
   "paths": {
+    "/v1/CompositionHooks": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "List of all Recording Composition Hooks.",
+        "parameters": [
+          {
+            "description": "Only show Composition Hooks enabled or disabled.",
+            "in": "query",
+            "name": "Enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Only show Composition Hooks created on or after this ISO8601 date-time with timezone.",
+            "in": "query",
+            "name": "DateCreatedAfter",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Composition Hooks created before this ISO8601 date-time with timezone.",
+            "in": "query",
+            "name": "DateCreatedBefore",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Composition Hooks with friendly name that match this name.",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "composition_hooks": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.composition_hook"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "Friendly name of the Composition Hook to be shown in the console.",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Boolean flag indicating if the Composition Hook is active.",
+            "in": "query",
+            "name": "Enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The JSON video layout description.",
+            "in": "query",
+            "name": "VideoLayout",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "A list of audio sources related to this Composition Hook.",
+            "in": "query",
+            "name": "AudioSources",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "A list of audio sources excluded related to this Composition Hook.",
+            "in": "query",
+            "name": "AudioSourcesExcluded",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Pixel resolution of the composed video.",
+            "in": "query",
+            "name": "Resolution",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Container format of the Composition Hook media file. Any of the following: `mp4`, `webm`.",
+            "in": "query",
+            "name": "Format",
+            "required": false,
+            "schema": {
+              "enum": [
+                "mp4",
+                "webm"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "A URL that Twilio sends asynchronous webhook requests to on every composition event.",
+            "in": "query",
+            "name": "StatusCallback",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HTTP method Twilio should use when requesting the above URL.",
+            "in": "query",
+            "name": "StatusCallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Boolean flag for clipping intervals that have no media.",
+            "in": "query",
+            "name": "Trim",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition_hook"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/CompositionHooks/{Sid}": {
+      "delete": {
+        "description": "Delete a Recording Composition Hook Instance resource identified by a `CompositionHookSid`.",
+        "parameters": [
+          {
+            "description": "The Recording Composition Hook Sid that uniquely identifies the Recording Composition Hook to delete.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^HK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns a single Composition Hook Instance resource identified by a CompositionHookSid.",
+        "parameters": [
+          {
+            "description": "The Composition Hook Sid that uniquely identifies the Composition Hook to fetch.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^HK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition_hook"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "A 34-character string that uniquely identifies the Composition Hook to update, specified as a path parameter.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^HK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Friendly name of the Composition Hook to be shown in the console.",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Boolean flag indicating if the Composition Hook is active.",
+            "in": "query",
+            "name": "Enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The JSON video layout description.",
+            "in": "query",
+            "name": "VideoLayout",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "A list of audio sources related to this Composition Hook.",
+            "in": "query",
+            "name": "AudioSources",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "A list of audio sources excluded related to this Composition Hook.",
+            "in": "query",
+            "name": "AudioSourcesExcluded",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Boolean flag for clipping intervals that have no media.",
+            "in": "query",
+            "name": "Trim",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Container format of the Composition Hook media file. Any of the following: `mp4`, `webm`.",
+            "in": "query",
+            "name": "Format",
+            "required": false,
+            "schema": {
+              "enum": [
+                "mp4",
+                "webm"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Pixel resolution of the composed video.",
+            "in": "query",
+            "name": "Resolution",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A URL that Twilio sends asynchronous webhook requests to on every composition event.",
+            "in": "query",
+            "name": "StatusCallback",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HTTP method Twilio should use when requesting the above URL.",
+            "in": "query",
+            "name": "StatusCallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition_hook"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/CompositionSettings/Default": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition_settings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "Friendly name of the configuration to be shown in the console",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "SID of the Stored Credential resource CRxx",
+            "in": "query",
+            "name": "AwsCredentialsSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "SID of the Public Key resource CRxx",
+            "in": "query",
+            "name": "EncryptionKeySid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Identity of the external location where the compositions should be stored. We only support DNS-compliant URLs like http://<my-bucket>.s3-<aws-region>.amazonaws.com/compositions, where compositions is the path where you want compositions to be stored.",
+            "in": "query",
+            "name": "AwsS3Url",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "true|false When set to true, all Compositions will be written to the AwsS3Url specified above. When set to false, all Compositions will be stored in Twilio's cloud.",
+            "in": "query",
+            "name": "AwsStorageEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "true|false When set to true, all Compositions will be stored encrypted.",
+            "in": "query",
+            "name": "EncryptionEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition_settings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Compositions": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "List of all Recording Compositions.",
+        "parameters": [
+          {
+            "description": "Only show Compositions with the given status.",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "enqueued",
+                "processing",
+                "completed",
+                "deleted",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Compositions created on or after this ISO8601 date-time with timezone.",
+            "in": "query",
+            "name": "DateCreatedAfter",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Compositions created before this ISO8601 date-time with timezone.",
+            "in": "query",
+            "name": "DateCreatedBefore",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only show Compositions with the given Room SID.",
+            "in": "query",
+            "name": "RoomSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "compositions": {
+                      "items": {
+                        "$ref": "#/components/schemas/video.v1.composition"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "Twilio Room SID.",
+            "in": "query",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The JSON video layout description.",
+            "in": "query",
+            "name": "VideoLayout",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "A list of audio sources related to this Composition.",
+            "in": "query",
+            "name": "AudioSources",
+            "required": false,
+            "schema": {
+              "items": {
+                "maxLength": 34,
+                "minLength": 34,
+                "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "A list of audio sources excluded related to this Composition.",
+            "in": "query",
+            "name": "AudioSourcesExcluded",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Pixel resolution of the composed video.",
+            "in": "query",
+            "name": "Resolution",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Container format of the Composition media file. Any of the following: `mp4`, `webm`.",
+            "in": "query",
+            "name": "Format",
+            "required": false,
+            "schema": {
+              "enum": [
+                "mp4",
+                "webm"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "A URL that Twilio sends asynchronous webhook requests to on every composition event.",
+            "in": "query",
+            "name": "StatusCallback",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HTTP method Twilio should use when requesting the above URL.",
+            "in": "query",
+            "name": "StatusCallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Boolean flag for clipping intervals that have no media.",
+            "in": "query",
+            "name": "Trim",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
     "/v1/Compositions/{CompositionSid}/Media": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieves the media file associated to a given Composition Instance resource identified by a 'CompositionSid'.",
+        "description": "Retrieves the media file associated to a given Composition Instance resource identified by a `CompositionSid`.",
         "parameters": [
           {
             "description": "The Composition Sid that uniquely identifies the Composition media to fetch.",
@@ -717,7 +1954,7 @@
             }
           },
           {
-            "description": "Duration in seconds for which the 'redirect_to' URL can be used.",
+            "description": "Duration in seconds for which the `redirect_to` URL can be used.",
             "in": "query",
             "name": "Ttl",
             "required": false,
@@ -726,7 +1963,7 @@
             }
           },
           {
-            "description": "Sets the 'Content-Disposition' header of the 'redirect_to' URL.",
+            "description": "Sets the `Content-Disposition` header of the `redirect_to` URL.",
             "in": "query",
             "name": "ContentDisposition",
             "required": false,
@@ -750,13 +1987,215 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Compositions/{Sid}": {
+      "delete": {
+        "description": "Delete a Recording Composition Instance resource identified by a `CompositionSid`.",
+        "parameters": [
+          {
+            "description": "The Recording Composition Sid that uniquely identifies the Recording Composition to delete.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CJ[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns a single Composition Instance resource identified by a CompositionSid.",
+        "parameters": [
+          {
+            "description": "The Composition Sid that uniquely identifies the Composition to fetch.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CJ[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.composition"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/RecordingSettings/Default": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.recording_settings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "Friendly name of the configuration to be shown in the console",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "SID of the Stored Credential resource CRxx",
+            "in": "query",
+            "name": "AwsCredentialsSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "SID of the Public Key resource CRxx",
+            "in": "query",
+            "name": "EncryptionKeySid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CR[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Identity of the external location where the recordings should be stored. We only support DNS-compliant URLs like http://<my-bucket>.s3-<aws-region>.amazonaws.com/recordings, where recordings is the path where you want recordings to be stored.",
+            "in": "query",
+            "name": "AwsS3Url",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "true|false When set to true, all Recordings will be written to the AwsS3Url specified above. When set to false, all Recordings will be stored in Twilio's cloud.",
+            "in": "query",
+            "name": "AwsStorageEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "true|false When set to true, all Recordings will be stored encrypted.",
+            "in": "query",
+            "name": "EncryptionEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.recording_settings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Recordings": {
       "description": "TODO: Resource-level docs",
@@ -893,18 +2332,22 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Recordings/{RecordingSid}/Media": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieves the media file associated to a given Recording Instance resource identified by a 'RecordingSid'.",
+        "description": "Retrieves the media file associated to a given Recording Instance resource identified by a `RecordingSid`.",
         "parameters": [
           {
             "description": "The Recording Sid that uniquely identifies the Recording media to fetch.",
@@ -919,7 +2362,7 @@
             }
           },
           {
-            "description": "Duration in seconds for which the 'redirect_to' URL can be used.",
+            "description": "Duration in seconds for which the `redirect_to` URL can be used.",
             "in": "query",
             "name": "Ttl",
             "required": false,
@@ -928,7 +2371,7 @@
             }
           },
           {
-            "description": "Sets the 'Content-Disposition' header of the 'redirect_to' URL.",
+            "description": "Sets the `Content-Disposition` header of the `redirect_to` URL.",
             "in": "query",
             "name": "ContentDisposition",
             "required": false,
@@ -952,13 +2395,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Recordings/{Sid}": {
       "delete": {
@@ -992,6 +2439,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -1026,13 +2476,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms": {
       "description": "TODO: Resource-level docs",
@@ -1136,6 +2590,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1265,13 +2722,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Participants": {
       "description": "TODO: Resource-level docs",
@@ -1386,18 +2847,22 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Returns a list of tracks associated with a given Participant. Only 'currently' Published Tracks are in the list resource.",
+        "description": "Returns a list of tracks associated with a given Participant. Only `currently` Published Tracks are in the list resource.",
         "parameters": [
           {
             "description": "Unique Room identifier where this Track is published.",
@@ -1477,18 +2942,22 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks/{Sid}": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Returns a single Track resource represented by 'TrackNameOrSid'.",
+        "description": "Returns a single Track resource represented by `TrackNameOrSid`.",
         "parameters": [
           {
             "description": "Unique Room identifier where this Track is published.",
@@ -1542,13 +3011,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Participants/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -1595,6 +3068,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1653,13 +3129,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Participants/{SubscriberSid}/SubscribedTracks": {
       "description": "TODO: Resource-level docs",
@@ -1802,6 +3282,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1898,13 +3381,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Recordings": {
       "description": "TODO: Resource-level docs",
@@ -2024,13 +3511,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Recordings/{Sid}": {
       "delete": {
@@ -2076,6 +3567,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -2122,13 +3616,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{RoomSid}/Recordings/{Sid}/Media": {
       "description": "TODO: Resource-level docs",
@@ -2193,13 +3691,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Rooms/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -2234,6 +3736,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2281,13 +3786,27 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://video.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    },
+    {
+      "description": "PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.",
+      "name": "Preview"
+    }
+  ]
 }

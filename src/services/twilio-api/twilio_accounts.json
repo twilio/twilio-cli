@@ -176,6 +176,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -227,13 +230,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://accounts.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Credentials/AWS/{Sid}": {
       "delete": {
@@ -267,6 +274,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "User provided AWS keys",
@@ -301,6 +311,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -343,13 +356,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://accounts.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Credentials/PublicKeys": {
       "description": "User provided public keys",
@@ -409,6 +426,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -460,13 +480,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://accounts.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Credentials/PublicKeys/{Sid}": {
       "delete": {
@@ -500,6 +524,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "User provided public keys",
@@ -534,6 +561,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -576,13 +606,23 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://accounts.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
 }

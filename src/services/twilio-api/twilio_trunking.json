@@ -772,6 +772,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -876,13 +879,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{Sid}": {
       "delete": {
@@ -916,6 +923,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -950,6 +960,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1066,13 +1079,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/CredentialLists": {
       "description": "TODO: Resource-level docs",
@@ -1145,6 +1162,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1190,13 +1210,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/CredentialLists/{Sid}": {
       "delete": {
@@ -1242,6 +1266,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -1288,13 +1315,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/IpAccessControlLists": {
       "description": "TODO: Resource-level docs",
@@ -1367,6 +1398,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1412,13 +1446,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/IpAccessControlLists/{Sid}": {
       "delete": {
@@ -1464,6 +1502,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -1510,13 +1551,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/OriginationUrls": {
       "description": "TODO: Resource-level docs",
@@ -1589,6 +1634,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1668,13 +1716,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/OriginationUrls/{Sid}": {
       "delete": {
@@ -1720,6 +1772,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -1766,6 +1821,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1857,13 +1915,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/PhoneNumbers": {
       "description": "TODO: Resource-level docs",
@@ -1936,6 +1998,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1981,13 +2046,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/PhoneNumbers/{Sid}": {
       "delete": {
@@ -2033,6 +2102,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -2079,13 +2151,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/TerminatingSipDomains": {
       "description": "TODO: Resource-level docs",
@@ -2158,6 +2234,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2203,13 +2282,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Trunks/{TrunkSid}/TerminatingSipDomains/{Sid}": {
       "delete": {
@@ -2255,6 +2338,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -2301,13 +2387,23 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://trunking.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
 }

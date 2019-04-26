@@ -589,13 +589,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Channels/{ChatChannelSid}/Roles/{Role}/Users": {
       "description": "TODO: Resource-level docs",
@@ -648,13 +652,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Channels/{Sid}": {
       "delete": {
@@ -688,6 +696,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -695,7 +706,8 @@
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Configuration": {
       "description": "TODO: Resource-level docs",
@@ -727,6 +739,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -747,13 +762,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Configuration/Public": {
       "description": "TODO: Resource-level docs",
@@ -835,13 +854,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/FlexFlows": {
       "description": "TODO: Resource-level docs",
@@ -911,6 +934,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1092,13 +1118,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/FlexFlows/{Sid}": {
       "delete": {
@@ -1132,6 +1162,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -1166,6 +1199,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -1359,13 +1395,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/WebChannels": {
       "description": "TODO: Resource-level docs",
@@ -1445,13 +1485,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/WebChannels/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -1507,13 +1551,23 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
 }

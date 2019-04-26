@@ -1,6 +1,806 @@
 {
   "components": {
-    "schemas": {},
+    "schemas": {
+      "autopilot.v1.assistant": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "callback_events": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "callback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "latest_model_build_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "log_queries": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.defaults": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.dialogue": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.field_type": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.field_type.field_value": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "field_type_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "language": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "synonym_of": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "value": {
+            "type": {
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.model_build": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "build_duration": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "error_code": {
+            "type": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "enqueued",
+                "building",
+                "completed",
+                "failed",
+                "canceled"
+              ],
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.query": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "language": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "model_build_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "query": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "results": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "sample_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UH[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "source_channel": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.style_sheet": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.task": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "actions_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.task.field": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "field_type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "task_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.task.sample": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "language": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "source_channel": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "tagged_text": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "task_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.task.task_actions": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "task_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "autopilot.v1.assistant.task.task_statistics": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "fields_count": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "samples_count": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "task_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
     "securitySchemes": {
       "accountSid_authToken": {
         "scheme": "basic",
@@ -24,5 +824,3071 @@
     "version": "81ff5a4"
   },
   "openapi": "3.0.1",
-  "paths": {}
+  "paths": {
+    "/v1/Assistants": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "assistants": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "A string to describe the new resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether queries should be logged and kept after training",
+            "in": "query",
+            "name": "LogQueries",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the new resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Reserved",
+            "in": "query",
+            "name": "CallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Reserved",
+            "in": "query",
+            "name": "CallbackEvents",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A JSON string that defines the Assistant's style sheet",
+            "in": "query",
+            "name": "StyleSheet",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "A JSON object that defines the Assistant's default tasks for various scenarios",
+            "in": "query",
+            "name": "Defaults",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Defaults": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.defaults"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A JSON string that describes the default task links.",
+            "in": "query",
+            "name": "Defaults",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.defaults"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Dialogues/{Sid}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UK[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.dialogue"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/FieldTypes": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant with the FieldType resources to read",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "field_types": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.field_type"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the new resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the new resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.field_type"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the FieldType associated with the resources to read",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Field Type associated with the Field Value to read",
+            "in": "path",
+            "name": "FieldTypeSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO language-country tag that identifies the language of the value",
+            "in": "query",
+            "name": "Language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "field_values": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.field_type.field_value"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the FieldType associated with the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Field Type associated with the Field Value",
+            "in": "path",
+            "name": "FieldTypeSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO language-country tag that identifies the language of the value",
+            "in": "query",
+            "name": "Language",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Field Value data",
+            "in": "query",
+            "name": "Value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The string value that indicates which word the field value is a synonym of",
+            "in": "query",
+            "name": "SynonymOf",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.field_type.field_value"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the FieldType associated with the resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Field Type associated with the Field Value to delete",
+            "in": "path",
+            "name": "FieldTypeSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the FieldType associated with the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Field Type associated with  the Field Value to fetch",
+            "in": "path",
+            "name": "FieldTypeSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.field_type.field_value"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/FieldTypes/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant with the FieldType resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.field_type"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant with the FieldType resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UB[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.field_type"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/ModelBuilds": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to read",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "model_builds": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.model_build"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we should call using a POST method to send status information to your application",
+            "in": "query",
+            "name": "StatusCallback",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the new resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.model_build"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.model_build"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource to update",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.model_build"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Queries": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to read",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO language-country string that specifies the language used by the Query resources to read",
+            "in": "query",
+            "name": "Language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID or unique name of the Model Build to be queried",
+            "in": "query",
+            "name": "ModelBuild",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The status of the resources to read",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "queries": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.query"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO language-country string that specifies the language used for the new query",
+            "in": "query",
+            "name": "Language",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The end-user's natural language input",
+            "in": "query",
+            "name": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The list of tasks to limit the new query to",
+            "in": "query",
+            "name": "Tasks",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID or unique name of the Model Build to be queried",
+            "in": "query",
+            "name": "ModelBuild",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.query"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Queries/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UH[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UH[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.query"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource to update",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UH[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of an optional reference to the Sample created from the query",
+            "in": "query",
+            "name": "SampleSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The new status of the resource",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.query"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/StyleSheet": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns Style sheet JSON object for the Assistant",
+        "parameters": [
+          {
+            "description": "The SID of the Assistant with the StyleSheet resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.style_sheet"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Updates the style sheet for an Assistant identified by `assistant_sid`.",
+        "parameters": [
+          {
+            "description": "The SID of the Assistant with the StyleSheet resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The JSON string that describes the style sheet object",
+            "in": "query",
+            "name": "StyleSheet",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.style_sheet"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to read",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "tasks": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.task"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": " descriptive string that you create to describe the new resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The JSON string that specifies the actions that instruct the Assistant on how to perform the task",
+            "in": "query",
+            "name": "Actions",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "The URL from which the Assistant can fetch actions",
+            "in": "query",
+            "name": "ActionsUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource to delete",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource to fetch",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The JSON string that specifies the actions that instruct the Assistant on how to perform the task",
+            "in": "query",
+            "name": "Actions",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "The URL from which the Assistant can fetch actions",
+            "in": "query",
+            "name": "ActionsUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns JSON actions for the Task.",
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task for which the task actions to fetch were defined",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task for which the task actions to fetch were defined",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.task_actions"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Updates the actions of an Task identified by {TaskSid} or {TaskUniqueName}.",
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task for which the task actions to update were defined",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task for which the task actions to update were defined",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The JSON string that specifies the actions that instruct the Assistant on how to perform the task",
+            "in": "query",
+            "name": "Actions",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.task_actions"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the resources to read.",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) resource associated with the Field resources to read",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "fields": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.task.field"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) resource associated with the new Field resource",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Field Type of this field",
+            "in": "query",
+            "name": "FieldType",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the new resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.field"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) resource associated with the Field resource to delete",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) resource associated with the Field resource to fetch",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.field"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the resources to read",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task associated with the Sample resources to read",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO language-country string that specifies the language used for the sample",
+            "in": "query",
+            "name": "Language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "samples": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.task.sample"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task associated with the Sample resource to create",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO language-country string that specifies the language used for the new sample",
+            "in": "query",
+            "name": "Language",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The text example of how end users might express the task",
+            "in": "query",
+            "name": "TaggedText",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The communication channel from which the new sample was captured",
+            "in": "query",
+            "name": "SourceChannel",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.sample"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task associated with the Sample resource to delete",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task associated with the Sample resource to create",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.sample"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the Task associated with the resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task associated with the Sample resource to update",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO language-country string that specifies the language used for the sample",
+            "in": "query",
+            "name": "Language",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The text example of how end users might express the task",
+            "in": "query",
+            "name": "TaggedText",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The communication channel from which the sample was captured",
+            "in": "query",
+            "name": "SourceChannel",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.sample"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Statistics": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Task that is associated with the resource to fetch",
+            "in": "path",
+            "name": "TaskSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.task.task_statistics"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Assistants/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the resource",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether queries should be logged and kept after training",
+            "in": "query",
+            "name": "LogQueries",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Reserved",
+            "in": "query",
+            "name": "CallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Reserved",
+            "in": "query",
+            "name": "CallbackEvents",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A JSON string that defines the Assistant's style sheet",
+            "in": "query",
+            "name": "StyleSheet",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          },
+          {
+            "description": "A JSON object that defines the Assistant's [default tasks](https://www.twilio.com/docs/autopilot/api/assistant/defaults) for various scenarios",
+            "in": "query",
+            "name": "Defaults",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    }
+  },
+  "tags": [
+    {
+      "description": "PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.",
+      "name": "Preview"
+    }
+  ]
 }

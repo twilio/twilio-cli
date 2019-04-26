@@ -1,6 +1,253 @@
 {
   "components": {
-    "schemas": {},
+    "schemas": {
+      "verify.v2.service": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "code_length": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "dtmf_input_required": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "lookup_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "psd2_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "skip_sms_to_landlines": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "tts_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "verify.v2.service.verification": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "amount": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "channel": {
+            "type": {
+              "enum": [
+                "sms",
+                "call"
+              ],
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "lookup": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "payee": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "to": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "valid": {
+            "type": {
+              "type": "boolean"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "verify.v2.service.verification_check": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "amount": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "channel": {
+            "type": {
+              "enum": [
+                "sms",
+                "call"
+              ],
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "payee": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "to": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "valid": {
+            "type": {
+              "type": "boolean"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
     "securitySchemes": {
       "accountSid_authToken": {
         "scheme": "basic",
@@ -24,5 +271,670 @@
     "version": "81ff5a4"
   },
   "openapi": "3.0.1",
-  "paths": {}
+  "paths": {
+    "/v2/Services": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Phone Verification Services for an account.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "services": {
+                      "items": {
+                        "$ref": "#/components/schemas/verify.v2.service"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Create a new Verification Service.",
+        "parameters": [
+          {
+            "description": "A string to describe the verification service",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The length of the verification code to generate",
+            "in": "query",
+            "name": "CodeLength",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Whether to perform a lookup with each verification",
+            "in": "query",
+            "name": "LookupEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Whether to skip sending SMS verifications to landlines",
+            "in": "query",
+            "name": "SkipSmsToLandlines",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Whether to ask the user to press a number before delivering the verify code in a phone call",
+            "in": "query",
+            "name": "DtmfInputRequired",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The name of an alternative text-to-speech service to use in phone calls",
+            "in": "query",
+            "name": "TtsName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether to pass PSD2 transaction parameters when starting a verification",
+            "in": "query",
+            "name": "Psd2Enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://verify.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v2/Services/{ServiceSid}/VerificationCheck": {
+      "description": "TODO: Resource-level docs",
+      "post": {
+        "description": "challenge a specific Verification Check.",
+        "parameters": [
+          {
+            "description": "The SID of the verification Service to create the resource under",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The verification string",
+            "in": "query",
+            "name": "Code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The phone number to verify",
+            "in": "query",
+            "name": "To",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A SID that uniquely identifies the Verification Check",
+            "in": "query",
+            "name": "VerificationSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The amount of the associated PSD2 compliant transaction.",
+            "in": "query",
+            "name": "Amount",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The payee of the associated PSD2 compliant transaction",
+            "in": "query",
+            "name": "Payee",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service.verification_check"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://verify.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v2/Services/{ServiceSid}/Verifications": {
+      "description": "TODO: Resource-level docs",
+      "post": {
+        "description": "Create a new Verification for a To number using a Service",
+        "parameters": [
+          {
+            "description": "The SID of the verification Service to create the resource under",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The phone number to verify",
+            "in": "query",
+            "name": "To",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The verification method to use",
+            "in": "query",
+            "name": "Channel",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The text of a custom message to use for the verification",
+            "in": "query",
+            "name": "CustomMessage",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The digits to send after a phone call is answered",
+            "in": "query",
+            "name": "SendDigits",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The local to use for the verification SMS or call",
+            "in": "query",
+            "name": "Locale",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A pre-generated code",
+            "in": "query",
+            "name": "CustomCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The amount of the associated PSD2 compliant transaction.",
+            "in": "query",
+            "name": "Amount",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The payee of the associated PSD2 compliant transaction",
+            "in": "query",
+            "name": "Payee",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service.verification"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://verify.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v2/Services/{ServiceSid}/Verifications/{Sid}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Verification",
+        "parameters": [
+          {
+            "description": "The SID of the verification Service to fetch the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service.verification"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Update a Verification status",
+        "parameters": [
+          {
+            "description": "The SID of the verification Service to update the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The new status of the resource",
+            "in": "query",
+            "name": "Status",
+            "required": true,
+            "schema": {
+              "enum": [
+                "canceled"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service.verification"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://verify.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v2/Services/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Verification Service Instance.",
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch specific Verification Service Instance.",
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Update a specific Phone Verification Service.",
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A string to describe the verification service",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The length of the verification code to generate",
+            "in": "query",
+            "name": "CodeLength",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Whether to perform a lookup with each verification",
+            "in": "query",
+            "name": "LookupEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Whether to skip sending SMS verifications to landlines",
+            "in": "query",
+            "name": "SkipSmsToLandlines",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Whether to ask the user to press a number before delivering the verify code in a phone call",
+            "in": "query",
+            "name": "DtmfInputRequired",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The name of an alternative text-to-speech service to use in phone calls",
+            "in": "query",
+            "name": "TtsName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether to pass PSD2 transaction parameters when starting a verification",
+            "in": "query",
+            "name": "Psd2Enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://verify.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    }
+  },
+  "tags": [
+    {
+      "description": "PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.",
+      "name": "Beta"
+    }
+  ]
 }

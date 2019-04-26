@@ -1,6 +1,172 @@
 {
   "components": {
-    "schemas": {},
+    "schemas": {
+      "voice.v1.dialing_permissions": {
+        "properties": {},
+        "type": "object"
+      },
+      "voice.v1.dialing_permissions.dialing_permissions_country": {
+        "properties": {
+          "continent": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "country_codes": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "high_risk_special_numbers_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "high_risk_tollfraud_numbers_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "iso_code": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "low_risk_numbers_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "voice.v1.dialing_permissions.dialing_permissions_country.dialing_permissions_hrs_prefixes": {
+        "properties": {
+          "prefix": {
+            "type": {
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "voice.v1.dialing_permissions.dialing_permissions_country_bulk_update": {
+        "properties": {
+          "update_count": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "update_request": {
+            "type": {
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "voice.v1.dialing_permissions.dialing_permissions_country|instance": {
+        "properties": {
+          "continent": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "country_codes": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "high_risk_special_numbers_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "high_risk_tollfraud_numbers_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "iso_code": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "low_risk_numbers_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "voice.v1.dialing_permissions.dialing_permissions_settings": {
+        "properties": {
+          "dialing_permissions_inheritance": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
     "securitySchemes": {
       "accountSid_authToken": {
         "scheme": "basic",
@@ -24,5 +190,366 @@
     "version": "81ff5a4"
   },
   "openapi": "3.0.1",
-  "paths": {}
+  "paths": {
+    "/v1/DialingPermissions/BulkCountryUpdates": {
+      "description": "TODO: Resource-level docs",
+      "post": {
+        "description": "Create a bulk update request to change voice dialing country permissions of one or more countries identified by the corresponding [ISO country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+        "parameters": [
+          {
+            "description": "URL encoded JSON array of update objects",
+            "in": "query",
+            "name": "UpdateRequest",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voice.v1.dialing_permissions.dialing_permissions_country_bulk_update"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://voice.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/DialingPermissions/Countries": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve all voice dialing country permissions for this account",
+        "parameters": [
+          {
+            "description": "Filter to retrieve the country permissions by specifying the ISO country code",
+            "in": "query",
+            "name": "IsoCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter to retrieve the country permissions by specifying the continent",
+            "in": "query",
+            "name": "Continent",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Country code filter",
+            "in": "query",
+            "name": "CountryCode",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter to retrieve the country permissions with dialing to low-risk numbers enabled",
+            "in": "query",
+            "name": "LowRiskNumbersEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Filter to retrieve the country permissions with dialing to high-risk special service numbers enabled",
+            "in": "query",
+            "name": "HighRiskSpecialNumbersEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Filter to retrieve the country permissions with dialing to high-risk toll fraud numbers enabled",
+            "in": "query",
+            "name": "HighRiskTollfraudNumbersEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "content": {
+                      "items": {
+                        "$ref": "#/components/schemas/voice.v1.dialing_permissions.dialing_permissions_country"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://voice.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/DialingPermissions/Countries/{IsoCode}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve voice dialing country permissions identified by the given ISO country code",
+        "parameters": [
+          {
+            "description": "The ISO country code",
+            "in": "path",
+            "name": "IsoCode",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voice.v1.dialing_permissions.dialing_permissions_country|instance"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://voice.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/DialingPermissions/Countries/{IsoCode}/HighRiskSpecialPrefixes": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch the high-risk special services prefixes from the country resource corresponding to the [ISO country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+        "parameters": [
+          {
+            "description": "The ISO 3166-1 country code",
+            "in": "path",
+            "name": "IsoCode",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "content": {
+                      "items": {
+                        "$ref": "#/components/schemas/voice.v1.dialing_permissions.dialing_permissions_country.dialing_permissions_hrs_prefixes"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://voice.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Settings": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve voice dialing permissions inheritance for this sub-account",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voice.v1.dialing_permissions.dialing_permissions_settings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": "Update voice dialing permissions inheritance for this sub-account",
+        "parameters": [
+          {
+            "description": "`true` for this sub-account to inherit voice dialing permissions from the Master Project; otherwise `false`",
+            "in": "query",
+            "name": "DialingPermissionsInheritance",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voice.v1.dialing_permissions.dialing_permissions_settings"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://voice.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    }
+  },
+  "tags": [
+    {
+      "description": "PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.",
+      "name": "Preview"
+    }
+  ]
 }

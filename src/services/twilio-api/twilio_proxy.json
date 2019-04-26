@@ -1,6 +1,861 @@
 {
   "components": {
-    "schemas": {},
+    "schemas": {
+      "proxy.v1.service": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "callback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "chat_instance_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "default_ttl": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "geo_match_level": {
+            "type": {
+              "enum": [
+                "area-code",
+                "overlay",
+                "radius",
+                "country"
+              ],
+              "type": "string"
+            }
+          },
+          "intercept_callback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "number_selection_behavior": {
+            "type": {
+              "enum": [
+                "avoid-sticky",
+                "prefer-sticky"
+              ],
+              "type": "string"
+            }
+          },
+          "out_of_session_callback_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "proxy.v1.service.phone_number": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "capabilities": {
+            "type": {
+              "properties": {
+                "mms": {
+                  "type": "boolean"
+                },
+                "sms": {
+                  "type": "boolean"
+                },
+                "voice": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "in_use": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "is_reserved": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "iso_country": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "phone_number": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "proxy.v1.service.session": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "closed_reason": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_ended": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_expiry": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_last_interaction": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_started": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "mode": {
+            "type": {
+              "enum": [
+                "message-only",
+                "voice-only",
+                "voice-and-message"
+              ],
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": {
+              "enum": [
+                "open",
+                "in-progress",
+                "closed",
+                "failed",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "ttl": {
+            "type": {
+              "type": "integer"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "proxy.v1.service.session.interaction": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "inbound_participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "inbound_resource_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "inbound_resource_status": {
+            "type": {
+              "enum": [
+                "accepted",
+                "answered",
+                "busy",
+                "canceled",
+                "completed",
+                "deleted",
+                "delivered",
+                "delivery-unknown",
+                "failed",
+                "in-progress",
+                "initiated",
+                "no-answer",
+                "queued",
+                "received",
+                "receiving",
+                "ringing",
+                "scheduled",
+                "sending",
+                "sent",
+                "undelivered",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "inbound_resource_type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "inbound_resource_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "outbound_participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "outbound_resource_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "outbound_resource_status": {
+            "type": {
+              "enum": [
+                "accepted",
+                "answered",
+                "busy",
+                "canceled",
+                "completed",
+                "deleted",
+                "delivered",
+                "delivery-unknown",
+                "failed",
+                "in-progress",
+                "initiated",
+                "no-answer",
+                "queued",
+                "received",
+                "receiving",
+                "ringing",
+                "scheduled",
+                "sending",
+                "sent",
+                "undelivered",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "outbound_resource_type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "outbound_resource_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "session_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": {
+              "enum": [
+                "message",
+                "voice",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "proxy.v1.service.session.participant": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_deleted": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "identifier": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "proxy_identifier": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "proxy_identifier_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "session_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "proxy.v1.service.session.participant.message_interaction": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "inbound_participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "inbound_resource_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "inbound_resource_status": {
+            "type": {
+              "enum": [
+                "accepted",
+                "answered",
+                "busy",
+                "canceled",
+                "completed",
+                "deleted",
+                "delivered",
+                "delivery-unknown",
+                "failed",
+                "in-progress",
+                "initiated",
+                "no-answer",
+                "queued",
+                "received",
+                "receiving",
+                "ringing",
+                "scheduled",
+                "sending",
+                "sent",
+                "undelivered",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "inbound_resource_type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "inbound_resource_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "outbound_participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "outbound_resource_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "outbound_resource_status": {
+            "type": {
+              "enum": [
+                "accepted",
+                "answered",
+                "busy",
+                "canceled",
+                "completed",
+                "deleted",
+                "delivered",
+                "delivery-unknown",
+                "failed",
+                "in-progress",
+                "initiated",
+                "no-answer",
+                "queued",
+                "received",
+                "receiving",
+                "ringing",
+                "scheduled",
+                "sending",
+                "sent",
+                "undelivered",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "outbound_resource_type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "outbound_resource_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "session_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": {
+              "enum": [
+                "message",
+                "voice",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "proxy.v1.service.short_code": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "capabilities": {
+            "type": {
+              "properties": {
+                "mms": {
+                  "type": "boolean"
+                },
+                "sms": {
+                  "type": "boolean"
+                },
+                "voice": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "is_reserved": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "iso_country": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "short_code": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      }
+    },
     "securitySchemes": {
       "accountSid_authToken": {
         "scheme": "basic",
@@ -24,5 +879,2211 @@
     "version": "81ff5a4"
   },
   "openapi": "3.0.1",
-  "paths": {}
+  "paths": {
+    "/v1/Services": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Services for Twilio Proxy.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "services": {
+                      "items": {
+                        "$ref": "#/components/schemas/proxy.v1.service"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Create a new Service for Twilio Proxy",
+        "parameters": [
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Default TTL for a Session, in seconds",
+            "in": "query",
+            "name": "DefaultTtl",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The URL we should call when the interaction status changes",
+            "in": "query",
+            "name": "CallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Where a proxy number must be located relative to the participant identifier",
+            "in": "query",
+            "name": "GeoMatchLevel",
+            "required": false,
+            "schema": {
+              "enum": [
+                "area-code",
+                "overlay",
+                "radius",
+                "country"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The preference for Proxy Number selection for the Service instance",
+            "in": "query",
+            "name": "NumberSelectionBehavior",
+            "required": false,
+            "schema": {
+              "enum": [
+                "avoid-sticky",
+                "prefer-sticky"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we call on each interaction",
+            "in": "query",
+            "name": "InterceptCallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we call when an inbound call or SMS action occurs on a closed or non-existent Session",
+            "in": "query",
+            "name": "OutOfSessionCallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Chat Service Instance",
+            "in": "query",
+            "name": "ChatInstanceSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/PhoneNumbers": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Phone Numbers in the Proxy Number Pool for a Service.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource of the PhoneNumber resource to read",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "phone_numbers": {
+                      "items": {
+                        "$ref": "#/components/schemas/proxy.v1.service.phone_number"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Add a Phone Number to a Service's Proxy Number Pool.",
+        "parameters": [
+          {
+            "description": "The SID of the resource's parent Service",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of a Twilio IncomingPhoneNumber resource",
+            "in": "query",
+            "name": "Sid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The phone number in E.164 format",
+            "in": "query",
+            "name": "PhoneNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether the new phone number should be reserved",
+            "in": "query",
+            "name": "IsReserved",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Phone Number from a Service.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource of the PhoneNumber resource to delete",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Phone Number.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource of the PhoneNumber resource to fetch",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Update a specific Proxy Number.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource of the PhoneNumber resource to update",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether the new phone number should be reserved",
+            "in": "query",
+            "name": "IsReserved",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.phone_number"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Sessions for the Service.",
+        "parameters": [
+          {
+            "description": "The SID of the Service to fetch the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "sessions": {
+                      "items": {
+                        "$ref": "#/components/schemas/proxy.v1.service.session"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Create a new Session",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO 8601 date when the Session should expire",
+            "in": "query",
+            "name": "DateExpiry",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "When the session will expire",
+            "in": "query",
+            "name": "Ttl",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The Mode of the Session",
+            "in": "query",
+            "name": "Mode",
+            "required": false,
+            "schema": {
+              "enum": [
+                "message-only",
+                "voice-only",
+                "voice-and-message"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Session status",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "open",
+                "in-progress",
+                "closed",
+                "failed",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Participant objects to include in the new session",
+            "in": "query",
+            "name": "Participants",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Interactions for a Session.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service to read the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session to read the resource from",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "interactions": {
+                      "items": {
+                        "$ref": "#/components/schemas/proxy.v1.service.session.interaction"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Interaction.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service of the resource to delete",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "he SID of the parent Session of the resource to delete",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of Interactions for a given [Session](https://www.twilio.com/docs/proxy/api/session).",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service of the resource to fetch",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "he SID of the parent Session of the resource to fetch",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session.interaction"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Participants in a Session.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service of the resource to read",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session of the resource to read",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "participants": {
+                      "items": {
+                        "$ref": "#/components/schemas/proxy.v1.service.session.participant"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Add a new Participant to the Session",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session resource",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The phone number of the Participant",
+            "in": "query",
+            "name": "Identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The string that you assigned to describe the participant",
+            "in": "query",
+            "name": "FriendlyName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The proxy phone number to use for the Participant",
+            "in": "query",
+            "name": "ProxyIdentifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Proxy Identifier Sid",
+            "in": "query",
+            "name": "ProxyIdentifierSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session.participant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Service to read the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Participant resource",
+            "in": "path",
+            "name": "ParticipantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "interactions": {
+                      "items": {
+                        "$ref": "#/components/schemas/proxy.v1.service.session.participant.message_interaction"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Create a new message Interaction to send directly from your system to one [Participant](https://www.twilio.com/docs/proxy/api/participant).  The `inbound` properties for the Interaction will always be empty.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session resource",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Participant resource",
+            "in": "path",
+            "name": "ParticipantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Message body",
+            "in": "query",
+            "name": "Body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Reserved",
+            "in": "query",
+            "name": "MediaUrl",
+            "required": false,
+            "schema": {
+              "items": {
+                "format": "uri",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session.participant.message_interaction"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions/{Sid}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Service to fetch the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Participant resource",
+            "in": "path",
+            "name": "ParticipantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session.participant.message_interaction"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Participant. This is a soft-delete. The participant remains associated with the session and cannot be re-added. Participants are only permanently deleted when the [Session](https://www.twilio.com/docs/proxy/api/session) is deleted.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service of the resource to delete",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session of the resource to delete",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Participant.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service of the resource to fetch",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the parent Session of the resource to fetch",
+            "in": "path",
+            "name": "SessionSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session.participant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/Sessions/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Session.",
+        "parameters": [
+          {
+            "description": "The SID of the Service to delete the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Session.",
+        "parameters": [
+          {
+            "description": "The SID of the Service to fetch the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Update a specific Session.",
+        "parameters": [
+          {
+            "description": "The SID of the Service to update the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO 8601 date when the Session should expire",
+            "in": "query",
+            "name": "DateExpiry",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "When the session will expire",
+            "in": "query",
+            "name": "Ttl",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The Mode of the Session",
+            "in": "query",
+            "name": "Mode",
+            "required": false,
+            "schema": {
+              "enum": [
+                "message-only",
+                "voice-only",
+                "voice-and-message"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The new status of the resource",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "open",
+                "in-progress",
+                "closed",
+                "failed",
+                "unknown"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Participant objects to include in the session",
+            "in": "query",
+            "name": "Participants",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.session"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/ShortCodes": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Short Codes in the Proxy Number Pool for the Service.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service to read the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "short_codes": {
+                      "items": {
+                        "$ref": "#/components/schemas/proxy.v1.service.short_code"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Add a Short Code to the Proxy Number Pool for the Service.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service resource",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of a Twilio ShortCode resource",
+            "in": "query",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.short_code"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{ServiceSid}/ShortCodes/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Short Code from a Service.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service to delete the ShortCode resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Short Code.",
+        "parameters": [
+          {
+            "description": "The SID of the parent Service to fetch the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.short_code"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Update a specific Short Code.",
+        "parameters": [
+          {
+            "description": "The SID of the Service to update the resource from",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^SC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether the short code should be reserved for manual assignment to participants only",
+            "in": "query",
+            "name": "IsReserved",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service.short_code"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/v1/Services/{Sid}": {
+      "delete": {
+        "description": "Delete a specific Service.",
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific Service.",
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Update a specific Service.",
+        "parameters": [
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^KS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Default TTL for a Session, in seconds",
+            "in": "query",
+            "name": "DefaultTtl",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The URL we should call when the interaction status changes",
+            "in": "query",
+            "name": "CallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Where a proxy number must be located relative to the participant identifier",
+            "in": "query",
+            "name": "GeoMatchLevel",
+            "required": false,
+            "schema": {
+              "enum": [
+                "area-code",
+                "overlay",
+                "radius",
+                "country"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The preference for Proxy Number selection for the Service instance",
+            "in": "query",
+            "name": "NumberSelectionBehavior",
+            "required": false,
+            "schema": {
+              "enum": [
+                "avoid-sticky",
+                "prefer-sticky"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we call on each interaction",
+            "in": "query",
+            "name": "InterceptCallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL we call when an inbound call or SMS action occurs on a closed or non-existent Session",
+            "in": "query",
+            "name": "OutOfSessionCallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Chat Service Instance",
+            "in": "query",
+            "name": "ChatInstanceSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^IS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/proxy.v1.service"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://proxy.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    }
+  },
+  "tags": [
+    {
+      "description": "PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.",
+      "name": "Beta"
+    }
+  ]
 }

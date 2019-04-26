@@ -2600,6 +2600,145 @@
         },
         "type": "object"
       },
+      "api.v2010.account.incoming_phone_number.incoming_phone_number_assigned_add_on": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "configuration": {
+            "type": {
+              "type": "object"
+            }
+          },
+          "date_created": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "resource_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "subresource_uris": {
+            "type": {
+              "patternProperties": {
+                "^.+$": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "uri": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "api.v2010.account.incoming_phone_number.incoming_phone_number_assigned_add_on.incoming_phone_number_assigned_add_on_extension": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assigned_add_on_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "product_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "resource_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "uri": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
       "api.v2010.account.incoming_phone_number.incoming_phone_number_local": {
         "properties": {
           "account_sid": {
@@ -5259,6 +5398,29 @@
           "uri": {
             "type": {
               "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "api.v2010.account.sip.sip_region": {
+        "properties": {
+          "features": {
+            "type": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "region": {
+            "type": {
               "type": "string"
             }
           }
@@ -8955,6 +9117,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -8985,13 +9150,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Addresses.json": {
       "description": "Physical locations within a country",
@@ -9011,7 +9180,7 @@
             }
           },
           {
-            "description": "The 'customer_name' of the Address resources to read",
+            "description": "The `customer_name` of the Address resources to read",
             "in": "query",
             "name": "CustomerName",
             "required": false,
@@ -9089,6 +9258,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -9203,13 +9375,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Addresses/{AddressSid}/DependentPhoneNumbers.json": {
       "description": "Phone numbers dependent on an Address resource",
@@ -9292,13 +9468,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json": {
       "delete": {
@@ -9344,6 +9524,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Physical locations within a country",
@@ -9390,6 +9573,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -9507,13 +9693,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Applications.json": {
       "description": "Applications that you have created with Twilio",
@@ -9593,6 +9783,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -9838,13 +10031,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Applications/{Sid}.json": {
       "delete": {
@@ -9890,6 +10087,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Applications that you have created with Twilio",
@@ -9936,6 +10136,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -10193,13 +10396,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps.json": {
       "description": "Authorized Twilio Connect apps",
@@ -10270,13 +10477,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps/{ConnectAppSid}.json": {
       "description": "Authorized Twilio Connect apps",
@@ -10323,13 +10534,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers.json": {
       "description": "TODO: Resource-level docs",
@@ -10400,13 +10615,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json": {
       "description": "TODO: Resource-level docs",
@@ -10450,13 +10669,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local.json": {
       "description": "Available local phone numbers",
@@ -10698,13 +10921,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/MachineToMachine.json": {
       "description": "TODO: Resource-level docs",
@@ -10946,13 +11173,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Mobile.json": {
       "description": "Available mobile phone numbers",
@@ -11194,13 +11425,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/National.json": {
       "description": "TODO: Resource-level docs",
@@ -11442,13 +11677,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/SharedCost.json": {
       "description": "TODO: Resource-level docs",
@@ -11690,13 +11929,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree.json": {
       "description": "Available toll free phone numbers",
@@ -11938,13 +12181,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Voip.json": {
       "description": "Available VoIP phone numbers",
@@ -12186,13 +12433,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Balance.json": {
       "description": "TODO: Resource-level docs",
@@ -12227,13 +12478,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls.json": {
       "description": "Connections between telephones and Twilio",
@@ -12262,7 +12517,7 @@
             }
           },
           {
-            "description": "Phone number or Client identifier to filter 'from' on",
+            "description": "Phone number or Client identifier to filter `from` on",
             "in": "query",
             "name": "From",
             "required": false,
@@ -12373,6 +12628,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -12475,7 +12733,7 @@
             }
           },
           {
-            "description": "The call progress events that we send to the 'status_callback' URL.",
+            "description": "The call progress events that we send to the `status_callback` URL.",
             "in": "query",
             "name": "StatusCallbackEvent",
             "required": false,
@@ -12555,7 +12813,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use when calling the 'recording_status_callback' URL",
+            "description": "The HTTP method we should use when calling the `recording_status_callback` URL",
             "in": "query",
             "name": "RecordingStatusCallbackMethod",
             "required": false,
@@ -12587,7 +12845,7 @@
             }
           },
           {
-            "description": "The password required to authenticate the user account specified in 'sip_auth_username'.",
+            "description": "The password required to authenticate the user account specified in `sip_auth_username`.",
             "in": "query",
             "name": "SipAuthPassword",
             "required": false,
@@ -12614,7 +12872,7 @@
             }
           },
           {
-            "description": "The recording status events that will trigger calls to the URL specified in 'recording_status_callback'",
+            "description": "The recording status events that will trigger calls to the URL specified in `recording_status_callback`",
             "in": "query",
             "name": "RecordingStatusCallbackEvent",
             "required": false,
@@ -12635,7 +12893,7 @@
             }
           },
           {
-            "description": "The phone number, SIP address, or Client identifier that made this call. Phone numbers are in E.164 format (e.g., +16175551212). SIP addresses are formatted as 'name@company.com'.",
+            "description": "The phone number, SIP address, or Client identifier that made this call. Phone numbers are in E.164 format (e.g., +16175551212). SIP addresses are formatted as `name@company.com`.",
             "in": "query",
             "name": "CallerId",
             "required": false,
@@ -12708,13 +12966,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary.json": {
       "description": "How your end user's perceive the quality of their calls",
@@ -12754,7 +13016,7 @@
             }
           },
           {
-            "description": "'true' includes feedback from the specified account and its subaccounts",
+            "description": "`true` includes feedback from the specified account and its subaccounts",
             "in": "query",
             "name": "IncludeSubaccounts",
             "required": false,
@@ -12811,13 +13073,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary/{Sid}.json": {
       "delete": {
@@ -12863,6 +13129,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "How your end user's perceive the quality of their calls",
@@ -12909,13 +13178,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Feedback.json": {
       "description": "Describes the quality experienced during phone calls",
@@ -12962,6 +13235,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -13038,13 +13314,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications.json": {
       "description": "TODO: Resource-level docs",
@@ -13146,13 +13426,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications/{Sid}.json": {
       "delete": {
@@ -13210,6 +13494,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -13268,13 +13555,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings.json": {
       "description": "Recordings associated with voice calls",
@@ -13306,7 +13597,7 @@
             }
           },
           {
-            "description": "The 'YYYY-MM-DD' value of the resources to read",
+            "description": "The `YYYY-MM-DD` value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -13367,6 +13658,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -13419,7 +13713,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call 'recording_status_callback'",
+            "description": "The HTTP method we should use to call `recording_status_callback`",
             "in": "query",
             "name": "RecordingStatusCallbackMethod",
             "required": false,
@@ -13475,13 +13769,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings/{Sid}.json": {
       "delete": {
@@ -13539,6 +13837,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Recordings associated with voice calls",
@@ -13597,10 +13898,13 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
-        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: Pass 'Twilio.CURRENT' instead of recording sid to reference current active recording.",
+        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: Pass `Twilio.CURRENT` instead of recording sid to reference current active recording.",
         "parameters": [
           {
             "description": "The SID of the Account that created the resource to update",
@@ -13680,13 +13984,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json": {
       "delete": {
@@ -13732,6 +14040,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Connections between telephones and Twilio",
@@ -13778,6 +14089,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -13935,13 +14249,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences.json": {
       "description": "Voice call conferences",
@@ -13961,7 +14279,7 @@
             }
           },
           {
-            "description": "The 'YYYY-MM-DD' value of the resources to read",
+            "description": "The `YYYY-MM-DD` value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -13971,7 +14289,7 @@
             }
           },
           {
-            "description": "The 'YYYY-MM-DD' value of the resources to read",
+            "description": "The `YYYY-MM-DD` value of the resources to read",
             "in": "query",
             "name": "DateUpdated",
             "required": false,
@@ -14055,13 +14373,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants.json": {
       "description": "Conference participants",
@@ -14171,6 +14493,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -14201,7 +14526,7 @@
             }
           },
           {
-            "description": "The 'from' phone number used to invite a participant",
+            "description": "The `from` phone number used to invite a participant",
             "in": "query",
             "name": "From",
             "required": true,
@@ -14229,7 +14554,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call 'status_callback'",
+            "description": "The HTTP method we should use to call `status_callback`",
             "in": "query",
             "name": "StatusCallbackMethod",
             "required": false,
@@ -14328,7 +14653,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call 'wait_url'",
+            "description": "The HTTP method we should use to call `wait_url`",
             "in": "query",
             "name": "WaitMethod",
             "required": false,
@@ -14397,7 +14722,7 @@
             }
           },
           {
-            "description": "HTTP method for requesting 'conference_status_callback' URL",
+            "description": "HTTP method for requesting `conference_status_callback` URL",
             "in": "query",
             "name": "ConferenceStatusCallbackMethod",
             "required": false,
@@ -14420,7 +14745,7 @@
             }
           },
           {
-            "description": "The conference state changes that should generate a call to 'conference_status_callback'",
+            "description": "The conference state changes that should generate a call to `conference_status_callback`",
             "in": "query",
             "name": "ConferenceStatusCallbackEvent",
             "required": false,
@@ -14432,7 +14757,7 @@
             }
           },
           {
-            "description": "Specify 'mono' or 'dual' recording channels",
+            "description": "Specify `mono` or `dual` recording channels",
             "in": "query",
             "name": "RecordingChannels",
             "required": false,
@@ -14441,7 +14766,7 @@
             }
           },
           {
-            "description": "The URL that we should call using the 'recording_status_callback_method' when the recording status changes",
+            "description": "The URL that we should call using the `recording_status_callback_method` when the recording status changes",
             "in": "query",
             "name": "RecordingStatusCallback",
             "required": false,
@@ -14451,7 +14776,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use when we call 'recording_status_callback'",
+            "description": "The HTTP method we should use when we call `recording_status_callback`",
             "in": "query",
             "name": "RecordingStatusCallbackMethod",
             "required": false,
@@ -14501,7 +14826,7 @@
             }
           },
           {
-            "description": "The URL we should call using the 'conference_recording_status_callback_method' when the conference recording is available",
+            "description": "The URL we should call using the `conference_recording_status_callback_method` when the conference recording is available",
             "in": "query",
             "name": "ConferenceRecordingStatusCallback",
             "required": false,
@@ -14511,7 +14836,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call 'conference_recording_status_callback'",
+            "description": "The HTTP method we should use to call `conference_recording_status_callback`",
             "in": "query",
             "name": "ConferenceRecordingStatusCallbackMethod",
             "required": false,
@@ -14534,7 +14859,7 @@
             }
           },
           {
-            "description": "The recording state changes that should generate a call to 'recording_status_callback'",
+            "description": "The recording state changes that should generate a call to `recording_status_callback`",
             "in": "query",
             "name": "RecordingStatusCallbackEvent",
             "required": false,
@@ -14546,7 +14871,7 @@
             }
           },
           {
-            "description": "The conference recording state changes that should generate a call to 'conference_recording_status_callback'",
+            "description": "The conference recording state changes that should generate a call to `conference_recording_status_callback`",
             "in": "query",
             "name": "ConferenceRecordingStatusCallbackEvent",
             "required": false,
@@ -14567,7 +14892,7 @@
             }
           },
           {
-            "description": "The SID of the participant who is being 'coached'",
+            "description": "The SID of the participant who is being `coached`",
             "in": "query",
             "name": "CallSidToCoach",
             "required": false,
@@ -14594,13 +14919,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants/{CallSid}.json": {
       "delete": {
@@ -14658,6 +14987,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Conference participants",
@@ -14716,6 +15048,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -14776,7 +15111,7 @@
             }
           },
           {
-            "description": "The URL we call using the 'hold_method' for  music that plays when the participant is on hold",
+            "description": "The URL we call using the `hold_method` for  music that plays when the participant is on hold",
             "in": "query",
             "name": "HoldUrl",
             "required": false,
@@ -14809,7 +15144,7 @@
             }
           },
           {
-            "description": "The URL we call using the 'announce_method' for an announcement to the participant",
+            "description": "The URL we call using the `announce_method` for an announcement to the participant",
             "in": "query",
             "name": "AnnounceUrl",
             "required": false,
@@ -14852,7 +15187,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call 'wait_url'",
+            "description": "The HTTP method we should use to call `wait_url`",
             "in": "query",
             "name": "WaitMethod",
             "required": false,
@@ -14902,7 +15237,7 @@
             }
           },
           {
-            "description": "The SID of the participant who is being 'coached'",
+            "description": "The SID of the participant who is being `coached`",
             "in": "query",
             "name": "CallSidToCoach",
             "required": false,
@@ -14929,13 +15264,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings.json": {
       "description": "Recordings of conferences",
@@ -14967,7 +15306,7 @@
             }
           },
           {
-            "description": "The 'YYYY-MM-DD' value of the resources to read",
+            "description": "The `YYYY-MM-DD` value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -15028,13 +15367,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings/{Sid}.json": {
       "delete": {
@@ -15092,6 +15435,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Recordings of conferences",
@@ -15150,10 +15496,13 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
-        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: To use 'Twilio.CURRENT', pass it as recording sid.",
+        "description": "Changes the status of the recording to paused, stopped, or in-progress. Note: To use `Twilio.CURRENT`, pass it as recording sid.",
         "parameters": [
           {
             "description": "The SID of the Account that created the resource to update",
@@ -15233,13 +15582,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{Sid}.json": {
       "description": "Voice call conferences",
@@ -15286,6 +15639,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -15376,13 +15732,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/ConnectApps.json": {
       "description": "Twilio Connect apps",
@@ -15453,13 +15813,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json": {
       "description": "Twilio Connect apps",
@@ -15506,6 +15870,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -15647,13 +16014,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json": {
       "description": "Incoming phone numbers on a Twilio account/project",
@@ -15760,6 +16131,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -16101,13 +16475,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Local.json": {
       "description": "Incoming local phone numbers on a Twilio account/project",
@@ -16214,6 +16592,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -16496,13 +16877,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Mobile.json": {
       "description": "Incoming mobile phone numbers on a Twilio account/project",
@@ -16609,6 +16994,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -16891,13 +17279,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/TollFree.json": {
       "description": "Incoming toll free phone numbers on a Twilio account/project",
@@ -17004,6 +17396,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -17286,13 +17681,485 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
+    },
+    "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns.json": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of Add-on installations currently assigned to this Number.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to read",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Phone Number that installed this Add-on",
+            "in": "path",
+            "name": "ResourceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "assigned_add_ons": {
+                      "items": {
+                        "$ref": "#/components/schemas/api.v2010.account.incoming_phone_number.incoming_phone_number_assigned_add_on"
+                      },
+                      "type": "array"
+                    },
+                    "end": {
+                      "type": "integer"
+                    },
+                    "first_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "next_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "previous_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "start": {
+                      "type": "integer"
+                    },
+                    "uri": {
+                      "format": "uri",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Assign an Add-on installation to the Number specified.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that will create the resource",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Phone Number to assign the Add-on",
+            "in": "path",
+            "name": "ResourceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID that identifies the Add-on installation",
+            "in": "query",
+            "name": "InstalledAddOnSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.incoming_phone_number.incoming_phone_number_assigned_add_on"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://api.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions.json": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of Extensions for the Assigned Add-on.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to read",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Phone Number to which the Add-on is assigned",
+            "in": "path",
+            "name": "ResourceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID that uniquely identifies the assigned Add-on installation",
+            "in": "path",
+            "name": "AssignedAddOnSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "end": {
+                      "type": "integer"
+                    },
+                    "extensions": {
+                      "items": {
+                        "$ref": "#/components/schemas/api.v2010.account.incoming_phone_number.incoming_phone_number_assigned_add_on.incoming_phone_number_assigned_add_on_extension"
+                      },
+                      "type": "array"
+                    },
+                    "first_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "next_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "previous_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "start": {
+                      "type": "integer"
+                    },
+                    "uri": {
+                      "format": "uri",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://api.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions/{Sid}.json": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch an instance of an Extension for the Assigned Add-on.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resource to fetch",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Phone Number to which the Add-on is assigned",
+            "in": "path",
+            "name": "ResourceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID that uniquely identifies the assigned Add-on installation",
+            "in": "path",
+            "name": "AssignedAddOnSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XF[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.incoming_phone_number.incoming_phone_number_assigned_add_on.incoming_phone_number_assigned_add_on_extension"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://api.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
+    },
+    "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json": {
+      "delete": {
+        "description": "Remove the assignment of an Add-on installation from the Number specified.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resources to delete",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Phone Number that installed this Add-on",
+            "in": "path",
+            "name": "ResourceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch an instance of an Add-on installation currently assigned to this Number.",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resource to fetch",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Phone Number that installed this Add-on",
+            "in": "path",
+            "name": "ResourceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^XE[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.v2010.account.incoming_phone_number.incoming_phone_number_assigned_add_on"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://api.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json": {
       "delete": {
@@ -17338,6 +18205,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Incoming phone numbers on a Twilio account/project",
@@ -17384,6 +18254,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -17731,13 +18604,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Keys.json": {
       "description": "API keys",
@@ -17808,6 +18685,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -17850,13 +18730,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json": {
       "delete": {
@@ -17902,6 +18786,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "API keys",
@@ -17948,6 +18835,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -18002,13 +18892,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages.json": {
       "description": "Inbound or outbound messages",
@@ -18107,6 +19001,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -18277,13 +19174,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Feedback.json": {
       "description": "TODO: Resource-level docs",
@@ -18343,13 +19244,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media.json": {
       "description": "Media attached to MMS messages",
@@ -18381,7 +19286,7 @@
             }
           },
           {
-            "description": "The 'YYYY-MM-DD' value of the resources to read",
+            "description": "The `YYYY-MM-DD` value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -18442,13 +19347,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media/{Sid}.json": {
       "delete": {
@@ -18506,6 +19415,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Media attached to MMS messages",
@@ -18564,13 +19476,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json": {
       "delete": {
@@ -18616,6 +19532,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Inbound or outbound messages",
@@ -18662,6 +19581,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -18716,13 +19638,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Notifications.json": {
       "description": "[DEPRECATED] Log entries",
@@ -18812,13 +19738,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Notifications/{Sid}.json": {
       "delete": {
@@ -18864,6 +19794,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "[DEPRECATED] Log entries",
@@ -18910,13 +19843,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds.json": {
       "description": "Verified numbers that may be used as caller ID",
@@ -19005,6 +19942,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -19107,13 +20047,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds/{Sid}.json": {
       "delete": {
@@ -19159,6 +20103,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Verified numbers that may be used as caller ID",
@@ -19205,6 +20152,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -19259,13 +20209,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues.json": {
       "description": "Queues of calls",
@@ -19336,6 +20290,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -19387,13 +20344,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members.json": {
       "description": "Calls in a call queue",
@@ -19476,13 +20437,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members/{CallSid}.json": {
       "description": "Calls in a call queue",
@@ -19541,6 +20506,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -19631,13 +20599,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues/{Sid}.json": {
       "delete": {
@@ -19683,6 +20655,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Queues of calls",
@@ -19729,6 +20704,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -19792,13 +20770,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings.json": {
       "description": "Recordings of phone calls",
@@ -19818,7 +20800,7 @@
             }
           },
           {
-            "description": "The 'YYYY-MM-DD' value of the resources to read",
+            "description": "The `YYYY-MM-DD` value of the resources to read",
             "in": "query",
             "name": "DateCreated",
             "required": false,
@@ -19903,13 +20885,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions.json": {
       "description": "References to text transcriptions of call recordings",
@@ -19992,13 +20978,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions/{Sid}.json": {
       "delete": {
@@ -20056,6 +21046,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "References to text transcriptions of call recordings",
@@ -20114,13 +21107,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults.json": {
       "description": "TODO: Resource-level docs",
@@ -20203,13 +21200,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads.json": {
       "description": "TODO: Resource-level docs",
@@ -20304,13 +21305,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{PayloadSid}/Data.json": {
       "description": "TODO: Resource-level docs",
@@ -20381,13 +21386,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{Sid}.json": {
       "delete": {
@@ -20457,6 +21466,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -20527,13 +21539,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json": {
       "delete": {
@@ -20591,6 +21607,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -20649,13 +21668,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{Sid}.json": {
       "delete": {
@@ -20701,6 +21724,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Recordings of phone calls",
@@ -20747,13 +21773,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists.json": {
       "description": "Lists of SIP credentials",
@@ -20824,6 +21854,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -20866,13 +21899,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials.json": {
       "description": "Username and password information for SIP Domains",
@@ -20955,6 +21992,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -21018,13 +22058,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials/{Sid}.json": {
       "delete": {
@@ -21082,6 +22126,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Username and password information for SIP Domains",
@@ -21140,6 +22187,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -21206,13 +22256,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json": {
       "delete": {
@@ -21258,6 +22312,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Lists of SIP credentials",
@@ -21304,6 +22361,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -21358,13 +22418,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains.json": {
       "description": "Custom DNS hostnames that can accept SIP traffic",
@@ -21435,6 +22499,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -21547,7 +22614,7 @@
             }
           },
           {
-            "description": "The HTTP method we should use to call 'voice_status_callback_url'",
+            "description": "The HTTP method we should use to call `voice_status_callback_url`",
             "in": "query",
             "name": "VoiceStatusCallbackMethod",
             "required": false,
@@ -21594,13 +22661,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings.json": {
       "description": "TODO: Resource-level docs",
@@ -21683,6 +22754,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -21740,13 +22814,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings/{Sid}.json": {
       "delete": {
@@ -21804,6 +22882,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -21862,13 +22943,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings.json": {
       "description": "TODO: Resource-level docs",
@@ -21951,6 +23036,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -22008,13 +23096,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings/{Sid}.json": {
       "delete": {
@@ -22072,6 +23164,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -22130,13 +23225,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings.json": {
       "description": "TODO: Resource-level docs",
@@ -22219,6 +23318,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -22276,13 +23378,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings/{Sid}.json": {
       "delete": {
@@ -22340,6 +23446,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -22398,13 +23507,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings.json": {
       "description": "Credential lists associated with a SIP Domain",
@@ -22487,6 +23600,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -22544,13 +23660,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings/{Sid}.json": {
       "delete": {
@@ -22608,6 +23728,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Credential lists associated with a SIP Domain",
@@ -22666,13 +23789,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings.json": {
       "description": "Access control lists associated with a SIP Domain",
@@ -22755,6 +23882,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -22812,13 +23942,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings/{Sid}.json": {
       "delete": {
@@ -22876,6 +24010,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Access control lists associated with a SIP Domain",
@@ -22934,13 +24071,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{Sid}.json": {
       "delete": {
@@ -22986,6 +24127,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Custom DNS hostnames that can accept SIP traffic",
@@ -23032,6 +24176,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -23203,13 +24350,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists.json": {
       "description": "Access control lists of IP address resources",
@@ -23280,6 +24431,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -23322,13 +24476,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/Addresses.json": {
       "description": "TODO: Resource-level docs",
@@ -23411,6 +24569,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -23483,13 +24644,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/Addresses/{Sid}.json": {
       "delete": {
@@ -23547,6 +24712,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -23605,6 +24773,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -23689,13 +24860,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses.json": {
       "description": "IP addresses that have access to a SIP Domain",
@@ -23778,6 +24953,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -23850,13 +25028,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses/{Sid}.json": {
       "delete": {
@@ -23914,6 +25096,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "IP addresses that have access to a SIP Domain",
@@ -23972,6 +25157,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -24056,13 +25244,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json": {
       "delete": {
@@ -24108,6 +25300,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Access control lists of IP address resources",
@@ -24154,6 +25349,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -24208,13 +25406,107 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
+    },
+    "/2010-04-01/Accounts/{AccountSid}/SIP/Regions.json": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": null,
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "Feature",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "end": {
+                      "type": "integer"
+                    },
+                    "first_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "next_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "previous_page_uri": {
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "regions": {
+                      "items": {
+                        "$ref": "#/components/schemas/api.v2010.account.sip.sip_region"
+                      },
+                      "type": "array"
+                    },
+                    "start": {
+                      "type": "integer"
+                    },
+                    "uri": {
+                      "format": "uri",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://api.twilio.com"
+        }
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/Messages.json": {
       "description": "TODO: Resource-level docs",
@@ -24313,6 +25605,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -24404,13 +25699,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/Messages/{Sid}.json": {
       "description": "TODO: Resource-level docs",
@@ -24457,13 +25756,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes.json": {
       "description": "Messaging short codes",
@@ -24552,13 +25855,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes/{Sid}.json": {
       "description": "Messaging short codes",
@@ -24605,6 +25912,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -24734,13 +26044,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SigningKeys.json": {
       "description": "TODO: Resource-level docs",
@@ -24811,6 +26125,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -24853,13 +26170,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/SigningKeys/{Sid}.json": {
       "delete": {
@@ -24905,6 +26226,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -24951,6 +26275,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -25005,13 +26332,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Tokens.json": {
       "description": "TODO: Resource-level docs",
@@ -25055,13 +26386,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Transcriptions.json": {
       "description": "Text transcriptions of call recordings",
@@ -25132,13 +26467,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Transcriptions/{Sid}.json": {
       "delete": {
@@ -25184,6 +26523,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Text transcriptions of call recordings",
@@ -25230,13 +26572,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records.json": {
       "description": "Twilio account usage records",
@@ -25586,13 +26932,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/AllTime.json": {
       "description": "Usage records for all time",
@@ -25942,13 +27292,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Daily.json": {
       "description": "Usage records summarized by day",
@@ -26298,13 +27652,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/LastMonth.json": {
       "description": "Usage records for last month",
@@ -26654,13 +28012,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Monthly.json": {
       "description": "Usage records summarized by month",
@@ -27010,13 +28372,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/ThisMonth.json": {
       "description": "Usage records for this month",
@@ -27366,13 +28732,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Today.json": {
       "description": "Usage records for today",
@@ -27722,13 +29092,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yearly.json": {
       "description": "Usage records summarized by year",
@@ -28078,13 +29452,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yesterday.json": {
       "description": "Usage records for yesterday",
@@ -28434,13 +29812,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers.json": {
       "description": "Webhooks that notify you of usage thresholds",
@@ -28790,6 +30172,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -29153,13 +30538,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers/{Sid}.json": {
       "delete": {
@@ -29205,6 +30594,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Webhooks that notify you of usage thresholds",
@@ -29251,6 +30643,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -29338,13 +30733,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/2010-04-01/Accounts/{Sid}.json": {
       "description": "Twilio accounts (aka Project) or subaccounts",
@@ -29379,6 +30778,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -29435,13 +30837,31 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://api.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    },
+    {
+      "description": "PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.",
+      "name": "Beta"
+    },
+    {
+      "description": "PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.",
+      "name": "Preview"
+    }
+  ]
 }

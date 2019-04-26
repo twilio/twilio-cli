@@ -1961,6 +1961,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2050,13 +2053,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Credentials/{Sid}": {
       "delete": {
@@ -2090,6 +2097,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Credentials for push notifications channels",
@@ -2124,6 +2134,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2211,13 +2224,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services": {
       "description": "Top level scope for all chat resources",
@@ -2277,6 +2294,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2307,13 +2327,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels": {
       "description": "Channels represent chat rooms",
@@ -2402,6 +2426,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2475,13 +2502,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites": {
       "description": "Pending invitations to users to become channel members",
@@ -2578,6 +2609,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2644,13 +2678,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}": {
       "delete": {
@@ -2708,6 +2746,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Pending invitations to users to become channel members",
@@ -2766,13 +2807,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members": {
       "description": "Users joined to specific channels",
@@ -2869,6 +2914,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -2935,13 +2983,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}": {
       "delete": {
@@ -2999,6 +3051,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Users joined to specific channels",
@@ -3057,6 +3112,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3142,13 +3200,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages": {
       "description": "Individual chat messages",
@@ -3246,6 +3308,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3318,13 +3383,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}": {
       "delete": {
@@ -3382,6 +3451,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Individual chat messages",
@@ -3440,6 +3512,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3515,13 +3590,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Channels/{Sid}": {
       "delete": {
@@ -3567,6 +3646,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Channels represent chat rooms",
@@ -3613,6 +3695,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3685,13 +3770,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Roles": {
       "description": "Roles determining user or member permissions",
@@ -3764,6 +3853,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3831,13 +3923,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Roles/{Sid}": {
       "delete": {
@@ -3883,6 +3979,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Roles determining user or member permissions",
@@ -3929,6 +4028,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -3986,13 +4088,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Users": {
       "description": "Unique chat users within a chat service",
@@ -4065,6 +4171,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -4137,13 +4246,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Users/{Sid}": {
       "delete": {
@@ -4189,6 +4302,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Unique chat users within a chat service",
@@ -4235,6 +4351,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -4310,13 +4429,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{ServiceSid}/Users/{UserSid}/Channels": {
       "description": "List of channels for a given user",
@@ -4401,13 +4524,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v1/Services/{Sid}": {
       "delete": {
@@ -4441,6 +4568,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Top level scope for all chat resources",
@@ -4475,6 +4605,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -5406,13 +5539,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Credentials": {
       "description": "Credentials for push notifications channels",
@@ -5472,6 +5609,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -5561,13 +5701,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Credentials/{Sid}": {
       "delete": {
@@ -5601,6 +5745,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Credentials for push notifications channels",
@@ -5635,6 +5782,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -5722,13 +5872,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services": {
       "description": "Top level scope for all chat resources",
@@ -5788,6 +5942,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -5818,13 +5975,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Bindings": {
       "description": "Push notification subscription for users",
@@ -5861,7 +6022,7 @@
             }
           },
           {
-            "description": "The 'identity' value of the resources to read",
+            "description": "The `identity` value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -5926,13 +6087,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Bindings/{Sid}": {
       "delete": {
@@ -5978,6 +6143,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Push notification subscription for users",
@@ -6024,13 +6192,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels": {
       "description": "Channels represent chat rooms",
@@ -6119,6 +6291,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -6221,13 +6396,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites": {
       "description": "Pending invitations to users to become channel members",
@@ -6259,7 +6438,7 @@
             }
           },
           {
-            "description": "The 'identity' value of the resources to read",
+            "description": "The `identity` value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -6324,6 +6503,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -6354,7 +6536,7 @@
             }
           },
           {
-            "description": "The 'identity' value that identifies the new resource's User",
+            "description": "The `identity` value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -6390,13 +6572,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}": {
       "delete": {
@@ -6454,6 +6640,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Pending invitations to users to become channel members",
@@ -6512,13 +6701,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members": {
       "description": "Users joined to specific channels",
@@ -6550,7 +6743,7 @@
             }
           },
           {
-            "description": "The 'identity' value of the resources to read",
+            "description": "The `identity` value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -6615,6 +6808,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -6645,7 +6841,7 @@
             }
           },
           {
-            "description": "The 'identity' value that identifies the new resource's User",
+            "description": "The `identity` value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -6736,13 +6932,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}": {
       "delete": {
@@ -6800,6 +7000,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Users joined to specific channels",
@@ -6858,6 +7061,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -6982,13 +7188,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages": {
       "description": "Individual chat messages",
@@ -7086,6 +7296,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -7199,13 +7412,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}": {
       "delete": {
@@ -7263,6 +7480,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Individual chat messages",
@@ -7321,6 +7541,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -7434,13 +7657,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks": {
       "description": "TODO: Resource-level docs",
@@ -7525,6 +7752,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -7578,7 +7808,7 @@
             }
           },
           {
-            "description": "The HTTP method used to call 'configuration.url'",
+            "description": "The HTTP method used to call `configuration.url`",
             "in": "query",
             "name": "Configuration.method",
             "required": false,
@@ -7651,13 +7881,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks/{Sid}": {
       "delete": {
@@ -7715,6 +7949,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "TODO: Resource-level docs",
@@ -7773,6 +8010,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -7824,7 +8064,7 @@
             }
           },
           {
-            "description": "The HTTP method used to call 'configuration.url'",
+            "description": "The HTTP method used to call `configuration.url`",
             "in": "query",
             "name": "Configuration.method",
             "required": false,
@@ -7897,13 +8137,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Channels/{Sid}": {
       "delete": {
@@ -7949,6 +8193,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Channels represent chat rooms",
@@ -7995,6 +8242,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -8096,13 +8346,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Roles": {
       "description": "Roles determining user or member permissions",
@@ -8175,6 +8429,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -8242,13 +8499,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Roles/{Sid}": {
       "delete": {
@@ -8294,6 +8555,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Roles determining user or member permissions",
@@ -8340,6 +8604,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -8397,13 +8664,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Users": {
       "description": "Unique chat users within a chat service",
@@ -8476,6 +8747,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -8494,7 +8768,7 @@
             }
           },
           {
-            "description": "The 'identity' value that identifies the new resource's User",
+            "description": "The `identity` value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -8548,13 +8822,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Users/{Sid}": {
       "delete": {
@@ -8600,6 +8878,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Unique chat users within a chat service",
@@ -8646,6 +8927,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -8721,13 +9005,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings": {
       "description": "List of bindings for a given user",
@@ -8829,13 +9117,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings/{Sid}": {
       "delete": {
@@ -8893,6 +9185,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "List of bindings for a given user",
@@ -8951,13 +9246,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels": {
       "description": "List of channels for a given user",
@@ -9042,13 +9341,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels/{ChannelSid}": {
       "description": "List of channels for a given user",
@@ -9107,6 +9410,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -9177,13 +9483,17 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     },
     "/v2/Services/{Sid}": {
       "delete": {
@@ -9217,6 +9527,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "description": "Top level scope for all chat resources",
@@ -9251,6 +9564,9 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "post": {
@@ -9558,7 +9874,7 @@
             }
           },
           {
-            "description": "The number of times calls to the 'post_webhook_url' will be retried",
+            "description": "The number of times calls to the `post_webhook_url` will be retried",
             "in": "query",
             "name": "PostWebhookRetryCount",
             "required": false,
@@ -9591,13 +9907,23 @@
           {
             "accountSid_authToken": []
           }
+        ],
+        "tags": [
+          "GA"
         ]
       },
       "servers": [
         {
           "url": "https://chat.twilio.com"
         }
-      ]
+      ],
+      "x-default-output-properties": []
     }
-  }
+  },
+  "tags": [
+    {
+      "description": "This product is Generally Available.",
+      "name": "GA"
+    }
+  ]
 }
