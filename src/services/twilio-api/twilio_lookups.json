@@ -68,7 +68,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/PhoneNumbers/{PhoneNumber}": {
-      "description": "Phone numbers to lookup",
+      "description": "Detailed information on phone numbers",
       "get": {
         "description": null,
         "parameters": [
@@ -155,7 +155,11 @@
           "url": "https://lookups.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "caller_name",
+        "country_code",
+        "carrier"
+      ]
     }
   },
   "tags": [

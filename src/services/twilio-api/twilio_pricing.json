@@ -694,7 +694,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Messaging/Countries": {
-      "description": "TODO: Resource-level docs",
+      "description": "Messaging pricing by country",
       "get": {
         "description": null,
         "parameters": [],
@@ -761,10 +761,15 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "outbound_sms_prices",
+        "inbound_sms_prices",
+        "price_unit"
+      ]
     },
     "/v1/Messaging/Countries/{IsoCountry}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Messaging pricing by country",
       "get": {
         "description": null,
         "parameters": [
@@ -803,10 +808,15 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "outbound_sms_prices",
+        "inbound_sms_prices",
+        "price_unit"
+      ]
     },
     "/v1/PhoneNumbers/Countries": {
-      "description": "TODO: Resource-level docs",
+      "description": "Phone number pricing by country",
       "get": {
         "description": null,
         "parameters": [],
@@ -873,10 +883,13 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "price_unit"
+      ]
     },
     "/v1/PhoneNumbers/Countries/{IsoCountry}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Phone number pricing by country",
       "get": {
         "description": null,
         "parameters": [
@@ -915,10 +928,13 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "price_unit"
+      ]
     },
     "/v1/Voice/Countries": {
-      "description": "TODO: Resource-level docs",
+      "description": "Voice pricing by country",
       "get": {
         "description": null,
         "parameters": [],
@@ -985,10 +1001,13 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "price_unit"
+      ]
     },
     "/v1/Voice/Countries/{IsoCountry}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Voice pricing by country",
       "get": {
         "description": null,
         "parameters": [
@@ -1027,10 +1046,13 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "price_unit"
+      ]
     },
     "/v1/Voice/Numbers/{Number}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Voice pricing for a specific phone number",
       "get": {
         "description": null,
         "parameters": [
@@ -1069,10 +1091,15 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "outbound_call_price",
+        "inbound_call_price",
+        "price_unit"
+      ]
     },
     "/v2/Voice/Countries": {
-      "description": "TODO: Resource-level docs",
+      "description": "Voice pricing by country",
       "get": {
         "description": null,
         "parameters": [],
@@ -1139,10 +1166,13 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "price_unit"
+      ]
     },
     "/v2/Voice/Countries/{IsoCountry}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Voice pricing by country",
       "get": {
         "description": "Fetch a specific Country.",
         "parameters": [
@@ -1181,10 +1211,13 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "price_unit"
+      ]
     },
     "/v2/Voice/Numbers/{DestinationNumber}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Voice pricing for a specific phone number",
       "get": {
         "description": "Fetch pricing information for a specific destination and, optionally, origination phone number.",
         "parameters": [
@@ -1232,7 +1265,11 @@
           "url": "https://pricing.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country",
+        "inbound_call_price",
+        "price_unit"
+      ]
     }
   },
   "tags": [

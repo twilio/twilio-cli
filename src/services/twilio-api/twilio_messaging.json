@@ -1160,7 +1160,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{MessagingServiceSid}/Broadcasts": {
       "description": "TODO: Resource-level docs",
@@ -1248,7 +1252,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "body",
+        "date_created"
+      ]
     },
     "/v1/Services/{MessagingServiceSid}/Messages": {
       "description": "TODO: Resource-level docs",
@@ -1342,7 +1350,12 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/AlphaSenders": {
       "description": "TODO: Resource-level docs",
@@ -1470,7 +1483,10 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "alpha_sender"
+      ]
     },
     "/v1/Services/{ServiceSid}/AlphaSenders/{Sid}": {
       "delete": {
@@ -1575,7 +1591,10 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "alpha_sender"
+      ]
     },
     "/v1/Services/{ServiceSid}/PhoneNumbers": {
       "description": "TODO: Resource-level docs",
@@ -1706,7 +1725,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "country_code"
+      ]
     },
     "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}": {
       "delete": {
@@ -1811,7 +1834,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "country_code"
+      ]
     },
     "/v1/Services/{ServiceSid}/ShortCodes": {
       "description": "TODO: Resource-level docs",
@@ -1942,7 +1969,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "short_code",
+        "country_code"
+      ]
     },
     "/v1/Services/{ServiceSid}/ShortCodes/{Sid}": {
       "delete": {
@@ -2047,7 +2078,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "short_code",
+        "country_code"
+      ]
     },
     "/v1/Services/{Sid}": {
       "delete": {
@@ -2326,7 +2361,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Sessions": {
       "description": "TODO: Resource-level docs",
@@ -2476,7 +2515,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Sessions/Webhooks": {
       "description": "TODO: Resource-level docs",
@@ -2602,7 +2645,12 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "target",
+        "webhook_method",
+        "pre_webhook_url",
+        "post_webhook_url"
+      ]
     },
     "/v1/Sessions/{SessionSid}/Messages": {
       "description": "TODO: Resource-level docs",
@@ -2768,7 +2816,12 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "index",
+        "author",
+        "date_created"
+      ]
     },
     "/v1/Sessions/{SessionSid}/Messages/{Sid}": {
       "delete": {
@@ -2968,7 +3021,12 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "index",
+        "author",
+        "date_created"
+      ]
     },
     "/v1/Sessions/{SessionSid}/Participants": {
       "description": "TODO: Resource-level docs",
@@ -3143,7 +3201,13 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "twilio_address",
+        "user_address",
+        "type"
+      ]
     },
     "/v1/Sessions/{SessionSid}/Participants/{Sid}": {
       "delete": {
@@ -3325,7 +3389,13 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "twilio_address",
+        "user_address",
+        "type"
+      ]
     },
     "/v1/Sessions/{SessionSid}/Webhooks": {
       "description": "TODO: Resource-level docs",
@@ -3552,7 +3622,10 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "target"
+      ]
     },
     "/v1/Sessions/{SessionSid}/Webhooks/{Sid}": {
       "delete": {
@@ -3790,7 +3863,10 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "target"
+      ]
     },
     "/v1/Sessions/{Sid}": {
       "delete": {
@@ -3954,7 +4030,11 @@
           "url": "https://messaging.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     }
   },
   "tags": [

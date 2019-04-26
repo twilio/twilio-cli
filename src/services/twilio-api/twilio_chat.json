@@ -2063,7 +2063,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v1/Credentials/{Sid}": {
       "delete": {
@@ -2234,7 +2238,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v1/Services": {
       "description": "Top level scope for all chat resources",
@@ -2337,7 +2345,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels": {
       "description": "Channels represent chat rooms",
@@ -2512,7 +2524,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites": {
       "description": "Pending invitations to users to become channel members",
@@ -2688,7 +2704,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}": {
       "delete": {
@@ -2817,7 +2837,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members": {
       "description": "Users joined to specific channels",
@@ -2993,7 +3017,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}": {
       "delete": {
@@ -3210,7 +3238,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages": {
       "description": "Individual chat messages",
@@ -3393,7 +3425,12 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}": {
       "delete": {
@@ -3600,7 +3637,12 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Channels/{Sid}": {
       "delete": {
@@ -3780,7 +3822,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Services/{ServiceSid}/Roles": {
       "description": "Roles determining user or member permissions",
@@ -3933,7 +3979,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v1/Services/{ServiceSid}/Roles/{Sid}": {
       "delete": {
@@ -4098,7 +4148,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users": {
       "description": "Unique chat users within a chat service",
@@ -4256,7 +4310,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users/{Sid}": {
       "delete": {
@@ -4439,7 +4497,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users/{UserSid}/Channels": {
       "description": "List of channels for a given user",
@@ -4534,7 +4596,10 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "channel_sid",
+        "status"
+      ]
     },
     "/v1/Services/{Sid}": {
       "delete": {
@@ -5549,7 +5614,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v2/Credentials": {
       "description": "Credentials for push notifications channels",
@@ -5711,7 +5780,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v2/Credentials/{Sid}": {
       "delete": {
@@ -5882,7 +5955,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v2/Services": {
       "description": "Top level scope for all chat resources",
@@ -5985,7 +6062,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Bindings": {
       "description": "Push notification subscription for users",
@@ -6097,7 +6178,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "endpoint",
+        "identity"
+      ]
     },
     "/v2/Services/{ServiceSid}/Bindings/{Sid}": {
       "delete": {
@@ -6202,7 +6287,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "endpoint",
+        "identity"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels": {
       "description": "Channels represent chat rooms",
@@ -6406,7 +6495,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites": {
       "description": "Pending invitations to users to become channel members",
@@ -6582,7 +6675,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}": {
       "delete": {
@@ -6711,7 +6808,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members": {
       "description": "Users joined to specific channels",
@@ -6942,7 +7043,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}": {
       "delete": {
@@ -7198,7 +7303,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages": {
       "description": "Individual chat messages",
@@ -7422,7 +7531,12 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}": {
       "delete": {
@@ -7667,10 +7781,15 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks": {
-      "description": "TODO: Resource-level docs",
+      "description": "Webhooks for specific channels",
       "get": {
         "description": null,
         "parameters": [
@@ -7891,7 +8010,10 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "configuration"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks/{Sid}": {
       "delete": {
@@ -7954,7 +8076,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Webhooks for specific channels",
       "get": {
         "description": null,
         "parameters": [
@@ -8147,7 +8269,10 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "configuration"
+      ]
     },
     "/v2/Services/{ServiceSid}/Channels/{Sid}": {
       "delete": {
@@ -8356,7 +8481,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v2/Services/{ServiceSid}/Roles": {
       "description": "Roles determining user or member permissions",
@@ -8509,7 +8638,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v2/Services/{ServiceSid}/Roles/{Sid}": {
       "delete": {
@@ -8674,7 +8807,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v2/Services/{ServiceSid}/Users": {
       "description": "Unique chat users within a chat service",
@@ -8832,7 +8969,12 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "identity",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Users/{Sid}": {
       "delete": {
@@ -9015,7 +9157,12 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "identity",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings": {
       "description": "List of bindings for a given user",
@@ -9127,7 +9274,12 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "endpoint",
+        "identity",
+        "binding_type"
+      ]
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings/{Sid}": {
       "delete": {
@@ -9256,7 +9408,12 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "endpoint",
+        "identity",
+        "binding_type"
+      ]
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels": {
       "description": "List of channels for a given user",
@@ -9351,7 +9508,10 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "channel_sid",
+        "status"
+      ]
     },
     "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels/{ChannelSid}": {
       "description": "List of channels for a given user",
@@ -9493,7 +9653,10 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "channel_sid",
+        "status"
+      ]
     },
     "/v2/Services/{Sid}": {
       "delete": {
@@ -9917,7 +10080,11 @@
           "url": "https://chat.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     }
   },
   "tags": [

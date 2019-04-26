@@ -748,7 +748,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Services": {
-      "description": "TODO: Resource-level docs",
+      "description": "Containers for sync objects",
       "get": {
         "description": null,
         "parameters": [],
@@ -876,10 +876,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Services/{ServiceSid}/Documents": {
-      "description": "TODO: Resource-level docs",
+      "description": "Sync document objects",
       "get": {
         "description": null,
         "parameters": [
@@ -1022,10 +1026,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "revision"
+      ]
     },
     "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Sync document permissions",
       "get": {
         "description": "Retrieve a list of all Permissions applying to a Sync Document.",
         "parameters": [
@@ -1117,7 +1125,12 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "read",
+        "write",
+        "manage"
+      ]
     },
     "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}": {
       "delete": {
@@ -1177,7 +1190,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Sync document permissions",
       "get": {
         "description": "Fetch a specific Sync Document Permission.",
         "parameters": [
@@ -1324,7 +1337,12 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "read",
+        "write",
+        "manage"
+      ]
     },
     "/v1/Services/{ServiceSid}/Documents/{Sid}": {
       "delete": {
@@ -1375,7 +1393,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Sync document objects",
       "get": {
         "description": null,
         "parameters": [
@@ -1495,10 +1513,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "revision"
+      ]
     },
     "/v1/Services/{ServiceSid}/Lists": {
-      "description": "TODO: Resource-level docs",
+      "description": "Sync list objects",
       "get": {
         "description": null,
         "parameters": [
@@ -1641,10 +1663,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "revision"
+      ]
     },
     "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items": {
-      "description": "TODO: Resource-level docs",
+      "description": "Items in a sync list",
       "get": {
         "description": null,
         "parameters": [
@@ -1855,7 +1881,11 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "index",
+        "revision",
+        "created_by"
+      ]
     },
     "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}": {
       "delete": {
@@ -1915,7 +1945,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Items in a sync list",
       "get": {
         "description": null,
         "parameters": [
@@ -2071,10 +2101,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "index",
+        "revision",
+        "created_by"
+      ]
     },
     "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Permissions for sync list items",
       "get": {
         "description": "Retrieve a list of all Permissions applying to a Sync List.",
         "parameters": [
@@ -2166,7 +2200,12 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "read",
+        "write",
+        "manage"
+      ]
     },
     "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}": {
       "delete": {
@@ -2226,7 +2265,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Permissions for sync list items",
       "get": {
         "description": "Fetch a specific Sync List Permission.",
         "parameters": [
@@ -2373,7 +2412,12 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "read",
+        "write",
+        "manage"
+      ]
     },
     "/v1/Services/{ServiceSid}/Lists/{Sid}": {
       "delete": {
@@ -2424,7 +2468,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Sync list objects",
       "get": {
         "description": null,
         "parameters": [
@@ -2544,10 +2588,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "revision"
+      ]
     },
     "/v1/Services/{ServiceSid}/Maps": {
-      "description": "TODO: Resource-level docs",
+      "description": "Sync map objects",
       "get": {
         "description": null,
         "parameters": [
@@ -2690,10 +2738,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "revision"
+      ]
     },
     "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items": {
-      "description": "TODO: Resource-level docs",
+      "description": "Keys in a sync map",
       "get": {
         "description": null,
         "parameters": [
@@ -2913,7 +2965,11 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "key",
+        "revision",
+        "created_by"
+      ]
     },
     "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}": {
       "delete": {
@@ -2973,7 +3029,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Keys in a sync map",
       "get": {
         "description": null,
         "parameters": [
@@ -3129,10 +3185,14 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "key",
+        "revision",
+        "created_by"
+      ]
     },
     "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Permissions for sync map keys",
       "get": {
         "description": "Retrieve a list of all Permissions applying to a Sync Map.",
         "parameters": [
@@ -3224,7 +3284,12 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "read",
+        "write",
+        "manage"
+      ]
     },
     "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}": {
       "delete": {
@@ -3284,7 +3349,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Permissions for sync map keys",
       "get": {
         "description": "Fetch a specific Sync Map Permission.",
         "parameters": [
@@ -3431,7 +3496,12 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "read",
+        "write",
+        "manage"
+      ]
     },
     "/v1/Services/{ServiceSid}/Maps/{Sid}": {
       "delete": {
@@ -3482,7 +3552,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Sync map objects",
       "get": {
         "description": null,
         "parameters": [
@@ -3602,7 +3672,11 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "revision"
+      ]
     },
     "/v1/Services/{ServiceSid}/Streams": {
       "description": "TODO: Resource-level docs",
@@ -3739,7 +3813,11 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "created_by"
+      ]
     },
     "/v1/Services/{ServiceSid}/Streams/{Sid}": {
       "delete": {
@@ -3901,7 +3979,11 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "created_by"
+      ]
     },
     "/v1/Services/{ServiceSid}/Streams/{StreamSid}/Messages": {
       "description": "TODO: Resource-level docs",
@@ -3967,7 +4049,9 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid"
+      ]
     },
     "/v1/Services/{Sid}": {
       "delete": {
@@ -4006,7 +4090,7 @@
           "Beta"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Containers for sync objects",
       "get": {
         "description": null,
         "parameters": [
@@ -4121,7 +4205,11 @@
           "url": "https://sync.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     }
   },
   "tags": [

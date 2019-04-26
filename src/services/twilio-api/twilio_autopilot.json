@@ -981,7 +981,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Defaults": {
       "description": "TODO: Resource-level docs",
@@ -1071,7 +1075,9 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "data"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Dialogues/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -1128,7 +1134,10 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "data"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/FieldTypes": {
       "description": "TODO: Resource-level docs",
@@ -1265,7 +1274,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues": {
       "description": "TODO: Resource-level docs",
@@ -1447,7 +1460,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "value",
+        "language"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}": {
       "delete": {
@@ -1576,7 +1593,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "value",
+        "language"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/FieldTypes/{Sid}": {
       "delete": {
@@ -1747,7 +1768,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/ModelBuilds": {
       "description": "TODO: Resource-level docs",
@@ -1885,7 +1910,12 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}": {
       "delete": {
@@ -2047,7 +2077,12 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Queries": {
       "description": "TODO: Resource-level docs",
@@ -2235,7 +2270,12 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "query",
+        "status",
+        "language"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Queries/{Sid}": {
       "delete": {
@@ -2409,7 +2449,12 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "query",
+        "status",
+        "language"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/StyleSheet": {
       "description": "TODO: Resource-level docs",
@@ -2499,7 +2544,9 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "data"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks": {
       "description": "TODO: Resource-level docs",
@@ -2655,7 +2702,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks/{Sid}": {
       "delete": {
@@ -2845,7 +2896,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions": {
       "description": "TODO: Resource-level docs",
@@ -2959,7 +3014,9 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "data"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields": {
       "description": "TODO: Resource-level docs",
@@ -3120,7 +3177,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "field_type"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}": {
       "delete": {
@@ -3249,7 +3310,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "field_type"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples": {
       "description": "TODO: Resource-level docs",
@@ -3428,7 +3493,12 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "tagged_text",
+        "language",
+        "source_channel"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}": {
       "delete": {
@@ -3644,7 +3714,12 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "tagged_text",
+        "language",
+        "source_channel"
+      ]
     },
     "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Statistics": {
       "description": "TODO: Resource-level docs",
@@ -3701,7 +3776,10 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "samples_count",
+        "fields_count"
+      ]
     },
     "/v1/Assistants/{Sid}": {
       "delete": {
@@ -3882,7 +3960,11 @@
           "url": "https://autopilot.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     }
   },
   "tags": [

@@ -462,7 +462,9 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "form_type"
+      ]
     },
     "/v1/Services": {
       "description": "TODO: Resource-level docs",
@@ -565,7 +567,11 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Entities": {
       "description": "TODO: Resource-level docs",
@@ -693,7 +699,11 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Entities/{Identity}": {
       "delete": {
@@ -792,7 +802,11 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors": {
       "description": "TODO: Resource-level docs",
@@ -961,7 +975,12 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status",
+        "factor_type"
+      ]
     },
     "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors/{FactorSid}/Challenges": {
       "description": "TODO: Resource-level docs",
@@ -1055,7 +1074,12 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "factor_type",
+        "status",
+        "responded_reason",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors/{FactorSid}/Challenges/{Sid}": {
       "delete": {
@@ -1271,7 +1295,12 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "factor_type",
+        "status",
+        "responded_reason",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Entities/{Identity}/Factors/{Sid}": {
       "delete": {
@@ -1460,7 +1489,12 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status",
+        "factor_type"
+      ]
     },
     "/v1/Services/{Sid}": {
       "delete": {
@@ -1586,7 +1620,11 @@
           "url": "https://authy.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     }
   },
   "tags": [

@@ -143,7 +143,11 @@
           "url": "https://integrations.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "request_sid",
+        "status",
+        "date_created"
+      ]
     }
   },
   "tags": [

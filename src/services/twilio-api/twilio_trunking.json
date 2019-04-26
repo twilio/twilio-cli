@@ -715,7 +715,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Trunks": {
-      "description": "TODO: Resource-level docs",
+      "description": "Represents a SIP trunk",
       "get": {
         "description": null,
         "parameters": [],
@@ -889,7 +889,11 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "domain_name"
+      ]
     },
     "/v1/Trunks/{Sid}": {
       "delete": {
@@ -928,7 +932,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Represents a SIP trunk",
       "get": {
         "description": null,
         "parameters": [
@@ -1089,10 +1093,14 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "domain_name"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/CredentialLists": {
-      "description": "TODO: Resource-level docs",
+      "description": "List of credentials for accessing a trunk",
       "get": {
         "description": null,
         "parameters": [
@@ -1220,7 +1228,11 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/CredentialLists/{Sid}": {
       "delete": {
@@ -1271,7 +1283,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "List of credentials for accessing a trunk",
       "get": {
         "description": null,
         "parameters": [
@@ -1325,10 +1337,14 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/IpAccessControlLists": {
-      "description": "TODO: Resource-level docs",
+      "description": "List of IP addresses for accessing a trunk",
       "get": {
         "description": "List all IP Access Control Lists for a Trunk",
         "parameters": [
@@ -1456,7 +1472,11 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/IpAccessControlLists/{Sid}": {
       "delete": {
@@ -1507,7 +1527,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "List of IP addresses for accessing a trunk",
       "get": {
         "description": null,
         "parameters": [
@@ -1561,10 +1581,14 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/OriginationUrls": {
-      "description": "TODO: Resource-level docs",
+      "description": "Network element entry points into your communications infrastructure",
       "get": {
         "description": null,
         "parameters": [
@@ -1726,7 +1750,13 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "sip_url",
+        "priority",
+        "weight"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/OriginationUrls/{Sid}": {
       "delete": {
@@ -1777,7 +1807,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Network element entry points into your communications infrastructure",
       "get": {
         "description": null,
         "parameters": [
@@ -1925,10 +1955,16 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "sip_url",
+        "priority",
+        "weight"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/PhoneNumbers": {
-      "description": "TODO: Resource-level docs",
+      "description": "Phone numbers associated with trunks",
       "get": {
         "description": null,
         "parameters": [
@@ -2056,7 +2092,11 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "phone_number"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/PhoneNumbers/{Sid}": {
       "delete": {
@@ -2107,7 +2147,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Phone numbers associated with trunks",
       "get": {
         "description": null,
         "parameters": [
@@ -2161,7 +2201,11 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "phone_number"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/TerminatingSipDomains": {
       "description": "TODO: Resource-level docs",
@@ -2292,7 +2336,11 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "domain_name"
+      ]
     },
     "/v1/Trunks/{TrunkSid}/TerminatingSipDomains/{Sid}": {
       "delete": {
@@ -2397,7 +2445,11 @@
           "url": "https://trunking.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "domain_name"
+      ]
     }
   },
   "tags": [

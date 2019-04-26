@@ -240,7 +240,11 @@
           "url": "https://accounts.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Credentials/AWS/{Sid}": {
       "delete": {
@@ -366,7 +370,11 @@
           "url": "https://accounts.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Credentials/PublicKeys": {
       "description": "User provided public keys",
@@ -490,7 +498,11 @@
           "url": "https://accounts.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Credentials/PublicKeys/{Sid}": {
       "delete": {
@@ -616,7 +628,11 @@
           "url": "https://accounts.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     }
   },
   "tags": [

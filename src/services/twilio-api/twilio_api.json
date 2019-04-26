@@ -9160,7 +9160,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Addresses.json": {
       "description": "Physical locations within a country",
@@ -9385,7 +9389,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "validated",
+        "verified"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Addresses/{AddressSid}/DependentPhoneNumbers.json": {
       "description": "Phone numbers dependent on an Address resource",
@@ -9478,7 +9487,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json": {
       "delete": {
@@ -9703,7 +9716,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "validated",
+        "verified"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Applications.json": {
       "description": "Applications that you have created with Twilio",
@@ -10041,7 +10059,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Applications/{Sid}.json": {
       "delete": {
@@ -10406,7 +10428,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps.json": {
       "description": "Authorized Twilio Connect apps",
@@ -10487,7 +10513,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "connect_app_sid",
+        "connect_app_friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps/{ConnectAppSid}.json": {
       "description": "Authorized Twilio Connect apps",
@@ -10544,10 +10573,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "connect_app_sid",
+        "connect_app_friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Country codes with available phone numbers",
       "get": {
         "description": null,
         "parameters": [
@@ -10625,10 +10657,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country_code",
+        "country",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Country codes with available phone numbers",
       "get": {
         "description": null,
         "parameters": [
@@ -10679,7 +10715,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "country_code",
+        "country",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local.json": {
       "description": "Available local phone numbers",
@@ -10931,10 +10971,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "phone_number",
+        "region",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/MachineToMachine.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Available machine-to-machine phone numbers",
       "get": {
         "description": null,
         "parameters": [
@@ -11183,7 +11227,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "phone_number",
+        "region",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Mobile.json": {
       "description": "Available mobile phone numbers",
@@ -11435,10 +11483,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "phone_number",
+        "region",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/National.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Available national phone numbers",
       "get": {
         "description": null,
         "parameters": [
@@ -11687,10 +11739,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "phone_number",
+        "region",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/SharedCost.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Available shared cost numbers",
       "get": {
         "description": null,
         "parameters": [
@@ -11939,7 +11995,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "phone_number",
+        "region",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree.json": {
       "description": "Available toll free phone numbers",
@@ -12191,7 +12251,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "phone_number",
+        "region",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Voip.json": {
       "description": "Available VoIP phone numbers",
@@ -12443,10 +12507,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "phone_number",
+        "region",
+        "beta"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Balance.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Account balance",
       "get": {
         "description": "Fetch the balance for an Account based on Account Sid. Balance changes may not be reflected immediately. Child accounts do not contain balance information",
         "parameters": [
@@ -12488,7 +12556,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "account_sid",
+        "balance",
+        "currency"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls.json": {
       "description": "Connections between telephones and Twilio",
@@ -12976,10 +13048,16 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "start_time"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary.json": {
-      "description": "How your end user's perceive the quality of their calls",
+      "description": "How your end user\u00e2\u20ac\u2122s perceive the quality of their calls",
       "post": {
         "description": "Create a FeedbackSummary resource for a call",
         "parameters": [
@@ -13083,7 +13161,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_feedback_count",
+        "quality_score_average",
+        "start_date"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary/{Sid}.json": {
       "delete": {
@@ -13134,7 +13217,7 @@
           "GA"
         ]
       },
-      "description": "How your end user's perceive the quality of their calls",
+      "description": "How your end user\u00e2\u20ac\u2122s perceive the quality of their calls",
       "get": {
         "description": "Fetch a FeedbackSummary resource from a call",
         "parameters": [
@@ -13188,7 +13271,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_feedback_count",
+        "quality_score_average",
+        "start_date"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Feedback.json": {
       "description": "Describes the quality experienced during phone calls",
@@ -13324,10 +13412,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "quality_score",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Error notifications for calls",
       "get": {
         "description": null,
         "parameters": [
@@ -13436,7 +13528,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "error_code",
+        "message_date"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications/{Sid}.json": {
       "delete": {
@@ -13499,7 +13596,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Error notifications for calls",
       "get": {
         "description": null,
         "parameters": [
@@ -13565,7 +13662,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "error_code",
+        "message_date"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings.json": {
       "description": "Recordings associated with voice calls",
@@ -13779,7 +13881,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "status",
+        "start_time",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings/{Sid}.json": {
       "delete": {
@@ -13994,7 +14102,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "status",
+        "start_time",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json": {
       "delete": {
@@ -14259,7 +14373,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "start_time"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences.json": {
       "description": "Voice call conferences",
@@ -14383,7 +14503,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants.json": {
       "description": "Conference participants",
@@ -14929,7 +15053,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "call_sid",
+        "status",
+        "muted",
+        "hold"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants/{CallSid}.json": {
       "delete": {
@@ -15274,7 +15403,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "call_sid",
+        "status",
+        "muted",
+        "hold"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings.json": {
       "description": "Recordings of conferences",
@@ -15377,7 +15511,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "conference_sid",
+        "status",
+        "start_time",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings/{Sid}.json": {
       "delete": {
@@ -15592,7 +15732,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "conference_sid",
+        "status",
+        "start_time",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Conferences/{Sid}.json": {
       "description": "Voice call conferences",
@@ -15742,7 +15888,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/ConnectApps.json": {
       "description": "Twilio Connect apps",
@@ -15823,7 +15973,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json": {
       "description": "Twilio Connect apps",
@@ -16024,7 +16177,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json": {
       "description": "Incoming phone numbers on a Twilio account/project",
@@ -16485,7 +16641,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Local.json": {
       "description": "Incoming local phone numbers on a Twilio account/project",
@@ -16887,7 +17047,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Mobile.json": {
       "description": "Incoming mobile phone numbers on a Twilio account/project",
@@ -17289,7 +17453,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/TollFree.json": {
       "description": "Incoming toll free phone numbers on a Twilio account/project",
@@ -17691,7 +17859,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns.json": {
       "description": "TODO: Resource-level docs",
@@ -17844,7 +18016,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "description"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions.json": {
       "description": "TODO: Resource-level docs",
@@ -17949,7 +18126,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "product_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions/{Sid}.json": {
       "description": "TODO: Resource-level docs",
@@ -18030,7 +18212,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "product_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json": {
       "delete": {
@@ -18159,7 +18346,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "description"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json": {
       "delete": {
@@ -18614,7 +18806,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Keys.json": {
       "description": "API keys",
@@ -18740,7 +18936,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json": {
       "delete": {
@@ -18902,7 +19102,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages.json": {
       "description": "Inbound or outbound messages",
@@ -19184,10 +19388,17 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "direction",
+        "date_sent"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Feedback.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Customer-provided feedback on delivery confirmation",
       "post": {
         "description": null,
         "parameters": [
@@ -19254,7 +19465,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "message_sid",
+        "outcome",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media.json": {
       "description": "Media attached to MMS messages",
@@ -19357,7 +19572,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "parent_sid",
+        "content_type"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media/{Sid}.json": {
       "delete": {
@@ -19486,7 +19705,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "parent_sid",
+        "content_type"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json": {
       "delete": {
@@ -19648,7 +19871,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "direction",
+        "date_sent"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Notifications.json": {
       "description": "[DEPRECATED] Log entries",
@@ -19748,7 +19978,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "error_code",
+        "message_date"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Notifications/{Sid}.json": {
       "delete": {
@@ -19853,7 +20088,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "error_code",
+        "message_date"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds.json": {
       "description": "Verified numbers that may be used as caller ID",
@@ -20057,7 +20297,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds/{Sid}.json": {
       "delete": {
@@ -20219,7 +20463,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues.json": {
       "description": "Queues of calls",
@@ -20354,7 +20602,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "current_size",
+        "average_wait_time"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members.json": {
       "description": "Calls in a call queue",
@@ -20447,7 +20700,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "call_sid",
+        "date_enqueued",
+        "position",
+        "wait_time"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members/{CallSid}.json": {
       "description": "Calls in a call queue",
@@ -20609,7 +20867,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "call_sid",
+        "date_enqueued",
+        "position",
+        "wait_time"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Queues/{Sid}.json": {
       "delete": {
@@ -20780,7 +21043,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "current_size",
+        "average_wait_time"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings.json": {
       "description": "Recordings of phone calls",
@@ -20895,7 +21163,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "status",
+        "start_time",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions.json": {
       "description": "References to text transcriptions of call recordings",
@@ -20988,7 +21262,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "type",
+        "status",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions/{Sid}.json": {
       "delete": {
@@ -21117,10 +21396,15 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "type",
+        "status",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "The results of an Add-on API call",
       "get": {
         "description": "Retrieve a list of results belonging to the recording",
         "parameters": [
@@ -21210,10 +21494,15 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "add_on_sid",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "A single Add-on results' payload",
       "get": {
         "description": "Retrieve a list of payloads belonging to the AddOnResult",
         "parameters": [
@@ -21315,7 +21604,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "label",
+        "content_type"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{PayloadSid}/Data.json": {
       "description": "TODO: Resource-level docs",
@@ -21396,7 +21689,9 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "redirect_to"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{Sid}.json": {
       "delete": {
@@ -21471,7 +21766,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "A single Add-on results' payload",
       "get": {
         "description": "Fetch an instance of a result payload",
         "parameters": [
@@ -21549,7 +21844,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "label",
+        "content_type"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json": {
       "delete": {
@@ -21612,7 +21911,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "The results of an Add-on API call",
       "get": {
         "description": "Fetch an instance of an AddOnResult",
         "parameters": [
@@ -21678,7 +21977,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "add_on_sid",
+        "date_created"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Recordings/{Sid}.json": {
       "delete": {
@@ -21783,7 +22087,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "call_sid",
+        "status",
+        "start_time",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists.json": {
       "description": "Lists of SIP credentials",
@@ -21909,7 +22219,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials.json": {
       "description": "Username and password information for SIP Domains",
@@ -22068,7 +22381,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "username",
+        "credential_list_sid"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials/{Sid}.json": {
       "delete": {
@@ -22266,7 +22583,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "username",
+        "credential_list_sid"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json": {
       "delete": {
@@ -22428,7 +22749,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains.json": {
       "description": "Custom DNS hostnames that can accept SIP traffic",
@@ -22671,10 +22995,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "domain_name",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Credential lists for SIP calls",
       "get": {
         "description": "Retrieve a list of credential list mappings belonging to the domain used in the request",
         "parameters": [
@@ -22824,7 +23152,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings/{Sid}.json": {
       "delete": {
@@ -22887,7 +23218,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Credential lists for SIP calls",
       "get": {
         "description": "Fetch a specific instance of a credential list mapping",
         "parameters": [
@@ -22953,10 +23284,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "IP address lists for SIP calls",
       "get": {
         "description": "Retrieve a list of IP Access Control List mappings belonging to the domain used in the request",
         "parameters": [
@@ -23106,7 +23440,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings/{Sid}.json": {
       "delete": {
@@ -23169,7 +23506,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "IP address lists for SIP calls",
       "get": {
         "description": "Fetch a specific instance of an IP Access Control List mapping",
         "parameters": [
@@ -23235,10 +23572,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Credential lists for SIP registrations",
       "get": {
         "description": "Retrieve a list of credential list mappings belonging to the domain used in the request",
         "parameters": [
@@ -23388,7 +23728,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings/{Sid}.json": {
       "delete": {
@@ -23451,7 +23794,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Credential lists for SIP registrations",
       "get": {
         "description": "Fetch a specific instance of a credential list mapping",
         "parameters": [
@@ -23517,7 +23860,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings.json": {
       "description": "Credential lists associated with a SIP Domain",
@@ -23670,7 +24016,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings/{Sid}.json": {
       "delete": {
@@ -23799,7 +24148,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings.json": {
       "description": "Access control lists associated with a SIP Domain",
@@ -23952,7 +24304,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings/{Sid}.json": {
       "delete": {
@@ -24081,7 +24436,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{Sid}.json": {
       "delete": {
@@ -24360,7 +24718,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "domain_name",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists.json": {
       "description": "Access control lists of IP address resources",
@@ -24486,7 +24848,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/Addresses.json": {
       "description": "TODO: Resource-level docs",
@@ -24654,7 +25019,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "ip_address",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/Addresses/{Sid}.json": {
       "delete": {
@@ -24870,7 +25239,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "ip_address",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses.json": {
       "description": "IP addresses that have access to a SIP Domain",
@@ -25038,7 +25411,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "ip_address",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses/{Sid}.json": {
       "delete": {
@@ -25254,7 +25631,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "ip_address",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json": {
       "delete": {
@@ -25416,7 +25797,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SIP/Regions.json": {
       "description": "TODO: Resource-level docs",
@@ -25506,7 +25890,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "friendly_name",
+        "region"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/Messages.json": {
       "description": "TODO: Resource-level docs",
@@ -25709,7 +26096,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "direction",
+        "date_sent"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/Messages/{Sid}.json": {
       "description": "TODO: Resource-level docs",
@@ -25766,7 +26160,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "direction",
+        "date_sent"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes.json": {
       "description": "Messaging short codes",
@@ -25865,7 +26266,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "short_code",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes/{Sid}.json": {
       "description": "Messaging short codes",
@@ -26054,10 +26459,14 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "short_code",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SigningKeys.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Create a new signing key",
       "get": {
         "description": null,
         "parameters": [
@@ -26180,7 +26589,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "secret"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/SigningKeys/{Sid}.json": {
       "delete": {
@@ -26342,10 +26755,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Tokens.json": {
-      "description": "TODO: Resource-level docs",
+      "description": "Credentials for ICE servers",
       "post": {
         "description": "Create a new token",
         "parameters": [
@@ -26396,7 +26812,10 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "username",
+        "ice_servers"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Transcriptions.json": {
       "description": "Text transcriptions of call recordings",
@@ -26477,7 +26896,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "type",
+        "status",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Transcriptions/{Sid}.json": {
       "delete": {
@@ -26582,7 +27006,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "type",
+        "status",
+        "duration"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records.json": {
       "description": "Twilio account usage records",
@@ -26942,7 +27371,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/AllTime.json": {
       "description": "Usage records for all time",
@@ -27302,7 +27737,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Daily.json": {
       "description": "Usage records summarized by day",
@@ -27662,7 +28103,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/LastMonth.json": {
       "description": "Usage records for last month",
@@ -28022,7 +28469,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Monthly.json": {
       "description": "Usage records summarized by month",
@@ -28382,7 +28835,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/ThisMonth.json": {
       "description": "Usage records for this month",
@@ -28742,7 +29201,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Today.json": {
       "description": "Usage records for today",
@@ -29102,7 +29567,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yearly.json": {
       "description": "Usage records summarized by year",
@@ -29462,7 +29933,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yesterday.json": {
       "description": "Usage records for yesterday",
@@ -29822,7 +30299,13 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "category",
+        "start_date",
+        "end_date",
+        "count",
+        "count_unit"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers.json": {
       "description": "Webhooks that notify you of usage thresholds",
@@ -30548,7 +31031,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "usage_category",
+        "trigger_by"
+      ]
     },
     "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers/{Sid}.json": {
       "delete": {
@@ -30743,7 +31231,12 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "usage_category",
+        "trigger_by"
+      ]
     },
     "/2010-04-01/Accounts/{Sid}.json": {
       "description": "Twilio accounts (aka Project) or subaccounts",
@@ -30847,7 +31340,11 @@
           "url": "https://api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status"
+      ]
     }
   },
   "tags": [

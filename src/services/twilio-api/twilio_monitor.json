@@ -343,7 +343,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Alerts": {
-      "description": "TODO: Resource-level docs",
+      "description": "Debugger alerts",
       "get": {
         "description": null,
         "parameters": [
@@ -440,7 +440,12 @@
           "url": "https://monitor.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "error_code",
+        "log_level",
+        "alert_text"
+      ]
     },
     "/v1/Alerts/{Sid}": {
       "delete": {
@@ -479,7 +484,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Debugger alerts",
       "get": {
         "description": null,
         "parameters": [
@@ -521,10 +526,15 @@
           "url": "https://monitor.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "error_code",
+        "log_level",
+        "alert_text"
+      ]
     },
     "/v1/Events": {
-      "description": "TODO: Resource-level docs",
+      "description": "Debugger events",
       "get": {
         "description": "Returns a list of Events in this account, sorted by event-date.",
         "parameters": [
@@ -654,10 +664,15 @@
           "url": "https://monitor.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "event_type",
+        "event_type",
+        "description"
+      ]
     },
     "/v1/Events/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Debugger events",
       "get": {
         "description": null,
         "parameters": [
@@ -699,7 +714,12 @@
           "url": "https://monitor.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "event_type",
+        "event_type",
+        "description"
+      ]
     }
   },
   "tags": [

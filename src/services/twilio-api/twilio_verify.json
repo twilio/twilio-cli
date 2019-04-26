@@ -427,7 +427,11 @@
           "url": "https://verify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/VerificationCheck": {
       "description": "TODO: Resource-level docs",
@@ -520,7 +524,14 @@
           "url": "https://verify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "to",
+        "channel",
+        "status",
+        "valid",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Verifications": {
       "description": "TODO: Resource-level docs",
@@ -637,7 +648,14 @@
           "url": "https://verify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "to",
+        "channel",
+        "status",
+        "valid",
+        "date_created"
+      ]
     },
     "/v2/Services/{ServiceSid}/Verifications/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -748,7 +766,14 @@
           "url": "https://verify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "to",
+        "channel",
+        "status",
+        "valid",
+        "date_created"
+      ]
     },
     "/v2/Services/{Sid}": {
       "delete": {
@@ -928,7 +953,11 @@
           "url": "https://verify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     }
   },
   "tags": [

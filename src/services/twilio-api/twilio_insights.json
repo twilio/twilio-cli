@@ -222,7 +222,13 @@
           "url": "https://insights.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "call_type",
+        "call_state",
+        "processing_state",
+        "direction",
+        "duration"
+      ]
     }
   },
   "tags": [

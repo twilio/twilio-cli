@@ -614,7 +614,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Flows": {
-      "description": "TODO: Resource-level docs",
+      "description": "Studio flows",
       "get": {
         "description": "Retrieve a list of all Flows.",
         "parameters": [],
@@ -681,10 +681,15 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status",
+        "version"
+      ]
     },
     "/v1/Flows/{FlowSid}/Engagements": {
-      "description": "TODO: Resource-level docs",
+      "description": "[DEPRECATED] Excecutions of Studio flows",
       "get": {
         "description": "Retrieve a list of all Engagements for the Flow.",
         "parameters": [
@@ -827,10 +832,15 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "contact_sid",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Context": {
-      "description": "TODO: Resource-level docs",
+      "description": "[DEPRECATED] JSON context for engagements",
       "get": {
         "description": "Retrieve the most recent context for an Engagement.",
         "parameters": [
@@ -884,10 +894,12 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "context"
+      ]
     },
     "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps": {
-      "description": "TODO: Resource-level docs",
+      "description": "Steps within a Studio flow",
       "get": {
         "description": "Retrieve a list of all Steps for an Engagement.",
         "parameters": [
@@ -979,10 +991,15 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "transitioned_from",
+        "transitioned_to"
+      ]
     },
     "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Steps within a Studio flow",
       "get": {
         "description": "Retrieve a Step.",
         "parameters": [
@@ -1048,10 +1065,15 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "transitioned_from",
+        "transitioned_to"
+      ]
     },
     "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{StepSid}/Context": {
-      "description": "TODO: Resource-level docs",
+      "description": "JSON context for individual steps",
       "get": {
         "description": "Retrieve the context for an Engagement Step.",
         "parameters": [
@@ -1117,7 +1139,9 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "context"
+      ]
     },
     "/v1/Flows/{FlowSid}/Engagements/{Sid}": {
       "delete": {
@@ -1168,7 +1192,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "[DEPRECATED] Excecutions of Studio flows",
       "get": {
         "description": "Retrieve an Engagement",
         "parameters": [
@@ -1222,10 +1246,15 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "contact_sid",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Flows/{FlowSid}/Executions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Executions of Studio flows",
       "get": {
         "description": "Retrieve a list of all Executions for the Flow.",
         "parameters": [
@@ -1388,10 +1417,15 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "contact_sid",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Context": {
-      "description": "TODO: Resource-level docs",
+      "description": "JSON context for executions",
       "get": {
         "description": "Retrieve the most recent context for an Execution.",
         "parameters": [
@@ -1445,10 +1479,12 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "context"
+      ]
     },
     "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps": {
-      "description": "TODO: Resource-level docs",
+      "description": "Individual steps within an execution",
       "get": {
         "description": "Retrieve a list of all Steps for an Execution.",
         "parameters": [
@@ -1540,10 +1576,14 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "date_created"
+      ]
     },
     "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Individual steps within an execution",
       "get": {
         "description": "Retrieve a Step.",
         "parameters": [
@@ -1609,10 +1649,14 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "date_created"
+      ]
     },
     "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context": {
-      "description": "TODO: Resource-level docs",
+      "description": "JSON context for an individual step within an execution",
       "get": {
         "description": "Retrieve the context for an Execution Step.",
         "parameters": [
@@ -1678,7 +1722,9 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "context"
+      ]
     },
     "/v1/Flows/{FlowSid}/Executions/{Sid}": {
       "delete": {
@@ -1729,7 +1775,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Executions of Studio flows",
       "get": {
         "description": "Retrieve an Execution",
         "parameters": [
@@ -1783,7 +1829,12 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "contact_sid",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Flows/{Sid}": {
       "delete": {
@@ -1822,7 +1873,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Studio flows",
       "get": {
         "description": "Retrieve a specific Flow.",
         "parameters": [
@@ -1864,7 +1915,12 @@
           "url": "https://studio.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status",
+        "version"
+      ]
     }
   },
   "tags": [

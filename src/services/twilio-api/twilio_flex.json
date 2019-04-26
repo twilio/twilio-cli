@@ -473,7 +473,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Channels": {
-      "description": "TODO: Resource-level docs",
+      "description": "Flex channels",
       "post": {
         "description": null,
         "parameters": [
@@ -599,10 +599,15 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "flex_flow_sid",
+        "user_sid",
+        "task_sid"
+      ]
     },
     "/v1/Channels/{ChatChannelSid}/Roles/{Role}/Users": {
-      "description": "TODO: Resource-level docs",
+      "description": "Users in a Flex channel",
       "post": {
         "description": null,
         "parameters": [
@@ -662,7 +667,9 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity"
+      ]
     },
     "/v1/Channels/{Sid}": {
       "delete": {
@@ -701,16 +708,21 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Flex channels",
       "servers": [
         {
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "flex_flow_sid",
+        "user_sid",
+        "task_sid"
+      ]
     },
     "/v1/Configuration": {
-      "description": "TODO: Resource-level docs",
+      "description": "Configuration for a Flex instance",
       "get": {
         "description": null,
         "parameters": [
@@ -772,10 +784,15 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "status",
+        "ui_language",
+        "ui_version",
+        "service_version"
+      ]
     },
     "/v1/Configuration/Public": {
-      "description": "TODO: Resource-level docs",
+      "description": "Flex public configuration",
       "get": {
         "description": null,
         "parameters": [
@@ -864,10 +881,12 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "runtime_domain"
+      ]
     },
     "/v1/FlexFlows": {
-      "description": "TODO: Resource-level docs",
+      "description": "Flex flow",
       "get": {
         "description": null,
         "parameters": [
@@ -1128,7 +1147,12 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "channel_type",
+        "integration_type"
+      ]
     },
     "/v1/FlexFlows/{Sid}": {
       "delete": {
@@ -1167,7 +1191,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Flex flow",
       "get": {
         "description": null,
         "parameters": [
@@ -1405,10 +1429,15 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "channel_type",
+        "integration_type"
+      ]
     },
     "/v1/WebChannels": {
-      "description": "TODO: Resource-level docs",
+      "description": "Flex web channel",
       "post": {
         "description": null,
         "parameters": [
@@ -1495,10 +1524,13 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "flex_flow_sid"
+      ]
     },
     "/v1/WebChannels/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Flex web channel",
       "post": {
         "description": null,
         "parameters": [
@@ -1561,7 +1593,10 @@
           "url": "https://flex-api.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "flex_flow_sid"
+      ]
     }
   },
   "tags": [

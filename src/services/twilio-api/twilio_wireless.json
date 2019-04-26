@@ -451,6 +451,11 @@
               "type": "string"
             }
           },
+          "imeisv": {
+            "type": {
+              "type": "string"
+            }
+          },
           "last_updated": {
             "type": {
               "format": "date-time",
@@ -579,7 +584,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Commands": {
-      "description": "TODO: Resource-level docs",
+      "description": "Machine-to-machine commands sent to/from devices",
       "get": {
         "description": "Retrieve a list of Commands from your account.",
         "parameters": [
@@ -804,7 +809,14 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "command_mode",
+        "transport",
+        "status",
+        "direction",
+        "date_created"
+      ]
     },
     "/v1/Commands/{Sid}": {
       "delete": {
@@ -843,7 +855,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Machine-to-machine commands sent to/from devices",
       "get": {
         "description": "Fetch a Command instance from your account.",
         "parameters": [
@@ -885,10 +897,17 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "command_mode",
+        "transport",
+        "status",
+        "direction",
+        "date_created"
+      ]
     },
     "/v1/RatePlans": {
-      "description": "TODO: Resource-level docs",
+      "description": "Capabilities and restrictions for SIMs",
       "get": {
         "description": null,
         "parameters": [],
@@ -1081,7 +1100,12 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/RatePlans/{Sid}": {
       "delete": {
@@ -1120,7 +1144,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Capabilities and restrictions for SIMs",
       "get": {
         "description": null,
         "parameters": [
@@ -1216,10 +1240,15 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Sims": {
-      "description": "TODO: Resource-level docs",
+      "description": "Individual wireless SIMs",
       "get": {
         "description": "Retrieve a list of Sims from your account.",
         "parameters": [
@@ -1342,7 +1371,12 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "status"
+      ]
     },
     "/v1/Sims/{Sid}": {
       "delete": {
@@ -1381,7 +1415,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Individual wireless SIMs",
       "get": {
         "description": "Fetch a Sim instance from your account.",
         "parameters": [
@@ -1718,10 +1752,15 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name",
+        "status"
+      ]
     },
     "/v1/Sims/{SimSid}/DataSessions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Data session information for SIMs",
       "get": {
         "description": null,
         "parameters": [
@@ -1821,10 +1860,16 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "packets_uploaded",
+        "packets_downloaded",
+        "start",
+        "end"
+      ]
     },
     "/v1/Sims/{SimSid}/UsageRecords": {
-      "description": "TODO: Resource-level docs",
+      "description": "Usage information for SIMs",
       "get": {
         "description": null,
         "parameters": [
@@ -1938,7 +1983,9 @@
           "url": "https://wireless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "period"
+      ]
     }
   },
   "tags": [

@@ -445,7 +445,13 @@
           "url": "https://fax.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Faxes/{FaxSid}/Media": {
       "description": "TODO: Resource-level docs",
@@ -528,7 +534,10 @@
           "url": "https://fax.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "content_type",
+        "url"
+      ]
     },
     "/v1/Faxes/{FaxSid}/Media/{Sid}": {
       "delete": {
@@ -633,7 +642,10 @@
           "url": "https://fax.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "content_type",
+        "url"
+      ]
     },
     "/v1/Faxes/{Sid}": {
       "delete": {
@@ -762,7 +774,13 @@
           "url": "https://fax.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "status",
+        "date_created"
+      ]
     }
   },
   "tags": [

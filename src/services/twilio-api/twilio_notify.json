@@ -847,7 +847,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v1/Credentials/{Sid}": {
       "delete": {
@@ -1018,7 +1022,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type"
+      ]
     },
     "/v1/Services": {
       "description": "TODO: Resource-level docs",
@@ -1242,7 +1250,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Bindings": {
       "description": "TODO: Resource-level docs",
@@ -1482,7 +1494,13 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "endpoint",
+        "binding_type",
+        "address"
+      ]
     },
     "/v1/Services/{ServiceSid}/Bindings/{Sid}": {
       "delete": {
@@ -1587,7 +1605,13 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "endpoint",
+        "binding_type",
+        "address"
+      ]
     },
     "/v1/Services/{ServiceSid}/Notifications": {
       "description": "TODO: Resource-level docs",
@@ -1801,7 +1825,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "priority",
+        "title"
+      ]
     },
     "/v1/Services/{ServiceSid}/Segments": {
       "description": "TODO: Resource-level docs",
@@ -1884,7 +1912,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users": {
       "description": "TODO: Resource-level docs",
@@ -2045,7 +2077,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users/{Identity}": {
       "delete": {
@@ -2150,7 +2186,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users/{Identity}/Bindings": {
       "description": "TODO: Resource-level docs",
@@ -2393,7 +2433,13 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "endpoint",
+        "binding_type",
+        "address"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users/{Identity}/Bindings/{Sid}": {
       "delete": {
@@ -2522,7 +2568,13 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "endpoint",
+        "binding_type",
+        "address"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users/{Identity}/SegmentMemberships": {
       "description": "TODO: Resource-level docs",
@@ -2588,7 +2640,10 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "segment"
+      ]
     },
     "/v1/Services/{ServiceSid}/Users/{Identity}/SegmentMemberships/{Segment}": {
       "delete": {
@@ -2711,7 +2766,10 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "segment"
+      ]
     },
     "/v1/Services/{Sid}": {
       "delete": {
@@ -2948,7 +3006,11 @@
           "url": "https://notify.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     }
   },
   "tags": [

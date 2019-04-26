@@ -231,7 +231,10 @@
           "url": "https://voice.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "update_request",
+        "update_count"
+      ]
     },
     "/v1/DialingPermissions/Countries": {
       "description": "TODO: Resource-level docs",
@@ -356,7 +359,11 @@
           "url": "https://voice.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "iso_code",
+        "name",
+        "continent"
+      ]
     },
     "/v1/DialingPermissions/Countries/{IsoCode}": {
       "description": "TODO: Resource-level docs",
@@ -398,7 +405,11 @@
           "url": "https://voice.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "iso_code",
+        "name",
+        "continent"
+      ]
     },
     "/v1/DialingPermissions/Countries/{IsoCode}/HighRiskSpecialPrefixes": {
       "description": "TODO: Resource-level docs",
@@ -478,7 +489,9 @@
           "url": "https://voice.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "prefix"
+      ]
     },
     "/v1/Settings": {
       "description": "TODO: Resource-level docs",
@@ -543,7 +556,9 @@
           "url": "https://voice.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "dialing_permissions_inheritance"
+      ]
     }
   },
   "tags": [

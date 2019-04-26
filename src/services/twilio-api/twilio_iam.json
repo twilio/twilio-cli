@@ -201,7 +201,10 @@
           "url": "https://iam.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "expiration"
+      ]
     },
     "/v1/Accounts/{AccountSid}/Tokens/refresh": {
       "description": "TODO: Resource-level docs",
@@ -246,7 +249,10 @@
           "url": "https://iam.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "expiration"
+      ]
     },
     "/v1/Accounts/{AccountSid}/Tokens/validate": {
       "description": "TODO: Resource-level docs",
@@ -291,7 +297,13 @@
           "url": "https://iam.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "identity",
+        "realm_user_id",
+        "valid",
+        "code",
+        "message"
+      ]
     },
     "/v1/Accounts/{AccountSid}/authenticate": {
       "description": "TODO: Resource-level docs",
@@ -333,7 +345,9 @@
           "url": "https://iam.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "url"
+      ]
     },
     "/v1/Accounts/{AccountSid}/saml2": {
       "description": "TODO: Resource-level docs",
@@ -396,7 +410,9 @@
           "url": "https://iam.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "redirect_to"
+      ]
     }
   },
   "tags": [

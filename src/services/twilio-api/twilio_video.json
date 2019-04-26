@@ -1330,7 +1330,11 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/CompositionHooks/{Sid}": {
       "delete": {
@@ -1562,7 +1566,11 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/CompositionSettings/Default": {
       "description": "TODO: Resource-level docs",
@@ -1679,7 +1687,11 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "friendly_name",
+        "aws_storage_enabled",
+        "encryption_enabled"
+      ]
     },
     "/v1/Compositions": {
       "description": "TODO: Resource-level docs",
@@ -1934,10 +1946,15 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "resolution",
+        "format"
+      ]
     },
     "/v1/Compositions/{CompositionSid}/Media": {
-      "description": "TODO: Resource-level docs",
+      "description": "Composition media files",
       "get": {
         "description": "Retrieves the media file associated to a given Composition Instance resource identified by a `CompositionSid`.",
         "parameters": [
@@ -1997,7 +2014,9 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "redirect_to"
+      ]
     },
     "/v1/Compositions/{Sid}": {
       "delete": {
@@ -2078,7 +2097,12 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "resolution",
+        "format"
+      ]
     },
     "/v1/RecordingSettings/Default": {
       "description": "TODO: Resource-level docs",
@@ -2195,10 +2219,14 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "friendly_name",
+        "aws_storage_enabled",
+        "encryption_enabled"
+      ]
     },
     "/v1/Recordings": {
-      "description": "TODO: Resource-level docs",
+      "description": "Single-track, single-media recordings",
       "get": {
         "description": "List of all Track Recordings.",
         "parameters": [
@@ -2342,10 +2370,17 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "date_created",
+        "status",
+        "type",
+        "duration",
+        "codec"
+      ]
     },
     "/v1/Recordings/{RecordingSid}/Media": {
-      "description": "TODO: Resource-level docs",
+      "description": "Recording media files",
       "get": {
         "description": "Retrieves the media file associated to a given Recording Instance resource identified by a `RecordingSid`.",
         "parameters": [
@@ -2405,7 +2440,9 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "redirect_to"
+      ]
     },
     "/v1/Recordings/{Sid}": {
       "delete": {
@@ -2444,7 +2481,7 @@
           "GA"
         ]
       },
-      "description": "TODO: Resource-level docs",
+      "description": "Single-track, single-media recordings",
       "get": {
         "description": "Returns a single Recording Instance resource identified by a RecordingSid.",
         "parameters": [
@@ -2486,10 +2523,17 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "date_created",
+        "status",
+        "type",
+        "duration",
+        "codec"
+      ]
     },
     "/v1/Rooms": {
-      "description": "TODO: Resource-level docs",
+      "description": "Video rooms with one or more participants",
       "get": {
         "description": null,
         "parameters": [
@@ -2732,10 +2776,14 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "status"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Participants": {
-      "description": "TODO: Resource-level docs",
+      "description": "Participants in video rooms",
       "get": {
         "description": null,
         "parameters": [
@@ -2857,10 +2905,14 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "status"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks": {
-      "description": "TODO: Resource-level docs",
+      "description": "Audio or video tracks being published by a participant",
       "get": {
         "description": "Returns a list of tracks associated with a given Participant. Only `currently` Published Tracks are in the list resource.",
         "parameters": [
@@ -2952,10 +3004,15 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "enabled",
+        "kind"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Audio or video tracks being published by a participant",
       "get": {
         "description": "Returns a single Track resource represented by `TrackNameOrSid`.",
         "parameters": [
@@ -3021,10 +3078,15 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "enabled",
+        "kind"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Participants/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Participants in video rooms",
       "get": {
         "description": null,
         "parameters": [
@@ -3139,7 +3201,11 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "status"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Participants/{SubscriberSid}/SubscribedTracks": {
       "description": "TODO: Resource-level docs",
@@ -3391,7 +3457,12 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "enabled",
+        "kind"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Recordings": {
       "description": "TODO: Resource-level docs",
@@ -3521,7 +3592,14 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "date_created",
+        "status",
+        "type",
+        "duration",
+        "codec"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Recordings/{Sid}": {
       "delete": {
@@ -3626,7 +3704,14 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "date_created",
+        "status",
+        "type",
+        "duration",
+        "codec"
+      ]
     },
     "/v1/Rooms/{RoomSid}/Recordings/{Sid}/Media": {
       "description": "TODO: Resource-level docs",
@@ -3701,10 +3786,12 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "redirect_to"
+      ]
     },
     "/v1/Rooms/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Video rooms with one or more participants",
       "get": {
         "description": null,
         "parameters": [
@@ -3796,7 +3883,11 @@
           "url": "https://video.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "status"
+      ]
     }
   },
   "tags": [

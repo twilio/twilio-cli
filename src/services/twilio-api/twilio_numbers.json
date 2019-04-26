@@ -735,7 +735,12 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "address_sid",
+        "email"
+      ]
     },
     "/v1/HostedNumber/AuthorizationDocuments/{Sid}": {
       "delete": {
@@ -913,7 +918,12 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "address_sid",
+        "email"
+      ]
     },
     "/v1/HostedNumber/AuthorizationDocuments/{SigningDocumentSid}/DependentOrders": {
       "description": "TODO: Resource-level docs",
@@ -1047,7 +1057,12 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status",
+        "phone_number"
+      ]
     },
     "/v1/HostedNumber/Orders": {
       "description": "TODO: Resource-level docs",
@@ -1386,7 +1401,12 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status",
+        "phone_number"
+      ]
     },
     "/v1/HostedNumber/Orders/{Sid}": {
       "delete": {
@@ -1576,7 +1596,12 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "status",
+        "phone_number"
+      ]
     },
     "/v1/RegulatoryCompliance/Identities": {
       "description": "TODO: Resource-level docs",
@@ -1743,7 +1768,12 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type",
+        "status"
+      ]
     },
     "/v1/RegulatoryCompliance/Identities/{IdentitySid}/Documents": {
       "description": "TODO: Resource-level docs",
@@ -1826,7 +1856,10 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name"
+      ]
     },
     "/v1/RegulatoryCompliance/Identities/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -1871,7 +1904,12 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "type",
+        "status"
+      ]
     },
     "/v1/RegulatoryCompliance/ProofOfAddresses": {
       "description": "TODO: Resource-level docs",
@@ -2014,7 +2052,11 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/RegulatoryCompliance/ProofOfAddresses/{Sid}": {
       "description": "TODO: Resource-level docs",
@@ -2059,7 +2101,11 @@
           "url": "https://numbers.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "date_created"
+      ]
     }
   },
   "tags": [

@@ -263,11 +263,8 @@
           "status": {
             "type": {
               "enum": [
-                "queued",
                 "building",
-                "deploying",
-                "deployed",
-                "verified",
+                "completed",
                 "failed"
               ],
               "type": "string"
@@ -649,7 +646,7 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Services": {
-      "description": "TODO: Resource-level docs",
+      "description": "Containers for serverless apps",
       "get": {
         "description": null,
         "parameters": [],
@@ -767,10 +764,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     },
     "/v1/Services/{ServiceSid}/Assets": {
-      "description": "TODO: Resource-level docs",
+      "description": "Static assets",
       "get": {
         "description": null,
         "parameters": [
@@ -895,10 +896,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Static asset versions",
       "get": {
         "description": null,
         "parameters": [
@@ -1061,10 +1066,15 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "path",
+        "visibility",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Static asset versions",
       "get": {
         "description": null,
         "parameters": [
@@ -1130,10 +1140,15 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "path",
+        "visibility",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Assets/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Static assets",
       "get": {
         "description": null,
         "parameters": [
@@ -1244,10 +1259,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Builds": {
-      "description": "TODO: Resource-level docs",
+      "description": "Builds of functions and assets",
       "get": {
         "description": null,
         "parameters": [
@@ -1402,10 +1421,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Builds/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Builds of functions and assets",
       "get": {
         "description": null,
         "parameters": [
@@ -1459,10 +1482,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "status",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Environments": {
-      "description": "TODO: Resource-level docs",
+      "description": "Isolated environments for deploying functions and assets",
       "get": {
         "description": null,
         "parameters": [
@@ -1596,10 +1623,15 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "domain_name",
+        "build_sid"
+      ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments": {
-      "description": "TODO: Resource-level docs",
+      "description": "Deployments of builds to environments",
       "get": {
         "description": null,
         "parameters": [
@@ -1751,10 +1783,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "build_sid",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Deployments of builds to environments",
       "get": {
         "description": null,
         "parameters": [
@@ -1820,10 +1856,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "build_sid",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables": {
-      "description": "TODO: Resource-level docs",
+      "description": "Environment variable values",
       "get": {
         "description": null,
         "parameters": [
@@ -1981,10 +2021,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "key",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Environment variable values",
       "get": {
         "description": null,
         "parameters": [
@@ -2128,10 +2172,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "key",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Environments/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Isolated environments for deploying functions and assets",
       "get": {
         "description": null,
         "parameters": [
@@ -2185,10 +2233,15 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "domain_name",
+        "build_sid"
+      ]
     },
     "/v1/Services/{ServiceSid}/Functions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Twilio functions",
       "get": {
         "description": null,
         "parameters": [
@@ -2313,10 +2366,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions": {
-      "description": "TODO: Resource-level docs",
+      "description": "Twilio function versions",
       "get": {
         "description": null,
         "parameters": [
@@ -2479,10 +2536,15 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "path",
+        "visibility",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Twilio function versions",
       "get": {
         "description": null,
         "parameters": [
@@ -2548,10 +2610,15 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "path",
+        "visibility",
+        "date_created"
+      ]
     },
     "/v1/Services/{ServiceSid}/Functions/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Twilio functions",
       "get": {
         "description": null,
         "parameters": [
@@ -2662,10 +2729,14 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "friendly_name",
+        "date_created"
+      ]
     },
     "/v1/Services/{Sid}": {
-      "description": "TODO: Resource-level docs",
+      "description": "Containers for serverless apps",
       "get": {
         "description": null,
         "parameters": [
@@ -2761,7 +2832,11 @@
           "url": "https://serverless.twilio.com"
         }
       ],
-      "x-default-output-properties": []
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "friendly_name"
+      ]
     }
   },
   "tags": [
