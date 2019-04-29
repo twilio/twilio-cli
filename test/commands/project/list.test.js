@@ -27,6 +27,24 @@ describe('commands', () => {
         .it('runs project:list with 1 project', ctx => {
           expect(ctx.stdout).to.contain('default');
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
+          expect(ctx.stdout).to.not.contain('Region');
+          expect(ctx.stderr).to.equal('');
+        });
+
+      test
+        .do(ctx => {
+          ctx.userConfig = new ConfigData();
+          ctx.userConfig.addProject('default', constants.FAKE_ACCOUNT_SID, 'dev');
+        })
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCommand(ProjectList, [])
+        .it('runs project:list with 1 regional project', ctx => {
+          expect(ctx.stdout).to.contain('default');
+          expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
+          expect(ctx.stdout).to.contain('dev');
+          expect(ctx.stdout).to.contain('Region');
           expect(ctx.stderr).to.equal('');
         });
     });

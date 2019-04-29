@@ -49,6 +49,7 @@ class ProjectAdd extends BaseCommand {
     this.authToken = this.flags['auth-token'];
     this.projectId = this.flags.project;
     this.force = this.flags.force;
+    this.region = this.flags.region;
   }
 
   validateAccountSid() {
@@ -108,7 +109,8 @@ class ProjectAdd extends BaseCommand {
 
   getTwilioClient() {
     return twilio(this.accountSid, this.authToken, {
-      httpClient: new CLIRequestClient(this.id, this.logger)
+      httpClient: new CLIRequestClient(this.id, this.logger),
+      region: this.region
     });
   }
 
@@ -140,7 +142,7 @@ class ProjectAdd extends BaseCommand {
       return;
     }
 
-    this.userConfig.addProject(this.projectId, this.accountSid);
+    this.userConfig.addProject(this.projectId, this.accountSid, this.region);
     await this.secureStorage.saveCredentials(this.projectId, apiKey.sid, apiKey.secret);
     const configSavedMessage = await this.configFile.save(this.userConfig);
 
@@ -164,6 +166,9 @@ ProjectAdd.flags = Object.assign(
     force: flags.boolean({
       char: 'f',
       description: 'Force overwriting existing project credentials'
+    }),
+    region: flags.string({
+      hidden: true
     })
   },
   TwilioClientCommand.flags // Yes! We _do_ want the same flags as TwilioClientCommand
