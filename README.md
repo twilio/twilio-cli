@@ -176,6 +176,10 @@ Please file a GitHub issue in this repository for any feedback you may have.
 
 ## Release Notes
 
+### v1.0.0
+
+Moving all related CLI libs to v1.0.0 per npm semver recommendation.
+
 ### v0.1.2
 
 * Moved config from `~/.config/@twilio/cli` (Unix) and `%LOCALAPPDATA%\@twilio\cli` (Windows) to `~/.twilio` and `%USERPROFILE%\.twilio`, respectively.
