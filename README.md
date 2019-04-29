@@ -14,31 +14,25 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 
 ## Setup
 
-1. Clone [this repo](https://github.com/twilio/twilio-cli): `git clone git@code.hq.twilio.com:twilio/cli.git`
-1. Change to the project directory: `cd cli`
-1. Run: `npm install`
-1. Install the CLI globally using `npm install -g .`
+1. Install the CLI globally: `npm install -g twilio-cli`
 1. Now you can run the CLI from anywhere using the `twilio` command.
 
 ### Updating
 
-1. Change to the project directory: `cd cli`
-1. Download the latest updates: `git pull`
-1. Remove locally cached modules: `rm -rf node_modules`
-1. Run: `npm install`
-1. Install the CLI globally using `npm install -g .`
+1. Check if there's a new version: `npm outdated -g twilio-cli`
+1. Update the CLI globally: `npm update -g twilio-cli`
 
 ## Plugins
 
 Plugins for the CLI can be installed using the `twilio plugins` command. Until we are publishing the plugins to npm, they will need to be installed by first cloning the plugin repository locally.
 
-1. Clone the plugin repository. [Example debugger plugin](https://code.hq.twilio.com/twilio/plugin-debugger/).
+1. Clone the plugin repository. [Example debugger plugin](https://github.com/twilio/plugin-debugger/).
 
 1. "Install" the plugin referencing your plugin's local folder like so:
 
     ```
-    twilio plugins:link ../plugin-debugger
-    cd ../plugin-debugger
+    twilio plugins:link plugin-debugger
+    cd plugin-debugger
     npm install
     ```
 
@@ -178,13 +172,13 @@ And follow the instructions.
 
 ## Feedback
 
-Please file a GitHub issue in this repository for any feedback you may have. For questions, see the #help-dev-interfaces Slack channel.
+Please file a GitHub issue in this repository for any feedback you may have.
 
 ## Release Notes
 
-### v0.1.5
+### v0.1.2
 
-Move config from `~/.config/@twilio/cli` (Unix) and `%LOCALAPPDATA%\@twilio\cli` (Windows) to `~/.twilio` and `%USERPROFILE%\.twilio`, respectively.
+* Moved config from `~/.config/@twilio/cli` (Unix) and `%LOCALAPPDATA%\@twilio\cli` (Windows) to `~/.twilio` and `%USERPROFILE%\.twilio`, respectively.
 
 To copy over your existing configuration, run the following commands (Unix):
 ```
@@ -192,17 +186,8 @@ mkdir ~/.twilio
 cp ~/.config/@twilio/cli/config.json ~/.twilio/config.json
 ```
 
-### v0.1.4
-
-Added [autocomplete support](#autocomplete).
-
-### v0.1.3
-
-Added support for [credentials in environment variables](#want-to-use-environment-variables).
-
-### v0.1.2
-
-Initial pilot release.
+* Added [autocomplete support](#autocomplete).
+* Added support for [credentials in environment variables](#want-to-use-environment-variables).
 
 ## License
 

@@ -1,7 +1,6 @@
-
 # twilio-cli Cookbook
 
-At this stage in the `twilio-cli`, we have exposed commands that mirror the Twilio API. As a result, you may have to execute multiple commands to satisfy a use case. We created this cookbook to share recipies of how to accomplish certain use cases with the CLI.
+At this stage in the `twilio-cli`, we have exposed commands that mirror the Twilio API. As a result, you may have to execute multiple commands to satisfy a use case. We created this cookbook to share recipes of how to accomplish certain use cases with the CLI.
 
 ## Recipe 1: Purchase a phone number
 

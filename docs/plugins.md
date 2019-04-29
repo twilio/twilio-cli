@@ -8,11 +8,10 @@ You will specifically want to review the docs:
 - [Introduction](https://oclif.io/docs/introduction)
 - [Topics](https://oclif.io/docs/topics)
 - [Plugins](https://oclif.io/docs/plugins)
-- [twilio-cli Design Doc](https://docs.google.com/document/d/1wGgJO_CmNIdbRYxhob3IF82TbNxl5MGKE_7mNGZncEs/edit)
 
 ## 2. Clone the starter repo
 
-Start by cloning [this repo of an example plugin](https://code.hq.twilio.com/twilio/plugin-debugger).
+Start by cloning [this repo of an example plugin](https://github.com/twilio/plugin-debugger).
 
 ## 3. Add your [topics](https://oclif.io/docs/topics) and [commands](https://oclif.io/docs/commands)
 
@@ -20,7 +19,7 @@ Commands go in the `src/commands` folder and should inherit from one of our comm
 
 ## 4. Test your plugin with the CLI
 
-Clone the main CLI repo (this repo) and [set it up](https://code.hq.twilio.com/twilio/cli).
+Clone the main CLI repo (this repo) and [set it up](https://github.com/twilio/twilio-cli).
 
 "Install" the plugin referencing your plugin's local development folder like so:
 
@@ -28,9 +27,9 @@ Clone the main CLI repo (this repo) and [set it up](https://code.hq.twilio.com/t
 ./bin/run plugins:link ../plugin-<my-spectacular-plugin>
 ```
 
-Run this command from the cli folder. This assumes the cli and your plugin folders are siblings of each other (perhaps in a `~/Projects` folder).
+Run this command from the CLI folder. This assumes the CLI and your plugin folders are siblings of each other (perhaps in a `~/Projects` folder).
 
-Now, you can run your plugin command from the cli:
+Now, you can run your plugin command from the CLI:
 
 ```
 ./bin/run my-new-topic:my-new-command --help

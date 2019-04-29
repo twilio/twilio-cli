@@ -1,7 +1,7 @@
 {
-  "name": "@twilio/cli",
+  "name": "twilio-cli",
   "description": "unleash the power of Twilio from your command prompt",
-  "version": "0.1.5",
+  "version": "0.1.2",
   "author": "Twilio @twilio",
   "bin": {
     "twilio": "./bin/run"
@@ -13,15 +13,15 @@
     "@oclif/plugin-autocomplete": "^0.1.0",
     "@oclif/plugin-help": "^2.1.6",
     "@oclif/plugin-plugins": "^1.7.7",
-    "@twilio/cli-core": "git+ssh://git@code.hq.twilio.com:twilio/cli-core.git",
+    "@twilio/cli-core": "^0.0.1",
     "chalk": "^2.4.1",
     "ngrok": "^3.0.1",
-    "twilio": "^3.19.1"
+    "twilio": "^3.30.2"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.21.0",
     "@oclif/test": "^1.1.0",
-    "@twilio/cli-test": "git+ssh://git@code.hq.twilio.com:twilio/cli-test.git",
+    "@twilio/cli-test": "^0.0.1",
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-config-oclif": "^1.5.1",
@@ -67,7 +67,10 @@
       "init": "./src/hooks/init/twilio-api"
     }
   },
-  "repository": "twilio/twilio-cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twilio/twilio-cli.git"
+  },
   "scripts": {
     "postpack": "rimraf oclif.manifest.json npm-shrinkwrap.json",
     "posttest": "eslint --ignore-path .gitignore . && npm audit",
