@@ -5,9 +5,14 @@ class ProjectList extends BaseCommand {
   async run() {
     await super.run();
     if (this.userConfig.projects.length > 0) {
+      // If none of the projects have a region, delete it from all of them so it doesn't show up in the output.
+      if (!this.userConfig.projects.some(p => p.region)) {
+        this.userConfig.projects.forEach(p => delete p.region);
+      }
+
       this.output(this.userConfig.projects);
     } else {
-      this.logger.warn('No projects have been configured. Run ' + chalk.whiteBright('twilio login') + ' to add one!');
+      this.logger.warn('No projects have been configured. Run ' + chalk.whiteBright('twilio project:add') + ' to add one!');
     }
   }
 }

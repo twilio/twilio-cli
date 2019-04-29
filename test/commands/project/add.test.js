@@ -8,9 +8,9 @@ const helpMessages = require('../../../src/services/messaging/help-messages');
 describe('commands', () => {
   describe('project', () => {
     describe('add', () => {
-      const addTest = test
+      const addTest = (commandArgs = []) => test
         .twilioCliEnv(Config)
-        .twilioCreateCommand(ProjectAdd, [])
+        .twilioCreateCommand(ProjectAdd, commandArgs)
         .do(ctx => {
           const fakePrompt = sinon.stub();
           fakePrompt
@@ -27,7 +27,7 @@ describe('commands', () => {
           ctx.testCmd.exit = sinon.fake();
         });
 
-      addTest
+      addTest()
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
             sid: constants.FAKE_ACCOUNT_SID
@@ -53,7 +53,7 @@ describe('commands', () => {
           );
         });
 
-      addTest
+      addTest()
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(500, {
             error: 'oops'
@@ -67,7 +67,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Could not validate the provided credentials');
         });
 
-      addTest
+      addTest()
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
             sid: constants.FAKE_ACCOUNT_SID
@@ -82,6 +82,24 @@ describe('commands', () => {
           await ctx.testCmd.run();
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('Could not create an API Key');
+        });
+
+      addTest(['--region', 'dev'])
+        .nock('https://api.dev.twilio.com', api => {
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
+            sid: constants.FAKE_ACCOUNT_SID
+          });
+          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(200, {
+            sid: constants.FAKE_API_KEY,
+            secret: constants.FAKE_API_SECRET
+          });
+        })
+        .stdout()
+        .stderr()
+        .it('supports other regions', async ctx => {
+          await ctx.testCmd.run();
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('configuration saved');
         });
     });
   });
