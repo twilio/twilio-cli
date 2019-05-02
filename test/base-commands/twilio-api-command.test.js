@@ -48,8 +48,8 @@ describe('base-commands', () => {
         );
         expect(NewCommandClass.flags.from.required).to.be.true;
         expect(NewCommandClass.flags.method.required).to.be.false;
-        expect(NewCommandClass.flags.method.optionType).to.equal('enum');
-        expect(NewCommandClass.flags.method.options).to.eql(['head', 'get', 'post', 'patch', 'put', 'delete']);
+        expect(NewCommandClass.flags.method.type).to.equal('option');
+        expect(NewCommandClass.flags.method.helpValue).to.eql('(head|get|post|patch|put|delete)');
         expect(NewCommandClass.flags.record.type).to.equal('boolean');
 
         expect(Object.keys(NewCommandClass.flags).length).to.equal(
