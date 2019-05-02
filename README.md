@@ -18,6 +18,10 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 1. Install the CLI globally: `npm install -g twilio-cli`
 1. Now you can run the CLI from anywhere using the `twilio` command.
 
+### Troubleshooting
+
+- [Resolving EACCES permissions errors when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+
 ### Updating
 
 1. Check if there's a new version: `npm outdated -g twilio-cli`
