@@ -167,14 +167,16 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
       }
     };
 
-    let flagType;
+    const flagType = typeMap[param.schema.type];
+
     if (doesObjectHaveProperty(param.schema, 'enum')) {
-      flagType = flags.enum;
-      flagConfig.options = param.schema.enum
+      // We want the best of all worlds. We want the help to show just lower-case options, but accept all options. Since
+      // oclif doesn't support this, we'll create a string that matches the enum flag text and let the schema validator
+      // take care of the actual validation.
+      const options = param.schema.enum
         .map(value => value.toLowerCase()) // standardize the enum values
         .filter((value, index, self) => self.indexOf(value) === index); // remove duplicates
-    } else {
-      flagType = typeMap[param.schema.type];
+      flagConfig.helpValue = `(${options.join('|')})`; // format it like the help plugin
     }
 
     if (flagType) {
