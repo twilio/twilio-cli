@@ -11,7 +11,6 @@ Closes #2
 
 ### Checklist
 - [ ] I have made a material change to the repo (functionality, testing, spelling, grammar)
-- [ ] I have read the [Contribution Guide] and my PR follows them.
 - [ ] I updated my branch with the master branch.
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] I have added necessary documentation about the functionality in the appropriate .md file
