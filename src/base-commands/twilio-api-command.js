@@ -8,7 +8,7 @@ const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { validateSchema } = require('../services/api-schema/schema-validator');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
 const ResourcePathParser = require('../services/resource-path-parser');
-const { getActionDescription } = require('../services/twilio-api');
+const { getActionDescription, isApi2010 } = require('../services/twilio-api');
 
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
@@ -152,13 +152,12 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
 
   // Parameters
   const cmdFlags = {};
-  const isApi2010 = domainName === 'api' && versionName === 'v2010';
   action.parameters.forEach(param => {
     const flagName = kebabCase(param.name);
     const flagConfig = {
       description: sanitizeDescription(param.description),
       // AccountSid on api.v2010 not required, we can get from the current project
-      required: flagName === ACCOUNT_SID_FLAG && isApi2010 ? false : param.required,
+      required: flagName === ACCOUNT_SID_FLAG && isApi2010(domainName, versionName) ? false : param.required,
       multiple: param.schema.type === 'array',
       apiDetails: {
         parameter: param,

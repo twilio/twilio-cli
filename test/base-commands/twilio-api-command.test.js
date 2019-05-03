@@ -30,7 +30,7 @@ describe('base-commands', () => {
       test.it('setUpNewCommandClass', async () => {
         const NewCommandClass = getCommandClass();
 
-        expect(NewCommandClass.id).to.equal('api:v2010:accounts:calls:create');
+        expect(NewCommandClass.id).to.equal('api:calls:create');
         expect(NewCommandClass.description).to.contain('\'Twilio Client\' connections');
         expect(NewCommandClass.load()).to.equal(NewCommandClass);
 

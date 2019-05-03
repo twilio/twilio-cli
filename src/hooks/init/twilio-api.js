@@ -1,6 +1,6 @@
 const { Plugin } = require('@oclif/config');
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
-const { TwilioApiBrowser, getTopicName, TOPIC_SEPARATOR } = require('../../services/twilio-api');
+const { TwilioApiBrowser, isApi2010, getTopicName, TOPIC_SEPARATOR } = require('../../services/twilio-api');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
@@ -25,6 +25,11 @@ class TwilioRestApiPlugin extends Plugin {
       actionDefinition.path = resourcePath;
       this.scanResource(actionDefinition);
     }, this);
+
+    // No need to add a topic for the legacy API version since all sub-topics will be at the domain-level.
+    if (isApi2010(actionDefinition.domainName, actionDefinition.versionName)) {
+      return;
+    }
 
     const shortVersion = actionDefinition.versionName.replace(/v/g, '');
     this.versionTopics.push({
