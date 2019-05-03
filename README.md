@@ -27,28 +27,6 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 1. Check if there's a new version: `npm outdated -g twilio-cli`
 1. Update the CLI globally: `npm update -g twilio-cli`
 
-## Plugins
-
-Plugins for the CLI can be installed using the `twilio plugins` command. Until we are publishing the plugins to npm, they will need to be installed by first cloning the plugin repository locally.
-
-1. Clone the plugin repository. [Example debugger plugin](https://github.com/twilio/plugin-debugger/).
-
-1. "Install" the plugin referencing your plugin's local folder like so:
-
-    ```
-    twilio plugins:link plugin-debugger
-    cd plugin-debugger
-    npm install
-    ```
-
-1. Now, you can run your plugin command from the cli:
-
-    ```
-    twilio debugger:logs:list --help
-    ```
-
-Want to write your own plugin? [See this document](docs/plugins.md).
-
 ## Basic usage
 
 ### Step 1 - Login (aka add a project)
@@ -65,14 +43,14 @@ twilio project:add -p default
 
 This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "twilio-cli for [username] on [hostname]" in the console) and stored in your system's keychain.
 
-#### Want to use environment variables?
+#### Want to use environment variables instead of creating a project?
 
 You can also use credentials stored in environment variables:
 
 ##### OPTION 1 (recommended)
 - `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
 - `TWILIO_API_KEY` = an API Key created in [your console](https://twil.io/get-api-key)
-- `TWILIO_API_SECRET` = the secret for the API Key
+- `TWILIO_API_SECRET` = the secret for the API Key (you would have received this when you created an API key)
 
 ##### OPTION 2
 - `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
@@ -112,7 +90,7 @@ You can set a webhook on a phone number like so:
 twilio incoming-phone-number:update [PN sid or E.164] --sms-url http://url
 ```
 
-That sets the primary SMS url. There are also options for setting the voice url, fallback url's, and methods for each. Run `twilio incoming-phone-number:update --help` for a full list of options.
+That sets the primary SMS url. There are also options for setting the voice url, fallback urls, and methods for each. Run `twilio incoming-phone-number:update --help` for a full list of options.
 
 ### Ngrok integration
 
@@ -158,6 +136,38 @@ To store credentials for multiple projects, you can use a shorthand "project id"
 When you run `twilio project:add`, it stores your credentials under a project called `default`. This is the project that will be used for all subsequent commands.
 
 To add a second project after the default project, you can run `twilio project:add -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`).
+
+## Plugins
+
+twilio-cli can be extended via plugins.  
+
+At this time, only two plugins exist:
+
+* [twilio-run plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [the twilio-run plugin](https://github.com/twilio-labs/plugin-serverless).  
+
+* [twilio debugger plugin](https://github.com/twilio/plugin-debugger): The debugger plugin will display Twilio Degugger logs directly in your terminal.
+
+### Install a plugin
+
+Plugins for the CLI can be installed using the `twilio plugins` command.
+
+1. Install the plugin by it's package name:
+
+    ```
+    twilio plugins:install @twilio/plugin-debugger
+    ```
+
+1. Now, you can run your plugin command from the cli:
+
+    ```
+    twilio debugger:logs:list --help
+    ```
+
+1. Note: if you're using autocomplete [see below](#autocomplete), you'll need to run `twilio autocomplete` after installing a plugin and open a new terminal window.  The cli needs to re-build it's cache.
+
+### Create a plugin
+
+Want to write your own plugin? [See this document](docs/plugins.md).
 
 ### Autocomplete
 
