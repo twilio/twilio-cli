@@ -451,11 +451,6 @@
               "type": "string"
             }
           },
-          "imeisv": {
-            "type": {
-              "type": "string"
-            }
-          },
           "last_updated": {
             "type": {
               "format": "date-time",

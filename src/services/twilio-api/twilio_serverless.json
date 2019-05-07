@@ -646,9 +646,9 @@
   "openapi": "3.0.1",
   "paths": {
     "/v1/Services": {
-      "description": "Containers for serverless apps",
+      "description": "Container for Serverless application Environments.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Services.",
         "parameters": [],
         "responses": {
           "200": {
@@ -709,10 +709,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Service.",
         "parameters": [
           {
-            "description": null,
+            "description": "A unique, addressable name of this Service.",
             "in": "query",
             "name": "UniqueName",
             "required": true,
@@ -721,7 +721,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A human-readable description of this Service.",
             "in": "query",
             "name": "FriendlyName",
             "required": true,
@@ -730,7 +730,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Whether to inject Account credentials into a Function invocation context.",
             "in": "query",
             "name": "IncludeCredentials",
             "required": false,
@@ -771,12 +771,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Assets": {
-      "description": "Static assets",
+      "description": "A wrapper that represents a static file.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Assets.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -847,10 +847,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Asset.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -862,7 +862,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A human-readable description of this Asset.",
             "in": "query",
             "name": "FriendlyName",
             "required": true,
@@ -903,12 +903,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions": {
-      "description": "Static asset versions",
+      "description": "The content of an Asset.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Asset Versions.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -920,7 +920,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Asset Sid.",
             "in": "path",
             "name": "AssetSid",
             "required": true,
@@ -991,10 +991,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Asset Version.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1006,7 +1006,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Asset Sid.",
             "in": "path",
             "name": "AssetSid",
             "required": true,
@@ -1018,7 +1018,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The URL-friendly string by which this Asset Version can be referenced.",
             "in": "query",
             "name": "Path",
             "required": true,
@@ -1027,7 +1027,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The access control which determines how the Asset Version can be accessed.",
             "in": "query",
             "name": "Visibility",
             "required": true,
@@ -1074,12 +1074,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions/{Sid}": {
-      "description": "Static asset versions",
+      "description": "The content of an Asset.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Asset Version.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1091,7 +1091,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Asset Sid.",
             "in": "path",
             "name": "AssetSid",
             "required": true,
@@ -1103,7 +1103,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Asset Version Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -1148,12 +1148,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Assets/{Sid}": {
-      "description": "Static assets",
+      "description": "A wrapper that represents a static file.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Asset.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1165,7 +1165,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Asset Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -1198,10 +1198,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Update a specific Asset.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1213,7 +1213,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Asset Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -1225,7 +1225,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A human-readable description of this Asset.",
             "in": "query",
             "name": "FriendlyName",
             "required": true,
@@ -1266,12 +1266,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Builds": {
-      "description": "Builds of functions and assets",
+      "description": "A collection of Function Versions, Asset Versions, and Dependencies that form a deployable unit.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Builds.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1342,10 +1342,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Build. At least one Function Version or Asset Version is required.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1357,7 +1357,7 @@
             }
           },
           {
-            "description": null,
+            "description": "List of Asset Version Sids.",
             "in": "query",
             "name": "AssetVersions",
             "required": false,
@@ -1372,7 +1372,7 @@
             }
           },
           {
-            "description": null,
+            "description": "List of Function Version Sids.",
             "in": "query",
             "name": "FunctionVersions",
             "required": false,
@@ -1387,7 +1387,7 @@
             }
           },
           {
-            "description": null,
+            "description": "List of Dependencies.",
             "in": "query",
             "name": "Dependencies",
             "required": false,
@@ -1428,12 +1428,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Builds/{Sid}": {
-      "description": "Builds of functions and assets",
+      "description": "A collection of Function Versions, Asset Versions, and Dependencies that form a deployable unit.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Build.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1445,7 +1445,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Build Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -1489,12 +1489,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Environments": {
-      "description": "Isolated environments for deploying functions and assets",
+      "description": "Represents a deployed Build of a given set of Functions and/or Assets at a specific URL.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Environments.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1565,10 +1565,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Environment.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1580,7 +1580,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A unique, addressable name of this Environment.",
             "in": "query",
             "name": "UniqueName",
             "required": true,
@@ -1589,7 +1589,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A URL-friendly name that represents this Environment.",
             "in": "query",
             "name": "DomainSuffix",
             "required": false,
@@ -1631,12 +1631,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments": {
-      "description": "Deployments of builds to environments",
+      "description": "An association of a Build with an Environment.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Deployments.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1648,7 +1648,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "EnvironmentSid",
             "required": true,
@@ -1719,10 +1719,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Deployment.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1734,7 +1734,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "EnvironmentSid",
             "required": true,
@@ -1746,7 +1746,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Build Sid.",
             "in": "query",
             "name": "BuildSid",
             "required": true,
@@ -1790,12 +1790,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments/{Sid}": {
-      "description": "Deployments of builds to environments",
+      "description": "An association of a Build with an Environment.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Deployment.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1807,7 +1807,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "EnvironmentSid",
             "required": true,
@@ -1819,7 +1819,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Deployment Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -1863,12 +1863,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables": {
-      "description": "Environment variable values",
+      "description": "A key and value pair that is specific to an Environment.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Variables.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1880,7 +1880,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "EnvironmentSid",
             "required": true,
@@ -1951,10 +1951,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Variable.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -1966,7 +1966,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "EnvironmentSid",
             "required": true,
@@ -1978,7 +1978,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A string by which this Variable can be referenced.",
             "in": "query",
             "name": "Key",
             "required": true,
@@ -1987,7 +1987,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A string that contains the actual value of this Variable.",
             "in": "query",
             "name": "Value",
             "required": true,
@@ -2028,12 +2028,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Variables/{Sid}": {
-      "description": "Environment variable values",
+      "description": "A key and value pair that is specific to an Environment.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Variable.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2045,7 +2045,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "EnvironmentSid",
             "required": true,
@@ -2057,7 +2057,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Variable Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2090,10 +2090,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Update a specific Variable.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2105,7 +2105,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "EnvironmentSid",
             "required": true,
@@ -2117,7 +2117,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Variable Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2129,7 +2129,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A string by which this Variable can be referenced.",
             "in": "query",
             "name": "Key",
             "required": false,
@@ -2138,7 +2138,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A string that contains the actual value of this Variable.",
             "in": "query",
             "name": "Value",
             "required": false,
@@ -2179,12 +2179,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Environments/{Sid}": {
-      "description": "Isolated environments for deploying functions and assets",
+      "description": "Represents a deployed Build of a given set of Functions and/or Assets at a specific URL.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Environment.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2196,7 +2196,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Environment Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2241,12 +2241,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Functions": {
-      "description": "Twilio functions",
+      "description": "A wrapper that represents a Serverless JavaScript function.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Functions.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2317,10 +2317,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Function.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2332,7 +2332,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A human-readable description of this Function.",
             "in": "query",
             "name": "FriendlyName",
             "required": true,
@@ -2373,12 +2373,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions": {
-      "description": "Twilio function versions",
+      "description": "The content of a Function.",
       "get": {
-        "description": null,
+        "description": "Retrieve a list of all Function Versions.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2390,7 +2390,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Function Sid.",
             "in": "path",
             "name": "FunctionSid",
             "required": true,
@@ -2461,10 +2461,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Create a new Function Version.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2476,7 +2476,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Function Sid.",
             "in": "path",
             "name": "FunctionSid",
             "required": true,
@@ -2488,7 +2488,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The URL-friendly string by which this Function Version can be referenced.",
             "in": "query",
             "name": "Path",
             "required": true,
@@ -2497,7 +2497,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The access control which determines how the Function Version can be accessed.",
             "in": "query",
             "name": "Visibility",
             "required": true,
@@ -2544,12 +2544,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}": {
-      "description": "Twilio function versions",
+      "description": "The content of a Function.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Function Version.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2561,7 +2561,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Function Sid.",
             "in": "path",
             "name": "FunctionSid",
             "required": true,
@@ -2573,7 +2573,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Function Version Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2618,12 +2618,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Functions/{Sid}": {
-      "description": "Twilio functions",
+      "description": "A wrapper that represents a Serverless JavaScript function.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Function.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2635,7 +2635,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Function Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2668,10 +2668,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Update a specific Function.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2683,7 +2683,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Function Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2695,7 +2695,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A human-readable description of this Function.",
             "in": "query",
             "name": "FriendlyName",
             "required": true,
@@ -2736,12 +2736,12 @@
       ]
     },
     "/v1/Services/{Sid}": {
-      "description": "Containers for serverless apps",
+      "description": "Container for Serverless application Environments.",
       "get": {
-        "description": null,
+        "description": "Retrieve a specific Service.",
         "parameters": [
           {
-            "description": null,
+            "description": "Serverless Service Sid or unique name.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2774,10 +2774,10 @@
         ]
       },
       "post": {
-        "description": null,
+        "description": "Update a specific Service.",
         "parameters": [
           {
-            "description": null,
+            "description": "Service Sid.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2789,7 +2789,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Whether to inject Account credentials into a Function invocation context.",
             "in": "query",
             "name": "IncludeCredentials",
             "required": false,
@@ -2798,7 +2798,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A human-readable description of this Service.",
             "in": "query",
             "name": "FriendlyName",
             "required": false,

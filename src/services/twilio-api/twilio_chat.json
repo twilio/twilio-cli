@@ -1970,7 +1970,7 @@
         "description": null,
         "parameters": [
           {
-            "description": "Credential type, one of \"gcm\" or \"apn\"",
+            "description": "The type of push-notification service the credential is for",
             "in": "query",
             "name": "Type",
             "required": true,
@@ -1984,7 +1984,7 @@
             }
           },
           {
-            "description": "Friendly name for stored credential",
+            "description": "A string to describe the resource",
             "in": "query",
             "name": "FriendlyName",
             "required": false,
@@ -1993,7 +1993,7 @@
             }
           },
           {
-            "description": "[APN only] URL encoded representation of the certificate, e.",
+            "description": "[APN only] The URL encoded representation of the certificate",
             "in": "query",
             "name": "Certificate",
             "required": false,
@@ -2002,7 +2002,7 @@
             }
           },
           {
-            "description": "[APN only] URL encoded representation of the private key, e.",
+            "description": "[APN only] The URL encoded representation of the private key",
             "in": "query",
             "name": "PrivateKey",
             "required": false,
@@ -2011,7 +2011,7 @@
             }
           },
           {
-            "description": "[APN only] use this credential for sending to production or sandbox APNs",
+            "description": "[APN only] Whether to send the credential to sandbox APNs",
             "in": "query",
             "name": "Sandbox",
             "required": false,
@@ -2020,7 +2020,7 @@
             }
           },
           {
-            "description": "[GCM only] This is the \"API key\" for project from Google Developer console for your GCM Service application credential",
+            "description": "[GCM only] The API key for the project that was obtained from the Google Developer console for your GCM Service application credential",
             "in": "query",
             "name": "ApiKey",
             "required": false,
@@ -2029,7 +2029,7 @@
             }
           },
           {
-            "description": null,
+            "description": "[FCM only] The Server key of your project from Firebase console",
             "in": "query",
             "name": "Secret",
             "required": false,
@@ -2074,7 +2074,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2111,7 +2111,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2147,7 +2147,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2159,7 +2159,7 @@
             }
           },
           {
-            "description": "Friendly name for stored credential",
+            "description": "A string to describe the resource",
             "in": "query",
             "name": "FriendlyName",
             "required": false,
@@ -2168,7 +2168,7 @@
             }
           },
           {
-            "description": "[APN only] URL encoded representation of the certificate, e.",
+            "description": "[APN only] The URL encoded representation of the certificate",
             "in": "query",
             "name": "Certificate",
             "required": false,
@@ -2177,7 +2177,7 @@
             }
           },
           {
-            "description": "[APN only] URL encoded representation of the private key, e.",
+            "description": "[APN only] The URL encoded representation of the private key",
             "in": "query",
             "name": "PrivateKey",
             "required": false,
@@ -2186,7 +2186,7 @@
             }
           },
           {
-            "description": "[APN only] use this credential for sending to production or sandbox APNs",
+            "description": "[APN only] Whether to send the credential to sandbox APNs",
             "in": "query",
             "name": "Sandbox",
             "required": false,
@@ -2195,7 +2195,7 @@
             }
           },
           {
-            "description": "[GCM only] This is the \"API key\" for project from Google Developer console for your GCM Service application credential",
+            "description": "[GCM only] The API key for the project that was obtained from the Google Developer console for your GCM Service application credential",
             "in": "query",
             "name": "ApiKey",
             "required": false,
@@ -2204,7 +2204,7 @@
             }
           },
           {
-            "description": null,
+            "description": "[FCM only] The Server key of your project from Firebase console",
             "in": "query",
             "name": "Secret",
             "required": false,
@@ -2311,7 +2311,7 @@
         "description": null,
         "parameters": [
           {
-            "description": "Human-readable name for this service instance",
+            "description": "A string to describe the resource",
             "in": "query",
             "name": "FriendlyName",
             "required": true,
@@ -2357,7 +2357,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to read the resources from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2369,7 +2369,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The visibility of the channel to read",
             "in": "query",
             "name": "Type",
             "required": false,
@@ -2447,7 +2447,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to create the resource under",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2459,7 +2459,7 @@
             }
           },
           {
-            "description": "A human-readable name for the Channel.",
+            "description": "A string to describe the new resource",
             "in": "query",
             "name": "FriendlyName",
             "required": false,
@@ -2468,7 +2468,7 @@
             }
           },
           {
-            "description": "A unique, addressable name for the Channel.",
+            "description": "An application-defined string that uniquely identifies the resource",
             "in": "query",
             "name": "UniqueName",
             "required": false,
@@ -2477,7 +2477,7 @@
             }
           },
           {
-            "description": "An optional metadata field you can use to store any data you wish.",
+            "description": "A valid JSON string that contains application-specific data",
             "in": "query",
             "name": "Attributes",
             "required": false,
@@ -2486,7 +2486,7 @@
             }
           },
           {
-            "description": "The visibility of the channel - public or private.",
+            "description": "The visibility of the channel",
             "in": "query",
             "name": "Type",
             "required": false,
@@ -2536,7 +2536,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to read the resources from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2548,7 +2548,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The SID of the Channel the resources to read belong to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -2560,7 +2560,7 @@
             }
           },
           {
-            "description": "A unique string identifier for this User in this Service.",
+            "description": "The `identity` value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -2634,7 +2634,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to create the resource under",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2646,7 +2646,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The SID of the Channel the new resource belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -2658,7 +2658,7 @@
             }
           },
           {
-            "description": "A unique string identifier for this User in this Service.",
+            "description": "The `identity` value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -2667,7 +2667,7 @@
             }
           },
           {
-            "description": "The Role assigned to this member.",
+            "description": "The Role assigned to the new member",
             "in": "query",
             "name": "RoleSid",
             "required": false,
@@ -2715,7 +2715,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to delete the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2727,7 +2727,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The SID of the Channel the resource to delete belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -2739,7 +2739,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2776,7 +2776,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to fetch the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2788,7 +2788,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The SID of the Channel the resource to fetch belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -2800,7 +2800,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -2849,7 +2849,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to read the resources from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2861,7 +2861,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the channel the member belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -2873,7 +2873,7 @@
             }
           },
           {
-            "description": "A unique string identifier for this User in this Service.",
+            "description": "The `identity` value of the resources to read",
             "in": "query",
             "name": "Identity",
             "required": false,
@@ -2947,7 +2947,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to create the resource under",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -2959,7 +2959,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the channel the new member belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -2971,7 +2971,7 @@
             }
           },
           {
-            "description": "A unique string identifier for this User in this Service.",
+            "description": "The `identity` value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -2980,7 +2980,7 @@
             }
           },
           {
-            "description": "The Role assigned to this member.",
+            "description": "The SID of the Role to assign to the member",
             "in": "query",
             "name": "RoleSid",
             "required": false,
@@ -3028,7 +3028,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to delete the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3040,7 +3040,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the channel the message to delete belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3052,7 +3052,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3089,7 +3089,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to fetch the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3101,7 +3101,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the channel the member belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3113,7 +3113,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3149,7 +3149,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to create the resource under",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3161,7 +3161,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the channel the member to update belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3173,7 +3173,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3185,7 +3185,7 @@
             }
           },
           {
-            "description": "The Role assigned to this member.",
+            "description": "The SID of the Role to assign to the member",
             "in": "query",
             "name": "RoleSid",
             "required": false,
@@ -3197,7 +3197,7 @@
             }
           },
           {
-            "description": "An Integer representing index of the last Message this Member has read within this Channel",
+            "description": "The index of the last consumed Message for the Channel for the Member",
             "in": "query",
             "name": "LastConsumedMessageIndex",
             "required": false,
@@ -3250,7 +3250,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to read the resources from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3262,7 +3262,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the Channel the message to read belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3274,7 +3274,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The sort order of the returned messages",
             "in": "query",
             "name": "Order",
             "required": false,
@@ -3349,7 +3349,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to create the resource under",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3361,7 +3361,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the channel the new resource belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3373,7 +3373,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The message to send to the channel",
             "in": "query",
             "name": "Body",
             "required": true,
@@ -3382,7 +3382,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The identity of the new message's author",
             "in": "query",
             "name": "From",
             "required": false,
@@ -3391,7 +3391,7 @@
             }
           },
           {
-            "description": null,
+            "description": "A valid JSON string that contains application-specific data",
             "in": "query",
             "name": "Attributes",
             "required": false,
@@ -3437,7 +3437,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to delete the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3449,7 +3449,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the channel the message to delete belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3461,7 +3461,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3498,7 +3498,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to fetch the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3510,7 +3510,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID of the Channel the message to fetch belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3522,7 +3522,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3558,7 +3558,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to update the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3570,7 +3570,7 @@
             }
           },
           {
-            "description": null,
+            "description": "he unique ID of the Channel the message belongs to",
             "in": "path",
             "name": "ChannelSid",
             "required": true,
@@ -3582,7 +3582,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3594,7 +3594,7 @@
             }
           },
           {
-            "description": "The new message body string.",
+            "description": "The message to send to the channel",
             "in": "query",
             "name": "Body",
             "required": false,
@@ -3603,7 +3603,7 @@
             }
           },
           {
-            "description": "The new attributes metadata field you can use to store any data you wish.",
+            "description": "A valid JSON string that contains application-specific data",
             "in": "query",
             "name": "Attributes",
             "required": false,
@@ -3649,7 +3649,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to delete the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3661,7 +3661,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3698,7 +3698,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to fetch the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3710,7 +3710,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3746,7 +3746,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to update the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3758,7 +3758,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3770,7 +3770,7 @@
             }
           },
           {
-            "description": "A human-readable name for the Channel.",
+            "description": "A string to describe the resource",
             "in": "query",
             "name": "FriendlyName",
             "required": false,
@@ -3779,7 +3779,7 @@
             }
           },
           {
-            "description": "A unique, addressable name for the Channel.",
+            "description": "An application-defined string that uniquely identifies the resource",
             "in": "query",
             "name": "UniqueName",
             "required": false,
@@ -3788,7 +3788,7 @@
             }
           },
           {
-            "description": "An optional metadata field you can use to store any data you wish.",
+            "description": "A valid JSON string that contains application-specific data",
             "in": "query",
             "name": "Attributes",
             "required": false,
@@ -3834,7 +3834,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to read the resources from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3908,7 +3908,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to create the resource under",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -3920,7 +3920,7 @@
             }
           },
           {
-            "description": "The human-readable name of this role.",
+            "description": "A string to describe the new resource",
             "in": "query",
             "name": "FriendlyName",
             "required": true,
@@ -3929,7 +3929,7 @@
             }
           },
           {
-            "description": "What kind of role this is.",
+            "description": "The type of role",
             "in": "query",
             "name": "Type",
             "required": true,
@@ -3942,7 +3942,7 @@
             }
           },
           {
-            "description": "A permission this role should have.",
+            "description": "A permission the role should have",
             "in": "query",
             "name": "Permission",
             "required": true,
@@ -3990,7 +3990,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to delete the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4002,7 +4002,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4039,7 +4039,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to fetch the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4051,7 +4051,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4087,7 +4087,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to update the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4099,7 +4099,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4111,7 +4111,7 @@
             }
           },
           {
-            "description": "A permission this role should have.",
+            "description": "A permission the role should have",
             "in": "query",
             "name": "Permission",
             "required": true,
@@ -4160,7 +4160,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to read the resources from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4234,7 +4234,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to create the new resource under",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4246,7 +4246,7 @@
             }
           },
           {
-            "description": "A unique string that identifies the user within this service - often a username or email address.",
+            "description": "The `identity` value that identifies the new resource's User",
             "in": "query",
             "name": "Identity",
             "required": true,
@@ -4255,7 +4255,7 @@
             }
           },
           {
-            "description": "The unique id of the Role assigned to this user.",
+            "description": "The SID of the Role assigned to this user",
             "in": "query",
             "name": "RoleSid",
             "required": false,
@@ -4267,7 +4267,7 @@
             }
           },
           {
-            "description": "An optional string used to contain any metadata or other information for the User.",
+            "description": "A valid JSON string that contains application-specific data",
             "in": "query",
             "name": "Attributes",
             "required": false,
@@ -4276,7 +4276,7 @@
             }
           },
           {
-            "description": "An optional human readable string representing the user.",
+            "description": "A string to describe the new resource",
             "in": "query",
             "name": "FriendlyName",
             "required": false,
@@ -4321,7 +4321,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to delete the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4333,7 +4333,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4370,7 +4370,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to fetch the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4382,7 +4382,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4418,7 +4418,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to update the resource from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4430,7 +4430,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4442,7 +4442,7 @@
             }
           },
           {
-            "description": "The unique id of the [Role][role] assigned to this user.",
+            "description": "The SID id of the Role assigned to this user",
             "in": "query",
             "name": "RoleSid",
             "required": false,
@@ -4454,7 +4454,7 @@
             }
           },
           {
-            "description": "An optional string used to contain any metadata or other information for the User.",
+            "description": "A valid JSON string that contains application-specific data",
             "in": "query",
             "name": "Attributes",
             "required": false,
@@ -4463,7 +4463,7 @@
             }
           },
           {
-            "description": "An optional human readable string representing the user.",
+            "description": "A string to describe the resource",
             "in": "query",
             "name": "FriendlyName",
             "required": false,
@@ -4504,12 +4504,12 @@
       ]
     },
     "/v1/Services/{ServiceSid}/Users/{UserSid}/Channels": {
-      "description": "List of channels for a given user",
+      "description": "TODO: Resource-level docs",
       "get": {
-        "description": null,
+        "description": "List all Channels for a given User.",
         "parameters": [
           {
-            "description": null,
+            "description": "The SID of the Service to read the resources from",
             "in": "path",
             "name": "ServiceSid",
             "required": true,
@@ -4521,7 +4521,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The SID of the User to fetch the User Channel resources from",
             "in": "path",
             "name": "UserSid",
             "required": true,
@@ -4606,7 +4606,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4643,7 +4643,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4679,7 +4679,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique string that identifies the resource",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4691,7 +4691,7 @@
             }
           },
           {
-            "description": "Human-readable name for this service instance",
+            "description": "A string to describe the resource",
             "in": "query",
             "name": "FriendlyName",
             "required": false,
@@ -4700,7 +4700,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The service role assigned to users when they are added to the service",
             "in": "query",
             "name": "DefaultServiceRoleSid",
             "required": false,
@@ -4712,7 +4712,7 @@
             }
           },
           {
-            "description": "Channel role assigned on channel join",
+            "description": "The channel role assigned to users when they are added to a channel",
             "in": "query",
             "name": "DefaultChannelRoleSid",
             "required": false,
@@ -4724,7 +4724,7 @@
             }
           },
           {
-            "description": "Channel role assigned to creator of channel when joining for first time",
+            "description": "The channel role assigned to a channel creator when they join a new channel",
             "in": "query",
             "name": "DefaultChannelCreatorRoleSid",
             "required": false,
@@ -4736,7 +4736,7 @@
             }
           },
           {
-            "description": "true if the member read status feature is enabled, false if not.",
+            "description": "Whether to enable the Message Consumption Horizon feature",
             "in": "query",
             "name": "ReadStatusEnabled",
             "required": false,
@@ -4745,7 +4745,7 @@
             }
           },
           {
-            "description": "true if the reachability feature should be enabled.",
+            "description": "Whether to enable the Reachability Indicator feature for this Service instance",
             "in": "query",
             "name": "ReachabilityEnabled",
             "required": false,
@@ -4754,7 +4754,7 @@
             }
           },
           {
-            "description": "ISO 8601 duration indicating the timeout after \"started typing\" event when client should assume that user is not typing anymore even if no \"ended typing\" message received",
+            "description": "How long in seconds to wait before assuming the user is no longer typing",
             "in": "query",
             "name": "TypingIndicatorTimeout",
             "required": false,
@@ -4763,7 +4763,7 @@
             }
           },
           {
-            "description": "ISO 8601 duration indicating the interval between consumption reports sent from client endpoints.",
+            "description": "DEPRECATED",
             "in": "query",
             "name": "ConsumptionReportInterval",
             "required": false,
@@ -4772,7 +4772,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Whether to send a notification when a new message is added to a channel",
             "in": "query",
             "name": "Notifications.newMessage.enabled",
             "required": false,
@@ -4781,7 +4781,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The template to use to create the notification text displayed when a new message is added to a channel",
             "in": "query",
             "name": "Notifications.newMessage.template",
             "required": false,
@@ -4790,7 +4790,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Whether to send a notification when a member is added to a channel",
             "in": "query",
             "name": "Notifications.addedToChannel.enabled",
             "required": false,
@@ -4799,7 +4799,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The template to use to create the notification text displayed when a member is added to a channel",
             "in": "query",
             "name": "Notifications.addedToChannel.template",
             "required": false,
@@ -4808,7 +4808,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Whether to send a notification to a user when they are removed from a channel",
             "in": "query",
             "name": "Notifications.removedFromChannel.enabled",
             "required": false,
@@ -4817,7 +4817,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The template to use to create the notification text displayed to a user when they are removed",
             "in": "query",
             "name": "Notifications.removedFromChannel.template",
             "required": false,
@@ -4826,7 +4826,7 @@
             }
           },
           {
-            "description": null,
+            "description": "Whether to send a notification when a user is invited to a channel",
             "in": "query",
             "name": "Notifications.invitedToChannel.enabled",
             "required": false,
@@ -4835,7 +4835,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The template to use to create the notification text displayed when a user is invited to a channel",
             "in": "query",
             "name": "Notifications.invitedToChannel.template",
             "required": false,
@@ -4844,7 +4844,7 @@
             }
           },
           {
-            "description": "The webhook URL for PRE-Event webhooks.",
+            "description": "The webhook URL for pre-event webhooks",
             "in": "query",
             "name": "PreWebhookUrl",
             "required": false,
@@ -4854,7 +4854,7 @@
             }
           },
           {
-            "description": "The webhook URL for POST-Event webhooks.",
+            "description": "The URL for post-event webhooks",
             "in": "query",
             "name": "PostWebhookUrl",
             "required": false,
@@ -4864,7 +4864,7 @@
             }
           },
           {
-            "description": "The webhook request format to use.",
+            "description": "The HTTP method  to use for both PRE and POST webhooks",
             "in": "query",
             "name": "WebhookMethod",
             "required": false,
@@ -4887,7 +4887,7 @@
             }
           },
           {
-            "description": "The list of WebHook events that are enabled for this Service instance.",
+            "description": "The list of WebHook events that are enabled for this Service instance",
             "in": "query",
             "name": "WebhookFilters",
             "required": false,
@@ -4899,7 +4899,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_message_send event",
             "in": "query",
             "name": "Webhooks.onMessageSend.url",
             "required": false,
@@ -4909,7 +4909,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_message_send.url",
             "in": "query",
             "name": "Webhooks.onMessageSend.method",
             "required": false,
@@ -4932,16 +4932,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMessageSend.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_message_update event",
             "in": "query",
             "name": "Webhooks.onMessageUpdate.url",
             "required": false,
@@ -4951,7 +4942,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_message_update.url",
             "in": "query",
             "name": "Webhooks.onMessageUpdate.method",
             "required": false,
@@ -4974,16 +4965,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMessageUpdate.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_message_remove event",
             "in": "query",
             "name": "Webhooks.onMessageRemove.url",
             "required": false,
@@ -4993,7 +4975,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_message_remove.url",
             "in": "query",
             "name": "Webhooks.onMessageRemove.method",
             "required": false,
@@ -5016,16 +4998,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMessageRemove.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_channel_add event",
             "in": "query",
             "name": "Webhooks.onChannelAdd.url",
             "required": false,
@@ -5035,7 +5008,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_channel_add.url",
             "in": "query",
             "name": "Webhooks.onChannelAdd.method",
             "required": false,
@@ -5058,16 +5031,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onChannelAdd.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_channel_destroy event",
             "in": "query",
             "name": "Webhooks.onChannelDestroy.url",
             "required": false,
@@ -5077,7 +5041,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_channel_destroy.url",
             "in": "query",
             "name": "Webhooks.onChannelDestroy.method",
             "required": false,
@@ -5100,16 +5064,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onChannelDestroy.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_channel_update event",
             "in": "query",
             "name": "Webhooks.onChannelUpdate.url",
             "required": false,
@@ -5119,7 +5074,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_channel_update.url",
             "in": "query",
             "name": "Webhooks.onChannelUpdate.method",
             "required": false,
@@ -5142,16 +5097,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onChannelUpdate.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_member_add event",
             "in": "query",
             "name": "Webhooks.onMemberAdd.url",
             "required": false,
@@ -5161,7 +5107,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_member_add.url",
             "in": "query",
             "name": "Webhooks.onMemberAdd.method",
             "required": false,
@@ -5184,16 +5130,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMemberAdd.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_member_remove event",
             "in": "query",
             "name": "Webhooks.onMemberRemove.url",
             "required": false,
@@ -5203,7 +5140,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_member_remove.url",
             "in": "query",
             "name": "Webhooks.onMemberRemove.method",
             "required": false,
@@ -5226,16 +5163,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMemberRemove.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_message_sent event",
             "in": "query",
             "name": "Webhooks.onMessageSent.url",
             "required": false,
@@ -5245,7 +5173,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_message_sent event",
             "in": "query",
             "name": "Webhooks.onMessageSent.method",
             "required": false,
@@ -5268,16 +5196,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMessageSent.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_message_updated event",
             "in": "query",
             "name": "Webhooks.onMessageUpdated.url",
             "required": false,
@@ -5287,7 +5206,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_message_updated.url",
             "in": "query",
             "name": "Webhooks.onMessageUpdated.method",
             "required": false,
@@ -5310,16 +5229,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMessageUpdated.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_message_removed event",
             "in": "query",
             "name": "Webhooks.onMessageRemoved.url",
             "required": false,
@@ -5329,7 +5239,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_message_removed.url",
             "in": "query",
             "name": "Webhooks.onMessageRemoved.method",
             "required": false,
@@ -5352,16 +5262,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMessageRemoved.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_channel_added event",
             "in": "query",
             "name": "Webhooks.onChannelAdded.url",
             "required": false,
@@ -5371,7 +5272,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_channel_added event",
             "in": "query",
             "name": "Webhooks.onChannelAdded.method",
             "required": false,
@@ -5394,16 +5295,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onChannelAdded.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_channel_added event",
             "in": "query",
             "name": "Webhooks.onChannelDestroyed.url",
             "required": false,
@@ -5413,7 +5305,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_channel_destroyed.url",
             "in": "query",
             "name": "Webhooks.onChannelDestroyed.method",
             "required": false,
@@ -5436,16 +5328,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onChannelDestroyed.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "he URL of the webhook to call in response to the on_channel_updated event",
             "in": "query",
             "name": "Webhooks.onChannelUpdated.url",
             "required": false,
@@ -5455,7 +5338,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_channel_updated.url",
             "in": "query",
             "name": "Webhooks.onChannelUpdated.method",
             "required": false,
@@ -5478,16 +5361,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onChannelUpdated.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_channel_updated event",
             "in": "query",
             "name": "Webhooks.onMemberAdded.url",
             "required": false,
@@ -5497,7 +5371,7 @@
             }
           },
           {
-            "description": null,
+            "description": "he HTTP method to use when calling the webhooks.on_channel_updated.url",
             "in": "query",
             "name": "Webhooks.onMemberAdded.method",
             "required": false,
@@ -5520,16 +5394,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMemberAdded.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The URL of the webhook to call in response to the on_member_removed event",
             "in": "query",
             "name": "Webhooks.onMemberRemoved.url",
             "required": false,
@@ -5539,7 +5404,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The HTTP method to use when calling the webhooks.on_member_removed.url",
             "in": "query",
             "name": "Webhooks.onMemberRemoved.method",
             "required": false,
@@ -5562,16 +5427,7 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Webhooks.onMemberRemoved.format",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
+            "description": "The maximum number of Members that can be added to Channels within this Service",
             "in": "query",
             "name": "Limits.channelMembers",
             "required": false,
@@ -5580,7 +5436,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The maximum number of Channels Users can be a Member of within this Service",
             "in": "query",
             "name": "Limits.userChannels",
             "required": false,

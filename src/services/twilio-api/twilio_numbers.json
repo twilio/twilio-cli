@@ -432,6 +432,16 @@
               "type": "string"
             }
           },
+          "status_callback_method": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "status_callback_url": {
+            "type": {
+              "type": "string"
+            }
+          },
           "type": {
             "type": {
               "type": "string"
@@ -448,7 +458,98 @@
       },
       "numbers.v1.identity.document": {
         "properties": {
+          "academic_degree": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "address_proof": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "birth_date": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "birth_place": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "company_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "expiration_date": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "first_name": {
+            "type": {
+              "type": "string"
+            }
+          },
           "friendly_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "identity_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "issue_date": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "last_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "nationality": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "number": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "profession": {
             "type": {
               "type": "string"
             }
@@ -458,6 +559,27 @@
               "maxLength": 34,
               "minLength": 34,
               "pattern": "^RI[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "vat": {
+            "type": {
               "type": "string"
             }
           }
@@ -1738,6 +1860,24 @@
             "in": "query",
             "name": "PurchaseIntentNumberType",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "StatusCallbackUrl",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": null,
+            "in": "query",
+            "name": "StatusCallbackMethod",
+            "required": false,
             "schema": {
               "type": "string"
             }

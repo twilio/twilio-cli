@@ -517,6 +517,11 @@
               "type": "string"
             }
           },
+          "channel_optimized_routing": {
+            "type": {
+              "type": "boolean"
+            }
+          },
           "date_created": {
             "type": {
               "format": "date-time",
@@ -3221,7 +3226,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique ID of the Workspace that this TaskChannel belongs to.",
             "in": "path",
             "name": "WorkspaceSid",
             "required": true,
@@ -3295,7 +3300,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique ID of the Workspace that this TaskChannel belongs to.",
             "in": "path",
             "name": "WorkspaceSid",
             "required": true,
@@ -3322,6 +3327,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "If true then prioritize longest idle workers",
+            "in": "query",
+            "name": "ChannelOptimizedRouting",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           }
         ],
@@ -3361,7 +3375,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique ID of the Workspace that this TaskChannel belongs to.",
             "in": "path",
             "name": "WorkspaceSid",
             "required": true,
@@ -3373,7 +3387,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID for this TaskChannel.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3410,7 +3424,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique ID of the Workspace that this TaskChannel belongs to.",
             "in": "path",
             "name": "WorkspaceSid",
             "required": true,
@@ -3422,7 +3436,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID for this TaskChannel.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3458,7 +3472,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "The unique ID of the Workspace that this TaskChannel belongs to.",
             "in": "path",
             "name": "WorkspaceSid",
             "required": true,
@@ -3470,7 +3484,7 @@
             }
           },
           {
-            "description": null,
+            "description": "The unique ID for this TaskChannel.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -3488,6 +3502,15 @@
             "required": false,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "If true then prioritize longest idle workers",
+            "in": "query",
+            "name": "ChannelOptimizedRouting",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           }
         ],
