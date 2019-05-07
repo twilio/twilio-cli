@@ -1,9 +1,9 @@
 const os = require('os');
 const { flags } = require('@oclif/command');
-const twilio = require('twilio');
 
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CLIRequestClient } = require('@twilio/cli-core').services;
+const { DEFAULT_PROJECT } = require('@twilio/cli-core').services.config;
 const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
 
 const helpMessages = require('../../services/messaging/help-messages');
@@ -47,7 +47,7 @@ class ProjectAdd extends BaseCommand {
   loadArguments() {
     this.accountSid = this.args['account-sid'];
     this.authToken = this.flags['auth-token'];
-    this.projectId = this.flags.project;
+    this.projectId = this.flags.project || DEFAULT_PROJECT;
     this.force = this.flags.force;
     this.region = this.flags.region;
   }
@@ -108,10 +108,13 @@ class ProjectAdd extends BaseCommand {
   }
 
   getTwilioClient() {
-    return twilio(this.accountSid, this.authToken, {
-      httpClient: new CLIRequestClient(this.id, this.logger),
-      region: this.region
-    });
+    if (!this.twilioClient) {
+      this.twilioClient = require('twilio')(this.accountSid, this.authToken, {
+        httpClient: new CLIRequestClient(this.id, this.logger),
+        region: this.region
+      });
+    }
+    return this.twilioClient;
   }
 
   async validateCredentials() {

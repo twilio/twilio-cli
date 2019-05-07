@@ -68,9 +68,9 @@ _NOTE: Option 2 should only be used in cases where you are unable to make use of
 
 The CLI will attempt to load credentials in the following order of priority:
 
-1. From the project specified with the `-p` parameter.
-1. From the default project, if it exists.
-1. From environment variables.
+1. From the project specified with the `-p` parameter
+1. From environment variables, if set
+1. From the default project, if it exists
 
 ### Step 2 - Explore
 
