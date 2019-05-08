@@ -30,6 +30,10 @@ class ProjectAdd extends BaseCommand {
 
     this.loadArguments();
 
+    if (!await this.confirmDefaultProjectAndEnvVars()) {
+      this.cancel();
+    }
+
     this.validateAccountSid();
     this.validateAuthToken();
     await this.promptForCredentials();
@@ -37,10 +41,8 @@ class ProjectAdd extends BaseCommand {
     if ((await this.confirmOverwrite()) && (await this.validateCredentials())) {
       await this.saveCredentials();
       this.logger.info(`Saved ${this.projectId}.`);
-      this.exit(0);
     } else {
-      this.logger.warn('Cancelled');
-      this.exit(1);
+      this.cancel();
     }
   }
 
@@ -105,6 +107,29 @@ class ProjectAdd extends BaseCommand {
       }
     }
     return overwrite;
+  }
+
+  async confirmDefaultProjectAndEnvVars() {
+    let affirmative = true;
+    if (this.projectId === DEFAULT_PROJECT && this.userConfig.getProjectFromEnvironment()) {
+      const confirm = await this.inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'affirmative',
+          message: 'Account credentials are currently stored in environment variables and will take precedence over ' +
+            `the "${DEFAULT_PROJECT}" project when connecting to Twilio, unless the "${DEFAULT_PROJECT}" project is ` +
+            `explicitly specified. Continue setting up "${DEFAULT_PROJECT}" project?`,
+          default: false
+        }
+      ]);
+      affirmative = confirm.affirmative;
+    }
+    return affirmative;
+  }
+
+  cancel() {
+    this.logger.warn('Cancelled');
+    this.exit(1);
   }
 
   getTwilioClient() {

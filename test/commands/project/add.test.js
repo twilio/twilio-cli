@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
-const { Config } = require('@twilio/cli-core').services.config;
+const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const ProjectAdd = require('../../../src/commands/project/add');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
@@ -9,8 +9,11 @@ describe('commands', () => {
   describe('project', () => {
     describe('add', () => {
       const addTest = (commandArgs = []) => test
+        .twilioFakeProject(ConfigData)
         .twilioCliEnv(Config)
         .twilioCreateCommand(ProjectAdd, commandArgs)
+        .stdout()
+        .stderr()
         .do(ctx => {
           const fakePrompt = sinon.stub();
           fakePrompt
@@ -24,7 +27,6 @@ describe('commands', () => {
               overwrite: true
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
-          ctx.testCmd.exit = sinon.fake();
         });
 
       addTest()
@@ -37,10 +39,8 @@ describe('commands', () => {
             secret: constants.FAKE_API_SECRET
           });
         })
-        .stdout()
-        .stderr()
-        .it('runs project:add', async ctx => {
-          await ctx.testCmd.run();
+        .do(ctx => ctx.testCmd.run())
+        .it('runs project:add', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
@@ -53,16 +53,55 @@ describe('commands', () => {
           );
         });
 
+      addTest(['not-an-account-sid'])
+        .do(ctx => {
+          const fakePrompt = ctx.testCmd.inquirer.prompt;
+          fakePrompt.reset();
+          fakePrompt
+            .onFirstCall()
+            .resolves({
+              authToken: constants.FAKE_API_SECRET
+            });
+
+          return ctx.testCmd.run();
+        })
+        .exit(1)
+        .it('fails for invalid account SIDs', ctx => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('Account SID must be "AC"');
+        });
+
+      addTest()
+        .do(ctx => {
+          process.env.TWILIO_ACCOUNT_SID = constants.FAKE_ACCOUNT_SID;
+          process.env.TWILIO_API_KEY = constants.FAKE_API_KEY;
+          process.env.TWILIO_API_SECRET = constants.FAKE_API_SECRET;
+
+          const fakePrompt = ctx.testCmd.inquirer.prompt;
+          fakePrompt.reset();
+          fakePrompt
+            .onFirstCall()
+            .resolves({
+              affirmative: false
+            });
+
+          return ctx.testCmd.run();
+        })
+        .exit(1)
+        .it('prompts when adding default project with env vars set', ctx => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('Cancelled');
+        });
+
       addTest()
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(500, {
             error: 'oops'
           });
         })
-        .stdout()
-        .stderr()
-        .it('runs project:add with invalid credentials', async ctx => {
-          await ctx.testCmd.run();
+        .do(ctx => ctx.testCmd.run())
+        .exit(1)
+        .it('fails for invalid credentials', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('Could not validate the provided credentials');
         });
@@ -76,10 +115,9 @@ describe('commands', () => {
             error: 'oops'
           });
         })
-        .stdout()
-        .stderr()
-        .it('runs project:add but fails to create api key', async ctx => {
-          await ctx.testCmd.run();
+        .do(ctx => ctx.testCmd.run())
+        .exit(1)
+        .it('fails to create an API key', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('Could not create an API Key');
         });
@@ -94,10 +132,8 @@ describe('commands', () => {
             secret: constants.FAKE_API_SECRET
           });
         })
-        .stdout()
-        .stderr()
-        .it('supports other regions', async ctx => {
-          await ctx.testCmd.run();
+        .do(async ctx => ctx.testCmd.run())
+        .it('supports other regions', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('configuration saved');
         });
