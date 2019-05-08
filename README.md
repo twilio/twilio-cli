@@ -33,6 +33,10 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 1. Check if there's a new version: `npm outdated -g twilio-cli`
 1. Update the CLI globally: `npm update -g twilio-cli`
 
+## Versioning
+
+`twilio-cli` uses a modified version of [Semantic Versioning](https://semver.org) for all changes. [See this document](VERSIONS.md) for details.
+
 ## Basic usage
 
 ### Step 1 - Login (aka add a project)
