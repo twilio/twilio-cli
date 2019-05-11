@@ -74,7 +74,8 @@ class TwilioApiBrowser {
         if (!doesObjectHaveProperty(resources, resourcePath)) {
           resources[resourcePath] = {
             actions: {},
-            description: spec.paths[path].description.replace(/(\r\n|\n|\r)/gm, ' ')
+            description: spec.paths[path].description.replace(/(\r\n|\n|\r)/gm, ' '),
+            defaultOutputProperties: spec.paths[path]['x-default-output-properties']
           };
         }
 
