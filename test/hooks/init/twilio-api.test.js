@@ -17,8 +17,8 @@ describe('hooks', () => {
         expect(plugin.commands.length).to.equal(plugin.commandIDs.length);
 
         /* eslint-disable max-nested-callbacks */
-        const domainTopic = plugin.topics.find(t => t.name === 'accounts');
-        const versionTopic = plugin.topics.find(t => t.name === 'accounts:v1');
+        const domainTopic = plugin.topics.find(t => t.name === 'api:accounts');
+        const versionTopic = plugin.topics.find(t => t.name === 'api:accounts:v1');
 
         expect(domainTopic.description).to.equal('resources under accounts.twilio.com');
         expect(versionTopic.description).to.equal('version 1 of the API');

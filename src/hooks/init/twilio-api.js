@@ -1,6 +1,6 @@
 const { Plugin } = require('@oclif/config');
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
-const { TwilioApiBrowser, isApi2010, getTopicName, TOPIC_SEPARATOR } = require('../../services/twilio-api');
+const { TwilioApiBrowser, getTopicName, TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('../../services/twilio-api');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
@@ -12,7 +12,7 @@ class TwilioRestApiPlugin extends Plugin {
 
   scanResource(actionDefinition) {
     actionDefinition.resource = actionDefinition.version.resources[actionDefinition.path];
-    actionDefinition.topicName = getTopicName(actionDefinition);
+    actionDefinition.topicName = BASE_TOPIC_NAME + TOPIC_SEPARATOR + getTopicName(actionDefinition);
     Object.keys(actionDefinition.resource.actions).forEach(actionName => {
       actionDefinition.actionName = actionName;
       this.scanAction(actionDefinition);
@@ -26,14 +26,9 @@ class TwilioRestApiPlugin extends Plugin {
       this.scanResource(actionDefinition);
     }, this);
 
-    // No need to add a topic for the legacy API version since all sub-topics will be at the domain-level.
-    if (isApi2010(actionDefinition.domainName, actionDefinition.versionName)) {
-      return;
-    }
-
     const shortVersion = actionDefinition.versionName.replace(/v/g, '');
     this.versionTopics.push({
-      name: actionDefinition.domainName + TOPIC_SEPARATOR + actionDefinition.versionName,
+      name: [BASE_TOPIC_NAME, actionDefinition.domainName, actionDefinition.versionName].join(TOPIC_SEPARATOR),
       description: `version ${shortVersion} of the API`
     });
   }
@@ -49,8 +44,15 @@ class TwilioRestApiPlugin extends Plugin {
       this.scanVersion(actionDefinition);
     }, this);
 
+    let topicDomainName = domainName;
+
+    // If the domain matches our base, switch to core.
+    if (topicDomainName === BASE_TOPIC_NAME) {
+      topicDomainName = CORE_TOPIC_NAME;
+    }
+
     this.domainTopics.push({
-      name: domainName,
+      name: [BASE_TOPIC_NAME, topicDomainName].join(TOPIC_SEPARATOR),
       description: `resources under ${domainName}.twilio.com`
     });
   }
@@ -60,7 +62,7 @@ class TwilioRestApiPlugin extends Plugin {
     this.apiBrowser = apiBrowser || new TwilioApiBrowser();
 
     this.actions = [];
-    this.domainTopics = [];
+    this.domainTopics = [{ name: BASE_TOPIC_NAME, description: 'advanced access to all of the Twilio APIs' }];
     this.versionTopics = [];
     Object.keys(this.apiBrowser.domains).forEach(this.scanDomain, this);
   }
@@ -82,7 +84,7 @@ class TwilioRestApiPlugin extends Plugin {
   }
 
   get commandIDs() {
-    return this.actions.map(a => a.topicName + ':' + a.commandName);
+    return this.actions.map(a => [a.topicName, a.commandName].join(TOPIC_SEPARATOR));
   }
 
   get commands() {

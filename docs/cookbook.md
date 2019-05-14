@@ -4,9 +4,9 @@ At this stage in the `twilio-cli`, we have exposed commands that mirror the Twil
 
 ## Recipe 1: Purchase a phone number
 
-```twilio api:available-phone-numbers:local:list --area-code="209" --country-code US -o json```
+```twilio api:core:available-phone-numbers:local:list --area-code="209" --country-code US -o json```
 
 (This command currently throws an error claiming a missing sid)
 
 Then, once you find the desired number, execute:
-```twilio api:incoming-phone-numbers:create --phone-number="+12095551212"```
+```twilio api:core:incoming-phone-numbers:create --phone-number="+12095551212"```
