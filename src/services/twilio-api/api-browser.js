@@ -3,12 +3,13 @@ const url = require('url');
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const ResourcePathParser = require('../resource-path-parser');
 
+const isApi2010 = (domain, version) => {
+  return domain === 'api' && (version === '2010-04-01' || version === 'v2010');
+};
+
 function translateLegacyVersions(domain, version) {
   // In the Node helper library, api.twilio.com/2010-04-01 is represented as "v2010"
-  if (domain === 'api' && version === '2010-04-01') {
-    return 'v2010';
-  }
-  return version;
+  return isApi2010(domain, version) ? 'v2010' : version;
 }
 
 const listResourceMethodMap = {
@@ -93,4 +94,7 @@ class TwilioApiBrowser {
   }
 }
 
-module.exports = TwilioApiBrowser;
+module.exports = {
+  TwilioApiBrowser,
+  isApi2010
+};

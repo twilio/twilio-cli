@@ -30,7 +30,7 @@ describe('base-commands', () => {
       test.it('setUpNewCommandClass', async () => {
         const NewCommandClass = getCommandClass();
 
-        expect(NewCommandClass.id).to.equal('api:v2010:accounts:calls:create');
+        expect(NewCommandClass.id).to.equal('core:calls:create');
         expect(NewCommandClass.description).to.contain('\'Twilio Client\' connections');
         expect(NewCommandClass.load()).to.equal(NewCommandClass);
 
@@ -49,7 +49,7 @@ describe('base-commands', () => {
         expect(NewCommandClass.flags.from.required).to.be.true;
         expect(NewCommandClass.flags.method.required).to.be.false;
         expect(NewCommandClass.flags.method.type).to.equal('option');
-        expect(NewCommandClass.flags.method.helpValue).to.eql('(head|get|post|patch|put|delete)');
+        expect(NewCommandClass.flags.method.helpValue).to.equal('(head|get|post|patch|put|delete)');
         expect(NewCommandClass.flags.record.type).to.equal('boolean');
         expect(NewCommandClass.flags.properties.default).to.equal('sid,friendlyName,status');
 
