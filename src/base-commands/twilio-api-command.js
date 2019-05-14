@@ -189,8 +189,11 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
     }
   });
 
+  const defaultProperties = resource.defaultOutputProperties || [];
+
   cmdFlags.properties = flags.string({
-    default: 'sid',
+    // Camel-cased, CSV of the provided property list. Or just the SID.
+    default: defaultProperties.map(prop => camelCase(prop)).join(',') || 'sid',
     description: 'The properties you would like to display (JSON output always shows all properties).'
   });
 

@@ -51,6 +51,7 @@ describe('base-commands', () => {
         expect(NewCommandClass.flags.method.type).to.equal('option');
         expect(NewCommandClass.flags.method.helpValue).to.eql('(head|get|post|patch|put|delete)');
         expect(NewCommandClass.flags.record.type).to.equal('boolean');
+        expect(NewCommandClass.flags.properties.default).to.equal('sid,friendlyName,status');
 
         expect(Object.keys(NewCommandClass.flags).length).to.equal(
           NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS

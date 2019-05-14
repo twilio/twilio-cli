@@ -175,7 +175,8 @@ const fakeResource = {
       security: [{ accountSid_authToken: [] }] // eslint-disable-line camelcase
     }
   },
-  description: 'TODO: Resource-level docs'
+  description: 'TODO: Resource-level docs',
+  defaultOutputProperties: ['sid', 'friendly_name', 'status']
 };
 
 /* eslint-disable camelcase */
