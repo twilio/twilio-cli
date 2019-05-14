@@ -9,14 +9,14 @@
   "bugs": "https://github.com/twilio/twilio-cli/issues",
   "dependencies": {
     "@oclif/command": "^1.4.36",
-    "@oclif/config": "^1.6.33",
+    "@oclif/config": "^1.13.0",
     "@oclif/plugin-autocomplete": "^0.1.0",
     "@oclif/plugin-help": "^2.1.6",
     "@oclif/plugin-plugins": "^1.7.7",
-    "@twilio/cli-core": "^1.0.0",
+    "@twilio/cli-core": "^1.1.0",
     "chalk": "^2.4.1",
     "ngrok": "^3.0.1",
-    "twilio": "^3.30.2"
+    "twilio": "^3.30.3"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.21.0",
@@ -29,7 +29,7 @@
     "globby": "^8.0.1",
     "mocha": "^5.2.0",
     "nock": "^10.0.6",
-    "nyc": "^14.0.0",
+    "nyc": "^14.1.1",
     "rimraf": "^2.6.2",
     "sinon": "^6.3.4",
     "tmp": "0.0.33"
