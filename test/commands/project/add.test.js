@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
-const { Config, ConfigData } = require('@twilio/cli-core').services.config;
+const { Config, ConfigData, DEFAULT_PROJECT } = require('@twilio/cli-core').services.config;
 const ProjectAdd = require('../../../src/commands/project/add');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
@@ -19,12 +19,16 @@ describe('commands', () => {
           fakePrompt
             .onFirstCall()
             .resolves({
-              accountSid: constants.FAKE_ACCOUNT_SID,
-              authToken: constants.FAKE_API_SECRET
+              projectId: DEFAULT_PROJECT
             })
             .onSecondCall()
             .resolves({
               overwrite: true
+            })
+            .onThirdCall()
+            .resolves({
+              accountSid: constants.FAKE_ACCOUNT_SID,
+              authToken: constants.FAKE_API_SECRET
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
         });
@@ -56,9 +60,8 @@ describe('commands', () => {
       addTest(['not-an-account-sid'])
         .do(ctx => {
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt.reset();
           fakePrompt
-            .onFirstCall()
+            .onThirdCall()
             .resolves({
               authToken: constants.FAKE_API_SECRET
             });
@@ -78,9 +81,8 @@ describe('commands', () => {
           process.env.TWILIO_API_SECRET = constants.FAKE_API_SECRET;
 
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt.reset();
           fakePrompt
-            .onFirstCall()
+            .onSecondCall()
             .resolves({
               affirmative: false
             });

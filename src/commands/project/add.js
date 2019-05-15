@@ -29,8 +29,9 @@ class ProjectAdd extends BaseCommand {
     await super.run();
 
     this.loadArguments();
+    await this.promptForProjectId();
 
-    if (!await this.confirmDefaultProjectAndEnvVars()) {
+    if (!await this.confirmDefaultProjectAndEnvVars() || !await this.confirmOverwrite()) {
       this.cancel();
     }
 
@@ -38,7 +39,7 @@ class ProjectAdd extends BaseCommand {
     this.validateAuthToken();
     await this.promptForCredentials();
 
-    if ((await this.confirmOverwrite()) && (await this.validateCredentials())) {
+    if (await this.validateCredentials()) {
       await this.saveCredentials();
       this.logger.info(`Saved ${this.projectId}.`);
     } else {
@@ -49,9 +50,20 @@ class ProjectAdd extends BaseCommand {
   loadArguments() {
     this.accountSid = this.args['account-sid'];
     this.authToken = this.flags['auth-token'];
-    this.projectId = this.flags.project || DEFAULT_PROJECT;
+    this.projectId = this.flags.project;
     this.force = this.flags.force;
     this.region = this.flags.region;
+  }
+
+  async promptForProjectId() {
+    if (!this.projectId) {
+      const answer = await this.inquirer.prompt([{
+        name: 'projectId',
+        message: ProjectAdd.flags.project.description,
+        default: DEFAULT_PROJECT
+      }]);
+      this.projectId = answer.projectId;
+    }
   }
 
   validateAccountSid() {
@@ -95,14 +107,12 @@ class ProjectAdd extends BaseCommand {
     if (this.userConfig.getProjectById(this.projectId)) {
       overwrite = this.force;
       if (!overwrite) {
-        const confirm = await this.inquirer.prompt([
-          {
-            type: 'confirm',
-            name: 'overwrite',
-            message: `Overwrite existing project credentials for "${this.projectId}"?`,
-            default: false
-          }
-        ]);
+        const confirm = await this.inquirer.prompt([{
+          type: 'confirm',
+          name: 'overwrite',
+          message: `Overwrite existing project credentials for "${this.projectId}"?`,
+          default: false
+        }]);
         overwrite = confirm.overwrite;
       }
     }
@@ -112,16 +122,14 @@ class ProjectAdd extends BaseCommand {
   async confirmDefaultProjectAndEnvVars() {
     let affirmative = true;
     if (this.projectId === DEFAULT_PROJECT && this.userConfig.getProjectFromEnvironment()) {
-      const confirm = await this.inquirer.prompt([
-        {
-          type: 'confirm',
-          name: 'affirmative',
-          message: 'Account credentials are currently stored in environment variables and will take precedence over ' +
-            `the "${DEFAULT_PROJECT}" project when connecting to Twilio, unless the "${DEFAULT_PROJECT}" project is ` +
-            `explicitly specified. Continue setting up "${DEFAULT_PROJECT}" project?`,
-          default: false
-        }
-      ]);
+      const confirm = await this.inquirer.prompt([{
+        type: 'confirm',
+        name: 'affirmative',
+        message: 'Account credentials are currently stored in environment variables and will take precedence over ' +
+          `the "${DEFAULT_PROJECT}" project when connecting to Twilio, unless the "${DEFAULT_PROJECT}" project is ` +
+          `explicitly specified. Continue setting up "${DEFAULT_PROJECT}" project?`,
+        default: false
+      }]);
       affirmative = confirm.affirmative;
     }
     return affirmative;
@@ -167,7 +175,6 @@ class ProjectAdd extends BaseCommand {
       this.logger.error('Could not create an API Key.');
       this.logger.debug(err);
       this.exit(1);
-      return;
     }
 
     this.userConfig.addProject(this.projectId, this.accountSid, this.region);
