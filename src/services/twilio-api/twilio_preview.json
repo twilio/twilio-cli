@@ -3527,6 +3527,126 @@
         },
         "type": "object"
       },
+      "preview.trusted_comms.current_call": {
+        "properties": {
+          "created_at": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "from": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "to": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "preview.trusted_comms.device": {
+        "properties": {
+          "binding_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^BS[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "phone_number": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^DD[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "preview.trusted_comms.phone_call": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "created_at": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "from": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "reason": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "to": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
       "preview.understand.assistant": {
         "properties": {
           "account_sid": {
@@ -13968,6 +14088,194 @@
         }
       ],
       "x-default-output-properties": []
+    },
+    "/TrustedComms/Business/PhoneCalls": {
+      "description": "TODO: Resource-level docs",
+      "post": {
+        "description": "Initiates a Branded Call.",
+        "parameters": [
+          {
+            "description": "The originating Phone Number",
+            "in": "query",
+            "name": "From",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The terminating Phone Number",
+            "in": "query",
+            "name": "To",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Twiml URL",
+            "in": "query",
+            "name": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The business reason for this phone call",
+            "in": "query",
+            "name": "Reason",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preview.trusted_comms.phone_call"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://preview.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "account_sid",
+        "from",
+        "to",
+        "reason",
+        "date_created"
+      ]
+    },
+    "/TrustedComms/CurrentCall": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a current call given the originating and terminating number.",
+        "parameters": [
+          {
+            "description": "The originating Phone Number",
+            "in": "query",
+            "name": "From",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The terminating Phone Number",
+            "in": "query",
+            "name": "To",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preview.trusted_comms.current_call"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://preview.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "reason",
+        "date_created"
+      ]
+    },
+    "/TrustedComms/Devices": {
+      "description": "TODO: Resource-level docs",
+      "post": {
+        "description": "Registers a new Device and Push Token against Trusted Comms API. This works specially for iOS devices, which don't allow the SDK to know when there's an incoming call, nor the originating number.",
+        "parameters": [
+          {
+            "description": "The end user Phone Number",
+            "in": "query",
+            "name": "PhoneNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Push Token for this Phone Number",
+            "in": "query",
+            "name": "PushToken",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preview.trusted_comms.device"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://preview.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "phone_number",
+        "binding_sid"
+      ]
     },
     "/Verification/Services": {
       "description": "TODO: Resource-level docs",

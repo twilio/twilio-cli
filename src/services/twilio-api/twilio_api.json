@@ -16019,6 +16019,54 @@
       ]
     },
     "/2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json": {
+      "delete": {
+        "description": "Delete an instance of a connect-app",
+        "parameters": [
+          {
+            "description": "The SID of the Account that created the resource to fetch",
+            "in": "path",
+            "name": "AccountSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^CN[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "GA"
+        ]
+      },
       "description": "Twilio Connect apps",
       "get": {
         "description": "Fetch an instance of a connect-app",

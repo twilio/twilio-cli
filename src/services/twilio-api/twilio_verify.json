@@ -587,7 +587,7 @@
             }
           },
           {
-            "description": "The local to use for the verification SMS or call",
+            "description": "The locale to use for the verification SMS or call",
             "in": "query",
             "name": "Locale",
             "required": false,

@@ -846,6 +846,47 @@
         },
         "type": "object"
       },
+      "video.v1.room.room_participant.room_participant_subscribe_rule": {
+        "properties": {
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "room_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "rules": {
+            "type": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "type": "object"
+      },
       "video.v1.room.room_participant.room_participant_subscribed_track": {
         "properties": {
           "date_created": {
@@ -880,6 +921,14 @@
               "type": "string"
             }
           },
+          "participant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
           "publisher_sid": {
             "type": {
               "maxLength": 34,
@@ -904,11 +953,9 @@
               "type": "string"
             }
           },
-          "subscriber_sid": {
+          "url": {
             "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "format": "uri",
               "type": "string"
             }
           }
@@ -2788,7 +2835,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "A system-generated 34-character string that uniquely identifies this Room.",
             "in": "path",
             "name": "RoomSid",
             "required": true,
@@ -3085,13 +3132,13 @@
         "kind"
       ]
     },
-    "/v1/Rooms/{RoomSid}/Participants/{Sid}": {
-      "description": "Participants in video rooms",
+    "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribeRules": {
+      "description": "TODO: Resource-level docs",
       "get": {
-        "description": null,
+        "description": "Returns a list of Subscribe Rules for the Participant.",
         "parameters": [
           {
-            "description": null,
+            "description": "Unique Room identifier where the Subscribe Rules apply",
             "in": "path",
             "name": "RoomSid",
             "required": true,
@@ -3103,9 +3150,9 @@
             }
           },
           {
-            "description": null,
+            "description": "Unique Participant identifier to apply Subscribe Rules.",
             "in": "path",
-            "name": "Sid",
+            "name": "ParticipantSid",
             "required": true,
             "schema": {
               "maxLength": 34,
@@ -3120,7 +3167,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/video.v1.room.room_participant"
+                  "$ref": "#/components/schemas/video.v1.room.room_participant.room_participant_subscribe_rule"
                 }
               }
             }
@@ -3132,14 +3179,14 @@
           }
         ],
         "tags": [
-          "GA"
+          "Beta"
         ]
       },
       "post": {
-        "description": null,
+        "description": "Update the Subscribe Rules for the Participant",
         "parameters": [
           {
-            "description": null,
+            "description": "Unique Room identifier where the Subscribe Rules apply",
             "in": "path",
             "name": "RoomSid",
             "required": true,
@@ -3151,9 +3198,9 @@
             }
           },
           {
-            "description": null,
+            "description": "Unique Participant identifier to apply Subscribe Rules.",
             "in": "path",
-            "name": "Sid",
+            "name": "ParticipantSid",
             "required": true,
             "schema": {
               "maxLength": 34,
@@ -3163,25 +3210,21 @@
             }
           },
           {
-            "description": "Set to disconnected to remove participant.",
+            "description": "A JSON-encoded array of Subscribe Rules.",
             "in": "query",
-            "name": "Status",
+            "name": "Rules",
             "required": false,
             "schema": {
-              "enum": [
-                "connected",
-                "disconnected"
-              ],
-              "type": "string"
+              "type": "object"
             }
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/video.v1.room.room_participant"
+                  "$ref": "#/components/schemas/video.v1.room.room_participant.room_participant_subscribe_rule"
                 }
               }
             }
@@ -3193,7 +3236,7 @@
           }
         ],
         "tags": [
-          "GA"
+          "Beta"
         ]
       },
       "servers": [
@@ -3202,18 +3245,18 @@
         }
       ],
       "x-default-output-properties": [
-        "sid",
-        "identity",
-        "status"
+        "participant_sid",
+        "room_sid",
+        "rules"
       ]
     },
-    "/v1/Rooms/{RoomSid}/Participants/{SubscriberSid}/SubscribedTracks": {
+    "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": null,
+        "description": "Returns a list of tracks that are subscribed for the participant.",
         "parameters": [
           {
-            "description": null,
+            "description": "Unique Room identifier where the Tracks are subscribed.",
             "in": "path",
             "name": "RoomSid",
             "required": true,
@@ -3225,72 +3268,14 @@
             }
           },
           {
-            "description": null,
+            "description": "Unique Participant identifier that subscribes to this Track.",
             "in": "path",
-            "name": "SubscriberSid",
+            "name": "ParticipantSid",
             "required": true,
             "schema": {
               "maxLength": 34,
               "minLength": 34,
               "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "DateCreatedAfter",
-            "required": false,
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "DateCreatedBefore",
-            "required": false,
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "Track",
-            "required": false,
-            "schema": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "Publisher",
-            "required": false,
-            "schema": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "Kind",
-            "required": false,
-            "schema": {
-              "enum": [
-                "audio",
-                "video",
-                "data"
-              ],
               "type": "string"
             }
           }
@@ -3353,11 +3338,25 @@
           "GA"
         ]
       },
-      "post": {
-        "description": null,
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "name",
+        "enabled",
+        "kind"
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks/{Sid}": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Returns a single Track resource represented by `TrackSid`.  Note: This is one resource with the Video API that requires a Sid, as Track Name on the subscriber side is not guaranteed to be unique.",
         "parameters": [
           {
-            "description": null,
+            "description": "Unique Room identifier where this Track is subscribed.",
             "in": "path",
             "name": "RoomSid",
             "required": true,
@@ -3369,9 +3368,9 @@
             }
           },
           {
-            "description": null,
+            "description": "Unique Participant identifier that subscribes to this Track.",
             "in": "path",
-            "name": "SubscriberSid",
+            "name": "ParticipantSid",
             "required": true,
             "schema": {
               "maxLength": 34,
@@ -3381,59 +3380,20 @@
             }
           },
           {
-            "description": null,
-            "in": "query",
-            "name": "Track",
-            "required": false,
+            "description": "A 34 character string that uniquely identifies this resource.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
             "schema": {
               "maxLength": 34,
               "minLength": 34,
               "pattern": "^MT[0-9a-fA-F]{32}$",
               "type": "string"
             }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "Publisher",
-            "required": false,
-            "schema": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "Kind",
-            "required": false,
-            "schema": {
-              "enum": [
-                "audio",
-                "video",
-                "data"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "description": null,
-            "in": "query",
-            "name": "Status",
-            "required": false,
-            "schema": {
-              "enum": [
-                "subscribe",
-                "unsubscribe"
-              ],
-              "type": "string"
-            }
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "content": {
               "application/json": {
                 "schema": {
@@ -3462,6 +3422,128 @@
         "name",
         "enabled",
         "kind"
+      ]
+    },
+    "/v1/Rooms/{RoomSid}/Participants/{Sid}": {
+      "description": "Participants in video rooms",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "A system-generated 34-character string that uniquely identifies a Room.",
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A system-generated 34-character string that uniquely identifies this Participant.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_participant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "GA"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "A system-generated 34-character string that uniquely identifies a Room.",
+            "in": "path",
+            "name": "RoomSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^RM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A system-generated 34-character string that uniquely identifies this Participant.",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^PA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set to `disconnected` to remove participant.",
+            "in": "query",
+            "name": "Status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "connected",
+                "disconnected"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/video.v1.room.room_participant"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "GA"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://video.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "identity",
+        "status"
       ]
     },
     "/v1/Rooms/{RoomSid}/Recordings": {
@@ -3894,6 +3976,10 @@
     {
       "description": "This product is Generally Available.",
       "name": "GA"
+    },
+    {
+      "description": "PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.",
+      "name": "Beta"
     },
     {
       "description": "PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.",
