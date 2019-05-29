@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2019-05-29] Version 1.1.2
+---------------------------
+**Verify**
+- Add `approved` to status enum
+
+
 [2019-05-15] Version 1.1.1
 ---------------------------
 **Library**
