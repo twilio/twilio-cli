@@ -64,7 +64,8 @@
       }
     },
     "hooks": {
-      "init": "./src/hooks/init/twilio-api"
+      "init": "./src/hooks/init/twilio-api",
+      "post-api-plugin": "./src/hooks/post-api-plugin/plugin-verification"
     }
   },
   "repository": {

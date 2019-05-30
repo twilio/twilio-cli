@@ -65,6 +65,17 @@ class TwilioRestApiPlugin extends Plugin {
     this.domainTopics = [{ name: BASE_TOPIC_NAME, description: 'advanced access to all of the Twilio APIs' }];
     this.versionTopics = [];
     Object.keys(this.apiBrowser.domains).forEach(this.scanDomain, this);
+
+    this.commands = this.actions.map(actionDefinition => {
+      // Because oclif is constructing the object for us,
+      // we can't pass the actionDefinition in through
+      // the constructor, so we make it a static property
+      // of the newly created command class.
+      const NewCommandClass = class extends TwilioApiCommand {};
+      NewCommandClass.actionDefinition = actionDefinition;
+      TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
+      return NewCommandClass;
+    });
   }
 
   get hooks() {
@@ -86,19 +97,6 @@ class TwilioRestApiPlugin extends Plugin {
   get commandIDs() {
     return this.actions.map(a => [a.topicName, a.commandName].join(TOPIC_SEPARATOR));
   }
-
-  get commands() {
-    return this.actions.map(actionDefinition => {
-      // Because oclif is constructing the object for us,
-      // we can't pass the actionDefinition in through
-      // the constructor, so we make it a static property
-      // of the newly created command class.
-      const NewCommandClass = class extends TwilioApiCommand {};
-      NewCommandClass.actionDefinition = actionDefinition;
-      TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
-      return NewCommandClass;
-    });
-  }
 }
 
 module.exports = async function () {
@@ -108,4 +106,5 @@ module.exports = async function () {
   twilioApiPlugin.tag = 'latest';
   twilioApiPlugin.type = 'core';
   this.config.plugins.push(twilioApiPlugin);
+  await this.config.runHook('post-api-plugin', twilioApiPlugin);
 };
