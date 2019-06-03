@@ -6,9 +6,9 @@ console.log('* To get started, please create a project. Type the following to be
 console.log('*                                                                       *');
 console.log('*     twilio login                                                      *');
 console.log('*                                                                       *');
-console.log('*     or                                                                *');
+console.log('*     OR                                                                *');
 console.log('*                                                                       *');
-console.log('*     twilio project:add <project name>                                 *');
+console.log('*     twilio project:add                                                *');
 console.log('*                                                                       *');
 console.log('*************************************************************************');
 console.log();
