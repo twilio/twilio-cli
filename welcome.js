@@ -2,7 +2,7 @@
 console.log();
 console.log('*************************************************************************');
 console.log('*                                                                       *');
-console.log('* To get started, please create a project. Type the following to begin: *');
+console.log('* To get started, please login to your Twilio account.                  *');
 console.log('*                                                                       *');
 console.log('*     twilio login                                                      *');
 console.log('*                                                                       *');
