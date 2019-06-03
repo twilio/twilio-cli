@@ -4154,17 +4154,6 @@
               "type": "string"
             }
           },
-          "subresource_uris": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
           "uri": {
             "type": {
               "format": "uri",

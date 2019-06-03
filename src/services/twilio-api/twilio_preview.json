@@ -14095,7 +14095,7 @@
         "description": "Initiates a Branded Call.",
         "parameters": [
           {
-            "description": "The originating Phone Number",
+            "description": "Twilio number from which to originate the call",
             "in": "query",
             "name": "From",
             "required": true,
@@ -14113,20 +14113,295 @@
             }
           },
           {
-            "description": "The Twiml URL",
-            "in": "query",
-            "name": "Url",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "description": "The business reason for this phone call",
             "in": "query",
             "name": "Reason",
             "required": false,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "ApplicationSid",
+            "required": false,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AP[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "CallerId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "FallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "FallbackUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "MachineDetection",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "MachineDetectionSilenceTimeout",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "MachineDetectionSpeechEndThreshold",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "MachineDetectionSpeechThreshold",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "MachineDetectionTimeout",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "Method",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "Record",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "RecordingChannels",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "RecordingStatusCallback",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "RecordingStatusCallbackEvent",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "RecordingStatusCallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "SendDigits",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "SipAuthPassword",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "SipAuthUsername",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "StatusCallback",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "StatusCallbackEvent",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "StatusCallbackMethod",
+            "required": false,
+            "schema": {
+              "enum": [
+                "head",
+                "get",
+                "post",
+                "patch",
+                "put",
+                "delete",
+                "HEAD",
+                "GET",
+                "POST",
+                "PATCH",
+                "PUT",
+                "DELETE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "Timeout",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "Trim",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Refers to the Voice API Initiate Call parameter",
+            "in": "query",
+            "name": "Url",
+            "required": false,
+            "schema": {
+              "format": "uri",
               "type": "string"
             }
           }

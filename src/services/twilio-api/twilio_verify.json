@@ -735,7 +735,8 @@
             "required": true,
             "schema": {
               "enum": [
-                "canceled"
+                "canceled",
+                "approved"
               ],
               "type": "string"
             }
