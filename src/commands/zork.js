@@ -1,9 +1,11 @@
+const path = require('path');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const Plugins = require('@oclif/plugin-plugins').default;
 
 class Zork extends BaseCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
-    this.exec = require('../services/await-exec');
+    const zorkPath = path.join(config.configDir, 'node_modules', 'zorkjs');
 
     // We don't have a direct dependency on the zorkjs module,
     // but eslint tries to make sure you don't reference packages
@@ -11,7 +13,7 @@ class Zork extends BaseCommand {
     // you disable specific linter rules for a single line of code.
 
     // eslint-disable-next-line node/no-extraneous-require,node/no-missing-require
-    this.findZork = () => require('zorkjs');
+    this.findZork = () => require(zorkPath);
   }
 
   async run() {
@@ -23,9 +25,11 @@ class Zork extends BaseCommand {
       this.logger.warn('Standby, loading the dungeon...');
 
       try {
-        await this.exec('npm install --no-save zorkjs');
+        this.plugins = this.plugins || new Plugins(this.config);
+        await this.plugins.install('zorkjs', { tag: 'latest', force: false });
         this.runZork();
       } catch (error) {
+        this.logger.debug(JSON.stringify(error));
         this.logger.error('I don\'t know the word "zork".');
         this.exit(1);
       }
@@ -38,7 +42,7 @@ class Zork extends BaseCommand {
   }
 }
 
-Zork.description = 'What could this be?';
+Zork.description = 'what could this be?';
 Zork.flags = BaseCommand.flags;
 Zork.hidden = true;
 

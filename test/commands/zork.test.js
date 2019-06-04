@@ -9,7 +9,7 @@ describe('commands', () => {
       .twilioCliEnv(Config)
       .twilioCreateCommand(Zork, [])
       .do(ctx => {
-        ctx.testCmd.exec = sinon.stub().throws('simulated error installing module');
+        ctx.testCmd.plugins = { install: sinon.stub().throws('simulated error installing module') };
         ctx.testCmd.findZork = sinon.stub().throws('simulated error finding module');
         ctx.testCmd.exit = sinon.fake();
       })
@@ -25,7 +25,7 @@ describe('commands', () => {
       .twilioCliEnv(Config)
       .twilioCreateCommand(Zork, [])
       .do(ctx => {
-        ctx.testCmd.exec = sinon.stub().resolves();
+        ctx.testCmd.plugins = { install: sinon.stub().resolves() };
         ctx.testCmd.findZork = sinon
           .stub()
           .onFirstCall()
