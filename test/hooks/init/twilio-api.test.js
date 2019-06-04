@@ -1,7 +1,7 @@
 const pluginFunc = require('../../../src/hooks/init/twilio-api');
 const { expect, test } = require('@twilio/cli-test');
 
-const getFakeContext = () => ({ config: { plugins: [] } });
+const getFakeContext = () => ({ config: { plugins: [], runHook: () => '' } });
 
 describe('hooks', () => {
   describe('init', () => {
