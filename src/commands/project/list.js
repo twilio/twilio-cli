@@ -9,7 +9,14 @@ class ProjectList extends BaseCommand {
       if (!this.userConfig.projects.some(p => p.region)) {
         this.userConfig.projects.forEach(p => delete p.region);
       }
-
+      let activeProject = this.userConfig.projects[0];
+      if (this.userConfig.activeProject) {
+        const project = this.userConfig.getProjectById(this.userConfig.activeProject);
+        if (project) {
+          activeProject = project;
+        }
+      }
+      activeProject.active = true;
       this.output(this.userConfig.projects);
     } else {
       this.logger.warn('No projects have been configured. Run ' + chalk.whiteBright('twilio project:add') + ' to add one!');
