@@ -3,7 +3,6 @@ const { flags } = require('@oclif/command');
 
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CLIRequestClient } = require('@twilio/cli-core').services;
-const { DEFAULT_PROJECT } = require('@twilio/cli-core').services.config;
 const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
 
 const helpMessages = require('../../services/messaging/help-messages');
@@ -31,7 +30,7 @@ class ProjectAdd extends BaseCommand {
     this.loadArguments();
     await this.promptForProjectId();
 
-    if (!await this.confirmDefaultProjectAndEnvVars() || !await this.confirmOverwrite()) {
+    if (!await this.confirmProjectAndEnvVars() || !await this.confirmOverwrite()) {
       this.cancel();
     }
 
@@ -59,8 +58,7 @@ class ProjectAdd extends BaseCommand {
     if (!this.projectId) {
       const answer = await this.inquirer.prompt([{
         name: 'projectId',
-        message: ProjectAdd.flags.project.description,
-        default: DEFAULT_PROJECT
+        message: ProjectAdd.flags.project.description
       }]);
       this.projectId = answer.projectId;
     }
@@ -119,15 +117,15 @@ class ProjectAdd extends BaseCommand {
     return overwrite;
   }
 
-  async confirmDefaultProjectAndEnvVars() {
+  async confirmProjectAndEnvVars() {
     let affirmative = true;
-    if (this.projectId === DEFAULT_PROJECT && this.userConfig.getProjectFromEnvironment()) {
+    if (this.userConfig.getProjectFromEnvironment()) {
       const confirm = await this.inquirer.prompt([{
         type: 'confirm',
         name: 'affirmative',
         message: 'Account credentials are currently stored in environment variables and will take precedence over ' +
-          `the "${DEFAULT_PROJECT}" project when connecting to Twilio, unless the "${DEFAULT_PROJECT}" project is ` +
-          `explicitly specified. Continue setting up "${DEFAULT_PROJECT}" project?`,
+          `the "${this.projectId}" project when connecting to Twilio, unless the "${this.projectId}" project is ` +
+          `explicitly specified. Continue setting up "${this.projectId}" project?`,
         default: false
       }]);
       affirmative = confirm.affirmative;

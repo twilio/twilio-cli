@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
-const { Config, ConfigData, DEFAULT_PROJECT } = require('@twilio/cli-core').services.config;
+const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const ProjectAdd = require('../../../src/commands/project/add');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
@@ -19,7 +19,7 @@ describe('commands', () => {
           fakePrompt
             .onFirstCall()
             .resolves({
-              projectId: DEFAULT_PROJECT
+              projectId: 'default'
             })
             .onSecondCall()
             .resolves({
