@@ -18,7 +18,7 @@ describe('commands', () => {
         expect(ctx.stderr).to.contain('set identity as active project');
       });
       setup().twilioCommand(ProjectUse, ['incorrectId']).exit(1).it('run project:active with non-existing project', ctx => {
-        expect(ctx.stderr).to.not.be.empty;
+        expect(ctx.stderr).to.contain('does not exist');
       });
     });
   });

@@ -6,7 +6,7 @@ class ProjectUse extends BaseCommand {
 
     const project = this.userConfig.getProjectById(this.args.project);
     if (!project) {
-      this.logger.error('This project does not exist run twilio project:list to see a list of projects');
+      this.logger.error('The project "' + this.args.project + '" does not exist. Run "twilio project:list" to see the list of configured projects.');
       this.exit(1);
     }
     this.userConfig.activeProject = this.args.project;

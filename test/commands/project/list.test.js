@@ -54,6 +54,27 @@ describe('commands', () => {
       test
         .do(ctx => {
           ctx.userConfig = new ConfigData();
+          ctx.userConfig.addProject('project1', constants.FAKE_ACCOUNT_SID);
+          ctx.userConfig.addProject('project2', constants.FAKE_ACCOUNT_SID);
+          ctx.userConfig.activeProject = 'project1';
+        })
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCommand(ProjectList, [])
+        .it('when the active project is set', ctx => {
+          expect(ctx.stdout).to.contain('project1');
+          expect(ctx.stdout).to.contain('project2');
+          expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
+          expect(ctx.stdout).to.not.contain('Region');
+          expect(ctx.stdout.match(/true/g)).to.have.length(1);
+          expect(ctx.stdout).to.match(/project1.*true/);
+          expect(ctx.stderr).to.equal('');
+        });
+
+      test
+        .do(ctx => {
+          ctx.userConfig = new ConfigData();
           ctx.userConfig.addProject('default', constants.FAKE_ACCOUNT_SID, 'dev');
         })
         .twilioCliEnv(Config)
