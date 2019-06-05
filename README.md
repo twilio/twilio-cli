@@ -45,7 +45,7 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 twilio login
 ```
 
-This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. You will be prompted for a shorthand identifier for your Twilio project. This is referred to as the "project ID" which is just an easy to remember, short string to identify the project. (If you've used `git` before, it's like the name you assign to a remote like "origin".)
+This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. You will be prompted for a shorthand identifier for your Twilio project. This is referred to as the "project ID", which is just an easy to remember, short string to identify the project. (If you've used `git` before, it's like the name you assign to a remote like "origin".)
 
 Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "twilio-cli for [username] on [hostname]" in the console) and stored in your system's keychain.
 
@@ -100,9 +100,9 @@ PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  +1209337XXXX  DAVID'S TWILIO CONTACT
 
 Many `list` commands will allow you to specify a `--properties` option to specify which columns you'd like to display. For example, to display only the Phone Number and SMS Url columns, you would pass `--properties "phoneNumber, smsUrl"`.
 
-Note that the default list of properties varies by command and is subject to change with each release.
+Note that the default list of properties varies by command and is subject to change with each release. Use the `--properties` option to explicitly control which columns to output.
 
-Also note that currently, the column names must match the JSON property names in the Twilio API.
+Also note that the column names must match the JSON property names in the Twilio API.
 
 #### JSON output format
 
