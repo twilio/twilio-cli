@@ -74,7 +74,7 @@ The CLI will attempt to load credentials in the following order of priority:
 
 1. From the project specified with the `-p` parameter
 1. From environment variables, if set
-1. From the default project, if it exists
+1. From the active project, if it exists
 
 ### Step 2 - Explore
 
@@ -145,7 +145,7 @@ To store credentials for multiple projects, you can use a shorthand "project id"
 
 When you run `twilio project:add`, it stores your credentials under a project called `default`. This is the project that will be used for all subsequent commands.
 
-To add a second project after the default project, you can run `twilio project:add -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`).
+To add a second project after the default project, you can run `twilio project:add -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`). Alternatively you can run `twilio project:use my_other_project` to set your second project as the project you want to use for all subsequent commands.
 
 ## Plugins
 
