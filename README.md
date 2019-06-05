@@ -21,7 +21,16 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 
 ## Setup
 
+You can install the Twilio via npm or Homebrew.
+
+### NPM
+
 1. Install the CLI globally: `npm install -g twilio-cli`
+1. Now you can run the CLI from anywhere using the `twilio` command.
+
+### Homebrew
+
+1. `brew tap twilio/brew && brew install twilio`
 1. Now you can run the CLI from anywhere using the `twilio` command.
 
 ### Troubleshooting
