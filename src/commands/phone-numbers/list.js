@@ -10,7 +10,6 @@ class NumberList extends TwilioClientCommand {
   }
 }
 
-NumberList.aliases = ['number:list', 'phone-number:list'];
 NumberList.description = 'show what Twilio phone numbers you have configured';
 
 NumberList.flags = Object.assign(
