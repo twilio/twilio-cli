@@ -1,16 +1,16 @@
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
-const ProjectList = require('../../../src/commands/project/list');
+const ProjectsList = require('../../../src/commands/projects/list');
 
 describe('commands', () => {
-  describe('project', () => {
+  describe('projects', () => {
     describe('list', () => {
       test
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
-        .twilioCommand(ProjectList, [])
-        .it('runs project:list with no projects', ctx => {
+        .twilioCommand(ProjectsList, [])
+        .it('runs projects:list with no projects', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('No projects have been configured');
         });
@@ -23,8 +23,8 @@ describe('commands', () => {
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
-        .twilioCommand(ProjectList, [])
-        .it('runs project:list with 1 project', ctx => {
+        .twilioCommand(ProjectsList, [])
+        .it('runs projects:list with 1 project', ctx => {
           expect(ctx.stdout).to.contain('project1');
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
           expect(ctx.stdout).to.not.contain('Region');
@@ -41,8 +41,8 @@ describe('commands', () => {
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
-        .twilioCommand(ProjectList, [])
-        .it('runs project:list with multiple projects', ctx => {
+        .twilioCommand(ProjectsList, [])
+        .it('runs projects:list with multiple projects', ctx => {
           expect(ctx.stdout).to.contain('project1');
           expect(ctx.stdout).to.contain('project2');
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
@@ -61,7 +61,7 @@ describe('commands', () => {
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
-        .twilioCommand(ProjectList, [])
+        .twilioCommand(ProjectsList, [])
         .it('when the active project is set', ctx => {
           expect(ctx.stdout).to.contain('project1');
           expect(ctx.stdout).to.contain('project2');
@@ -80,8 +80,8 @@ describe('commands', () => {
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
-        .twilioCommand(ProjectList, [])
-        .it('runs project:list with 1 regional project', ctx => {
+        .twilioCommand(ProjectsList, [])
+        .it('runs projects:list with 1 regional project', ctx => {
           expect(ctx.stdout).to.contain('default');
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
           expect(ctx.stdout).to.contain('dev');

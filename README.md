@@ -129,11 +129,11 @@ All debug, informational, warning, and error information is sent to `stderr`. Th
 
 ### Multiple Twilio accounts/projects
 
-When you run `twilio login` (an alias for `twilio project:add`), it stores your credentials and associates them with the provided project ID. The first project added will default to being the "active" project. The active project is used for all subsequent commands.
+When you run `twilio login` (an alias for `twilio projects:add`), it stores your credentials and associates them with the provided project ID. The first project added will default to being the "active" project. The active project is used for all subsequent commands.
 
 To add additional projects, run `twilio login` again but provide a different project ID (like, `my_other_proj`). Then, when you run subsequent commands, just include `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`).
 
-Alternatively, you may switch which project is active using the `twilio project:use` command. To see the full list of local projects (including which project is active), run `twilio project:list`.
+Alternatively, you may switch which project is active using the `twilio projects:use` command. To see the full list of local projects (including which project is active), run `twilio projects:list`.
 
 ### Want to use environment variables instead of creating a project?
 

@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 
-class ProjectList extends BaseCommand {
+class ProjectsList extends BaseCommand {
   async run() {
     await super.run();
     if (this.userConfig.projects.length > 0) {
@@ -19,12 +19,12 @@ class ProjectList extends BaseCommand {
       activeProject.active = true;
       this.output(this.userConfig.projects);
     } else {
-      this.logger.warn('No projects have been configured. Run ' + chalk.whiteBright('twilio project:add') + ' to add one!');
+      this.logger.warn('No projects have been configured. Run ' + chalk.whiteBright('twilio projects:add') + ' to add one!');
     }
   }
 }
 
-ProjectList.description = 'show what Twilio projects you have configured';
-ProjectList.flags = BaseCommand.flags;
+ProjectsList.description = 'show what Twilio projects you have configured';
+ProjectsList.flags = BaseCommand.flags;
 
-module.exports = ProjectList;
+module.exports = ProjectsList;

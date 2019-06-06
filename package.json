@@ -59,7 +59,7 @@
       "@oclif/plugin-plugins"
     ],
     "topics": {
-      "project": {
+      "projects": {
         "description": "manage credentials for Twilio projects"
       }
     },
