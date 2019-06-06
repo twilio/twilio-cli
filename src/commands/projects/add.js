@@ -13,7 +13,7 @@ const FRIENDLY_STORAGE_LOCATIONS = {
   [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret'
 };
 
-class ProjectAdd extends BaseCommand {
+class ProjectsAdd extends BaseCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
 
@@ -58,7 +58,7 @@ class ProjectAdd extends BaseCommand {
     if (!this.projectId) {
       const answer = await this.inquirer.prompt([{
         name: 'projectId',
-        message: ProjectAdd.flags.project.description
+        message: ProjectsAdd.flags.project.description
       }]);
       this.projectId = answer.projectId;
     }
@@ -68,7 +68,7 @@ class ProjectAdd extends BaseCommand {
     if (!this.accountSid) {
       this.questions.push({
         name: 'accountSid',
-        message: ProjectAdd.args[0].description + ':',
+        message: ProjectsAdd.args[0].description + ':',
         validate: input => Boolean(input)
       });
     }
@@ -79,7 +79,7 @@ class ProjectAdd extends BaseCommand {
       this.questions.push({
         type: 'password',
         name: 'authToken',
-        message: ProjectAdd.flags['auth-token'].description,
+        message: ProjectsAdd.flags['auth-token'].description,
         validate: input => Boolean(input)
       });
     }
@@ -188,10 +188,10 @@ class ProjectAdd extends BaseCommand {
   }
 }
 
-ProjectAdd.aliases = ['login'];
-ProjectAdd.description = 'add credentials for an existing Twilio project';
+ProjectsAdd.aliases = ['login'];
+ProjectsAdd.description = 'add credentials for an existing Twilio project';
 
-ProjectAdd.flags = Object.assign(
+ProjectsAdd.flags = Object.assign(
   {
     'auth-token': flags.string({
       description: 'Your Twilio Auth Token for your Twilio project'
@@ -207,11 +207,11 @@ ProjectAdd.flags = Object.assign(
   TwilioClientCommand.flags // Yes! We _do_ want the same flags as TwilioClientCommand
 );
 
-ProjectAdd.args = [
+ProjectsAdd.args = [
   {
     name: 'account-sid',
     description: 'The Account SID for your Twilio project'
   }
 ];
 
-module.exports = ProjectAdd;
+module.exports = ProjectsAdd;

@@ -1,10 +1,10 @@
-const ProjectAdd = require('./project/add');
+const ProjectsAdd = require('./projects/add');
 
-class Login extends ProjectAdd {
+class Login extends ProjectsAdd {
 }
 
-Login.aliases = ['project:add'];
-Login.flags = ProjectAdd.flags;
-Login.args = ProjectAdd.args;
+Login.aliases = ['projects:add'];
+Login.flags = ProjectsAdd.flags;
+Login.args = ProjectsAdd.args;
 
 module.exports = Login;

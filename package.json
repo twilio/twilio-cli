@@ -62,7 +62,7 @@
       "phone-numbers": {
         "description": "manage Twilio phone numbers"
       },
-      "project": {
+      "projects": {
         "description": "manage credentials for Twilio projects"
       }
     },

@@ -1,9 +1,9 @@
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
-const ProjectUse = require('../../../src/commands/project/use');
+const ProjectsUse = require('../../../src/commands/projects/use');
 
 describe('commands', () => {
-  describe('project', () => {
+  describe('projects', () => {
     describe('use', () => {
       const setup = () => test
         .stdout()
@@ -14,10 +14,10 @@ describe('commands', () => {
         })
         .twilioCliEnv(Config);
 
-      setup().twilioCommand(ProjectUse, ['identity']).it('should set the active project with id', ctx => {
+      setup().twilioCommand(ProjectsUse, ['identity']).it('should set the active project with id', ctx => {
         expect(ctx.stderr).to.contain('set identity as active project');
       });
-      setup().twilioCommand(ProjectUse, ['incorrectId']).exit(1).it('run project:active with non-existing project', ctx => {
+      setup().twilioCommand(ProjectsUse, ['incorrectId']).exit(1).it('run projects:active with non-existing project', ctx => {
         expect(ctx.stderr).to.contain('does not exist');
       });
     });

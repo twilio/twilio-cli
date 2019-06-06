@@ -2,16 +2,16 @@
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
-const ProjectAdd = require('../../../src/commands/project/add');
+const ProjectsAdd = require('../../../src/commands/projects/add');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
 describe('commands', () => {
-  describe('project', () => {
+  describe('projects', () => {
     describe('add', () => {
       const addTest = (commandArgs = []) => test
         .twilioFakeProject(ConfigData)
         .twilioCliEnv(Config)
-        .twilioCreateCommand(ProjectAdd, commandArgs)
+        .twilioCreateCommand(ProjectsAdd, commandArgs)
         .stdout()
         .stderr()
         .do(ctx => {
@@ -44,7 +44,7 @@ describe('commands', () => {
           });
         })
         .do(ctx => ctx.testCmd.run())
-        .it('runs project:add', ctx => {
+        .it('runs projects:add', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');

@@ -1,12 +1,12 @@
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 
-class ProjectUse extends BaseCommand {
+class ProjectsUse extends BaseCommand {
   async run() {
     await super.run();
 
     const project = this.userConfig.getProjectById(this.args.project);
     if (!project) {
-      this.logger.error('The project "' + this.args.project + '" does not exist. Run "twilio project:list" to see the list of configured projects.');
+      this.logger.error('The project "' + this.args.project + '" does not exist. Run "twilio projects:list" to see the list of configured projects.');
       this.exit(1);
     }
     this.userConfig.activeProject = this.args.project;
@@ -15,15 +15,15 @@ class ProjectUse extends BaseCommand {
     this.logger.info(configSavedMessage);
   }
 }
-ProjectUse.description = 'select which project to use';
+ProjectsUse.description = 'select which project to use';
 
-ProjectUse.args = [
+ProjectsUse.args = [
   {
     name: 'project',
     description: 'Shorthand identifier for your Twilio project',
     required: true
   }
 ];
-ProjectUse.flags = BaseCommand.flags;
+ProjectsUse.flags = BaseCommand.flags;
 
-module.exports = ProjectUse;
+module.exports = ProjectsUse;
