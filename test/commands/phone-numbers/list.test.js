@@ -1,9 +1,9 @@
 const { expect, test, constants } = require('@twilio/cli-test');
-const NumberList = require('../../../src/commands/incoming-phone-number/list');
+const NumberList = require('../../../src/commands/phone-numbers/list');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 describe('commands', () => {
-  describe('incoming-phone-number', () => {
+  describe('phone-numbers', () => {
     describe('list', () => {
       const setUpTest = (args = []) => {
         return test

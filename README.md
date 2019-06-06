@@ -69,29 +69,29 @@ twilio
 Lists all available commands.
 
 ```
-twilio incoming-phone-number:list
+twilio phone-numbers:list
 ```
 
 Lists all your phone numbers.
 
-Add `--help` to any command to get help (e.g. `twilio incoming-phone-number:list --help`)
+Add `--help` to any command to get help (e.g. `twilio phone-numbers:list --help`)
 
 ### Webhooks
 
 You can set a webhook on a phone number like so:
 
 ```
-twilio incoming-phone-number:update [PN sid or E.164] --sms-url http://url
+twilio phone-numbers:update [PN sid or E.164] --sms-url http://url
 ```
 
-That sets the primary SMS url. There are also options for setting the voice url, fallback urls, and methods for each. Run `twilio incoming-phone-number:update --help` for a full list of options.
+That sets the primary SMS url. There are also options for setting the voice url, fallback urls, and methods for each. Run `twilio phone-numbers:update --help` for a full list of options.
 
 ### Ngrok integration
 
 When you set a webhook, if you specify a URL that uses the host name of `localhost` or `127.0.0.1`, the twilio-cli will automatically create an ngrok tunnel for you and set your webhook to the new ngrok URL. For example:
 
 ```
-twilio incoming-phone-number:update [PN sid or E.164] --sms-url http://localhost:5000/handle_sms
+twilio phone-numbers:update [PN sid or E.164] --sms-url http://localhost:5000/handle_sms
 ```
 
 ### Output formats
@@ -131,7 +131,7 @@ All debug, informational, warning, and error information is sent to `stderr`. Th
 
 When you run `twilio login` (an alias for `twilio projects:add`), it stores your credentials and associates them with the provided project ID. The first project added will default to being the "active" project. The active project is used for all subsequent commands.
 
-To add additional projects, run `twilio login` again but provide a different project ID (like, `my_other_proj`). Then, when you run subsequent commands, just include `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`).
+To add additional projects, run `twilio login` again but provide a different project ID (like, `my_other_proj`). Then, when you run subsequent commands, just include `-p my_other_proj` in the command (e.g. `twilio phone-numbers:list -p my_other_proj`).
 
 Alternatively, you may switch which project is active using the `twilio projects:use` command. To see the full list of local projects (including which project is active), run `twilio projects:list`.
 

@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const { expect, test, constants, getFakeSid } = require('@twilio/cli-test');
-const NumberUpdate = require('../../../src/commands/incoming-phone-number/update');
+const NumberUpdate = require('../../../src/commands/phone-numbers/update');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 const fakeNumber = '+12095551212';
@@ -35,7 +35,7 @@ async function createCommand(ctx, args, useFakeNgrok) {
 }
 
 describe('commands', () => {
-  describe('incoming-phone-number', () => {
+  describe('phone-numbers', () => {
     describe('update', () => {
       const setUpTest = (args = [], useFakeNgrok = false) => {
         return test
