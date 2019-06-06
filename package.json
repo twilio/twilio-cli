@@ -59,6 +59,9 @@
       "@oclif/plugin-plugins"
     ],
     "topics": {
+      "phone-numbers": {
+        "description": "manage Twilio phone numbers"
+      },
       "project": {
         "description": "manage credentials for Twilio projects"
       }

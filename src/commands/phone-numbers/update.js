@@ -54,7 +54,6 @@ class NumberUpdate extends TwilioClientCommand {
   }
 }
 
-NumberUpdate.aliases = ['number:update', 'phone-number:update'];
 NumberUpdate.description = 'update the properties of a Twilio phone number';
 
 NumberUpdate.PropertyFlags = {
