@@ -163,7 +163,9 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
         parameter: param,
         action: action,
         resource: resource
-      }
+      },
+      // Allow negated booleans ('-no' option)
+      allowNo: true
     };
 
     const flagType = typeMap[param.schema.type];
