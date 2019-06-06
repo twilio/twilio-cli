@@ -99,12 +99,11 @@ class TwilioRestApiPlugin extends Plugin {
   }
 }
 
-module.exports = async function () {
+module.exports = function () {
   const twilioApiPlugin = new TwilioRestApiPlugin(this.config);
   twilioApiPlugin.name = 'api-cli-commands';
   twilioApiPlugin.version = this.config.version;
   twilioApiPlugin.tag = 'latest';
   twilioApiPlugin.type = 'core';
   this.config.plugins.push(twilioApiPlugin);
-  await this.config.runHook('post-api-plugin', twilioApiPlugin);
 };

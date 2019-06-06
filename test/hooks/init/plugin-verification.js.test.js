@@ -1,10 +1,9 @@
-const pluginFunc = require('../../../src/hooks/post-api-plugin/plugin-verification');
+const pluginFunc = require('../../../src/hooks/init/plugin-verification');
 const { expect, test } = require('@twilio/cli-test');
 
-const CLI_NAME = 'twilio-cli';
-
 const getCliPlugin = () => ({
-  name: CLI_NAME,
+  name: 'twilio-cli',
+  type: 'core',
   commands: [{
     id: 'login',
     aliases: ['logon']
@@ -17,6 +16,7 @@ const getCliPlugin = () => ({
 
 const getApiPlugin = () => ({
   name: 'api-plugin',
+  type: 'core',
   commands: [{
     id: 'api'
   }]
@@ -43,7 +43,6 @@ const getConflictingPlugin = () => ({
 });
 
 const getFakeConfig = () => ({
-  name: CLI_NAME,
   plugins: [getCliPlugin(), getApiPlugin()]
 });
 
