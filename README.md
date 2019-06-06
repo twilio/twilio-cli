@@ -26,7 +26,7 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 
 ### Troubleshooting
 
-- [Resolving EACCES permissions errors when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+* [Resolving EACCES permissions errors when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 
 ### Updating
 
@@ -42,39 +42,14 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 ### Step 1 - Login (aka add a project)
 
 ```
-twilio project:add
+twilio login
 ```
 
-which is an alias for:
+This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. You will be prompted for a shorthand identifier for your Twilio project. This is referred to as the "project ID", which is just an easy to remember, short string to identify the project. (If you've used `git` before, it's like the name you assign to a remote like "origin".)
 
-```
-twilio project:add -p default
-```
+Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "twilio-cli for [username] on [hostname]" in the console) and stored in your system's keychain.
 
-This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "twilio-cli for [username] on [hostname]" in the console) and stored in your system's keychain.
-
-#### Want to use environment variables instead of creating a project?
-
-You can also use credentials stored in environment variables:
-
-##### OPTION 1 (recommended)
-- `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
-- `TWILIO_API_KEY` = an API Key created in [your console](https://twil.io/get-api-key)
-- `TWILIO_API_SECRET` = the secret for the API Key (you would have received this when you created an API key)
-
-##### OPTION 2
-- `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
-- `TWILIO_AUTH_TOKEN` = your Auth Token from [your console](https://www.twilio.com/console)
-
-_NOTE: Option 2 should only be used in cases where you are unable to make use of option 1 (which are uncommon)._
-
-#### Precedence of stored credentials
-
-The CLI will attempt to load credentials in the following order of priority:
-
-1. From the project specified with the `-p` parameter
-1. From environment variables, if set
-1. From the default project, if it exists
+For details on how to work with multiple Twilio accounts/projects or use environment variables, see the [projects](#projects) section.
 
 ### Step 2 - Explore
 
@@ -125,7 +100,9 @@ PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  +1209337XXXX  DAVID'S TWILIO CONTACT
 
 Many `list` commands will allow you to specify a `--properties` option to specify which columns you'd like to display. For example, to display only the Phone Number and SMS Url columns, you would pass `--properties "phoneNumber, smsUrl"`.
 
-Note that currently, the column names must match the JSON property names in the Twilio API.
+Note that the default list of properties varies by command and is subject to change with each release. Use the `--properties` option to explicitly control which columns to output.
+
+Also note that the column names must match the JSON property names in the Twilio API.
 
 #### JSON output format
 
@@ -139,13 +116,38 @@ To change the output format to tab separated values (TSV), add `-o tsv` to the c
 
 All debug, informational, warning, and error information is sent to `stderr`. This is so it can be easily separated from the command output. You can decide what level of logging you'd like by using the `-l` option. The valid levels of logging messages are `debug`, `info`, `warn`, `error`, and `none`.
 
+## Projects
+
 ### Multiple Twilio accounts/projects
 
-To store credentials for multiple projects, you can use a shorthand "project id" which is just an easy to remember, short string to identify the project. (If you've used `git` before, it's like the name you assign to a remote like "origin".)
+When you run `twilio login` (an alias for `twilio project:add`), it stores your credentials and associates them with the provided project ID. The first project added will default to being the "active" project. The active project is used for all subsequent commands.
 
-When you run `twilio project:add`, it stores your credentials under a project called `default`. This is the project that will be used for all subsequent commands.
+To add additional projects, run `twilio login` again but provide a different project ID (like, `my_other_proj`). Then, when you run subsequent commands, just include `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`).
 
-To add a second project after the default project, you can run `twilio project:add -p my_other_proj` (using whatever identifier you'd like in place of `my_other_proj`). Then, when you run subsequent commands, just include the `-p my_other_proj` in the command (e.g. `twilio incoming-phone-number:list -p my_other_proj`).
+Alternatively, you may switch which project is active using the `twilio project:use` command. To see the full list of local projects (including which project is active), run `twilio project:list`.
+
+### Want to use environment variables instead of creating a project?
+
+You can also use credentials stored in environment variables:
+
+#### OPTION 1 (recommended)
+* `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
+* `TWILIO_API_KEY` = an API Key created in [your console](https://twil.io/get-api-key)
+* `TWILIO_API_SECRET` = the secret for the API Key (you would have received this when you created an API key)
+
+#### OPTION 2
+* `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
+* `TWILIO_AUTH_TOKEN` = your Auth Token from [your console](https://www.twilio.com/console)
+
+_NOTE: Option 2 should only be used in cases where you are unable to make use of option 1 (which are uncommon)._
+
+### Precedence of stored credentials
+
+The CLI will attempt to load credentials in the following order of priority:
+
+1. From the project specified with the `-p` parameter
+1. From environment variables, if set
+1. From the active project
 
 ## Plugins
 
@@ -155,7 +157,7 @@ At this time, only two plugins exist:
 
 * [twilio-run plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [the twilio-run plugin](https://github.com/twilio-labs/plugin-serverless).  
 
-* [twilio debugger plugin](https://github.com/twilio/plugin-debugger): The debugger plugin will display Twilio Degugger logs directly in your terminal.
+* [twilio debugger plugin](https://github.com/twilio/plugin-debugger): The debugger plugin will display Twilio Debugger logs directly in your terminal.
 
 ### Install a plugin
 
