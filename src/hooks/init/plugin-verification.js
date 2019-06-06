@@ -36,11 +36,8 @@ const checkCommandConflicts = (corePlugins, installedPlugins) => {
   });
 };
 
-module.exports = function (twilioApiPlugin) {
-  const corePluginNames = [this.config.name, twilioApiPlugin.name];
-  const isCorePlugin = plugin => {
-    return corePluginNames.includes(plugin.name);
-  };
+module.exports = function () {
+  const isCorePlugin = plugin => plugin.type === 'core';
 
   // Split the plugins into "core" and "installed".
   const [corePlugins, installedPlugins] = splitArray(this.config.plugins, isCorePlugin);
