@@ -10,11 +10,12 @@ Closes #2
 # Fixes # 
 
 ### Checklist
-- [ ] I have made a material change to the repo (functionality, testing, spelling, grammar)
-- [ ] I updated my branch with the master branch.
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] I have added necessary documentation about the functionality in the appropriate .md file
-- [ ] I have added in line documentation to the code I modified
+* [ ] I acknowledge that all my contributions will be made under the project's license
+* [ ] I have made a material change to the repo (functionality, testing, spelling, grammar)
+* [ ] I updated my branch with the master branch.
+* [ ] I have added tests that prove my fix is effective or that my feature works
+* [ ] I have added necessary documentation about the functionality in the appropriate .md file
+* [ ] I have added in line documentation to the code I modified
 
 **Contributing to Twilio**
 
