@@ -26,7 +26,7 @@ You can install `twilio-cli` via [npm](https://www.npmjs.com/get-npm) or [Homebr
 ### NPM
 
 1. Install the CLI globally: `npm install -g twilio-cli`
-1. Now you can run the CLI from anywhere using the `twilio` command.
+2. Now you can run the CLI from anywhere using the `twilio` command.
 
 ### Homebrew
 
