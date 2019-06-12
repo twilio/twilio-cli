@@ -1264,7 +1264,7 @@
         "description": null,
         "parameters": [
           {
-            "description": "The 34 character unique sid of the Service.",
+            "description": "The 34 character unique SID of the Service.",
             "in": "path",
             "name": "MessagingServiceSid",
             "required": true,
@@ -1282,6 +1282,24 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "description": "A single colon-delimited address.",
+            "in": "query",
+            "name": "From",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Integer number in range [1, 14400].",
+            "in": "query",
+            "name": "Ttl",
+            "required": false,
+            "schema": {
+              "type": "integer"
             }
           },
           {
@@ -1305,28 +1323,120 @@
               },
               "type": "array"
             }
-          },
-          {
-            "description": "A single colon-delimited address.",
-            "in": "query",
-            "name": "From",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Integer number in range [1, 14400].",
-            "in": "query",
-            "name": "Ttl",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
           }
         ],
         "responses": {
           "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/messaging.v1.service.message"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://messaging.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "from",
+        "to",
+        "date_created"
+      ]
+    },
+    "/v1/Services/{MessagingServiceSid}/Messages/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The 34 character unique SID of the Service.",
+            "in": "path",
+            "name": "MessagingServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The 34 character unique SID of the Message",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The 34 character unique SID of the Service.",
+            "in": "path",
+            "name": "MessagingServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The 34 character unique SID of the Message",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
             "content": {
               "application/json": {
                 "schema": {

@@ -11,6 +11,11 @@
               "type": "string"
             }
           },
+          "attributes": {
+            "type": {
+              "type": "object"
+            }
+          },
           "call_sid": {
             "type": {
               "maxLength": 34,

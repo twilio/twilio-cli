@@ -883,7 +883,7 @@
     "/v1/Services": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieve a list of all Services for Twilio Proxy.",
+        "description": "Retrieve a list of all Services for Twilio Proxy. A maximum of 100 records will be returned per page.",
         "parameters": [],
         "responses": {
           "200": {
@@ -1069,7 +1069,7 @@
     "/v1/Services/{ServiceSid}/PhoneNumbers": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieve a list of all Phone Numbers in the Proxy Number Pool for a Service.",
+        "description": "Retrieve a list of all Phone Numbers in the Proxy Number Pool for a Service. A maximum of 100 records will be returned per page.",
         "parameters": [
           {
             "description": "The SID of the parent Service resource of the PhoneNumber resource to read",
@@ -1388,7 +1388,7 @@
     "/v1/Services/{ServiceSid}/Sessions": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieve a list of all Sessions for the Service.",
+        "description": "Retrieve a list of all Sessions for the Service. A maximum of 100 records will be returned per page.",
         "parameters": [
           {
             "description": "The SID of the Service to fetch the resource from",
@@ -1582,7 +1582,7 @@
     "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieve a list of all Interactions for a Session.",
+        "description": "Retrieve a list of all Interactions for a Session. A maximum of 100 records will be returned per page.",
         "parameters": [
           {
             "description": "The SID of the parent Service to read the resource from",
@@ -2555,20 +2555,6 @@
             }
           },
           {
-            "description": "The Mode of the Session",
-            "in": "query",
-            "name": "Mode",
-            "required": false,
-            "schema": {
-              "enum": [
-                "message-only",
-                "voice-only",
-                "voice-and-message"
-              ],
-              "type": "string"
-            }
-          },
-          {
             "description": "The new status of the resource",
             "in": "query",
             "name": "Status",
@@ -2582,18 +2568,6 @@
                 "unknown"
               ],
               "type": "string"
-            }
-          },
-          {
-            "description": "The Participant objects to include in the session",
-            "in": "query",
-            "name": "Participants",
-            "required": false,
-            "schema": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
             }
           }
         ],
@@ -2632,7 +2606,7 @@
     "/v1/Services/{ServiceSid}/ShortCodes": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieve a list of all Short Codes in the Proxy Number Pool for the Service.",
+        "description": "Retrieve a list of all Short Codes in the Proxy Number Pool for the Service. A maximum of 100 records will be returned per page.",
         "parameters": [
           {
             "description": "The SID of the parent Service to read the resource from",

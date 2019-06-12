@@ -799,6 +799,74 @@
           }
         },
         "type": "object"
+      },
+      "autopilot.v1.assistant.webhook": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "assistant_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "events": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "unique_name": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "webhook_method": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "webhook_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -3779,6 +3847,364 @@
       "x-default-output-properties": [
         "samples_count",
         "fields_count"
+      ]
+    },
+    "/v1/Assistants/{AssistantSid}/Webhooks": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to read",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "webhooks": {
+                      "items": {
+                        "$ref": "#/components/schemas/autopilot.v1.assistant.webhook"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the new resource",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The list of space-separated events that this Webhook will subscribe to.",
+            "in": "query",
+            "name": "Events",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL associated with this Webhook.",
+            "in": "query",
+            "name": "WebhookUrl",
+            "required": true,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The method to be used when calling the webhook's URL.",
+            "in": "query",
+            "name": "WebhookMethod",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.webhook"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "events",
+        "wehbook_url",
+        "webhook_method"
+      ]
+    },
+    "/v1/Assistants/{AssistantSid}/Webhooks/{Sid}": {
+      "delete": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resources to delete",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource to delete",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to fetch",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource to fetch",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.webhook"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "post": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The SID of the Assistant that is the parent of the resource to update",
+            "in": "path",
+            "name": "AssistantSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique string that identifies the resource",
+            "in": "path",
+            "name": "Sid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^UM[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "An application-defined string that uniquely identifies the resource",
+            "in": "query",
+            "name": "UniqueName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The list of space-separated events that this Webhook will subscribe to.",
+            "in": "query",
+            "name": "Events",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The URL associated with this Webhook.",
+            "in": "query",
+            "name": "WebhookUrl",
+            "required": false,
+            "schema": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The method to be used when calling the webhook's URL.",
+            "in": "query",
+            "name": "WebhookMethod",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/autopilot.v1.assistant.webhook"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://autopilot.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "sid",
+        "unique_name",
+        "events",
+        "wehbook_url",
+        "webhook_method"
       ]
     },
     "/v1/Assistants/{Sid}": {

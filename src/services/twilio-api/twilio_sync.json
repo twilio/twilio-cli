@@ -44,6 +44,16 @@
               "type": "object"
             }
           },
+          "reachability_debouncing_enabled": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "reachability_debouncing_window": {
+            "type": {
+              "type": "integer"
+            }
+          },
           "reachability_webhooks_enabled": {
             "type": {
               "type": "boolean"
@@ -848,6 +858,24 @@
             "required": false,
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "description": "true or false - Determines whether transient disconnections (i.e. an immediate reconnect succeeds) cause reachability webhooks.",
+            "in": "query",
+            "name": "ReachabilityDebouncingEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Determines how long an identity must be offline before reachability webhooks fire.",
+            "in": "query",
+            "name": "ReachabilityDebouncingWindow",
+            "required": false,
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -4058,7 +4086,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "A unique identifier for this service instance.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4095,7 +4123,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "A unique identifier for this service instance.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4131,7 +4159,7 @@
         "description": null,
         "parameters": [
           {
-            "description": null,
+            "description": "A unique identifier for this service instance.",
             "in": "path",
             "name": "Sid",
             "required": true,
@@ -4177,6 +4205,24 @@
             "required": false,
             "schema": {
               "type": "boolean"
+            }
+          },
+          {
+            "description": "true or false - Determines whether transient disconnections (i.e. an immediate reconnect succeeds) cause reachability webhooks.",
+            "in": "query",
+            "name": "ReachabilityDebouncingEnabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Determines how long an identity must be offline before reachability webhooks fire.",
+            "in": "query",
+            "name": "ReachabilityDebouncingWindow",
+            "required": false,
+            "schema": {
+              "type": "integer"
             }
           }
         ],
