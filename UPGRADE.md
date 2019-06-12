@@ -5,10 +5,18 @@
 
 Config moved from `~/.twilio` (Unix) and `%USERPROFILE%\.twilio` (Windows) to `~/.twilio-cli` and `%USERPROFILE%\.twilio-cli`, respectively.
 
-To copy over your existing configuration, run the following commands (Unix):
+To copy over your existing configuration, run the following commands:
+
+* Unix
 ```
 rm -rf ~/.twilio-cli
 mv ~/.twilio/ ~/.twilio-cli/
+```
+
+* Windows
+```
+rmdir /S %USERPROFILE%\.twilio-cli
+move %USERPROFILE%\.twilio %USERPROFILE%\.twilio-cli
 ```
 
 [2019-04-29] 0.1.1 to 0.1.2
