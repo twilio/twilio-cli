@@ -98,18 +98,22 @@ describe('hooks', () => {
             .resolves({ affirmative: true });
         })
         .nock('https://api.twilio.com', api => {
-          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/AvailablePhoneNumbers/${TEST_COUNTY_CODE}/Local.json`).reply(200, {
-            /* eslint-disable camelcase */
-            available_phone_numbers: [{
-              phone_number: TEST_PHONE_NUMBER,
-              iso_country: TEST_COUNTY_CODE
-            }]
-            /* eslint-enable camelcase */
-          });
-          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/IncomingPhoneNumbers.json`).reply(200, {});
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/AvailablePhoneNumbers/${TEST_COUNTY_CODE}/Local.json`)
+            .reply(200, {
+              /* eslint-disable camelcase */
+              available_phone_numbers: [{
+                phone_number: TEST_PHONE_NUMBER,
+                iso_country: TEST_COUNTY_CODE
+              }]
+              /* eslint-enable camelcase */
+            });
+
+          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/IncomingPhoneNumbers.json`)
+            .reply(200, {});
         })
         .do(ctx => ctx.testCmd.run())
         .it('allows purchasing of a phone number', ctx => {
+          expect(ctx.testCmd.flags).to.eql({ 'phone-number': TEST_PHONE_NUMBER });
           expect(ctx.stderr).to.contain('successfully purchased');
         });
 
