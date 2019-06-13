@@ -112,6 +112,33 @@ describe('hooks', () => {
         .it('allows purchasing of a phone number', ctx => {
           expect(ctx.stderr).to.contain('successfully purchased');
         });
+
+      test.stderr().it('does nothing if the API commands plugin is not found', ctx => {
+        ctx.config = getFakeConfig();
+        ctx.config.plugins[0].name = 'not the API command plugins';
+        pluginFunc.call(ctx);
+
+        expect(ctx.config.plugins).to.have.length(1);
+        expect(ctx.stderr).to.contain('Twilio API Plugin');
+      });
+
+      test.stderr().it('does nothing if no phone number list commands are found', ctx => {
+        ctx.config = getFakeConfig();
+        ctx.config.plugins[0].commands = ctx.config.plugins[0].commands.filter(c => c.id.includes('incoming-phone-numbers'));
+        pluginFunc.call(ctx);
+
+        expect(ctx.config.plugins).to.have.length(1);
+        expect(ctx.stderr).to.contain('locate available');
+      });
+
+      test.stderr().it('does nothing if the phone number create command is not found', ctx => {
+        ctx.config = getFakeConfig();
+        ctx.config.plugins[0].commands = ctx.config.plugins[0].commands.filter(c => c.id.includes('available-phone-numbers'));
+        pluginFunc.call(ctx);
+
+        expect(ctx.config.plugins).to.have.length(1);
+        expect(ctx.stderr).to.contain('locate incoming');
+      });
     });
   });
 });
