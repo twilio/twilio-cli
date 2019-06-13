@@ -106,7 +106,9 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
       }
 
       async purchasePhoneNumber(phoneNumber) {
-        this.flags[PHONE_NUMBER_FLAG] = phoneNumber;
+        this.flags = {
+          [PHONE_NUMBER_FLAG]: phoneNumber
+        };
 
         const createCommandRunner = new ApiCommandRunner(
           this.twilioClient,
