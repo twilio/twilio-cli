@@ -42,7 +42,8 @@
     "/bin",
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json",
-    "/src"
+    "/src",
+    "/welcome.js"
   ],
   "homepage": "https://github.com/twilio/twilio-cli",
   "keywords": [
