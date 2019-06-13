@@ -1,8 +1,8 @@
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
+
 class IncomingPhoneNumberHelper {
-  constructor(command) {
-    this.command = command;
-    this.logger = command.logger;
-    this.twilioClient = command.twilioClient;
+  constructor(twilioClient) {
+    this.twilioClient = twilioClient;
   }
 
   async findPhoneNumber(userInput) {
@@ -14,8 +14,7 @@ class IncomingPhoneNumberHelper {
         response = await this.twilioClient.incomingPhoneNumbers(sid).fetch();
       } catch (err) {
         const errorMessage = err.code === 20404 ? 'Could not find phone number ' + userInput : err.message;
-        this.logger.error(errorMessage);
-        this.command.exit(1);
+        throw new TwilioCliError(errorMessage);
       }
       return response;
     }
@@ -24,14 +23,12 @@ class IncomingPhoneNumberHelper {
     try {
       matches = await this.twilioClient.incomingPhoneNumbers.list({ phoneNumber: userInput });
     } catch (err) {
-      this.logger.error(err.message);
-      this.command.exit(1);
+      throw new TwilioCliError(err.message);
     }
 
     if (matches && matches.length > 0) return matches[0];
 
-    this.logger.error('Could not find phone number ' + userInput);
-    this.command.exit(1);
+    throw new TwilioCliError('Could not find phone number ' + userInput);
   }
 }
 
