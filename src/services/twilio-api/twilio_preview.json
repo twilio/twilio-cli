@@ -3529,9 +3529,24 @@
       },
       "preview.trusted_comms.current_call": {
         "properties": {
+          "bg_color": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "caller": {
+            "type": {
+              "type": "string"
+            }
+          },
           "created_at": {
             "type": {
               "format": "date-time",
+              "type": "string"
+            }
+          },
+          "font_color": {
+            "type": {
               "type": "string"
             }
           },
@@ -3540,7 +3555,22 @@
               "type": "string"
             }
           },
+          "logo": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "manager": {
+            "type": {
+              "type": "string"
+            }
+          },
           "reason": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "shield_img": {
             "type": {
               "type": "string"
             }
@@ -3553,6 +3583,11 @@
               "type": "string"
             }
           },
+          "status": {
+            "type": {
+              "type": "string"
+            }
+          },
           "to": {
             "type": {
               "type": "string"
@@ -3561,6 +3596,11 @@
           "url": {
             "type": {
               "format": "uri",
+              "type": "string"
+            }
+          },
+          "use_case": {
+            "type": {
               "type": "string"
             }
           }

@@ -162,6 +162,14 @@
               "type": "string"
             }
           },
+          "integrations": {
+            "type": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
           "messaging_service_instance_sid": {
             "type": {
               "maxLength": 34,
@@ -305,7 +313,8 @@
                 "sms",
                 "facebook",
                 "whatsapp",
-                "line"
+                "line",
+                "custom"
               ],
               "type": "string"
             }
@@ -993,7 +1002,8 @@
                 "sms",
                 "facebook",
                 "whatsapp",
-                "line"
+                "line",
+                "custom"
               ],
               "type": "string"
             }
@@ -1275,7 +1285,8 @@
                 "sms",
                 "facebook",
                 "whatsapp",
-                "line"
+                "line",
+                "custom"
               ],
               "type": "string"
             }

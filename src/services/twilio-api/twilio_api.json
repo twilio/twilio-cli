@@ -3592,7 +3592,14 @@
           },
           "error_code": {
             "type": {
-              "type": "integer"
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
             }
           },
           "error_message": {
@@ -3625,7 +3632,7 @@
           },
           "price": {
             "type": {
-              "type": "number"
+              "type": "string"
             }
           },
           "price_unit": {
@@ -3652,7 +3659,9 @@
                 "undelivered",
                 "receiving",
                 "received",
-                "accepted"
+                "accepted",
+                "scheduled",
+                "read"
               ],
               "type": "string"
             }
@@ -19924,7 +19933,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "content": {
               "application/json": {
                 "schema": {
