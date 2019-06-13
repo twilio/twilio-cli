@@ -1,5 +1,6 @@
 const { Plugin } = require('@oclif/config');
 const { camelCase, capitalize } = require('../../services/naming-conventions');
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { OutputFormats } = require('@twilio/cli-core').services.outputFormats;
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
@@ -48,8 +49,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
         const phoneNumber = await this.getPhoneNumber();
 
         if (!await this.confirmPurchase(phoneNumber)) {
-          this.logger.warn('Cancelled');
-          this.exit(1);
+          throw new TwilioCliError('Cancelled');
         }
 
         await this.purchasePhoneNumber(phoneNumber);
@@ -68,8 +68,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
         this.logger.debug(`Search returned ${response.length} phone number(s)`);
 
         if (response.length === 0) {
-          this.logger.warn('Search returned 0 phone numbers. Please expand your search criteria.');
-          this.exit(1);
+          throw new TwilioCliError('Search returned 0 phone numbers. Please expand your search criteria.');
         }
 
         const limitedData = this.getLimitedData(response, this.flags.properties);
