@@ -5,6 +5,7 @@ const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 const TEST_COUNTRY_CODE = 'US';
 const TEST_PHONE_NUMBER = '+12345678901';
+const TEST_AREA_CODE = '123';
 
 const getFakeConfig = () => ({
   plugins: [{
@@ -21,7 +22,8 @@ const getFakeConfig = () => ({
         flags: {
           sid: { description: 'local-list-sid' },
           'country-code': { default: TEST_COUNTRY_CODE },
-          'phone-number': { description: 'local-list-phone-number' }
+          'phone-number': { description: 'local-list-phone-number' },
+          'area-code': { default: TEST_AREA_CODE }
         }
       },
       {
@@ -98,7 +100,7 @@ describe('hooks', () => {
             .resolves({ affirmative: true });
         })
         .nock('https://api.twilio.com', api => {
-          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/AvailablePhoneNumbers/${TEST_COUNTRY_CODE}/Local.json`)
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/AvailablePhoneNumbers/${TEST_COUNTRY_CODE}/Local.json?AreaCode=${TEST_AREA_CODE}`)
             .reply(200, {
               /* eslint-disable camelcase */
               available_phone_numbers: [{
@@ -113,7 +115,9 @@ describe('hooks', () => {
         })
         .do(ctx => ctx.testCmd.run())
         .it('allows purchasing of a phone number', ctx => {
-          expect(ctx.testCmd.flags).to.eql({ 'phone-number': TEST_PHONE_NUMBER });
+          expect(ctx.testCmd.flags['phone-number']).to.equal(TEST_PHONE_NUMBER);
+          expect(ctx.testCmd.flags).to.not.include.key('area-code');
+
           expect(ctx.stderr).to.contain('successfully purchased');
         });
 

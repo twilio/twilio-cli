@@ -24,6 +24,7 @@ const CREATE_COMMAND = [
 const LIST_COMMAND_PATTERN = new RegExp(`^${LIST_COMMAND}$`);
 
 const PHONE_NUMBER_FLAG = 'phone-number';
+const AREA_CODE_FLAG = 'area-code';
 
 class TwilioBuyPhoneNumberPlugin extends Plugin {
   constructor(config, listPhoneNumberCommands, createPhoneNumberCommand) {
@@ -105,9 +106,10 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
       }
 
       async purchasePhoneNumber(phoneNumber) {
-        this.flags = {
-          [PHONE_NUMBER_FLAG]: phoneNumber
-        };
+        // Set the phone number flag and drop the area code flag (if present)
+        // as they are mutually exclusive for the create command.
+        this.flags[PHONE_NUMBER_FLAG] = phoneNumber;
+        delete this.flags[AREA_CODE_FLAG];
 
         const createCommandRunner = new ApiCommandRunner(
           this.twilioClient,
