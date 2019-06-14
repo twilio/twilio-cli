@@ -3,7 +3,7 @@ const pluginFunc = require('../../../src/hooks/init/buy-phone-number');
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
-const TEST_COUNTY_CODE = 'US';
+const TEST_COUNTRY_CODE = 'US';
 const TEST_PHONE_NUMBER = '+12345678901';
 
 const getFakeConfig = () => ({
@@ -20,7 +20,7 @@ const getFakeConfig = () => ({
         },
         flags: {
           sid: { description: 'local-list-sid' },
-          'country-code': { default: TEST_COUNTY_CODE },
+          'country-code': { default: TEST_COUNTRY_CODE },
           'phone-number': { description: 'local-list-phone-number' }
         }
       },
@@ -80,7 +80,7 @@ describe('hooks', () => {
 
         const TollFreeCommand = ctx.plugin.commands.find(t => t.id === 'phone-numbers:buy:toll-free');
 
-        expect(TollFreeCommand.description).to.equal('purchase a TollFree phone number');
+        expect(TollFreeCommand.description).to.equal('purchase a toll-free phone number');
         expect(TollFreeCommand.flags.sid.description).to.equal('toll-free-list-sid');
         expect(TollFreeCommand.flags['phone-number']).to.be.undefined;
       });
@@ -98,12 +98,12 @@ describe('hooks', () => {
             .resolves({ affirmative: true });
         })
         .nock('https://api.twilio.com', api => {
-          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/AvailablePhoneNumbers/${TEST_COUNTY_CODE}/Local.json`)
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/AvailablePhoneNumbers/${TEST_COUNTRY_CODE}/Local.json`)
             .reply(200, {
               /* eslint-disable camelcase */
               available_phone_numbers: [{
                 phone_number: TEST_PHONE_NUMBER,
-                iso_country: TEST_COUNTY_CODE
+                iso_country: TEST_COUNTRY_CODE
               }]
               /* eslint-enable camelcase */
             });

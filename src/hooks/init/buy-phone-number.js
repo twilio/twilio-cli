@@ -1,5 +1,4 @@
 const { Plugin } = require('@oclif/config');
-const { camelCase, capitalize } = require('../../services/naming-conventions');
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { OutputFormats } = require('@twilio/cli-core').services.outputFormats;
@@ -127,7 +126,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
     };
 
     NewCommandClass.id = [this.commandTopic.name, phoneNumberType].join(TOPIC_SEPARATOR);
-    NewCommandClass.description = `purchase a ${capitalize(camelCase(phoneNumberType))} phone number`;
+    NewCommandClass.description = `purchase a ${phoneNumberType} phone number`;
     NewCommandClass.args = listCommand.args;
     // Merge the flags for the commands we're utilizing. Place the list command
     // last so it takes precedence for conflicting flags (like the output
