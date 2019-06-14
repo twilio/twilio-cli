@@ -10,9 +10,8 @@ class NumberUpdate extends TwilioClientCommand {
     this.ngrok = ngrok || require('ngrok');
   }
 
-  async run() {
-    await super.run();
-    const helper = new IncomingPhoneNumberHelper(this);
+  async runCommand() {
+    const helper = new IncomingPhoneNumberHelper(this.twilioClient);
     const phoneNumber = await helper.findPhoneNumber(this.args['phone-number']);
 
     const props = this.parseProperties();

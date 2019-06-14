@@ -5,10 +5,8 @@
 const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
-const { validateSchema } = require('../services/api-schema/schema-validator');
 const { kebabCase, camelCase } = require('../services/naming-conventions');
-const ResourcePathParser = require('../services/resource-path-parser');
-const { getActionDescription, isApi2010 } = require('../services/twilio-api');
+const { ApiCommandRunner, getActionDescription, isApi2010 } = require('../services/twilio-api');
 
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
@@ -25,109 +23,17 @@ const typeMap = {
 const ACCOUNT_SID_FLAG = 'account-sid';
 
 class TwilioApiCommand extends TwilioClientCommand {
-  async run() {
-    await super.run();
+  async runCommand() {
+    const runner = new ApiCommandRunner(
+      this.twilioClient,
+      this.constructor.actionDefinition,
+      this.constructor.flags,
+      this.flags
+    );
 
-    // "this.constructor" is the class used for this command.
-    // Because oclif is constructing the object for us,
-    // we can't pass the actionDefinition in through
-    // the constructor, so we make it a static property
-    // of the command class.
-    const ThisCommandClass = this.constructor;
-    const domainName = ThisCommandClass.actionDefinition.domainName;
-    const versionName = ThisCommandClass.actionDefinition.versionName;
-    const currentPath = ThisCommandClass.actionDefinition.path;
-    const actionName = ThisCommandClass.actionDefinition.actionName;
+    const response = await runner.run();
 
-    const { flags: receivedFlags } = this.parse(this.constructor);
-
-    // TODO: Possible extender event: "beforeValidateParameters"
-
-    const camelCasedFlags = {};
-    const flagErrors = {};
-    Object.keys(receivedFlags).forEach(key => {
-      const flagValue = receivedFlags[key];
-
-      if (doesObjectHaveProperty(ThisCommandClass.flags[key], 'apiDetails')) {
-        const schema = ThisCommandClass.flags[key].apiDetails.parameter.schema;
-        this.logger.debug(`Schema for "${key}": ` + JSON.stringify(schema));
-
-        const validationErrors = validateSchema(schema, flagValue, this.logger);
-
-        if (validationErrors.length > 0) {
-          flagErrors[key] = validationErrors;
-        }
-      }
-
-      camelCasedFlags[camelCase(key)] = flagValue;
-    });
-
-    this.logger.debug('Provided flags: ' + JSON.stringify(receivedFlags));
-
-    // If there were any errors validating the flag values, log them by flag
-    // key and exit with a non-zero code.
-    if (Object.keys(flagErrors).length > 0) {
-      this.logger.error('Flag value validation errors:');
-      Object.keys(flagErrors).forEach(key => {
-        flagErrors[key].forEach(error => {
-          this.logger.error(`  ${key}: ${error}`);
-        });
-      });
-      this.exit(1);
-    }
-
-    // TODO: Possible extender event: "afterValidateParameters"
-
-    // TODO: Possible extender event: "beforeInvokeApi"
-
-    // This converts a path like "/Accounts/{AccountSid}/Calls" to
-    // the Node.js object in the Twilio Helper library.
-    // Example: twilioClient.api.v2010.accounts('ACxxxx').calls
-    const helperVersion = this.twilioClient[domainName][versionName];
-    const resourcePathParser = new ResourcePathParser(currentPath);
-    let endpoint = helperVersion;
-
-    resourcePathParser.forEachPathNode(pathNode => {
-      if (resourcePathParser.isPathVariable(pathNode)) {
-        const paramName = kebabCase(pathNode.replace(/[{}]/g, ''));
-        let value = '';
-
-        if (doesObjectHaveProperty(receivedFlags, paramName)) {
-          value = receivedFlags[paramName];
-        } else if (paramName === ACCOUNT_SID_FLAG) {
-          value = this.twilioClient.accountSid;
-        }
-
-        // Since this part of the path has a parameter, we invoke
-        // the current endpoint as a function, passing the parameter
-        // and then use it's result as the new endpoint.
-        endpoint = endpoint(value);
-        this.logger.debug(`pathNode=${pathNode}, value=${value}, endpoint=${typeof endpoint}`);
-      } else {
-        endpoint = endpoint[camelCase(pathNode)];
-        this.logger.debug(`pathNode=${pathNode}, endpoint=${typeof endpoint}`);
-      }
-    });
-
-    this.logger.debug(`actionName=${actionName}, endpoint[actionName]=${typeof endpoint[actionName]}`);
-
-    let response;
-    try {
-      response = await endpoint[actionName](camelCasedFlags);
-    } catch (error) {
-      if (error.moreInfo) {
-        this.logger.error(`Error ${error.code} response from Twilio: ${error.message}`);
-        this.logger.info(`See ${error.moreInfo} for more info.`);
-      } else {
-        this.logger.error(`Twilio library error: ${error.message}`);
-      }
-      this.exit(error.code);
-    }
-
-    // TODO: Figure out sane default output columns
     this.output(response, this.flags.properties);
-
-    // TODO: Possible extender event: "afterInvokeApi"
   }
 }
 

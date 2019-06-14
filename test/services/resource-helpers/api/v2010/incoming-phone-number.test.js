@@ -1,9 +1,8 @@
 /* eslint no-unused-expressions: 0 */
-const sinon = require('sinon');
 const { expect, test, constants, getFakeSid } = require('@twilio/cli-test');
 const IncomingPhoneNumberHelper = require('../../../../../src/services/resource-helpers/api/v2010/incoming-phone-number');
-const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
-const { Config, ConfigData } = require('@twilio/cli-core').services.config;
+
+require('chai').use(require('chai-as-promised'));
 
 const fakeNumber = '+12095551212';
 const fakeNumberSid = getFakeSid('PN');
@@ -19,13 +18,9 @@ const fakeNumberLookupUrl = `/2010-04-01/Accounts/${
 
 function runTests() {
   const helperTest = test
-    .twilioFakeProject(ConfigData)
-    .twilioCliEnv(Config)
-    .stderr()
-    .twilioCreateCommand(TwilioClientCommand, [])
-    .do(async ctx => {
-      await ctx.testCmd.run();
-      ctx.helper = new IncomingPhoneNumberHelper(ctx.testCmd);
+    .do(ctx => {
+      const twilioClient = require('twilio')(constants.FAKE_ACCOUNT_SID, 'password');
+      ctx.helper = new IncomingPhoneNumberHelper(twilioClient);
     });
 
   helperTest
@@ -42,10 +37,7 @@ function runTests() {
       api.get(fakeNumberUrl).reply(404, { code: 20404 });
     })
     .it('doesn\'t find number by invalid sid', async ctx => {
-      ctx.testCmd.exit = sinon.fake();
-      await ctx.helper.findPhoneNumber(fakeNumberSid);
-      expect(ctx.stderr).to.contain('Could not find phone number');
-      expect(ctx.testCmd.exit.calledWith(1)).to.be.true;
+      await expect(ctx.helper.findPhoneNumber(fakeNumberSid)).to.be.rejectedWith('Could not find phone number');
     });
 
   helperTest
@@ -53,10 +45,7 @@ function runTests() {
       api.get(fakeNumberUrl).reply(500, { code: 20500, message: 'What happened?' });
     })
     .it('handles error looking up phone number sid', async ctx => {
-      ctx.testCmd.exit = sinon.fake();
-      await ctx.helper.findPhoneNumber(fakeNumberSid);
-      expect(ctx.stderr).to.contain('What happened?');
-      expect(ctx.testCmd.exit.calledWith(1)).to.be.true;
+      await expect(ctx.helper.findPhoneNumber(fakeNumberSid)).to.be.rejectedWith('What happened?');
     });
 
   helperTest
@@ -77,10 +66,7 @@ function runTests() {
       });
     })
     .it('doesn\'t find number by invalid phone number', async ctx => {
-      ctx.testCmd.exit = sinon.fake();
-      await ctx.helper.findPhoneNumber(fakeNumber);
-      expect(ctx.stderr).to.contain('Could not find phone number');
-      expect(ctx.testCmd.exit.calledWith(1)).to.be.true;
+      await expect(ctx.helper.findPhoneNumber(fakeNumber)).to.be.rejectedWith('Could not find phone number');
     });
 
   helperTest
@@ -91,10 +77,7 @@ function runTests() {
       });
     })
     .it('handles error looking up phone number', async ctx => {
-      ctx.testCmd.exit = sinon.fake();
-      await ctx.helper.findPhoneNumber(fakeNumber);
-      expect(ctx.stderr).to.contain('What happened?');
-      expect(ctx.testCmd.exit.calledWith(1)).to.be.true;
+      await expect(ctx.helper.findPhoneNumber(fakeNumber)).to.be.rejectedWith('What happened?');
     });
 }
 

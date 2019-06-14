@@ -47,12 +47,12 @@ const getFakeConfig = () => ({
 });
 
 describe('hooks', () => {
-  describe('post-api-plugin', () => {
+  describe('init', () => {
     describe('plugin-verification', () => {
       test.stderr().it('outputs nothing for just core plugins', ctx => {
         ctx.config = getFakeConfig();
 
-        pluginFunc.call(ctx, getApiPlugin());
+        pluginFunc.call(ctx);
 
         expect(ctx.stderr).to.be.empty;
       });
@@ -61,7 +61,7 @@ describe('hooks', () => {
         ctx.config = getFakeConfig();
         ctx.config.plugins.push(getConformingPlugin());
 
-        pluginFunc.call(ctx, getApiPlugin());
+        pluginFunc.call(ctx);
 
         expect(ctx.stderr).to.be.empty;
       });
@@ -70,7 +70,7 @@ describe('hooks', () => {
         ctx.config = getFakeConfig();
         ctx.config.plugins.push(getConflictingPlugin());
 
-        pluginFunc.call(ctx, getApiPlugin());
+        pluginFunc.call(ctx);
 
         expect(ctx.stderr).to.contain('logon');
         expect(ctx.stderr).to.contain('feedback');

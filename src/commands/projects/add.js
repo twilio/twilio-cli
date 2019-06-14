@@ -2,7 +2,7 @@ const os = require('os');
 const { flags } = require('@oclif/command');
 
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
-const { CLIRequestClient } = require('@twilio/cli-core').services;
+const { CliRequestClient } = require('@twilio/cli-core').services;
 const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
 
 const helpMessages = require('../../services/messaging/help-messages');
@@ -141,7 +141,7 @@ class ProjectsAdd extends BaseCommand {
   getTwilioClient() {
     if (!this.twilioClient) {
       this.twilioClient = require('twilio')(this.accountSid, this.authToken, {
-        httpClient: new CLIRequestClient(this.id, this.logger),
+        httpClient: new CliRequestClient(this.id, this.logger),
         region: this.region
       });
     }

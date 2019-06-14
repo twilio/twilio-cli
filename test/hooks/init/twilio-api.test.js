@@ -1,14 +1,15 @@
 const pluginFunc = require('../../../src/hooks/init/twilio-api');
 const { expect, test } = require('@twilio/cli-test');
 
-const getFakeContext = () => ({ config: { plugins: [] } });
+const getFakeConfig = () => ({ plugins: [] });
 
 describe('hooks', () => {
   describe('init', () => {
     describe('twilio-api', () => {
-      test.it('provides multiple resources and actions', async () => {
-        const ctx = getFakeContext();
-        await pluginFunc.call(ctx);
+      test.it('provides multiple resources and actions', ctx => {
+        ctx.config = getFakeConfig();
+        pluginFunc.call(ctx);
+
         const plugin = ctx.config.plugins[0];
 
         expect(plugin.hooks).to.eql({}); // eql is for comparing objects (== instead of ===)
