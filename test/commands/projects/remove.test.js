@@ -65,7 +65,7 @@ describe('commands', () => {
         expect(ctx.stderr).to.contain('Cancelled');
       });
 
-      oneSetup(['project1']).it('run projects:remove with the last conficured project', ctx => {
+      oneSetup(['project1']).it('run projects:remove with the last configured project', ctx => {
         expect(ctx.stderr).to.contain('Removing the active project');
         expect(ctx.stderr).to.contain('Removing last project');
         expect(ctx.stderr).to.contain('Deleted project1');
