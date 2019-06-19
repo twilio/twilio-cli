@@ -122,4 +122,4 @@ Plugins for the CLI can be installed using the `twilio plugins` command.
 
 ### Create a plugin
 
-Want to write your own plugin? [See this document](plugins.md).
+Want to write your own plugin? [See this document](https://github.com/twilio/twilio-cli/blob/master/docs/plugins.md).
