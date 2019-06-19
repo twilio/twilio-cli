@@ -94,11 +94,11 @@ And follow the instructions.
 
 ## Plugins
 
-twilio-cli can be extended via plugins.  
+twilio-cli can be extended via plugins.
 
 At this time, only two plugins exist:
 
-* [twilio-run plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [the twilio-run plugin](https://github.com/twilio-labs/plugin-serverless).  
+* [twilio-run plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [the twilio-run plugin](https://github.com/twilio-labs/plugin-serverless).
 
 * [twilio debugger plugin](https://github.com/twilio/plugin-debugger): The debugger plugin will display Twilio Debugger logs directly in your terminal.
 
@@ -118,8 +118,8 @@ Plugins for the CLI can be installed using the `twilio plugins` command.
     twilio debugger:logs:list --help
     ```
 
-1. Note: if you're using autocomplete [see below](#autocomplete), you'll need to run `twilio autocomplete` after installing a plugin and open a new terminal window.  The cli needs to re-build it's cache.
+1. Note: if you're using [autocomplete](#autocomplete), you'll need to run `twilio autocomplete` after installing a plugin and open a new terminal window. The cli needs to re-build it's cache.
 
 ### Create a plugin
 
-Want to write your own plugin? [See this document](docs/plugins.md).
+Want to write your own plugin? [See this document](plugins.md).
