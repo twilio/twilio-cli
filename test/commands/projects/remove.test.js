@@ -134,6 +134,13 @@ describe('commands', () => {
         expect(ctx.stderr).to.contain('configuration saved');
       });
 
+      setup(['project2']).it('run projects:remove with project and deletes local key but can not delete remote key', ctx => {
+        expect(ctx.stderr).to.contain('Deleted local key.');
+        expect(ctx.stderr).to.contain('Could not delete the API Key.');
+        expect(ctx.stderr).to.contain('Deleted project2');
+        expect(ctx.stderr).to.contain('configuration saved');
+      });
+
       setup(['project2'], { deleteProject: false }).exit(1).it('run projects:remove with a project and decide not to remove project', ctx => {
         expect(ctx.stderr).to.contain('Cancelled');
       });

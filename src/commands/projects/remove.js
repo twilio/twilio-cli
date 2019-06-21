@@ -12,8 +12,12 @@ class ProjectsRemove extends TwilioClientCommand {
       const keyVerdict = await this.confirmRemoveKey();
       const apiKey = await this.deleteLocalKey(this.projectDelete);
       await this.deleteRemoteKey(this.projectDelete, keyVerdict, apiKey);
+      this.userConfig.removeProject(this.projectDelete);
+      this.logger.info('Deleted ' + this.projectDelete.id + ' project.');
     }
-    this.callRemoveProject(this.projectDelete, verdict);
+    if (verdict === false) {
+      throw new TwilioCliError('Cancelled');
+    }
     const configSavedMessage = await this.configFile.save(this.userConfig);
     this.logger.info(configSavedMessage);
   }
@@ -28,16 +32,6 @@ class ProjectsRemove extends TwilioClientCommand {
     }
     if (this.userConfig.projects.length === 1) {
       this.logger.warn('Removing last project. Run "twilio projects:add" to add another project.');
-    }
-  }
-
-  callRemoveProject(deleteProject, verdict) {
-    if (verdict === true) {
-      this.userConfig.removeProject(deleteProject);
-      this.logger.info('Deleted ' + deleteProject.id + ' project.');
-    }
-    if (verdict === false) {
-      throw new TwilioCliError('Cancelled');
     }
   }
 
@@ -60,7 +54,6 @@ class ProjectsRemove extends TwilioClientCommand {
       } catch (err) {
         this.logger.error('Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API key from the console.');
         this.logger.error(err.message);
-        // throw new TwilioCliError(err);
       }
     }
     if (keyVerdict === false) {
