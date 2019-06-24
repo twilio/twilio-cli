@@ -3,19 +3,15 @@ const { TwilioCliError } = require('@twilio/cli-core').services.error;
 
 class ProjectsRemove extends TwilioClientCommand {
   async runCommand() {
-    this.projectId = this.args.project;
-    this.projectDelete = this.userConfig.getProjectById(this.projectId);
-
-    this.removeProjectStatus(this.projectDelete, this.projectId);
+    this.removeProjectStatus(this.userConfig.getProjectById(this.args.project), this.args.project);
     const verdict = await this.confirmRemoveProject();
     if (verdict === true) {
       const keyVerdict = await this.confirmRemoveKey();
-      const apiKey = await this.deleteLocalKey(this.projectDelete);
-      await this.deleteRemoteKey(this.projectDelete, keyVerdict, apiKey);
-      this.userConfig.removeProject(this.projectDelete);
-      this.logger.info('Deleted ' + this.projectDelete.id + ' project.');
-    }
-    if (verdict === false) {
+      const apiKey = await this.deleteLocalKey(this.userConfig.getProjectById(this.args.project));
+      await this.deleteRemoteKey(this.userConfig.getProjectById(this.args.project), keyVerdict, apiKey);
+      this.logger.info('Deleted ' + this.userConfig.getProjectById(this.args.project).id + ' project.');
+      this.userConfig.removeProject(this.userConfig.getProjectById(this.args.project));
+    } else {
       throw new TwilioCliError('Cancelled');
     }
     const configSavedMessage = await this.configFile.save(this.userConfig);
@@ -23,41 +19,41 @@ class ProjectsRemove extends TwilioClientCommand {
   }
 
   removeProjectStatus(deleteProject, projectId) {
-    const activated = this.userConfig.getActiveProject();
+    const activeProject = this.userConfig.getActiveProject();
     if (!deleteProject) {
       throw new TwilioCliError('The project "' + projectId + '" does not exist. Run "twilio projects:list" to see the list of configured projects.');
     }
-    if (activated.id === deleteProject.id) {
-      this.logger.warn('Removing the active project. Run "twilio projects:use" to set another project as active.');
+    if (activeProject.id === deleteProject.id) {
+      this.logger.warn('Are you sure you want to remove the active project? Run "twilio projects:use" to set another project as active.');
     }
     if (this.userConfig.projects.length === 1) {
-      this.logger.warn('Removing last project. Run "twilio projects:add" to add another project.');
+      this.logger.warn('Are you sure you want to remove the last project? Run "twilio projects:add" to add another project.');
     }
   }
 
   async deleteLocalKey(projectDelete) {
-    const apiKey = this.secureStorage.getCredentials(projectDelete.id);
+    const Credentials = this.secureStorage.getCredentials(projectDelete.id);
     const removed = await this.secureStorage.removeCredentials(projectDelete.id);
     if (removed === true) {
       this.logger.info('Deleted local key.');
     } else {
       this.logger.warn('Could not delete local key.');
     }
-    return apiKey;
+    return Credentials;
   }
 
-  async deleteRemoteKey(projectDelete, keyVerdict, apiKey) {
+  async deleteRemoteKey(projectDelete, keyVerdict, Credentials) {
     if (keyVerdict === true) {
       try {
-        await this.twilioClient.api.keys(apiKey.apiKey).remove();
-        this.logger.info('The key has been deleted from twilio console.');
+        await this.twilioClient.api.keys(Credentials.apiKey).remove();
+        this.logger.info('The key has been deleted from The Twilio console.');
       } catch (err) {
-        this.logger.error('Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API key from the console.');
-        this.logger.error(err.message);
+        this.logger.error('Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API key from The Twilio Console.');
+        this.logger.debug(err.message);
       }
     }
     if (keyVerdict === false) {
-      this.logger.warn(' The key for ' + projectDelete.id + ' project still exists in the Twilio Console.');
+      this.logger.warn('The key for ' + projectDelete.id + ' project still exists in The Twilio console.');
     }
   }
 
@@ -66,7 +62,7 @@ class ProjectsRemove extends TwilioClientCommand {
       type: 'confirm',
       name: 'affirmative',
       message: 'Are you sure you want to remove ' +
-        `the "${this.projectId}" project? `,
+        `the "${this.args.project}" project?`,
       default: false
     }]);
     return confirm.affirmative;
@@ -76,8 +72,8 @@ class ProjectsRemove extends TwilioClientCommand {
     const confirm = await this.inquirer.prompt([{
       type: 'confirm',
       name: 'affirmative',
-      message: 'Are you sure you want to delete ' +
-        `the "${this.projectId}" project's remote key?`,
+      message: 'Would you like to attempt to delete ' +
+        `the "${this.args.project}" project's remote key?`,
       default: false
     }]);
     return confirm.affirmative;
