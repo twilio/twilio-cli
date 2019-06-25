@@ -38,7 +38,17 @@ file? Have a mode of operation where it just picks the most recent version?
 class TwilioApiBrowser {
   constructor(apiSpec) {
     this.apiSpec = apiSpec || this.loadApiSpecFromDisk();
+    this.filterPreviewLegacyApis(this.apiSpec);
     this.domains = this.loadDomains();
+  }
+
+  filterPreviewLegacyApis() {
+    // Hide APIs that have a maturity flag of preview
+    this.apiSpec.forEach(function (item, itemIndex, object) {
+      if (item.tags[0].name === 'Preview') {
+        object.splice(itemIndex, 1);
+      }
+    });
   }
 
   loadApiSpecFromDisk() {
