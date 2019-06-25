@@ -96,9 +96,7 @@ And follow the instructions.
 
 twilio-cli can be extended via plugins.
 
-At this time, only two plugins exist:
-
-* [twilio-run plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [the twilio-run plugin](https://github.com/twilio-labs/plugin-serverless).
+* [serverless plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, we created `serverless`. You can use serverless from within twilio-cli via [the serverless plugin](https://github.com/twilio-labs/plugin-serverless).
 
 * [twilio debugger plugin](https://github.com/twilio/plugin-debugger): The debugger plugin will display Twilio Debugger logs directly in your terminal.
 
