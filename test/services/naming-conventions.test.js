@@ -42,6 +42,11 @@ describe('services', () => {
         expect(kebabCase('OneTwoThree')).to.equal('one-two-three');
       });
 
+      test.it('handles PascalCase with digits', () => {
+        expect(kebabCase('One1Two')).to.equal('one1-two');
+        expect(kebabCase('One1Two2Three')).to.equal('one1-two2-three');
+      });
+
       test.it('handles kebab-case', () => {
         expect(kebabCase('one-two')).to.equal('one-two');
         expect(kebabCase('one-two-three')).to.equal('one-two-three');

@@ -2,9 +2,7 @@ const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 
 class NumberList extends TwilioClientCommand {
-  async run() {
-    await super.run();
-
+  async runCommand() {
     const fullData = await this.twilioClient.incomingPhoneNumbers.list();
     this.output(fullData, this.flags.properties);
   }
