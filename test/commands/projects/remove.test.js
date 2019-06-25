@@ -41,7 +41,7 @@ describe('commands', () => {
         .do(ctx => ctx.testCmd.run())
         .it('run projects:remove with a project and delets local key but keep remote key', ctx => {
           expect(ctx.stderr).to.contain('Deleted local key.');
-          expect(ctx.stderr).to.contain('The key for project2 project still exists in The Twilio console');
+          expect(ctx.stderr).to.contain('The API Key for project2 project still exists in The Twilio console');
           expect(ctx.stderr).to.contain('Deleted project2');
           expect(ctx.stderr).to.contain('configuration saved');
         });
@@ -50,7 +50,7 @@ describe('commands', () => {
         .do(ctx => ctx.testCmd.run())
         .it('run projects:remove with a project and fails to delete both keys', ctx => {
           expect(ctx.stderr).to.contain('Could not delete local key');
-          expect(ctx.stderr).to.contain('The key for project3 project still exists in The Twilio console.');
+          expect(ctx.stderr).to.contain('The API Key for project3 project still exists in The Twilio console.');
           expect(ctx.stderr).to.contain('Deleted project3');
           expect(ctx.stderr).to.contain('configuration saved');
         });
@@ -66,7 +66,7 @@ describe('commands', () => {
         .it('run projects:remove with the active project and deletes both keys', ctx => {
           expect(ctx.stderr).to.contain('remove the active project');
           expect(ctx.stderr).to.contain('Deleted local key.');
-          expect(ctx.stderr).to.contain('The key has been deleted from The Twilio console');
+          expect(ctx.stderr).to.contain('The API Key has been deleted from The Twilio console');
           expect(ctx.stderr).to.contain('Deleted project1');
           expect(ctx.stderr).to.contain('configuration saved');
         });
@@ -99,7 +99,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('remove the active project');
           expect(ctx.stderr).to.contain('remove the last project');
           expect(ctx.stderr).to.contain('Deleted local key.');
-          expect(ctx.stderr).to.contain('The key has been deleted from The Twilio console');
+          expect(ctx.stderr).to.contain('The API Key has been deleted from The Twilio console');
           expect(ctx.stderr).to.contain('Deleted project1');
           expect(ctx.stderr).to.contain('configuration saved');
         });

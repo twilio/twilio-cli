@@ -3,14 +3,15 @@ const { TwilioCliError } = require('@twilio/cli-core').services.error;
 
 class ProjectsRemove extends TwilioClientCommand {
   async runCommand() {
-    this.removeProjectStatus(this.userConfig.getProjectById(this.args.project), this.args.project);
+    const deleteProject = this.userConfig.getProjectById(this.args.project);
+    this.removeProjectStatus(deleteProject, this.args.project);
     const verdict = await this.confirmRemoveProject();
     if (verdict === true) {
       const keyVerdict = await this.confirmRemoveKey();
-      const apiKey = await this.deleteLocalKey(this.userConfig.getProjectById(this.args.project));
-      await this.deleteRemoteKey(this.userConfig.getProjectById(this.args.project), keyVerdict, apiKey);
-      this.logger.info('Deleted ' + this.userConfig.getProjectById(this.args.project).id + ' project.');
-      this.userConfig.removeProject(this.userConfig.getProjectById(this.args.project));
+      const credentials = await this.deleteLocalKey(deleteProject);
+      await this.deleteRemoteKey(deleteProject, keyVerdict, credentials);
+      this.logger.info('Deleted ' + deleteProject.id + ' project.');
+      this.userConfig.removeProject(deleteProject);
     } else {
       throw new TwilioCliError('Cancelled');
     }
@@ -32,28 +33,28 @@ class ProjectsRemove extends TwilioClientCommand {
   }
 
   async deleteLocalKey(projectDelete) {
-    const Credentials = this.secureStorage.getCredentials(projectDelete.id);
+    const credentials = this.secureStorage.getCredentials(projectDelete.id);
     const removed = await this.secureStorage.removeCredentials(projectDelete.id);
     if (removed === true) {
       this.logger.info('Deleted local key.');
     } else {
       this.logger.warn('Could not delete local key.');
     }
-    return Credentials;
+    return credentials;
   }
 
-  async deleteRemoteKey(projectDelete, keyVerdict, Credentials) {
+  async deleteRemoteKey(projectDelete, keyVerdict, credentials) {
     if (keyVerdict === true) {
       try {
-        await this.twilioClient.api.keys(Credentials.apiKey).remove();
-        this.logger.info('The key has been deleted from The Twilio console.');
+        await this.twilioClient.api.keys(credentials.apiKey).remove();
+        this.logger.info('The API Key has been deleted from The Twilio console.');
       } catch (err) {
         this.logger.error('Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API key from The Twilio Console.');
         this.logger.debug(err.message);
       }
     }
     if (keyVerdict === false) {
-      this.logger.warn('The key for ' + projectDelete.id + ' project still exists in The Twilio console.');
+      this.logger.warn('The API Key for ' + projectDelete.id + ' project still exists in The Twilio console.');
     }
   }
 
@@ -72,8 +73,7 @@ class ProjectsRemove extends TwilioClientCommand {
     const confirm = await this.inquirer.prompt([{
       type: 'confirm',
       name: 'affirmative',
-      message: 'Would you like to attempt to delete ' +
-        `the "${this.args.project}" project's remote key?`,
+      message: 'Would you like to attempt to delete the API Key?',
       default: false
     }]);
     return confirm.affirmative;
