@@ -49,7 +49,7 @@ class ProjectsRemove extends TwilioClientCommand {
         await this.twilioClient.api.keys(credentials.apiKey).remove();
         this.logger.info('The API Key has been deleted from The Twilio console.');
       } catch (err) {
-        this.logger.error('Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API key from The Twilio Console.');
+        this.logger.error('Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API Key from The Twilio Console.');
         this.logger.debug(err.message);
       }
     }
