@@ -34,6 +34,11 @@
               "type": "string"
             }
           },
+          "development_stage": {
+            "type": {
+              "type": "string"
+            }
+          },
           "friendly_name": {
             "type": {
               "type": "string"
@@ -59,6 +64,11 @@
             }
           },
           "log_queries": {
+            "type": {
+              "type": "boolean"
+            }
+          },
+          "needs_model_build": {
             "type": {
               "type": "boolean"
             }
@@ -4358,6 +4368,15 @@
             "required": false,
             "schema": {
               "type": "object"
+            }
+          },
+          {
+            "description": "A string describing the state of the assistant.",
+            "in": "query",
+            "name": "DevelopmentStage",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           }
         ],

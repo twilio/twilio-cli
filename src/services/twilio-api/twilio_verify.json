@@ -86,6 +86,58 @@
         },
         "type": "object"
       },
+      "verify.v2.service.messaging_configuration": {
+        "properties": {
+          "account_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^AC[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "country": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "date_created": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "date_updated": {
+            "type": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "messaging_service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "service_sid": {
+            "type": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
       "verify.v2.service.rate_limit": {
         "properties": {
           "account_sid": {
@@ -564,6 +616,316 @@
         "sid",
         "friendly_name",
         "date_created"
+      ]
+    },
+    "/v2/Services/{ServiceSid}/MessagingConfigurations": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Retrieve a list of all Messaging Configurations for a Service.",
+        "parameters": [
+          {
+            "description": "The SID of the Service that the resource is associated with",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "messaging_configurations": {
+                      "items": {
+                        "$ref": "#/components/schemas/verify.v2.service.messaging_configuration"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Create a new MessagingConfiguration for a service.",
+        "parameters": [
+          {
+            "description": "The SID of the Service that the resource is associated with",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO-3166-1 country code of the country or `all`.",
+            "in": "query",
+            "name": "Country",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Messaging Service used for this configuration.",
+            "in": "query",
+            "name": "MessagingServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service.messaging_configuration"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://verify.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "account_sid",
+        "service_sid",
+        "country",
+        "messaging_service_sid",
+        "date_created",
+        "date_updated"
+      ]
+    },
+    "/v2/Services/{ServiceSid}/MessagingConfigurations/{Country}": {
+      "delete": {
+        "description": "Delete a specific MessagingConfiguration.",
+        "parameters": [
+          {
+            "description": "The SID of the Service that the resource is associated with",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO-3166-1 country code of the country or `all`.",
+            "in": "path",
+            "name": "Country",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific MessagingConfiguration.",
+        "parameters": [
+          {
+            "description": "The SID of the Service that the resource is associated with",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO-3166-1 country code of the country or `all`.",
+            "in": "path",
+            "name": "Country",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service.messaging_configuration"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "post": {
+        "description": "Update a specific MessagingConfiguration",
+        "parameters": [
+          {
+            "description": "The SID of the Service that the resource is associated with",
+            "in": "path",
+            "name": "ServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^VA[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ISO-3166-1 country code of the country or `all`.",
+            "in": "path",
+            "name": "Country",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The SID of the Messaging Service used for this configuration.",
+            "in": "query",
+            "name": "MessagingServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/verify.v2.service.messaging_configuration"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://verify.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "account_sid",
+        "service_sid",
+        "country",
+        "messaging_service_sid",
+        "date_created",
+        "date_updated"
       ]
     },
     "/v2/Services/{ServiceSid}/RateLimits": {

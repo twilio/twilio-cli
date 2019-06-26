@@ -330,15 +330,6 @@
               "type": "string"
             }
           },
-          "media_urls": {
-            "type": {
-              "items": {
-                "format": "uri",
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
           "messaging_service_sid": {
             "type": {
               "maxLength": 34,
@@ -1260,6 +1251,90 @@
     },
     "/v1/Services/{MessagingServiceSid}/Messages": {
       "description": "TODO: Resource-level docs",
+      "get": {
+        "description": null,
+        "parameters": [
+          {
+            "description": "The 34 character unique SID of the Service.",
+            "in": "path",
+            "name": "MessagingServiceSid",
+            "required": true,
+            "schema": {
+              "maxLength": 34,
+              "minLength": 34,
+              "pattern": "^MG[0-9a-fA-F]{32}$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The date that this resource was created.",
+            "in": "query",
+            "name": "DateSent",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "messages": {
+                      "items": {
+                        "$ref": "#/components/schemas/messaging.v1.service.message"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "properties": {
+                        "first_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "key": {
+                          "type": "string"
+                        },
+                        "next_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "page_size": {
+                          "type": "integer"
+                        },
+                        "previous_page_url": {
+                          "format": "uri",
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Beta"
+        ]
+      },
       "post": {
         "description": null,
         "parameters": [

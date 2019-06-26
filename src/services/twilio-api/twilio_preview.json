@@ -3527,6 +3527,28 @@
         },
         "type": "object"
       },
+      "preview.trusted_comms.cps": {
+        "properties": {
+          "cps_url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "phone_number": {
+            "type": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": {
+              "format": "uri",
+              "type": "string"
+            }
+          }
+        },
+        "type": "object"
+      },
       "preview.trusted_comms.current_call": {
         "properties": {
           "bg_color": {
@@ -14480,30 +14502,46 @@
         "date_created"
       ]
     },
+    "/TrustedComms/CPS": {
+      "description": "TODO: Resource-level docs",
+      "get": {
+        "description": "Fetch a specific CPS given a phone number via `X-XCNAM-Sensitive-Phone-Number` header.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/preview.trusted_comms.cps"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "accountSid_authToken": []
+          }
+        ],
+        "tags": [
+          "Preview"
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://preview.twilio.com"
+        }
+      ],
+      "x-default-output-properties": [
+        "phone_number",
+        "cps_url"
+      ]
+    },
     "/TrustedComms/CurrentCall": {
       "description": "TODO: Resource-level docs",
       "get": {
-        "description": "Retrieve a current call given the originating and terminating number.",
-        "parameters": [
-          {
-            "description": "The originating Phone Number",
-            "in": "query",
-            "name": "From",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "The terminating Phone Number",
-            "in": "query",
-            "name": "To",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "description": "Retrieve a current call given the originating and terminating number via `X-XCNAM-Sensitive-Phone-Number-From` and `X-XCNAM-Sensitive-Phone-Number-To` headers.",
+        "parameters": [],
         "responses": {
           "200": {
             "content": {
