@@ -5,9 +5,9 @@
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
+const { kebabCase, camelCase } = require('@twilio/cli-core').services.namingConventions;
 const { validateSchema } = require('../api-schema/schema-validator');
-const { kebabCase, camelCase } = require('../naming-conventions');
-const ResourcePathParser = require('../resource-path-parser');
+const { ResourcePathParser } = require('@twilio/cli-core').services;
 
 // AccountSid is a special snowflake
 const ACCOUNT_SID_FLAG = 'account-sid';
