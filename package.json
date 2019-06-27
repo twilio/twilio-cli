@@ -13,7 +13,7 @@
     "@oclif/plugin-autocomplete": "^0.1.1",
     "@oclif/plugin-help": "^2.2.0",
     "@oclif/plugin-plugins": "^1.7.8",
-    "@twilio/cli-core": "~1.4.0",
+    "@twilio/cli-core": "^1.5.0",
     "chalk": "^2.4.2",
     "ngrok": "^3.2.1",
     "twilio": "^3.33.0"
