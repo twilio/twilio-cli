@@ -4,85 +4,59 @@
       "sync.v1.service": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "acl_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "reachability_debouncing_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "reachability_debouncing_window": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reachability_webhooks_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "webhook_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -90,83 +64,59 @@
       "sync.v1.service.document": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "created_by": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_expires": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "revision": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^ET[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^ET[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -174,54 +124,38 @@
       "sync.v1.service.document.document_permission": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "document_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^ET[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^ET[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "manage": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "read": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "write": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -229,78 +163,56 @@
       "sync.v1.service.sync_list": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "created_by": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_expires": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "revision": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^ES[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^ES[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -308,72 +220,50 @@
       "sync.v1.service.sync_list.sync_list_item": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "created_by": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_expires": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "index": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "list_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^ES[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^ES[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "revision": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -381,54 +271,38 @@
       "sync.v1.service.sync_list.sync_list_permission": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "list_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^ES[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^ES[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "manage": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "read": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "write": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -436,78 +310,56 @@
       "sync.v1.service.sync_map": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "created_by": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_expires": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "revision": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -515,72 +367,50 @@
       "sync.v1.service.sync_map.sync_map_item": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "created_by": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_expires": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "key": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "map_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "revision": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -588,54 +418,38 @@
       "sync.v1.service.sync_map.sync_map_permission": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "manage": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "map_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "read": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "write": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -643,73 +457,53 @@
       "sync.v1.service.sync_stream": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "created_by": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_expires": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^TO[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^TO[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -717,17 +511,13 @@
       "sync.v1.service.sync_stream.stream_message": {
         "properties": {
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^TZ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^TZ[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"

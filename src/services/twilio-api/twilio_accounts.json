@@ -8,43 +8,31 @@
       "accounts.v1.credential.credential_aws": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -52,43 +40,31 @@
       "accounts.v1.credential.credential_public_key": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

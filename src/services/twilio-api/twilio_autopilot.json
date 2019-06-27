@@ -4,93 +4,65 @@
       "autopilot.v1.assistant": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "callback_events": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "development_stage": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "latest_model_build_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "log_queries": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "needs_model_build": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -98,31 +70,23 @@
       "autopilot.v1.assistant.defaults": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -130,39 +94,29 @@
       "autopilot.v1.assistant.dialogue": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UK[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -170,67 +124,49 @@
       "autopilot.v1.assistant.field_type": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UB[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UB[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -238,72 +174,52 @@
       "autopilot.v1.assistant.field_type.field_value": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "field_type_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UB[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UB[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "language": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "synonym_of": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "value": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"
@@ -311,87 +227,67 @@
       "autopilot.v1.assistant.model_build": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "build_duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "error_code": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "enqueued",
-                "building",
-                "completed",
-                "failed",
-                "canceled"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "enqueued",
+              "building",
+              "completed",
+              "failed",
+              "canceled"
+            ],
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -399,87 +295,61 @@
       "autopilot.v1.assistant.query": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "language": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "model_build_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "query": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "results": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "sample_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UF[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UF[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UH[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UH[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "source_channel": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "status": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -487,31 +357,23 @@
       "autopilot.v1.assistant.style_sheet": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -519,73 +381,53 @@
       "autopilot.v1.assistant.task": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "actions_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UD[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UD[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -593,64 +435,46 @@
       "autopilot.v1.assistant.task.field": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "field_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UE[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UE[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UD[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UD[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -658,69 +482,49 @@
       "autopilot.v1.assistant.task.sample": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "language": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UF[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UF[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "source_channel": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "tagged_text": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "task_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UD[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UD[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -728,39 +532,29 @@
       "autopilot.v1.assistant.task.task_actions": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "task_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UD[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UD[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -768,44 +562,32 @@
       "autopilot.v1.assistant.task.task_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "fields_count": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "samples_count": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "task_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UD[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UD[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -813,67 +595,47 @@
       "autopilot.v1.assistant.webhook": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assistant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "events": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^UM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^UM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "webhook_method": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "webhook_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

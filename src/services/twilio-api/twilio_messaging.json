@@ -4,155 +4,115 @@
       "messaging.v1.service": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "area_code_geomatch": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "fallback_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "fallback_to_long_code": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "fallback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "inbound_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "inbound_request_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "mms_converter": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "scan_message_content": {
-            "type": {
-              "enum": [
-                "inherit",
-                "enable",
-                "disable"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "inherit",
+              "enable",
+              "disable"
+            ],
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "smart_encoding": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "status_callback": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "sticky_sender": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "synchronous_validation": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "validity_period": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           }
         },
         "type": "object"
@@ -160,59 +120,43 @@
       "messaging.v1.service.alpha_sender": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "alpha_sender": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "capabilities": {
-            "type": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -220,66 +164,48 @@
       "messaging.v1.service.broadcasts": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "body": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_of_expiry": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "media_urls": {
-            "type": {
-              "items": {
-                "format": "uri",
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "messaging_service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
-          },
-          "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^BC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
-          },
-          "url": {
-            "type": {
+            "items": {
               "format": "uri",
               "type": "string"
-            }
+            },
+            "type": "array"
+          },
+          "messaging_service_sid": {
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "sid": {
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^BC[0-9a-fA-F]{32}$",
+            "type": "string"
+          },
+          "url": {
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -287,75 +213,53 @@
       "messaging.v1.service.message": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "body": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "broadcast_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^BC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^BC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_of_expiry": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "from": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "messaging_service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^(SM|MM)[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "to": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -363,64 +267,46 @@
       "messaging.v1.service.phone_number": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "capabilities": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "country_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "phone_number": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PN[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PN[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -428,64 +314,46 @@
       "messaging.v1.service.short_code": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "capabilities": {
-            "type": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
           },
           "country_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "short_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^SC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^SC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -493,80 +361,58 @@
       "messaging.v1.session": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "attributes": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "created_by": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "messaging_service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CH[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CH[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -574,82 +420,58 @@
       "messaging.v1.session.session_message": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "attributes": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "author": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "body": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "index": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "messaging_service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "session_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CH[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CH[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -657,91 +479,65 @@
       "messaging.v1.session.session_participant": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "attributes": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "messaging_service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "session_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CH[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CH[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MB[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MB[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "twilio_address": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "type": {
-            "type": {
-              "enum": [
-                "chat",
-                "sms"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "chat",
+              "sms"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "user_address": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"
@@ -749,56 +545,40 @@
       "messaging.v1.session.session_scoped_webhook": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "configuration": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "session_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CH[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CH[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WH[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WH[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "target": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -806,68 +586,48 @@
       "messaging.v1.session_webhook": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "post_webhook_retry_count": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "post_webhook_url": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "pre_webhook_retry_count": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "pre_webhook_url": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "target": {
-            "type": {
-              "enum": [
-                "webhook",
-                "flex"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "webhook",
+              "flex"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "webhook_filters": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "webhook_method": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"

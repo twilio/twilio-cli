@@ -4,144 +4,108 @@
       "video.v1.composition": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "audio_sources": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "audio_sources_excluded": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "bitrate": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "date_completed": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "format": "date-time",
-                  "type": "string"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "format": "date-time",
+                "type": "string"
+              }
+            ]
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_deleted": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "format": "date-time",
-                  "type": "string"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "format": "date-time",
+                "type": "string"
+              }
+            ]
           },
           "duration": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "format": {
-            "type": {
-              "enum": [
-                "mp4",
-                "webm"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "mp4",
+              "webm"
+            ],
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "resolution": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "room_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CJ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CJ[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "size": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "status": {
-            "type": {
-              "enum": [
-                "enqueued",
-                "processing",
-                "completed",
-                "deleted",
-                "failed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "enqueued",
+              "processing",
+              "completed",
+              "deleted",
+              "failed"
+            ],
+            "type": "string"
           },
           "trim": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "video_layout": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           }
         },
         "type": "object"
@@ -149,10 +113,8 @@
       "video.v1.composition.composition_media": {
         "properties": {
           "redirect_to": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -160,127 +122,97 @@
       "video.v1.composition_hook": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "audio_sources": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "audio_sources_excluded": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "format": "date-time",
-                  "type": "string"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "format": "date-time",
+                "type": "string"
+              }
+            ]
           },
           "enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "format": {
-            "type": {
-              "enum": [
-                "mp4",
-                "webm"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "mp4",
+              "webm"
+            ],
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "resolution": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^HK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^HK[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status_callback": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "format": "uri",
-                  "type": "string"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "format": "uri",
+                "type": "string"
+              }
+            ]
           },
           "status_callback_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "trim": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "video_layout": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           }
         },
         "type": "object"
@@ -288,55 +220,39 @@
       "video.v1.composition_settings": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "aws_credentials_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "aws_s3_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "aws_storage_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "encryption_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "encryption_key_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -344,124 +260,94 @@
       "video.v1.recording": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "codec": {
-            "type": {
-              "enum": [
-                "VP8",
-                "H264",
-                "OPUS",
-                "PCMU"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "VP8",
+              "H264",
+              "OPUS",
+              "PCMU"
+            ],
+            "type": "string"
           },
           "container_format": {
-            "type": {
-              "enum": [
-                "mka",
-                "mkv"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "mka",
+              "mkv"
+            ],
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "grouping_sids": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "offset": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "size": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "source_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "processing",
-                "completed",
-                "deleted",
-                "failed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "processing",
+              "completed",
+              "deleted",
+              "failed"
+            ],
+            "type": "string"
           },
           "track_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "type": {
-            "type": {
-              "enum": [
-                "audio",
-                "video",
-                "data"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "audio",
+              "video",
+              "data"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -469,10 +355,8 @@
       "video.v1.recording.recording_media": {
         "properties": {
           "redirect_to": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -480,55 +364,39 @@
       "video.v1.recording_settings": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "aws_credentials_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "aws_s3_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "aws_storage_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "encryption_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "encryption_key_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -536,149 +404,113 @@
       "video.v1.room": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "enable_turn": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "end_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "max_participants": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "media_region": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "record_participants_on_connect": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "in-progress",
-                "completed",
-                "failed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "in-progress",
+              "completed",
+              "failed"
+            ],
+            "type": "string"
           },
           "status_callback": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "status_callback_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "type": {
-            "type": {
-              "enum": [
-                "peer-to-peer",
-                "group",
-                "group-small"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "peer-to-peer",
+              "group",
+              "group-small"
+            ],
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "video_codecs": {
-            "type": {
-              "items": {
-                "enum": [
-                  "VP8",
-                  "H264"
-                ],
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "enum": [
+                "VP8",
+                "H264"
+              ],
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -686,95 +518,71 @@
       "video.v1.room.room_participant": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "end_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "room_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "start_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "connected",
-                "disconnected"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "connected",
+              "disconnected"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -782,66 +590,48 @@
       "video.v1.room.room_participant.room_participant_published_track": {
         "properties": {
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "kind": {
-            "type": {
-              "enum": [
-                "audio",
-                "video",
-                "data"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "audio",
+              "video",
+              "data"
+            ],
+            "type": "string"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "room_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -849,40 +639,30 @@
       "video.v1.room.room_participant.room_participant_subscribe_rule": {
         "properties": {
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "room_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "rules": {
-            "type": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -890,74 +670,54 @@
       "video.v1.room.room_participant.room_participant_subscribed_track": {
         "properties": {
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "kind": {
-            "type": {
-              "enum": [
-                "audio",
-                "video",
-                "data"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "audio",
+              "video",
+              "data"
+            ],
+            "type": "string"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "publisher_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "room_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^MT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^MT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -965,132 +725,100 @@
       "video.v1.room.room_recording": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "codec": {
-            "type": {
-              "enum": [
-                "VP8",
-                "H264",
-                "OPUS",
-                "PCMU"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "VP8",
+              "H264",
+              "OPUS",
+              "PCMU"
+            ],
+            "type": "string"
           },
           "container_format": {
-            "type": {
-              "enum": [
-                "mka",
-                "mkv"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "mka",
+              "mkv"
+            ],
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "grouping_sids": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "offset": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "room_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RM[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RM[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "size": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "source_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "processing",
-                "completed",
-                "deleted",
-                "failed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "processing",
+              "completed",
+              "deleted",
+              "failed"
+            ],
+            "type": "string"
           },
           "track_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "type": {
-            "type": {
-              "enum": [
-                "audio",
-                "video",
-                "data"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "audio",
+              "video",
+              "data"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1098,10 +826,8 @@
       "video.v1.room.room_recording.room_recording_media": {
         "properties": {
           "redirect_to": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

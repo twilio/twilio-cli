@@ -4,26 +4,20 @@
       "pricing.v1.messaging": {
         "properties": {
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -31,20 +25,14 @@
       "pricing.v1.messaging.messaging_country": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -52,77 +40,65 @@
       "pricing.v1.messaging.messaging_country|instance": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "inbound_sms_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "base_price": {
-                    "type": "number"
-                  },
-                  "current_price": {
-                    "type": "number"
-                  },
-                  "number_type": {
-                    "type": "string"
-                  }
+            "items": {
+              "properties": {
+                "base_price": {
+                  "type": "number"
                 },
-                "type": "object"
+                "current_price": {
+                  "type": "number"
+                },
+                "number_type": {
+                  "type": "string"
+                }
               },
-              "type": "array"
-            }
+              "type": "object"
+            },
+            "type": "array"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "outbound_sms_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "carrier": {
-                    "type": "string"
-                  },
-                  "mcc": {
-                    "type": "string"
-                  },
-                  "mnc": {
-                    "type": "string"
-                  },
-                  "prices": {
-                    "properties": {
-                      "base_price": {
-                        "type": "number"
-                      },
-                      "current_price": {
-                        "type": "number"
-                      },
-                      "number_type": {
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  }
+            "items": {
+              "properties": {
+                "carrier": {
+                  "type": "string"
                 },
-                "type": "object"
+                "mcc": {
+                  "type": "string"
+                },
+                "mnc": {
+                  "type": "string"
+                },
+                "prices": {
+                  "properties": {
+                    "base_price": {
+                      "type": "number"
+                    },
+                    "current_price": {
+                      "type": "number"
+                    },
+                    "number_type": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
               },
-              "type": "array"
-            }
+              "type": "object"
+            },
+            "type": "array"
           },
           "price_unit": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -130,26 +106,20 @@
       "pricing.v1.phone_number": {
         "properties": {
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -157,20 +127,14 @@
       "pricing.v1.phone_number.phone_number_country": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -178,44 +142,34 @@
       "pricing.v1.phone_number.phone_number_country|instance": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "phone_number_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "base_price": {
-                    "type": "number"
-                  },
-                  "current_price": {
-                    "type": "number"
-                  },
-                  "number_type": {
-                    "type": "string"
-                  }
+            "items": {
+              "properties": {
+                "base_price": {
+                  "type": "number"
                 },
-                "type": "object"
+                "current_price": {
+                  "type": "number"
+                },
+                "number_type": {
+                  "type": "string"
+                }
               },
-              "type": "array"
-            }
+              "type": "object"
+            },
+            "type": "array"
           },
           "price_unit": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -223,26 +177,20 @@
       "pricing.v1.voice": {
         "properties": {
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -250,20 +198,14 @@
       "pricing.v1.voice.voice_country": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -271,85 +213,73 @@
       "pricing.v1.voice.voice_country|instance": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "inbound_call_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "base_price": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "current_price": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "number_type": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
+            "items": {
+              "properties": {
+                "base_price": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 },
-                "type": "object"
+                "current_price": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "number_type": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
               },
-              "type": "array"
-            }
+              "type": "object"
+            },
+            "type": "array"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "outbound_prefix_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "base_price": {
-                    "type": "number"
-                  },
-                  "current_price": {
-                    "type": "number"
-                  },
-                  "prefixes": {
-                    "items": "string",
-                    "type": "array"
-                  }
+            "items": {
+              "properties": {
+                "base_price": {
+                  "type": "number"
                 },
-                "type": "object"
+                "current_price": {
+                  "type": "number"
+                },
+                "prefixes": {
+                  "items": "string",
+                  "type": "array"
+                }
               },
-              "type": "array"
-            }
+              "type": "object"
+            },
+            "type": "array"
           },
           "price_unit": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -357,80 +287,66 @@
       "pricing.v1.voice.voice_number": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "inbound_call_price": {
-            "type": {
-              "properties": {
-                "base_price": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "current_price": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "number_type": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                }
+            "properties": {
+              "base_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
-              "type": "object"
-            }
+              "current_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "number_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "type": "object"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "number": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "outbound_call_price": {
-            "type": {
-              "properties": {
-                "base_price": {
-                  "type": "number"
-                },
-                "current_price": {
-                  "type": "number"
-                }
+            "properties": {
+              "base_price": {
+                "type": "number"
               },
-              "type": "object"
-            }
+              "current_price": {
+                "type": "number"
+              }
+            },
+            "type": "object"
           },
           "price_unit": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -438,26 +354,20 @@
       "pricing.v2.voice": {
         "properties": {
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -465,20 +375,14 @@
       "pricing.v2.voice.voice_country": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -486,107 +390,10 @@
       "pricing.v2.voice.voice_country|instance": {
         "properties": {
           "country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "inbound_call_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "base_price": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "current_price": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "number_type": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  }
-                },
-                "type": "object"
-              },
-              "type": "array"
-            }
-          },
-          "iso_country": {
-            "type": {
-              "type": "string"
-            }
-          },
-          "outbound_prefix_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "base_price": {
-                    "type": "number"
-                  },
-                  "current_price": {
-                    "type": "number"
-                  },
-                  "destination_prefixes": {
-                    "items": "string",
-                    "type": "array"
-                  },
-                  "origination_prefixes": {
-                    "items": "string",
-                    "type": "array"
-                  }
-                },
-                "type": "object"
-              },
-              "type": "array"
-            }
-          },
-          "price_unit": {
-            "type": {
-              "type": "string"
-            }
-          },
-          "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
-          }
-        },
-        "type": "object"
-      },
-      "pricing.v2.voice.voice_number": {
-        "properties": {
-          "country": {
-            "type": {
-              "type": "string"
-            }
-          },
-          "destination_number": {
-            "type": {
-              "type": "string"
-            }
-          },
-          "inbound_call_price": {
-            "type": {
+            "items": {
               "properties": {
                 "base_price": {
                   "anyOf": [
@@ -620,50 +427,119 @@
                 }
               },
               "type": "object"
-            }
+            },
+            "type": "array"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
-          "origination_number": {
-            "type": {
-              "type": "string"
-            }
-          },
-          "outbound_call_prices": {
-            "type": {
-              "items": {
-                "properties": {
-                  "base_price": {
-                    "type": "number"
-                  },
-                  "current_price": {
-                    "type": "number"
-                  },
-                  "origination_prefixes": {
-                    "items": {
-                      "type": "string"
-                    },
-                    "type": "array"
-                  }
+          "outbound_prefix_prices": {
+            "items": {
+              "properties": {
+                "base_price": {
+                  "type": "number"
                 },
-                "type": "object"
+                "current_price": {
+                  "type": "number"
+                },
+                "destination_prefixes": {
+                  "items": "string",
+                  "type": "array"
+                },
+                "origination_prefixes": {
+                  "items": "string",
+                  "type": "array"
+                }
               },
-              "type": "array"
-            }
+              "type": "object"
+            },
+            "type": "array"
           },
           "price_unit": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "pricing.v2.voice.voice_number": {
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "destination_number": {
+            "type": "string"
+          },
+          "inbound_call_price": {
+            "properties": {
+              "base_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "current_price": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "number_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "type": "object"
+          },
+          "iso_country": {
+            "type": "string"
+          },
+          "origination_number": {
+            "type": "string"
+          },
+          "outbound_call_prices": {
+            "items": {
+              "properties": {
+                "base_price": {
+                  "type": "number"
+                },
+                "current_price": {
+                  "type": "number"
+                },
+                "origination_prefixes": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "price_unit": {
+            "type": "string"
+          },
+          "url": {
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

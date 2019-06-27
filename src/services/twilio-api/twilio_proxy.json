@@ -4,105 +4,77 @@
       "proxy.v1.service": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "chat_instance_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^IS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^IS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "default_ttl": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "geo_match_level": {
-            "type": {
-              "enum": [
-                "area-code",
-                "overlay",
-                "radius",
-                "country"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "area-code",
+              "overlay",
+              "radius",
+              "country"
+            ],
+            "type": "string"
           },
           "intercept_callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "number_selection_behavior": {
-            "type": {
-              "enum": [
-                "avoid-sticky",
-                "prefer-sticky"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "avoid-sticky",
+              "prefer-sticky"
+            ],
+            "type": "string"
           },
           "out_of_session_callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -110,87 +82,63 @@
       "proxy.v1.service.phone_number": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "capabilities": {
-            "type": {
-              "properties": {
-                "mms": {
-                  "type": "boolean"
-                },
-                "sms": {
-                  "type": "boolean"
-                },
-                "voice": {
-                  "type": "boolean"
-                }
+            "properties": {
+              "mms": {
+                "type": "boolean"
               },
-              "type": "object"
-            }
+              "sms": {
+                "type": "boolean"
+              },
+              "voice": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "in_use": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "is_reserved": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "phone_number": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PN[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PN[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -198,118 +146,86 @@
       "proxy.v1.service.session": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "closed_reason": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_ended": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_expiry": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_last_interaction": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_started": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "mode": {
-            "type": {
-              "enum": [
-                "message-only",
-                "voice-only",
-                "voice-and-message"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "message-only",
+              "voice-only",
+              "voice-and-message"
+            ],
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "open",
-                "in-progress",
-                "closed",
-                "failed",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "open",
+              "in-progress",
+              "closed",
+              "failed",
+              "unknown"
+            ],
+            "type": "string"
           },
           "ttl": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -317,179 +233,141 @@
       "proxy.v1.service.session.interaction": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "inbound_participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "inbound_resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "inbound_resource_status": {
-            "type": {
-              "enum": [
-                "accepted",
-                "answered",
-                "busy",
-                "canceled",
-                "completed",
-                "deleted",
-                "delivered",
-                "delivery-unknown",
-                "failed",
-                "in-progress",
-                "initiated",
-                "no-answer",
-                "queued",
-                "received",
-                "receiving",
-                "ringing",
-                "scheduled",
-                "sending",
-                "sent",
-                "undelivered",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "accepted",
+              "answered",
+              "busy",
+              "canceled",
+              "completed",
+              "deleted",
+              "delivered",
+              "delivery-unknown",
+              "failed",
+              "in-progress",
+              "initiated",
+              "no-answer",
+              "queued",
+              "received",
+              "receiving",
+              "ringing",
+              "scheduled",
+              "sending",
+              "sent",
+              "undelivered",
+              "unknown"
+            ],
+            "type": "string"
           },
           "inbound_resource_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "inbound_resource_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "outbound_participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "outbound_resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "outbound_resource_status": {
-            "type": {
-              "enum": [
-                "accepted",
-                "answered",
-                "busy",
-                "canceled",
-                "completed",
-                "deleted",
-                "delivered",
-                "delivery-unknown",
-                "failed",
-                "in-progress",
-                "initiated",
-                "no-answer",
-                "queued",
-                "received",
-                "receiving",
-                "ringing",
-                "scheduled",
-                "sending",
-                "sent",
-                "undelivered",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "accepted",
+              "answered",
+              "busy",
+              "canceled",
+              "completed",
+              "deleted",
+              "delivered",
+              "delivery-unknown",
+              "failed",
+              "in-progress",
+              "initiated",
+              "no-answer",
+              "queued",
+              "received",
+              "receiving",
+              "ringing",
+              "scheduled",
+              "sending",
+              "sent",
+              "undelivered",
+              "unknown"
+            ],
+            "type": "string"
           },
           "outbound_resource_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "outbound_resource_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "session_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "type": {
-            "type": {
-              "enum": [
-                "message",
-                "voice",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "message",
+              "voice",
+              "unknown"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -497,94 +375,68 @@
       "proxy.v1.service.session.participant": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_deleted": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "identifier": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "proxy_identifier": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "proxy_identifier_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PN[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PN[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "session_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -592,187 +444,147 @@
       "proxy.v1.service.session.participant.message_interaction": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "data": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "inbound_participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "inbound_resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "inbound_resource_status": {
-            "type": {
-              "enum": [
-                "accepted",
-                "answered",
-                "busy",
-                "canceled",
-                "completed",
-                "deleted",
-                "delivered",
-                "delivery-unknown",
-                "failed",
-                "in-progress",
-                "initiated",
-                "no-answer",
-                "queued",
-                "received",
-                "receiving",
-                "ringing",
-                "scheduled",
-                "sending",
-                "sent",
-                "undelivered",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "accepted",
+              "answered",
+              "busy",
+              "canceled",
+              "completed",
+              "deleted",
+              "delivered",
+              "delivery-unknown",
+              "failed",
+              "in-progress",
+              "initiated",
+              "no-answer",
+              "queued",
+              "received",
+              "receiving",
+              "ringing",
+              "scheduled",
+              "sending",
+              "sent",
+              "undelivered",
+              "unknown"
+            ],
+            "type": "string"
           },
           "inbound_resource_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "inbound_resource_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "outbound_participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "outbound_resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "outbound_resource_status": {
-            "type": {
-              "enum": [
-                "accepted",
-                "answered",
-                "busy",
-                "canceled",
-                "completed",
-                "deleted",
-                "delivered",
-                "delivery-unknown",
-                "failed",
-                "in-progress",
-                "initiated",
-                "no-answer",
-                "queued",
-                "received",
-                "receiving",
-                "ringing",
-                "scheduled",
-                "sending",
-                "sent",
-                "undelivered",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "accepted",
+              "answered",
+              "busy",
+              "canceled",
+              "completed",
+              "deleted",
+              "delivered",
+              "delivery-unknown",
+              "failed",
+              "in-progress",
+              "initiated",
+              "no-answer",
+              "queued",
+              "received",
+              "receiving",
+              "ringing",
+              "scheduled",
+              "sending",
+              "sent",
+              "undelivered",
+              "unknown"
+            ],
+            "type": "string"
           },
           "outbound_resource_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "outbound_resource_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "participant_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "session_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "type": {
-            "type": {
-              "enum": [
-                "message",
-                "voice",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "message",
+              "voice",
+              "unknown"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -780,77 +592,57 @@
       "proxy.v1.service.short_code": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "capabilities": {
-            "type": {
-              "properties": {
-                "mms": {
-                  "type": "boolean"
-                },
-                "sms": {
-                  "type": "boolean"
-                },
-                "voice": {
-                  "type": "boolean"
-                }
+            "properties": {
+              "mms": {
+                "type": "boolean"
               },
-              "type": "object"
-            }
+              "sms": {
+                "type": "boolean"
+              },
+              "voice": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "is_reserved": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "service_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^KS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^KS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "short_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^SC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^SC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

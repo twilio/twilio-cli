@@ -4,162 +4,122 @@
       "insights.v1.summary": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "attributes": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "call_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^CA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^CA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "call_state": {
-            "type": {
-              "enum": [
-                "ringing",
-                "completed",
-                "busy",
-                "fail",
-                "noanswer",
-                "canceled",
-                "answered",
-                "undialed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "ringing",
+              "completed",
+              "busy",
+              "fail",
+              "noanswer",
+              "canceled",
+              "answered",
+              "undialed"
+            ],
+            "type": "string"
           },
           "call_type": {
-            "type": {
-              "enum": [
-                "carrier",
-                "sip",
-                "trunking",
-                "client"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "carrier",
+              "sip",
+              "trunking",
+              "client"
+            ],
+            "type": "string"
           },
           "carrier_edge": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "client_edge": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "connect_duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "direction": {
-            "type": {
-              "enum": [
-                "inbound",
-                "outbound_api",
-                "outbound_dial",
-                "trunking_originating",
-                "trunking_terminating"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "inbound",
+              "outbound_api",
+              "outbound_dial",
+              "trunking_originating",
+              "trunking_terminating"
+            ],
+            "type": "string"
           },
           "disconnected_by": {
-            "type": {
-              "enum": [
-                "callee",
-                "caller",
-                "unknown"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "callee",
+              "caller",
+              "unknown"
+            ],
+            "type": "string"
           },
           "duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "end_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "from": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "processing_state": {
-            "type": {
-              "enum": [
-                "complete",
-                "partial"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "complete",
+              "partial"
+            ],
+            "type": "string"
           },
           "sdk_edge": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "sip_edge": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "start_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "tags": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "to": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

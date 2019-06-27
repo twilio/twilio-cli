@@ -4,102 +4,74 @@
       "monitor.v1.alert": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "alert_text": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "api_version": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_generated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "error_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "log_level": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "more_info": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "request_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "request_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^NO[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^NO[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -107,117 +79,83 @@
       "monitor.v1.alert|instance": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "alert_text": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "api_version": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_generated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "error_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "log_level": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "more_info": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "request_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "request_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "request_variables": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "response_body": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "response_headers": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^NO[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^NO[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -225,94 +163,66 @@
       "monitor.v1.event": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "actor_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^US[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^US[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "actor_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "description": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "event_data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "event_date": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "event_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "resource_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AE[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AE[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "source": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "source_ip_address": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

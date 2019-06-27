@@ -4,10 +4,8 @@
       "iam.v1.authenticate": {
         "properties": {
           "location": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -15,28 +13,20 @@
       "iam.v1.refresh_token": {
         "properties": {
           "expiration": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "roles": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "token": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"
@@ -44,10 +34,8 @@
       "iam.v1.saml2": {
         "properties": {
           "redirect_to": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -55,28 +43,20 @@
       "iam.v1.token": {
         "properties": {
           "expiration": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "roles": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "token": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"
@@ -84,51 +64,35 @@
       "iam.v1.validate_token": {
         "properties": {
           "code": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "expiration": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "identity": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "message": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "realm_user_id": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "roles": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "valid": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "worker_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WK[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"

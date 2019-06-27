@@ -4,147 +4,111 @@
       "fax.v1.fax": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "api_version": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "direction": {
-            "type": {
-              "enum": [
-                "inbound",
-                "outbound"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "inbound",
+              "outbound"
+            ],
+            "type": "string"
           },
           "duration": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "from": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "media_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^ME[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^ME[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "media_url": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "num_pages": {
-            "type": {
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            }
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
           },
           "price": {
-            "type": {
-              "type": "number"
-            }
+            "type": "number"
           },
           "price_unit": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "quality": {
-            "type": {
-              "enum": [
-                "standard",
-                "fine",
-                "superfine"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "standard",
+              "fine",
+              "superfine"
+            ],
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^FX[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^FX[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "queued",
-                "processing",
-                "sending",
-                "delivered",
-                "receiving",
-                "received",
-                "no-answer",
-                "busy",
-                "failed",
-                "canceled"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "queued",
+              "processing",
+              "sending",
+              "delivered",
+              "receiving",
+              "received",
+              "no-answer",
+              "busy",
+              "failed",
+              "canceled"
+            ],
+            "type": "string"
           },
           "to": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -152,51 +116,37 @@
       "fax.v1.fax.fax_media": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "content_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "fax_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^FX[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^FX[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^ME[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^ME[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

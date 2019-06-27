@@ -4,74 +4,56 @@
       "numbers.v1.authorization_document": {
         "properties": {
           "address_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AD[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AD[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cc_emails": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "email": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PX[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PX[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "opened",
-                "signing",
-                "signed",
-                "canceled",
-                "failed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "opened",
+              "signing",
+              "signed",
+              "canceled",
+              "failed"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -79,141 +61,105 @@
       "numbers.v1.authorization_document.dependent_order": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "authorization_document_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PX[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PX[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "capabilities": {
-            "type": {
-              "properties": {
-                "mms": {
-                  "type": "boolean"
-                },
-                "sms": {
-                  "type": "boolean"
-                },
-                "voice": {
-                  "type": "boolean"
-                }
+            "properties": {
+              "mms": {
+                "type": "boolean"
               },
-              "type": "object"
-            }
+              "sms": {
+                "type": "boolean"
+              },
+              "voice": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "failure_reason": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "incoming_phone_number_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PN[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PN[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "phone_number": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^HR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^HR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "twilio-processing",
-                "received",
-                "pending-verification",
-                "verified",
-                "pending-loa",
-                "carrier-processing",
-                "testing",
-                "completed",
-                "failed",
-                "action-required"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "twilio-processing",
+              "received",
+              "pending-verification",
+              "verified",
+              "pending-loa",
+              "carrier-processing",
+              "testing",
+              "completed",
+              "failed",
+              "action-required"
+            ],
+            "type": "string"
           },
           "verification_attempts": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "verification_call_delay": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "verification_call_extension": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "verification_call_sids": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "verification_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "verification_document_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "verification_type": {
-            "type": {
-              "enum": [
-                "phone-call",
-                "phone-bill"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "phone-call",
+              "phone-bill"
+            ],
+            "type": "string"
           }
         },
         "type": "object"
@@ -221,147 +167,109 @@
       "numbers.v1.hosted_number_order": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "authorization_document_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PX[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PX[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "capabilities": {
-            "type": {
-              "properties": {
-                "mms": {
-                  "type": "boolean"
-                },
-                "sms": {
-                  "type": "boolean"
-                },
-                "voice": {
-                  "type": "boolean"
-                }
+            "properties": {
+              "mms": {
+                "type": "boolean"
               },
-              "type": "object"
-            }
+              "sms": {
+                "type": "boolean"
+              },
+              "voice": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "failure_reason": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "incoming_phone_number_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PN[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PN[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "phone_number": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^HR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^HR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "twilio-processing",
-                "received",
-                "pending-verification",
-                "verified",
-                "pending-loa",
-                "carrier-processing",
-                "testing",
-                "completed",
-                "failed",
-                "action-required"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "twilio-processing",
+              "received",
+              "pending-verification",
+              "verified",
+              "pending-loa",
+              "carrier-processing",
+              "testing",
+              "completed",
+              "failed",
+              "action-required"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "verification_attempts": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "verification_call_delay": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "verification_call_extension": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "verification_call_sids": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "verification_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "verification_document_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "verification_type": {
-            "type": {
-              "enum": [
-                "phone-call",
-                "phone-bill"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "phone-call",
+              "phone-bill"
+            ],
+            "type": "string"
           }
         },
         "type": "object"
@@ -369,89 +277,61 @@
       "numbers.v1.identity": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "email": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "purchase_intent_iso_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "purchase_intent_number_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "status_callback_method": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "status_callback_url": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -459,129 +339,85 @@
       "numbers.v1.identity.document": {
         "properties": {
           "academic_degree": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "address_proof": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "birth_date": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "birth_place": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "company_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "expiration_date": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "first_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "identity_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "issue_date": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "last_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "nationality": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "number": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "profession": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "title": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "vat": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"
@@ -589,64 +425,46 @@
       "numbers.v1.proof_of_address": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "address_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AD[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AD[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "failure_reason": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "identity_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^RI[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^RI[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^PG[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^PG[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

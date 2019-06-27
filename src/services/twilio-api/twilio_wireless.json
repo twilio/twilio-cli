@@ -4,95 +4,71 @@
       "wireless.v1.command": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "command": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "command_mode": {
-            "type": {
-              "enum": [
-                "text",
-                "binary"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "text",
+              "binary"
+            ],
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "delivery_receipt_requested": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "direction": {
-            "type": {
-              "enum": [
-                "from_sim",
-                "to_sim"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "from_sim",
+              "to_sim"
+            ],
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^DC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^DC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sim_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^DE[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^DE[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "queued",
-                "sent",
-                "delivered",
-                "received",
-                "failed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "queued",
+              "sent",
+              "delivered",
+              "received",
+              "failed"
+            ],
+            "type": "string"
           },
           "transport": {
-            "type": {
-              "enum": [
-                "sms",
-                "ip"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "sms",
+              "ip"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -100,96 +76,64 @@
       "wireless.v1.rate_plan": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "data_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "data_limit": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "data_metering": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "international_roaming": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "international_roaming_data_limit": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "messaging_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "national_roaming_data_limit": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "national_roaming_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "voice_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -197,230 +141,182 @@
       "wireless.v1.sim": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "commands_callback_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "commands_callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "e_id": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "iccid": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "ip_address": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "rate_plan_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WP[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WP[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "reset_status": {
-            "type": {
-              "enum": [
-                "resetting"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "resetting"
+            ],
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^DE[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^DE[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sms_fallback_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "sms_fallback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "sms_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "sms_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "status": {
-            "type": {
-              "enum": [
-                "new",
-                "ready",
-                "active",
-                "suspended",
-                "deactivated",
-                "canceled",
-                "scheduled",
-                "updating"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "new",
+              "ready",
+              "active",
+              "suspended",
+              "deactivated",
+              "canceled",
+              "scheduled",
+              "updating"
+            ],
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "voice_fallback_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "voice_fallback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "voice_method": {
-            "type": {
-              "enum": [
-                "head",
-                "get",
-                "post",
-                "patch",
-                "put",
-                "delete",
-                "HEAD",
-                "GET",
-                "POST",
-                "PATCH",
-                "PUT",
-                "DELETE"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "head",
+              "get",
+              "post",
+              "patch",
+              "put",
+              "delete",
+              "HEAD",
+              "GET",
+              "POST",
+              "PATCH",
+              "PUT",
+              "DELETE"
+            ],
+            "type": "string"
           },
           "voice_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -428,96 +324,64 @@
       "wireless.v1.sim.data_session": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cell_id": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "cell_location_estimate": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "end": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "imei": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "last_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "operator_country": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "operator_mcc": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "operator_mnc": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "operator_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "packets_downloaded": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "packets_uploaded": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "radio_link": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WN[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WN[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sim_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^DE[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^DE[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "start": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -525,35 +389,25 @@
       "wireless.v1.sim.usage_record": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "commands": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "period": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "sim_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^DE[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^DE[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"

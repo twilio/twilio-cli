@@ -4,40 +4,26 @@
       "lookups.v1.phone_number": {
         "properties": {
           "add_ons": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "caller_name": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "carrier": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "country_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "national_format": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "phone_number": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"

@@ -4,105 +4,75 @@
       "taskrouter.v1.workspace": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "default_activity_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "default_activity_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "event_callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "events_filter": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "multi_task_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "prioritize_queue_order": {
-            "type": {
-              "enum": [
-                "FIFO",
-                "LIFO"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "FIFO",
+              "LIFO"
+            ],
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "timeout_activity_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "timeout_activity_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -110,56 +80,40 @@
       "taskrouter.v1.workspace.activity": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "available": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -167,108 +121,74 @@
       "taskrouter.v1.workspace.event": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "actor_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "actor_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "actor_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "description": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "event_data": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "event_date": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "event_date_ms": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "event_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "resource_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^[a-zA-Z]{2}[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "resource_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "resource_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^EV[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^EV[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "source": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "source_ip_address": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -276,139 +196,99 @@
       "taskrouter.v1.workspace.task": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "addons": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "age": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "assignment_status": {
-            "type": {
-              "enum": [
-                "pending",
-                "reserved",
-                "assigned",
-                "canceled",
-                "completed",
-                "wrapping"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "pending",
+              "reserved",
+              "assigned",
+              "canceled",
+              "completed",
+              "wrapping"
+            ],
+            "type": "string"
           },
           "attributes": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "priority": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reason": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_channel_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^TC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^TC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_channel_unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "task_queue_friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "task_queue_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WQ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WQ[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "timeout": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workflow_friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "workflow_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WW[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WW[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -416,93 +296,71 @@
       "taskrouter.v1.workspace.task.task_reservation": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "reservation_status": {
-            "type": {
-              "enum": [
-                "pending",
-                "accepted",
-                "rejected",
-                "timeout",
-                "canceled",
-                "rescinded",
-                "wrapping",
-                "completed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "timeout",
+              "canceled",
+              "rescinded",
+              "wrapping",
+              "completed"
+            ],
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "worker_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "worker_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WK[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -510,72 +368,52 @@
       "taskrouter.v1.workspace.task_channel": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "channel_optimized_routing": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^TC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^TC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -583,107 +421,77 @@
       "taskrouter.v1.workspace.task_queue": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assignment_activity_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "assignment_activity_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "max_reserved_workers": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservation_activity_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "reservation_activity_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WQ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WQ[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "target_workers": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "task_order": {
-            "type": {
-              "enum": [
-                "FIFO",
-                "LIFO"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "FIFO",
+              "LIFO"
+            ],
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -691,121 +499,79 @@
       "taskrouter.v1.workspace.task_queue.task_queue_cumulative_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "avg_task_acceptance_time": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "end_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "reservations_accepted": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_canceled": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_created": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rejected": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rescinded": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_timed_out": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "split_by_wait_time": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "start_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "task_queue_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WQ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WQ[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "tasks_canceled": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_completed": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_deleted": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_entered": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_moved": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "wait_duration_until_accepted": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "wait_duration_until_canceled": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -813,80 +579,56 @@
       "taskrouter.v1.workspace.task_queue.task_queue_real_time_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "activity_statistics": {
-            "type": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
           },
           "longest_task_waiting_age": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "longest_task_waiting_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_queue_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WQ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WQ[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "tasks_by_priority": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "tasks_by_status": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "total_available_workers": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "total_eligible_workers": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "total_tasks": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -894,44 +636,32 @@
       "taskrouter.v1.workspace.task_queue.task_queue_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cumulative": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "realtime": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "task_queue_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WQ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WQ[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -939,38 +669,28 @@
       "taskrouter.v1.workspace.task_queue.task_queues_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cumulative": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "realtime": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "task_queue_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WQ[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WQ[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -978,91 +698,65 @@
       "taskrouter.v1.workspace.worker": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "activity_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "activity_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WA[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WA[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "attributes": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "available": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_status_changed": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WK[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1070,87 +764,61 @@
       "taskrouter.v1.workspace.worker.worker_channel": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assigned_tasks": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "available": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "available_capacity_percentage": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "configured_capacity": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_channel_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^TC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^TC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_channel_unique_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "worker_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WK[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1158,39 +826,29 @@
       "taskrouter.v1.workspace.worker.worker_instance_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cumulative": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "worker_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WK[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1198,93 +856,71 @@
       "taskrouter.v1.workspace.worker.worker_reservation": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "reservation_status": {
-            "type": {
-              "enum": [
-                "pending",
-                "accepted",
-                "rejected",
-                "timeout",
-                "canceled",
-                "rescinded",
-                "wrapping",
-                "completed"
-              ],
-              "type": "string"
-            }
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "timeout",
+              "canceled",
+              "rescinded",
+              "wrapping",
+              "completed"
+            ],
+            "type": "string"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WR[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WR[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "worker_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "worker_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WK[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WK[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1292,36 +928,26 @@
       "taskrouter.v1.workspace.worker.worker_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cumulative": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "realtime": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1329,76 +955,52 @@
       "taskrouter.v1.workspace.worker.workers_cumulative_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "activity_durations": {
-            "type": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
           },
           "end_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "reservations_accepted": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_canceled": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_created": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rejected": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rescinded": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_timed_out": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "start_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1406,39 +1008,29 @@
       "taskrouter.v1.workspace.worker.workers_real_time_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "activity_statistics": {
-            "type": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
           },
           "total_workers": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1446,89 +1038,63 @@
       "taskrouter.v1.workspace.workflow": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "assignment_callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "configuration": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "date_created": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "date_updated": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "document_content_type": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "fallback_assignment_callback_url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "friendly_name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WW[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WW[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "task_reservation_timeout": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1536,126 +1102,82 @@
       "taskrouter.v1.workspace.workflow.workflow_cumulative_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "avg_task_acceptance_time": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "end_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "reservations_accepted": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_canceled": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_created": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rejected": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rescinded": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_timed_out": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "split_by_wait_time": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "start_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "tasks_canceled": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_completed": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_deleted": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_entered": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_moved": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_timed_out_in_workflow": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "wait_duration_until_accepted": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "wait_duration_until_canceled": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "workflow_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WW[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WW[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1663,62 +1185,44 @@
       "taskrouter.v1.workspace.workflow.workflow_real_time_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "longest_task_waiting_age": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "longest_task_waiting_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "tasks_by_priority": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "tasks_by_status": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "total_tasks": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workflow_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WW[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WW[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1726,44 +1230,32 @@
       "taskrouter.v1.workspace.workflow.workflow_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cumulative": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "realtime": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workflow_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WW[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WW[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1771,118 +1263,76 @@
       "taskrouter.v1.workspace.workspace_cumulative_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "avg_task_acceptance_time": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "end_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "reservations_accepted": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_canceled": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_created": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rejected": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_rescinded": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "reservations_timed_out": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "split_by_wait_time": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "start_time": {
-            "type": {
-              "format": "date-time",
-              "type": "string"
-            }
+            "format": "date-time",
+            "type": "string"
           },
           "tasks_canceled": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_completed": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_created": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_deleted": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_moved": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "tasks_timed_out_in_workflow": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "wait_duration_until_accepted": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "wait_duration_until_canceled": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1890,67 +1340,47 @@
       "taskrouter.v1.workspace.workspace_real_time_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "activity_statistics": {
-            "type": {
-              "items": {
-                "type": "object"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
           },
           "longest_task_waiting_age": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "longest_task_waiting_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WT[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WT[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "tasks_by_priority": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "tasks_by_status": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "total_tasks": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "total_workers": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"
@@ -1958,36 +1388,26 @@
       "taskrouter.v1.workspace.workspace_statistics": {
         "properties": {
           "account_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^AC[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^AC[0-9a-fA-F]{32}$",
+            "type": "string"
           },
           "cumulative": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "realtime": {
-            "type": {
-              "type": "object"
-            }
+            "type": "object"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           },
           "workspace_sid": {
-            "type": {
-              "maxLength": 34,
-              "minLength": 34,
-              "pattern": "^WS[0-9a-fA-F]{32}$",
-              "type": "string"
-            }
+            "maxLength": 34,
+            "minLength": 34,
+            "pattern": "^WS[0-9a-fA-F]{32}$",
+            "type": "string"
           }
         },
         "type": "object"

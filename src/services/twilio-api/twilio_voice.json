@@ -8,59 +8,41 @@
       "voice.v1.dialing_permissions.dialing_permissions_country": {
         "properties": {
           "continent": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "country_codes": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "high_risk_special_numbers_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "high_risk_tollfraud_numbers_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "iso_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "low_risk_numbers_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -68,9 +50,7 @@
       "voice.v1.dialing_permissions.dialing_permissions_country.dialing_permissions_hrs_prefixes": {
         "properties": {
           "prefix": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"
@@ -78,14 +58,10 @@
       "voice.v1.dialing_permissions.dialing_permissions_country_bulk_update": {
         "properties": {
           "update_count": {
-            "type": {
-              "type": "integer"
-            }
+            "type": "integer"
           },
           "update_request": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           }
         },
         "type": "object"
@@ -93,59 +69,41 @@
       "voice.v1.dialing_permissions.dialing_permissions_country|instance": {
         "properties": {
           "continent": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "country_codes": {
-            "type": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "high_risk_special_numbers_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "high_risk_tollfraud_numbers_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "iso_code": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "links": {
-            "type": {
-              "patternProperties": {
-                "^.+$": {
-                  "format": "uri",
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
+            "patternProperties": {
+              "^.+$": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "low_risk_numbers_enabled": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "name": {
-            "type": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
@@ -153,15 +111,11 @@
       "voice.v1.dialing_permissions.dialing_permissions_settings": {
         "properties": {
           "dialing_permissions_inheritance": {
-            "type": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           },
           "url": {
-            "type": {
-              "format": "uri",
-              "type": "string"
-            }
+            "format": "uri",
+            "type": "string"
           }
         },
         "type": "object"
