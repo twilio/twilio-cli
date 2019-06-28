@@ -116,6 +116,7 @@ Before you submit your pull request consider the following guidelines:
   * Test that everything is wired up correctuly with `./bin/run`
 
 * Understanding the code base:
+  * The Twilio CLI utilizes the Open CLI Framework ([oclif](https://oclif.io/)). It may be useful to familiarize yourself with it, in particular, the [multi-command CLI](https://oclif.io/docs/multi).
   * Utilize `DEBUG =* ./bin/run` to view the code flow
   * Key concepts:
     * _domains_
@@ -127,6 +128,8 @@ Before you submit your pull request consider the following guidelines:
     * _CLI commands_
       * Handcrafted commands are located at `./src/commands/`
       * Generated commands are created here `./src/hooks/init/twilio-api.js`
+    * _hooks_
+    * _topics_
 
 * Make your changes in a new git branch:
 
