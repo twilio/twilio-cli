@@ -113,6 +113,20 @@ Before you submit your pull request consider the following guidelines:
   * `cd twilio-cli`
   * In `package.json` replace `@twilio/cli-core": "<Version Number>"` with `@twilio/cli-core": "file:../twilio-cli-core`
   * `make clean install`
+  * Test that everything is wired up correctuly with `./bin/run`
+
+* Understanding the code base:
+  * Utilize `DEBUG =* ./bin/run` to view the code flow
+  * Key concepts:
+    * _domains_
+      * Located here: `./src/services/twilio-api`
+    * _versions_ 
+      * Specified in the path, e.g. `/v1/...`
+    * _action_
+      * These are the HTTP verbs
+    * _CLI commands_
+      * Handcrafted commands are located at `./src/commands/`
+      * Generated commands are created here `./src/hooks/init/twilio-api.js`
 
 * Make your changes in a new git branch:
 
