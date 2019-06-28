@@ -101,6 +101,19 @@ Before you submit your pull request consider the following guidelines:
 
 * Search [GitHub][github] for an open or closed Pull Request that relates to
   your submission. You don't want to duplicate effort.
+
+* Setup your development environment:
+  * `npm uninstall -g twilio-cli`
+  * `git clone https://github.com/twilio/twilio-cli-core.git`
+  * `cd twilio-cli-core`
+  * `rm -rf ./node_modules`
+  * `npm i`
+  * `cd ..`
+  * `git clone https://github.com/twilio/twilio-cli.git`
+  * `cd twilio-cli`
+  * In `package.json` replace `@twilio/cli-core": "<Version Number>"` with `@twilio/cli-core": "file:../twilio-cli-core`
+  * `make clean install`
+
 * Make your changes in a new git branch:
 
     ```shell
