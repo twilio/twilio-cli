@@ -55,7 +55,7 @@ For large fixes, please build and test the documentation before submitting the
 PR to be sure you haven't accidentally introduced layout or formatting issues.
 
 If you want to help improve the docs at
-[https://www.twilio.com/docs/libraries/twilio-cli][docs-link], please contact
+[http://twil.io/cli][docs-link], please contact
 [help@twilio.com](mailto:help@twilio.com).
 
 ## <a name="submit"></a> Submission Guidelines
@@ -170,6 +170,6 @@ you are working:
 * All features or bug fixes **must be tested** by one or more tests.
 * All classes and methods **must be documented**.
 
-[docs-link]: https://www.twilio.com/docs/libraries/twilio-cli
+[docs-link]: http://twil.io/cli
 [issue-link]: https://github.com/twilio/twilio-cli/issues/new
 [github]: https://github.com/twilio/twilio-cli
