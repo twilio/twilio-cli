@@ -23,6 +23,10 @@ describe('hooks', () => {
 
         expect(domainTopic.description).to.equal('resources under accounts.twilio.com');
         expect(versionTopic.description).to.equal('version 1 of the API');
+
+        const previewCommand = plugin.topics.find(t => t.name === 'api:preview');
+
+        expect(previewCommand).to.equal(undefined);
       });
     });
   });
