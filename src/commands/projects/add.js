@@ -151,8 +151,8 @@ class ProjectsAdd extends BaseCommand {
   async validateCredentials() {
     const twilioClient = this.getTwilioClient();
     try {
-      const account = await twilioClient.api.accounts(this.accountSid).fetch();
-      this.logger.debug(account);
+      // Don't log the response since it contains the account auth token.
+      await twilioClient.api.accounts(this.accountSid).fetch();
       return true;
     } catch (err) {
       this.logger.error('Could not validate the provided credentials. Not saving.');

@@ -8,16 +8,14 @@ describe('services', () => {
       test.it('handles a simple, non-nested resource path', () => {
         expect(getTopicName({
           domainName: 'foo',
-          versionName: 'v1',
-          path: '/Bars'
+          path: '/v1/Bars'
         })).to.equal('foo:v1:bars');
       });
 
       test.it('handles a nested resource path with parameters', () => {
         expect(getTopicName({
           domainName: 'foo',
-          versionName: 'v1',
-          path: '/Bars/{BarId}/SubBars/{SubBarId}'
+          path: '/v1/Bars/{BarId}/SubBars/{SubBarId}.json'
         })).to.equal('foo:v1:bars:sub-bars');
       });
     });
