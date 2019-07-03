@@ -15,7 +15,7 @@ describe('base-commands', () => {
         NewCommandClass.actionDefinition = {
           domainName: 'api',
           commandName: 'create',
-          path: '/2010-04-01/Accounts/{AccountSid}/Calls',
+          path: '/2010-04-01/Accounts/{AccountSid}/Calls.json',
           resource: fakeResource,
           actionName: 'create',
           action: fakeResource.actions.create
@@ -62,7 +62,7 @@ describe('base-commands', () => {
         .twilioCliEnv(Config)
         .stdout()
         .nock('https://api.twilio.com', api =>
-          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json`).reply(200, fakeCallResponse)
+          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json`).reply(201, fakeCallResponse)
         )
         .twilioCommand(getCommandClass(), [
           '--from',
