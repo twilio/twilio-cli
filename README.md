@@ -58,7 +58,7 @@ This is for caching your credentials for your _existing_ Twilio account (aka Pro
 
 Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "twilio-cli for [username] on [hostname]" in the console) and stored in your system's keychain.
 
-For details on how to work with multiple Twilio accounts/projects or use environment variables, see the [projects](#projects) section.
+For details on how to work with multiple Twilio accounts/projects or use environment variables, see the [projects](docs/general_usage.md#projects) section.
 
 ### Step 2 - Explore
 
