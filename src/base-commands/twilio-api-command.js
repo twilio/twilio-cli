@@ -26,7 +26,7 @@ const ACCOUNT_SID_FLAG = 'account-sid';
 class TwilioApiCommand extends TwilioClientCommand {
   async runCommand() {
     const runner = new ApiCommandRunner(
-      this.twilioClient,
+      this.twilioApiClient,
       this.constructor.actionDefinition,
       this.constructor.flags,
       this.flags
@@ -58,7 +58,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
 
   // Parameters
   const cmdFlags = {};
-  action.parameters.forEach(param => {
+  (action.parameters || []).forEach(param => {
     const flagName = kebabCase(param.name);
     const flagConfig = {
       description: sanitizeDescription(param.description),
