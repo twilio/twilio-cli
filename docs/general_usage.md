@@ -53,7 +53,7 @@ twilio phone-numbers:update [PN sid or E.164] --sms-url http://localhost:5000/ha
 
 ### Output formats
 
-All command output is sent to `stdout` (whereas [logging messages](#Loggingmessages) are sent to `stderr`).
+All command output is sent to `stdout` (whereas [logging messages](#logging-messages) are sent to `stderr`).
 
 By default, the output is formatted in human readable form in a columnar format like so:
 
@@ -98,7 +98,7 @@ twilio-cli can be extended via plugins.
 
 At this time, only two plugins exist:
 
-* [twilio-run plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [the twilio-run plugin](https://github.com/twilio-labs/plugin-serverless).
+* [twilio serverless plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [plugin-serverless](https://github.com/twilio-labs/plugin-serverless).
 
 * [twilio debugger plugin](https://github.com/twilio/plugin-debugger): The debugger plugin will display Twilio Debugger logs directly in your terminal.
 
