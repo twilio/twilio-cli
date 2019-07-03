@@ -21,64 +21,19 @@ Eventually, the plan is to have self-contained packages for \*nix systems and an
 
 ## Setup
 
-You can install `twilio-cli` via [npm](https://www.npmjs.com/get-npm) or [Homebrew](https://brew.sh) (macOS or Linux).
-
-### NPM
-
-1. Install the CLI globally: `npm install -g twilio-cli`
-1. Now you can run the CLI from anywhere using the `twilio` command.
-
-### Homebrew
-
-1. `brew tap twilio/brew && brew install twilio`
-1. Now you can run the CLI from anywhere using the `twilio` command.
-
-### Troubleshooting
-
-* [Resolving EACCES permissions errors when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
-
-### Updating
-
-1. Check if there's a new version: `npm outdated -g twilio-cli`
-1. Update the CLI globally: `npm update -g twilio-cli`
+Head over to the [twilio-cli documentation](https://www.twilio.com/docs/twilio-cli/quickstart).
 
 ## Versioning
 
 `twilio-cli` uses a modified version of [Semantic Versioning](https://semver.org) for all changes. [See this document](VERSIONS.md) for details.
 
-## Basic usage
+## Usage
 
-### Step 1 - Login (aka add a project)
+See the [General usage guide](https://www.twilio.com/docs/twilio-cli/general-usage).
 
-```
-twilio login
-```
+## Examples
 
-This is for caching your credentials for your _existing_ Twilio account (aka Project) locally. You will be prompted for a shorthand identifier for your Twilio project. This is referred to as the "project ID", which is just an easy to remember, short string to identify the project. (If you've used `git` before, it's like the name you assign to a remote like "origin".)
-
-Note, while you are prompted for your Account SID and Auth Token, these are not saved. An API Key is created (look for "twilio-cli for [username] on [hostname]" in the console) and stored in your system's keychain.
-
-For details on how to work with multiple Twilio accounts/projects or use environment variables, see the [projects](#projects) section.
-
-### Step 2 - Explore
-
-```
-twilio
-```
-
-Lists all available commands.
-
-```
-twilio phone-numbers:list
-```
-
-Lists all your phone numbers.
-
-Add `--help` to any command to get help (e.g. `twilio phone-numbers:list --help`)
-
-## General usage
-
-See the [General usage guide](docs/general_usage.md).
+Review the [Examples](https://www.twilio.com/docs/twilio-cli/examples).
 
 ## Contributing
 
