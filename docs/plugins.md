@@ -35,6 +35,16 @@ Now, you can run your plugin command from the CLI:
 ./bin/run my-new-topic:my-new-command --help
 ```
 
+*NOTE if you pull in [twilio-cli-core](https://github.com/twilio/twilio-cli-core) as a dependency, you will need to add `keytar@^4.11.0` as a development dependency to avoid re-install/upgrade issues.
+
+e.g. 
+```
+"devDependencies": {
+    "keytar": "^4.11.0"
+}
+```
+
+
 ### TwilioClientCommand
 
 Inherit from `TwilioClientCommand` if your command will need to make Twilio API calls. You will be provided with a `this.twilioClient` to make API calls using the Node.js helper library for Twilio. The client object will already have the necessary credentials and account SID. Just start calling the API. You are also given an `this.httpClient` to make requests to other API's, but you'll need to manage any necessary credentials yourself.
