@@ -15,6 +15,7 @@
     "@oclif/plugin-plugins": "^1.7.8",
     "@twilio/cli-core": "^1.5.0",
     "chalk": "^2.4.2",
+    "keytar": "^4.11.0",
     "ngrok": "^3.2.1",
     "twilio": "^3.33.0"
   },
