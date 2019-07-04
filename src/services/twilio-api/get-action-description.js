@@ -1,4 +1,4 @@
-const { capitalize } = require('../naming-conventions');
+const { capitalize } = require('@twilio/cli-core').services.namingConventions;
 
 // The (upper-case) name of any tags that we should ignore when building command descriptions.
 const IGNORED_TAGS = new Set(['GA']);
