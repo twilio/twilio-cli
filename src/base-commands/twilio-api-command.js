@@ -5,8 +5,9 @@
 const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
-const { kebabCase, camelCase } = require('../services/naming-conventions');
-const { ApiCommandRunner, getActionDescription, isApi2010 } = require('../services/twilio-api');
+const { kebabCase, camelCase } = require('@twilio/cli-core').services.namingConventions;
+const { isApi2010 } = require('@twilio/cli-core').services.TwilioApi;
+const { ApiCommandRunner, getActionDescription } = require('../services/twilio-api');
 
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {

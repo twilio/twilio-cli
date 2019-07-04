@@ -1,4 +1,4 @@
-const { kebabCase } = require('../naming-conventions');
+const { kebabCase } = require('@twilio/cli-core').services.namingConventions;
 
 const TOPIC_SEPARATOR = ':';
 const BASE_TOPIC_NAME = 'api';
