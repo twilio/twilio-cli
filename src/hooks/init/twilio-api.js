@@ -1,6 +1,7 @@
 const { Plugin } = require('@oclif/config');
+const { TwilioApiBrowser } = require('@twilio/cli-core').services.TwilioApi;
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
-const { TwilioApiBrowser, getTopicName, TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('../../services/twilio-api');
+const { getTopicName, TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('../../services/twilio-api');
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
