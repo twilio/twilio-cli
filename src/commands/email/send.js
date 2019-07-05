@@ -6,6 +6,11 @@ class send extends BaseCommand {
   async run() {
     await super.run();
     this.loadArguments();
+    console.log(process.env.SENDGRID_API_KEY);
+    if (!process.env.SENDGRID_API_KEY) {
+      this.logger.error('Make sure you have an enviornmental varible called SENDGRID_API_KEY set up with your API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key');
+      return this.exit(1);
+    }
     this.fromEmail = await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
     const stringFromEmail = validFromEmail.toString();
@@ -108,9 +113,6 @@ class send extends BaseCommand {
   }
 
   sendEmail(sendInfomation) {
-    if (!process.env.SENDGRID_API_KEY) {
-      this.logger.error('Make sure you have an enviornmental varible called SENDGRID_API_KEY set up with your API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key');
-    }
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     sgMail.send(sendInfomation);
     this.logger.info('Your email containing the message "' + this.emailText + '" sent from ' + this.fromEmail + ' to ' + this.toEmail + ' with the subject line ' + this.subjectLine + ' has been sent!');
