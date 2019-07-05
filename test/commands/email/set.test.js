@@ -19,33 +19,29 @@ describe('commands', () => {
         .do(ctx => {
           const fakePrompt = sinon.stub();
           fakePrompt
+            .onFirstCall()
             .resolves({
               from: emailAddress,
               subject: subjectLine
+
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
         });
-      const noDefaults = ({ flags = [], emailAddress = '', subjectLine = '' } = {}) => test
+      const noDefaults = ({ emailAddress = '', subjectLine = '' } = {}) => test
         .twilioCliEnv(Config)
-        .twilioCreateCommand(EmailSet, flags)
+        .twilioCreateCommand(EmailSet, [])
         .stdout()
         .stderr()
         .do(ctx => {
           const fakePrompt = sinon.stub();
           fakePrompt
+            .onFirstCall()
             .resolves({
               from: emailAddress,
               subject: subjectLine
+
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
-        });
-
-      noDefaults({ flags: ['--from', 'Frodo@test.com', '--subject', 'Where is the ring'] })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:set to set a new default sending email and subject with flags', ctx => {
-          expect(ctx.stderr).to.contain('Frodo@test.com');
-          expect(ctx.stderr).to.contain('Where is the ring');
-          expect(ctx.stderr).to.contain('configuration saved');
         });
 
       noDefaults({ emailAddress: 'newDefault@gmail.com', subjectLine: 'greetings' })
@@ -72,7 +68,7 @@ describe('commands', () => {
         .it('run email:set with invalid email and correct subject line when a default has already been set up', ctx => {
           expect(ctx.stderr).to.contain('Current default sending email: default@test.com');
           expect(ctx.stderr).to.contain('Current default subject line: default subjet line');
-          expect(ctx.stderr).to.contain('Please use a valid email');
+          expect(ctx.stderr).to.contain('Please use valid email');
         });
     });
   });

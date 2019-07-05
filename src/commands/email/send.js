@@ -1,23 +1,31 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
-const emailUtilities = require('../../services/email-utility');
 const sgMail = require('@sendgrid/mail');
 
-class Send extends BaseCommand {
+class send extends BaseCommand {
   async run() {
     await super.run();
+    this.loadArguments();
     if (!process.env.SENDGRID_API_KEY) {
-      this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
+      this.logger.error('Make sure you have an environmental variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
     }
-    await this.promptForFromEmail();
+    this.fromEmail = await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
+    const stringFromEmail = validFromEmail.toString();
     await this.promptForToEmail();
     const validToEmail = this.validateEmail(this.toEmail);
-    await this.promptForSubject();
+    this.subjectLine = await this.promptForSubject();
     await this.promptForText();
-    const sendInformation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
-    await this.sendEmail(sendInformation);
+    const sendInfomation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    await this.sendEmail(sendInfomation);
+  }
+
+  loadArguments() {
+    this.toEmail = this.flags.toEmail;
+    this.fromEmail = this.flags.fromEmail;
+    this.subjectLine = this.flags.subjectLine;
+    this.emailText = this.flags.emailText;
   }
 
   validateEmail(email) {
@@ -31,104 +39,102 @@ class Send extends BaseCommand {
     } else {
       emailList[0] = email;
     }
-
     emailList.forEach(emailAddress => {
-      if (emailUtilities.validateEmail(emailAddress) === false) {
+      const emailVerdict = emailAddress.includes('@');
+      if (emailVerdict === false) {
         this.logger.error(emailAddress + ' is not a valid email.');
         validEmail = false;
       }
     });
     if (validEmail === false) {
-      this.logger.error('Email could not be sent, please re-run the command with valid email addresses.');
+      this.logger.error('Email could not be sent please re-run the command with valid email addresses.');
       return this.exit(1);
     }
     return emailList;
   }
 
   async promptForFromEmail() {
+    if (this.fromEmail) {
+      return this.fromEmail;
+    }
     if (this.userConfig.email.fromEmail) {
-      this.fromEmail = this.userConfig.email.fromEmail;
+      return this.userConfig.email.fromEmail;
     }
-    if (this.flags.from) {
-      this.fromEmail = this.flags.from;
-    }
-    if (!this.fromEmail) {
+    if (!this.fromEmail || !this.userConfig.email.fromEmail) {
       const answer = await this.inquirer.prompt([
         {
           name: 'from',
-          message: Send.flags.from.description + ':'
+          message: send.flags.fromEmail.description + ':'
         }
       ]);
-      this.fromEmail = answer.from;
+      return answer.from;
     }
   }
 
   async promptForToEmail() {
-    this.toEmail = this.flags.to;
     if (!this.toEmail) {
       const answer = await this.inquirer.prompt([{
         name: 'to',
-        message: Send.flags.to.description + ':'
+        message: send.flags.toEmail.description + ':'
       }]);
       this.toEmail = answer.to;
     }
   }
 
   async promptForSubject() {
+    if (this.subjectLine) {
+      return this.subjectLine;
+    }
     if (this.userConfig.email.subjectLine) {
-      this.subjectLine = this.userConfig.email.subjectLine;
+      return this.userConfig.email.subjectLine;
     }
-    if (this.flags.subject) {
-      this.subjectLine = this.flags.subject;
-    }
-    if (!this.subjectLine) {
+    if (!this.subjectLine || !this.userConfig.email.subjectLine) {
       const subject = await this.inquirer.prompt([
         {
           name: 'subject',
-          message: Send.flags.subject.description + ':'
+          message: send.flags.subjectLine.description + ':'
         }
       ]);
-      this.subjectLine = subject.subject;
+      return subject.subject;
     }
   }
 
   async promptForText() {
-    this.emailText = this.flags.text;
     if (!this.emailText) {
       const answers = await this.inquirer.prompt([
         {
           name: 'text',
-          message: Send.flags.text.description + ':'
+          message: send.flags.emailText.description + ':'
         }
       ]);
       this.emailText = answers.text;
     }
   }
 
-  async sendEmail(sendInformation) {
+  async sendEmail(sendInfomation) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    await sgMail.send(sendInformation);
+    await sgMail.send(sendInfomation);
     this.logger.info('Your email containing the message "' + this.emailText + '" sent from ' + this.fromEmail + ' to ' + this.toEmail + ' with the subject line ' + this.subjectLine + ' has been sent!');
   }
 }
 
-Send.description = 'sends emails to single or multiple recipients';
-Send.flags = Object.assign(
+send.description = 'sends emails to single or multiple recipients';
+send.flags = Object.assign(
   {
-    to: flags.string({
-      description: 'Email address of recipient (for multiple email addresses separate each email with a comma)'
+    toEmail: flags.string({
+      description: 'Email address of recipient (for multiple email addresses seprate each email with a comma)'
     }),
-    from: flags.string({
+    fromEmail: flags.string({
       description: 'Email address of the sender'
     }),
-    subject: flags.string({
+    subjectLine: flags.string({
       description: 'The subject line for an email'
     }),
-    text: flags.string({
+    emailText: flags.string({
       description: 'Text to send within the email body'
     })
   },
   BaseCommand.flags
 );
-Send.args = [];
-module.exports = Send;
+send.args = [];
+module.exports = send;

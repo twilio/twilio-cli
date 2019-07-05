@@ -1,19 +1,11 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
-const emailUtilities = require('../../services/email-utility');
 
-class Set extends BaseCommand {
+class set extends BaseCommand {
   async run() {
     await super.run();
     this.reminderCurrentData();
-    const email = await this.promptSetDefaultEmail();
-    const subject = await this.promptSetDefaultSubject();
-    const verdict = emailUtilities.validateEmail(email);
-    if (verdict === false) {
-      this.logger.error('Please use a valid email.');
-      this.exit(1);
-    }
-    this.setDefaults(email, subject);
+    await this.promptSetDefaultEmail();
     const configSavedMessage = await this.configFile.save(this.userConfig);
     this.logger.info(configSavedMessage);
   }
@@ -27,51 +19,39 @@ class Set extends BaseCommand {
     }
   }
 
-  setDefaults(email, subject) {
-    this.userConfig.email.fromEmail = email;
-    this.userConfig.email.subjectLine = subject;
-    this.logger.info('Default sending email address has been set to: ' + this.userConfig.email.fromEmail);
-    this.logger.info('Default subject line has been set to: ' + this.userConfig.email.subjectLine);
-  }
-
   async promptSetDefaultEmail() {
-    if (!this.flags.from) {
-      const answer = await this.inquirer.prompt([
-        {
-          name: 'from',
-          message: Set.flags.from.description + ':',
-          default: this.userConfig.email.fromEmail
-        }
-      ]);
-      return answer.from;
+    const answer = await this.inquirer.prompt([
+      {
+        name: 'from',
+        message: set.flags['from-email'].description + ':'
+      },
+      {
+        name: 'subject',
+        message: set.flags['subject-line'].description + ':'
+      }
+    ]);
+    const validEmail = answer.from.includes('@');
+    if (validEmail === true) {
+      this.userConfig.email.fromEmail = answer.from;
+      this.userConfig.email.subjectLine = answer.subject;
+      this.logger.info('Default sending email address has been set to: ' + this.userConfig.email.fromEmail);
+      this.logger.info('Default subject line has been set to: ' + this.userConfig.email.subjectLine);
+    } else {
+      this.logger.error('Please use valid email.');
+      this.exit(1);
     }
-    return this.flags.from;
-  }
-
-  async promptSetDefaultSubject() {
-    if (!this.flags.subject) {
-      const answer = await this.inquirer.prompt([
-        {
-          name: 'subject',
-          message: Set.flags.subject.description + ':',
-          default: this.userConfig.email.subjectLine
-        }
-      ]);
-      return answer.subject;
-    }
-    return this.flags.subject;
   }
 }
 
-Set.description = 'sets a default sending email address and subject line';
+set.description = 'sets a default sending email address and subject line';
 
-Set.flags = {
-  from: flags.string({
-    description: 'Default email address of the sender'
+set.flags = {
+  'from-email': flags.string({
+    description: 'Default email of the sender'
   }),
-  subject: flags.string({
+  'subject-line': flags.string({
     description: 'Default subject line for all emails'
   })
 };
 
-module.exports = Set;
+module.exports = set;
