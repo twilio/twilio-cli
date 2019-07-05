@@ -5,12 +5,7 @@
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
-const { kebabCase, camelCase } = require('@twilio/cli-core').services.namingConventions;
 const { validateSchema } = require('../api-schema/schema-validator');
-const { ResourcePathParser } = require('@twilio/cli-core').services;
-
-// AccountSid is a special snowflake
-const ACCOUNT_SID_FLAG = 'account-sid';
 
 class ApiCommandRunner {
   constructor(twilioClient, actionDefinition, flagDefinitions, flagValues) {
@@ -23,9 +18,7 @@ class ApiCommandRunner {
   async run() {
     this.validateFlags();
 
-    const endpoint = this.getEndpoint();
-
-    return this.execute(endpoint);
+    return this.execute();
   }
 
   validateFlags() {
@@ -64,66 +57,20 @@ class ApiCommandRunner {
     // TODO: Possible extender event: "afterValidateParameters"
   }
 
-  getEndpoint() {
+  async execute() {
     const domainName = this.actionDefinition.domainName;
     const path = this.actionDefinition.path;
-
-    // This converts a path like "/Accounts/{AccountSid}/Calls" to
-    // the Node.js object in the Twilio Helper library.
-    // Example: twilioClient.api.v2010.accounts('ACxxxx').calls
-    const helperVersion = this.twilioClient[domainName];
-    const resourcePathParser = new ResourcePathParser(path);
-    resourcePathParser.removeJsonExtension();
-    let endpoint = helperVersion;
-
-    resourcePathParser.forEachPathNode(pathNode => {
-      if (resourcePathParser.isPathVariable(pathNode)) {
-        const paramName = kebabCase(pathNode.replace(/[{}]/g, ''));
-        let value = '';
-
-        if (doesObjectHaveProperty(this.flagValues, paramName)) {
-          value = this.flagValues[paramName];
-        } else if (paramName === ACCOUNT_SID_FLAG) {
-          value = this.twilioClient.accountSid;
-        }
-
-        // Since this part of the path has a parameter, we invoke
-        // the current endpoint as a function, passing the parameter
-        // and then use it's result as the new endpoint.
-        endpoint = endpoint(value);
-        logger.debug(`pathNode=${pathNode}, value=${value}, endpoint=${typeof endpoint}`);
-      } else {
-        if (pathNode === '2010-04-01') {
-          pathNode = 'v2010';
-        }
-
-        endpoint = endpoint[camelCase(pathNode)];
-        logger.debug(`pathNode=${pathNode}, endpoint=${typeof endpoint}`);
-      }
-    });
-
-    return endpoint;
-  }
-
-  async execute(endpoint) {
     const actionName = this.actionDefinition.actionName;
 
-    const camelCasedFlags = {};
-    Object.keys(this.flagValues).forEach(key => {
-      camelCasedFlags[camelCase(key)] = this.flagValues[key];
-    });
-
-    logger.debug(`actionName=${actionName}, endpoint[actionName]=${typeof endpoint[actionName]}`);
+    logger.debug(`domainName=${domainName}, path=${path}, actionName=${actionName}`);
 
     // TODO: Possible extender event: "beforeInvokeApi"
 
-    const actionPromise = endpoint[actionName](camelCasedFlags);
-
-    try {
-      return await actionPromise;
-    } catch (error) {
-      throw new TwilioCliError(`Error code ${error.code} from Twilio: ${error.message}. See ${error.moreInfo} for more info.`, error.code);
-    }
+    return this.twilioClient[actionName]({
+      domain: domainName,
+      path: path,
+      data: this.flagValues
+    });
 
     // TODO: Possible extender event: "afterInvokeApi"
   }
