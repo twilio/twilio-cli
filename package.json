@@ -13,6 +13,7 @@
     "@oclif/plugin-autocomplete": "^0.1.1",
     "@oclif/plugin-help": "^2.2.0",
     "@oclif/plugin-plugins": "^1.7.8",
+    "@sendgrid/mail": "^6.4.0",
     "@twilio/cli-core": "^2.0.1",
     "chalk": "^2.4.2",
     "keytar": "^4.11.0",
