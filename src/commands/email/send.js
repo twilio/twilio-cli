@@ -6,9 +6,8 @@ class send extends BaseCommand {
   async run() {
     await super.run();
     this.loadArguments();
-    console.log(process.env.SENDGRID_API_KEY);
     if (!process.env.SENDGRID_API_KEY) {
-      this.logger.error('Make sure you have an enviornmental varible called SENDGRID_API_KEY set up with your API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key');
+      this.logger.error('Make sure you have an environmental variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
     }
     this.fromEmail = await this.promptForFromEmail();
@@ -18,8 +17,8 @@ class send extends BaseCommand {
     const validToEmail = this.validateEmail(this.toEmail);
     this.subjectLine = await this.promptForSubject();
     await this.promptForText();
-    const sendInfomation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText };
-    this.sendEmail(sendInfomation);
+    const sendInfomation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    await this.sendEmail(sendInfomation);
   }
 
   loadArguments() {
@@ -31,7 +30,7 @@ class send extends BaseCommand {
 
   validateEmail(email) {
     var emailList = [];
-    var test;
+    var validEmail;
     const multipleEmail = email.includes(',');
     if (multipleEmail === true) {
       emailList = email.split(',').map(item => {
@@ -44,10 +43,10 @@ class send extends BaseCommand {
       const emailVerdict = emailAddress.includes('@');
       if (emailVerdict === false) {
         this.logger.error(emailAddress + ' is not a valid email.');
-        test = false;
+        validEmail = false;
       }
     });
-    if (test === false) {
+    if (validEmail === false) {
       this.logger.error('Email could not be sent please re-run the command with valid email addresses.');
       return this.exit(1);
     }
@@ -112,9 +111,9 @@ class send extends BaseCommand {
     }
   }
 
-  sendEmail(sendInfomation) {
+  async sendEmail(sendInfomation) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    sgMail.send(sendInfomation);
+    await sgMail.send(sendInfomation);
     this.logger.info('Your email containing the message "' + this.emailText + '" sent from ' + this.fromEmail + ' to ' + this.toEmail + ' with the subject line ' + this.subjectLine + ' has been sent!');
   }
 }
