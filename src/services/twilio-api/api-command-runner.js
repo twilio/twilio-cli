@@ -66,14 +66,14 @@ class ApiCommandRunner {
 
   getEndpoint() {
     const domainName = this.actionDefinition.domainName;
-    const versionName = this.actionDefinition.versionName;
     const path = this.actionDefinition.path;
 
     // This converts a path like "/Accounts/{AccountSid}/Calls" to
     // the Node.js object in the Twilio Helper library.
     // Example: twilioClient.api.v2010.accounts('ACxxxx').calls
-    const helperVersion = this.twilioClient[domainName][versionName];
+    const helperVersion = this.twilioClient[domainName];
     const resourcePathParser = new ResourcePathParser(path);
+    resourcePathParser.removeJsonExtension();
     let endpoint = helperVersion;
 
     resourcePathParser.forEachPathNode(pathNode => {
@@ -93,6 +93,10 @@ class ApiCommandRunner {
         endpoint = endpoint(value);
         logger.debug(`pathNode=${pathNode}, value=${value}, endpoint=${typeof endpoint}`);
       } else {
+        if (pathNode === '2010-04-01') {
+          pathNode = 'v2010';
+        }
+
         endpoint = endpoint[camelCase(pathNode)];
         logger.debug(`pathNode=${pathNode}, endpoint=${typeof endpoint}`);
       }

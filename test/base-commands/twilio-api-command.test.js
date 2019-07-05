@@ -14,9 +14,8 @@ describe('base-commands', () => {
         const NewCommandClass = class extends TwilioApiCommand {};
         NewCommandClass.actionDefinition = {
           domainName: 'api',
-          versionName: 'v2010',
           commandName: 'create',
-          path: '/Accounts/{AccountSid}/Calls',
+          path: '/2010-04-01/Accounts/{AccountSid}/Calls',
           resource: fakeResource,
           actionName: 'create',
           action: fakeResource.actions.create
