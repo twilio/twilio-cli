@@ -33,7 +33,7 @@ describe('commands', () => {
         .stdout()
         .stderr()
         .do(ctx => {
-          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          process.env.SENDGRID_API_KEY = 'SG.1134567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
           var fakePrompt = sinon.stub();
           fakePrompt
             .resolves({
