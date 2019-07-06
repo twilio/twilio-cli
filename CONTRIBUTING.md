@@ -103,7 +103,7 @@ Before you submit your pull request consider the following guidelines:
 
 * Understanding the code base:
   * The Twilio CLI utilizes the Open CLI Framework ([oclif](https://oclif.io/)). It may be useful to familiarize yourself with it, in particular, the [multi-command CLI](https://oclif.io/docs/multi).
-  * Utilize `DEBUG =* ./bin/run` to view the code flow
+  * Utilize `DEBUG=* ./bin/run` to view the code flow
   * Key concepts:
     * _domains_
       * Located here: `./src/services/twilio-api`

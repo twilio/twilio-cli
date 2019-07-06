@@ -75,6 +75,9 @@
         "./src/hooks/init/twilio-api",
         "./src/hooks/init/buy-phone-number",
         "./src/hooks/init/plugin-verification"
+      ],
+      "plugins:preinstall": [
+        "./src/hooks/init/plugin-install"
       ]
     },
     "macos": {
