@@ -24,22 +24,25 @@ const getTwilioLabsPlugin = () => ({
 describe('hooks', () => {
   describe('init', () => {
     describe('plugin-install', () => {
-      before(function ()  {
-        sinon.stub(inquirer, 'prompt').resolves({ continue: false });
+      before(() => {
+        inquirer._prompt = inquirer.prompt;
+        inquirer.prompt = sinon.stub().resolves({ continue: false });
       });
-      after(function ()  {
-        inquirer.prompt.restore();
-      });
-      test
-        .stderr().it('warning when non Twilio plugin is installed', ctx => {
-          pluginFunc.call(ctx, getNonTwilioPlugin());
-          expect(ctx.stderr).to.contain('WARNING');
-        });
 
-      test.stderr().it('outputs nothing when Twilio plugin is installed', ctx => {
-        pluginFunc.call(ctx, getTwilioPlugin());
+      after(() => {
+        inquirer.prompt = inquirer._prompt;
+        delete inquirer._prompt;
+      });
+
+      test.stderr().it('warning when non Twilio plugin is installed', async ctx => {
+        await pluginFunc.call(ctx, getNonTwilioPlugin());
+        expect(ctx.stderr).to.contain('WARNING');
+      });
+
+      test.stderr().it('outputs nothing when Twilio plugin is installed', async ctx => {
+        await pluginFunc.call(ctx, getTwilioPlugin());
         expect(ctx.stderr).to.be.empty;
-        pluginFunc.call(ctx, getTwilioLabsPlugin());
+        await pluginFunc.call(ctx, getTwilioLabsPlugin());
         expect(ctx.stderr).to.be.empty;
       });
     });

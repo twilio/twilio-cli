@@ -1,4 +1,3 @@
-const prompt = require('inquirer').prompt;
 const { logger } = require('@twilio/cli-core').services.logging;
 const ALLOWED_ORGS = [
   '@twilio/',
@@ -18,7 +17,9 @@ module.exports = async function (options) {
   if (!isTwilioPlugin(options)) {
     logger.warn('WARNING!!! You are attempting to install a plugin from an untrusted source.');
     logger.warn('It could contain malicious software or in other ways compromise your system.');
-    let response = await prompt([{
+
+    const prompt = require('inquirer').prompt;
+    const response = await prompt([{
       type: 'confirm',
       name: 'continue',
       message: 'Are you sure you want to continue?',
