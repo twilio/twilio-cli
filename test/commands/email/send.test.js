@@ -2,7 +2,6 @@ const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const emailSend = require('../../../src/commands/email/send');
-const os = require('os');
 
 describe('commands', () => {
   describe('projects', () => {
@@ -15,8 +14,8 @@ describe('commands', () => {
         })
         .twilioCliEnv(Config)
         .twilioCreateCommand(emailSend, flags)
-        // .stdout()
-        // .stderr()
+        .stdout()
+        .stderr()
         .do(ctx => {
           const fakePrompt = sinon.stub();
           fakePrompt
