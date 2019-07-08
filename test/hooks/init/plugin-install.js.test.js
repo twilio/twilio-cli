@@ -21,6 +21,12 @@ const getTwilioLabsPlugin = () => ({
   }
 });
 
+const getUndefinedPlugin = () => ({
+  plugin: {
+    name: undefined
+  }
+});
+
 describe('hooks', () => {
   describe('init', () => {
     describe('plugin-install', () => {
@@ -36,6 +42,11 @@ describe('hooks', () => {
 
       test.stderr().it('warning when non Twilio plugin is installed', async ctx => {
         await pluginFunc.call(ctx, getNonTwilioPlugin());
+        expect(ctx.stderr).to.contain('WARNING');
+      });
+
+      test.stderr().it('warning when plugin is undefined', async ctx => {
+        await pluginFunc.call(ctx, getUndefinedPlugin());
         expect(ctx.stderr).to.contain('WARNING');
       });
 
