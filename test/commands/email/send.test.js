@@ -6,7 +6,7 @@ const emailSend = require('../../../src/commands/email/send');
 describe('commands', () => {
   describe('projects', () => {
     describe('send', () => {
-      const defaultSetup = ({ flags = [], toEmail = '', subjectLine = '', fromEmail = '', bodyText = 'Hello world' } = {}) => test
+      const defaultSetup = ({ flags = [], toEmail = '', subjectLine = '', fromEmail = '', bodyText = 'Hello world', attachmentVerdict = false, filePath = 'test/commands/email/test.txt', fileName = 'Top Secret' } = {}) => test
         .do(ctx => {
           ctx.userConfig = new ConfigData();
           ctx.userConfig.email.fromEmail = 'default@test.com';
@@ -22,12 +22,15 @@ describe('commands', () => {
             .resolves({
               to: toEmail,
               from: fromEmail,
-              subjectLine: subjectLine,
-              text: bodyText
+              subject: subjectLine,
+              text: bodyText,
+              sendAttachment: attachmentVerdict,
+              path: filePath,
+              name: fileName
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
         });
-      const noDefault = ({ flags = [], toEmail = '', subjectLine = '', fromEmail = '', bodyText = 'Hello world' } = {}) => test
+      const noDefault = ({ flags = [], toEmail = '', subjectLine = '', fromEmail = '', bodyText = 'Hello world', attachmentVerdict = 'true', filePath = 'test.txttest/commands/email/test.txt', fileName = 'topSecret' } = {}) => test
         .twilioCliEnv(Config)
         .twilioCreateCommand(emailSend, flags)
         .stdout()
@@ -40,11 +43,13 @@ describe('commands', () => {
               to: toEmail,
               from: fromEmail,
               subject: subjectLine,
-              text: bodyText
+              text: bodyText,
+              sendAttachment: attachmentVerdict,
+              path: filePath,
+              name: fileName
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
         });
-
       defaultSetup({ toEmail: 'jen@test.com, mike@test.com, tamu@test.com' })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
@@ -66,13 +71,6 @@ describe('commands', () => {
         .do(ctx => ctx.testCmd.run())
         .it('run email:send with filled out inquirer prompts', ctx => {
           expect(ctx.stderr).to.contain('Your email containing the message "You know nothing Jon Snow." sent from Ygritte@wall.com to JonSnow@castleBlack.com with the subject line Secret Message has been sent!');
-        });
-      noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte@wall.com', flags: ['--subjectLine', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
-        .nock('https://api.sendgrid.com', api => {
-          api.post('/v3/mail/send').reply(200, {});
-        }).do(ctx => ctx.testCmd.run())
-        .it('run email:send use inquire and a flag to set information', ctx => {
-          expect(ctx.stderr).to.contain('Your email containing the message "You know nothing Jon Snow." sent from Ygritte@wall.com to JonSnow@castleBlack.com with the subject line Open ASAP has been sent!');
         });
       noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte', subjectLine: 'Secret Message', bodyText: 'You know nothing Jon Snow.' })
         .do(ctx => ctx.testCmd.run())
@@ -116,7 +114,6 @@ describe('commands', () => {
         .it('run email:send with all flags', ctx => {
           expect(ctx.stderr).to.contain('Your email containing the message "Short cuts make delays, but inns make longer ones." sent from Bilbo@test.com to Frodo@test.com with the subject line Greetings has been sent!');
         });
-
       defaultSetup({ flags: ['--toEmail', 'Frodo@test.com', '--fromEmail', 'Bilbo@test.com', '--emailText', 'Short cuts make delays, but inns make longer ones.'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
@@ -127,6 +124,65 @@ describe('commands', () => {
         })
         .it('run email:send with flags and default subject line', ctx => {
           expect(ctx.stderr).to.contain('Your email containing the message "Short cuts make delays, but inns make longer ones." sent from Bilbo@test.com to Frodo@test.com with the subject line default has been sent!');
+        });
+
+      defaultSetup({ flags: ['--subjectLine', 'Secret Message', '--toEmail', 'JonSnow@castleBlack.com', '--fromEmail', 'Ygritte@wall.com', '--emailText', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/test.txt', '--attachmentName', 'attachment'] })
+        .nock('https://api.sendgrid.com', api => {
+          api.post('/v3/mail/send').reply(200, {});
+        }).do(ctx => ctx.testCmd.run())
+        .it('run email:send using flags to set information using relative file path', ctx => {
+          expect(ctx.stderr).to.contain('Your email containing the message "You know nothing Jon Snow." sent from Ygritte@wall.com to JonSnow@castleBlack.com with the subject line Secret Message has been sent!');
+          expect(ctx.stderr).to.contain('Your attachment from /Users/jmah/Desktop/CLI/twilio-cli/test/commands/email/test.txt path called attachment has been sent.');
+        });
+      defaultSetup({ flags: ['--subjectLine', 'Secret Message', '--toEmail', 'JonSnow@castleBlack.com', '--fromEmail', 'Ygritte@wall.com', '--emailText', 'You know nothing Jon Snow.', '--attachment', '/Users/jmah/Desktop/CLI/twilio-cli/test/commands/email/test.txt', '--attachmentName', 'absolute'] })
+        .nock('https://api.sendgrid.com', api => {
+          api.post('/v3/mail/send').reply(200, {});
+        }).do(ctx => ctx.testCmd.run())
+        .it('run email:send using flags to set information using absolute file path', ctx => {
+          expect(ctx.stderr).to.contain('Your email containing the message "You know nothing Jon Snow." sent from Ygritte@wall.com to JonSnow@castleBlack.com with the subject line Secret Message has been sent!');
+          expect(ctx.stderr).to.contain('Your attachment from /Users/jmah/Desktop/CLI/twilio-cli/test/commands/email/test.txt path called absolute has been sent.');
+        });
+      defaultSetup({ flags: ['--subjectLine', 'Secret Message', '--toEmail', 'JonSnow@castleBlack.com', '--fromEmail', 'Ygritte@wall.com', '--emailText', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/invalid.txt', '--attachmentName', 'absolute'] })
+        .do(ctx => ctx.testCmd.run())
+        .exit(1)
+        .it('run email:send using flags to set information using absolute file path', ctx => {
+          expect(ctx.stderr).to.contain('{"errno":-2,"code":"ENOENT","syscall":"open","path":"test/commands/email/invalid.txt"}');
+        });
+      // testing attach file
+      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true })
+        .nock('https://api.sendgrid.com', api => {
+          api.post('/v3/mail/send').reply(200, {});
+        })
+        .do(ctx => {
+          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          return ctx.testCmd.run();
+        })
+        .it('run email:send with default subject line and sending email address and relative path for attachment', ctx => {
+          expect(ctx.stderr).to.contain('Your email containing the message "Hello world" sent from default@test.com to jen@test.com with the subject line default has been sent!');
+          expect(ctx.stderr).to.contain('Your attachment from /Users/jmah/Desktop/CLI/twilio-cli/test/commands/email/test.txt path called Top Secret has been sent.');
+        });
+      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, filePath: '/Users/jmah/Desktop/CLI/twilio-cli/test/commands/email/test.txt' })
+        .nock('https://api.sendgrid.com', api => {
+          api.post('/v3/mail/send').reply(200, {});
+        })
+        .do(ctx => {
+          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          return ctx.testCmd.run();
+        })
+        .it('run email:send with default subject line and sending email address and absolute path for attachment', ctx => {
+          expect(ctx.stderr).to.contain('Your email containing the message "Hello world" sent from default@test.com to jen@test.com with the subject line default has been sent!');
+          expect(ctx.stderr).to.contain('Your attachment from /Users/jmah/Desktop/CLI/twilio-cli/test/commands/email/test.txt path called Top Secret has been sent.');
+        });
+      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, filePath: '' })
+        .nock('https://api.sendgrid.com', api => {
+          api.post('/v3/mail/send').reply(200, {});
+        })
+        .do(ctx => {
+          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          return ctx.testCmd.run();
+        })
+        .it('run email:send with default subject line and sending email address and empty path for attachment', ctx => {
+          expect(ctx.stderr).to.contain('Your email containing the message "Hello world" sent from default@test.com to jen@test.com with the subject line default has been sent!');
         });
     });
   });
