@@ -23,14 +23,17 @@ class set extends BaseCommand {
     const answer = await this.inquirer.prompt([
       {
         name: 'from',
-        message: set.flags['from-email'].description + ':'
+        message: set.flags['from-email'].description + ':',
+        default: this.userConfig.email.fromEmail
       },
       {
         name: 'subject',
-        message: set.flags['subject-line'].description + ':'
+        message: set.flags['subject-line'].description + ':',
+        default: this.userConfig.email.subjectLine
       }
     ]);
-    const validEmail = answer.from.includes('@');
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const validEmail = re.test(String(answer.from).toLowerCase());
     if (validEmail === true) {
       this.userConfig.email.fromEmail = answer.from;
       this.userConfig.email.subjectLine = answer.subject;
