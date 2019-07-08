@@ -47,7 +47,7 @@ describe('services', () => {
             description: null
           },
           actionName: 'create',
-          path: '/Foo/Bar'
+          path: '/Foo/Bar.json'
         });
         expect(result).to.equal('create a Bar resource');
       });
@@ -58,7 +58,7 @@ describe('services', () => {
             description: null
           },
           actionName: 'fetch',
-          path: '/Foo/Bar/{BarSid}'
+          path: '/Foo/Bar/{BarSid}.json'
         });
         expect(result).to.equal('fetch a Bar resource');
       });

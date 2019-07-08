@@ -10,7 +10,7 @@ const getSummaryDescription = actionDefinition => {
   }
 
   const actionName = actionDefinition.actionName;
-  const pathParts = actionDefinition.path.replace(/\/{.+?}$/g, '').split('/');
+  const pathParts = actionDefinition.path.replace(/\.json$/, '').replace(/\/{.+?}$/g, '').split('/');
   const resourceName = capitalize(pathParts[pathParts.length - 1]);
 
   if (actionName === 'list') {
