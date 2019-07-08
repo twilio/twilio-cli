@@ -30,7 +30,7 @@ describe('commands', () => {
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
         });
-      const noDefault = ({ flags = [], toEmail = '', subjectLine = '', fromEmail = '', bodyText = 'Hello world', attachmentVerdict = 'true', filePath = 'test.txttest/commands/email/test.txt', fileName = 'topSecret' } = {}) => test
+      const noDefault = ({ flags = [], toEmail = '', subjectLine = '', fromEmail = '', bodyText = 'Hello world' } = {}) => test
         .twilioCliEnv(Config)
         .twilioCreateCommand(emailSend, flags)
         .stdout()
@@ -43,10 +43,7 @@ describe('commands', () => {
               to: toEmail,
               from: fromEmail,
               subject: subjectLine,
-              text: bodyText,
-              sendAttachment: attachmentVerdict,
-              path: filePath,
-              name: fileName
+              text: bodyText
             });
           ctx.testCmd.inquirer.prompt = fakePrompt;
         });
