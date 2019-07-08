@@ -58,7 +58,7 @@ describe('services', () => {
             description: null
           },
           actionName: 'fetch',
-          path: '/Foo/Bar/{BarSid}.json'
+          path: '/Foo/{Account}/Bar/{BarSid}.json'
         });
         expect(result).to.equal('fetch a Bar resource');
       });
