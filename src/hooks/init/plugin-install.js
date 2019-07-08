@@ -1,21 +1,17 @@
 const prompt = require('inquirer').prompt;
 const { logger } = require('@twilio/cli-core').services.logging;
 const ALLOWED_ORGS = [
-  '@twilio',
-  '@twilio-labs'
+  '@twilio/',
+  '@twilio-labs/'
 ];
 
 function isTwilioPlugin(options) {
-  let isValid = false;
   if (options.plugin.name === undefined) {
-    return isValid;
+    return false;
   }
-  ALLOWED_ORGS.forEach(function (org) {
-    if (options.plugin.name.startsWith(org)) {
-      isValid = true;
-    }
+  return ALLOWED_ORGS.find(function (org) {
+    return options.plugin.name.startsWith(org);
   });
-  return isValid;
 }
 
 module.exports = async function (options) {
@@ -29,7 +25,7 @@ module.exports = async function (options) {
       default: false
     }]);
     if (response.continue === false) {
-      this.exit();
+      this.exit(1);
     }
   }
 };
