@@ -9,7 +9,7 @@ const getTopicName = actionDefinition => {
     actionDefinition.domainName +
     kebabCase(
       actionDefinition.path
-        .replace(/.json/, '') // Drop the JSON extension
+        .replace(/\.json$/, '') // Drop the JSON extension
         .replace(/\/{.+?}/g, '') // Drop every {PathParameter}
         .replace(/\/+/g, TOPIC_SEPARATOR) // Separate paths with topic separator
     )
