@@ -33,11 +33,13 @@ describe('hooks', () => {
       before(() => {
         inquirer._prompt = inquirer.prompt;
         inquirer.prompt = sinon.stub().resolves({ continue: false });
+        sinon.stub(process, 'exit');
       });
 
       after(() => {
         inquirer.prompt = inquirer._prompt;
         delete inquirer._prompt;
+        process.exit.restore();
       });
 
       test.stderr().it('warning when non Twilio plugin is installed', async ctx => {
