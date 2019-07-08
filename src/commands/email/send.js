@@ -13,6 +13,7 @@ class send extends BaseCommand {
       this.logger.error('Make sure you have an environmental variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
     }
+    console.log(os.homedir());
     this.fromEmail = await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
     const stringFromEmail = validFromEmail.toString();
