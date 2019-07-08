@@ -67,8 +67,8 @@ describe('commands', () => {
         .it('run email:send with filled out inquirer prompts', ctx => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
-          expect(ctx.stderr).to.contain('to JonSnow@castleBlack.com');
-          expect(ctx.stderr).to.contain(' subject line Secret Message');
+          expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
+          expect(ctx.stderr).to.contain('Secret Message');
         });
       noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte@wall.com', flags: ['--subjectLine', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
         .nock('https://api.sendgrid.com', api => {
@@ -77,8 +77,8 @@ describe('commands', () => {
         .it('run email:send use inquire and a flag to set information', ctx => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
-          expect(ctx.stderr).to.contain('to JonSnow@castleBlack.com');
-          expect(ctx.stderr).to.contain('subject line Open ASAP');
+          expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
+          expect(ctx.stderr).to.contain('Open ASAP');
         });
       noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte', subjectLine: 'Secret Message', bodyText: 'You know nothing Jon Snow.' })
         .do(ctx => ctx.testCmd.run())
@@ -97,10 +97,10 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .it('run email:send with default subject line and sending email address', ctx => {
-          expect(ctx.stderr).to.contain('"Hello world"');
-          expect(ctx.stderr).to.contain('from default@test.com');
-          expect(ctx.stderr).to.contain('to jen@test.com');
-          expect(ctx.stderr).to.contain('subject line default');
+          expect(ctx.stderr).to.contain('Hello world');
+          expect(ctx.stderr).to.contain('default@test.com');
+          expect(ctx.stderr).to.contain('jen@test.com');
+          expect(ctx.stderr).to.contain('default');
         });
 
       defaultSetup({ toEmail: 'jen@test.com, mike@test.com, tamu@test.com' })
@@ -112,10 +112,12 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .it('run email:send with defaults and multiple recipients', ctx => {
-          expect(ctx.stderr).to.contain('"Hello world"');
-          expect(ctx.stderr).to.contain('from default@test.com');
-          expect(ctx.stderr).to.contain('to jen@test.com, mike@test.com, tamu@test.com');
-          expect(ctx.stderr).to.contain('subject line default');
+          expect(ctx.stderr).to.contain('Hello world');
+          expect(ctx.stderr).to.contain('default@test.com');
+          expect(ctx.stderr).to.contain('jen@test.com');
+          expect(ctx.stderr).to.contain('mike@test.com');
+          expect(ctx.stderr).to.contain('tamu@test.com');
+          expect(ctx.stderr).to.contain('default');
         });
       defaultSetup({ flags: ['--toEmail', 'Frodo@test.com', '--fromEmail', 'Bilbo@test.com', '--subjectLine', 'Greetings', '--emailText', 'Short cuts make delays, but inns make longer ones.'] })
         .nock('https://api.sendgrid.com', api => {
@@ -126,10 +128,10 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .it('run email:send with all flags', ctx => {
-          expect(ctx.stderr).to.contain('"Short cuts make delays, but inns make longer ones."');
-          expect(ctx.stderr).to.contain('sent from Bilbo@test.com');
-          expect(ctx.stderr).to.contain('to Frodo@test.com');
-          expect(ctx.stderr).to.contain('subject line Greetings');
+          expect(ctx.stderr).to.contain('Short cuts make delays, but inns make longer ones');
+          expect(ctx.stderr).to.contain('Bilbo@test.com');
+          expect(ctx.stderr).to.contain('Frodo@test.com');
+          expect(ctx.stderr).to.contain('Greetings');
         });
 
       defaultSetup({ flags: ['--toEmail', 'Frodo@test.com', '--fromEmail', 'Bilbo@test.com', '--emailText', 'Short cuts make delays, but inns make longer ones.'] })
@@ -143,8 +145,8 @@ describe('commands', () => {
         .it('run email:send with flags and default subject line', ctx => {
           expect(ctx.stderr).to.contain('"Short cuts make delays, but inns make longer ones."');
           expect(ctx.stderr).to.contain('sent from Bilbo@test.com');
-          expect(ctx.stderr).to.contain('to Frodo@test.com');
-          expect(ctx.stderr).to.contain('subject line default');
+          expect(ctx.stderr).to.contain('Frodo@test.com');
+          expect(ctx.stderr).to.contain('default');
         });
     });
   });
