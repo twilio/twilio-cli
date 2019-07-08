@@ -164,7 +164,7 @@ describe('commands', () => {
         .do(ctx => ctx.testCmd.run())
         .exit(1)
         .it('run email:send using flags to set information using invalid file path', ctx => {
-          expect(ctx.stderr).to.contain('"code":"ENOENT","syscall":"open"');
+          expect(ctx.stderr).to.contain('{"errno"');
         });
       defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true })
         .nock('https://api.sendgrid.com', api => {
