@@ -1,5 +1,6 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const emailUtilities = require('../../services/email-utility');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
 const path = require('path');
@@ -14,14 +15,12 @@ class Send extends BaseCommand {
     }
     await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
-    const stringFromEmail = validFromEmail.toString();
     await this.promptForToEmail();
     const validToEmail = this.validateEmail(this.toEmail);
     await this.promptForSubject();
     await this.promptForText();
-    const sendInformation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    const sendInformation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
     const attachmentVerdict = await this.askAttachment();
-
     await this.promptAttachment(attachmentVerdict);
     if (this.attachment) {
       const fileContent = this.readFile(this.attachment);
@@ -98,10 +97,9 @@ class Send extends BaseCommand {
     } else {
       emailList[0] = email;
     }
+
     emailList.forEach(emailAddress => {
-      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const emailVerdict = re.test(String(emailAddress).toLowerCase());
-      if (emailVerdict === false) {
+      if (emailUtilities.validateEmail(emailAddress) === false) {
         this.logger.error(emailAddress + ' is not a valid email.');
         validEmail = false;
       }
