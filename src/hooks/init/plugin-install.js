@@ -28,7 +28,7 @@ module.exports = async function (options) {
       default: false
     }]);
     if (response.continue === false) {
-      process.exit(1);
+      this.exit(1);
     }
   }
 };

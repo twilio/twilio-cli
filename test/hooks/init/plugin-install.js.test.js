@@ -43,11 +43,13 @@ describe('hooks', () => {
       });
 
       test.stderr().it('warning when non Twilio plugin is installed', async ctx => {
+        ctx.exit = sinon.stub().resolves(1);
         await pluginFunc.call(ctx, getNonTwilioPlugin());
         expect(ctx.stderr).to.contain('WARNING');
       });
 
       test.stderr().it('warning when plugin is undefined', async ctx => {
+        ctx.exit = sinon.stub().resolves(1);
         await pluginFunc.call(ctx, getUndefinedPlugin());
         expect(ctx.stderr).to.contain('WARNING');
       });
