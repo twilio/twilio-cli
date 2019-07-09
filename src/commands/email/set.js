@@ -1,7 +1,7 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 
-class set extends BaseCommand {
+class Set extends BaseCommand {
   async run() {
     await super.run();
     this.reminderCurrentData();
@@ -43,7 +43,7 @@ class set extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'from',
-          message: set.flags.from.description + ':',
+          message: Set.flags.from.description + ':',
           default: this.userConfig.email.fromEmail
         }
       ]);
@@ -57,7 +57,7 @@ class set extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'subject',
-          message: set.flags.subject.description + ':',
+          message: Set.flags.subject.description + ':',
           default: this.userConfig.email.subjectLine
         }
       ]);
@@ -67,9 +67,9 @@ class set extends BaseCommand {
   }
 }
 
-set.description = 'sets a default sending email address and subject line';
+Set.description = 'sets a default sending email address and subject line';
 
-set.flags = {
+Set.flags = {
   from: flags.string({
     description: 'Default email address of the sender'
   }),
@@ -78,4 +78,4 @@ set.flags = {
   })
 };
 
-module.exports = set;
+module.exports = Set;
