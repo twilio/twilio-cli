@@ -18,6 +18,7 @@
     "chalk": "^2.4.2",
     "keytar": "^4.11.0",
     "ngrok": "^3.2.1",
+    "reverse": "^4.0.1",
     "twilio": "^3.33.0"
   },
   "devDependencies": {
