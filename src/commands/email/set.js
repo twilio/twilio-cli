@@ -1,5 +1,6 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const emailUtilities = require('../../services/email-utility');
 
 class Set extends BaseCommand {
   async run() {
@@ -7,7 +8,11 @@ class Set extends BaseCommand {
     this.reminderCurrentData();
     const email = await this.promptSetDefaultEmail();
     const subject = await this.promptSetDefaultSubject();
-    this.validateEmail(email);
+    const verdict = emailUtilities.validateEmail(email);
+    if (verdict === false) {
+      this.logger.error('Please use a valid email.');
+      this.exit(1);
+    }
     this.setDefaults(email, subject);
     const configSavedMessage = await this.configFile.save(this.userConfig);
     this.logger.info(configSavedMessage);
@@ -19,15 +24,6 @@ class Set extends BaseCommand {
     }
     if (this.userConfig.email.subjectLine) {
       this.logger.info('Current default subject line: ' + this.userConfig.email.subjectLine);
-    }
-  }
-
-  validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const verdict = re.test(String(email).toLowerCase());
-    if (verdict === false) {
-      this.logger.error('Please use a valid email.');
-      this.exit(1);
     }
   }
 
