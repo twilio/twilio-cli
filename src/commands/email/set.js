@@ -1,13 +1,18 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const emailUtilities = require('../../services/email-utility');
 
-class set extends BaseCommand {
+class Set extends BaseCommand {
   async run() {
     await super.run();
     this.reminderCurrentData();
     const email = await this.promptSetDefaultEmail();
     const subject = await this.promptSetDefaultSubject();
-    this.validateEmail(email);
+    const verdict = emailUtilities.validateEmail(email);
+    if (verdict === false) {
+      this.logger.error('Please use a valid email.');
+      this.exit(1);
+    }
     this.setDefaults(email, subject);
     const configSavedMessage = await this.configFile.save(this.userConfig);
     this.logger.info(configSavedMessage);
@@ -19,15 +24,6 @@ class set extends BaseCommand {
     }
     if (this.userConfig.email.subjectLine) {
       this.logger.info('Current default subject line: ' + this.userConfig.email.subjectLine);
-    }
-  }
-
-  validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const verdict = re.test(String(email).toLowerCase());
-    if (verdict === false) {
-      this.logger.error('Please use a valid email.');
-      this.exit(1);
     }
   }
 
@@ -43,7 +39,7 @@ class set extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'from',
-          message: set.flags.from.description + ':',
+          message: Set.flags.from.description + ':',
           default: this.userConfig.email.fromEmail
         }
       ]);
@@ -57,7 +53,7 @@ class set extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'subject',
-          message: set.flags.subject.description + ':',
+          message: Set.flags.subject.description + ':',
           default: this.userConfig.email.subjectLine
         }
       ]);
@@ -67,9 +63,9 @@ class set extends BaseCommand {
   }
 }
 
-set.description = 'sets a default sending email address and subject line';
+Set.description = 'sets a default sending email address and subject line';
 
-set.flags = {
+Set.flags = {
   from: flags.string({
     description: 'Default email address of the sender'
   }),
@@ -78,4 +74,4 @@ set.flags = {
   })
 };
 
-module.exports = set;
+module.exports = Set;
