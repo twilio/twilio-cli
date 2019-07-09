@@ -15,6 +15,7 @@
     "@oclif/plugin-plugins": "^1.7.8",
     "@twilio/cli-core": "^2.0.1",
     "chalk": "^2.4.2",
+    "inquirer": "^6.4.1",
     "keytar": "^4.11.0",
     "ngrok": "^3.2.1",
     "twilio": "^3.33.0"
@@ -75,6 +76,9 @@
         "./src/hooks/init/twilio-api",
         "./src/hooks/init/buy-phone-number",
         "./src/hooks/init/plugin-verification"
+      ],
+      "plugins:preinstall": [
+        "./src/hooks/init/plugin-install"
       ]
     },
     "macos": {
