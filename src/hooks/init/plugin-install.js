@@ -1,5 +1,3 @@
-/* eslint-disable no-process-exit */
-/* eslint-disable unicorn/no-process-exit */
 const { logger } = require('@twilio/cli-core').services.logging;
 const ALLOWED_ORGS = [
   '@twilio/',
