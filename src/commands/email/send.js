@@ -19,15 +19,15 @@ class Send extends BaseCommand {
     const validToEmail = this.validateEmail(this.toEmail);
     await this.promptForSubject();
     await this.promptForText();
-    const sendInfomation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    const sendInformation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
     const attachmentVerdict = await this.askAttachment();
     await this.promptAttachment(attachmentVerdict);
     if (this.attachment) {
       const fileContent = this.readFile(this.attachment);
       const attachment = this.createAttachmentArray(fileContent);
-      sendInfomation.attachments = attachment;
+      sendInformation.attachments = attachment;
     }
-    await this.sendEmail(sendInfomation);
+    await this.sendEmail(sendInformation);
   }
 
   async askAttachment() {
