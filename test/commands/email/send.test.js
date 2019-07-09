@@ -48,11 +48,11 @@ describe('commands', () => {
       defaultSetup({ toEmail: 'jen@test.com , mike@test.com, tamu@test.com' })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
-        .it('run email:send with no environmental variable for SendGrid key', ctx => {
+        .it('run email:send with no environment variable for SendGrid key', ctx => {
           expect(ctx.stderr).to.contain('environment variable called SENDGRID_API_KEY set up with your SendGrid API key');
         });
 
-      noDefault({ toEmail: 'JonSnow, BranStark@winterfell', fromEmail: 'Ygritte@wall.com', flags: ['--subjectLine', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
+      noDefault({ toEmail: 'JonSnow, BranStark@winterfell', fromEmail: 'Ygritte@wall.com', flags: ['--subject', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
         .it('run email:send without defaults and with multiple recipients including an incorrect to email address', ctx => {
@@ -70,7 +70,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
           expect(ctx.stderr).to.contain('Secret Message');
         });
-      noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte@wall.com', flags: ['--subjectLine', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
+      noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte@wall.com', flags: ['--subject', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         }).do(ctx => ctx.testCmd.run())
@@ -85,7 +85,7 @@ describe('commands', () => {
         .exit(1)
         .it('run email:send without defaults and an invalid from email address', ctx => {
           expect(ctx.stderr).to.contain('Ygritte is not a valid email');
-          expect(ctx.stderr).to.contain('Email could not be sent please re-run the command with valid email addresses');
+          expect(ctx.stderr).to.contain('Email could not be sent');
         });
 
       defaultSetup({ toEmail: 'jen@test.com' })
@@ -119,7 +119,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('tamu@test.com');
           expect(ctx.stderr).to.contain('default');
         });
-      defaultSetup({ flags: ['--toEmail', 'Frodo@test.com', '--fromEmail', 'Bilbo@test.com', '--subjectLine', 'Greetings', '--emailText', 'Short cuts make delays, but inns make longer ones.'] })
+      defaultSetup({ flags: ['--to', 'Frodo@test.com', '--from', 'Bilbo@test.com', '--subject', 'Greetings', '--text', 'Short cuts make delays, but inns make longer ones.'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -134,7 +134,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Greetings');
         });
 
-      defaultSetup({ flags: ['--toEmail', 'Frodo@test.com', '--fromEmail', 'Bilbo@test.com', '--emailText', 'Short cuts make delays, but inns make longer ones.'] })
+      defaultSetup({ flags: ['--to', 'Frodo@test.com', '--from', 'Bilbo@test.com', '--text', 'Short cuts make delays, but inns make longer ones.'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -143,8 +143,8 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .it('run email:send with flags and default subject line', ctx => {
-          expect(ctx.stderr).to.contain('"Short cuts make delays, but inns make longer ones."');
-          expect(ctx.stderr).to.contain('sent from Bilbo@test.com');
+          expect(ctx.stderr).to.contain('Short cuts make delays, but inns make longer ones');
+          expect(ctx.stderr).to.contain('Bilbo@test.com');
           expect(ctx.stderr).to.contain('Frodo@test.com');
           expect(ctx.stderr).to.contain('default');
         });

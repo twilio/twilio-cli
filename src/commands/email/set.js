@@ -5,7 +5,10 @@ class set extends BaseCommand {
   async run() {
     await super.run();
     this.reminderCurrentData();
-    await this.promptSetDefaultEmail();
+    const email = await this.promptSetDefaultEmail();
+    const subject = await this.promptSetDefaultSubject();
+    this.validateEmail(email);
+    this.setDefaults(email, subject);
     const configSavedMessage = await this.configFile.save(this.userConfig);
     this.logger.info(configSavedMessage);
   }
@@ -19,40 +22,58 @@ class set extends BaseCommand {
     }
   }
 
-  async promptSetDefaultEmail() {
-    const answer = await this.inquirer.prompt([
-      {
-        name: 'from',
-        message: set.flags['from-email'].description + ':',
-        default: this.userConfig.email.fromEmail
-      },
-      {
-        name: 'subject',
-        message: set.flags['subject-line'].description + ':',
-        default: this.userConfig.email.subjectLine
-      }
-    ]);
+  validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const validEmail = re.test(String(answer.from).toLowerCase());
-    if (validEmail === true) {
-      this.userConfig.email.fromEmail = answer.from;
-      this.userConfig.email.subjectLine = answer.subject;
-      this.logger.info('Default sending email address has been set to: ' + this.userConfig.email.fromEmail);
-      this.logger.info('Default subject line has been set to: ' + this.userConfig.email.subjectLine);
-    } else {
-      this.logger.error('Please use valid email.');
+    const verdict = re.test(String(email).toLowerCase());
+    if (verdict === false) {
+      this.logger.error('Please use a valid email.');
       this.exit(1);
     }
+  }
+
+  setDefaults(email, subject) {
+    this.userConfig.email.fromEmail = email;
+    this.userConfig.email.subjectLine = subject;
+    this.logger.info('Default sending email address has been set to: ' + this.userConfig.email.fromEmail);
+    this.logger.info('Default subject line has been set to: ' + this.userConfig.email.subjectLine);
+  }
+
+  async promptSetDefaultEmail() {
+    if (!this.flags.from) {
+      const answer = await this.inquirer.prompt([
+        {
+          name: 'from',
+          message: set.flags.from.description + ':',
+          default: this.userConfig.email.fromEmail
+        }
+      ]);
+      return answer.from;
+    }
+    return this.flags.from;
+  }
+
+  async promptSetDefaultSubject() {
+    if (!this.flags.subject) {
+      const answer = await this.inquirer.prompt([
+        {
+          name: 'subject',
+          message: set.flags.subject.description + ':',
+          default: this.userConfig.email.subjectLine
+        }
+      ]);
+      return answer.subject;
+    }
+    return this.flags.subject;
   }
 }
 
 set.description = 'sets a default sending email address and subject line';
 
 set.flags = {
-  'from-email': flags.string({
-    description: 'Default email of the sender'
+  from: flags.string({
+    description: 'Default email address of the sender'
   }),
-  'subject-line': flags.string({
+  subject: flags.string({
     description: 'Default subject line for all emails'
   })
 };
