@@ -154,7 +154,7 @@ describe('commands', () => {
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         }).do(ctx => ctx.testCmd.run())
-        .it('run email:send using flags to set information using relative file path', ctx => {
+        .it('run email:send using flags to set information and use a flag to send a relative file path', ctx => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
@@ -164,7 +164,7 @@ describe('commands', () => {
       defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/invalid.txt'] })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
-        .it('run email:send using flags to set information using invalid file path', ctx => {
+        .it('run email:send using flags to set information and use a flag to send an invalid file path', ctx => {
           expect(ctx.stderr).to.contain('{"errno"');
         });
       defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true })
@@ -175,7 +175,7 @@ describe('commands', () => {
           process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
           return ctx.testCmd.run();
         })
-        .it('run email:send with default subject line and sending email address and relative path for attachment', ctx => {
+        .it('run email:send with default subject line and sending email address and a relative path for attachment', ctx => {
           expect(ctx.stderr).to.contain('Hello world');
           expect(ctx.stderr).to.contain('default@test.com ');
           expect(ctx.stderr).to.contain('jen@test.com ');
