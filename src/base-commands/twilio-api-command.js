@@ -23,6 +23,8 @@ const typeMap = {
 // AccountSid is a special snowflake
 const ACCOUNT_SID_FLAG = 'account-sid';
 
+const isRemoveCommand = actionDefinition => actionDefinition.commandName === 'remove';
+
 class TwilioApiCommand extends TwilioClientCommand {
   async runCommand() {
     const runner = new ApiCommandRunner(
@@ -33,6 +35,11 @@ class TwilioApiCommand extends TwilioClientCommand {
     );
 
     const response = await runner.run();
+
+    if (isRemoveCommand(this.constructor.actionDefinition)) {
+      logger.info(response ? 'The resource was deleted successfully' : 'Failed to delete the resource');
+      return;
+    }
 
     this.output(response, this.flags.properties);
   }
@@ -93,13 +100,16 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
     }
   });
 
-  const defaultProperties = resource.defaultOutputProperties || [];
+  // 'remove' commands have no response body and thus do not need display properties.
+  if (NewCommandClass.actionDefinition.commandName !== 'remove') {
+    const defaultProperties = resource.defaultOutputProperties || [];
 
-  cmdFlags.properties = flags.string({
-    // Camel-cased, CSV of the provided property list. Or just the SID.
-    default: defaultProperties.map(prop => camelCase(prop)).join(',') || 'sid',
-    description: 'The properties you would like to display (JSON output always shows all properties).'
-  });
+    cmdFlags.properties = flags.string({
+      // Camel-cased, CSV of the provided property list. Or just the SID.
+      default: defaultProperties.map(prop => camelCase(prop)).join(',') || 'sid',
+      description: 'The properties you would like to display (JSON output always shows all properties).'
+    });
+  }
 
   // Class statics
   NewCommandClass.id = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
