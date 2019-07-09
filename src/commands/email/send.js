@@ -5,43 +5,34 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-class send extends BaseCommand {
+class Send extends BaseCommand {
   async run() {
     await super.run();
-    this.loadArguments();
     if (!process.env.SENDGRID_API_KEY) {
-      this.logger.error('Make sure you have an environmental variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
+      this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
     }
-    this.fromEmail = await this.promptForFromEmail();
+    await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
     const stringFromEmail = validFromEmail.toString();
     await this.promptForToEmail();
     const validToEmail = this.validateEmail(this.toEmail);
-    this.subjectLine = await this.promptForSubject();
+    await this.promptForSubject();
     await this.promptForText();
-    const sendInfomation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    const sendInformation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
     const attachmentVerdict = await this.askAttachment();
+
     await this.promptAttachment(attachmentVerdict);
     if (this.attachment) {
-      await this.promptFileName();
       const fileContent = this.readFile(this.attachment);
       const attachment = this.createAttachmentArray(fileContent);
-      sendInfomation.attachments = attachment;
+      sendInformation.attachments = attachment;
     }
-    await this.sendEmail(sendInfomation);
-  }
-
-  loadArguments() {
-    this.toEmail = this.flags.toEmail;
-    this.fromEmail = this.flags.fromEmail;
-    this.subjectLine = this.flags.subjectLine;
-    this.emailText = this.flags.emailText;
-    this.attachment = this.flags.attachment;
-    this.fileName = this.flags.attachmentName;
+    await this.sendEmail(sendInformation);
   }
 
   async askAttachment() {
+    this.attachment = this.flags.attachment;
     if (!this.attachment) {
       const verdict = await this.inquirer.prompt([
         {
@@ -61,26 +52,15 @@ class send extends BaseCommand {
       const file = await this.inquirer.prompt([
         {
           name: 'path',
-          message: send.flags.attachment.description + ':'
+          message: Send.flags.attachment.description + ':'
         }
       ]);
       this.attachment = file.path;
     }
   }
 
-  async promptFileName() {
-    if (!this.fileName) {
-      const file = await this.inquirer.prompt([
-        {
-          name: 'name',
-          message: send.flags.attachmentName.description + ':'
-        }
-      ]);
-      this.fileName = file.name;
-    }
-  }
-
   readFile(FilePath) {
+    this.fileName = path.basename(FilePath);
     if (FilePath.includes(os.homedir()) === false) {
       this.attachment = path.resolve(FilePath);
     }
@@ -119,80 +99,83 @@ class send extends BaseCommand {
       emailList[0] = email;
     }
     emailList.forEach(emailAddress => {
-      const emailVerdict = emailAddress.includes('@');
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const emailVerdict = re.test(String(emailAddress).toLowerCase());
       if (emailVerdict === false) {
         this.logger.error(emailAddress + ' is not a valid email.');
         validEmail = false;
       }
     });
     if (validEmail === false) {
-      this.logger.error('Email could not be sent please re-run the command with valid email addresses.');
+      this.logger.error('Email could not be sent, please re-run the command with valid email addresses.');
       return this.exit(1);
     }
     return emailList;
   }
 
   async promptForFromEmail() {
-    if (this.fromEmail) {
-      return this.fromEmail;
-    }
     if (this.userConfig.email.fromEmail) {
-      return this.userConfig.email.fromEmail;
+      this.fromEmail = this.userConfig.email.fromEmail;
     }
-    if (!this.fromEmail || !this.userConfig.email.fromEmail) {
+    if (this.flags.from) {
+      this.fromEmail = this.flags.from;
+    }
+    if (!this.fromEmail) {
       const answer = await this.inquirer.prompt([
         {
           name: 'from',
-          message: send.flags.fromEmail.description + ':'
+          message: Send.flags.from.description + ':'
         }
       ]);
-      return answer.from;
+      this.fromEmail = answer.from;
     }
   }
 
   async promptForToEmail() {
+    this.toEmail = this.flags.to;
     if (!this.toEmail) {
       const answer = await this.inquirer.prompt([{
         name: 'to',
-        message: send.flags.toEmail.description + ':'
+        message: Send.flags.to.description + ':'
       }]);
       this.toEmail = answer.to;
     }
   }
 
   async promptForSubject() {
-    if (this.subjectLine) {
-      return this.subjectLine;
-    }
     if (this.userConfig.email.subjectLine) {
-      return this.userConfig.email.subjectLine;
+      this.subjectLine = this.userConfig.email.subjectLine;
     }
-    if (!this.subjectLine || !this.userConfig.email.subjectLine) {
+    if (this.flags.subject) {
+      this.subjectLine = this.flags.subject;
+    }
+    if (!this.subjectLine) {
       const subject = await this.inquirer.prompt([
         {
           name: 'subject',
-          message: send.flags.subjectLine.description + ':'
+          message: Send.flags.subject.description + ':'
         }
       ]);
-      return subject.subject;
+      this.subjectLine = subject.subject;
     }
   }
 
   async promptForText() {
+    this.emailText = this.flags.text;
     if (!this.emailText) {
       const answers = await this.inquirer.prompt([
         {
           name: 'text',
-          message: send.flags.emailText.description + ':'
+          message: Send.flags.text.description + ':'
         }
       ]);
       this.emailText = answers.text;
     }
   }
 
-  async sendEmail(sendInfomation) {
+  async sendEmail(sendInformation) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    await sgMail.send(sendInfomation);
+    await sgMail.send(sendInformation);
     this.logger.info('Your email containing the message "' + this.emailText + '" sent from ' + this.fromEmail + ' to ' + this.toEmail + ' with the subject line ' + this.subjectLine + ' has been sent!');
     if (this.attachment) {
       this.logger.info('Your attachment from ' + this.attachment + ' path called ' + this.fileName + ' has been sent.');
@@ -200,29 +183,26 @@ class send extends BaseCommand {
   }
 }
 
-send.description = 'sends emails to single or multiple recipients';
-send.flags = Object.assign(
+Send.description = 'sends emails to single or multiple recipients';
+Send.flags = Object.assign(
   {
-    toEmail: flags.string({
-      description: 'Email address of recipient (for multiple email addresses seprate each email with a comma)'
+    to: flags.string({
+      description: 'Email address of recipient (for multiple email addresses separate each email with a comma)'
     }),
-    fromEmail: flags.string({
+    from: flags.string({
       description: 'Email address of the sender'
     }),
-    subjectLine: flags.string({
+    subject: flags.string({
       description: 'The subject line for an email'
     }),
-    emailText: flags.string({
+    text: flags.string({
       description: 'Text to send within the email body'
     }),
     attachment: flags.string({
       description: 'Path for the file that you want to attach'
-    }),
-    attachmentName: flags.string({
-      description: 'Name of the file you want to send'
     })
   },
   BaseCommand.flags
 );
-send.args = [];
-module.exports = send;
+Send.args = [];
+module.exports = Send;
