@@ -10,16 +10,26 @@ const NUMBER_OF_PARAMS_FOR_CALL_CREATE = fakeResource.actions.create.parameters.
 describe('base-commands', () => {
   describe('twilio-api-command', () => {
     describe('TwilioApiCommand', () => {
-      const getCommandClass = () => {
+      const callCreateActionDefinition = {
+        domainName: 'api',
+        commandName: 'create',
+        path: '/2010-04-01/Accounts/{AccountSid}/Calls.json',
+        resource: fakeResource,
+        actionName: 'create',
+        action: fakeResource.actions.create
+      };
+
+      const callRemoveActionDefinition = {
+        domainName: 'api',
+        commandName: 'remove',
+        path: '/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json',
+        actionName: 'remove',
+        action: { parameters: [{ name: 'sid', schema: { type: 'string' } }] }
+      };
+
+      const getCommandClass = (actionDefinition = callCreateActionDefinition) => {
         const NewCommandClass = class extends TwilioApiCommand {};
-        NewCommandClass.actionDefinition = {
-          domainName: 'api',
-          commandName: 'create',
-          path: '/2010-04-01/Accounts/{AccountSid}/Calls.json',
-          resource: fakeResource,
-          actionName: 'create',
-          action: fakeResource.actions.create
-        };
+        NewCommandClass.actionDefinition = actionDefinition;
         NewCommandClass.actionDefinition.topicName = getTopicName(NewCommandClass.actionDefinition);
         TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
 
@@ -57,6 +67,13 @@ describe('base-commands', () => {
         );
       });
 
+      test.it('handles remove action', async () => {
+        const NewCommandClass = getCommandClass(callRemoveActionDefinition);
+
+        expect(NewCommandClass.id).to.equal('core:calls:remove');
+        expect(NewCommandClass.flags.properties).to.be.undefined;
+      });
+
       test
         .twilioFakeProject(ConfigData)
         .twilioCliEnv(Config)
@@ -74,6 +91,23 @@ describe('base-commands', () => {
         ])
         .it('creates a call', ctx => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
+        });
+
+      test
+        .twilioFakeProject(ConfigData)
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .nock('https://api.twilio.com', api =>
+          api.delete(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls/${fakeCallResponse.sid}.json`).reply(204)
+        )
+        .twilioCommand(getCommandClass(callRemoveActionDefinition), [
+          '--sid',
+          fakeCallResponse.sid
+        ])
+        .it('creates a call', ctx => {
+          expect(ctx.stdout).to.be.empty;
+          expect(ctx.stderr).to.contain('success');
         });
 
       test
