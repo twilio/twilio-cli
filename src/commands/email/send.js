@@ -5,27 +5,19 @@ const sgMail = require('@sendgrid/mail');
 class Send extends BaseCommand {
   async run() {
     await super.run();
-    this.loadArguments();
     if (!process.env.SENDGRID_API_KEY) {
       this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
     }
-    this.fromEmail = await this.promptForFromEmail();
+    await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
     const stringFromEmail = validFromEmail.toString();
     await this.promptForToEmail();
     const validToEmail = this.validateEmail(this.toEmail);
-    this.subjectLine = await this.promptForSubject();
+    await this.promptForSubject();
     await this.promptForText();
-    const sendInfomation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
-    await this.sendEmail(sendInfomation);
-  }
-
-  loadArguments() {
-    this.toEmail = this.flags.toEmail;
-    this.fromEmail = this.flags.fromEmail;
-    this.subjectLine = this.flags.subjectLine;
-    this.emailText = this.flags.emailText;
+    const sendInformation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    await this.sendEmail(sendInformation);
   }
 
   validateEmail(email) {
@@ -49,60 +41,66 @@ class Send extends BaseCommand {
       }
     });
     if (validEmail === false) {
-      this.logger.error('Email could not be sent please re-run the command with valid email addresses.');
+      this.logger.error('Email could not be sent, please re-run the command with valid email addresses.');
       return this.exit(1);
     }
     return emailList;
   }
 
   async promptForFromEmail() {
-    if (this.fromEmail) {
-      return this.fromEmail;
-    }
     if (this.userConfig.email.fromEmail) {
-      return this.userConfig.email.fromEmail;
+      this.fromEmail = this.userConfig.email.fromEmail;
     }
-    const answer = await this.inquirer.prompt([
-      {
-        name: 'from',
-        message: Send.flags.fromEmail.description + ':'
-      }
-    ]);
-    return answer.from;
+    if (this.flags.from) {
+      this.fromEmail = this.flags.from;
+    }
+    if (!this.fromEmail) {
+      const answer = await this.inquirer.prompt([
+        {
+          name: 'from',
+          message: Send.flags.from.description + ':'
+        }
+      ]);
+      this.fromEmail = answer.from;
+    }
   }
 
   async promptForToEmail() {
+    this.toEmail = this.flags.to;
     if (!this.toEmail) {
       const answer = await this.inquirer.prompt([{
         name: 'to',
-        message: Send.flags.toEmail.description + ':'
+        message: Send.flags.to.description + ':'
       }]);
       this.toEmail = answer.to;
     }
   }
 
   async promptForSubject() {
-    if (this.subjectLine) {
-      return this.subjectLine;
-    }
     if (this.userConfig.email.subjectLine) {
-      return this.userConfig.email.subjectLine;
+      this.subjectLine = this.userConfig.email.subjectLine;
     }
-    const subject = await this.inquirer.prompt([
-      {
-        name: 'subject',
-        message: Send.flags.subjectLine.description + ':'
-      }
-    ]);
-    return subject.subject;
+    if (this.flags.subject) {
+      this.subjectLine = this.flags.subject;
+    }
+    if (!this.subjectLine) {
+      const subject = await this.inquirer.prompt([
+        {
+          name: 'subject',
+          message: Send.flags.subject.description + ':'
+        }
+      ]);
+      this.subjectLine = subject.subject;
+    }
   }
 
   async promptForText() {
+    this.emailText = this.flags.text;
     if (!this.emailText) {
       const answers = await this.inquirer.prompt([
         {
           name: 'text',
-          message: Send.flags.emailText.description + ':'
+          message: Send.flags.text.description + ':'
         }
       ]);
       this.emailText = answers.text;
@@ -119,16 +117,16 @@ class Send extends BaseCommand {
 Send.description = 'sends emails to single or multiple recipients';
 Send.flags = Object.assign(
   {
-    toEmail: flags.string({
+    to: flags.string({
       description: 'Email address of recipient (for multiple email addresses separate each email with a comma)'
     }),
-    fromEmail: flags.string({
+    from: flags.string({
       description: 'Email address of the sender'
     }),
-    subjectLine: flags.string({
+    subject: flags.string({
       description: 'The subject line for an email'
     }),
-    emailText: flags.string({
+    text: flags.string({
       description: 'Text to send within the email body'
     })
   },
