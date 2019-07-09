@@ -2,7 +2,6 @@ const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const emailSend = require('../../../src/commands/email/send');
-const os = require('os');
 
 describe('commands', () => {
   describe('projects', () => {
@@ -15,8 +14,8 @@ describe('commands', () => {
         })
         .twilioCliEnv(Config)
         .twilioCreateCommand(emailSend, flags)
-        // .stdout()
-        // .stderr()
+        .stdout()
+        .stderr()
         .do(ctx => {
           const fakePrompt = sinon.stub();
           fakePrompt
@@ -152,7 +151,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('default');
         });
 
-      defaultSetup({ flags: ['--subjectLine', 'Secret Message', '--toEmail', 'JonSnow@castleBlack.com', '--fromEmail', 'Ygritte@wall.com', '--emailText', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/test.txt', '--attachmentName', 'attachment'] })
+      defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/test.txt'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         }).do(ctx => ctx.testCmd.run())
@@ -160,7 +159,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Your email containing the message "You know nothing Jon Snow." sent from Ygritte@wall.com to JonSnow@castleBlack.com with the subject line Secret Message has been sent!');
           expect(ctx.stderr).to.contain('test.txt path');
         });
-      defaultSetup({ flags: ['--subjectLine', 'Secret Message', '--toEmail', 'JonSnow@castleBlack.com', '--fromEmail', 'Ygritte@wall.com', '--emailText', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/invalid.txt', '--attachmentName', 'absolute'] })
+      defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/invalid.txt'] })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
         .it('run email:send using flags to set information using invalid file path', ctx => {

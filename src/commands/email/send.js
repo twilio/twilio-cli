@@ -19,11 +19,10 @@ class Send extends BaseCommand {
     const validToEmail = this.validateEmail(this.toEmail);
     await this.promptForSubject();
     await this.promptForText();
-    const sendInfomation = { to: validToEmail, from: stringFromEmail, subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    const sendInfomation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
     const attachmentVerdict = await this.askAttachment();
     await this.promptAttachment(attachmentVerdict);
     if (this.attachment) {
-      await this.promptFileName();
       const fileContent = this.readFile(this.attachment);
       const attachment = this.createAttachmentArray(fileContent);
       sendInfomation.attachments = attachment;
@@ -31,16 +30,8 @@ class Send extends BaseCommand {
     await this.sendEmail(sendInfomation);
   }
 
-  loadArguments() {
-    this.toEmail = this.flags.toEmail;
-    this.fromEmail = this.flags.fromEmail;
-    this.subjectLine = this.flags.subjectLine;
-    this.emailText = this.flags.emailText;
-    this.attachment = this.flags.attachment;
-    this.fileName = this.flags.attachmentName;
-  }
-
   async askAttachment() {
+    this.attachment = this.flags.attachment;
     if (!this.attachment) {
       const verdict = await this.inquirer.prompt([
         {
@@ -60,26 +51,15 @@ class Send extends BaseCommand {
       const file = await this.inquirer.prompt([
         {
           name: 'path',
-          message: send.flags.attachment.description + ':'
+          message: Send.flags.attachment.description + ':'
         }
       ]);
       this.attachment = file.path;
     }
   }
 
-  async promptFileName() {
-    if (!this.fileName) {
-      const file = await this.inquirer.prompt([
-        {
-          name: 'name',
-          message: send.flags.attachmentName.description + ':'
-        }
-      ]);
-      this.fileName = file.name;
-    }
-  }
-
   readFile(FilePath) {
+    this.fileName = path.basename(FilePath);
     if (FilePath.includes(os.homedir()) === false) {
       this.attachment = path.resolve(FilePath);
     }
@@ -218,9 +198,6 @@ Send.flags = Object.assign(
     }),
     attachment: flags.string({
       description: 'Path for the file that you want to attach'
-    }),
-    attachmentName: flags.string({
-      description: 'Name of the file you want to send'
     })
   },
   BaseCommand.flags
