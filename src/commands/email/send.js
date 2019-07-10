@@ -2,6 +2,9 @@ const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const emailUtilities = require('../../services/email-utility');
 const sgMail = require('@sendgrid/mail');
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
 
 class Send extends BaseCommand {
   async run() {
@@ -17,7 +20,69 @@ class Send extends BaseCommand {
     await this.promptForSubject();
     await this.promptForText();
     const sendInformation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    const attachmentVerdict = await this.askAttachment();
+    await this.promptAttachment(attachmentVerdict);
+    if (this.attachment) {
+      const fileContent = this.readFile(this.attachment);
+      const attachment = this.createAttachmentArray(fileContent);
+      sendInformation.attachments = attachment;
+    }
     await this.sendEmail(sendInformation);
+  }
+
+  async askAttachment() {
+    this.attachment = this.flags.attachment;
+    if (!this.attachment) {
+      const verdict = await this.inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'sendAttachment',
+          message: 'Would you like to send an attachment?',
+          default: false
+        }
+      ]);
+      return verdict.sendAttachment;
+    }
+    return false;
+  }
+
+  async promptAttachment(verdict) {
+    if (verdict === true) {
+      const file = await this.inquirer.prompt([
+        {
+          name: 'path',
+          message: Send.flags.attachment.description + ':'
+        }
+      ]);
+      this.attachment = file.path;
+    }
+  }
+
+  readFile(FilePath) {
+    this.fileName = path.basename(FilePath);
+    if (FilePath.includes(os.homedir()) === false) {
+      this.attachment = path.resolve(FilePath);
+    }
+    try {
+      const coded = fs.readFileSync(FilePath, 'base64');
+      return coded;
+    } catch (err) {
+      this.logger.error(err);
+      return this.exit(1);
+    }
+  }
+
+  createAttachmentArray(fileContent) {
+    const attachments = [];
+    const attachment = {
+      content: fileContent,
+      type: 'plain/text',
+      disposition: 'attachment',
+      filename: this.fileName,
+      contentId: 'attachmentText'
+    };
+    attachments[0] = attachment;
+    return attachments;
   }
 
   validateEmail(email) {
@@ -109,6 +174,9 @@ class Send extends BaseCommand {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     await sgMail.send(sendInformation);
     this.logger.info('Your email containing the message "' + this.emailText + '" sent from ' + this.fromEmail + ' to ' + this.toEmail + ' with the subject line ' + this.subjectLine + ' has been sent!');
+    if (this.attachment) {
+      this.logger.info('Your attachment from ' + this.attachment + ' path called ' + this.fileName + ' has been sent.');
+    }
   }
 }
 
@@ -126,6 +194,9 @@ Send.flags = Object.assign(
     }),
     text: flags.string({
       description: 'Text to send within the email body'
+    }),
+    attachment: flags.string({
+      description: 'Path for the file that you want to attach'
     })
   },
   BaseCommand.flags
