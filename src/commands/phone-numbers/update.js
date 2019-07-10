@@ -34,7 +34,7 @@ class NumberUpdate extends TwilioClientCommand {
   }
 
   async checkForLocalhost(props, propName) {
-    if (props[propName]) {
+    if (props && props[propName]) {
       const url = new URL(props[propName]);
       if (['localhost', '127.0.0.1'].indexOf(url.hostname) > -1 && url.protocol === 'http:') {
         let newBaseUrl = this.tunnels[url.port];

@@ -5,8 +5,8 @@
 const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
+const { logger } = require('@twilio/cli-core').services.logging;
 const { kebabCase, camelCase } = require('@twilio/cli-core').services.namingConventions;
-const { isApi2010 } = require('@twilio/cli-core').services.TwilioApi;
 const { ApiCommandRunner, getActionDescription } = require('../services/twilio-api');
 
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
@@ -23,16 +23,23 @@ const typeMap = {
 // AccountSid is a special snowflake
 const ACCOUNT_SID_FLAG = 'account-sid';
 
+const isRemoveCommand = actionDefinition => actionDefinition.commandName === 'remove';
+
 class TwilioApiCommand extends TwilioClientCommand {
   async runCommand() {
     const runner = new ApiCommandRunner(
-      this.twilioClient,
+      this.twilioApiClient,
       this.constructor.actionDefinition,
       this.constructor.flags,
       this.flags
     );
 
     const response = await runner.run();
+
+    if (isRemoveCommand(this.constructor.actionDefinition)) {
+      logger.info(response ? 'The resource was deleted successfully' : 'Failed to delete the resource');
+      return;
+    }
 
     this.output(response, this.flags.properties);
   }
@@ -45,7 +52,6 @@ TwilioApiCommand.flags = TwilioClientCommand.flags;
 // command class.
 TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   const domainName = NewCommandClass.actionDefinition.domainName;
-  const versionName = NewCommandClass.actionDefinition.versionName;
   const resource = NewCommandClass.actionDefinition.resource;
   const action = NewCommandClass.actionDefinition.action;
 
@@ -59,12 +65,12 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
 
   // Parameters
   const cmdFlags = {};
-  action.parameters.forEach(param => {
+  (action.parameters || []).forEach(param => {
     const flagName = kebabCase(param.name);
     const flagConfig = {
       description: sanitizeDescription(param.description),
       // AccountSid on api.v2010 not required, we can get from the current project
-      required: flagName === ACCOUNT_SID_FLAG && isApi2010(domainName, versionName) ? false : param.required,
+      required: flagName === ACCOUNT_SID_FLAG && domainName === 'api' ? false : param.required,
       multiple: param.schema.type === 'array',
       apiDetails: {
         parameter: param,
@@ -90,20 +96,20 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
     if (flagType) {
       cmdFlags[flagName] = flagType(flagConfig);
     } else {
-      // We don't have a logger in this context and our build process should ensure this
-      // error condition isn't possible.
-      // eslint-disable-next-line no-console
-      console.error(`Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`);
+      logger.error(`Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`);
     }
   });
 
-  const defaultProperties = resource.defaultOutputProperties || [];
+  // 'remove' commands have no response body and thus do not need display properties.
+  if (NewCommandClass.actionDefinition.commandName !== 'remove') {
+    const defaultProperties = resource.defaultOutputProperties || [];
 
-  cmdFlags.properties = flags.string({
-    // Camel-cased, CSV of the provided property list. Or just the SID.
-    default: defaultProperties.map(prop => camelCase(prop)).join(',') || 'sid',
-    description: 'The properties you would like to display (JSON output always shows all properties).'
-  });
+    cmdFlags.properties = flags.string({
+      // Camel-cased, CSV of the provided property list. Or just the SID.
+      default: defaultProperties.map(prop => camelCase(prop)).join(',') || 'sid',
+      description: 'The properties you would like to display (JSON output always shows all properties).'
+    });
+  }
 
   // Class statics
   NewCommandClass.id = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;

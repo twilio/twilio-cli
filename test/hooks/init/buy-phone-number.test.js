@@ -15,8 +15,7 @@ const getFakeConfig = () => ({
         id: 'api:core:available-phone-numbers:local:list',
         actionDefinition: {
           domainName: 'api',
-          versionName: 'v2010',
-          path: '/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local',
+          path: '/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local.json',
           actionName: 'list'
         },
         flags: {
@@ -30,8 +29,7 @@ const getFakeConfig = () => ({
         id: 'api:core:available-phone-numbers:toll-free:list',
         actionDefinition: {
           domainName: 'api',
-          versionName: 'v2010',
-          path: '/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree',
+          path: '/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree.json',
           actionName: 'list'
         },
         flags: {
@@ -43,8 +41,7 @@ const getFakeConfig = () => ({
         id: 'api:core:incoming-phone-numbers:create',
         actionDefinition: {
           domainName: 'api',
-          versionName: 'v2010',
-          path: '/Accounts/{AccountSid}/IncomingPhoneNumbers',
+          path: '/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json',
           actionName: 'create'
         },
         flags: {

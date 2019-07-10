@@ -1,37 +1,41 @@
+const { URL } = require('url');
 const { Plugin } = require('@oclif/config');
+const { logger } = require('@twilio/cli-core').services.logging;
 const { TwilioApiBrowser } = require('@twilio/cli-core').services.TwilioApi;
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
 const { getTopicName, TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('../../services/twilio-api');
+
+const METHOD_TO_ACTION_MAP = {
+  list: {
+    get: 'list',
+    post: 'create'
+  },
+  instance: {
+    delete: 'remove',
+    get: 'fetch',
+    post: 'update'
+  }
+};
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
 class TwilioRestApiPlugin extends Plugin {
   scanAction(actionDefinition) {
     actionDefinition.commandName = actionDefinition.actionName;
-    actionDefinition.action = actionDefinition.resource.actions[actionDefinition.actionName];
+    actionDefinition.action = actionDefinition.resource.operations[actionDefinition.methodName];
     this.actions.push(Object.assign({}, actionDefinition));
   }
 
   scanResource(actionDefinition) {
-    actionDefinition.resource = actionDefinition.version.resources[actionDefinition.path];
+    actionDefinition.resource = actionDefinition.domain.paths[actionDefinition.path];
     actionDefinition.topicName = BASE_TOPIC_NAME + TOPIC_SEPARATOR + getTopicName(actionDefinition);
-    Object.keys(actionDefinition.resource.actions).forEach(actionName => {
-      actionDefinition.actionName = actionName;
+
+    const pathType = actionDefinition.resource.pathType.toLowerCase();
+
+    Object.keys(actionDefinition.resource.operations).forEach(methodName => {
+      actionDefinition.methodName = methodName;
+      actionDefinition.actionName = METHOD_TO_ACTION_MAP[pathType][methodName];
       this.scanAction(actionDefinition);
     }, this);
-  }
-
-  scanVersion(actionDefinition) {
-    actionDefinition.version = actionDefinition.domain.versions[actionDefinition.versionName];
-    Object.keys(actionDefinition.version.resources).forEach(resourcePath => {
-      actionDefinition.path = resourcePath;
-      this.scanResource(actionDefinition);
-    }, this);
-
-    const shortVersion = actionDefinition.versionName.replace(/v/g, '');
-    this.versionTopics.push({
-      name: [BASE_TOPIC_NAME, actionDefinition.domainName, actionDefinition.versionName].join(TOPIC_SEPARATOR),
-      description: `version ${shortVersion} of the API`
-    });
   }
 
   scanDomain(domainName) {
@@ -44,9 +48,17 @@ class TwilioRestApiPlugin extends Plugin {
       domain: this.apiBrowser.domains[domainName]
     };
 
-    Object.keys(actionDefinition.domain.versions).forEach(versionName => {
-      actionDefinition.versionName = versionName;
-      this.scanVersion(actionDefinition);
+    Object.keys(actionDefinition.domain.paths).forEach(pathName => {
+      const versionName = pathName.split('/')[1];
+      const shortVersion = versionName.replace(/v/g, '');
+
+      this.versionTopics.push({
+        name: [BASE_TOPIC_NAME, actionDefinition.domainName, versionName].join(TOPIC_SEPARATOR),
+        description: `version ${shortVersion} of the API`
+      });
+
+      actionDefinition.path = pathName;
+      this.scanResource(actionDefinition);
     }, this);
 
     let topicDomainName = domainName;
@@ -58,8 +70,32 @@ class TwilioRestApiPlugin extends Plugin {
 
     this.domainTopics.push({
       name: [BASE_TOPIC_NAME, topicDomainName].join(TOPIC_SEPARATOR),
-      description: `resources under ${domainName}.twilio.com`
+      description: `resources under ${this.getHostname(actionDefinition)}`
     });
+  }
+
+  /**
+   * Attempts to get the hostname from first path's server. Falls back to using the domain name.
+   *
+   * @param actionDefinition - action containing domain paths
+   * @returns {string} - Target hostname for the action
+   */
+  getHostname(actionDefinition) {
+    try {
+      const firstPath = Object.values(actionDefinition.domain.paths)[0];
+      const serverUrl = new URL(firstPath.server);
+      const hostname = serverUrl.hostname;
+
+      if (!hostname) {
+        throw new Error('Could not determine hostname for server: ' + firstPath.server);
+      }
+
+      return serverUrl.hostname;
+    } catch (error) {
+      logger.debug('Failed to parse server name: ' + error);
+      logger.debug('Falling back to domain name: ' + actionDefinition.domainName);
+      return `${actionDefinition.domainName}.twilio.com`;
+    }
   }
 
   constructor(config, apiBrowser) {

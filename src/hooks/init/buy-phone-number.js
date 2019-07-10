@@ -57,7 +57,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
 
       async getPhoneNumber() {
         const listCommandRunner = new ApiCommandRunner(
-          this.twilioClient,
+          this.twilioApiClient,
           listCommand.actionDefinition,
           listCommand.flags,
           this.flags
@@ -112,7 +112,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
         delete this.flags[AREA_CODE_FLAG];
 
         const createCommandRunner = new ApiCommandRunner(
-          this.twilioClient,
+          this.twilioApiClient,
           createCommand.actionDefinition,
           createCommand.flags,
           this.flags

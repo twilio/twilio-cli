@@ -1,6 +1,9 @@
-.PHONY: install test clean
+.PHONY: githooks install test clean
 
-install:
+githooks:
+	ln -sf ../../githooks/pre-commit .git/hooks/pre-commit
+
+install: githooks
 	npm install
 
 test:
