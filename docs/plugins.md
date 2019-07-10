@@ -35,15 +35,11 @@ Now, you can run your plugin command from the CLI:
 ./bin/run my-new-topic:my-new-command --help
 ```
 
-*NOTE if you pull in [twilio-cli-core](https://github.com/twilio/twilio-cli-core) as a dependency, you will need to add `keytar@^4.11.0` as a development dependency to avoid re-install/upgrade issues.
+* NOTE: If you pull in [twilio-cli-core](https://github.com/twilio/twilio-cli-core) as a dependency, you will need to add `keytar` as a development dependency in order to develop and test locally:
 
-e.g. 
 ```
-"devDependencies": {
-    "keytar": "^4.11.0"
-}
+npm install keytar --save-dev
 ```
-
 
 ### TwilioClientCommand
 
