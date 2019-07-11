@@ -4,7 +4,6 @@ const emailUtilities = require('../../services/email-utility');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 
 class Send extends BaseCommand {
   async run() {
@@ -58,31 +57,25 @@ class Send extends BaseCommand {
     }
   }
 
-  readFile(FilePath) {
-    this.fileName = path.basename(FilePath);
-    if (FilePath.includes(os.homedir()) === false) {
-      this.attachment = path.resolve(FilePath);
-    }
+  readFile(filePath) {
+    this.fileName = path.basename(filePath);
     try {
-      const coded = fs.readFileSync(FilePath, 'base64');
+      const coded = fs.readFileSync(filePath, 'base64');
       return coded;
     } catch (err) {
-      this.logger.error(err);
+      this.logger.error(filePath + ' file not found.');
       return this.exit(1);
     }
   }
 
   createAttachmentArray(fileContent) {
-    const attachments = [];
-    const attachment = {
+    return [{
       content: fileContent,
       type: 'plain/text',
       disposition: 'attachment',
       filename: this.fileName,
       contentId: 'attachmentText'
-    };
-    attachments[0] = attachment;
-    return attachments;
+    }];
   }
 
   validateEmail(email) {
@@ -180,7 +173,7 @@ class Send extends BaseCommand {
   }
 }
 
-Send.description = 'sends emails to single or multiple recipients';
+Send.description = 'sends emails to single or multiple recipients using Twilio SendGrid';
 Send.flags = Object.assign(
   {
     to: flags.string({
