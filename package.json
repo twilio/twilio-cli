@@ -21,7 +21,7 @@
     "inquirer": "^6.4.1",
     "keytar": "^4.11.0",
     "ngrok": "^3.2.1",
-    "twilio": "^3.33.0"
+    "twilio": "^3.33.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.0",
