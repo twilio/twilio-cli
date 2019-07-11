@@ -63,7 +63,8 @@ class Send extends BaseCommand {
       const coded = fs.readFileSync(filePath, 'base64');
       return coded;
     } catch (err) {
-      this.logger.error(filePath + ' file not found.');
+      this.logger.error('Unable to read the file: ' + filePath);
+      this.logger.debug(err);
       return this.exit(1);
     }
   }
