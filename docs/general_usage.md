@@ -104,7 +104,7 @@ At this time, only two plugins exist:
 
 * [twilio serverless plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [plugin-serverless](https://github.com/twilio-labs/plugin-serverless).
 
-* [twilio debugger plugin](https://github.com/twilio/plugin-debugger): The debugger plugin will display Twilio Debugger logs directly in your terminal.
+* [twilio watch plugin](https://github.com/twilio-labs/plugin-watch): Allows you to watch your live debugger alerts, voice calls, and messages as they come in, in real-time. 
 
 ### Install a plugin
 
