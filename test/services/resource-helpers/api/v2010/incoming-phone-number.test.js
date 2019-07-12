@@ -2,8 +2,6 @@
 const { expect, test, constants, getFakeSid } = require('@twilio/cli-test');
 const IncomingPhoneNumberHelper = require('../../../../../src/services/resource-helpers/api/v2010/incoming-phone-number');
 
-require('chai').use(require('chai-as-promised'));
-
 const fakeNumber = '+12095551212';
 const fakeNumberSid = getFakeSid('PN');
 const fakeNumberResource = {

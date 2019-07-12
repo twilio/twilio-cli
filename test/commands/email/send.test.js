@@ -54,14 +54,24 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('environment variable called SENDGRID_API_KEY set up with your SendGrid API key');
         });
 
-      noDefault({ toEmail: 'JonSnow, BranStark@winterfell', fromEmail: 'Ygritte@wall.com', flags: ['--subject', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
+      noDefault({
+        toEmail: 'JonSnow, BranStark@winterfell',
+        fromEmail: 'Ygritte@wall.com',
+        flags: ['--subject', 'Open ASAP'],
+        bodyText: 'You know nothing Jon Snow.'
+      })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
         .it('run email:send without defaults and with multiple recipients including an incorrect to email address', ctx => {
           expect(ctx.stderr).to.contain('JonSnow is not a valid email');
           expect(ctx.stderr).to.contain('Email could not be sent');
         });
-      noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte@wall.com', subjectLine: 'Secret Message', bodyText: 'You know nothing Jon Snow.' })
+      noDefault({
+        toEmail: 'JonSnow@castleBlack.com',
+        fromEmail: 'Ygritte@wall.com',
+        subjectLine: 'Secret Message',
+        bodyText: 'You know nothing Jon Snow.'
+      })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -72,7 +82,12 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
           expect(ctx.stderr).to.contain('Secret Message');
         });
-      noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte@wall.com', flags: ['--subject', 'Open ASAP'], bodyText: 'You know nothing Jon Snow.' })
+      noDefault({
+        toEmail: 'JonSnow@castleBlack.com',
+        fromEmail: 'Ygritte@wall.com',
+        flags: ['--subject', 'Open ASAP'],
+        bodyText: 'You know nothing Jon Snow.'
+      })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         }).do(ctx => ctx.testCmd.run())
@@ -82,7 +97,12 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
           expect(ctx.stderr).to.contain('Open ASAP');
         });
-      noDefault({ toEmail: 'JonSnow@castleBlack.com', fromEmail: 'Ygritte', subjectLine: 'Secret Message', bodyText: 'You know nothing Jon Snow.' })
+      noDefault({
+        toEmail: 'JonSnow@castleBlack.com',
+        fromEmail: 'Ygritte',
+        subjectLine: 'Secret Message',
+        bodyText: 'You know nothing Jon Snow.'
+      })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
         .it('run email:send without defaults and an invalid from email address', ctx => {
@@ -153,7 +173,11 @@ describe('commands', () => {
       defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/test.txt'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
-        }).do(ctx => ctx.testCmd.run())
+        })
+        .do(ctx => {
+          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          return ctx.testCmd.run();
+        })
         .it('run email:send using flags to set information using relative file path', ctx => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
@@ -162,7 +186,10 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('test.txt path');
         });
       defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/invalid.txt'] })
-        .do(ctx => ctx.testCmd.run())
+        .do(ctx => {
+          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          return ctx.testCmd.run();
+        })
         .exit(1)
         .it('run email:send using flags to set information using invalid file path', ctx => {
           expect(ctx.stderr).to.contain('Unable to read the file:');
