@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2019-07-12] Version 1.3.4
+---------------------------
+**Preview**
+- Added endpoint to brand a call without initiating it, so it can be initiated manually by the Customer
+
+
 [2019-07-10] Version 1.3.3
 ---------------------------
 **Library**
