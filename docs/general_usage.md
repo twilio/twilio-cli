@@ -92,6 +92,10 @@ twilio autocomplete
 
 And follow the instructions.
 
+## Sending Email with Twilio SendGrid
+
+When you run `twilio email:send` you can send an email within the command line. You can use `twilio email:set` to set a default email address for the sender and default subject line. After you set a default sending email address and subject line, `twilio email:send` will automatically use the default sending email address and subject line. To change the sending email address or subject line, you can either re-run `twilio email:set` or use the corresponding flag to set a new value for the item you want to change.
+
 ## Plugins
 
 twilio-cli can be extended via plugins.
