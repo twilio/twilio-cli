@@ -17,6 +17,10 @@ Start by cloning [this repo of an example plugin](https://github.com/twilio/plug
 
 Commands go in the `src/commands` folder and should inherit from one of our command base classes.
 
+We recommend that you consider command naming diligently. It's possible to write a command that will collide with an existing command name. Additionally, we recommend starting your top-level command help with lower case to be consistent with the help that ships with twilio-cli.
+
+Finally, the CLI will warn the user if the plugin is hosted outside of the [twilio](https://github.com/twilio) and [twilio-labs](https://github.com/twilio-labs) organizations.
+
 ## 4. Test your plugin with the CLI
 
 Clone the main CLI repo (this repo) and [set it up](https://github.com/twilio/twilio-cli).
