@@ -57,7 +57,7 @@ describe('commands', () => {
       noDefault({
         toEmail: 'JonSnow, BranStark@winterfell',
         fromEmail: 'Ygritte@wall.com',
-        flags: ['--subject', 'Open ASAP'],
+        flags: ['--subject', 'Open ASAP', '--context', 'ForceTTY'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .do(ctx => ctx.testCmd.run())
@@ -70,6 +70,7 @@ describe('commands', () => {
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte@wall.com',
         subjectLine: 'Secret Message',
+        flags: ['--context', 'ForceTTY'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .nock('https://api.sendgrid.com', api => {
@@ -85,7 +86,7 @@ describe('commands', () => {
       noDefault({
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte@wall.com',
-        flags: ['--subject', 'Open ASAP'],
+        flags: ['--subject', 'Open ASAP', '--context', 'ForceTTY'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .nock('https://api.sendgrid.com', api => {
@@ -101,6 +102,7 @@ describe('commands', () => {
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte',
         subjectLine: 'Secret Message',
+        flags: ['--context', 'ForceTTY'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .do(ctx => ctx.testCmd.run())
@@ -110,7 +112,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Email could not be sent');
         });
 
-      defaultSetup({ toEmail: 'jen@test.com' })
+      defaultSetup({ toEmail: 'jen@test.com', flags: ['--context', 'ForceTTY'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -125,7 +127,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('default');
         });
 
-      defaultSetup({ toEmail: 'jen@test.com, mike@test.com, tamu@test.com' })
+      defaultSetup({ toEmail: 'jen@test.com, mike@test.com, tamu@test.com', flags: ['--context', 'ForceTTY'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -141,7 +143,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('tamu@test.com');
           expect(ctx.stderr).to.contain('default');
         });
-      defaultSetup({ flags: ['--to', 'Frodo@test.com', '--from', 'Bilbo@test.com', '--subject', 'Greetings', '--text', 'Short cuts make delays, but inns make longer ones.'] })
+      defaultSetup({ flags: ['--to', 'Frodo@test.com', '--from', 'Bilbo@test.com', '--subject', 'Greetings', '--text', 'Short cuts make delays, but inns make longer ones.', '--context', 'ForceTTY'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -156,7 +158,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Greetings');
         });
 
-      defaultSetup({ flags: ['--to', 'Frodo@test.com', '--from', 'Bilbo@test.com', '--text', 'Short cuts make delays, but inns make longer ones.'] })
+      defaultSetup({ flags: ['--to', 'Frodo@test.com', '--from', 'Bilbo@test.com', '--text', 'Short cuts make delays, but inns make longer ones.', '--context', 'ForceTTY'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -170,7 +172,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Frodo@test.com');
           expect(ctx.stderr).to.contain('default');
         });
-      defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/test.txt'] })
+      defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/test.txt', '--context', 'ForceTTY'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -185,7 +187,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Secret Message');
           expect(ctx.stderr).to.contain('test.txt path');
         });
-      defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/invalid.txt'] })
+      defaultSetup({ flags: ['--subject', 'Secret Message', '--to', 'JonSnow@castleBlack.com', '--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.', '--attachment', 'test/commands/email/invalid.txt', '--context', 'ForceTTY'] })
         .do(ctx => {
           process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
           return ctx.testCmd.run();
@@ -194,7 +196,7 @@ describe('commands', () => {
         .it('run email:send using flags to set information using invalid file path', ctx => {
           expect(ctx.stderr).to.contain('Unable to read the file:');
         });
-      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true })
+      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, flags: ['--context', 'ForceTTY'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -209,7 +211,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('default@test.com');
           expect(ctx.stderr).to.contain('test.txt path');
         });
-      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, filePath: '' })
+      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, filePath: '', flags: ['--context', 'ForceTTY'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })

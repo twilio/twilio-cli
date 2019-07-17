@@ -8,10 +8,22 @@ const path = require('path');
 class Send extends BaseCommand {
   async run() {
     await super.run();
+    var input;
     if (!process.env.SENDGRID_API_KEY) {
       this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
     }
+    const tty = this.checkTty();
+    if (process.stdin.isTTY === undefined && !this.flags.context) {
+      this.logger.error('All flags must be provided to send email.');
+      this.exit(1);
+    }
+    if (process.stdin.isTTY === undefined && this.flags.context === 'pipe') {
+      input = await this.readStream(process.stdin);
+    } else {
+      input = null;
+    }
+    this.processData(tty, input);
     await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
     await this.promptForToEmail();
@@ -19,14 +31,61 @@ class Send extends BaseCommand {
     await this.promptForSubject();
     await this.promptForText();
     const sendInformation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
-    const attachmentVerdict = await this.askAttachment();
-    await this.promptAttachment(attachmentVerdict);
-    if (this.attachment) {
-      const fileContent = this.readFile(this.attachment);
-      const attachment = this.createAttachmentArray(fileContent);
+    if (this.pipedInfo) {
+      const attachment = this.createAttachmentArray(this.pipedInfo);
       sendInformation.attachments = attachment;
+    } else {
+      const attachmentVerdict = await this.askAttachment();
+      await this.promptAttachment(attachmentVerdict);
+      if (this.attachment) {
+        const fileContent = this.readFile(this.attachment);
+        const attachment = this.createAttachmentArray(fileContent);
+        sendInformation.attachments = attachment;
+      }
     }
     await this.sendEmail(sendInformation);
+  }
+
+  checkTty() {
+    const tty = process.stdout.isTTY;
+    if (tty === false) {
+      this.logger.info('This is not tty.');
+    }
+    return (tty);
+  }
+
+  readStream(stream, encoding = 'base64') {
+    stream.setEncoding(encoding);
+    return new Promise((resolve, reject) => {
+      let data = '';
+      stream.on('data',
+        chunk => {
+          data += chunk;
+        });
+      stream.on('end', () => resolve(data));
+      stream.on('error', error => reject(error));
+    });
+  }
+
+  processData(tty, input) {
+    if (tty === true) {
+      if (input) {
+        this.fileName = 'piped.txt';
+        this.pipedInfo = input;
+        this.subjectLine = this.userConfig.email.subjectLine;
+        this.fromEmail = this.userConfig.email.fromEmail;
+        if (this.flags.subject) {
+          this.subjectLine = this.flags.subject;
+        }
+        if (this.flags.from) {
+          this.fromEmail = this.flags.from;
+        }
+        if (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail) {
+          this.logger.error('All flags must be provided to send email.');
+          return this.exit(1);
+        }
+      }
+    }
   }
 
   async askAttachment() {
@@ -171,6 +230,9 @@ class Send extends BaseCommand {
     if (this.attachment) {
       this.logger.info('Your attachment from ' + this.attachment + ' path called ' + this.fileName + ' has been sent.');
     }
+    if (this.pipedInfo) {
+      this.logger.info('Your piped data attachment has been sent.');
+    }
   }
 }
 
@@ -191,6 +253,9 @@ Send.flags = Object.assign(
     }),
     attachment: flags.string({
       description: 'Path for the file that you want to attach'
+    }),
+    context: flags.string({
+      description: 'Set context equal to the word pipe if you are sending the output of another command through email'
     })
   },
   BaseCommand.flags
