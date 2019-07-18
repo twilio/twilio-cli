@@ -66,7 +66,8 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   // Parameters
   const cmdFlags = {};
   (action.parameters || []).forEach(param => {
-    const flagName = kebabCase(param.name);
+    const cliName = param.name.replace('<', 'Before').replace('>', 'After');
+    const flagName = kebabCase(cliName);
     const flagConfig = {
       description: sanitizeDescription(param.description),
       // AccountSid on api.v2010 not required, we can get from the current project
