@@ -1,7 +1,9 @@
+
 const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const emailSend = require('../../../src/commands/email/send');
+const standardIn = require('mock-stdin').stdin();
 
 describe('commands', () => {
   describe('projects', () => {
@@ -17,6 +19,7 @@ describe('commands', () => {
         .stdout()
         .stderr()
         .do(ctx => {
+          standardIn.send('This should mock standard in');
           const fakePrompt = sinon.stub();
           fakePrompt
             .resolves({
@@ -211,19 +214,14 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('default@test.com');
           expect(ctx.stderr).to.contain('test.txt path');
         });
-      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, filePath: '', flags: ['--context', 'ForceTTY'] })
-        .nock('https://api.sendgrid.com', api => {
-          api.post('/v3/mail/send').reply(200, {});
-        })
+      defaultSetup({ toEmail: 'jen@test.com' })
         .do(ctx => {
           process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
           return ctx.testCmd.run();
         })
-        .it('run email:send with default subject line and sending email address and empty path for attachment', ctx => {
-          expect(ctx.stderr).to.contain('Your email containing the message "Hello world" sent from default@test.com to jen@test.com with the subject line default has been sent!');
-          expect(ctx.stderr).to.contain('default@test.com');
-          expect(ctx.stderr).to.contain('jen@test.com');
-          expect(ctx.stderr).to.contain('default');
+        .exit(1)
+        .it('run email:send with defaults and piped data but forget to include any flags', ctx => {
+          expect(ctx.stderr).to.contain('All flags must be provided to send email.');
         });
     });
   });

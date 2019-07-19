@@ -4,6 +4,7 @@ const emailUtilities = require('../../services/email-utility');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
 const path = require('path');
+const getStdin = require('get-stdin');
 
 class Send extends BaseCommand {
   async run() {
@@ -19,7 +20,7 @@ class Send extends BaseCommand {
       this.exit(1);
     }
     if (process.stdin.isTTY === undefined && this.flags.context === 'pipe') {
-      input = await this.readStream(process.stdin);
+      input = await this.readStream();
     } else {
       input = null;
     }
@@ -54,17 +55,10 @@ class Send extends BaseCommand {
     return (tty);
   }
 
-  readStream(stream, encoding = 'base64') {
-    stream.setEncoding(encoding);
-    return new Promise((resolve, reject) => {
-      let data = '';
-      stream.on('data',
-        chunk => {
-          data += chunk;
-        });
-      stream.on('end', () => resolve(data));
-      stream.on('error', error => reject(error));
-    });
+  async readStream() {
+    const input = await getStdin();
+    const base64data = Buffer.from(input).toString('base64');
+    return base64data;
   }
 
   processData(tty, input) {
