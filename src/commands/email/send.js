@@ -21,10 +21,8 @@ class Send extends BaseCommand {
     }
     if (process.stdin.isTTY === undefined && this.flags.context === 'pipe') {
       input = await this.readStream();
-    } else {
-      input = null;
+      this.processData(tty, input);
     }
-    this.processData(tty, input);
     await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
     await this.promptForToEmail();
@@ -63,21 +61,19 @@ class Send extends BaseCommand {
 
   processData(tty, input) {
     if (tty === true) {
-      if (input) {
-        this.fileName = 'piped.txt';
-        this.pipedInfo = input;
-        this.subjectLine = this.userConfig.email.subjectLine;
-        this.fromEmail = this.userConfig.email.fromEmail;
-        if (this.flags.subject) {
-          this.subjectLine = this.flags.subject;
-        }
-        if (this.flags.from) {
-          this.fromEmail = this.flags.from;
-        }
-        if (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail) {
-          this.logger.error('All flags must be provided to send email.');
-          return this.exit(1);
-        }
+      this.fileName = 'piped.txt';
+      this.pipedInfo = input;
+      this.subjectLine = this.userConfig.email.subjectLine;
+      this.fromEmail = this.userConfig.email.fromEmail;
+      if (this.flags.subject) {
+        this.subjectLine = this.flags.subject;
+      }
+      if (this.flags.from) {
+        this.fromEmail = this.flags.from;
+      }
+      if (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail) {
+        this.logger.error('All flags must be provided to send email.');
+        return this.exit(1);
       }
     }
   }

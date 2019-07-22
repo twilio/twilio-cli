@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 
 const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
@@ -13,13 +14,17 @@ describe('commands', () => {
           ctx.userConfig = new ConfigData();
           ctx.userConfig.email.fromEmail = 'default@test.com';
           ctx.userConfig.email.subjectLine = 'default';
+          standardIn.send('This should mock standard in');
         })
         .twilioCliEnv(Config)
         .twilioCreateCommand(emailSend, flags)
         .stdout()
         .stderr()
         .do(ctx => {
-          standardIn.send('This should mock standard in');
+          // eslint-disable-next-line max-nested-callbacks
+          // process.nextTick(function mock() {
+          //   standardIn.send('This should mock standard in');
+          // });
           const fakePrompt = sinon.stub();
           fakePrompt
             .resolves({
@@ -50,6 +55,15 @@ describe('commands', () => {
           ctx.testCmd.inquirer.prompt = fakePrompt;
         });
 
+      defaultSetup({ toEmail: 'jen@test.com', flags: ['--context', 'pipe'] })
+        .do(ctx => {
+          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          return ctx.testCmd.run();
+        })
+        .exit(1)
+        .it('run email:send with defaults and piped data but forget to include to email address and text flags', ctx => {
+          expect(ctx.stderr).to.contain('All flags must be provided to send email.');
+        });
       defaultSetup({ toEmail: 'jen@test.com , mike@test.com, tamu@test.com' })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
