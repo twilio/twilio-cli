@@ -19,9 +19,8 @@ class Send extends BaseCommand {
       this.exit(1);
     }
     if (process.stdin.isTTY === undefined && this.flags.context === 'pipe') {
-      const tty = this.checkTty();
       input = await this.readStream();
-      this.processData(tty, input);
+      this.processData(input);
     }
     await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
@@ -45,32 +44,22 @@ class Send extends BaseCommand {
     await this.sendEmail(sendInformation);
   }
 
-  checkTty() {
-    const tty = process.stdout.isTTY;
-    if (tty === false) {
-      this.logger.info('This is not tty.');
-    }
-    return (tty);
-  }
-
   async readStream() {
     const input = await getStdin();
     const base64data = Buffer.from(input).toString('base64');
     return base64data;
   }
 
-  processData(tty, input) {
-    if (tty === true) {
-      this.fileName = 'piped.txt';
-      this.pipedInfo = input;
-      this.subjectLine = this.userConfig.email.subjectLine;
-      this.fromEmail = this.userConfig.email.fromEmail;
-      if (this.flags.subject) {
-        this.subjectLine = this.flags.subject;
-      }
-      if (this.flags.from) {
-        this.fromEmail = this.flags.from;
-      }
+  processData(input) {
+    this.fileName = 'piped.txt';
+    this.pipedInfo = input;
+    this.subjectLine = this.userConfig.email.subjectLine;
+    this.fromEmail = this.userConfig.email.fromEmail;
+    if (this.flags.subject) {
+      this.subjectLine = this.flags.subject;
+    }
+    if (this.flags.from) {
+      this.fromEmail = this.flags.from;
     }
     if (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail) {
       this.logger.error('All flags must be provided to send email.');
