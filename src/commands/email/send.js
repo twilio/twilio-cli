@@ -14,12 +14,12 @@ class Send extends BaseCommand {
       this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
     }
-    const tty = this.checkTty();
     if (process.stdin.isTTY === undefined && !this.flags.context) {
       this.logger.error('All flags must be provided to send email.');
       this.exit(1);
     }
     if (process.stdin.isTTY === undefined && this.flags.context === 'pipe') {
+      const tty = this.checkTty();
       input = await this.readStream();
       this.processData(tty, input);
     }
@@ -71,10 +71,10 @@ class Send extends BaseCommand {
       if (this.flags.from) {
         this.fromEmail = this.flags.from;
       }
-      if (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail) {
-        this.logger.error('All flags must be provided to send email.');
-        return this.exit(1);
-      }
+    }
+    if (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail) {
+      this.logger.error('All flags must be provided to send email.');
+      return this.exit(1);
     }
   }
 
