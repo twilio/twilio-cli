@@ -58,7 +58,13 @@ class ProjectsAdd extends BaseCommand {
     if (!this.projectId) {
       const answer = await this.inquirer.prompt([{
         name: 'projectId',
-        message: ProjectsAdd.flags.project.description
+        message: ProjectsAdd.flags.project.description,
+        validate: function (value) {
+          if (!value) {
+            return 'Please enter a shorthand identifier for your Twilio project.';
+          }
+          return true;
+        }
       }]);
       this.projectId = answer.projectId;
     }
