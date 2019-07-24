@@ -9,37 +9,27 @@ You will specifically want to review the docs:
 - [Topics](https://oclif.io/docs/topics)
 - [Plugins](https://oclif.io/docs/plugins)
 
-## 2. Clone the starter repo
+## 2. Adapt the starter repo (optional, but good for getting started)
 
-Start by cloning [this repo of an example plugin](https://github.com/twilio/plugin-debugger).
+Start by cloning [this repo of an example debugger plugin](https://github.com/twilio/plugin-debugger).
+
+Once it's cloned, you can poke around to get a sense for the organization and even copy and adapt it for your own plugin use case.
+
+Your plugin directory should following the naming convention `plugin-<my-spectacular-plugin`.
+
+Remember to update the `package.json` fields if you start building your own plugin off of this one:
+* name
+* description
+* homepage
+* oclif["name"]
+* topics
+
+And run `npm install`.
+
 
 ## 3. Add your [topics](https://oclif.io/docs/topics) and [commands](https://oclif.io/docs/commands)
 
 Commands go in the `src/commands` folder and should inherit from one of our command base classes.
-
-## 4. Test your plugin with the CLI
-
-Clone the main CLI repo (this repo) and [set it up](https://github.com/twilio/twilio-cli).
-
-"Install" the plugin referencing your plugin's local development folder like so:
-
-```
-./bin/run plugins:link ../plugin-<my-spectacular-plugin>
-```
-
-Run this command from the CLI folder. This assumes the CLI and your plugin folders are siblings of each other (perhaps in a `~/Projects` folder).
-
-Now, you can run your plugin command from the CLI:
-
-```
-./bin/run my-new-topic:my-new-command --help
-```
-
-* NOTE: If you pull in [twilio-cli-core](https://github.com/twilio/twilio-cli-core) as a dependency, you will need to add `keytar` as a development dependency in order to develop and test locally:
-
-```
-npm install keytar --save-dev
-```
 
 ### TwilioClientCommand
 
@@ -48,3 +38,35 @@ Inherit from `TwilioClientCommand` if your command will need to make Twilio API 
 ### TwilioBaseCommand
 
 Inherit from `TwilioBaseCommand` if your command doesn't need to make any API calls.
+
+### Flags
+
+To create flags for your spectacular plugin, you will need the following import: `const { flags } = require('@oclif/command');`
+
+Additionally, you will need to copy the base class' flags: `MySpectacularPlugin.flags = Object.assign({'fave-dessert': flag.string({'description': 'Your favorite dessert', required: true})}, TwilioClientCommand.flags)`
+
+
+## 4. Test your plugin with the CLI
+
+Clone [the main CLI repo (this repo)](https://github.com/twilio/twilio-cli) and  set it up following the [twilio-cli Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart).
+
+"Install" the plugin referencing your plugin's local development folder by linking to your plugin.
+
+Run this command from the CLI folder. This assumes the CLI and your plugin folders are siblings of each other (perhaps in a `~/Projects` folder):
+
+```
+./bin/run plugins:link ../plugin-<my-spectacular-plugin>
+```
+
+
+Now, you can run your plugin command from the CLI:
+
+```
+twilio my-new-topic:my-new-command --help
+```
+
+* NOTE: If you pull in [twilio-cli-core](https://github.com/twilio/twilio-cli-core) as a dependency, you will need to add `keytar` as a development dependency in order to develop and test locally:
+
+```
+npm install keytar --save-dev
+```
