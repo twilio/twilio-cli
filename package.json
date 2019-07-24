@@ -35,7 +35,6 @@
     "eslint-plugin-mocha": "^5.2.1",
     "globby": "^10.0.1",
     "mocha": "^6.1.4",
-    "mock-stdin": "^0.3.1",
     "nock": "^10.0.6",
     "nyc": "^14.1.1",
     "rimraf": "^2.6.3",

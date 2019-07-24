@@ -9,7 +9,6 @@ const getStdin = require('get-stdin');
 class Send extends BaseCommand {
   async run() {
     await super.run();
-    var input;
     if (!process.env.SENDGRID_API_KEY) {
       this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
       return this.exit(1);
@@ -19,7 +18,7 @@ class Send extends BaseCommand {
       this.exit(1);
     }
     if (process.stdin.isTTY === undefined && this.flags.context === 'pipe') {
-      input = await this.readStream();
+      const input = await this.readStream();
       this.processData(input);
     }
     await this.promptForFromEmail();
