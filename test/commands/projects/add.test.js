@@ -8,7 +8,7 @@ const helpMessages = require('../../../src/services/messaging/help-messages');
 describe('commands', () => {
   describe('projects', () => {
     describe('add', () => {
-      const addTest = (commandArgs = []) => test
+      const addTest = (commandArgs = [], projectID = 'default') => test
         .twilioFakeProject(ConfigData)
         .twilioCliEnv(Config)
         .twilioCreateCommand(ProjectsAdd, commandArgs)
@@ -19,7 +19,7 @@ describe('commands', () => {
           fakePrompt
             .onFirstCall()
             .resolves({
-              projectId: 'default'
+              projectId: projectID
             })
             .onSecondCall()
             .resolves({
@@ -55,6 +55,13 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain(
             `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`
           );
+        });
+
+      addTest([], '')
+        .do(ctx => ctx.testCmd.run())
+        .exit(1)
+        .it('fails for not entering a project ID', ctx => {
+          expect(ctx.stderr).to.contain('Shorthand identifier for your Twilio project was required');
         });
 
       addTest(['not-an-account-sid'])
