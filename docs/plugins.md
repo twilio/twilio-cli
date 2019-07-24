@@ -15,7 +15,7 @@ Start by cloning [this repo of an example debugger plugin](https://github.com/tw
 
 Once it's cloned, you can poke around to get a sense for the organization and even copy and adapt it for your own plugin use case.
 
-Your plugin directory should following the naming convention `plugin-<my-spectacular-plugin`.
+Your plugin directory should following the naming convention `plugin-<my-spectacular-plugin>`.
 
 Remember to update the `package.json` fields if you start building your own plugin off of this one:
 * name
@@ -43,8 +43,10 @@ Inherit from `TwilioBaseCommand` if your command doesn't need to make any API ca
 
 To create flags for your spectacular plugin, you will need the following import: `const { flags } = require('@oclif/command');`
 
-Additionally, you will need to copy the base class' flags: `MySpectacularPlugin.flags = Object.assign({'fave-dessert': flag.string({'description': 'Your favorite dessert', required: true})}, TwilioClientCommand.flags)`
-
+Additionally, you will need to copy the base class' flags:
+```javascript
+MySpectacularPlugin.flags = Object.assign({'fave-dessert': flag.string({'description': 'Your favorite dessert', required: true})}, TwilioClientCommand.flags)
+```
 
 ## 4. Test your plugin with the CLI
 
