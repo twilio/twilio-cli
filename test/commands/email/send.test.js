@@ -333,7 +333,8 @@ describe('commands', () => {
         })
         .exit(1)
         .it('run email:send using stdin as the attachment source but missing a To', ctx => {
-          expect(ctx.stderr).to.contain('All flags must be provided to send email');
+          expect(ctx.stderr).to.contain('No terminal');
+          expect(ctx.stderr).to.contain('Please provide');
         });
     });
   });

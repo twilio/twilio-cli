@@ -29,7 +29,7 @@ class Send extends BaseCommand {
     await this.promptForText();
 
     if (!this.isTTY && (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail)) {
-      this.logger.error('All flags must be provided to send email.');
+      this.logger.error('No terminal input available. Please provide --to, --from, --subject, and --text');
       return this.exit(1);
     }
 
@@ -84,7 +84,7 @@ class Send extends BaseCommand {
   }
 
   processData(input) {
-    this.fileName = 'piped.txt';
+    this.fileName = 'piped.txt'; // placeholder filename for attachement
     this.pipedInfo = input;
   }
 
@@ -165,66 +165,40 @@ class Send extends BaseCommand {
     return emailList;
   }
 
-  async promptForFromEmail() {
-    if (this.userConfig.email.fromEmail) {
-      this.fromEmail = this.userConfig.email.fromEmail;
+  async promptForValue(key, flagKey, configKey) {
+    if (configKey && this.userConfig.email[configKey]) {
+      this[key] = this.userConfig.email[configKey];
     }
-    if (this.flags.from) {
-      this.fromEmail = this.flags.from;
+
+    if (this.flags[flagKey]) {
+      this[key] = this.flags[flagKey];
     }
-    if (this.isTTY && !this.fromEmail) {
+
+    if (this.isTTY && !this[key]) {
       const answer = await this.inquirer.prompt([
         {
-          name: 'from',
-          message: Send.flags.from.description + ':'
+          name: flagKey,
+          message: Send.flags[flagKey].description + ':'
         }
       ]);
-      this.fromEmail = answer.from;
+      this[key] = answer[flagKey];
     }
+  }
+
+  async promptForFromEmail() {
+    return this.promptForValue('fromEmail', 'from', 'fromEmail');
   }
 
   async promptForToEmail() {
-    this.toEmail = this.flags.to;
-    if (this.isTTY && !this.toEmail) {
-      const answer = await this.inquirer.prompt([
-        {
-          name: 'to',
-          message: Send.flags.to.description + ':'
-        }
-      ]);
-      this.toEmail = answer.to;
-    }
+    return this.promptForValue('toEmail', 'to');
   }
 
   async promptForSubject() {
-    if (this.userConfig.email.subjectLine) {
-      this.subjectLine = this.userConfig.email.subjectLine;
-    }
-    if (this.flags.subject) {
-      this.subjectLine = this.flags.subject;
-    }
-    if (this.isTTY && !this.subjectLine) {
-      const subject = await this.inquirer.prompt([
-        {
-          name: 'subject',
-          message: Send.flags.subject.description + ':'
-        }
-      ]);
-      this.subjectLine = subject.subject;
-    }
+    return this.promptForValue('subjectLine', 'subject', 'subjectLine');
   }
 
   async promptForText() {
-    this.emailText = this.flags.text;
-    if (this.isTTY && !this.emailText) {
-      const answers = await this.inquirer.prompt([
-        {
-          name: 'text',
-          message: Send.flags.text.description + ':'
-        }
-      ]);
-      this.emailText = answers.text;
-    }
+    return this.promptForValue('emailText', 'text');
   }
 
   async sendEmail(sendInformation) {
