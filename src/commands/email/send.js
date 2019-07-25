@@ -8,25 +8,84 @@ const path = require('path');
 class Send extends BaseCommand {
   async run() {
     await super.run();
+
     if (!process.env.SENDGRID_API_KEY) {
-      this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
+      this.logger.error(
+        'Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.'
+      );
       return this.exit(1);
     }
+
+    const pipedInput = await this.readStream();
+    if (pipedInput) {
+      this.processData(pipedInput);
+    }
+
+    this.isTTY = process.stdin.isTTY || this.flags['force-tty'];
+
     await this.promptForFromEmail();
-    const validFromEmail = this.validateEmail(this.fromEmail);
     await this.promptForToEmail();
-    const validToEmail = this.validateEmail(this.toEmail);
     await this.promptForSubject();
     await this.promptForText();
-    const sendInformation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
-    const attachmentVerdict = await this.askAttachment();
-    await this.promptAttachment(attachmentVerdict);
-    if (this.attachment) {
-      const fileContent = this.readFile(this.attachment);
-      const attachment = this.createAttachmentArray(fileContent);
+
+    if (!this.isTTY && (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail)) {
+      this.logger.error('No terminal input available. Please provide --to, --from, --subject, and --text');
+      return this.exit(1);
+    }
+
+    const validFromEmail = this.validateEmail(this.fromEmail);
+    const validToEmail = this.validateEmail(this.toEmail);
+
+    const sendInformation = {
+      to: validToEmail,
+      from: validFromEmail[0],
+      subject: this.subjectLine,
+      text: this.emailText,
+      html: '<p>' + this.emailText + '</p>'
+    };
+
+    if (this.pipedInfo) {
+      const attachment = this.createAttachmentArray(this.pipedInfo);
       sendInformation.attachments = attachment;
+    } else {
+      const attachmentVerdict = await this.askAttachment();
+      await this.promptAttachment(attachmentVerdict);
+      if (this.attachment) {
+        const fileContent = this.readFile(this.attachment);
+        const attachment = this.createAttachmentArray(fileContent);
+        sendInformation.attachments = attachment;
+      }
     }
     await this.sendEmail(sendInformation);
+  }
+
+  myGetStdin() {
+    const { stdin } = process;
+    let result = '';
+
+    return new Promise(resolve => {
+      if (stdin.isTTY) {
+        resolve(result);
+        return;
+      }
+
+      stdin.setEncoding('utf8');
+
+      stdin.once('data', data => {
+        resolve(data);
+      });
+    });
+  }
+
+  async readStream() {
+    const input = await this.myGetStdin();
+    const base64data = Buffer.from(input).toString('base64');
+    return base64data;
+  }
+
+  processData(input) {
+    this.fileName = 'piped.txt'; // placeholder filename for attachement
+    this.pipedInfo = input;
   }
 
   async askAttachment() {
@@ -70,13 +129,15 @@ class Send extends BaseCommand {
   }
 
   createAttachmentArray(fileContent) {
-    return [{
-      content: fileContent,
-      type: 'plain/text',
-      disposition: 'attachment',
-      filename: this.fileName,
-      contentId: 'attachmentText'
-    }];
+    return [
+      {
+        content: fileContent,
+        type: 'plain/text',
+        disposition: 'attachment',
+        filename: this.fileName,
+        contentId: 'attachmentText'
+      }
+    ];
   }
 
   validateEmail(email) {
@@ -104,72 +165,61 @@ class Send extends BaseCommand {
     return emailList;
   }
 
-  async promptForFromEmail() {
-    if (this.userConfig.email.fromEmail) {
-      this.fromEmail = this.userConfig.email.fromEmail;
+  async promptForValue(key, flagKey, configKey) {
+    if (configKey && this.userConfig.email[configKey]) {
+      this[key] = this.userConfig.email[configKey];
     }
-    if (this.flags.from) {
-      this.fromEmail = this.flags.from;
+
+    if (this.flags[flagKey]) {
+      this[key] = this.flags[flagKey];
     }
-    if (!this.fromEmail) {
+
+    if (this.isTTY && !this[key]) {
       const answer = await this.inquirer.prompt([
         {
-          name: 'from',
-          message: Send.flags.from.description + ':'
+          name: flagKey,
+          message: Send.flags[flagKey].description + ':'
         }
       ]);
-      this.fromEmail = answer.from;
+      this[key] = answer[flagKey];
     }
+  }
+
+  async promptForFromEmail() {
+    return this.promptForValue('fromEmail', 'from', 'fromEmail');
   }
 
   async promptForToEmail() {
-    this.toEmail = this.flags.to;
-    if (!this.toEmail) {
-      const answer = await this.inquirer.prompt([{
-        name: 'to',
-        message: Send.flags.to.description + ':'
-      }]);
-      this.toEmail = answer.to;
-    }
+    return this.promptForValue('toEmail', 'to');
   }
 
   async promptForSubject() {
-    if (this.userConfig.email.subjectLine) {
-      this.subjectLine = this.userConfig.email.subjectLine;
-    }
-    if (this.flags.subject) {
-      this.subjectLine = this.flags.subject;
-    }
-    if (!this.subjectLine) {
-      const subject = await this.inquirer.prompt([
-        {
-          name: 'subject',
-          message: Send.flags.subject.description + ':'
-        }
-      ]);
-      this.subjectLine = subject.subject;
-    }
+    return this.promptForValue('subjectLine', 'subject', 'subjectLine');
   }
 
   async promptForText() {
-    this.emailText = this.flags.text;
-    if (!this.emailText) {
-      const answers = await this.inquirer.prompt([
-        {
-          name: 'text',
-          message: Send.flags.text.description + ':'
-        }
-      ]);
-      this.emailText = answers.text;
-    }
+    return this.promptForValue('emailText', 'text');
   }
 
   async sendEmail(sendInformation) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     await sgMail.send(sendInformation);
-    this.logger.info('Your email containing the message "' + this.emailText + '" sent from ' + this.fromEmail + ' to ' + this.toEmail + ' with the subject line ' + this.subjectLine + ' has been sent!');
+    this.logger.info(
+      'Your email containing the message "' +
+        this.emailText +
+        '" sent from ' +
+        this.fromEmail +
+        ' to ' +
+        this.toEmail +
+        ' with the subject line ' +
+        this.subjectLine +
+        ' has been sent!'
+    );
     if (this.attachment) {
       this.logger.info('Your attachment from ' + this.attachment + ' path called ' + this.fileName + ' has been sent.');
+    }
+    if (this.pipedInfo) {
+      this.logger.info('Your piped data attachment has been sent.');
     }
   }
 }
@@ -191,6 +241,10 @@ Send.flags = Object.assign(
     }),
     attachment: flags.string({
       description: 'Path for the file that you want to attach'
+    }),
+    'force-tty': flags.boolean({
+      default: false,
+      hidden: true
     })
   },
   BaseCommand.flags
