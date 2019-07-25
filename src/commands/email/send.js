@@ -24,9 +24,7 @@ class Send extends BaseCommand {
     this.isTTY = process.stdin.isTTY || this.flags['force-tty'];
 
     await this.promptForFromEmail();
-    const validFromEmail = this.validateEmail(this.fromEmail);
     await this.promptForToEmail();
-    const validToEmail = this.validateEmail(this.toEmail);
     await this.promptForSubject();
     await this.promptForText();
 
@@ -34,6 +32,9 @@ class Send extends BaseCommand {
       this.logger.error('All flags must be provided to send email.');
       return this.exit(1);
     }
+
+    const validFromEmail = this.validateEmail(this.fromEmail);
+    const validToEmail = this.validateEmail(this.toEmail);
 
     const sendInformation = {
       to: validToEmail,

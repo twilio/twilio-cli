@@ -322,6 +322,19 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Secret Message');
           expect(ctx.stderr).to.contain('Your piped data attachment has been sent');
         });
+
+      defaultSetup({
+        flags: ['--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.']
+      })
+        .stdin('this is some piped data', 100)
+        .do(ctx => {
+          process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+          return ctx.testCmd.run();
+        })
+        .exit(1)
+        .it('run email:send using stdin as the attachment source but missing a To', async ctx => {
+          expect(ctx.stderr).to.contain('All flags must be provided to send email');
+        });
     });
   });
 });
