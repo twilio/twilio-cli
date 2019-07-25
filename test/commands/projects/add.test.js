@@ -72,7 +72,7 @@ describe('commands', () => {
         .do(ctx => ctx.testCmd.run())
         .exit(1)
         .it('fails for not entering a project ID', ctx => {
-          expect(ctx.stderr).to.contain('Shorthand identifier for your Twilio project was required');
+          expect(ctx.stderr).to.contain('Shorthand identifier for your Twilio project is required');
         });
 
       addTest(['not-an-account-sid'])
