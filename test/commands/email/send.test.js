@@ -315,7 +315,7 @@ describe('commands', () => {
           process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
           return ctx.testCmd.run();
         })
-        .it('run email:send using stdin as the attachment source', async ctx => {
+        .it('run email:send using stdin as the attachment source', ctx => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
@@ -332,7 +332,7 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .exit(1)
-        .it('run email:send using stdin as the attachment source but missing a To', async ctx => {
+        .it('run email:send using stdin as the attachment source but missing a To', ctx => {
           expect(ctx.stderr).to.contain('All flags must be provided to send email');
         });
     });
