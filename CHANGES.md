@@ -1,6 +1,16 @@
 twilio-cli changelog
 =====================
 
+[2019-07-24] Version 1.3.5
+---------------------------
+**Library**
+- [PR #77](https://github.com/twilio/twilio-cli/pull/77): Bump lodash.template from 4.4.0 to 4.5.0. Thanks to [@dependabot[bot]](https://github.com/dependabot[bot])!
+- [PR #72](https://github.com/twilio/twilio-cli/pull/72): Add --skip-parameter-validation flag. Thanks to [@dprothero](https://github.com/dprothero)!
+
+**Insights**
+- Added `properties` to summary.
+
+
 [2019-07-12] Version 1.3.4
 ---------------------------
 **Preview**
