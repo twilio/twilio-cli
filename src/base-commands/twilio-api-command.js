@@ -45,7 +45,15 @@ class TwilioApiCommand extends TwilioClientCommand {
   }
 }
 
-TwilioApiCommand.flags = TwilioClientCommand.flags;
+TwilioApiCommand.flags = Object.assign(
+  {
+    'skip-parameter-validation': flags.boolean({
+      default: false,
+      hidden: true
+    })
+  },
+  TwilioClientCommand.flags
+);
 
 // A static function to help us add the other static
 // fields required by oclif on our dynamically created

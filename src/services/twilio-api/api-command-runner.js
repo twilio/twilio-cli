@@ -44,7 +44,7 @@ class ApiCommandRunner {
 
     // If there were any errors validating the flag values, log them by flag
     // key and throw.
-    if (Object.keys(flagErrors).length > 0) {
+    if (Object.keys(flagErrors).length > 0 && !this.flagValues['skip-parameter-validation']) {
       logger.error('Flag value validation errors:');
       Object.keys(flagErrors).forEach(key => {
         flagErrors[key].forEach(error => {
