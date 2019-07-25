@@ -5,33 +5,44 @@ const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const ProjectsAdd = require('../../../src/commands/projects/add');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
+function getFakeProjectIdPrompt(projectId) {
+  return questions => {
+    const validate = questions[0].validate;
+    if (validate) {
+      while (validate(projectId) !== true) {
+        //
+      }
+    }
+    return { projectId };
+  };
+}
+
 describe('commands', () => {
   describe('projects', () => {
     describe('add', () => {
-      const addTest = (commandArgs = []) => test
-        .twilioFakeProject(ConfigData)
-        .twilioCliEnv(Config)
-        .twilioCreateCommand(ProjectsAdd, commandArgs)
-        .stdout()
-        .stderr()
-        .do(ctx => {
-          const fakePrompt = sinon.stub();
-          fakePrompt
-            .onFirstCall()
-            .resolves({
-              projectId: 'default'
-            })
-            .onSecondCall()
-            .resolves({
-              overwrite: true
-            })
-            .onThirdCall()
-            .resolves({
-              accountSid: constants.FAKE_ACCOUNT_SID,
-              authToken: constants.FAKE_API_SECRET
-            });
-          ctx.testCmd.inquirer.prompt = fakePrompt;
-        });
+      const addTest = (commandArgs = [], projectId = 'default') =>
+        test
+          .twilioFakeProject(ConfigData)
+          .twilioCliEnv(Config)
+          .twilioCreateCommand(ProjectsAdd, commandArgs)
+          .stdout()
+          .stderr()
+          .do(ctx => {
+            const fakePrompt = sinon.stub();
+            fakePrompt
+              .onFirstCall()
+              .callsFake(getFakeProjectIdPrompt(projectId))
+              .onSecondCall()
+              .resolves({
+                overwrite: true
+              })
+              .onThirdCall()
+              .resolves({
+                accountSid: constants.FAKE_ACCOUNT_SID,
+                authToken: constants.FAKE_API_SECRET
+              });
+            ctx.testCmd.inquirer.prompt = fakePrompt;
+          });
 
       addTest()
         .nock('https://api.twilio.com', api => {
@@ -57,14 +68,19 @@ describe('commands', () => {
           );
         });
 
+      addTest([], '')
+        .do(ctx => ctx.testCmd.run())
+        .exit(1)
+        .it('fails for not entering a project ID', ctx => {
+          expect(ctx.stderr).to.contain('Shorthand identifier for your Twilio project is required');
+        });
+
       addTest(['not-an-account-sid'])
         .do(ctx => {
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt
-            .onThirdCall()
-            .resolves({
-              authToken: constants.FAKE_API_SECRET
-            });
+          fakePrompt.onThirdCall().resolves({
+            authToken: constants.FAKE_API_SECRET
+          });
 
           return ctx.testCmd.run();
         })
@@ -81,11 +97,9 @@ describe('commands', () => {
           process.env.TWILIO_API_SECRET = constants.FAKE_API_SECRET;
 
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt
-            .onSecondCall()
-            .resolves({
-              affirmative: false
-            });
+          fakePrompt.onSecondCall().resolves({
+            affirmative: false
+          });
 
           return ctx.testCmd.run();
         })
