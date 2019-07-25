@@ -4,13 +4,14 @@ const emailUtilities = require('../../services/email-utility');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
 const path = require('path');
-const getStdin = require('get-stdin');
 
 class Send extends BaseCommand {
   async run() {
     await super.run();
     if (!process.env.SENDGRID_API_KEY) {
-      this.logger.error('Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.');
+      this.logger.error(
+        'Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.'
+      );
       return this.exit(1);
     }
     if (process.stdin.isTTY === undefined && !this.flags.context) {
@@ -27,7 +28,13 @@ class Send extends BaseCommand {
     const validToEmail = this.validateEmail(this.toEmail);
     await this.promptForSubject();
     await this.promptForText();
-    const sendInformation = { to: validToEmail, from: validFromEmail[0], subject: this.subjectLine, text: this.emailText, html: '<p>' + this.emailText + '</p>' };
+    const sendInformation = {
+      to: validToEmail,
+      from: validFromEmail[0],
+      subject: this.subjectLine,
+      text: this.emailText,
+      html: '<p>' + this.emailText + '</p>'
+    };
     if (this.pipedInfo) {
       const attachment = this.createAttachmentArray(this.pipedInfo);
       sendInformation.attachments = attachment;
@@ -43,8 +50,26 @@ class Send extends BaseCommand {
     await this.sendEmail(sendInformation);
   }
 
+  myGetStdin() {
+    const { stdin } = process;
+    let result = '';
+
+    return new Promise(resolve => {
+      if (stdin.isTTY) {
+        resolve(result);
+        return;
+      }
+
+      stdin.setEncoding('utf8');
+
+      stdin.once('data', data => {
+        resolve(data);
+      });
+    });
+  }
+
   async readStream() {
-    const input = await getStdin();
+    const input = await this.myGetStdin();
     const base64data = Buffer.from(input).toString('base64');
     return base64data;
   }
@@ -107,13 +132,15 @@ class Send extends BaseCommand {
   }
 
   createAttachmentArray(fileContent) {
-    return [{
-      content: fileContent,
-      type: 'plain/text',
-      disposition: 'attachment',
-      filename: this.fileName,
-      contentId: 'attachmentText'
-    }];
+    return [
+      {
+        content: fileContent,
+        type: 'plain/text',
+        disposition: 'attachment',
+        filename: this.fileName,
+        contentId: 'attachmentText'
+      }
+    ];
   }
 
   validateEmail(email) {
@@ -162,10 +189,12 @@ class Send extends BaseCommand {
   async promptForToEmail() {
     this.toEmail = this.flags.to;
     if (!this.toEmail) {
-      const answer = await this.inquirer.prompt([{
-        name: 'to',
-        message: Send.flags.to.description + ':'
-      }]);
+      const answer = await this.inquirer.prompt([
+        {
+          name: 'to',
+          message: Send.flags.to.description + ':'
+        }
+      ]);
       this.toEmail = answer.to;
     }
   }
@@ -204,7 +233,17 @@ class Send extends BaseCommand {
   async sendEmail(sendInformation) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     await sgMail.send(sendInformation);
-    this.logger.info('Your email containing the message "' + this.emailText + '" sent from ' + this.fromEmail + ' to ' + this.toEmail + ' with the subject line ' + this.subjectLine + ' has been sent!');
+    this.logger.info(
+      'Your email containing the message "' +
+        this.emailText +
+        '" sent from ' +
+        this.fromEmail +
+        ' to ' +
+        this.toEmail +
+        ' with the subject line ' +
+        this.subjectLine +
+        ' has been sent!'
+    );
     if (this.attachment) {
       this.logger.info('Your attachment from ' + this.attachment + ' path called ' + this.fileName + ' has been sent.');
     }
