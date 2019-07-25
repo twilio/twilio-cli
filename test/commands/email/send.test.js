@@ -76,7 +76,7 @@ describe('commands', () => {
       noDefault({
         toEmail: 'JonSnow, BranStark@winterfell',
         fromEmail: 'Ygritte@wall.com',
-        flags: ['--subject', 'Open ASAP', '--context', 'ForceTTY'],
+        flags: ['--subject', 'Open ASAP', '--force-tty'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .do(ctx => ctx.testCmd.run())
@@ -93,7 +93,7 @@ describe('commands', () => {
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte@wall.com',
         subjectLine: 'Secret Message',
-        flags: ['--context', 'ForceTTY'],
+        flags: ['--force-tty'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .nock('https://api.sendgrid.com', api => {
@@ -110,7 +110,7 @@ describe('commands', () => {
       noDefault({
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte@wall.com',
-        flags: ['--subject', 'Open ASAP', '--context', 'ForceTTY'],
+        flags: ['--subject', 'Open ASAP', '--force-tty'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .nock('https://api.sendgrid.com', api => {
@@ -128,7 +128,7 @@ describe('commands', () => {
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte',
         subjectLine: 'Secret Message',
-        flags: ['--context', 'ForceTTY'],
+        flags: ['--force-tty'],
         bodyText: 'You know nothing Jon Snow.'
       })
         .do(ctx => ctx.testCmd.run())
@@ -138,7 +138,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Email could not be sent');
         });
 
-      defaultSetup({ toEmail: 'jen@test.com', flags: ['--context', 'ForceTTY'] })
+      defaultSetup({ toEmail: 'jen@test.com', flags: ['--force-tty'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -153,7 +153,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('default');
         });
 
-      defaultSetup({ toEmail: 'jen@test.com, mike@test.com, tamu@test.com', flags: ['--context', 'ForceTTY'] })
+      defaultSetup({ toEmail: 'jen@test.com, mike@test.com, tamu@test.com', flags: ['--force-tty'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -180,8 +180,7 @@ describe('commands', () => {
           'Greetings',
           '--text',
           'Short cuts make delays, but inns make longer ones.',
-          '--context',
-          'ForceTTY'
+          '--force-tty'
         ]
       })
         .nock('https://api.sendgrid.com', api => {
@@ -206,8 +205,7 @@ describe('commands', () => {
           'Bilbo@test.com',
           '--text',
           'Short cuts make delays, but inns make longer ones.',
-          '--context',
-          'ForceTTY'
+          '--force-tty'
         ]
       })
         .nock('https://api.sendgrid.com', api => {
@@ -236,8 +234,7 @@ describe('commands', () => {
           'You know nothing Jon Snow.',
           '--attachment',
           'test/commands/email/test.txt',
-          '--context',
-          'ForceTTY'
+          '--force-tty'
         ]
       })
         .nock('https://api.sendgrid.com', api => {
@@ -267,8 +264,7 @@ describe('commands', () => {
           'You know nothing Jon Snow.',
           '--attachment',
           'test/commands/email/invalid.txt',
-          '--context',
-          'ForceTTY'
+          '--force-tty'
         ]
       })
         .do(ctx => {
@@ -280,7 +276,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Unable to read the file:');
         });
 
-      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, flags: ['--context', 'ForceTTY'] })
+      defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, flags: ['--force-tty'] })
         .nock('https://api.sendgrid.com', api => {
           api.post('/v3/mail/send').reply(200, {});
         })
@@ -308,9 +304,7 @@ describe('commands', () => {
           '--from',
           'Ygritte@wall.com',
           '--text',
-          'You know nothing Jon Snow.',
-          '--context',
-          'pipe'
+          'You know nothing Jon Snow.'
         ]
       })
         .nock('https://api.sendgrid.com', api => {

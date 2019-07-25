@@ -8,26 +8,33 @@ const path = require('path');
 class Send extends BaseCommand {
   async run() {
     await super.run();
+
     if (!process.env.SENDGRID_API_KEY) {
       this.logger.error(
         'Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.'
       );
       return this.exit(1);
     }
-    if (process.stdin.isTTY === undefined && !this.flags.context) {
-      this.logger.error('All flags must be provided to send email.');
-      this.exit(1);
+
+    const pipedInput = await this.readStream();
+    if (pipedInput) {
+      this.processData(pipedInput);
     }
-    if (process.stdin.isTTY === undefined && this.flags.context === 'pipe') {
-      const input = await this.readStream();
-      this.processData(input);
-    }
+
+    this.isTTY = process.stdin.isTTY || this.flags['force-tty'];
+
     await this.promptForFromEmail();
     const validFromEmail = this.validateEmail(this.fromEmail);
     await this.promptForToEmail();
     const validToEmail = this.validateEmail(this.toEmail);
     await this.promptForSubject();
     await this.promptForText();
+
+    if (!this.isTTY && (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail)) {
+      this.logger.error('All flags must be provided to send email.');
+      return this.exit(1);
+    }
+
     const sendInformation = {
       to: validToEmail,
       from: validFromEmail[0],
@@ -35,6 +42,7 @@ class Send extends BaseCommand {
       text: this.emailText,
       html: '<p>' + this.emailText + '</p>'
     };
+
     if (this.pipedInfo) {
       const attachment = this.createAttachmentArray(this.pipedInfo);
       sendInformation.attachments = attachment;
@@ -77,18 +85,6 @@ class Send extends BaseCommand {
   processData(input) {
     this.fileName = 'piped.txt';
     this.pipedInfo = input;
-    this.subjectLine = this.userConfig.email.subjectLine;
-    this.fromEmail = this.userConfig.email.fromEmail;
-    if (this.flags.subject) {
-      this.subjectLine = this.flags.subject;
-    }
-    if (this.flags.from) {
-      this.fromEmail = this.flags.from;
-    }
-    if (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail) {
-      this.logger.error('All flags must be provided to send email.');
-      return this.exit(1);
-    }
   }
 
   async askAttachment() {
@@ -175,7 +171,7 @@ class Send extends BaseCommand {
     if (this.flags.from) {
       this.fromEmail = this.flags.from;
     }
-    if (!this.fromEmail) {
+    if (this.isTTY && !this.fromEmail) {
       const answer = await this.inquirer.prompt([
         {
           name: 'from',
@@ -188,7 +184,7 @@ class Send extends BaseCommand {
 
   async promptForToEmail() {
     this.toEmail = this.flags.to;
-    if (!this.toEmail) {
+    if (this.isTTY && !this.toEmail) {
       const answer = await this.inquirer.prompt([
         {
           name: 'to',
@@ -206,7 +202,7 @@ class Send extends BaseCommand {
     if (this.flags.subject) {
       this.subjectLine = this.flags.subject;
     }
-    if (!this.subjectLine) {
+    if (this.isTTY && !this.subjectLine) {
       const subject = await this.inquirer.prompt([
         {
           name: 'subject',
@@ -219,7 +215,7 @@ class Send extends BaseCommand {
 
   async promptForText() {
     this.emailText = this.flags.text;
-    if (!this.emailText) {
+    if (this.isTTY && !this.emailText) {
       const answers = await this.inquirer.prompt([
         {
           name: 'text',
@@ -271,8 +267,9 @@ Send.flags = Object.assign(
     attachment: flags.string({
       description: 'Path for the file that you want to attach'
     }),
-    context: flags.string({
-      description: 'Set context equal to the word pipe if you are sending the output of another command through email'
+    'force-tty': flags.boolean({
+      default: false,
+      hidden: true
     })
   },
   BaseCommand.flags
