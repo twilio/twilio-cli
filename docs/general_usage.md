@@ -94,7 +94,22 @@ And follow the instructions.
 
 ## Sending Email with Twilio SendGrid
 
-When you run `twilio email:send` you can send an email within the command line. You can use `twilio email:set` to set a default email address for the sender and default subject line. After you set a default sending email address and subject line, `twilio email:send` will automatically use the default sending email address and subject line. To change the sending email address or subject line, you can either re-run `twilio email:set` or use the corresponding flag to set a new value for the item you want to change.
+When you run `twilio email:send` you can send an email. You can use `twilio email:set` to set a default email address for the sender and default subject line. After you set those, `twilio email:send` will automatically use the default sending email address and subject line. To change the sending email address or subject line, you can either re-run `twilio email:set` or use the corresponding flag to set a new value for the item you want to change.
+
+To send an email with an attachment run `twilio email:send` and wait to be prompted to add an attachment.
+You can also use `twilio email:send --attachment=filePath` to attach a file.
+
+To send the output of a different command as an email attachment, pipe the command to `twilio email:send`. If a default sending email address and subject line has been set the command will automatically use the defaults and you only need to include the `--text="email body text"`  and `--to=email@email.com`. If there is not a default subject line and sender’s email address all the flags need to be included to send the output of the piped command.
+
+#### Pipe output to email example
+
+```bash
+ps -aux | twilio email:send \
+  --from="me@example.com" \
+  --to="me@example.com" \
+  --subject="Current processes" \
+  --text="See attachment"
+```
 
 ## Plugins
 

@@ -39,6 +39,10 @@ Inherit from `TwilioClientCommand` if your command will need to make Twilio API 
 
 Inherit from `TwilioBaseCommand` if your command doesn't need to make any API calls.
 
+We recommend that you consider command naming diligently. It's possible to write a command that will collide with an existing command name. Additionally, we recommend starting your top-level command help with lower case to be consistent with the help that ships with twilio-cli.
+
+Finally, the CLI will warn the user if the plugin is hosted outside of the [twilio](https://github.com/twilio) and [twilio-labs](https://github.com/twilio-labs) organizations.
+
 ### Flags
 
 To create flags for your spectacular plugin, you will need the following import: `const { flags } = require('@oclif/command');`

@@ -4,7 +4,7 @@ const { expect, test, constants } = require('@twilio/cli-test');
 const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
-const NUMBER_OF_BASE_COMMAND_FLAGS = 4;
+const NUMBER_OF_BASE_COMMAND_FLAGS = 5;
 const NUMBER_OF_PARAMS_FOR_CALL_CREATE = fakeResource.actions.create.parameters.length;
 
 describe('base-commands', () => {
@@ -101,10 +101,7 @@ describe('base-commands', () => {
         .nock('https://api.twilio.com', api =>
           api.delete(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls/${fakeCallResponse.sid}.json`).reply(204)
         )
-        .twilioCommand(getCommandClass(callRemoveActionDefinition), [
-          '--sid',
-          fakeCallResponse.sid
-        ])
+        .twilioCommand(getCommandClass(callRemoveActionDefinition), ['--sid', fakeCallResponse.sid])
         .it('creates a call', ctx => {
           expect(ctx.stdout).to.be.empty;
           expect(ctx.stderr).to.contain('success');
@@ -127,6 +124,28 @@ describe('base-commands', () => {
         .exit(1)
         .it('exits with a failure code and prints validation errors', ctx => {
           expect(ctx.stderr).to.contain('validation errors');
+        });
+
+      test
+        .twilioFakeProject(ConfigData)
+        .twilioCliEnv(Config)
+        .stdout()
+        .nock('https://api.twilio.com', api =>
+          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json`).reply(201, fakeCallResponse)
+        )
+        .twilioCommand(getCommandClass(), [
+          '--skip-parameter-validation',
+          '--from',
+          '+15555555555',
+          '--to',
+          '+14155555555',
+          '--url',
+          'http://example.com/',
+          '--account-sid',
+          'ac12345678901234567890123456789012' // Lower-cased 'ac'
+        ])
+        .it('creates a call with invalid parameter', ctx => {
+          expect(ctx.stdout).to.contain(fakeCallResponse.sid);
         });
     });
   });
