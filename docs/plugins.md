@@ -50,9 +50,13 @@ MySpectacularPlugin.flags = Object.assign({'fave-dessert': flag.string({'descrip
 
 ## 4. Test your plugin with the CLI
 
-Clone [the main CLI repo (this repo)](https://github.com/twilio/twilio-cli) and  set it up following the [twilio-cli Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart).
+You are probably using NPM if you develop a twilio-cli plugin, so install it if you have not already done so:
 
-"Install" the plugin referencing your plugin's local development folder by linking to your plugin.
+`npm install -g twilio-cli`
+
+Follow the set-up instructions in the [twilio-cli Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart). The Quickstart also includes instructions for homebrew installation.
+
+For testing, "install" the plugin referencing your plugin's local development folder by linking to your plugin.
 
 Run this command from the CLI folder. This assumes the CLI and your plugin folders are siblings of each other (perhaps in a `~/Projects` folder):
 
