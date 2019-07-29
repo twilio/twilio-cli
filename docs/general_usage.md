@@ -100,11 +100,13 @@ When you run `twilio email:send` you can send an email within the command line. 
 
 twilio-cli can be extended via plugins.
 
-At this time, only two plugins exist:
+At this time, the following plugins exist:
 
-* [twilio serverless plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Dominik Kundel](https://github.com/dkundel) created `twilio-run`. You can use twilio-run from within twilio-cli via [plugin-serverless](https://github.com/twilio-labs/plugin-serverless).
+* [twilio serverless plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Twilio Labs](https://github.com/twilio-labs/) created `twilio-run`. You can use twilio-run from within twilio-cli via [plugin-serverless](https://github.com/twilio-labs/plugin-serverless).
 
 * [twilio watch plugin](https://github.com/twilio-labs/plugin-watch): Allows you to watch your live debugger alerts, voice calls, and messages as they come in, in real-time. 
+
+* [twilio token plug](https://github.com/twilio-labs/plugin-token): Install and use this plugin to generate a token for use in a client-side SDK, e.g., a chat application.
 
 ### Install a plugin
 
