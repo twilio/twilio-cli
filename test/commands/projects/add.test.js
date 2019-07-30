@@ -153,6 +153,16 @@ describe('commands', () => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('configuration saved');
         });
+
+      describe('getPromptMessage', () => {
+        test
+          .twilioCreateCommand(ProjectsAdd, [])
+          .it('adds a colon to the end of the message', ctx => {
+            expect(ctx.testCmd.getPromptMessage('Name: ')).to.equal('Name:');
+            expect(ctx.testCmd.getPromptMessage('Number.')).to.equal('Number:');
+            expect(ctx.testCmd.getPromptMessage('  Address  ')).to.equal('Address:');
+          });
+      });
     });
   });
 });

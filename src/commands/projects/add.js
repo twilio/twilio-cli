@@ -60,7 +60,7 @@ class ProjectsAdd extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'projectId',
-          message: ProjectsAdd.flags.project.description,
+          message: this.getPromptMessage(ProjectsAdd.flags.project.description),
           validate: function (value) {
             if (!value && counter < 1) {
               counter++;
@@ -82,7 +82,7 @@ class ProjectsAdd extends BaseCommand {
     if (!this.accountSid) {
       this.questions.push({
         name: 'accountSid',
-        message: ProjectsAdd.args[0].description + ':',
+        message: this.getPromptMessage(ProjectsAdd.args[0].description),
         validate: input => Boolean(input)
       });
     }
@@ -93,7 +93,7 @@ class ProjectsAdd extends BaseCommand {
       this.questions.push({
         type: 'password',
         name: 'authToken',
-        message: ProjectsAdd.flags['auth-token'].description,
+        message: this.getPromptMessage(ProjectsAdd.flags['auth-token'].description),
         validate: input => Boolean(input)
       });
     }
@@ -205,6 +205,11 @@ class ProjectsAdd extends BaseCommand {
     );
     this.logger.info(configSavedMessage);
   }
+
+  getPromptMessage(message) {
+    // Drop the trailing period and put a colon at the end of the message.
+    return message.trim().replace(/[.:]?$/, ':');
+  }
 }
 
 ProjectsAdd.aliases = ['login'];
@@ -213,11 +218,11 @@ ProjectsAdd.description = 'add credentials for an existing Twilio project';
 ProjectsAdd.flags = Object.assign(
   {
     'auth-token': flags.string({
-      description: 'Your Twilio Auth Token for your Twilio project'
+      description: 'Your Twilio Auth Token for your Twilio project.'
     }),
     force: flags.boolean({
       char: 'f',
-      description: 'Force overwriting existing project credentials'
+      description: 'Force overwriting existing project credentials.'
     }),
     region: flags.string({
       hidden: true
@@ -229,7 +234,7 @@ ProjectsAdd.flags = Object.assign(
 ProjectsAdd.args = [
   {
     name: 'account-sid',
-    description: 'The Account SID for your Twilio project'
+    description: 'The Account SID for your Twilio project.'
   }
 ];
 
