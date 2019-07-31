@@ -205,11 +205,6 @@ class ProjectsAdd extends BaseCommand {
     );
     this.logger.info(configSavedMessage);
   }
-
-  getPromptMessage(message) {
-    // Drop the trailing period and put a colon at the end of the message.
-    return message.trim().replace(/[.:]?$/, ':');
-  }
 }
 
 ProjectsAdd.aliases = ['login'];

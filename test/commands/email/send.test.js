@@ -1,5 +1,3 @@
-/* eslint-disable func-names */
-
 const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
@@ -68,9 +66,7 @@ describe('commands', () => {
         .do(ctx => ctx.testCmd.run())
         .exit(1)
         .it('run email:send with no environment variable for SendGrid key', ctx => {
-          expect(ctx.stderr).to.contain(
-            'environment variable called SENDGRID_API_KEY set up with your SendGrid API key'
-          );
+          expect(ctx.stderr).to.contain('SENDGRID_API_KEY');
         });
 
       noDefault({
