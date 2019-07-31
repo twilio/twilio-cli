@@ -57,46 +57,51 @@ NumberUpdate.description = 'update the properties of a Twilio phone number';
 
 NumberUpdate.PropertyFlags = {
   'friendly-name': flags.string({
-    description: 'A human readable descriptive text for this resource, up to 64 characters long'
+    description: 'A human readable descriptive text for this resource, up to 64 characters long.'
   }),
   'sms-url': flags.string({
-    description: 'The URL that Twilio should request when somebody sends an SMS to the new phone number'
+    description: 'The URL that Twilio should request when somebody sends an SMS to the new phone number.'
   }),
   'sms-method': flags.enum({
     options: ['GET', 'POST'],
-    description: 'The HTTP method Twilio will use when making requests to the SmsUrl'
+    description: 'The HTTP method Twilio will use when making requests to the SmsUrl.'
   }),
   'sms-fallback-url': flags.string({
-    description: 'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl'
+    description: 'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl.'
   }),
   'sms-fallback-method': flags.enum({
     options: ['GET', 'POST'],
-    description: 'The HTTP method that should be used to request the SmsFallbackUrl'
+    description: 'The HTTP method that should be used to request the SmsFallbackUrl.'
   }),
   'voice-url': flags.string({
-    description: 'The URL that Twilio should request when somebody dials the phone number'
+    description: 'The URL that Twilio should request when somebody dials the phone number.'
   }),
   'voice-method': flags.enum({
     options: ['GET', 'POST'],
-    description: 'The HTTP method Twilio will use when making requests to the VoiceUrl'
+    description: 'The HTTP method Twilio will use when making requests to the VoiceUrl.'
   }),
   'voice-fallback-url': flags.string({
     description:
-      'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by VoiceUrl'
+      'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by VoiceUrl.'
   }),
   'voice-fallback-method': flags.enum({
     options: ['GET', 'POST'],
-    description: 'The HTTP method Twilio will use when requesting the VoiceFallbackUrl'
+    description: 'The HTTP method Twilio will use when requesting the VoiceFallbackUrl.'
   })
 };
 
-NumberUpdate.flags = Object.assign({}, NumberUpdate.PropertyFlags, TwilioClientCommand.flags);
+NumberUpdate.flags = Object.assign(
+  {},
+  NumberUpdate.PropertyFlags,
+  TwilioClientCommand.flags,
+  TwilioClientCommand.accountSidFlag
+);
 
 NumberUpdate.args = [
   {
     name: 'phone-number',
     required: true,
-    description: 'The SID or E.164 formatted phone number you wish to update'
+    description: 'The SID or E.164 formatted phone number you wish to update.'
   }
 ];
 
