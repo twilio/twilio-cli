@@ -11,17 +11,18 @@ class Send extends BaseCommand {
 
     if (!process.env.SENDGRID_API_KEY) {
       this.logger.error(
-        'Make sure you have an environment variable called SENDGRID_API_KEY set up with your SendGrid API key. Visit https://app.sendgrid.com/settings/api_keys to get an API key.'
+        'Make sure you have the environment variable SENDGRID_API_KEY set up with your Twilio SendGrid API key. ' +
+        'Visit https://app.sendgrid.com/settings/api_keys to get an API key.'
       );
       return this.exit(1);
     }
+
+    this.isTTY = process.stdin.isTTY || this.flags['force-tty'];
 
     const pipedInput = await this.readStream();
     if (pipedInput) {
       this.processData(pipedInput);
     }
-
-    this.isTTY = process.stdin.isTTY || this.flags['force-tty'];
 
     await this.promptForFromEmail();
     await this.promptForToEmail();
@@ -59,28 +60,22 @@ class Send extends BaseCommand {
     await this.sendEmail(sendInformation);
   }
 
-  myGetStdin() {
-    const { stdin } = process;
-    let result = '';
-
-    return new Promise(resolve => {
-      if (stdin.isTTY) {
-        resolve(result);
-        return;
-      }
-
-      stdin.setEncoding('utf8');
-
-      stdin.once('data', data => {
-        resolve(data);
-      });
-    });
+  async readStream() {
+    const input = await this.getStdin();
+    return Buffer.from(input).toString('base64');
   }
 
-  async readStream() {
-    const input = await this.myGetStdin();
-    const base64data = Buffer.from(input).toString('base64');
-    return base64data;
+  getStdin() {
+    return new Promise(resolve => {
+      if (this.isTTY) {
+        resolve('');
+      } else {
+        process.stdin.setEncoding('utf8');
+        process.stdin.once('data', data => {
+          resolve(data);
+        });
+      }
+    });
   }
 
   processData(input) {
@@ -109,7 +104,7 @@ class Send extends BaseCommand {
       const file = await this.inquirer.prompt([
         {
           name: 'path',
-          message: Send.flags.attachment.description + ':'
+          message: this.getPromptMessage(Send.flags.attachment.description)
         }
       ]);
       this.attachment = file.path;
@@ -178,7 +173,7 @@ class Send extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: flagKey,
-          message: Send.flags[flagKey].description + ':'
+          message: this.getPromptMessage(Send.flags[flagKey].description)
         }
       ]);
       this[key] = answer[flagKey];
@@ -206,14 +201,14 @@ class Send extends BaseCommand {
     await sgMail.send(sendInformation);
     this.logger.info(
       'Your email containing the message "' +
-        this.emailText +
-        '" sent from ' +
-        this.fromEmail +
-        ' to ' +
-        this.toEmail +
-        ' with the subject line ' +
-        this.subjectLine +
-        ' has been sent!'
+      this.emailText +
+      '" sent from ' +
+      this.fromEmail +
+      ' to ' +
+      this.toEmail +
+      ' with the subject line ' +
+      this.subjectLine +
+      ' has been sent!'
     );
     if (this.attachment) {
       this.logger.info('Your attachment from ' + this.attachment + ' path called ' + this.fileName + ' has been sent.');
@@ -228,19 +223,19 @@ Send.description = 'sends emails to single or multiple recipients using Twilio S
 Send.flags = Object.assign(
   {
     to: flags.string({
-      description: 'Email address of recipient (for multiple email addresses separate each email with a comma)'
+      description: 'Email address of recipient (for multiple email addresses separate each email with a comma).'
     }),
     from: flags.string({
-      description: 'Email address of the sender'
+      description: 'Email address of the sender.'
     }),
     subject: flags.string({
-      description: 'The subject line for an email'
+      description: 'The subject line for an email.'
     }),
     text: flags.string({
-      description: 'Text to send within the email body'
+      description: 'Text to send within the email body.'
     }),
     attachment: flags.string({
-      description: 'Path for the file that you want to attach'
+      description: 'Path for the file that you want to attach.'
     }),
     'force-tty': flags.boolean({
       default: false,
@@ -250,4 +245,5 @@ Send.flags = Object.assign(
   BaseCommand.flags
 );
 Send.args = [];
+
 module.exports = Send;

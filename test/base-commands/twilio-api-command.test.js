@@ -118,8 +118,8 @@ describe('base-commands', () => {
           '+14155555555',
           '--url',
           'http://example.com/',
-          '--account-sid',
-          'ac12345678901234567890123456789012' // Lower-cased 'ac'
+          '--application-sid',
+          'ap12345678901234567890123456789012' // Lower-cased 'ap'
         ])
         .exit(1)
         .it('exits with a failure code and prints validation errors', ctx => {
@@ -141,8 +141,8 @@ describe('base-commands', () => {
           '+14155555555',
           '--url',
           'http://example.com/',
-          '--account-sid',
-          'ac12345678901234567890123456789012' // Lower-cased 'ac'
+          '--application-sid',
+          'ap12345678901234567890123456789012' // Lower-cased 'ap'
         ])
         .it('creates a call with invalid parameter', ctx => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
