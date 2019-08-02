@@ -2,36 +2,36 @@
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
-const ProjectsAdd = require('../../../src/commands/projects/add');
+const ProfilesAdd = require('../../../src/commands/profiles/add');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
-function getFakeProjectIdPrompt(projectId) {
+function getFakeProfileIdPrompt(profileId) {
   return questions => {
     const validate = questions[0].validate;
     if (validate) {
-      while (validate(projectId) !== true) {
+      while (validate(profileId) !== true) {
         //
       }
     }
-    return { projectId };
+    return { profileId };
   };
 }
 
 describe('commands', () => {
-  describe('projects', () => {
+  describe('profiles', () => {
     describe('add', () => {
-      const addTest = (commandArgs = [], projectId = 'default') =>
+      const addTest = (commandArgs = [], profileId = 'default') =>
         test
-          .twilioFakeProject(ConfigData)
+          .twilioFakeProfile(ConfigData)
           .twilioCliEnv(Config)
-          .twilioCreateCommand(ProjectsAdd, commandArgs)
+          .twilioCreateCommand(ProfilesAdd, commandArgs)
           .stdout()
           .stderr()
           .do(ctx => {
             const fakePrompt = sinon.stub();
             fakePrompt
               .onFirstCall()
-              .callsFake(getFakeProjectIdPrompt(projectId))
+              .callsFake(getFakeProfileIdPrompt(profileId))
               .onSecondCall()
               .resolves({
                 overwrite: true
@@ -55,7 +55,7 @@ describe('commands', () => {
           });
         })
         .do(ctx => ctx.testCmd.run())
-        .it('runs projects:add', ctx => {
+        .it('runs profiles:add', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
@@ -71,8 +71,8 @@ describe('commands', () => {
       addTest([], '')
         .do(ctx => ctx.testCmd.run())
         .exit(1)
-        .it('fails for not entering a project ID', ctx => {
-          expect(ctx.stderr).to.contain('Shorthand identifier for your Twilio project is required');
+        .it('fails for not entering a profile ID', ctx => {
+          expect(ctx.stderr).to.contain('Shorthand identifier for your Twilio profile is required');
         });
 
       addTest(['not-an-account-sid'])
@@ -104,7 +104,7 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .exit(1)
-        .it('prompts when adding default project with env vars set', ctx => {
+        .it('prompts when adding default profile with env vars set', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('Cancelled');
         });

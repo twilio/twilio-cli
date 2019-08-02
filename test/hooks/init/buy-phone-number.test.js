@@ -85,7 +85,7 @@ describe('hooks', () => {
       });
 
       test
-        .twilioFakeProject(ConfigData)
+        .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .twilioCreateCommand(getBuyLocalCommand(), [])
         .stderr()

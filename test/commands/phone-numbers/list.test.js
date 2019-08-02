@@ -7,7 +7,7 @@ describe('commands', () => {
     describe('list', () => {
       const setUpTest = (args = []) => {
         return test
-          .twilioFakeProject(ConfigData)
+          .twilioFakeProfile(ConfigData)
           .twilioCliEnv(Config)
           .stdout()
           .nock('https://api.twilio.com', api =>
