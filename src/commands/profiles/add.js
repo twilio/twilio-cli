@@ -56,24 +56,13 @@ class ProfilesAdd extends BaseCommand {
 
   async promptForProfileId() {
     if (!this.profileId) {
-      let counter = 0;
       const answer = await this.inquirer.prompt([
         {
           name: 'profileId',
           message: this.getPromptMessage(ProfilesAdd.flags.profile.description),
-          validate: function (value) {
-            if (!value && counter < 1) {
-              counter++;
-              return 'Shorthand identifier for your Twilio profile is required';
-            }
-            return true;
-          }
+          validate: input => Boolean(input)
         }
       ]);
-      if (!answer.profileId) {
-        this.logger.error('Shorthand identifier for your Twilio profile is required');
-        return this.exit(1);
-      }
       this.profileId = answer.profileId;
     }
   }
@@ -208,12 +197,12 @@ class ProfilesAdd extends BaseCommand {
 }
 
 ProfilesAdd.aliases = ['login'];
-ProfilesAdd.description = 'add credentials for an existing Twilio profile';
+ProfilesAdd.description = 'add a new profile to store Twilio Project credentials and configuration';
 
 ProfilesAdd.flags = Object.assign(
   {
     'auth-token': flags.string({
-      description: 'Your Twilio Auth Token for your Twilio profile.'
+      description: 'Your Twilio Auth Token for your Twilio Project.'
     }),
     force: flags.boolean({
       char: 'f',
@@ -229,7 +218,7 @@ ProfilesAdd.flags = Object.assign(
 ProfilesAdd.args = [
   {
     name: 'account-sid',
-    description: 'The Account SID for your Twilio profile.'
+    description: 'The Account SID for your Twilio Project.'
   }
 ];
 

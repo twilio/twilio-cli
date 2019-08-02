@@ -5,18 +5,6 @@ const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const ProfilesAdd = require('../../../src/commands/profiles/add');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
-function getFakeProfileIdPrompt(profileId) {
-  return questions => {
-    const validate = questions[0].validate;
-    if (validate) {
-      while (validate(profileId) !== true) {
-        //
-      }
-    }
-    return { profileId };
-  };
-}
-
 describe('commands', () => {
   describe('profiles', () => {
     describe('add', () => {
@@ -31,7 +19,9 @@ describe('commands', () => {
             const fakePrompt = sinon.stub();
             fakePrompt
               .onFirstCall()
-              .callsFake(getFakeProfileIdPrompt(profileId))
+              .resolves({
+                profileId
+              })
               .onSecondCall()
               .resolves({
                 overwrite: true
@@ -66,13 +56,6 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain(
             `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`
           );
-        });
-
-      addTest([], '')
-        .do(ctx => ctx.testCmd.run())
-        .exit(1)
-        .it('fails for not entering a profile ID', ctx => {
-          expect(ctx.stderr).to.contain('Shorthand identifier for your Twilio profile is required');
         });
 
       addTest(['not-an-account-sid'])
