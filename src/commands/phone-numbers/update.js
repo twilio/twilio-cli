@@ -24,7 +24,7 @@ class NumberUpdate extends TwilioClientCommand {
     if (hasLocalHostProp) {
       this.logger.warn('WARNING: Detected localhost URL.');
       this.logger.warn('For convenience, we will automatically create an encrypted tunnel using the 3rd-party service https://ngrok.io');
-      this.logger.warn('While running, this will expose your computer to the internet. Please exit this command after testing.');
+      this.logger.warn('While running, this will expose your computer to the internet.');
       this.logger.warn('Please exit this command after testing.');
 
       await this.confirmTunnelCreation();
