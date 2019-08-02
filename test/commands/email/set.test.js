@@ -4,7 +4,7 @@ const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const EmailSet = require('../../../src/commands/email/set');
 
 describe('commands', () => {
-  describe('projects', () => {
+  describe('email', () => {
     describe('set', () => {
       const setup = ({ emailAddress = '', subjectLine = '' } = {}) => test
         .do(ctx => {

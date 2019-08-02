@@ -23,10 +23,10 @@ async function createCommand(ctx, args, useFakeNgrok) {
     args,
     ctx.fakeConfig,
     {
-      async getCredentials(projectId) {
+      async getCredentials(profileId) {
         return {
           apiKey: constants.FAKE_API_KEY,
-          apiSecret: constants.FAKE_API_SECRET + projectId
+          apiSecret: constants.FAKE_API_SECRET + profileId
         };
       }
     },
@@ -43,7 +43,7 @@ describe('commands', () => {
     describe('update', () => {
       const setUpTest = (args = [], useFakeNgrok = false) => {
         return test
-          .twilioFakeProject(ConfigData)
+          .twilioFakeProfile(ConfigData)
           .twilioCliEnv(Config)
           .stdout()
           .do(ctx => createCommand(ctx, args, useFakeNgrok));
