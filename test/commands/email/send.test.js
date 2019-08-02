@@ -4,7 +4,7 @@ const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const emailSend = require('../../../src/commands/email/send');
 
 describe('commands', () => {
-  describe('projects', () => {
+  describe('email', () => {
     describe('send', () => {
       const defaultSetup = ({
         flags = [],

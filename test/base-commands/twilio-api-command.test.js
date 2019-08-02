@@ -75,7 +75,7 @@ describe('base-commands', () => {
       });
 
       test
-        .twilioFakeProject(ConfigData)
+        .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stdout()
         .nock('https://api.twilio.com', api =>
@@ -94,7 +94,7 @@ describe('base-commands', () => {
         });
 
       test
-        .twilioFakeProject(ConfigData)
+        .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
@@ -108,7 +108,7 @@ describe('base-commands', () => {
         });
 
       test
-        .twilioFakeProject(ConfigData)
+        .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stderr()
         .twilioCommand(getCommandClass(), [
@@ -127,7 +127,7 @@ describe('base-commands', () => {
         });
 
       test
-        .twilioFakeProject(ConfigData)
+        .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stdout()
         .nock('https://api.twilio.com', api =>
