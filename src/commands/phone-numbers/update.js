@@ -22,12 +22,14 @@ class NumberUpdate extends TwilioClientCommand {
     const hasLocalHostProp = localHostProps.length > 0;
 
     if (hasLocalHostProp) {
-      this.logger.warn('WARNING: Detected localhost URL.');
-      this.logger.warn('For convenience, we will automatically create an encrypted tunnel using the 3rd-party service https://ngrok.io');
-      this.logger.warn('While running, this will expose your computer to the internet.');
-      this.logger.warn('Please exit this command after testing.');
+      const promptId = 'ngrok-warning';
 
-      await this.confirmTunnelCreation();
+      if (!this.userConfig.isPromptAcked(promptId)) {
+        await this.confirmTunnelCreation();
+        this.userConfig.ackPrompt(promptId);
+        const configSavedMessage = await this.configFile.save(this.userConfig);
+        this.logger.info(configSavedMessage);
+      }
 
       // Create each tunnel. Note that we can't parallelize this since we're only creating 1 tunnel
       // per port and we don't yet know the unique set of ports.
@@ -86,6 +88,11 @@ class NumberUpdate extends TwilioClientCommand {
   }
 
   async confirmTunnelCreation() {
+    this.logger.warn('WARNING: Detected localhost URL.');
+    this.logger.warn('For convenience, we will automatically create an encrypted tunnel using the 3rd-party service https://ngrok.io');
+    this.logger.warn('While running, this will expose your computer to the internet.');
+    this.logger.warn('Please exit this command after testing.');
+
     const confirm = await this.inquirer.prompt([{
       type: 'confirm',
       name: 'affirmative',
