@@ -80,11 +80,11 @@ class ProfilesRemove extends TwilioClientCommand {
   }
 }
 
-ProfilesRemove.description = 'select which Twilio profile to remove';
+ProfilesRemove.description = 'select which profile to remove';
 ProfilesRemove.args = [
   {
     name: 'profile',
-    description: 'Shorthand identifier for your Twilio profile',
+    description: 'Shorthand identifier for your profile',
     required: true
   }
 ];

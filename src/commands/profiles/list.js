@@ -22,7 +22,7 @@ class ProfilesList extends BaseCommand {
   }
 }
 
-ProfilesList.description = 'show what Twilio profiles you have configured';
+ProfilesList.description = 'show what profiles you have configured';
 ProfilesList.flags = BaseCommand.flags;
 
 module.exports = ProfilesList;

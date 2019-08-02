@@ -20,7 +20,7 @@ ProfilesUse.description = 'select which profile to use';
 ProfilesUse.args = [
   {
     name: 'profile',
-    description: 'Shorthand identifier for your Twilio profile',
+    description: 'Shorthand identifier for your profile',
     required: true
   }
 ];
