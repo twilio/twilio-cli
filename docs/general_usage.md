@@ -51,6 +51,8 @@ When you set a webhook, if you specify a URL that uses the host name of `localho
 twilio phone-numbers:update [PN sid or E.164] --sms-url http://localhost:5000/handle_sms
 ```
 
+Please be aware that this will expose your computer to the Internet. You should exit this command when you are completed testing.
+
 ### Output formats
 
 All command output is sent to `stdout` (whereas [logging messages](#logging-messages) are sent to `stderr`).
