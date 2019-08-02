@@ -32,6 +32,10 @@ async function createCommand(ctx, args, useFakeNgrok) {
     },
     useFakeNgrok ? ctx.fakeNgrok : undefined
   );
+
+  ctx.testCmd.inquirer.prompt = sinon.stub()
+    .onFirstCall()
+    .resolves({ affirmative: true });
 }
 
 describe('commands', () => {
