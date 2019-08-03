@@ -81,3 +81,9 @@ twilio my-new-topic:my-new-command --help
 ```
 npm install keytar --save-dev
 ```
+
+## 5. Publish your plugin to NPM
+
+Once you have your plugin working, publish it to npmjs.org as a JavaScript package using `npm publish`. The `twilio plugins:install <npm package name>` command will download your package from NPM.
+
+If you want to keep your package private, then you can run `npm pack` to create a tarball and distribute that file. Running `twilio plugins:install <package.tar.gz>` will install the plugin from the file instead of looking on NPM.

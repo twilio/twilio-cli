@@ -43,13 +43,15 @@ twilio phone-numbers:update [PN sid or E.164] --sms-url http://url
 
 That sets the primary SMS url. There are also options for setting the voice url, fallback urls, and methods for each. Run `twilio phone-numbers:update --help` for a full list of options.
 
-### Ngrok integration
+### Proxying your localhost
 
-When you set a webhook, if you specify a URL that uses the host name of `localhost` or `127.0.0.1`, the twilio-cli will automatically create an ngrok tunnel for you and set your webhook to the new ngrok URL. For example:
+When you set a webhook, if you specify a URL that uses the host name of `localhost` or `127.0.0.1`, the twilio-cli will automatically create a public proxy for you and set your webhook to the new proxy URL. For example:
 
 ```
 twilio phone-numbers:update [PN sid or E.164] --sms-url http://localhost:5000/handle_sms
 ```
+
+Please be aware that this will temporarily expose your computer to the internet. You should exit this command when you have completed testing.
 
 ### Output formats
 
@@ -110,37 +112,3 @@ ps -aux | twilio email:send \
   --subject="Current processes" \
   --text="See attachment"
 ```
-
-## Plugins
-
-twilio-cli can be extended via plugins.
-
-At this time, the following plugins exist:
-
-* [twilio serverless plugin](https://github.com/twilio-labs/plugin-serverless): To streamline your Twilio Functions development workflow, [Twilio Labs](https://github.com/twilio-labs/) created `twilio-run`. You can use twilio-run from within twilio-cli via [plugin-serverless](https://github.com/twilio-labs/plugin-serverless).
-
-* [twilio watch plugin](https://github.com/twilio-labs/plugin-watch): Allows you to watch your live debugger alerts, voice calls, and messages as they come in, in real-time. 
-
-* [twilio token plug](https://github.com/twilio-labs/plugin-token): Install and use this plugin to generate a token for use in a client-side SDK, e.g., a chat application.
-
-### Install a plugin
-
-Plugins for the CLI can be installed using the `twilio plugins` command.
-
-1. Install the plugin by it's package name:
-
-    ```
-    twilio plugins:install @twilio/plugin-debugger
-    ```
-
-1. Now, you can run your plugin command from the cli:
-
-    ```
-    twilio debugger:logs:list --help
-    ```
-
-1. Note: if you're using [autocomplete](#autocomplete), you'll need to run `twilio autocomplete` after installing a plugin and open a new terminal window. The cli needs to re-build it's cache.
-
-### Create a plugin
-
-Want to write your own plugin? [See this document](https://github.com/twilio/twilio-cli/blob/master/docs/plugins.md).
