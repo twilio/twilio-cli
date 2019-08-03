@@ -3,12 +3,6 @@
 [![npm version](https://badge.fury.io/js/twilio-cli.svg)](https://badge.fury.io/js/twilio-cli)
 [![Travis Build Status](https://travis-ci.com/twilio/twilio-cli.svg?token=8pBrDtYneMQqFq8wVpYP&branch=master)](https://travis-ci.com/twilio/twilio-cli)[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/48hf89rslhjhn7ca?svg=true)](https://ci.appveyor.com/project/TwilioAPI/twilio-cli)[![codecov](https://codecov.io/gh/twilio/twilio-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/twilio/twilio-cli)
 
-## ⚠⚠⚠⚠ Pre-release software warning ⚠⚠⚠⚠
-
-This software is in pre-release status and not currently supported. We are looking for community feedback on what type of CLI tool would be the most useful for Twilio users.
-
-⚠⚠⚠⚠
-
 ## Prerequisites
 
 1. [Node.js](https://nodejs.org/) >= 8.0
@@ -43,7 +37,7 @@ Review the [Examples](https://www.twilio.com/docs/twilio-cli/examples).
 
 ## Feedback
 
-Please file a GitHub issue in this repository for any feedback you may have.
+Please file a GitHub issue in this repository for any feedback you may have. You may also send feedback via the `twilio feedback` command.
 
 ## License
 
