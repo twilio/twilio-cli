@@ -78,7 +78,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
     const flagName = kebabCase(cliName);
     const flagConfig = {
       description: sanitizeDescription(param.description),
-      // AccountSid on api.v2010 not required, we can get from the current project
+      // AccountSid on api.v2010 not required, we can get from the current profile
       required: flagName === ACCOUNT_SID_FLAG && domainName === 'api' ? false : param.required,
       multiple: param.schema.type === 'array',
       apiDetails: {

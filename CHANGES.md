@@ -1,6 +1,17 @@
 twilio-cli changelog
 =====================
 
+[2019-08-02] Version 1.4.0
+---------------------------
+**Library**
+- [PR #90](https://github.com/twilio/twilio-cli/pull/90): Hide the ngrok warning after user acknowledgment. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #89](https://github.com/twilio/twilio-cli/pull/89): Add ngrok warning and prompt when creating phone number tunnels. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #87](https://github.com/twilio/twilio-cli/pull/87): breaking: Switch naming from 'project(s)' to 'profile(s)'. Thanks to [@childish-sambino](https://github.com/childish-sambino)! **(breaking change)**
+
+**Preview**
+- Added support for the header `Twilio-Sandbox-Mode` to mock all Voice dependencies
+
+
 [2019-07-31] Version 1.3.6
 ---------------------------
 **Library**

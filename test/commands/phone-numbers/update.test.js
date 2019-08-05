@@ -23,23 +23,34 @@ async function createCommand(ctx, args, useFakeNgrok) {
     args,
     ctx.fakeConfig,
     {
-      async getCredentials(projectId) {
+      async getCredentials(profileId) {
         return {
           apiKey: constants.FAKE_API_KEY,
-          apiSecret: constants.FAKE_API_SECRET + projectId
+          apiSecret: constants.FAKE_API_SECRET + profileId
         };
       }
     },
     useFakeNgrok ? ctx.fakeNgrok : undefined
   );
+
+  ctx.testCmd.inquirer.prompt = sinon.stub()
+    .onFirstCall()
+    .resolves({ affirmative: true });
 }
 
 describe('commands', () => {
   describe('phone-numbers', () => {
     describe('update', () => {
-      const setUpTest = (args = [], useFakeNgrok = false) => {
+      const setUpTest = (args = [], { useFakeNgrok = false, promptAcked = false } = {}) => {
         return test
-          .twilioFakeProject(ConfigData)
+          .do(ctx => {
+            ctx.userConfig = new ConfigData();
+            ctx.userConfig.addProfile('default', constants.FAKE_ACCOUNT_SID);
+
+            if (promptAcked) {
+              ctx.userConfig.ackPrompt('ngrok-warning');
+            }
+          })
           .twilioCliEnv(Config)
           .stdout()
           .do(ctx => createCommand(ctx, args, useFakeNgrok));
@@ -65,7 +76,7 @@ describe('commands', () => {
           expect(ctx.stdout).to.contain(`sid\tresult\tsmsUrl\n${fakeNumberSid}\tSuccess\thttp://example.com/`);
         });
 
-      setUpTest([fakeNumberSid, '--sms-url', 'http://localhost:4567/', '-o', 'tsv'], true)
+      setUpTest([fakeNumberSid, '--sms-url', 'http://localhost:4567/', '-o', 'tsv'], { useFakeNgrok: true })
         .nock('https://api.twilio.com', api => {
           api.get(fakeNumberUrl).reply(200, fakeNumberResource);
           api.post(fakeNumberUrl).reply(200, fakeNumberResource);
@@ -76,6 +87,7 @@ describe('commands', () => {
           async ctx => {
             await ctx.testCmd.run();
             expect(ctx.stdout).to.contain(`sid\tresult\tsmsUrl\n${fakeNumberSid}\tSuccess\t${fakeNgrokUrl}/`);
+            expect(ctx.stderr).to.contain('WARNING: Detected localhost');
             expect(ctx.stderr).to.contain('ngrok is running');
             expect(ctx.fakeNgrok.connect.calledOnce).to.be.true;
             const tunnel = ctx.fakeNgrok.connect.getCall(0).args[0];
@@ -99,7 +111,7 @@ describe('commands', () => {
           '-o',
           'tsv'
         ],
-        true
+        { useFakeNgrok: true, promptAcked: true }
       )
         .nock('https://api.twilio.com', api => {
           api.get(fakeNumberUrl).reply(200, fakeNumberResource);
@@ -111,6 +123,7 @@ describe('commands', () => {
           expect(ctx.stdout).to.contain(
             `sid\tresult\tsmsUrl\tsmsFallbackUrl\tvoiceUrl\tvoiceFallbackUrl\n${fakeNumberSid}\tSuccess\t${fakeNgrokUrl}/\t${fakeNgrokUrl}/\t${fakeNgrokUrl}/\t${fakeNgrokUrl}/`
           );
+          expect(ctx.stderr).to.not.contain('WARNING: Detected localhost');
           expect(ctx.stderr).to.contain('ngrok is running');
           expect(ctx.fakeNgrok.connect.calledTwice).to.be.true;
 

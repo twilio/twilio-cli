@@ -8,7 +8,7 @@ console.log('*     twilio login                                                 
 console.log('*                                                                       *');
 console.log('*     OR                                                                *');
 console.log('*                                                                       *');
-console.log('*     twilio projects:add                                               *');
+console.log('*     twilio profiles:add                                               *');
 console.log('*                                                                       *');
 console.log('*************************************************************************');
 console.log();

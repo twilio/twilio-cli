@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const { URL } = require('url');
 const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const IncomingPhoneNumberHelper = require('../../services/resource-helpers/api/v2010/incoming-phone-number');
 
 class NumberUpdate extends TwilioClientCommand {
@@ -16,39 +17,91 @@ class NumberUpdate extends TwilioClientCommand {
 
     const props = this.parseProperties();
     this.tunnels = {};
-    await this.checkForLocalhost(props, 'smsUrl');
-    await this.checkForLocalhost(props, 'smsFallbackUrl');
-    await this.checkForLocalhost(props, 'voiceUrl');
-    await this.checkForLocalhost(props, 'voiceFallbackUrl');
+
+    const localHostProps = NumberUpdate.UrlFlags.filter(propName => this.isLocalhostUrl(props, propName));
+    const hasLocalHostProp = localHostProps.length > 0;
+
+    if (hasLocalHostProp) {
+      const promptId = 'ngrok-warning';
+
+      if (!this.userConfig.isPromptAcked(promptId)) {
+        await this.confirmTunnelCreation();
+        this.userConfig.ackPrompt(promptId);
+        const configSavedMessage = await this.configFile.save(this.userConfig);
+        this.logger.info(configSavedMessage);
+      }
+
+      // Create each tunnel. Note that we can't parallelize this since we're only creating 1 tunnel
+      // per port and we don't yet know the unique set of ports.
+      for (const propName of localHostProps) {
+        // eslint-disable-next-line no-await-in-loop
+        await this.createTunnel(props, propName);
+      }
+    }
 
     const results = await this.updateResource(this.twilioClient.incomingPhoneNumbers, phoneNumber.sid, props);
     this.output(results);
 
-    if (Object.keys(this.tunnels).length > 0) {
+    if (hasLocalHostProp) {
       this.logger.info(
         'ngrok is running. Open ' + chalk.blueBright('http://localhost:4040/') + ' to view tunnel activity.'
       );
-      this.logger.info('Press CTRL-C to stop.');
+      this.logger.info('Press CTRL-C to exit.');
       this.logger.debug(this.tunnels);
     }
   }
 
-  async checkForLocalhost(props, propName) {
-    if (props && props[propName]) {
+  isLocalhostUrl(props, propName) {
+    if (props[propName]) {
       const url = new URL(props[propName]);
-      if (['localhost', '127.0.0.1'].indexOf(url.hostname) > -1 && url.protocol === 'http:') {
-        let newBaseUrl = this.tunnels[url.port];
-        if (!newBaseUrl) {
-          const newTunnel = {
-            proto: 'http',
-            addr: url.port,
-            host_header: url.host // eslint-disable-line camelcase
-          };
-          newBaseUrl = await this.ngrok.connect(newTunnel);
-          this.tunnels[url.port] = newBaseUrl;
-        }
-        props[propName] = newBaseUrl + url.pathname + url.search;
+
+      return ['localhost', '127.0.0.1'].includes(url.hostname) && url.protocol === 'http:';
+    }
+  }
+
+  async createTunnel(props, propName) {
+    const url = new URL(props[propName]);
+    let newBaseUrl = this.tunnels[url.port];
+
+    // Create a new tunnel if one does not yet exist for this port.
+    if (!newBaseUrl) {
+      const newTunnel = {
+        /* eslint-disable camelcase */
+        proto: 'http',
+        addr: url.port,
+        host_header: url.host,
+        bind_tls: false // https not needed
+        /* eslint-enable camelcase */
+      };
+
+      try {
+        newBaseUrl = await this.ngrok.connect(newTunnel);
+      } catch (error) {
+        throw new TwilioCliError(error.details.err, error.error_code);
       }
+
+      this.tunnels[url.port] = newBaseUrl;
+    }
+
+    // Build the new prop value using the tunnel URL.
+    props[propName] = newBaseUrl + url.pathname + url.search;
+  }
+
+  async confirmTunnelCreation() {
+    this.logger.warn('WARNING: Detected localhost URL.');
+    this.logger.warn('For convenience, we will automatically create an encrypted tunnel using the 3rd-party service https://ngrok.io');
+    this.logger.warn('While running, this will expose your computer to the internet.');
+    this.logger.warn('Please exit this command after testing.');
+
+    const confirm = await this.inquirer.prompt([{
+      type: 'confirm',
+      name: 'affirmative',
+      message: 'Do you want to proceed?',
+      default: false
+    }]);
+
+    if (!confirm.affirmative) {
+      throw new TwilioCliError('Cancelled');
     }
   }
 }
@@ -89,6 +142,8 @@ NumberUpdate.PropertyFlags = {
     description: 'The HTTP method Twilio will use when requesting the VoiceFallbackUrl.'
   })
 };
+
+NumberUpdate.UrlFlags = ['smsUrl', 'smsFallbackUrl', 'voiceUrl', 'voiceFallbackUrl'];
 
 NumberUpdate.flags = Object.assign(
   {},

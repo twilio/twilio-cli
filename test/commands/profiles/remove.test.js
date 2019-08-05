@@ -2,20 +2,20 @@
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
-const ProjectsRemove = require('../../../src/commands/projects/remove');
+const ProfilesRemove = require('../../../src/commands/profiles/remove');
 
 describe('commands', () => {
-  describe('projects', () => {
+  describe('profiles', () => {
     describe('remove', () => {
-      const setup = (commandArgs = [], { addProjects = 4, deleteProject = true, deleteKey = true, removeCred = true } = {}) => test
+      const setup = (commandArgs = [], { addProfiles = 4, deleteProfile = true, deleteKey = true, removeCred = true } = {}) => test
         .do(ctx => {
           ctx.userConfig = new ConfigData();
-          for (var i = 1; i <= addProjects; i++) {
-            ctx.userConfig.addProject('project' + i, constants.FAKE_ACCOUNT_SID);
+          for (var i = 1; i <= addProfiles; i++) {
+            ctx.userConfig.addProfile('profile' + i, constants.FAKE_ACCOUNT_SID);
           }
         })
         .twilioCliEnv(Config)
-        .twilioCreateCommand(ProjectsRemove, commandArgs)
+        .twilioCreateCommand(ProfilesRemove, commandArgs)
         .stdout()
         .stderr()
         .do(ctx => {
@@ -23,7 +23,7 @@ describe('commands', () => {
           fakePrompt
             .onFirstCall()
             .resolves({
-              affirmative: deleteProject
+              affirmative: deleteProfile
             })
             .onSecondCall()
             .resolves({
@@ -37,25 +37,25 @@ describe('commands', () => {
           };
         });
 
-      setup(['project2'], { deleteKey: false })
+      setup(['profile2'], { deleteKey: false })
         .do(ctx => ctx.testCmd.run())
-        .it('run projects:remove with a project and delets local key but keep remote key', ctx => {
+        .it('run profiles:remove with a profile and delets local key but keep remote key', ctx => {
           expect(ctx.stderr).to.contain('Deleted local key.');
-          expect(ctx.stderr).to.contain('The API Key for project2 project still exists in The Twilio console');
-          expect(ctx.stderr).to.contain('Deleted project2');
+          expect(ctx.stderr).to.contain('The API Key for profile2 profile still exists in The Twilio console');
+          expect(ctx.stderr).to.contain('Deleted profile2');
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      setup(['project3'], { removeCred: false, deleteKey: false })
+      setup(['profile3'], { removeCred: false, deleteKey: false })
         .do(ctx => ctx.testCmd.run())
-        .it('run projects:remove with a project and fails to delete both keys', ctx => {
+        .it('run profiles:remove with a profile and fails to delete both keys', ctx => {
           expect(ctx.stderr).to.contain('Could not delete local key');
-          expect(ctx.stderr).to.contain('The API Key for project3 project still exists in The Twilio console.');
-          expect(ctx.stderr).to.contain('Deleted project3');
+          expect(ctx.stderr).to.contain('The API Key for profile3 profile still exists in The Twilio console.');
+          expect(ctx.stderr).to.contain('Deleted profile3');
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      setup(['project1'])
+      setup(['profile1'])
         .nock('https://api.twilio.com', api => {
           api.delete(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys/${constants.FAKE_API_KEY}.json`).reply(200, {
             sid: constants.FAKE_API_KEY,
@@ -63,31 +63,31 @@ describe('commands', () => {
           });
         })
         .do(ctx => ctx.testCmd.run())
-        .it('run projects:remove with the active project and deletes both keys', ctx => {
-          expect(ctx.stderr).to.contain('remove the active project');
+        .it('run profiles:remove with the active profile and deletes both keys', ctx => {
+          expect(ctx.stderr).to.contain('remove the active profile');
           expect(ctx.stderr).to.contain('Deleted local key.');
           expect(ctx.stderr).to.contain('The API Key has been deleted from The Twilio console');
-          expect(ctx.stderr).to.contain('Deleted project1');
+          expect(ctx.stderr).to.contain('Deleted profile1');
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      setup(['project2'])
+      setup(['profile2'])
         .do(ctx => ctx.testCmd.run())
-        .it('run projects:remove with project and deletes local key but can not delete remote key', ctx => {
+        .it('run profiles:remove with profile and deletes local key but can not delete remote key', ctx => {
           expect(ctx.stderr).to.contain('Deleted local key.');
           expect(ctx.stderr).to.contain('Could not delete the API Key.');
-          expect(ctx.stderr).to.contain('Deleted project2');
+          expect(ctx.stderr).to.contain('Deleted profile2');
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      setup(['project2'], { deleteProject: false })
+      setup(['profile2'], { deleteProfile: false })
         .do(ctx => ctx.testCmd.run())
         .exit(1)
-        .it('run projects:remove with a project and decide not to remove project', ctx => {
+        .it('run profiles:remove with a profile and decide not to remove profile', ctx => {
           expect(ctx.stderr).to.contain('Cancelled');
         });
 
-      setup(['project1'], { addProjects: 1 })
+      setup(['profile1'], { addProfiles: 1 })
         .nock('https://api.twilio.com', api => {
           api.delete(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys/${constants.FAKE_API_KEY}.json`).reply(200, {
             sid: constants.FAKE_API_KEY,
@@ -95,19 +95,19 @@ describe('commands', () => {
           });
         })
         .do(ctx => ctx.testCmd.run())
-        .it('run projects:remove with the last configured project and delete all keys', ctx => {
-          expect(ctx.stderr).to.contain('remove the active project');
-          expect(ctx.stderr).to.contain('remove the last project');
+        .it('run profiles:remove with the last configured profile and delete all keys', ctx => {
+          expect(ctx.stderr).to.contain('remove the active profile');
+          expect(ctx.stderr).to.contain('remove the last profile');
           expect(ctx.stderr).to.contain('Deleted local key.');
           expect(ctx.stderr).to.contain('The API Key has been deleted from The Twilio console');
-          expect(ctx.stderr).to.contain('Deleted project1');
+          expect(ctx.stderr).to.contain('Deleted profile1');
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      setup(['invalidProject'])
+      setup(['invalidProfile'])
         .do(ctx => ctx.testCmd.run())
         .exit(1)
-        .it('run projects:remove with non-existing project', ctx => {
+        .it('run profiles:remove with non-existing profile', ctx => {
           expect(ctx.stderr).to.contain('does not exist');
         });
     });
