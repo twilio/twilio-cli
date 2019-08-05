@@ -1,6 +1,16 @@
 twilio-cli changelog
 =====================
 
+[2019-08-05] Version 1.4.1
+---------------------------
+**Library**
+- [PR #92](https://github.com/twilio/twilio-cli/pull/92): Documentation improvements. Thanks to [@dprothero](https://github.com/dprothero)!
+- [PR #91](https://github.com/twilio/twilio-cli/pull/91): Remove pre-release warning. Thanks to [@aroach](https://github.com/aroach)!
+
+**Conversations**
+- Switch library_visibility to public for Conversations Resources
+
+
 [2019-08-02] Version 1.4.0
 ---------------------------
 **Library**
