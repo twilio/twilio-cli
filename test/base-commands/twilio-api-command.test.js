@@ -24,11 +24,25 @@ describe('base-commands', () => {
         commandName: 'remove',
         path: '/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json',
         actionName: 'remove',
-        action: { parameters: [{ name: 'sid', schema: { type: 'string' } }] }
+        action: {
+          parameters: [{ name: 'sid', schema: { type: 'string' } }, {
+            name: 'DateSent<',
+            schema: {
+              format: 'date-time',
+              type: 'string'
+            }
+          }, {
+            name: 'DateSent>',
+            schema: {
+              format: 'date-time',
+              type: 'string'
+            }
+          }]
+        }
       };
 
       const getCommandClass = (actionDefinition = callCreateActionDefinition) => {
-        const NewCommandClass = class extends TwilioApiCommand {};
+        const NewCommandClass = class extends TwilioApiCommand { };
         NewCommandClass.actionDefinition = actionDefinition;
         NewCommandClass.actionDefinition.topicName = getTopicName(NewCommandClass.actionDefinition);
         TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
@@ -65,6 +79,13 @@ describe('base-commands', () => {
         expect(Object.keys(NewCommandClass.flags).length).to.equal(
           NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS
         );
+      });
+
+      test.it('checks that parameters with inequalities convert to the correct flag names  ', async () => {
+        const NewCommandClass = getCommandClass(callRemoveActionDefinition);
+
+        expect(Object.keys(NewCommandClass.flags)).to.include('date-sent-after');
+        expect(Object.keys(NewCommandClass.flags)).to.include('date-sent-before');
       });
 
       test.it('handles remove action', async () => {
