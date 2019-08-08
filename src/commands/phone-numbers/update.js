@@ -77,7 +77,7 @@ class NumberUpdate extends TwilioClientCommand {
       try {
         newBaseUrl = await this.ngrok.connect(newTunnel);
       } catch (error) {
-        throw new TwilioCliError(error.details.err, error.error_code);
+        throw new TwilioCliError((error.details && error.details.err) || error);
       }
 
       this.tunnels[url.port] = newBaseUrl;
