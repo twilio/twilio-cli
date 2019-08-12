@@ -16,7 +16,8 @@ const fakeNgrokUrl = 'https://12345.ngrok.io';
 
 async function createCommand(ctx, args, useFakeNgrok) {
   ctx.fakeNgrok = {
-    connect: sinon.fake.resolves(fakeNgrokUrl)
+    connect: sinon.fake.resolves(fakeNgrokUrl),
+    getUrl: () => {}
   };
 
   ctx.testCmd = new NumberUpdate(
@@ -105,9 +106,9 @@ describe('commands', () => {
           '--voice-url',
           'http://localhost:4567/',
           '--sms-fallback-url',
-          'http://localhost:5678/',
+          'http://localhost:80/',
           '--voice-fallback-url',
-          'http://localhost:5678/',
+          'http://localhost',
           '-o',
           'tsv'
         ],
@@ -134,8 +135,8 @@ describe('commands', () => {
 
           tunnel = ctx.fakeNgrok.connect.getCall(1).args[0];
           expect(tunnel.proto).to.equal('http');
-          expect(tunnel.addr).to.equal('5678');
-          expect(tunnel.host_header).to.equal('localhost:5678');
+          expect(tunnel.addr).to.equal('80');
+          expect(tunnel.host_header).to.equal('localhost');
         });
 
       setUpTest([fakeNumberSid, '--sms-url', 'http://localhost:4567/'])

@@ -136,8 +136,8 @@ class Send extends BaseCommand {
   }
 
   validateEmail(email) {
-    var emailList = [];
-    var validEmail;
+    let emailList = [];
+    let validEmail;
     const multipleEmail = email.includes(',');
     if (multipleEmail === true) {
       emailList = email.split(',').map(item => {
