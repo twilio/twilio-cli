@@ -13,6 +13,7 @@ twilio-cli-*.tgz
 twilio.env
 *.env
 .env
+.history
 
 ### Backup package.json files created during release ###
 *.bak
