@@ -44,9 +44,10 @@ class NumberUpdate extends TwilioClientCommand {
 
     if (hasLocalHostProp) {
       this.logger.info(
-        'ngrok is running. Open ' + chalk.blueBright('http://localhost:4040/') + ' to view tunnel activity.'
+        'ngrok is running. Open ' + chalk.blueBright(this.ngrok.getUrl()) + ' to view tunnel activity.'
       );
       this.logger.info('Press CTRL-C to exit.');
+      this.logger.debug('Tunnels:');
       this.logger.debug(this.tunnels);
     }
   }
@@ -61,16 +62,18 @@ class NumberUpdate extends TwilioClientCommand {
 
   async createTunnel(props, propName) {
     const url = new URL(props[propName]);
-    let newBaseUrl = this.tunnels[url.port];
+    const urlPort = url.port || '80';
+    let newBaseUrl = this.tunnels[urlPort];
 
     // Create a new tunnel if one does not yet exist for this port.
     if (!newBaseUrl) {
       const newTunnel = {
         /* eslint-disable camelcase */
         proto: 'http',
-        addr: url.port,
+        addr: urlPort,
         host_header: url.host,
-        bind_tls: false // https not needed
+        bind_tls: false, // https not needed
+        onLogEvent: message => this.logger.debug('ngrok: ' + message)
         /* eslint-enable camelcase */
       };
 
@@ -80,7 +83,7 @@ class NumberUpdate extends TwilioClientCommand {
         throw new TwilioCliError((error.details && error.details.err) || error);
       }
 
-      this.tunnels[url.port] = newBaseUrl;
+      this.tunnels[urlPort] = newBaseUrl;
     }
 
     // Build the new prop value using the tunnel URL.

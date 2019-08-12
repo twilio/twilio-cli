@@ -20,7 +20,7 @@
     "chalk": "^2.4.2",
     "inquirer": "^6.5.0",
     "keytar": "^4.13.0",
-    "ngrok": "^3.2.4",
+    "ngrok": "^3.2.5",
     "twilio": "^3.33.3"
   },
   "devDependencies": {
