@@ -4,7 +4,7 @@ const { Command } = require('@oclif/command');
 
 class Feedback extends Command {
   async run() {
-    const link = chalk.bold('>>>>>  ') + chalk.underline.bold('https://bit.ly/twilio-cli-feedback') + chalk.bold('  <<<<<');
+    const link = chalk.bold('>>>>>  ') + chalk.underline.bold('https://twil.io/twilio-cli-feedback') + chalk.bold('  <<<<<');
     console.log();
     console.log('***********************************************************************');
     console.log('* Ahoy! Thank you for using twilio-cli!                               *');
