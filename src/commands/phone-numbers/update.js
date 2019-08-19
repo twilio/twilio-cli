@@ -53,7 +53,7 @@ class NumberUpdate extends TwilioClientCommand {
   }
 
   isLocalhostUrl(props, propName) {
-    if (props[propName]) {
+    if (props && props[propName]) {
       const url = new URL(props[propName]);
 
       return ['localhost', '127.0.0.1'].includes(url.hostname) && url.protocol === 'http:';
