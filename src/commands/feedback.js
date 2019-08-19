@@ -11,7 +11,7 @@ class Feedback extends Command {
     console.log('* We are always striving to make twilio-cli better.                   *');
     console.log('* Visit the link below to share your feedback with our team.          *');
     console.log('*                                                                     *');
-    console.log(`*          ${link}           *`);
+    console.log(`*          ${link}          *`);
     console.log('***********************************************************************');
     console.log();
   }
