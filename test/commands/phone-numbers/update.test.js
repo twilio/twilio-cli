@@ -62,8 +62,8 @@ describe('commands', () => {
           api.get(fakeNumberUrl).reply(200, fakeNumberResource);
           api.post(fakeNumberUrl).reply(200, fakeNumberResource);
         })
-        .it(`runs incoming-phone-number:update ${fakeNumberSid} --friendly-name <name>`, async ctx => {
-          await ctx.testCmd.run();
+        .do(ctx => ctx.testCmd.run())
+        .it(`runs incoming-phone-number:update ${fakeNumberSid} --friendly-name <name>`, ctx => {
           expect(ctx.stdout).to.contain(`sid\tresult\tfriendlyName\n${fakeNumberSid}\tSuccess\tMyPhoneNumber`);
         });
 
@@ -72,9 +72,19 @@ describe('commands', () => {
           api.get(fakeNumberUrl).reply(200, fakeNumberResource);
           api.post(fakeNumberUrl).reply(200, fakeNumberResource);
         })
-        .it(`runs incoming-phone-number:update ${fakeNumberSid} --sms-url <url>`, async ctx => {
-          await ctx.testCmd.run();
+        .do(ctx => ctx.testCmd.run())
+        .it(`runs incoming-phone-number:update ${fakeNumberSid} --sms-url <url>`, ctx => {
           expect(ctx.stdout).to.contain(`sid\tresult\tsmsUrl\n${fakeNumberSid}\tSuccess\thttp://example.com/`);
+        });
+
+      setUpTest([fakeNumberSid])
+        .nock('https://api.twilio.com', api => {
+          api.get(fakeNumberUrl).reply(200, fakeNumberResource);
+        })
+        .stderr()
+        .do(ctx => ctx.testCmd.run())
+        .it('should return nothing to update if no properties passed', ctx => {
+          expect(ctx.stderr).to.contain('Nothing to update');
         });
 
       setUpTest([fakeNumberSid, '--sms-url', 'http://localhost:4567/', '-o', 'tsv'], { useFakeNgrok: true })
@@ -83,10 +93,9 @@ describe('commands', () => {
           api.post(fakeNumberUrl).reply(200, fakeNumberResource);
         })
         .stderr()
-        .it(
-          `runs incoming-phone-number:update ${fakeNumberSid} --sms-url <LOCALHOST url> and starts ngrok`,
-          async ctx => {
-            await ctx.testCmd.run();
+        .do(ctx => ctx.testCmd.run())
+        .it(`runs incoming-phone-number:update ${fakeNumberSid} --sms-url <LOCALHOST url> and starts ngrok`,
+          ctx => {
             expect(ctx.stdout).to.contain(`sid\tresult\tsmsUrl\n${fakeNumberSid}\tSuccess\t${fakeNgrokUrl}/`);
             expect(ctx.stderr).to.contain('WARNING: Detected localhost');
             expect(ctx.stderr).to.contain('ngrok is running');
@@ -119,8 +128,8 @@ describe('commands', () => {
           api.post(fakeNumberUrl).reply(200, fakeNumberResource);
         })
         .stderr()
-        .it('runs incoming-phone-number:update with multiple urls and multiple ngrok tunnels', async ctx => {
-          await ctx.testCmd.run();
+        .do(ctx => ctx.testCmd.run())
+        .it('runs incoming-phone-number:update with multiple urls and multiple ngrok tunnels', ctx => {
           expect(ctx.stdout).to.contain(
             `sid\tresult\tsmsUrl\tsmsFallbackUrl\tvoiceUrl\tvoiceFallbackUrl\n${fakeNumberSid}\tSuccess\t${fakeNgrokUrl}/\t${fakeNgrokUrl}/\t${fakeNgrokUrl}/\t${fakeNgrokUrl}/`
           );
