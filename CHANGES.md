@@ -1,6 +1,25 @@
 twilio-cli changelog
 =====================
 
+[2019-08-21] Version 1.4.2
+---------------------------
+**Conversations**
+- Add Chat Conversation SID to conversation default output properties
+
+**Flex**
+- Adding `outbound_call_flows` object to Flex Configuration
+- Adding read and fetch to channels API
+
+**Supersim**
+- Add Sims and Commands resources for the Super Sim Pilot
+
+**Sync**
+- Added configuration option for enabling webhooks from REST.
+
+**Wireless**
+- Added `usage_notification_method` and `usage_notification_url` properties to `rate_plan`.
+
+
 [2019-08-05] Version 1.4.1
 ---------------------------
 **Library**
