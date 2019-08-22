@@ -3,6 +3,14 @@ twilio-cli changelog
 
 [2019-08-21] Version 1.4.2
 ---------------------------
+**Library**
+- [PR #103](https://github.com/twilio/twilio-cli/pull/103): Update feedback link. Thanks to [@aroach](https://github.com/aroach)!
+- [PR #105](https://github.com/twilio/twilio-cli/pull/105): Check for empty props when looking for localhost callback flags. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #101](https://github.com/twilio/twilio-cli/pull/101): Documents known limitations. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+- [PR #100](https://github.com/twilio/twilio-cli/pull/100): Add ngrok debugging, inspector URL, and port 80 handling. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #79](https://github.com/twilio/twilio-cli/pull/79): Add Date Inequality Support. Thanks to [@JenniferMah](https://github.com/JenniferMah)!
+- [PR #95](https://github.com/twilio/twilio-cli/pull/95): Handle generic and complex ngrok errors. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
 **Conversations**
 - Add Chat Conversation SID to conversation default output properties
 
