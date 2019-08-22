@@ -4,17 +4,17 @@ class ProfilesUse extends BaseCommand {
   async run() {
     await super.run();
 
-    const profile = this.userConfig.getProfileById(this.args.profile);
+    const profile = this.userConfig.setActiveProfile(this.args.profile);
     if (!profile) {
-      this.logger.error('The profile "' + this.args.profile + '" does not exist. Run "twilio profiles:list" to see the list of configured profiles.');
+      this.logger.error(`The profile "${this.args.profile}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`);
       this.exit(1);
     }
-    this.userConfig.activeProfile = this.args.profile;
     const configSavedMessage = await this.configFile.save(this.userConfig);
-    this.logger.info('set ' + this.args.profile + ' as active profile');
+    this.logger.info(`set "${profile.id}" as active profile`);
     this.logger.info(configSavedMessage);
   }
 }
+
 ProfilesUse.description = 'select which profile to use';
 
 ProfilesUse.args = [
