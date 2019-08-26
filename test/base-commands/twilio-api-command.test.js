@@ -19,25 +19,27 @@ describe('base-commands', () => {
         action: fakeResource.actions.create
       };
 
+      const callListActionDefinition = {
+        domainName: 'api',
+        commandName: 'list',
+        path: '/2010-04-01/Accounts/{AccountSid}/Calls.json',
+        resource: fakeResource,
+        actionName: 'list',
+        action: {
+          parameters: [
+            { name: 'StartTime<', schema: { type: 'string' } },
+            { name: 'StartTime>', schema: { type: 'string' } }
+          ]
+        }
+      };
+
       const callRemoveActionDefinition = {
         domainName: 'api',
         commandName: 'remove',
         path: '/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json',
         actionName: 'remove',
         action: {
-          parameters: [{ name: 'sid', schema: { type: 'string' } }, {
-            name: 'DateSent<',
-            schema: {
-              format: 'date-time',
-              type: 'string'
-            }
-          }, {
-            name: 'DateSent>',
-            schema: {
-              format: 'date-time',
-              type: 'string'
-            }
-          }]
+          parameters: [{ name: 'Sid', schema: { type: 'string' } }]
         }
       };
 
@@ -50,11 +52,11 @@ describe('base-commands', () => {
         return NewCommandClass;
       };
 
-      test.it('setUpNewCommandClass', async () => {
+      test.it('setUpNewCommandClass', () => {
         const NewCommandClass = getCommandClass();
 
         expect(NewCommandClass.id).to.equal('core:calls:create');
-        expect(NewCommandClass.description).to.contain('\'Twilio Client\' connections');
+        expect(NewCommandClass.description).to.equal(fakeResource.actions.create.description);
         expect(NewCommandClass.load()).to.equal(NewCommandClass);
 
         expect(NewCommandClass.flags['account-sid'].required).to.be.false;
@@ -67,7 +69,7 @@ describe('base-commands', () => {
         );
         expect(NewCommandClass.flags.to.required).to.be.true;
         expect(NewCommandClass.flags.to.description).to.equal(
-          'Phone number, SIP address, or \'client identifier\' to call'
+          'Phone number, SIP address, or `client identifier` to call'
         );
         expect(NewCommandClass.flags.from.required).to.be.true;
         expect(NewCommandClass.flags.method.required).to.be.false;
@@ -81,14 +83,14 @@ describe('base-commands', () => {
         );
       });
 
-      test.it('checks that parameters with inequalities convert to the correct flag names  ', async () => {
-        const NewCommandClass = getCommandClass(callRemoveActionDefinition);
+      test.it('checks that parameters with inequalities convert to the correct flag names', () => {
+        const NewCommandClass = getCommandClass(callListActionDefinition);
 
-        expect(Object.keys(NewCommandClass.flags)).to.include('date-sent-after');
-        expect(Object.keys(NewCommandClass.flags)).to.include('date-sent-before');
+        expect(Object.keys(NewCommandClass.flags)).to.include('start-time-after');
+        expect(Object.keys(NewCommandClass.flags)).to.include('start-time-before');
       });
 
-      test.it('handles remove action', async () => {
+      test.it('handles remove action', () => {
         const NewCommandClass = getCommandClass(callRemoveActionDefinition);
 
         expect(NewCommandClass.id).to.equal('core:calls:remove');
@@ -120,10 +122,27 @@ describe('base-commands', () => {
         .stdout()
         .stderr()
         .nock('https://api.twilio.com', api =>
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json?StartTime%3C=before-that&StartTime%3E=after-this`).reply(200)
+        )
+        .twilioCommand(getCommandClass(callListActionDefinition), [
+          '--start-time-after', 'after-this',
+          '--start-time-before', 'before-that'
+        ])
+        .it('lists calls', ctx => {
+          expect(ctx.stdout).to.be.empty;
+          expect(ctx.stderr).to.contain('No results');
+        });
+
+      test
+        .twilioFakeProfile(ConfigData)
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .nock('https://api.twilio.com', api =>
           api.delete(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls/${fakeCallResponse.sid}.json`).reply(204)
         )
         .twilioCommand(getCommandClass(callRemoveActionDefinition), ['--sid', fakeCallResponse.sid])
-        .it('creates a call', ctx => {
+        .it('deletes a call', ctx => {
           expect(ctx.stdout).to.be.empty;
           expect(ctx.stderr).to.contain('success');
         });
