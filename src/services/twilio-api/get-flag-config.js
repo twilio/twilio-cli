@@ -12,6 +12,9 @@ const getFlagName = paramName => {
   );
 };
 
+/**
+ * Converts a Twilio API parameter into a Twilio CLI flag.
+ */
 const getFlagConfig = (parameter, actionDefinition) => {
   const isCoreAccountSidFlag = (parameter.name === ACCOUNT_SID_FLAG && actionDefinition.domainName === BASE_TOPIC_NAME);
 
