@@ -6,8 +6,8 @@ const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { logger } = require('@twilio/cli-core').services.logging;
-const { kebabCase, camelCase } = require('@twilio/cli-core').services.namingConventions;
-const { ApiCommandRunner, getActionDescription } = require('../services/twilio-api');
+const { camelCase } = require('@twilio/cli-core').services.namingConventions;
+const { ApiCommandRunner, getActionDescription, getFlagConfig } = require('../services/twilio-api');
 
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
@@ -19,9 +19,6 @@ const typeMap = {
   object: flags.string,
   undefined: flags.string // TODO: Handle "anyOf" case more explicitly
 };
-
-// AccountSid is a special snowflake
-const ACCOUNT_SID_FLAG = 'account-sid';
 
 const isRemoveCommand = actionDefinition => actionDefinition.commandName === 'remove';
 
@@ -59,38 +56,20 @@ TwilioApiCommand.flags = Object.assign(
 // fields required by oclif on our dynamically created
 // command class.
 TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
-  const domainName = NewCommandClass.actionDefinition.domainName;
   const resource = NewCommandClass.actionDefinition.resource;
   const action = NewCommandClass.actionDefinition.action;
-
-  const sanitizeDescription = description => {
-    if (description) {
-      // Replace all backticks with single-quotes. We don't want them mistaken
-      // for statements that need to be evaluated (think zsh autocomplete).
-      return description.replace(/`/g, '\'');
-    }
-  };
 
   // Parameters
   const cmdFlags = {};
   (action.parameters || []).forEach(param => {
-    const cliName = param.name.replace('<', 'Before').replace('>', 'After');
-    const flagName = kebabCase(cliName);
-    const flagConfig = {
-      description: sanitizeDescription(param.description),
-      // AccountSid on api.v2010 not required, we can get from the current profile
-      required: flagName === ACCOUNT_SID_FLAG && domainName === 'api' ? false : param.required,
-      multiple: param.schema.type === 'array',
-      apiDetails: {
-        parameter: param,
-        action: action,
-        resource: resource
-      },
-      // Allow negated booleans ('-no' option)
-      allowNo: true
-    };
-
+    const flagConfig = getFlagConfig(param, NewCommandClass.actionDefinition);
     const flagType = typeMap[param.schema.type];
+
+    flagConfig.apiDetails = {
+      parameter: param,
+      action: action,
+      resource: resource
+    };
 
     if (doesObjectHaveProperty(param.schema, 'enum')) {
       // We want the best of all worlds. We want the help to show just lower-case options, but accept all options. Since
@@ -103,9 +82,9 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
     }
 
     if (flagType) {
-      cmdFlags[flagName] = flagType(flagConfig);
+      cmdFlags[flagConfig.name] = flagType(flagConfig);
     } else {
-      logger.error(`Unknown parameter type '${param.schema.type}' for parameter '${flagName}'`);
+      logger.error(`Unknown parameter type '${param.schema.type}' for parameter '${param.name}'`);
     }
   });
 
@@ -124,7 +103,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   NewCommandClass.id = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
   NewCommandClass.args = [];
   NewCommandClass.flags = Object.assign(cmdFlags, TwilioApiCommand.flags);
-  NewCommandClass.description = sanitizeDescription(getActionDescription(NewCommandClass.actionDefinition));
+  NewCommandClass.description = getActionDescription(NewCommandClass.actionDefinition);
   NewCommandClass.load = () => NewCommandClass;
 
   return NewCommandClass;
