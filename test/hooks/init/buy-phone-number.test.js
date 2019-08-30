@@ -2,6 +2,7 @@ const sinon = require('sinon');
 const pluginFunc = require('../../../src/hooks/init/buy-phone-number');
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
+const TwilioApiCommand = require('../../../src/base-commands/twilio-api-command');
 
 const TEST_COUNTRY_CODE = 'US';
 const TEST_PHONE_NUMBER = '+12345678901';
@@ -11,45 +12,45 @@ const getFakeConfig = () => ({
   plugins: [{
     name: 'api-cli-commands',
     commands: [
-      {
-        id: 'api:core:available-phone-numbers:local:list',
+      TwilioApiCommand.setUpNewCommandClass({
         actionDefinition: {
+          topicName: 'api:core:available-phone-numbers:local',
+          commandName: 'list',
           domainName: 'api',
           path: '/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local.json',
-          actionName: 'list'
-        },
-        flags: {
-          sid: { description: 'local-list-sid' },
-          'country-code': { default: TEST_COUNTRY_CODE },
-          'phone-number': { description: 'local-list-phone-number' },
-          'area-code': { default: TEST_AREA_CODE }
+          actionName: 'list',
+          action: {
+            parameters: [
+              { name: 'CountryCode', in: 'path', schema: { type: 'string' } },
+              { name: 'AreaCode', in: 'query', schema: { type: 'string' } }
+            ]
+          }
         }
-      },
-      {
-        id: 'api:core:available-phone-numbers:toll-free:list',
+      }),
+      TwilioApiCommand.setUpNewCommandClass({
         actionDefinition: {
+          topicName: 'api:core:available-phone-numbers:toll-free',
+          commandName: 'list',
           domainName: 'api',
           path: '/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree.json',
-          actionName: 'list'
-        },
-        flags: {
-          sid: { description: 'toll-free-list-sid' },
-          'phone-number': { description: 'toll-free-list-phone-number' }
+          actionName: 'list',
+          action: {
+            parameters: [
+              { name: 'Sid', in: 'query', description: 'toll-free-list-sid', schema: { type: 'string' } }
+            ]
+          }
         }
-      },
-      {
-        id: 'api:core:incoming-phone-numbers:create',
+      }),
+      TwilioApiCommand.setUpNewCommandClass({
         actionDefinition: {
+          topicName: 'api:core:incoming-phone-numbers',
+          commandName: 'create',
           domainName: 'api',
           path: '/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json',
-          actionName: 'create'
-        },
-        flags: {
-          sid: { description: 'incoming-create-sid' },
-          properties: { description: 'incoming-create-props' },
-          'phone-number': { description: 'incoming-phone-number' }
+          actionName: 'create',
+          action: { parameters: [{ name: 'PhoneNumber', in: 'query', schema: { type: 'string' } }] }
         }
-      }
+      })
     ]
   }]
 });
@@ -87,7 +88,10 @@ describe('hooks', () => {
       test
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
-        .twilioCreateCommand(getBuyLocalCommand(), [])
+        .twilioCreateCommand(getBuyLocalCommand(), [
+          '--country-code', TEST_COUNTRY_CODE,
+          '--area-code', TEST_AREA_CODE
+        ])
         .stderr()
         .do(ctx => {
           ctx.testCmd.inquirer.prompt = sinon.stub()
