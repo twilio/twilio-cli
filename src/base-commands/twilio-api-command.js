@@ -23,7 +23,9 @@ const typeMap = {
 const isRemoveCommand = actionDefinition => actionDefinition.commandName === 'remove';
 
 class TwilioApiCommand extends TwilioClientCommand {
-  async runCommand() {
+  async run() {
+    await super.run();
+
     const runner = new ApiCommandRunner(
       this.twilioApiClient,
       this.constructor.actionDefinition,

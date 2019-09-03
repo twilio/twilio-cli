@@ -157,10 +157,8 @@ describe('commands', () => {
           ctx.testCmd.ngrok = { connect: sinon.fake.rejects('Can\'t grok this') };
           return ctx.testCmd.run();
         })
-        .exit(1)
-        .it('handles generic ngrok errors', ctx => {
-          expect(ctx.stderr).to.contain('Can\'t grok this');
-        });
+        .catch(/Can't grok this/)
+        .it('handles generic ngrok errors');
 
       setUpTest([fakeNumberSid, '--sms-url', 'http://localhost:4567/'])
         .nock('https://api.twilio.com', api => {
@@ -176,10 +174,8 @@ describe('commands', () => {
           };
           return ctx.testCmd.run();
         })
-        .exit(1)
-        .it('handles complex ngrok errors', ctx => {
-          expect(ctx.stderr).to.contain('Can\'t grok this');
-        });
+        .catch(/Can't grok this/)
+        .it('handles complex ngrok errors');
     });
   });
 });
