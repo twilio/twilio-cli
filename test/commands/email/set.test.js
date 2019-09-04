@@ -68,11 +68,10 @@ describe('commands', () => {
 
       setup({ emailAddress: 'fakeEmail.com', subjectLine: 'testSubject' })
         .do(ctx => ctx.testCmd.run())
-        .exit(1)
+        .catch(/Please use a valid email/)
         .it('run email:set with invalid email and correct subject line when a default has already been set up', ctx => {
           expect(ctx.stderr).to.contain('Current default sending email: default@test.com');
           expect(ctx.stderr).to.contain('Current default subject line: default subjet line');
-          expect(ctx.stderr).to.contain('Please use a valid email');
         });
     });
   });

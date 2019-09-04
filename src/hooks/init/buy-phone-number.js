@@ -45,7 +45,9 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
 
   buildCommandClass(listCommand, createCommand, phoneNumberType) {
     const NewCommandClass = class extends TwilioClientCommand {
-      async runCommand() {
+      async run() {
+        await super.run();
+
         const phoneNumber = await this.getPhoneNumber();
 
         if (!await this.confirmPurchase(phoneNumber)) {

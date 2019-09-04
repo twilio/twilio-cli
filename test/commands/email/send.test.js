@@ -64,10 +64,8 @@ describe('commands', () => {
 
       defaultSetup({ toEmail: 'jen@test.com , mike@test.com, tamu@test.com' })
         .do(ctx => ctx.testCmd.run())
-        .exit(1)
-        .it('run email:send with no environment variable for SendGrid key', ctx => {
-          expect(ctx.stderr).to.contain('SENDGRID_API_KEY');
-        });
+        .catch(/SENDGRID_API_KEY/)
+        .it('run email:send with no environment variable for SendGrid key');
 
       noDefault({
         toEmail: 'JonSnow, BranStark@winterfell',
@@ -76,12 +74,11 @@ describe('commands', () => {
         bodyText: 'You know nothing Jon Snow.'
       })
         .do(ctx => ctx.testCmd.run())
-        .exit(1)
+        .catch(/Email could not be sent/)
         .it(
           'run email:send without defaults and with multiple recipients including an incorrect to email address',
           ctx => {
             expect(ctx.stderr).to.contain('JonSnow is not a valid email');
-            expect(ctx.stderr).to.contain('Email could not be sent');
           }
         );
 
@@ -128,10 +125,9 @@ describe('commands', () => {
         bodyText: 'You know nothing Jon Snow.'
       })
         .do(ctx => ctx.testCmd.run())
-        .exit(1)
+        .catch(/Email could not be sent/)
         .it('run email:send without defaults and an invalid from email address', ctx => {
           expect(ctx.stderr).to.contain('Ygritte is not a valid email');
-          expect(ctx.stderr).to.contain('Email could not be sent');
         });
 
       defaultSetup({ toEmail: 'jen@test.com', flags: ['--force-tty'] })
@@ -267,10 +263,8 @@ describe('commands', () => {
           process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
           return ctx.testCmd.run();
         })
-        .exit(1)
-        .it('run email:send using flags to set information using invalid file path', ctx => {
-          expect(ctx.stderr).to.contain('Unable to read the file:');
-        });
+        .catch(/Unable to read the file/)
+        .it('run email:send using flags to set information using invalid file path');
 
       defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true, flags: ['--force-tty'] })
         .nock('https://api.sendgrid.com', api => {
@@ -327,11 +321,8 @@ describe('commands', () => {
           process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
           return ctx.testCmd.run();
         })
-        .exit(1)
-        .it('run email:send using stdin as the attachment source but missing a To', ctx => {
-          expect(ctx.stderr).to.contain('No terminal');
-          expect(ctx.stderr).to.contain('Please provide');
-        });
+        .catch(/No terminal.*Please provide/)
+        .it('run email:send using stdin as the attachment source but missing a To');
     });
   });
 });

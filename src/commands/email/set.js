@@ -1,5 +1,6 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const emailUtilities = require('../../services/email-utility');
 
 class Set extends BaseCommand {
@@ -10,8 +11,7 @@ class Set extends BaseCommand {
     const subject = await this.promptSetDefaultSubject();
     const verdict = emailUtilities.validateEmail(email);
     if (verdict === false) {
-      this.logger.error('Please use a valid email.');
-      this.exit(1);
+      throw new TwilioCliError('Please use a valid email.');
     }
     this.setDefaults(email, subject);
     const configSavedMessage = await this.configFile.save(this.userConfig);

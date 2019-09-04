@@ -1,5 +1,6 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const emailUtilities = require('../../services/email-utility');
 const sgMail = require('@sendgrid/mail');
 const fs = require('fs');
@@ -10,11 +11,10 @@ class Send extends BaseCommand {
     await super.run();
 
     if (!process.env.SENDGRID_API_KEY) {
-      this.logger.error(
+      throw new TwilioCliError(
         'Make sure you have the environment variable SENDGRID_API_KEY set up with your Twilio SendGrid API key. ' +
         'Visit https://app.sendgrid.com/settings/api_keys to get an API key.'
       );
-      return this.exit(1);
     }
 
     this.isTTY = process.stdin.isTTY || this.flags['force-tty'];
@@ -30,8 +30,7 @@ class Send extends BaseCommand {
     await this.promptForText();
 
     if (!this.isTTY && (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail)) {
-      this.logger.error('No terminal input available. Please provide --to, --from, --subject, and --text');
-      return this.exit(1);
+      throw new TwilioCliError('No terminal input available. Please provide --to, --from, --subject, and --text');
     }
 
     const validFromEmail = this.validateEmail(this.fromEmail);
@@ -117,9 +116,8 @@ class Send extends BaseCommand {
       const coded = fs.readFileSync(filePath, 'base64');
       return coded;
     } catch (err) {
-      this.logger.error('Unable to read the file: ' + filePath);
       this.logger.debug(err);
-      return this.exit(1);
+      throw new TwilioCliError('Unable to read the file: ' + filePath);
     }
   }
 
@@ -154,8 +152,7 @@ class Send extends BaseCommand {
       }
     });
     if (validEmail === false) {
-      this.logger.error('Email could not be sent, please re-run the command with valid email addresses.');
-      return this.exit(1);
+      throw new TwilioCliError('Email could not be sent, please re-run the command with valid email addresses.');
     }
     return emailList;
   }

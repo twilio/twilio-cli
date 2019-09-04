@@ -1,4 +1,5 @@
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
 
 class ProfilesUse extends BaseCommand {
   async run() {
@@ -6,8 +7,7 @@ class ProfilesUse extends BaseCommand {
 
     const profile = this.userConfig.setActiveProfile(this.args.profile);
     if (!profile) {
-      this.logger.error(`The profile "${this.args.profile}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`);
-      this.exit(1);
+      throw new TwilioCliError(`The profile "${this.args.profile}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`);
     }
     const configSavedMessage = await this.configFile.save(this.userConfig);
     this.logger.info(`set "${profile.id}" as active profile`);

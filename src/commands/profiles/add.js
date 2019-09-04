@@ -3,6 +3,7 @@ const { flags } = require('@oclif/command');
 
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CliRequestClient } = require('@twilio/cli-core').services;
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
 
 const helpMessages = require('../../services/messaging/help-messages');
@@ -98,8 +99,7 @@ class ProfilesAdd extends BaseCommand {
     }
 
     if (!this.accountSid.toUpperCase().startsWith('AC')) {
-      this.logger.error('Account SID must be "AC" followed by 32 hexadecimal digits (0-9, a-z)');
-      this.exit(1);
+      throw new TwilioCliError('Account SID must be "AC" followed by 32 hexadecimal digits (0-9, a-z)');
     }
   }
 
@@ -178,9 +178,8 @@ class ProfilesAdd extends BaseCommand {
       apiKey = await twilioClient.newKeys.create({ friendlyName: apiKeyFriendlyName });
       this.logger.debug(apiKey);
     } catch (err) {
-      this.logger.error('Could not create an API Key.');
       this.logger.debug(err);
-      this.exit(1);
+      throw new TwilioCliError('Could not create an API Key.');
     }
 
     this.userConfig.addProfile(this.profileId, this.accountSid, this.region);

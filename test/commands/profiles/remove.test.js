@@ -82,10 +82,8 @@ describe('commands', () => {
 
       setup(['profile2'], { deleteProfile: false })
         .do(ctx => ctx.testCmd.run())
-        .exit(1)
-        .it('run profiles:remove with a profile and decide not to remove profile', ctx => {
-          expect(ctx.stderr).to.contain('Cancelled');
-        });
+        .catch(/Cancelled/)
+        .it('run profiles:remove with a profile and decide not to remove profile');
 
       setup(['profile1'], { addProfiles: 1 })
         .nock('https://api.twilio.com', api => {
@@ -106,10 +104,8 @@ describe('commands', () => {
 
       setup(['invalidProfile'])
         .do(ctx => ctx.testCmd.run())
-        .exit(1)
-        .it('run profiles:remove with non-existing profile', ctx => {
-          expect(ctx.stderr).to.contain('does not exist');
-        });
+        .catch(/does not exist/)
+        .it('run profiles:remove with non-existing profile');
     });
   });
 });

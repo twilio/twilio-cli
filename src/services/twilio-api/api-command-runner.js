@@ -6,6 +6,7 @@ const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { validateSchema } = require('../api-schema/schema-validator');
+const { getFlagConfig } = require('./get-flag-config');
 
 class ApiCommandRunner {
   constructor(twilioClient, actionDefinition, flagDefinitions, flagValues) {
@@ -61,15 +62,29 @@ class ApiCommandRunner {
     const domainName = this.actionDefinition.domainName;
     const path = this.actionDefinition.path;
     const actionName = this.actionDefinition.actionName;
+    const actionParams = this.actionDefinition.action.parameters;
 
     logger.debug(`domainName=${domainName}, path=${path}, actionName=${actionName}`);
+
+    const pathParams = {};
+    const queryParams = {};
+
+    actionParams.forEach(parameter => {
+      const flagConfig = getFlagConfig(parameter, this.actionDefinition);
+
+      if (doesObjectHaveProperty(this.flagValues, flagConfig.name)) {
+        const destination = (parameter.in === 'path' ? pathParams : queryParams);
+        destination[parameter.name] = this.flagValues[flagConfig.name];
+      }
+    });
 
     // TODO: Possible extender event: "beforeInvokeApi"
 
     return this.twilioClient[actionName]({
       domain: domainName,
       path: path,
-      data: this.flagValues
+      pathParams: pathParams,
+      data: queryParams
     });
 
     // TODO: Possible extender event: "afterInvokeApi"

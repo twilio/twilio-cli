@@ -2,7 +2,9 @@ const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 
 class ProfilesRemove extends TwilioClientCommand {
-  async runCommand() {
+  async run() {
+    await super.run();
+
     const deleteProfile = this.userConfig.getProfileById(this.args.profile);
     this.removeProfileStatus(deleteProfile, this.args.profile);
     const verdict = await this.confirmRemoveProfile();

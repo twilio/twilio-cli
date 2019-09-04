@@ -67,11 +67,8 @@ describe('commands', () => {
 
           return ctx.testCmd.run();
         })
-        .exit(1)
-        .it('fails for invalid account SIDs', ctx => {
-          expect(ctx.stdout).to.equal('');
-          expect(ctx.stderr).to.contain('Account SID must be "AC"');
-        });
+        .catch(/Account SID must be "AC"/)
+        .it('fails for invalid account SIDs');
 
       addTest()
         .do(ctx => {
@@ -115,11 +112,8 @@ describe('commands', () => {
           });
         })
         .do(ctx => ctx.testCmd.run())
-        .exit(1)
-        .it('fails to create an API key', ctx => {
-          expect(ctx.stdout).to.equal('');
-          expect(ctx.stderr).to.contain('Could not create an API Key');
-        });
+        .catch(/Could not create an API Key/)
+        .it('fails to create an API key');
 
       addTest(['--region', 'dev'])
         .nock('https://api.dev.twilio.com', api => {

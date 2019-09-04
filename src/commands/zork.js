@@ -1,5 +1,6 @@
 const path = require('path');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const Plugins = require('@oclif/plugin-plugins').default;
 
 class Zork extends BaseCommand {
@@ -36,8 +37,7 @@ class Zork extends BaseCommand {
       this.runZork();
     } catch (error) {
       this.logger.debug('Error on second attempt: ' + JSON.stringify(error));
-      this.logger.error('I don\'t know the word "zork".');
-      this.exit(1);
+      throw new TwilioCliError('I don\'t know the word "zork".');
     }
   }
 

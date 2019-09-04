@@ -13,13 +13,9 @@ describe('commands', () => {
         ctx.testCmd.findZork = sinon.stub().throws('simulated error finding module');
         ctx.testCmd.exit = sinon.fake();
       })
-      .stdout()
-      .stderr()
-      .it('tries to install zork and fails', async ctx => {
-        await ctx.testCmd.run();
-        expect(ctx.stdout).to.equal('');
-        expect(ctx.stderr).to.contain('I don\'t know the word "zork".');
-      });
+      .do(ctx => ctx.testCmd.run())
+      .catch(/I don't know the word "zork"/)
+      .it('tries to install zork and fails');
 
     test
       .twilioCliEnv(Config)

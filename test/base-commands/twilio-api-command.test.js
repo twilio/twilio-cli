@@ -27,8 +27,8 @@ describe('base-commands', () => {
         actionName: 'list',
         action: {
           parameters: [
-            { name: 'StartTime<', schema: { type: 'string' } },
-            { name: 'StartTime>', schema: { type: 'string' } }
+            { name: 'StartTime<', in: 'query', schema: { type: 'string' } },
+            { name: 'StartTime>', in: 'query', schema: { type: 'string' } }
           ]
         }
       };
@@ -39,7 +39,7 @@ describe('base-commands', () => {
         path: '/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json',
         actionName: 'remove',
         action: {
-          parameters: [{ name: 'Sid', schema: { type: 'string' } }]
+          parameters: [{ name: 'Sid', in: 'path', schema: { type: 'string' } }]
         }
       };
 
@@ -161,7 +161,7 @@ describe('base-commands', () => {
           '--application-sid',
           'ap12345678901234567890123456789012' // Lower-cased 'ap'
         ])
-        .exit(1)
+        .catch(/Cannot execute command/)
         .it('exits with a failure code and prints validation errors', ctx => {
           expect(ctx.stderr).to.contain('validation errors');
         });

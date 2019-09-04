@@ -115,7 +115,7 @@ describe('hooks', () => {
             .reply(200, {});
         })
         .do(ctx => ctx.testCmd.run())
-        .it('allows purchasing of a phone number', ctx => {
+        .it('allows purchasing a phone number', ctx => {
           expect(ctx.testCmd.flags['phone-number']).to.equal(TEST_PHONE_NUMBER);
           expect(ctx.testCmd.flags).to.not.include.key('area-code');
 
