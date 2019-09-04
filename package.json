@@ -15,18 +15,18 @@
     "@oclif/plugin-plugins": "^1.7.8",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "@sendgrid/mail": "^6.4.0",
-    "@twilio/cli-core": "^4.0.0",
-    "@twilio/plugin-debugger": "^1.1.7",
+    "@twilio/cli-core": "^4.0.1",
+    "@twilio/plugin-debugger": "^1.1.8",
     "chalk": "^2.4.2",
-    "inquirer": "^6.5.1",
+    "inquirer": "^6.5.2",
     "ngrok": "^3.2.5",
-    "twilio": "^3.33.4"
+    "twilio": "^3.34.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.5",
     "@twilio/cli-test": "^2.0.0",
-    "aws-sdk": "^2.515.0",
+    "aws-sdk": "^2.523.0",
     "chai": "^4.2.0",
     "eslint": "^4.19.1",
     "eslint-config-oclif": "^1.5.1",
@@ -36,7 +36,7 @@
     "nock": "^10.0.6",
     "nyc": "^14.1.1",
     "rimraf": "^2.7.1",
-    "sinon": "^7.4.1",
+    "sinon": "^7.4.2",
     "tmp": "^0.1.0"
   },
   "engines": {
