@@ -43,10 +43,24 @@ describe('base-commands', () => {
         }
       };
 
+      const numberUpdateActionDefinition = {
+        domainName: 'api',
+        commandName: 'update',
+        path: '/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json',
+        actionName: 'update',
+        action: {
+          parameters: [
+            { name: 'Sid', in: 'path', schema: { type: 'string' } },
+            { name: 'AccountSid', in: 'path', schema: { type: 'string' } },
+            { name: 'AccountSid', in: 'query', schema: { type: 'string' } }
+          ]
+        }
+      };
+
       const getCommandClass = (actionDefinition = callCreateActionDefinition) => {
         const NewCommandClass = class extends TwilioApiCommand { };
         NewCommandClass.actionDefinition = actionDefinition;
-        NewCommandClass.actionDefinition.topicName = getTopicName(NewCommandClass.actionDefinition);
+        NewCommandClass.actionDefinition.topicName = 'api:' + getTopicName(NewCommandClass.actionDefinition);
         TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
 
         return NewCommandClass;
@@ -55,7 +69,7 @@ describe('base-commands', () => {
       test.it('setUpNewCommandClass', () => {
         const NewCommandClass = getCommandClass();
 
-        expect(NewCommandClass.id).to.equal('core:calls:create');
+        expect(NewCommandClass.id).to.equal('api:core:calls:create');
         expect(NewCommandClass.description).to.equal(fakeResource.actions.create.description);
         expect(NewCommandClass.load()).to.equal(NewCommandClass);
 
@@ -95,7 +109,7 @@ describe('base-commands', () => {
       test.it('handles remove action', () => {
         const NewCommandClass = getCommandClass(callRemoveActionDefinition);
 
-        expect(NewCommandClass.id).to.equal('core:calls:remove');
+        expect(NewCommandClass.id).to.equal('api:core:calls:remove');
         expect(NewCommandClass.flags.properties).to.be.undefined;
       });
 
@@ -103,6 +117,7 @@ describe('base-commands', () => {
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stdout()
+        .stderr()
         .twilioCreateCommand(getCommandClass(), [
           '--from', '+15555555555',
           '--to', '+14155555555',
@@ -159,6 +174,23 @@ describe('base-commands', () => {
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stderr()
+        .twilioCreateCommand(getCommandClass(numberUpdateActionDefinition), [
+          '--sid', fakeCallResponse.sid,
+          '--target-account-sid', 'AC123'
+        ])
+        .do(ctx => {
+          ctx.testCmd.twilioApi = { update: sinon.stub().returns({}) };
+          return ctx.testCmd.run();
+        })
+        .it('updates a call', ctx => {
+          const callOptions = ctx.testCmd.twilioApi.update.firstCall.args[0];
+          expect(callOptions.data).to.include({ AccountSid: 'AC123' });
+        });
+
+      test
+        .twilioFakeProfile(ConfigData)
+        .twilioCliEnv(Config)
+        .stderr()
         .twilioCommand(getCommandClass(), [
           '--from', '+15555555555',
           '--to', '+14155555555',
@@ -174,6 +206,7 @@ describe('base-commands', () => {
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stdout()
+        .stderr()
         .twilioCreateCommand(getCommandClass(), [
           '--skip-parameter-validation',
           '--from', '+15555555555',
