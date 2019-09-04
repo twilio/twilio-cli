@@ -30,5 +30,6 @@ const getFlagConfig = (parameter, actionDefinition) => {
 };
 
 module.exports = {
-  getFlagConfig
+  getFlagConfig,
+  getFlagName
 };
