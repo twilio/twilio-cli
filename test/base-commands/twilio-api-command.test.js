@@ -1,6 +1,7 @@
+const sinon = require('sinon');
 const TwilioApiCommand = require('../../src/base-commands/twilio-api-command');
 const { getTopicName } = require('../../src/services/twilio-api');
-const { expect, test, constants } = require('@twilio/cli-test');
+const { expect, test } = require('@twilio/cli-test');
 const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
@@ -23,7 +24,6 @@ describe('base-commands', () => {
         domainName: 'api',
         commandName: 'list',
         path: '/2010-04-01/Accounts/{AccountSid}/Calls.json',
-        resource: fakeResource,
         actionName: 'list',
         action: {
           parameters: [
@@ -88,6 +88,8 @@ describe('base-commands', () => {
 
         expect(Object.keys(NewCommandClass.flags)).to.include('start-time-after');
         expect(Object.keys(NewCommandClass.flags)).to.include('start-time-before');
+        expect(Object.keys(NewCommandClass.flags)).to.include('limit');
+        expect(Object.keys(NewCommandClass.flags)).to.include('no-limit');
       });
 
       test.it('handles remove action', () => {
@@ -101,17 +103,15 @@ describe('base-commands', () => {
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stdout()
-        .nock('https://api.twilio.com', api =>
-          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json`).reply(201, fakeCallResponse)
-        )
-        .twilioCommand(getCommandClass(), [
-          '--from',
-          '+15555555555',
-          '--to',
-          '+14155555555',
-          '--url',
-          'http://example.com/'
+        .twilioCreateCommand(getCommandClass(), [
+          '--from', '+15555555555',
+          '--to', '+14155555555',
+          '--url', 'http://example.com/'
         ])
+        .do(ctx => {
+          ctx.testCmd.twilioApi = { create: sinon.stub().returns(fakeCallResponse) };
+          return ctx.testCmd.run();
+        })
         .it('creates a call', ctx => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
         });
@@ -121,14 +121,21 @@ describe('base-commands', () => {
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
-        .nock('https://api.twilio.com', api =>
-          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json?StartTime%3C=before-that&StartTime%3E=after-this`).reply(200)
-        )
-        .twilioCommand(getCommandClass(callListActionDefinition), [
+        .twilioCreateCommand(getCommandClass(callListActionDefinition), [
           '--start-time-after', 'after-this',
-          '--start-time-before', 'before-that'
+          '--start-time-before', 'before-that',
+          '--limit', '1'
         ])
+        .do(ctx => {
+          ctx.testCmd.twilioApi = { list: sinon.stub().returns([]) };
+          return ctx.testCmd.run();
+        })
         .it('lists calls', ctx => {
+          const callOptions = ctx.testCmd.twilioApi.list.firstCall.args[0];
+          expect(callOptions.data).to.include({ 'StartTime>': 'after-this' });
+          expect(callOptions.data).to.include({ 'StartTime<': 'before-that' });
+          expect(callOptions.data).to.include({ Limit: '1' });
+
           expect(ctx.stdout).to.be.empty;
           expect(ctx.stderr).to.contain('No results');
         });
@@ -138,10 +145,11 @@ describe('base-commands', () => {
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
-        .nock('https://api.twilio.com', api =>
-          api.delete(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls/${fakeCallResponse.sid}.json`).reply(204)
-        )
-        .twilioCommand(getCommandClass(callRemoveActionDefinition), ['--sid', fakeCallResponse.sid])
+        .twilioCreateCommand(getCommandClass(callRemoveActionDefinition), ['--sid', fakeCallResponse.sid])
+        .do(ctx => {
+          ctx.testCmd.twilioApi = { remove: sinon.stub().returns(true) };
+          return ctx.testCmd.run();
+        })
         .it('deletes a call', ctx => {
           expect(ctx.stdout).to.be.empty;
           expect(ctx.stderr).to.contain('success');
@@ -152,14 +160,10 @@ describe('base-commands', () => {
         .twilioCliEnv(Config)
         .stderr()
         .twilioCommand(getCommandClass(), [
-          '--from',
-          '+15555555555',
-          '--to',
-          '+14155555555',
-          '--url',
-          'http://example.com/',
-          '--application-sid',
-          'ap12345678901234567890123456789012' // Lower-cased 'ap'
+          '--from', '+15555555555',
+          '--to', '+14155555555',
+          '--url', 'http://example.com/',
+          '--application-sid', 'ap12345678901234567890123456789012' // Lower-cased 'ap'
         ])
         .catch(/Cannot execute command/)
         .it('exits with a failure code and prints validation errors', ctx => {
@@ -170,21 +174,18 @@ describe('base-commands', () => {
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .stdout()
-        .nock('https://api.twilio.com', api =>
-          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Calls.json`).reply(201, fakeCallResponse)
-        )
-        .twilioCommand(getCommandClass(), [
+        .twilioCreateCommand(getCommandClass(), [
           '--skip-parameter-validation',
-          '--from',
-          '+15555555555',
-          '--to',
-          '+14155555555',
-          '--url',
-          'http://example.com/',
-          '--application-sid',
-          'ap12345678901234567890123456789012' // Lower-cased 'ap'
+          '--from', '+15555555555',
+          '--to', '+14155555555',
+          '--url', 'http://example.com/',
+          '--application-sid', 'ap12345678901234567890123456789012' // Lower-cased 'ap'
         ])
-        .it('creates a call with invalid parameter', ctx => {
+        .do(ctx => {
+          ctx.testCmd.twilioApi = { create: sinon.stub().returns(fakeCallResponse) };
+          return ctx.testCmd.run();
+        })
+        .it('creates a call with an invalid parameter', ctx => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
         });
     });

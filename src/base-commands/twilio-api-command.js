@@ -62,7 +62,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   const action = NewCommandClass.actionDefinition.action;
 
   // Parameters
-  const cmdFlags = {};
+  let cmdFlags = {};
   (action.parameters || []).forEach(param => {
     const flagConfig = getFlagConfig(param, NewCommandClass.actionDefinition);
     const flagType = typeMap[param.schema.type];
@@ -99,6 +99,11 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
       default: defaultProperties.map(prop => camelCase(prop)).join(',') || 'sid',
       description: 'The properties you would like to display (JSON output always shows all properties).'
     });
+  }
+
+  // 'list' commands get limit flags for specifying the result set size.
+  if (NewCommandClass.actionDefinition.commandName === 'list') {
+    cmdFlags = Object.assign(cmdFlags, TwilioClientCommand.limitFlags);
   }
 
   // Class statics
