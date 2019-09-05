@@ -116,4 +116,6 @@ ps -aux | twilio email:send \
 ## Known limitations
 
 * The default timeout value for Twilio API requests in `twilio-cli` is 30 seconds.
-* Currently, by default, we will load all of the records. You can filter these results based on date, to, from, etc. to limit the results. Pass the `--help` flag to the command for details on which fields you may filter by.
+* When listing resources, only the first 50 records will be displayed, by default. Use the `--limit` flag to modify this behavior.
+  * You can filter these results based on date, to, from, etc. to further limit the results.
+  * Pass the `--help` flag to the command for details on which fields you may filter by.
