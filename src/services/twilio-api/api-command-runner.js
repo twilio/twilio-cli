@@ -7,7 +7,7 @@ const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { TwilioApiFlags } = require('@twilio/cli-core').services.TwilioApi;
 const { validateSchema } = require('../api-schema/schema-validator');
-const { getFlagName } = require('./get-flag-config');
+const { getFlagConfig } = require('./get-flag-config');
 
 class ApiCommandRunner {
   constructor(twilioClient, actionDefinition, flagDefinitions, flagValues) {
@@ -73,12 +73,12 @@ class ApiCommandRunner {
     // Build the path and query params based on the parameters defined with the API action.
     actionParams.forEach(parameter => {
       const destination = (parameter.in === 'path' ? pathParams : queryParams);
-      this.addParameter(parameter.name, destination);
+      this.addParameter(parameter, destination);
     });
 
     // Also add any API "snowflake" flags to the query params.
     Object.values(TwilioApiFlags).forEach(apiFlagName => {
-      this.addParameter(apiFlagName, queryParams);
+      this.addParameter({ name: apiFlagName }, queryParams);
     });
 
     // TODO: Possible extender event: "beforeInvokeApi"
@@ -93,11 +93,11 @@ class ApiCommandRunner {
     // TODO: Possible extender event: "afterInvokeApi"
   }
 
-  addParameter(parameterName, params) {
-    const cliFlagName = getFlagName(parameterName);
+  addParameter(parameter, params) {
+    const flag = getFlagConfig(parameter, this.actionDefinition);
 
-    if (doesObjectHaveProperty(this.flagValues, cliFlagName)) {
-      params[parameterName] = this.flagValues[cliFlagName];
+    if (doesObjectHaveProperty(this.flagValues, flag.name)) {
+      params[parameter.name] = this.flagValues[flag.name];
     }
   }
 }

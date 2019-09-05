@@ -60,6 +60,7 @@ TwilioApiCommand.flags = Object.assign(
 TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   const resource = NewCommandClass.actionDefinition.resource;
   const action = NewCommandClass.actionDefinition.action;
+  const commandId = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
 
   // Parameters
   let cmdFlags = {};
@@ -84,6 +85,12 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
     }
 
     if (flagType) {
+      // If the flag already exists, issue a warning. We're not equipped to
+      // handle such issues at the moment.
+      if (cmdFlags[flagConfig.name]) {
+        logger.warn(`The command "${commandId}" contains a conflicting flag: "--${flagConfig.name}"`);
+      }
+
       cmdFlags[flagConfig.name] = flagType(flagConfig);
     } else {
       logger.error(`Unknown parameter type '${param.schema.type}' for parameter '${param.name}'`);
@@ -107,7 +114,7 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
   }
 
   // Class statics
-  NewCommandClass.id = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
+  NewCommandClass.id = commandId;
   NewCommandClass.args = [];
   NewCommandClass.flags = Object.assign(cmdFlags, TwilioApiCommand.flags);
   NewCommandClass.description = getActionDescription(NewCommandClass.actionDefinition);

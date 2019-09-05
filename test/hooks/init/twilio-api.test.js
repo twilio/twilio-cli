@@ -6,9 +6,11 @@ const getFakeConfig = () => ({ plugins: [] });
 describe('hooks', () => {
   describe('init', () => {
     describe('twilio-api', () => {
-      test.it('provides multiple resources and actions', ctx => {
+      test.stderr().it('provides multiple resources and actions', ctx => {
         ctx.config = getFakeConfig();
         pluginFunc.call(ctx);
+
+        expect(ctx.stderr).to.be.empty; // Think conflicting command flag warnings
 
         const plugin = ctx.config.plugins[0];
 
