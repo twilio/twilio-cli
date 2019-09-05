@@ -1,6 +1,30 @@
 twilio-cli changelog
 =====================
 
+[2019-09-04] Version 1.5.0
+---------------------------
+**Library**
+- [PR #112](https://github.com/twilio/twilio-cli/pull/112): Upgrade to use the refactored cli-core. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #110](https://github.com/twilio/twilio-cli/pull/110): Add flag config utility for converting API params to CLI flags. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #109](https://github.com/twilio/twilio-cli/pull/109): Refactor the phone-number-buy tests to use the command class set up. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #108](https://github.com/twilio/twilio-cli/pull/108): Update the 'profile:use' command to use the new 'setActiveProfile' method. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+-  Pass Twiml in call update request
+
+**Conversations**
+- Add attributes to Conversations resources
+
+**Flex**
+- Adding `features_enabled` and `serverless_service_sids` to Flex Configuration
+
+**Messaging**
+- Message API required params updated **(breaking change)**
+
+**Preview**
+- Added support for the optional `CallSid` to `/BrandedCalls` endpoint
+
+
 [2019-08-21] Version 1.4.2
 ---------------------------
 **Library**
