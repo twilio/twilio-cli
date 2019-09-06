@@ -14,25 +14,15 @@ const fakeNumberUrl = `/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Incomi
 
 const fakeNgrokUrl = 'https://12345.ngrok.io';
 
-async function createCommand(ctx, args, useFakeNgrok) {
-  ctx.fakeNgrok = {
-    connect: sinon.fake.resolves(fakeNgrokUrl),
-    getUrl: () => {}
-  };
+async function patchCommand(ctx, useFakeNgrok) {
+  if (useFakeNgrok) {
+    ctx.fakeNgrok = {
+      connect: sinon.fake.resolves(fakeNgrokUrl),
+      getUrl: () => {}
+    };
 
-  ctx.testCmd = new NumberUpdate(
-    args,
-    ctx.fakeConfig,
-    {
-      async getCredentials(profileId) {
-        return {
-          apiKey: constants.FAKE_API_KEY,
-          apiSecret: constants.FAKE_API_SECRET + profileId
-        };
-      }
-    },
-    useFakeNgrok ? ctx.fakeNgrok : undefined
-  );
+    ctx.testCmd.ngrok = ctx.fakeNgrok;
+  }
 
   ctx.testCmd.inquirer.prompt = sinon.stub()
     .onFirstCall()
@@ -53,8 +43,9 @@ describe('commands', () => {
             }
           })
           .twilioCliEnv(Config)
+          .twilioCreateCommand(NumberUpdate, args)
           .stdout()
-          .do(ctx => createCommand(ctx, args, useFakeNgrok));
+          .do(ctx => patchCommand(ctx, useFakeNgrok));
       };
 
       setUpTest([fakeNumberSid, '--friendly-name', 'MyPhoneNumber', '-o', 'tsv'])

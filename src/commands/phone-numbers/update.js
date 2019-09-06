@@ -6,9 +6,9 @@ const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const IncomingPhoneNumberHelper = require('../../services/resource-helpers/api/v2010/incoming-phone-number');
 
 class NumberUpdate extends TwilioClientCommand {
-  constructor(argv, config, secureStorage, ngrok) {
-    super(argv, config, secureStorage);
-    this.ngrok = ngrok || require('ngrok');
+  constructor(argv, config) {
+    super(argv, config);
+    this.ngrok = require('ngrok');
   }
 
   async run() {
