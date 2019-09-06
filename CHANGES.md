@@ -1,6 +1,14 @@
 twilio-cli changelog
 =====================
 
+[2019-09-06] Version 1.5.1
+---------------------------
+**Library**
+- [PR #116](https://github.com/twilio/twilio-cli/pull/116): Make the 'phone-numbers:update' command constructor more generic. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #115](https://github.com/twilio/twilio-cli/pull/115): Add 'target-account-sid' flag for transferring phone numbers. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #114](https://github.com/twilio/twilio-cli/pull/114): Add limit flags to all 'list' commands. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2019-09-04] Version 1.5.0
 ---------------------------
 **Library**
