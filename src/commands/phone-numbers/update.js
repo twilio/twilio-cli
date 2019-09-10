@@ -74,7 +74,7 @@ class NumberUpdate extends TwilioClientCommand {
         proto: 'http',
         addr: urlPort,
         host_header: url.host,
-        bind_tls: false, // https not needed
+        bind_tls: true, // https only
         onLogEvent: message => this.logger.debug('ngrok: ' + message)
         /* eslint-enable camelcase */
       };
