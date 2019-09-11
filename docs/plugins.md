@@ -76,12 +76,6 @@ Now, you can run your plugin command from the CLI:
 twilio my-new-topic:my-new-command --help
 ```
 
-* NOTE: If you pull in [twilio-cli-core](https://github.com/twilio/twilio-cli-core) as a dependency, you will need to add `keytar` as a development dependency in order to develop and test locally:
-
-```
-npm install keytar --save-dev
-```
-
 ## 5. Publish your plugin to NPM
 
 Once you have your plugin working, publish it to npmjs.org as a JavaScript package using `npm publish`. The `twilio plugins:install <npm package name>` command will download your package from NPM.
