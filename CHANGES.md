@@ -1,6 +1,22 @@
 twilio-cli changelog
 =====================
 
+[2019-09-18] Version 1.6.0
+---------------------------
+**Library**
+- [PR #120](https://github.com/twilio/twilio-cli/pull/120): Enable npm auditing. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #118](https://github.com/twilio/twilio-cli/pull/118): Switch ngrok tunnels to use HTTPS endpoints. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Numbers**
+- Add v2 of the Identites API
+
+**Preview**
+- Changed authentication method for SDK Trusted Comms endpoints: `/CPS`, `/CurrentCall`, and `/Devices`. Please use `Authorization: Bearer <xCNAM JWT>` **(breaking change)**
+
+**Voice**
+- Add Recordings endpoints
+
+
 [2019-09-06] Version 1.5.1
 ---------------------------
 **Library**
