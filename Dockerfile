@@ -1,9 +1,8 @@
-FROM node:8-jessie
+FROM node:lts
 RUN apt-get update && apt-get install -y libsecret-1-dev
 
-RUN mkdir /cli
-WORKDIR /cli
+RUN mkdir /twilio
+WORKDIR /twilio
+
 COPY . .
-RUN npm install ./cli-test ./cli-core
-RUN npm install
-CMD ["npm", "test"]
+RUN npm link
