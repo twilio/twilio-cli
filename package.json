@@ -26,7 +26,7 @@
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.5",
     "@twilio/cli-test": "^2.0.1",
-    "aws-sdk": "^2.531.0",
+    "aws-sdk": "^2.535.0",
     "chai": "^4.2.0",
     "eslint": "^4.19.1",
     "eslint-config-oclif": "^1.5.1",
@@ -36,7 +36,7 @@
     "nock": "^10.0.6",
     "nyc": "^14.1.1",
     "rimraf": "^2.7.1",
-    "sinon": "^7.4.2",
+    "sinon": "^7.5.0",
     "tmp": "^0.1.0"
   },
   "engines": {
