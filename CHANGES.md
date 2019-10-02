@@ -1,6 +1,18 @@
 twilio-cli changelog
 =====================
 
+[2019-10-02] Version 1.6.1
+--------------------------
+**Library**
+- [PR #121](https://github.com/twilio/twilio-cli/pull/121): Update and add Docker image deployment. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Conversations**
+- Add media to Conversations Message resource
+
+**Supersim**
+- Add List endpoint to Sims resource for Super Sim Pilot
+
+
 [2019-09-18] Version 1.6.0
 ---------------------------
 **Library**
