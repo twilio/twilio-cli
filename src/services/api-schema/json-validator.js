@@ -49,7 +49,7 @@ class JSONSchemaValidator {
     }
 
     if (schema.maxItems && value.length > schema.maxItems) {
-      this.errors.push(`"${value}" item count (${value.length}) greater than max (${schema.minItems})`);
+      this.errors.push(`"${value}" item count (${value.length}) greater than max (${schema.maxItems})`);
     }
 
     if (schema.uniqueItems && new Set(value).size !== value.length) {
