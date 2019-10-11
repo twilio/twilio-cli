@@ -6,9 +6,16 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y libsecret-1-dev
 deploy:
-  provider: script
-  script: make docker-build && make docker-push
-  skip_cleanup: true
-  on:
-    tags: true
-    node: 'lts/*'
+  - provider: script
+    script: make docker-build && make docker-push
+    skip_cleanup: true
+    on:
+      tags: true
+      node: 'lts/*'
+  - provider: npm
+    email: twilio-ci@twilio.com
+    api_key:
+      secure: aseNt4M8/qLU5+Wh5f8Bqy8QEl6BT4id4qaq0fhRiVSrAOyb3em2nevjRRdZCVkLQvlV/v4uceo1h3kebXlj/4q9bHu0UnyNVnC9t+bZrSCRXfxWcvsq5XPKOwtXmLuVgNOhp6Zhd3Gaex4gyCummhMelXclLYhwOkp++SE0prY=
+    on:
+      tags: true
+      node: 'lts/*'
