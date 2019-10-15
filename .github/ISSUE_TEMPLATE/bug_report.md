@@ -4,8 +4,7 @@ about: Create a report to help us improve
 ---
 #### Issue Summary
 
-A summary of the issue and the environment in which it occurs. If suitable, include the steps required to reproduce the bug. Please feel free to include screenshots, screencasts, code examples.
-
+A summary of the issue and the environment in which it occurs. If suitable, include the steps required to reproduce the bug. Please feel free to include screenshots, screencasts, or code examples.
 
 #### Steps to Reproduce
 
@@ -17,5 +16,8 @@ Any other information you want to share that is relevant to the issue being repo
 
 #### Technical details:
 
-* twilio-cli Version: master (latest commit: [commit number])
-* Node.js Version: 8.12.0
+* `twilio version` output: 
+* Command output with debug logging enabled (adding `-l debug` to the end of the command):
+```
+output
+```
