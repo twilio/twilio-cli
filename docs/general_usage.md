@@ -2,9 +2,9 @@
 
 ### Multiple Twilio accounts/profiles
 
-When you run `twilio login` (an alias for `twilio profiles:add`), it stores your credentials and associates them with the provided profile ID. The first profile added will default to being the "active" profile. The active profile is used for all subsequent commands.
+When you run `twilio login` (an alias for `twilio profiles:create`), it stores your credentials and associates them with the provided profile ID. The first profile created will default to being the "active" profile. The active profile is used for all subsequent commands.
 
-To add additional profiles, run `twilio login` again but provide a different profile ID (like, `my_other_profile`). Then, when you run subsequent commands, just include `-p my_other_profile` in the command (e.g. `twilio phone-numbers:list -p my_other_profile`).
+To create additional profiles, run `twilio login` again but provide a different profile ID (like, `my_other_profile`). Then, when you run subsequent commands, just include `-p my_other_profile` in the command (e.g. `twilio phone-numbers:list -p my_other_profile`).
 
 Alternatively, you may switch which profile is active using the `twilio profiles:use` command. To see the full list of local profiles (including which profile is active), run `twilio profiles:list`.
 

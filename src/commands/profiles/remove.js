@@ -30,7 +30,7 @@ class ProfilesRemove extends TwilioClientCommand {
       this.logger.warn('Are you sure you want to remove the active profile? Run "twilio profiles:use" to set another profile as active.');
     }
     if (this.userConfig.profiles.length === 1) {
-      this.logger.warn('Are you sure you want to remove the last profile? Run "twilio profiles:add" to add another profile.');
+      this.logger.warn('Are you sure you want to remove the last profile? Run "twilio profiles:create" to create another profile.');
     }
   }
 

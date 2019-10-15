@@ -14,7 +14,7 @@ const FRIENDLY_STORAGE_LOCATIONS = {
   [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret'
 };
 
-class ProfilesAdd extends BaseCommand {
+class ProfilesCreate extends BaseCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
 
@@ -60,7 +60,7 @@ class ProfilesAdd extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'profileId',
-          message: this.getPromptMessage(ProfilesAdd.flags.profile.description),
+          message: this.getPromptMessage(ProfilesCreate.flags.profile.description),
           validate: input => Boolean(input)
         }
       ]);
@@ -72,7 +72,7 @@ class ProfilesAdd extends BaseCommand {
     if (!this.accountSid) {
       this.questions.push({
         name: 'accountSid',
-        message: this.getPromptMessage(ProfilesAdd.args[0].description),
+        message: this.getPromptMessage(ProfilesCreate.args[0].description),
         validate: input => Boolean(input)
       });
     }
@@ -83,7 +83,7 @@ class ProfilesAdd extends BaseCommand {
       this.questions.push({
         type: 'password',
         name: 'authToken',
-        message: this.getPromptMessage(ProfilesAdd.flags['auth-token'].description),
+        message: this.getPromptMessage(ProfilesCreate.flags['auth-token'].description),
         validate: input => Boolean(input)
       });
     }
@@ -195,10 +195,10 @@ class ProfilesAdd extends BaseCommand {
   }
 }
 
-ProfilesAdd.aliases = ['login'];
-ProfilesAdd.description = 'add a new profile to store Twilio Project credentials and configuration';
+ProfilesCreate.aliases = ['profiles:add', 'login'];
+ProfilesCreate.description = 'create a new profile to store Twilio Project credentials and configuration';
 
-ProfilesAdd.flags = Object.assign(
+ProfilesCreate.flags = Object.assign(
   {
     'auth-token': flags.string({
       description: 'Your Twilio Auth Token for your Twilio Project.'
@@ -214,11 +214,11 @@ ProfilesAdd.flags = Object.assign(
   TwilioClientCommand.flags // Yes! We _do_ want the same flags as TwilioClientCommand
 );
 
-ProfilesAdd.args = [
+ProfilesCreate.args = [
   {
     name: 'account-sid',
     description: 'The Account SID for your Twilio Project.'
   }
 ];
 
-module.exports = ProfilesAdd;
+module.exports = ProfilesCreate;
