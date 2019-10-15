@@ -2,17 +2,17 @@
 const sinon = require('sinon');
 const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
-const ProfilesAdd = require('../../../src/commands/profiles/add');
+const ProfilesCreate = require('../../../src/commands/profiles/create');
 const helpMessages = require('../../../src/services/messaging/help-messages');
 
 describe('commands', () => {
   describe('profiles', () => {
-    describe('add', () => {
-      const addTest = (commandArgs = [], profileId = 'default') =>
+    describe('create', () => {
+      const createTest = (commandArgs = [], profileId = 'default') =>
         test
           .twilioFakeProfile(ConfigData)
           .twilioCliEnv(Config)
-          .twilioCreateCommand(ProfilesAdd, commandArgs)
+          .twilioCreateCommand(ProfilesCreate, commandArgs)
           .stdout()
           .stderr()
           .do(ctx => {
@@ -34,7 +34,7 @@ describe('commands', () => {
             ctx.testCmd.inquirer.prompt = fakePrompt;
           });
 
-      addTest()
+      createTest()
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
             sid: constants.FAKE_ACCOUNT_SID
@@ -45,7 +45,7 @@ describe('commands', () => {
           });
         })
         .do(ctx => ctx.testCmd.run())
-        .it('runs profiles:add', ctx => {
+        .it('runs profiles:create', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
@@ -58,7 +58,7 @@ describe('commands', () => {
           );
         });
 
-      addTest(['not-an-account-sid'])
+      createTest(['not-an-account-sid'])
         .do(ctx => {
           const fakePrompt = ctx.testCmd.inquirer.prompt;
           fakePrompt.onThirdCall().resolves({
@@ -70,7 +70,7 @@ describe('commands', () => {
         .catch(/Account SID must be "AC"/)
         .it('fails for invalid account SIDs');
 
-      addTest()
+      createTest()
         .do(ctx => {
           process.env.TWILIO_ACCOUNT_SID = constants.FAKE_ACCOUNT_SID;
           process.env.TWILIO_API_KEY = constants.FAKE_API_KEY;
@@ -84,12 +84,12 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .exit(1)
-        .it('prompts when adding default profile with env vars set', ctx => {
+        .it('prompts when creating default profile with env vars set', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain('Cancelled');
         });
 
-      addTest()
+      createTest()
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(500, {
             error: 'oops'
@@ -102,7 +102,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Could not validate the provided credentials');
         });
 
-      addTest()
+      createTest()
         .nock('https://api.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
             sid: constants.FAKE_ACCOUNT_SID
@@ -115,7 +115,7 @@ describe('commands', () => {
         .catch(/Could not create an API Key/)
         .it('fails to create an API key');
 
-      addTest(['--region', 'dev'])
+      createTest(['--region', 'dev'])
         .nock('https://api.dev.twilio.com', api => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
             sid: constants.FAKE_ACCOUNT_SID

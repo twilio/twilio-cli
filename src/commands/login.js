@@ -1,10 +1,10 @@
-const ProfilesAdd = require('./profiles/add');
+const ProfilesCreate = require('./profiles/create');
 
-class Login extends ProfilesAdd {
+class Login extends ProfilesCreate {
 }
 
-Login.aliases = ['profiles:add'];
-Login.flags = ProfilesAdd.flags;
-Login.args = ProfilesAdd.args;
+Login.aliases = ['profiles:create', 'profiles:add'];
+Login.flags = ProfilesCreate.flags;
+Login.args = ProfilesCreate.args;
 
 module.exports = Login;
