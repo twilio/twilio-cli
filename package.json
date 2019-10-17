@@ -20,13 +20,13 @@
     "chalk": "^2.4.2",
     "inquirer": "^6.5.2",
     "ngrok": "^3.2.5",
-    "twilio": "^3.35.1"
+    "twilio": "^3.36.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.5",
     "@twilio/cli-test": "^2.0.1",
-    "aws-sdk": "^2.540.0",
+    "aws-sdk": "^2.551.0",
     "chai": "^4.2.0",
     "eslint": "^4.19.1",
     "eslint-config-oclif": "^1.5.1",
