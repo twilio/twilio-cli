@@ -1,22 +1,24 @@
 language: node_js
 dist: xenial
 node_js:
-  - 'lts/*'
+- lts/*
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y libsecret-1-dev
+- sudo apt-get update
+- sudo apt-get install -y libsecret-1-dev
 deploy:
+  matrix:
   - provider: script
     script: make docker-build && make docker-push
     skip_cleanup: true
     on:
       tags: true
-      node: 'lts/*'
+      node: lts/*
   - provider: npm
     skip_cleanup: true
     email: twilio-ci@twilio.com
     api_key:
-      secure: aseNt4M8/qLU5+Wh5f8Bqy8QEl6BT4id4qaq0fhRiVSrAOyb3em2nevjRRdZCVkLQvlV/v4uceo1h3kebXlj/4q9bHu0UnyNVnC9t+bZrSCRXfxWcvsq5XPKOwtXmLuVgNOhp6Zhd3Gaex4gyCummhMelXclLYhwOkp++SE0prY=
+      secure: wl//atwY07ScAGJvoPdNzVQ71xK44KsahgqDSZFz869Y1UZmo12MZavBpB8z8BtiVDdiipM5SmvKqUByAPgRWZCwJeFFD7KMzc36CZ1oC6bnzRtTWbz0XmSZfccY3gSKD2FP7iGYAFZOjb+XRc9N9hZFKBcdDUCX+aQMuhGHLWskzPpYC2tVaGH+bAiUaSDcqIZaPUbjJ7czokA5jBG8uZRLxieN6vY6ie5tyiT6yAiLO+GG8Pyx9Jdkq93x1CEmy8ix62ggelUPmbnUNOEuchEX+vZKH6XabEv08Oqrj0lwqPE2izGVuGOpxOt7b7WFEmWQFVD6mKYlNoDkSWCzGaJZDJ0CVsrvIyayRWtpB9nZAtarprOz048tPvCC33qJ/HoGi4wHmF/yButnunIdt9iec4mAKQbk1j6rpiw0notNHSY/3oONBchYkpDE05cJ2a8IbAmUUDlkD0IlDIuBVQ9yi3opeO+1omjlLkiYte9pHNpi6fUgzpuL+cl4Gaktj1BLUjSpbI9ZZIo8VzFUoC4EiCNuC4kMnmKwoBIu82V8inQQCfgRQt5O4MgINkK8d40HOzLEWkT8+q6xb4vvEBGWw+o1cxsPorVirXxpS8lI63dicmU2IhxBRlyP8m0hoT1L7XP4j4S/kIroIB9bbZ8hS/8yfKhCpHgddbnu6Lc=
     on:
       tags: true
-      node: 'lts/*'
+      node: lts/*
+
