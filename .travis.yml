@@ -6,7 +6,6 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install -y libsecret-1-dev
 deploy:
-  matrix:
   - provider: script
     script: make docker-build && make docker-push
     skip_cleanup: true
