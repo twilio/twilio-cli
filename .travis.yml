@@ -13,6 +13,7 @@ deploy:
       tags: true
       node: 'lts/*'
   - provider: npm
+    skip_cleanup: true
     email: twilio-ci@twilio.com
     api_key:
       secure: aseNt4M8/qLU5+Wh5f8Bqy8QEl6BT4id4qaq0fhRiVSrAOyb3em2nevjRRdZCVkLQvlV/v4uceo1h3kebXlj/4q9bHu0UnyNVnC9t+bZrSCRXfxWcvsq5XPKOwtXmLuVgNOhp6Zhd3Gaex4gyCummhMelXclLYhwOkp++SE0prY=
