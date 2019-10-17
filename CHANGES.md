@@ -1,6 +1,13 @@
 twilio-cli changelog
 =====================
 
+[2019-10-17] Version 1.7.1
+--------------------------
+**Library**
+- [PR #128](https://github.com/twilio/twilio-cli/pull/128): Update npm key. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+- [PR #127](https://github.com/twilio/twilio-cli/pull/127): Skip cleanup on deploy. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+
 [2019-10-17] Version 1.7.0
 --------------------------
 **Library**
