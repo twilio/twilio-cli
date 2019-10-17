@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2019-10-17] Version 1.7.2
+--------------------------
+**Library**
+- [PR #129](https://github.com/twilio/twilio-cli/pull/129): Remove matrix. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+
 [2019-10-17] Version 1.7.1
 --------------------------
 **Library**
