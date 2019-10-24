@@ -118,6 +118,22 @@ describe('commands', () => {
           }
         );
 
+      setUpTest([fakeNumberSid, '--sms-url', 'https://localhost:4567/', '-o', 'tsv'], { useFakeNgrok: true })
+        .nock('https://api.twilio.com', api => {
+          api.get(fakeNumberUrl).reply(200, fakeNumberResource);
+        })
+        .do(ctx => {
+          ctx.fakeNgrok.connect = () => {
+            const fakeTooManyColonsError = { details: { err: 'too many colons in address' } };
+            throw fakeTooManyColonsError;
+          };
+        })
+        .do(ctx => ctx.testCmd.run())
+        .catch(/Installed version of ngrok does not support tunnels to https endpoints/)
+        .it(
+          `runs incoming-phone-number:update ${fakeNumberSid} --sms-url <https LOCALHOST url> and catches the ngrok error`
+        );
+
       setUpTest(
         [
           fakeNumberSid,

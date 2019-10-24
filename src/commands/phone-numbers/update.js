@@ -84,7 +84,6 @@ class NumberUpdate extends TwilioClientCommand {
         this.logger.debug('ngrok response: ' + JSON.stringify(error));
         if (isHttps && error.details.err.includes('too many colons in address')) {
           // We don't have a current ngrok version downloaded
-          // TODO: Update it for them?
           throw new TwilioCliError(
             'Installed version of ngrok does not support tunnels to https endpoints. ' +
               'To update ngrok: 1) uninstall the Twilio CLI, ' +
