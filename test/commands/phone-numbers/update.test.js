@@ -24,7 +24,8 @@ async function patchCommand(ctx, useFakeNgrok) {
     ctx.testCmd.ngrok = ctx.fakeNgrok;
   }
 
-  ctx.testCmd.inquirer.prompt = sinon.stub()
+  ctx.testCmd.inquirer.prompt = sinon
+    .stub()
     .onFirstCall()
     .resolves({ affirmative: true });
 }
@@ -85,7 +86,26 @@ describe('commands', () => {
         })
         .stderr()
         .do(ctx => ctx.testCmd.run())
-        .it(`runs incoming-phone-number:update ${fakeNumberSid} --sms-url <LOCALHOST url> and starts ngrok`,
+        .it(`runs incoming-phone-number:update ${fakeNumberSid} --sms-url <LOCALHOST url> and starts ngrok`, ctx => {
+          expect(ctx.stdout).to.contain(`sid\tresult\tsmsUrl\n${fakeNumberSid}\tSuccess\t${fakeNgrokUrl}/`);
+          expect(ctx.stderr).to.contain('WARNING: Detected localhost');
+          expect(ctx.stderr).to.contain('ngrok is running');
+          expect(ctx.fakeNgrok.connect.calledOnce).to.be.true;
+          const tunnel = ctx.fakeNgrok.connect.getCall(0).args[0];
+          expect(tunnel.proto).to.equal('http');
+          expect(tunnel.addr).to.equal('4567');
+          expect(tunnel.host_header).to.equal('localhost:4567');
+        });
+
+      setUpTest([fakeNumberSid, '--sms-url', 'https://localhost:4567/', '-o', 'tsv'], { useFakeNgrok: true })
+        .nock('https://api.twilio.com', api => {
+          api.get(fakeNumberUrl).reply(200, fakeNumberResource);
+          api.post(fakeNumberUrl).reply(200, fakeNumberResource);
+        })
+        .stderr()
+        .do(ctx => ctx.testCmd.run())
+        .it(
+          `runs incoming-phone-number:update ${fakeNumberSid} --sms-url <https LOCALHOST url> and starts ngrok`,
           ctx => {
             expect(ctx.stdout).to.contain(`sid\tresult\tsmsUrl\n${fakeNumberSid}\tSuccess\t${fakeNgrokUrl}/`);
             expect(ctx.stderr).to.contain('WARNING: Detected localhost');
@@ -93,7 +113,7 @@ describe('commands', () => {
             expect(ctx.fakeNgrok.connect.calledOnce).to.be.true;
             const tunnel = ctx.fakeNgrok.connect.getCall(0).args[0];
             expect(tunnel.proto).to.equal('http');
-            expect(tunnel.addr).to.equal('4567');
+            expect(tunnel.addr).to.equal('https://localhost:4567');
             expect(tunnel.host_header).to.equal('localhost:4567');
           }
         );
