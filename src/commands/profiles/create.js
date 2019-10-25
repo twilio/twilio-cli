@@ -170,7 +170,8 @@ class ProfilesCreate extends BaseCommand {
   }
 
   async saveCredentials() {
-    const apiKeyFriendlyName = `twilio-cli for ${os.userInfo().username} on ${os.hostname()}`.substring(0, 64);
+    let apiKeyFriendlyName = `twilio-cli for ${os.userInfo().username} on ${os.hostname()}`;
+    apiKeyFriendlyName = apiKeyFriendlyName.substring(0, 64);
     let apiKey = null;
 
     const twilioClient = this.getTwilioClient();
