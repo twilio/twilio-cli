@@ -4,6 +4,7 @@ const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const ProfilesCreate = require('../../../src/commands/profiles/create');
 const helpMessages = require('../../../src/services/messaging/help-messages');
+const os = require('os');
 
 describe('commands', () => {
   describe('profiles', () => {
@@ -46,6 +47,33 @@ describe('commands', () => {
         })
         .do(ctx => ctx.testCmd.run())
         .it('runs profiles:create', ctx => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
+          expect(ctx.stderr).to.contain('Saved default.');
+          expect(ctx.stderr).to.contain('configuration saved');
+          expect(ctx.stderr).to.contain(
+            `Created API Key ${constants.FAKE_API_KEY} and stored the secret using libsecret`
+          );
+          expect(ctx.stderr).to.contain(
+            `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`
+          );
+        });
+
+      createTest()
+        .nock('https://api.twilio.com', api => {
+          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
+            sid: constants.FAKE_ACCOUNT_SID
+          });
+          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(200, {
+            sid: constants.FAKE_API_KEY,
+            secret: constants.FAKE_API_SECRET
+          });
+        })
+        .do(ctx => {
+          sinon.stub(os, 'hostname').returns('X'.repeat(64));
+          return ctx.testCmd.run();
+        })
+        .it('truncates apiKeyFriendlyName to 64 characters', ctx => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
