@@ -61,11 +61,15 @@ describe('commands', () => {
 
       createTest()
         .do(ctx => {
-          sinon.stub(os, 'hostname').returns('X'.repeat(64));
+          sinon.stub(os, 'hostname').returns('some_super_long_fake_hostname');
+          sinon.stub(os, 'userInfo').returns({
+            username: 'some_super_long_fake_username'
+          });
           ctx.returned = ctx.testCmd.getApiKeyFriendlyName();
         })
         .it('truncates apiKeyFriendlyName to 64 characters', ctx => {
           expect(ctx.returned.length).to.equal(64);
+          expect(ctx.returned).to.equal('twilio-cli for some_super_long_fake_username on some_super_long_');
         });
 
       createTest(['not-an-account-sid'])
