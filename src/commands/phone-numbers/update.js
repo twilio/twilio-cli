@@ -45,9 +45,7 @@ class NumberUpdate extends TwilioClientCommand {
     this.output(results);
 
     if (hasLocalHostProp) {
-      this.logger.info(
-        'ngrok is running. Open ' + chalk.blueBright(this.ngrok.getUrl()) + ' to view tunnel activity.'
-      );
+      this.logger.info('ngrok is running. Open ' + chalk.blueBright(this.ngrok.getUrl()) + ' to view tunnel activity.');
       this.logger.info('Press CTRL-C to exit.');
       this.logger.debug('Tunnels:');
       this.logger.debug(this.tunnels);
@@ -58,13 +56,14 @@ class NumberUpdate extends TwilioClientCommand {
     if (props && props[propName]) {
       const url = new URL(props[propName]);
 
-      return ['localhost', '127.0.0.1'].includes(url.hostname) && url.protocol === 'http:';
+      return ['localhost', '127.0.0.1'].includes(url.hostname);
     }
   }
 
   async createTunnel(props, propName) {
     const url = new URL(props[propName]);
-    const urlPort = url.port || '80';
+    const isHttps = url.protocol === 'https:';
+    const urlPort = url.port || (isHttps ? '443' : '80');
     let newBaseUrl = this.tunnels[urlPort];
 
     // Create a new tunnel if one does not yet exist for this port.
@@ -72,7 +71,7 @@ class NumberUpdate extends TwilioClientCommand {
       const newTunnel = {
         /* eslint-disable camelcase */
         proto: 'http',
-        addr: urlPort,
+        addr: isHttps ? `https://${url.host}` : urlPort,
         host_header: url.host,
         bind_tls: true, // https only
         onLogEvent: message => this.logger.debug('ngrok: ' + message)
@@ -82,7 +81,18 @@ class NumberUpdate extends TwilioClientCommand {
       try {
         newBaseUrl = await this.ngrok.connect(newTunnel);
       } catch (error) {
-        throw new TwilioCliError((error.details && error.details.err) || error);
+        this.logger.debug('ngrok response: ' + JSON.stringify(error));
+        if (isHttps && error.details.err.includes('too many colons in address')) {
+          // We don't have a current ngrok version downloaded
+          throw new TwilioCliError(
+            'Installed version of ngrok does not support tunnels to https endpoints. ' +
+              'To update ngrok: 1) uninstall the Twilio CLI, ' +
+              '2) remove any zip files in ~/.ngrok, ' +
+              '3) reinstall the CLI'
+          );
+        } else {
+          throw new TwilioCliError((error.details && error.details.err) || error);
+        }
       }
 
       this.tunnels[urlPort] = newBaseUrl;
@@ -94,16 +104,20 @@ class NumberUpdate extends TwilioClientCommand {
 
   async confirmTunnelCreation() {
     this.logger.warn('WARNING: Detected localhost URL.');
-    this.logger.warn('For convenience, we will automatically create an encrypted tunnel using the 3rd-party service https://ngrok.io');
+    this.logger.warn(
+      'For convenience, we will automatically create an encrypted tunnel using the 3rd-party service https://ngrok.io'
+    );
     this.logger.warn('While running, this will expose your computer to the internet.');
     this.logger.warn('Please exit this command after testing.');
 
-    const confirm = await this.inquirer.prompt([{
-      type: 'confirm',
-      name: 'affirmative',
-      message: 'Do you want to proceed?',
-      default: false
-    }]);
+    const confirm = await this.inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'affirmative',
+        message: 'Do you want to proceed?',
+        default: false
+      }
+    ]);
 
     if (!confirm.affirmative) {
       throw new TwilioCliError('Cancelled');
@@ -125,7 +139,8 @@ NumberUpdate.PropertyFlags = {
     description: 'The HTTP method Twilio will use when making requests to the SmsUrl.'
   }),
   'sms-fallback-url': flags.string({
-    description: 'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl.'
+    description:
+      'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl.'
   }),
   'sms-fallback-method': flags.enum({
     options: ['GET', 'POST'],
