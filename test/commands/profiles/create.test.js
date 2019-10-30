@@ -4,6 +4,7 @@ const { expect, test, constants } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 const ProfilesCreate = require('../../../src/commands/profiles/create');
 const helpMessages = require('../../../src/services/messaging/help-messages');
+const os = require('os');
 
 describe('commands', () => {
   describe('profiles', () => {
@@ -56,6 +57,19 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain(
             `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`
           );
+        });
+
+      createTest()
+        .do(ctx => {
+          sinon.stub(os, 'hostname').returns('some_super_long_fake_hostname');
+          sinon.stub(os, 'userInfo').returns({
+            username: 'some_super_long_fake_username'
+          });
+          ctx.returned = ctx.testCmd.getApiKeyFriendlyName();
+        })
+        .it('truncates apiKeyFriendlyName to 64 characters', ctx => {
+          expect(ctx.returned.length).to.equal(64);
+          expect(ctx.returned).to.equal('twilio-cli for some_super_long_fake_username on some_super_long_');
         });
 
       createTest(['not-an-account-sid'])
