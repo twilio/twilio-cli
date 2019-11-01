@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2019-11-01] Version 1.8.1
+--------------------------
+**Library**
+- [PR #136](https://github.com/twilio/twilio-cli/pull/136): chore: update dependencies. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2019-10-30] Version 1.8.0
 --------------------------
 **Library**
