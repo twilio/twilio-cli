@@ -8,7 +8,7 @@ const IncomingPhoneNumberHelper = require('../../services/resource-helpers/api/v
 class NumberUpdate extends TwilioClientCommand {
   constructor(argv, config) {
     super(argv, config);
-    this.ngrok = require('ngrok');
+    this.ngrok = null;
   }
 
   async run() {
@@ -31,6 +31,10 @@ class NumberUpdate extends TwilioClientCommand {
         this.userConfig.ackPrompt(promptId);
         const configSavedMessage = await this.configFile.save(this.userConfig);
         this.logger.info(configSavedMessage);
+      }
+
+      if (!this.ngrok) {
+        this.ngrok = await this.install('ngrok');
       }
 
       // Create each tunnel. Note that we can't parallelize this since we're only creating 1 tunnel
