@@ -28,6 +28,9 @@ class ProfilesCreate extends BaseCommand {
   async run() {
     await super.run();
 
+    // Eagerly load up the credential store. No need to proceed if this fails.
+    await this.secureStorage.loadKeytar();
+
     this.loadArguments();
     await this.promptForProfileId();
 
