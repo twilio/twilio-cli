@@ -4,7 +4,7 @@ githooks:
 	ln -sf ../../githooks/pre-commit .git/hooks/pre-commit
 
 install: githooks
-	npm install
+	npm install --no-optional
 
 test:
 	npm test

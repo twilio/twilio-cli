@@ -19,8 +19,10 @@
     "@twilio/plugin-debugger": "^1.1.8",
     "chalk": "^2.4.2",
     "inquirer": "^6.5.2",
-    "ngrok": "^3.2.5",
     "twilio": "^3.37.1"
+  },
+  "optionalDependencies": {
+    "ngrok": "^3.2.5"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
