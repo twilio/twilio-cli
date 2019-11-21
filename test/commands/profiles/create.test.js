@@ -33,6 +33,7 @@ describe('commands', () => {
                 authToken: constants.FAKE_API_SECRET
               });
             ctx.testCmd.inquirer.prompt = fakePrompt;
+            ctx.testCmd.secureStorage.loadKeytar = sinon.fake.resolves(true);
           });
 
       createTest()
@@ -128,6 +129,14 @@ describe('commands', () => {
         .do(ctx => ctx.testCmd.run())
         .catch(/Could not create an API Key/)
         .it('fails to create an API key');
+
+      createTest()
+        .do(ctx => {
+          ctx.testCmd.secureStorage.loadKeytar = sinon.fake.rejects('ugh');
+        })
+        .do(ctx => ctx.testCmd.run())
+        .catch(/ugh/)
+        .it('fails early if keytar cannot be loaded');
 
       createTest(['--region', 'dev'])
         .nock('https://api.dev.twilio.com', api => {
