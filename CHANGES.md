@@ -1,6 +1,23 @@
 twilio-cli changelog
 =====================
 
+[2019-11-21] Version 1.8.3
+--------------------------
+**Library**
+- [PR #139](https://github.com/twilio/twilio-cli/pull/139): fix: eagerly load keytar during profile creation. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #140](https://github.com/twilio/twilio-cli/pull/140): fix: make ngrok an optional dependency since it is installed at runtime. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #138](https://github.com/twilio/twilio-cli/pull/138): fix: dynamically install ngrok and zork if needed. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Add optional `twiml` parameter for call create
+
+**Chat**
+- Added `delete` method in UserChannel resource
+
+**Taskrouter**
+- Support ReEvaluateTasks parameter on Workflow update
+
+
 [2019-11-13] Version 1.8.2
 --------------------------
 **Api**
