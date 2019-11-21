@@ -176,6 +176,7 @@ describe('base-commands', () => {
         .stderr()
         .twilioCreateCommand(getCommandClass(numberUpdateActionDefinition), [
           '--sid', fakeCallResponse.sid,
+          '--account-sid', 'AC012',
           '--target-account-sid', 'AC123'
         ])
         .do(ctx => {
