@@ -96,7 +96,8 @@ class ApiCommandRunner {
   addParameter(parameter, params) {
     const flag = getFlagConfig(parameter, this.actionDefinition);
 
-    if (doesObjectHaveProperty(this.flagValues, flag.name)) {
+    // Add the param if it does't exist already and we have a value to add.
+    if (!doesObjectHaveProperty(params, parameter.name) && doesObjectHaveProperty(this.flagValues, flag.name)) {
       params[parameter.name] = this.flagValues[flag.name];
     }
   }
