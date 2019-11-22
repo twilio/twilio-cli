@@ -1,6 +1,15 @@
 twilio-cli changelog
 =====================
 
+[2019-11-22] Version 1.8.4
+--------------------------
+**Library**
+- [PR #141](https://github.com/twilio/twilio-cli/pull/141): fix: Don't overwrite parameters when building request. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Conversations**
+- Allow Messaging Service update
+
+
 [2019-11-21] Version 1.8.3
 --------------------------
 **Library**
