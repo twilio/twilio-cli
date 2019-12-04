@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2019-12-04] Version 1.8.5
+--------------------------
+**Library**
+- [PR #142](https://github.com/twilio/twilio-cli/pull/142): feat: add the official autopilot plugin to the trusted plugins list. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+
 [2019-11-22] Version 1.8.4
 --------------------------
 **Library**
