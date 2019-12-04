@@ -1,7 +1,8 @@
 const { logger } = require('@twilio/cli-core').services.logging;
 const ALLOWED_ORGS = [
   '@twilio/',
-  '@twilio-labs/'
+  '@twilio-labs/',
+  '@dabblelab/plugin-autopilot'
 ];
 
 function isTwilioPlugin(options) {
