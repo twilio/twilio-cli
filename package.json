@@ -105,9 +105,9 @@
     "url": "https://github.com/twilio/twilio-cli.git"
   },
   "scripts": {
-    "postpack": "rimraf oclif.manifest.json npm-shrinkwrap.json",
+    "postpack": "rimraf oclif.manifest.json",
     "posttest": "eslint --ignore-path .gitignore . && npm audit",
-    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
+    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
     "test": "nyc --check-coverage --lines 90 --reporter=html --reporter=text mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md",
     "postinstall": "node welcome.js"

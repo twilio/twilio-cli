@@ -15,6 +15,7 @@ twilio.env
 .env
 .history
 package-lock.json
+npm-shrinkwrap.json
 
 ### Backup package.json files created during release ###
 *.bak
