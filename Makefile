@@ -1,16 +1,17 @@
-.PHONY: githooks install test clean docker-build docker-push
+.PHONY: githooks clean install test docker-build docker-push
 
 githooks:
 	ln -sf ../../githooks/pre-commit .git/hooks/pre-commit
 
-install: githooks
+clean:
+	rm -rf node_modules
+
+install: githooks clean
+	rm -f package-lock.json
 	npm install --no-optional
 
 test:
 	npm test
-
-clean:
-	rm -rf node_modules
 
 API_DEFINITIONS_SHA=$(shell git log --oneline | grep Regenerated | head -n1 | cut -d ' ' -f 5)
 docker-build:
