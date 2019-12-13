@@ -22,7 +22,7 @@
     "twilio": "^3.39.0"
   },
   "optionalDependencies": {
-    "ngrok": "^3.2.5"
+    "ngrok": "^3.2.7"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
@@ -105,9 +105,9 @@
     "url": "https://github.com/twilio/twilio-cli.git"
   },
   "scripts": {
-    "postpack": "rimraf oclif.manifest.json",
+    "postpack": "rimraf oclif.manifest.json npm-shrinkwrap.json",
     "posttest": "eslint --ignore-path .gitignore . && npm audit",
-    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
+    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
     "test": "nyc --check-coverage --lines 90 --reporter=html --reporter=text mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md",
     "postinstall": "node welcome.js"
