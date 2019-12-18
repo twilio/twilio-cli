@@ -1,6 +1,24 @@
 twilio-cli changelog
 =====================
 
+[2019-12-18] Version 1.9.1
+--------------------------
+**Library - Fix**
+- [PR #144](https://github.com/twilio/twilio-cli/pull/144): rollback the lock file changes and remove the lock file during install. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Preview**
+- Add `/Insights/SuccessRate` endpoint for Businesses Branded Calls (Verified by Twilio)
+
+**Studio**
+- StudioV2 API in beta
+
+**Verify**
+- Add `MailerSid` property to Verify Service resource.
+
+**Wireless**
+- Added `data_limit_strategy` to Rate Plan resource.
+
+
 [2019-12-12] Version 1.9.0
 --------------------------
 **Library**
