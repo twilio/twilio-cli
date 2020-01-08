@@ -1,6 +1,15 @@
 twilio-cli changelog
 =====================
 
+[2020-01-08] Version 1.9.2
+--------------------------
+**Numbers**
+- Add Regulatory Compliance CRUD APIs
+
+**Studio**
+- Add parameter validation for Studio v2 Flows API
+
+
 [2019-12-18] Version 1.9.1
 --------------------------
 **Library - Fix**
