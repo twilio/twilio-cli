@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2020-01-23] Version 1.9.4
+--------------------------
+**Library - Fix**
+- [PR #150](https://github.com/twilio/twilio-cli/pull/150): travis npm deploy. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+
 [2020-01-23] Version 1.9.3
 --------------------------
 **Api**
