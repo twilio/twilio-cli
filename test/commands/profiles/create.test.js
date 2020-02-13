@@ -87,6 +87,22 @@ describe('commands', () => {
 
       createTest()
         .do(ctx => {
+          const fakePrompt = ctx.testCmd.inquirer.prompt;
+          fakePrompt.onThirdCall().resolves({
+            accountSid: constants.FAKE_ACCOUNT_SID,
+            authToken: constants.FAKE_API_SECRET.repeat(3)
+          });
+
+          return ctx.testCmd.run();
+        })
+        .exit(1)
+        .it('fails for a too long auth token', ctx => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('Please double check your auth token, you may have pasted it more than once.');
+        });
+
+      createTest()
+        .do(ctx => {
           process.env.TWILIO_ACCOUNT_SID = constants.FAKE_ACCOUNT_SID;
           process.env.TWILIO_API_KEY = constants.FAKE_API_KEY;
           process.env.TWILIO_API_SECRET = constants.FAKE_API_SECRET;
