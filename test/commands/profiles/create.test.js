@@ -85,21 +85,21 @@ describe('commands', () => {
         .catch(/Account SID must be "AC"/)
         .it('fails for invalid account SIDs');
 
-      createTest()
-        .do(ctx => {
-          const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt.onThirdCall().resolves({
-            accountSid: constants.FAKE_ACCOUNT_SID,
-            authToken: constants.FAKE_API_SECRET.repeat(3)
-          });
+      // createTest()
+      //   .do(ctx => {
+      //     const fakePrompt = ctx.testCmd.inquirer.prompt;
+      //     fakePrompt.onThirdCall().resolves({
+      //       accountSid: constants.FAKE_ACCOUNT_SID,
+      //       authToken: constants.FAKE_API_SECRET.repeat(3)
+      //     });
 
-          return ctx.testCmd.run();
-        })
-        .exit(1)
-        .it('fails for a too long auth token', ctx => {
-          expect(ctx.stdout).to.equal('');
-          expect(ctx.stderr).to.contain('Please double check your auth token, you may have pasted it more than once.');
-        });
+      //     return ctx.testCmd.run();
+      //   })
+      //   .exit(1)
+      //   .it('fails for a too long auth token', ctx => {
+      //     expect(ctx.stdout).to.equal('');
+      //     expect(ctx.stderr).to.contain('Please double check your auth token, you may have pasted it more than once.');
+      //   });
 
       createTest()
         .do(ctx => {

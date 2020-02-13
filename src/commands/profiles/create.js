@@ -81,13 +81,21 @@ class ProfilesCreate extends BaseCommand {
     }
   }
 
+  validateAuthTokenLength(input) {
+    if (input.length > 32) {
+      this.logger.error('Please double check your auth token, you may have pasted it more than once. Please re-enter your auth token or press enter to continue.');
+      return false;
+    }
+    return true;
+  }
+
   validateAuthToken() {
     if (!this.authToken) {
       this.questions.push({
         type: 'password',
         name: 'authToken',
         message: this.getPromptMessage(ProfilesCreate.flags['auth-token'].description),
-        validate: input => Boolean(input)
+        validate: input => this.validateAuthTokenLength(input)
       });
     }
   }
@@ -167,9 +175,6 @@ class ProfilesCreate extends BaseCommand {
       return true;
     } catch (err) {
       this.logger.error('Could not validate the provided credentials. Not saving.');
-      if (this.authToken.length > 32) {
-        this.logger.error('Please double check your auth token, you may have pasted it more than once.');
-      }
       this.logger.debug(err);
       return false;
     }
