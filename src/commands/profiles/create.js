@@ -167,6 +167,9 @@ class ProfilesCreate extends BaseCommand {
       return true;
     } catch (err) {
       this.logger.error('Could not validate the provided credentials. Not saving.');
+      if (this.authToken.length > 32) {
+        this.logger.error('Please double check your auth token, you may have pasted it more than once.');
+      }
       this.logger.debug(err);
       return false;
     }

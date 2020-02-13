@@ -97,7 +97,7 @@ Before you submit your pull request consider the following guidelines:
   * `cd ..`
   * `git clone https://github.com/twilio/twilio-cli.git`
   * `cd twilio-cli`
-  * In `package.json` replace `@twilio/cli-core": "<Version Number>"` with `@twilio/cli-core": "file:../twilio-cli-core`
+  * In `package.json` replace `"@twilio/cli-core": "<Version Number>"` with `"@twilio/cli-core": "file:../twilio-cli-core"`
   * `make clean install`
   * Test that everything is wired up correctuly with `./bin/run`
 
