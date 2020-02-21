@@ -30,22 +30,24 @@ describe('commands', () => {
               .onThirdCall()
               .resolves({
                 accountSid: constants.FAKE_ACCOUNT_SID,
-                authToken: constants.FAKE_API_SECRET
+                authToken: '0'.repeat(32)
               });
             ctx.testCmd.inquirer.prompt = fakePrompt;
             ctx.testCmd.secureStorage.loadKeytar = sinon.fake.resolves(true);
           });
 
+      const mockSuccess = api => {
+        api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
+          sid: constants.FAKE_ACCOUNT_SID
+        });
+        api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(200, {
+          sid: constants.FAKE_API_KEY,
+          secret: constants.FAKE_API_SECRET
+        });
+      };
+
       createTest()
-        .nock('https://api.twilio.com', api => {
-          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
-            sid: constants.FAKE_ACCOUNT_SID
-          });
-          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(200, {
-            sid: constants.FAKE_API_KEY,
-            secret: constants.FAKE_API_SECRET
-          });
-        })
+        .nock('https://api.twilio.com', mockSuccess)
         .do(ctx => ctx.testCmd.run())
         .it('runs profiles:create', ctx => {
           expect(ctx.stdout).to.equal('');
@@ -85,21 +87,34 @@ describe('commands', () => {
         .catch(/Account SID must be "AC"/)
         .it('fails for invalid account SIDs');
 
-      // createTest()
-      //   .do(ctx => {
-      //     const fakePrompt = ctx.testCmd.inquirer.prompt;
-      //     fakePrompt.onSecondCall().resolves({
-      //       accountSid: constants.FAKE_ACCOUNT_SID,
-      //       authToken: constants.FAKE_API_SECRET.repeat(4)
-      //     });
-      //
-      //     return ctx.testCmd.run();
-      //   })
-      //   .exit(1)
-      //   .it('fails for a too long auth token', ctx => {
-      //     expect(ctx.stdout).to.equal('');
-      //     expect(ctx.stderr).to.contain('Please double check your auth token, you may have pasted it more than once.  Please re-enter your auth token or press enter to continue.');
-      //   });
+      createTest()
+        .do(ctx => {
+          const fakePrompt = ctx.testCmd.inquirer.prompt;
+          fakePrompt.onThirdCall().resolves({
+            accountSid: constants.FAKE_ACCOUNT_SID,
+            authToken: '0'
+          });
+
+          return ctx.testCmd.run();
+        })
+        .catch(/Auth Token must be 32/)
+        .it('fails for invalid Auth Tokens');
+
+      createTest(['--skip-parameter-validation'])
+        .nock('https://api.twilio.com', mockSuccess)
+        .do(ctx => {
+          const fakePrompt = ctx.testCmd.inquirer.prompt;
+          fakePrompt.onThirdCall().resolves({
+            accountSid: constants.FAKE_ACCOUNT_SID,
+            authToken: 'blurgh'
+          });
+
+          return ctx.testCmd.run();
+        })
+        .it('can skip parameter validation', ctx => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('configuration saved');
+        });
 
       createTest()
         .do(ctx => {
@@ -155,15 +170,7 @@ describe('commands', () => {
         .it('fails early if keytar cannot be loaded');
 
       createTest(['--region', 'dev'])
-        .nock('https://api.dev.twilio.com', api => {
-          api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
-            sid: constants.FAKE_ACCOUNT_SID
-          });
-          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(200, {
-            sid: constants.FAKE_API_KEY,
-            secret: constants.FAKE_API_SECRET
-          });
-        })
+        .nock('https://api.dev.twilio.com', mockSuccess)
         .do(async ctx => ctx.testCmd.run())
         .it('supports other regions', ctx => {
           expect(ctx.stdout).to.equal('');
