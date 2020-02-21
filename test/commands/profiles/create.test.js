@@ -88,17 +88,17 @@ describe('commands', () => {
       // createTest()
       //   .do(ctx => {
       //     const fakePrompt = ctx.testCmd.inquirer.prompt;
-      //     fakePrompt.onThirdCall().resolves({
+      //     fakePrompt.onSecondCall().resolves({
       //       accountSid: constants.FAKE_ACCOUNT_SID,
-      //       authToken: constants.FAKE_API_SECRET.repeat(3)
+      //       authToken: constants.FAKE_API_SECRET.repeat(4)
       //     });
-
+      //
       //     return ctx.testCmd.run();
       //   })
       //   .exit(1)
       //   .it('fails for a too long auth token', ctx => {
       //     expect(ctx.stdout).to.equal('');
-      //     expect(ctx.stderr).to.contain('Please double check your auth token, you may have pasted it more than once.');
+      //     expect(ctx.stderr).to.contain('Please double check your auth token, you may have pasted it more than once.  Please re-enter your auth token or press enter to continue.');
       //   });
 
       createTest()

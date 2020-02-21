@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const os = require('os');
 const { flags } = require('@oclif/command');
 
@@ -83,7 +84,7 @@ class ProfilesCreate extends BaseCommand {
 
   validateAuthTokenLength(input) {
     if (input.length > 32) {
-      this.logger.error('Please double check your auth token, you may have pasted it more than once. Please re-enter your auth token or press enter to continue.');
+      this.logger.error('\nThe entered auth token is not of the standard length.\nPlease double-check the auth token and re-key it, or ' + chalk.red.bold('[press enter to continue as-is]') + '.');
       return false;
     }
     return true;
