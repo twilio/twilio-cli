@@ -14,6 +14,8 @@ const FRIENDLY_STORAGE_LOCATIONS = {
   [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret'
 };
 
+const SKIP_VALIDATION = 'skip-parameter-validation';
+
 class ProfilesCreate extends BaseCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
@@ -38,8 +40,8 @@ class ProfilesCreate extends BaseCommand {
       this.cancel();
     }
 
-    this.validateAccountSid();
-    this.validateAuthToken();
+    this.loadAccountSid();
+    this.loadAuthToken();
     await this.promptForCredentials();
 
     if (await this.validateCredentials()) {
@@ -51,8 +53,6 @@ class ProfilesCreate extends BaseCommand {
   }
 
   loadArguments() {
-    this.accountSid = this.args['account-sid'];
-    this.authToken = this.flags['auth-token'];
     this.profileId = this.flags.profile;
     this.force = this.flags.force;
     this.region = this.flags.region;
@@ -71,29 +71,59 @@ class ProfilesCreate extends BaseCommand {
     }
   }
 
-  validateAccountSid() {
+  loadAccountSid() {
+    this.accountSid = this.args['account-sid'];
     if (!this.accountSid) {
       this.questions.push({
         name: 'accountSid',
         message: this.getPromptMessage(ProfilesCreate.args[0].description),
-        validate: input => Boolean(input)
+        validate: input => this.validAccountSid(input)
       });
     }
   }
 
-  validateAuthToken() {
+  loadAuthToken() {
+    this.authToken = this.flags['auth-token'];
     if (!this.authToken) {
       this.questions.push({
         type: 'password',
         name: 'authToken',
         message: this.getPromptMessage(ProfilesCreate.flags['auth-token'].description),
-        validate: input => Boolean(input)
+        validate: input => this.validAuthToken(input)
       });
     }
   }
 
+  validAccountSid(input) {
+    if (!input) {
+      return false;
+    }
+
+    if (!this.flags[SKIP_VALIDATION]) {
+      if (!input.startsWith('AC') || input.length !== 34) {
+        return 'Account SID must be "AC" followed by 32 hexadecimal digits (0-9, a-z)';
+      }
+    }
+
+    return true;
+  }
+
+  validAuthToken(input) {
+    if (!input) {
+      return false;
+    }
+
+    if (!this.flags[SKIP_VALIDATION]) {
+      if (input.length !== 32) {
+        return 'Auth Token must be 32 characters in length';
+      }
+    }
+
+    return true;
+  }
+
   async promptForCredentials() {
-    if (this.questions) {
+    if (this.questions && this.questions.length > 0) {
       this.logger.info(helpMessages.WHERE_TO_FIND_ACCOUNT_SID);
       this.logger.error(helpMessages.AUTH_TOKEN_NOT_SAVED);
       const answers = await this.inquirer.prompt(this.questions);
@@ -101,9 +131,14 @@ class ProfilesCreate extends BaseCommand {
       this.authToken = answers.authToken || this.authToken;
     }
 
-    if (!this.accountSid.toUpperCase().startsWith('AC')) {
-      throw new TwilioCliError('Account SID must be "AC" followed by 32 hexadecimal digits (0-9, a-z)');
-    }
+    const throwIfInvalid = valid => {
+      if (valid !== true) {
+        throw new TwilioCliError(valid || 'You must provide a valid value');
+      }
+    };
+
+    throwIfInvalid(this.validAccountSid(this.accountSid));
+    throwIfInvalid(this.validAuthToken(this.authToken));
   }
 
   async confirmOverwrite() {
@@ -214,6 +249,10 @@ ProfilesCreate.flags = Object.assign(
     force: flags.boolean({
       char: 'f',
       description: 'Force overwriting existing profile credentials.'
+    }),
+    [SKIP_VALIDATION]: flags.boolean({
+      default: false,
+      hidden: true
     }),
     region: flags.string({
       hidden: true
