@@ -208,8 +208,18 @@ class ProfilesCreate extends BaseCommand {
   }
 
   getApiKeyFriendlyName() {
-    const friendlyName = `twilio-cli for ${os.userInfo().username} on ${os.hostname()}`;
+    const username = this.getUsername();
+    const friendlyName = `twilio-cli${username ? ' for ' + username : ''} on ${os.hostname()}`;
     return friendlyName.substring(0, 64);
+  }
+
+  getUsername() {
+    try {
+      return os.userInfo().username;
+    } catch (err) {
+      // Throws a SystemError if a user has no username or homedir.
+      this.logger.debug(err);
+    }
   }
 
   async saveCredentials() {
