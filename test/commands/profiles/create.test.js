@@ -46,6 +46,10 @@ describe('commands', () => {
         });
       };
 
+      afterEach(() => {
+        sinon.restore();
+      });
+
       createTest()
         .nock('https://api.twilio.com', mockSuccess)
         .do(ctx => ctx.testCmd.run())
@@ -73,6 +77,18 @@ describe('commands', () => {
         .it('truncates apiKeyFriendlyName to 64 characters', ctx => {
           expect(ctx.returned.length).to.equal(64);
           expect(ctx.returned).to.equal('twilio-cli for some_super_long_fake_username on some_super_long_');
+        });
+
+      createTest()
+        .do(ctx => {
+          sinon.stub(os, 'hostname').returns('host');
+          sinon.stub(os, 'userInfo').throws('no username');
+          return ctx.testCmd.run();
+        })
+        .exit(1)
+        .it('handles bad user info', ctx => {
+          const friendlyName = ctx.testCmd.getApiKeyFriendlyName();
+          expect(friendlyName).to.equal('twilio-cli on host');
         });
 
       createTest(['not-an-account-sid'])
