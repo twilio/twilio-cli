@@ -23,6 +23,8 @@ You can also use credentials stored in environment variables:
 
 _NOTE: Option 2 should only be used in cases where you are unable to make use of option 1 (which are uncommon)._
 
+Once these environment variables are set, a profile is not required to move forward with installation.
+
 ### Precedence of stored credentials
 
 The CLI will attempt to load credentials in the following order of priority:
