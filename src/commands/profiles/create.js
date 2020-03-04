@@ -34,17 +34,13 @@ class ProfilesCreate extends BaseCommand {
     await this.secureStorage.loadKeytar();
 
     this.loadArguments();
-    await this.promptForProfileId();
-
-    if (!(await this.confirmProfileAndEnvVars()) || !(await this.confirmOverwrite())) {
-      this.cancel();
-    }
 
     this.loadAccountSid();
     this.loadAuthToken();
     await this.promptForCredentials();
 
     if (await this.validateCredentials()) {
+      await this.loadProfileId();
       await this.saveCredentials();
       this.logger.info(`Saved ${this.profileId}.`);
     } else {
@@ -53,21 +49,27 @@ class ProfilesCreate extends BaseCommand {
   }
 
   loadArguments() {
-    this.profileId = this.flags.profile;
     this.force = this.flags.force;
     this.region = this.flags.region;
   }
 
-  async promptForProfileId() {
+  async loadProfileId() {
+    this.profileId = this.flags.profile;
     if (!this.profileId) {
       const answer = await this.inquirer.prompt([
         {
           name: 'profileId',
           message: this.getPromptMessage(ProfilesCreate.flags.profile.description),
-          validate: input => Boolean(input)
+          validate: input => Boolean(input.trim())
         }
       ]);
       this.profileId = answer.profileId;
+    }
+
+    this.profileId = this.profileId.trim();
+
+    if (!(await this.confirmProfileAndEnvVars()) || !(await this.confirmOverwrite())) {
+      this.cancel();
     }
   }
 
@@ -249,12 +251,12 @@ class ProfilesCreate extends BaseCommand {
 }
 
 ProfilesCreate.aliases = ['profiles:add', 'login'];
-ProfilesCreate.description = 'create a new profile to store Twilio Project credentials and configuration';
+ProfilesCreate.description = 'create a new profile to store Twilio Account credentials and configuration';
 
 ProfilesCreate.flags = Object.assign(
   {
     'auth-token': flags.string({
-      description: 'Your Twilio Auth Token for your Twilio Project.'
+      description: 'Your Twilio Auth Token for your Twilio Account or Subaccount.'
     }),
     force: flags.boolean({
       char: 'f',
@@ -274,7 +276,7 @@ ProfilesCreate.flags = Object.assign(
 ProfilesCreate.args = [
   {
     name: 'account-sid',
-    description: 'The Account SID for your Twilio Project.'
+    description: 'The Account SID for your Twilio Account or Subaccount.'
   }
 ];
 

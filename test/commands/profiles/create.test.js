@@ -21,16 +21,16 @@ describe('commands', () => {
             fakePrompt
               .onFirstCall()
               .resolves({
-                profileId
+                accountSid: constants.FAKE_ACCOUNT_SID,
+                authToken: '0'.repeat(32)
               })
               .onSecondCall()
               .resolves({
-                overwrite: true
+                profileId
               })
               .onThirdCall()
               .resolves({
-                accountSid: constants.FAKE_ACCOUNT_SID,
-                authToken: '0'.repeat(32)
+                overwrite: true
               });
             ctx.testCmd.inquirer.prompt = fakePrompt;
             ctx.testCmd.secureStorage.loadKeytar = sinon.fake.resolves(true);
@@ -94,7 +94,7 @@ describe('commands', () => {
       createTest(['not-an-account-sid'])
         .do(ctx => {
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt.onThirdCall().resolves({
+          fakePrompt.onFirstCall().resolves({
             authToken: constants.FAKE_API_SECRET
           });
 
@@ -106,7 +106,7 @@ describe('commands', () => {
       createTest()
         .do(ctx => {
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt.onThirdCall().resolves({
+          fakePrompt.onFirstCall().resolves({
             accountSid: constants.FAKE_ACCOUNT_SID,
             authToken: '0'
           });
@@ -120,7 +120,7 @@ describe('commands', () => {
         .nock('https://api.twilio.com', mockSuccess)
         .do(ctx => {
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt.onThirdCall().resolves({
+          fakePrompt.onFirstCall().resolves({
             accountSid: constants.FAKE_ACCOUNT_SID,
             authToken: 'blurgh'
           });
@@ -139,7 +139,7 @@ describe('commands', () => {
           process.env.TWILIO_API_SECRET = constants.FAKE_API_SECRET;
 
           const fakePrompt = ctx.testCmd.inquirer.prompt;
-          fakePrompt.onSecondCall().resolves({
+          fakePrompt.onThirdCall().resolves({
             affirmative: false
           });
 
