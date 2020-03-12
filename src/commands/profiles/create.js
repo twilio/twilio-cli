@@ -202,9 +202,9 @@ class ProfilesCreate extends BaseCommand {
       // Don't log the response since it contains the account auth token.
       await twilioClient.api.accounts(this.accountSid).fetch();
       return true;
-    } catch (err) {
+    } catch (error) {
       this.logger.error('Could not validate the provided credentials. Not saving.');
-      this.logger.debug(err);
+      this.logger.debug(error);
       return false;
     }
   }
@@ -218,9 +218,9 @@ class ProfilesCreate extends BaseCommand {
   getUsername() {
     try {
       return os.userInfo().username;
-    } catch (err) {
+    } catch (error) {
       // Throws a SystemError if a user has no username or homedir.
-      this.logger.debug(err);
+      this.logger.debug(error);
     }
   }
 
@@ -232,8 +232,8 @@ class ProfilesCreate extends BaseCommand {
     try {
       apiKey = await twilioClient.newKeys.create({ friendlyName: apiKeyFriendlyName });
       this.logger.debug(apiKey);
-    } catch (err) {
-      this.logger.debug(err);
+    } catch (error) {
+      this.logger.debug(error);
       throw new TwilioCliError('Could not create an API Key.');
     }
 

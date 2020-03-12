@@ -4,9 +4,9 @@ const TwilioSchemaValidator = require('./twilio-validator');
  * Validates an object's value against a given schema. Uses the Twilio schema
  * validator.
  *
- * @param schema {Object} - object to validate against
- * @param value {Object} - object to validate
- * @param logger {Logger} - debug logger
+ * @param {Object} schema - object to validate against
+ * @param {Object} value - object to validate
+ * @param {Logger} logger - debug logger
  * @returns {Array} - validation errors strings
  */
 function validateSchema(schema, value, logger) {

@@ -89,8 +89,10 @@ describe('hooks', () => {
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
         .twilioCreateCommand(getBuyLocalCommand(), [
-          '--country-code', TEST_COUNTRY_CODE,
-          '--area-code', TEST_AREA_CODE
+          '--country-code',
+          TEST_COUNTRY_CODE,
+          '--area-code',
+          TEST_AREA_CODE
         ])
         .stderr()
         .do(ctx => {

@@ -77,7 +77,7 @@ class TwilioRestApiPlugin extends Plugin {
   /**
    * Attempts to get the hostname from first path's server. Falls back to using the domain name.
    *
-   * @param actionDefinition - action containing domain paths
+   * @param {Object} actionDefinition - action containing domain paths
    * @returns {string} - Target hostname for the action
    */
   getHostname(actionDefinition) {

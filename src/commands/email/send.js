@@ -115,8 +115,8 @@ class Send extends BaseCommand {
     try {
       const coded = fs.readFileSync(filePath, 'base64');
       return coded;
-    } catch (err) {
-      this.logger.debug(err);
+    } catch (error) {
+      this.logger.debug(error);
       throw new TwilioCliError('Unable to read the file: ' + filePath);
     }
   }
