@@ -17,7 +17,9 @@
     "@sendgrid/mail": "^6.5.2",
     "@twilio/cli-core": "^4.6.0",
     "chalk": "^2.4.2",
+    "deep-equal": "^2.0.1",
     "inquirer": "^6.5.2",
+    "js-yaml": "^3.13.1",
     "twilio": "^3.42.0"
   },
   "optionalDependencies": {
@@ -40,7 +42,7 @@
     "tmp": "^0.1.0"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "files": [
     "/bin",

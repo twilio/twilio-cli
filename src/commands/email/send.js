@@ -36,7 +36,7 @@ class Send extends BaseCommand {
       html: '<p>' + this.emailText + '</p>'
     };
 
-    const fileInfo = await readFileOrStdIn(this.flags.attachment);
+    const fileInfo = await readFileOrStdIn(this.flags.attachment, 'base64');
 
     if (fileInfo) {
       sendInformation.attachments = this.createAttachmentArray(fileInfo);
@@ -45,7 +45,7 @@ class Send extends BaseCommand {
       const attachment = await this.promptAttachment(attachmentVerdict);
 
       if (attachment) {
-        sendInformation.attachments = this.createAttachmentArray(readFile(attachment));
+        sendInformation.attachments = this.createAttachmentArray(readFile(attachment, 'base64'));
       }
     }
     await this.sendEmail(sendInformation);

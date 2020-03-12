@@ -1,0 +1,137 @@
+version: '0.1'
+dependents:
+  incomingPhoneNumbers:
+    properties:
+      sid: string
+      friendlyName: string
+      smsApplicationSid: string
+      smsFallbackMethod: string
+      smsFallbackUrl: string
+      smsMethod: string
+      smsUrl: string
+      statusCallback: string
+      statusCallbackMethod: string
+      voiceApplicationSid: string
+      voiceCallerIdLookup: string
+      voiceFallbackMethod: string
+      voiceFallbackUrl: string
+      voiceMethod: string
+      voiceUrl: string
+      emergencyStatus: string
+      emergencyAddressSid: string
+      trunkSid: string
+      identitySid: string
+      addressSid: string
+      bundleSid: string
+  studio:
+    dependents:
+      flows:
+        instanceProperties:
+          sid: string
+          friendlyName: string
+          status: string
+          definition: string
+          commitMessage: string
+  taskrouter:
+    dependents:
+      workspaces:
+        properties:
+          sid: string
+          friendlyName: string
+          defaultActivitySid: string
+          eventCallbackUrl: string
+          eventsFilter: string
+          multiTaskEnabled: string
+          timeoutActivitySid: string
+          prioritizeQueueOrder: string
+        dependents:
+          activities:
+            properties:
+              sid: string
+              friendlyName: string
+          taskChannels:
+            properties:
+              sid: string
+              friendlyName: string
+              uniqueName: string
+              channelOptimizedRouting: string
+          taskQueues:
+            properties:
+              sid: string
+              friendlyName: string
+              targetWorkers: string
+              reservationActivitySid: string
+              assignmentActivitySid: string
+              maxReservedWorkers: string
+              taskOrder: string
+          workers:
+            properties:
+              sid: string
+              friendlyName: string
+              activitySid: string
+              attributes: string
+          workflows:
+            properties:
+              sid: string
+              friendlyName: string
+              configuration: string
+              assignmentCallbackUrl: string
+              fallbackAssignmentCallbackUrl: string
+              taskReservationTimeout: string
+#  serverless:
+#    dependents:
+#      services:
+#        properties:
+#          sid: string
+#          friendlyName: string
+#          uniqueName: string
+#          includeCredentials: string
+#          uiEditable: string
+#        dependents:
+#          environments:
+#            properties:
+#              sid: string
+#              uniqueName: string
+#              domainSuffix: string
+#              buildSid: string
+#            dependents:
+#              variables:
+#                properties:
+#                  sid: string
+#                  key: string
+#                  value: string
+#          builds:
+#            limit: serverless.services.environments.buildSid
+#            properties:
+#              sid: string
+#              assetVersions:
+#                - sid: string
+#              functionVersions:
+#                - sid: string
+#          assets:
+#            properties:
+#              sid: string
+#              friendlyName: string
+#            dependents:
+#              assetVersions:
+#                limit: serverless.services.builds.assetVersions.sid
+#                properties:
+#                  sid: string
+#                  path: string
+#                  visibility: string
+#          functions:
+#            properties:
+#              sid: string
+#              friendlyName: string
+#            dependents:
+#              functionVersions:
+#                limit: serverless.services.builds.functionVersions.sid
+#                properties:
+#                  sid: string
+#                  path: string
+#                  visibility: string
+#                dependents:
+#                  functionVersionContent:
+#                    instanceProperties:
+#                      sid: string
+#                      content: string

@@ -3,12 +3,12 @@ const { logger } = require('@twilio/cli-core').services.logging;
 const fs = require('fs');
 const path = require('path');
 
-async function readFileOrStdIn(filePath) {
+async function readFileOrStdIn(filePath, encoding) {
   if (filePath) {
-    return readFile(filePath);
+    return readFile(filePath, encoding);
   }
 
-  const pipedInput = await readStream();
+  const pipedInput = await readStream(encoding);
   if (pipedInput) {
     return {
       filename: 'piped.txt', // placeholder filename for attachment
@@ -17,11 +17,11 @@ async function readFileOrStdIn(filePath) {
   }
 }
 
-function readFile(filePath) {
+function readFile(filePath, encoding) {
   try {
     return {
       filename: path.basename(filePath),
-      content: fs.readFileSync(filePath, 'base64')
+      content: fs.readFileSync(filePath, encoding)
     };
   } catch (error) {
     logger.debug(error);
@@ -29,9 +29,9 @@ function readFile(filePath) {
   }
 }
 
-async function readStream() {
+async function readStream(encoding) {
   const input = await getStdin();
-  return Buffer.from(input).toString('base64');
+  return Buffer.from(input).toString(encoding);
 }
 
 function getStdin() {
