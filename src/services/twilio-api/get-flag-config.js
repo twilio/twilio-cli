@@ -21,6 +21,10 @@ const getFlagName = paramName => {
 
 /**
  * Converts a Twilio API parameter into a Twilio CLI flag.
+ *
+ * @param {Object} parameter - Twilio API parameter
+ * @param {Object} actionDefinition - action containing topic, command, and domain names
+ * @returns {Object} - Twilio CLI flag configuration
  */
 const getFlagConfig = (parameter, actionDefinition) => {
   let flagName = getFlagName(parameter.name);

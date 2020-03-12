@@ -103,6 +103,7 @@ class NumberUpdate extends TwilioClientCommand {
     }
 
     // Build the new prop value using the tunnel URL.
+    // eslint-disable-next-line require-atomic-updates
     props[propName] = newBaseUrl + url.pathname + url.search;
   }
 

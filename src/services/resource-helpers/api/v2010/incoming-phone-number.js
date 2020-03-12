@@ -12,8 +12,8 @@ class IncomingPhoneNumberHelper {
     if (sid) {
       try {
         response = await this.twilioClient.incomingPhoneNumbers(sid).fetch();
-      } catch (err) {
-        const errorMessage = err.code === 20404 ? 'Could not find phone number ' + userInput : err.message;
+      } catch (error) {
+        const errorMessage = error.code === 20404 ? 'Could not find phone number ' + userInput : error.message;
         throw new TwilioCliError(errorMessage);
       }
       return response;
@@ -22,8 +22,8 @@ class IncomingPhoneNumberHelper {
     let matches;
     try {
       matches = await this.twilioClient.incomingPhoneNumbers.list({ phoneNumber: userInput });
-    } catch (err) {
-      throw new TwilioCliError(err.message);
+    } catch (error) {
+      throw new TwilioCliError(error.message);
     }
 
     if (matches && matches.length > 0) return matches[0];

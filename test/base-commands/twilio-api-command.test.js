@@ -58,7 +58,8 @@ describe('base-commands', () => {
       };
 
       const getCommandClass = (actionDefinition = callCreateActionDefinition) => {
-        const NewCommandClass = class extends TwilioApiCommand { };
+        const NewCommandClass = class extends TwilioApiCommand {
+        };
         NewCommandClass.actionDefinition = actionDefinition;
         NewCommandClass.actionDefinition.topicName = 'api:' + getTopicName(NewCommandClass.actionDefinition);
         TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
@@ -119,9 +120,12 @@ describe('base-commands', () => {
         .stdout()
         .stderr()
         .twilioCreateCommand(getCommandClass(), [
-          '--from', '+15555555555',
-          '--to', '+14155555555',
-          '--url', 'http://example.com/'
+          '--from',
+          '+15555555555',
+          '--to',
+          '+14155555555',
+          '--url',
+          'http://example.com/'
         ])
         .do(ctx => {
           ctx.testCmd.twilioApi = { create: sinon.stub().returns(fakeCallResponse) };
@@ -137,9 +141,12 @@ describe('base-commands', () => {
         .stdout()
         .stderr()
         .twilioCreateCommand(getCommandClass(callListActionDefinition), [
-          '--start-time-after', 'after-this',
-          '--start-time-before', 'before-that',
-          '--limit', '1'
+          '--start-time-after',
+          'after-this',
+          '--start-time-before',
+          'before-that',
+          '--limit',
+          '1'
         ])
         .do(ctx => {
           ctx.testCmd.twilioApi = { list: sinon.stub().returns([]) };
@@ -175,9 +182,12 @@ describe('base-commands', () => {
         .twilioCliEnv(Config)
         .stderr()
         .twilioCreateCommand(getCommandClass(numberUpdateActionDefinition), [
-          '--sid', fakeCallResponse.sid,
-          '--account-sid', 'AC012',
-          '--target-account-sid', 'AC123'
+          '--sid',
+          fakeCallResponse.sid,
+          '--account-sid',
+          'AC012',
+          '--target-account-sid',
+          'AC123'
         ])
         .do(ctx => {
           ctx.testCmd.twilioApi = { update: sinon.stub().returns({}) };
@@ -193,10 +203,14 @@ describe('base-commands', () => {
         .twilioCliEnv(Config)
         .stderr()
         .twilioCommand(getCommandClass(), [
-          '--from', '+15555555555',
-          '--to', '+14155555555',
-          '--url', 'http://example.com/',
-          '--application-sid', 'ap12345678901234567890123456789012' // Lower-cased 'ap'
+          '--from',
+          '+15555555555',
+          '--to',
+          '+14155555555',
+          '--url',
+          'http://example.com/',
+          '--application-sid',
+          'ap12345678901234567890123456789012' // Lower-cased 'ap'
         ])
         .catch(/Cannot execute command/)
         .it('exits with a failure code and prints validation errors', ctx => {
@@ -210,10 +224,14 @@ describe('base-commands', () => {
         .stderr()
         .twilioCreateCommand(getCommandClass(), [
           '--skip-parameter-validation',
-          '--from', '+15555555555',
-          '--to', '+14155555555',
-          '--url', 'http://example.com/',
-          '--application-sid', 'ap12345678901234567890123456789012' // Lower-cased 'ap'
+          '--from',
+          '+15555555555',
+          '--to',
+          '+14155555555',
+          '--url',
+          'http://example.com/',
+          '--application-sid',
+          'ap12345678901234567890123456789012' // Lower-cased 'ap'
         ])
         .do(ctx => {
           ctx.testCmd.twilioApi = { create: sinon.stub().returns(fakeCallResponse) };
