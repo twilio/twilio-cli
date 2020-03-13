@@ -2,9 +2,8 @@ const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const emailUtilities = require('../../services/email-utility');
+const { readFileOrStdIn, readFile } = require('../../services/file-io');
 const sgMail = require('@sendgrid/mail');
-const fs = require('fs');
-const path = require('path');
 
 class Send extends BaseCommand {
   async run() {
@@ -17,19 +16,12 @@ class Send extends BaseCommand {
       );
     }
 
-    this.isTTY = process.stdin.isTTY || this.flags['force-tty'];
-
-    const pipedInput = await this.readStream();
-    if (pipedInput) {
-      this.processData(pipedInput);
-    }
-
     await this.promptForFromEmail();
     await this.promptForToEmail();
     await this.promptForSubject();
     await this.promptForText();
 
-    if (!this.isTTY && (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail)) {
+    if (!process.stdin.isTTY && (!this.flags.to || !this.flags.text || !this.subjectLine || !this.fromEmail)) {
       throw new TwilioCliError('No terminal input available. Please provide --to, --from, --subject, and --text');
     }
 
@@ -44,58 +36,31 @@ class Send extends BaseCommand {
       html: '<p>' + this.emailText + '</p>'
     };
 
-    if (this.pipedInfo) {
-      const attachment = this.createAttachmentArray(this.pipedInfo);
-      sendInformation.attachments = attachment;
+    const fileInfo = await readFileOrStdIn(this.flags.attachment);
+
+    if (fileInfo) {
+      sendInformation.attachments = this.createAttachmentArray(fileInfo);
     } else {
       const attachmentVerdict = await this.askAttachment();
-      await this.promptAttachment(attachmentVerdict);
-      if (this.attachment) {
-        const fileContent = this.readFile(this.attachment);
-        const attachment = this.createAttachmentArray(fileContent);
-        sendInformation.attachments = attachment;
+      const attachment = await this.promptAttachment(attachmentVerdict);
+
+      if (attachment) {
+        sendInformation.attachments = this.createAttachmentArray(readFile(attachment));
       }
     }
     await this.sendEmail(sendInformation);
   }
 
-  async readStream() {
-    const input = await this.getStdin();
-    return Buffer.from(input).toString('base64');
-  }
-
-  getStdin() {
-    return new Promise(resolve => {
-      if (this.isTTY) {
-        resolve('');
-      } else {
-        process.stdin.setEncoding('utf8');
-        process.stdin.once('data', data => {
-          resolve(data);
-        });
-      }
-    });
-  }
-
-  processData(input) {
-    this.fileName = 'piped.txt'; // placeholder filename for attachement
-    this.pipedInfo = input;
-  }
-
   async askAttachment() {
-    this.attachment = this.flags.attachment;
-    if (!this.attachment) {
-      const verdict = await this.inquirer.prompt([
-        {
-          type: 'confirm',
-          name: 'sendAttachment',
-          message: 'Would you like to send an attachment?',
-          default: false
-        }
-      ]);
-      return verdict.sendAttachment;
-    }
-    return false;
+    const verdict = await this.inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'sendAttachment',
+        message: 'Would you like to send an attachment?',
+        default: false
+      }
+    ]);
+    return verdict.sendAttachment;
   }
 
   async promptAttachment(verdict) {
@@ -106,28 +71,17 @@ class Send extends BaseCommand {
           message: this.getPromptMessage(Send.flags.attachment.description)
         }
       ]);
-      this.attachment = file.path;
+      return file.path;
     }
   }
 
-  readFile(filePath) {
-    this.fileName = path.basename(filePath);
-    try {
-      const coded = fs.readFileSync(filePath, 'base64');
-      return coded;
-    } catch (error) {
-      this.logger.debug(error);
-      throw new TwilioCliError('Unable to read the file: ' + filePath);
-    }
-  }
-
-  createAttachmentArray(fileContent) {
+  createAttachmentArray(fileInfo) {
     return [
       {
-        content: fileContent,
+        content: fileInfo.content,
+        filename: fileInfo.filename,
         type: 'plain/text',
         disposition: 'attachment',
-        filename: this.fileName,
         contentId: 'attachmentText'
       }
     ];
@@ -135,7 +89,7 @@ class Send extends BaseCommand {
 
   validateEmail(email) {
     let emailList = [];
-    let validEmail;
+    let validEmail = true;
     const multipleEmail = email.includes(',');
     if (multipleEmail === true) {
       emailList = email.split(',').map(item => {
@@ -166,7 +120,7 @@ class Send extends BaseCommand {
       this[key] = this.flags[flagKey];
     }
 
-    if (this.isTTY && !this[key]) {
+    if (process.stdin.isTTY && !this[key]) {
       const answer = await this.inquirer.prompt([
         {
           name: flagKey,
@@ -196,23 +150,18 @@ class Send extends BaseCommand {
   async sendEmail(sendInformation) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     await sgMail.send(sendInformation);
-    this.logger.info(
-      'Your email containing the message "' +
-      this.emailText +
-      '" sent from ' +
-      this.fromEmail +
-      ' to ' +
-      this.toEmail +
-      ' with the subject line ' +
-      this.subjectLine +
-      ' has been sent!'
-    );
-    if (this.attachment) {
-      this.logger.info('Your attachment from ' + this.attachment + ' path called ' + this.fileName + ' has been sent.');
+
+    const messageParts = [
+      `Your email containing the message "${sendInformation.text}"`,
+      `sent from "${sendInformation.from}" to "${sendInformation.to}"`,
+      `with the subject line "${sendInformation.subject}"`
+    ];
+    if (sendInformation.attachments) {
+      messageParts.push(`with attachment "${sendInformation.attachments[0].filename}"`);
     }
-    if (this.pipedInfo) {
-      this.logger.info('Your piped data attachment has been sent.');
-    }
+    messageParts.push('has been sent!');
+
+    this.logger.info(messageParts.join(' '));
   }
 }
 
@@ -233,10 +182,6 @@ Send.flags = Object.assign(
     }),
     attachment: flags.string({
       description: 'Path for the file that you want to attach.'
-    }),
-    'force-tty': flags.boolean({
-      default: false,
-      hidden: true
     })
   },
   BaseCommand.flags
