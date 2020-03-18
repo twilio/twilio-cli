@@ -1,6 +1,24 @@
 twilio-cli changelog
 =====================
 
+[2020-03-18] Version 1.11.0
+---------------------------
+**Library - Chore**
+- [PR #158](https://github.com/twilio/twilio-cli/pull/158): refactor reading data from file or stdin. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #157](https://github.com/twilio/twilio-cli/pull/157): upgrade dev dependencies and fix eslint errors/warnings. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Add optional `emergency_calling_enabled` parameter to SIP Domain
+- Add optional property `call_reason` in the call create request
+
+**Authy**
+- Added `friendly_name` and `config` as optional params to Factor update
+- Added `config` param to Factor creation **(breaking change)**
+
+**Preview**
+- Renamed `SuccessRate` endpoint to `ImpressionsRate` for Branded Calls (fka. Verified by Twilio) **(breaking change)**
+
+
 [2020-03-04] Version 1.10.0
 ---------------------------
 **Library - Feature**
