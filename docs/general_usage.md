@@ -115,6 +115,26 @@ ps -aux | twilio email:send \
   --text="See attachment"
 ```
 
+## Troubleshooting
+
+### Installing a specific version of twilio-cli
+
+General installation instructions are located [here](https://twil.io/cli#install-twilio-cli).
+
+A list of tagged releases can be found with `git ls-remote --tags https://github.com/twilio/twilio-cli.git`.
+
+Substitute X.X.X below with the desired version.
+
+#### Mac OS X
+
+`brew install https://raw.githubusercontent.com/twilio/homebrew-brew/X.X.X/Formula/twilio.rb`
+
+#### Windows / Linux
+
+`npm uninstall -g twilio-cli`
+
+`npm install twilio-cli@X.X.X -g`
+
 ## Known limitations
 
 * The default timeout value for Twilio API requests in `twilio-cli` is 30 seconds.
