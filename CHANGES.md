@@ -1,6 +1,35 @@
 twilio-cli changelog
 =====================
 
+[2020-04-01] Version 1.12.0
+---------------------------
+**Library - Chore**
+- [PR #161](https://github.com/twilio/twilio-cli/pull/161): move the debugger command out of the debugger plugin. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Library - Docs**
+- [PR #159](https://github.com/twilio/twilio-cli/pull/159): pin a specific version of the Twilio CLI. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+**Api**
+- Add optional 'secure' parameter to SIP Domain
+
+**Authy**
+- Added an endpoint to list the challenges of a factor
+- Added optional parameter `Push` when updating a service to send the service level push factor configuration
+
+**Bulkexports**
+- exposing bulk exports (vault/slapchop) API as public beta API
+
+**Flex**
+- Adding `queue_stats_configuration` and `wfm_integrations` to Flex Configuration
+
+**Serverless**
+- Add Function Version Content endpoint
+- Allow build_sid to be optional for deployment requests
+
+**Supersim**
+- Remove `deactivated` status for Super SIM which is replaced by `inactive` **(breaking change)**
+
+
 [2020-03-18] Version 1.11.0
 ---------------------------
 **Library - Chore**
