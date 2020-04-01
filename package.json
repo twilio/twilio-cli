@@ -1,7 +1,7 @@
 {
   "name": "twilio-cli",
   "description": "unleash the power of Twilio from your command prompt",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "author": "Twilio @twilio",
   "bin": {
     "twilio": "./bin/run"
@@ -15,10 +15,10 @@
     "@oclif/plugin-plugins": "^1.7.8",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "@sendgrid/mail": "^6.5.2",
-    "@twilio/cli-core": "^4.4.7",
+    "@twilio/cli-core": "^4.6.0",
     "chalk": "^2.4.2",
     "inquirer": "^6.5.2",
-    "twilio": "^3.39.4"
+    "twilio": "^3.42.0"
   },
   "optionalDependencies": {
     "ngrok": "^3.2.7"
