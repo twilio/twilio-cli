@@ -161,7 +161,7 @@ class Send extends BaseCommand {
       `with the subject line "${sendInformation.subject}"`
     ];
     if (sendInformation.attachments) {
-      messageParts.push(`with a "${sendInformation.attachments[0].type}`);
+      messageParts.push(`with a "${sendInformation.attachments[0].type}"`);
       messageParts.push(`"attachment "${sendInformation.attachments[0].filename}"`);
     }
     messageParts.push('has been sent!');
