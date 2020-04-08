@@ -4,6 +4,7 @@ const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const emailUtilities = require('../../services/email-utility');
 const { readFileOrStdIn, readFile } = require('../../services/file-io');
 const sgMail = require('@sendgrid/mail');
+const FileType = require('file-type');
 
 class Send extends BaseCommand {
   async run() {
@@ -39,13 +40,13 @@ class Send extends BaseCommand {
     const fileInfo = await readFileOrStdIn(this.flags.attachment);
 
     if (fileInfo) {
-      sendInformation.attachments = this.createAttachmentArray(fileInfo);
+      sendInformation.attachments = await this.createAttachmentArray(fileInfo);
     } else {
       const attachmentVerdict = await this.askAttachment();
       const attachment = await this.promptAttachment(attachmentVerdict);
 
       if (attachment) {
-        sendInformation.attachments = this.createAttachmentArray(readFile(attachment));
+        sendInformation.attachments = await this.createAttachmentArray(readFile(attachment));
       }
     }
     await this.sendEmail(sendInformation);
@@ -75,12 +76,15 @@ class Send extends BaseCommand {
     }
   }
 
-  createAttachmentArray(fileInfo) {
+  async createAttachmentArray(fileInfo) {
+    // readFile and readFileOrStdIn return a base64 encoded string
+    const type = await FileType.fromBuffer(Buffer.from(fileInfo.content, 'base64'));
+
     return [
       {
         content: fileInfo.content,
         filename: fileInfo.filename,
-        type: 'plain/text',
+        type: (type && type.mime) || 'text/plain',
         disposition: 'attachment',
         contentId: 'attachmentText'
       }
@@ -157,7 +161,8 @@ class Send extends BaseCommand {
       `with the subject line "${sendInformation.subject}"`
     ];
     if (sendInformation.attachments) {
-      messageParts.push(`with attachment "${sendInformation.attachments[0].filename}"`);
+      messageParts.push(`with a "${sendInformation.attachments[0].type}`);
+      messageParts.push(`"attachment "${sendInformation.attachments[0].filename}"`);
     }
     messageParts.push('has been sent!');
 

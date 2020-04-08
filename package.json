@@ -17,6 +17,7 @@
     "@sendgrid/mail": "^6.5.2",
     "@twilio/cli-core": "^4.6.0",
     "chalk": "^2.4.2",
+    "file-type": "^14.1.4",
     "inquirer": "^6.5.2",
     "twilio": "^3.42.0"
   },

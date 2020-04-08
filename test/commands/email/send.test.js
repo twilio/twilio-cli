@@ -319,6 +319,75 @@ describe('commands', () => {
         })
         .catch(/No terminal.*Please provide/)
         .it('run email:send using stdin as the attachment source but missing a To');
+
+      defaultSetup({
+        flags: [
+          '--subject',
+          'Secret Message',
+          '--to',
+          'JonSnow@castleBlack.com',
+          '--from',
+          'Ygritte@wall.com',
+          '--text',
+          'You know nothing Jon Snow.',
+          '--attachment',
+          'test/commands/email/test.txt'
+        ]
+      }).nock('https://api.sendgrid.com', api => {
+        api.post('/v3/mail/send').reply(200, {});
+      }).do(ctx => {
+        process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+        return ctx.testCmd.run();
+      }).it('run email:send with an attachment and set the correct content-type for plaintext files', ctx => {
+        expect(ctx.stderr).to.contain('test.txt');
+        expect(ctx.stderr).to.contain('text/plain');
+      });
+
+      defaultSetup({
+        flags: [
+          '--subject',
+          'Secret Message',
+          '--to',
+          'JonSnow@castleBlack.com',
+          '--from',
+          'Ygritte@wall.com',
+          '--text',
+          'You know nothing Jon Snow.',
+          '--attachment',
+          'test/commands/email/test.png'
+        ]
+      }).nock('https://api.sendgrid.com', api => {
+        api.post('/v3/mail/send').reply(200, {});
+      }).do(ctx => {
+        process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+        return ctx.testCmd.run();
+      }).it('run email:send with an attachment and set the correct content-type for non-text files', ctx => {
+        expect(ctx.stderr).to.contain('test.png');
+        expect(ctx.stderr).to.contain('image/png');
+      });
+
+      defaultSetup({
+        flags: [
+          '--subject',
+          'Secret Message',
+          '--to',
+          'JonSnow@castleBlack.com',
+          '--from',
+          'Ygritte@wall.com',
+          '--text',
+          'You know nothing Jon Snow.',
+          '--attachment',
+          'test/commands/email/test.bin'
+        ]
+      }).nock('https://api.sendgrid.com', api => {
+        api.post('/v3/mail/send').reply(200, {});
+      }).do(ctx => {
+        process.env.SENDGRID_API_KEY = 'SG.1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef_4';
+        return ctx.testCmd.run();
+      }).it('run email:send with an attachment and fall back to text/plain for unknown file types', ctx => {
+        expect(ctx.stderr).to.contain('test.bin');
+        expect(ctx.stderr).to.contain('text/plain');
+      });
     });
   });
 });
