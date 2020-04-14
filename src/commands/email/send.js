@@ -6,6 +6,12 @@ const { readFileOrStdIn, readFile } = require('../../services/file-io');
 const sgMail = require('@sendgrid/mail');
 const FileType = require('file-type');
 
+const DEFAULT_ENCODING = 'base64';
+const FLAGS = {
+  attachment: 'attachment',
+  noAttachment: 'no-attachment'
+};
+
 class Send extends BaseCommand {
   async run() {
     await super.run();
@@ -37,18 +43,21 @@ class Send extends BaseCommand {
       html: '<p>' + this.emailText + '</p>'
     };
 
-    const fileInfo = await readFileOrStdIn(this.flags.attachment);
+    if (!this.flags[FLAGS.noAttachment]) {
+      const fileInfo = await readFileOrStdIn(this.flags[FLAGS.attachment], DEFAULT_ENCODING);
 
-    if (fileInfo) {
-      sendInformation.attachments = await this.createAttachmentArray(fileInfo);
-    } else {
-      const attachmentVerdict = await this.askAttachment();
-      const attachment = await this.promptAttachment(attachmentVerdict);
+      if (fileInfo) {
+        sendInformation.attachments = await this.createAttachmentArray(fileInfo);
+      } else {
+        const attachmentVerdict = await this.askAttachment();
+        const attachment = await this.promptAttachment(attachmentVerdict);
 
-      if (attachment) {
-        sendInformation.attachments = await this.createAttachmentArray(readFile(attachment));
+        if (attachment) {
+          sendInformation.attachments = await this.createAttachmentArray(readFile(attachment, DEFAULT_ENCODING));
+        }
       }
     }
+
     await this.sendEmail(sendInformation);
   }
 
@@ -78,7 +87,7 @@ class Send extends BaseCommand {
 
   async createAttachmentArray(fileInfo) {
     // readFile and readFileOrStdIn return a base64 encoded string
-    const type = await FileType.fromBuffer(Buffer.from(fileInfo.content, 'base64'));
+    const type = await FileType.fromBuffer(Buffer.from(fileInfo.content, DEFAULT_ENCODING));
 
     return [
       {
@@ -92,26 +101,26 @@ class Send extends BaseCommand {
   }
 
   validateEmail(email) {
-    let emailList = [];
+    let emailList;
     let validEmail = true;
-    const multipleEmail = email.includes(',');
-    if (multipleEmail === true) {
-      emailList = email.split(',').map(item => {
-        return item.trim();
-      });
+
+    if (email.includes(',')) {
+      emailList = email.split(',').map(item => item.trim());
     } else {
-      emailList[0] = email;
+      emailList = [email];
     }
 
     emailList.forEach(emailAddress => {
-      if (emailUtilities.validateEmail(emailAddress) === false) {
-        this.logger.error(emailAddress + ' is not a valid email.');
+      if (!emailUtilities.validateEmail(emailAddress)) {
+        this.logger.error(`"${emailAddress}" is not a valid email.`);
         validEmail = false;
       }
     });
-    if (validEmail === false) {
+
+    if (!validEmail) {
       throw new TwilioCliError('Email could not be sent, please re-run the command with valid email addresses.');
     }
+
     return emailList;
   }
 
@@ -185,8 +194,14 @@ Send.flags = Object.assign(
     text: flags.string({
       description: 'Text to send within the email body.'
     }),
-    attachment: flags.string({
-      description: 'Path for the file that you want to attach.'
+    [FLAGS.attachment]: flags.string({
+      description: 'Path for the file that you want to attach.',
+      exclusive: [FLAGS.noAttachment]
+    }),
+    [FLAGS.noAttachment]: flags.boolean({
+      description: 'Do not include or prompt for an attachment.',
+      default: false,
+      exclusive: [FLAGS.attachment]
     })
   },
   BaseCommand.flags
