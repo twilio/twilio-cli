@@ -15,7 +15,7 @@
     "@oclif/plugin-plugins": "^1.7.9",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "@sendgrid/mail": "^6.5.2",
-    "@twilio/cli-core": "^4.6.0",
+    "@twilio/cli-core": "^5.0.0",
     "chalk": "^4.0.0",
     "file-type": "^14.1.4",
     "inquirer": "^7.1.0",
