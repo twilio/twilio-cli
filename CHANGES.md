@@ -1,6 +1,30 @@
 twilio-cli changelog
 =====================
 
+[2020-04-15] Version 2.0.0
+--------------------------
+**Library - Chore**
+- [PR #171](https://github.com/twilio/twilio-cli/pull/171): bump CLI core to pick up breaking camelCase change. Thanks to [@childish-sambino](https://github.com/childish-sambino)! **(breaking change)**
+- [PR #170](https://github.com/twilio/twilio-cli/pull/170): raise Node requirement to v10 and upgrade dependencies. Thanks to [@childish-sambino](https://github.com/childish-sambino)! **(breaking change)**
+
+**Library - Feature**
+- [PR #169](https://github.com/twilio/twilio-cli/pull/169): add '--no-attachment' option to 'email:send'. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #167](https://github.com/twilio/twilio-cli/pull/167): Content-type detection for attachments in email:send. Thanks to [@kolencherry](https://github.com/kolencherry)!
+
+**Api**
+- Updated description for property `call_reason` in the call create request
+
+**Contacts**
+- Added Read, Delete All, and Delete by SID docs
+- Initial Release
+
+**Studio**
+- Rename `flow_valid` to `flow_validate`
+- Removed `errors` and `warnings` from flows error response and added new property named `details`
+- Add Update Execution endpoints to v1 and v2 to end execution via API
+- Add new `warnings` attribute v2 flow POST api
+
+
 [2020-04-01] Version 1.12.0
 ---------------------------
 **Library - Chore**
