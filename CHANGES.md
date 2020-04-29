@@ -1,6 +1,21 @@
 twilio-cli changelog
 =====================
 
+[2020-04-29] Version 2.0.1
+--------------------------
+**Library - Fix**
+- [PR #172](https://github.com/twilio/twilio-cli/pull/172): added in @oclif/color 0.1.0 dependency. Thanks to [@adamchasetaylor](https://github.com/adamchasetaylor)!
+
+**Preview**
+- Added `Dispatch` version to `preview`
+
+**Studio**
+- Reroute Create Execution for V2 to the V2 downstream
+
+**Supersim**
+- Add Networks resource
+
+
 [2020-04-15] Version 2.0.0
 --------------------------
 **Library - Chore**
