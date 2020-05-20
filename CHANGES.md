@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2020-05-20] Version 2.0.3
+--------------------------
+**Chore**
+- upgrade dependencies
+
+
 [2020-05-13] Version 2.0.2
 --------------------------
 **Api**
