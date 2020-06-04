@@ -1,6 +1,26 @@
 twilio-cli changelog
 =====================
 
+[2020-06-04] Version 2.2.0
+--------------------------
+**Library - Fix**
+- [PR #189](https://github.com/twilio/twilio-cli/pull/189): pin 'tslib' to avoid issues when interacting with plugin-plugins. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Autopilot**
+- Add dialogue_sid param to Query list resource
+
+**Contacts**
+- Added AccountSID to CFD CREATE and GET Responses
+
+**Numbers**
+- Add `provisionally-approved` as a Bundle status
+
+**Preview**
+- Deleted phone number required field in the brand phone number endpoint from `kyc-api`
+- Removed insights `preview API` from API Definitions **(breaking change)**
+- Added `BrandsInformation` endpoint to query brands information stored in KYC
+
+
 [2020-05-27] Version 2.1.0
 --------------------------
 **Api**
