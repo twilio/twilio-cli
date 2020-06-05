@@ -88,7 +88,7 @@
         "./src/hooks/init/plugin-verification"
       ],
       "plugins:preinstall": [
-        "./src/hooks/init/plugin-install"
+        "./src/hooks/plugin-install"
       ]
     },
     "macos": {
