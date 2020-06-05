@@ -89,6 +89,9 @@
       ],
       "plugins:preinstall": [
         "./src/hooks/plugin-install"
+      ],
+      "command_not_found": [
+        "./src/hooks/command-not-found"
       ]
     },
     "macos": {

@@ -11,6 +11,7 @@ test_script:
   - .\bin\run --version
   - .\bin\run --help
   - .\bin\run plugins
+  - echo y | .\bin\run watch
   - npm test
 after_test:
   - .\node_modules\.bin\nyc report --reporter text-lcov > coverage.lcov
