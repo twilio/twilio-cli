@@ -1,6 +1,32 @@
 twilio-cli changelog
 =====================
 
+[2020-06-10] Version 2.3.0
+--------------------------
+**Library - Feature**
+- [PR #191](https://github.com/twilio/twilio-cli/pull/191): prompt to install known plugin when command is not found. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added `pstnconnectivity` to `usage_record` API
+
+**Contacts**
+- Added contacts channel create, update, read, delete API definition
+- Added contacts Get API definition
+- Added contacts Update API definition
+- Added contacts Delete API definition
+- Added contacts Search API definition
+- Added contacts location Create, update, read and delete API definitions
+
+**Notify**
+- delivery_callback_url and delivery_callback_enabled added
+
+**Preview**
+- `BrandsInformation` endpoint now returns a single `BrandsInformation`
+
+**Supersim**
+- Require a Network Access Profile when creating a Fleet **(breaking change)**
+
+
 [2020-06-04] Version 2.2.0
 --------------------------
 **Library - Fix**
