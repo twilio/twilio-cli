@@ -31,10 +31,7 @@ class DebuggerLogsList extends TwilioClientCommand {
       await sleep(STREAMING_DELAY_IN_SECONDS * 1000);
 
       // If streaming, just look at the last X minutes. This allows for delayed
-      // events to show up. Note that time of day is ignored by this filter,
-      // but it will still allow us to capture logs during day rollovers (i.e.,
-      // our local clock just rolled over midnight but an event from 1 minute
-      // before midnight had yet to make its way through the pipeline);.
+      // events to show up.
       props.startDate = new Date(new Date() - (STREAMING_HISTORY_IN_MINUTES * 60 * 1000));
       props.endDate = undefined; // Eh, why not?
 
