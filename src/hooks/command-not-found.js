@@ -1,24 +1,6 @@
 const Plugins = require('@oclif/plugin-plugins').default;
 const { logger } = require('@twilio/cli-core').services.logging;
-
-const PLUGIN_COMMANDS = {
-  '@twilio-labs/plugin-flex': ['flex'],
-  '@twilio-labs/plugin-rtc': ['rtc'],
-  '@twilio-labs/plugin-serverless': ['serverless'],
-  '@twilio-labs/plugin-token': ['token'],
-  '@twilio-labs/plugin-watch': ['watch'],
-  '@dabblelab/plugin-autopilot': ['autopilot']
-};
-
-const getSupportedPlugin = commandId => {
-  return Object.keys(PLUGIN_COMMANDS).find(plugin => {
-    return PLUGIN_COMMANDS[plugin].find(command => commandId === command || commandId.startsWith(command + ':'));
-  });
-};
-
-const isPluginInstalled = (config, pluginName) => {
-  return config.plugins.find(p => p.name === pluginName);
-};
+const { getSupportedPlugin, isPluginInstalled } = require('../services/plugins');
 
 const installPlugin = async (config, pluginName) => {
   const plugins = new Plugins(config);
