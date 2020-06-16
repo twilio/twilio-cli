@@ -33,7 +33,7 @@ The CLI will attempt to load credentials in the following order of priority:
 1. From environment variables, if set
 1. From the active profile
 
-### Twilio subaccounts
+## Subaccounts
 
 Instructions on how to create a Twilio subaccount can be found in the [Twilio docs](https://support.twilio.com/hc/en-us/articles/360011348693-View-and-Create-New-Twilio-Subaccounts).
 
