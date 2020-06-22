@@ -18,6 +18,18 @@ describe('services', () => {
           path: '/v1/Bars/{BarId}/SubBars/{SubBarId}.json'
         })).to.equal('foo:v1:bars:sub-bars');
       });
+
+      test.it('handles v2010 APIs', () => {
+        expect(getTopicName({
+          domainName: 'api',
+          path: '/2010-04-01/Accounts/{Sid}.json'
+        })).to.equal('core:accounts');
+
+        expect(getTopicName({
+          domainName: 'api',
+          path: '/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json'
+        })).to.equal('core:addresses');
+      });
     });
 
     describe('getActionDescription', () => {
