@@ -37,11 +37,17 @@ The CLI will attempt to load credentials in the following order of priority:
 
 Instructions on how to create a Twilio subaccount can be found in the [Twilio docs](https://support.twilio.com/hc/en-us/articles/360011348693-View-and-Create-New-Twilio-Subaccounts).
 
-Once you have your subaccount SID, you can add the `--account-sid` parameter to your call to run a command on behalf of a subaccount, provided it's a `core` command. For all other commands, please use profiles (via `twilio login` to create a new profile or `twilio profiles` to manage existing credentials).
+### API Commands
+
+For non-`twilio api:core` commands, please use profiles (via `twilio login` to create a new profile or `twilio profiles` to manage existing credentials).
 
 You can’t use the token created by `twilio login` to access subaccounts as it creates a Standard key which is scoped for master account only. An appropriate API key can be created from a Master Account here: https://www.twilio.com/console/project/api-keys/create.
 
 Instead of using `twilio login`, you must use environment variables if you want access to subaccounts. There are two options (Master API Key, or Master Account SID and Auth Token).
+
+### API Core Commands
+
+Once you have your subaccount SID, you can add the `--account-sid` parameter to run a command on a specific subaccount, provided it's a `twilio api:core` command. 
 
 For example:
 
