@@ -1,6 +1,39 @@
 twilio-cli changelog
 =====================
 
+[2020-06-25] Version 2.4.0
+--------------------------
+**Library - Feature**
+- [PR #195](https://github.com/twilio/twilio-cli/pull/195): move Twilio (Sub)Account APIs to their own topic. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #193](https://github.com/twilio/twilio-cli/pull/193): add 'plugins:available' command that lists trusted, uninstalled plugins. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added optional `JitterBufferSize` parameter for creating conference participant
+- Added optional `label` property for conference participants
+- Added optional parameter `caller_id` for creating conference participant endpoint.
+
+**Autopilot**
+- Remove Export resource from Autopilot Assistant
+
+**Conversations**
+- Expose Conversation timers
+
+**Monitor**
+- Update start/end date filter params to support date-or-time format **(breaking change)**
+
+**Numbers**
+- Add `provisionally-approved` as a Supporting Document status
+
+**Preview**
+- Removed `Authy` resources. **(breaking change)**
+
+**Supersim**
+- Add ready state to the allowed transitions in the sim update call behind the feature flag supersim.ready-state.v1
+
+**Verify**
+- Webhook resources added to Verify services and put behind the `api.verify.push` beta feature
+
+
 [2020-06-10] Version 2.3.0
 --------------------------
 **Library - Feature**
