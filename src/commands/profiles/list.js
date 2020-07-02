@@ -17,7 +17,7 @@ class ProfilesList extends BaseCommand {
       });
       this.output(this.userConfig.profiles);
     } else {
-      this.logger.warn('No profiles have been configured. Run ' + chalk.whiteBright('twilio profiles:create') + ' to create one!');
+      this.logger.warn('No profiles have been configured. Run ' + chalk.bold('twilio profiles:create') + ' to create one!');
     }
   }
 }

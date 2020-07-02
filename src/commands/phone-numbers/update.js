@@ -49,7 +49,7 @@ class NumberUpdate extends TwilioClientCommand {
     this.output(results);
 
     if (hasLocalHostProp) {
-      this.logger.info('ngrok is running. Open ' + chalk.blueBright(this.ngrok.getUrl()) + ' to view tunnel activity.');
+      this.logger.info('ngrok is running. Open ' + chalk.bold(this.ngrok.getUrl()) + ' to view tunnel activity.');
       this.logger.info('Press CTRL-C to exit.');
       this.logger.debug('Tunnels:');
       this.logger.debug(this.tunnels);
