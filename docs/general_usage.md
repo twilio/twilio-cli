@@ -33,6 +33,45 @@ The CLI will attempt to load credentials in the following order of priority:
 1. From environment variables, if set
 1. From the active profile
 
+## Subaccounts
+
+Instructions on how to create a Twilio subaccount can be found in the [Twilio docs](https://support.twilio.com/hc/en-us/articles/360011348693-View-and-Create-New-Twilio-Subaccounts).
+
+### API Commands
+
+For non-`twilio api:core` commands, with your subaccount SID, please use profiles (via `twilio login` to create a new profile or `twilio profiles` to manage existing credentials).
+
+### API Core Commands
+
+`twilio-cli` profiles created for parent accounts cannot be used to manage subaccounts as it creates a Standard API Key. An appropriate Master API Key can be created here: https://www.twilio.com/console/project/api-keys/create.
+
+Instead of using `twilio login`, you must use environment variables if you want access to subaccounts. There are two options (Master API Key, or Master Account SID and Auth Token).
+
+Once you have your subaccount SID, you can add the `--account-sid` parameter to run a command on a specific subaccount, provided it's a `twilio api:core` command. 
+
+For example:
+
+#### OPTION 1 (recommended)
+
+```bash
+export TWILIO_ACCOUNT_SID='ACXXXXXXXX'
+export TWILIO_API_KEY='XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+export TWILIO_API_SECRET='XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+twilio api:core:available-phone-numbers:local:list --area-code="415" --country-code US --account-sid=<subaccount SID>’
+```
+
+#### OPTION 2
+
+_NOTE: Option 2 should only be used in cases where you are unable to make use of option 1 (which are uncommon)._
+
+The Account SID and Auth Token can be retrieved from the [console](https://twil.io/console).
+
+```bash
+export TWILIO_ACCOUNT_SID='ACXXXXXXXX'
+export TWILIO_AUTH_TOKEN='XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+twilio api:core:available-phone-numbers:local:list --area-code="415" --country-code US --account-sid=<subaccount SID>’
+```
+
 ## Special features
 
 ### Webhooks
