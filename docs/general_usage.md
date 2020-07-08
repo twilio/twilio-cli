@@ -45,7 +45,7 @@ For non-`twilio api:core` commands, with your subaccount SID, please use profile
 
 `twilio-cli` profiles created for parent accounts cannot be used to manage subaccounts as it creates a Standard API Key. An appropriate Master API Key can be created here: https://www.twilio.com/console/project/api-keys/create.
 
-Instead of using `twilio login`, you must use environment variables if you want access to subaccounts. There are two options (Master API Key, or Master Account SID and Auth Token).
+Instead of using `twilio login`, you must use environment variables if you want access to subaccounts. There are two options (Master API Key, or Parent Account SID and Auth Token).
 
 Once you have your subaccount SID, you can add the `--account-sid` parameter to run a command on a specific subaccount, provided it's a `twilio api:core` command. 
 
