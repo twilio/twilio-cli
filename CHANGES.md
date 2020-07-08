@@ -1,6 +1,39 @@
 twilio-cli changelog
 =====================
 
+[2020-07-08] Version 2.5.0
+--------------------------
+**Library - Docs**
+- [PR #194](https://github.com/twilio/twilio-cli/pull/194): how to use the CLI to interact with Twilio subaccounts. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+**Library - Fix**
+- [PR #198](https://github.com/twilio/twilio-cli/pull/198): don't get so fancy with the font color scheme. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #197](https://github.com/twilio/twilio-cli/pull/197): upgrade dependencies and drop tslib pinning. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Conversations**
+- Allow Address updates for Participants
+- Message delivery receipts
+
+**Events**
+- Add account_sid to subscription and subscribed_events resources
+
+**Flex**
+- Changed `wfm_integrations` Flex Configuration key to private **(breaking change)**
+
+**Messaging**
+- Add error states to WhatsApp Sender status with failed reason **(breaking change)**
+- Delete WhatsApp Template API
+- Update WhatsApp Template API
+- Add WhatsApp Template Get Api (fetch and read)
+
+**Numbers**
+- Add `valid_until` in the Bundles resource
+- Add API for Bundle deletion
+
+**Verify**
+- Removed support for `sms`, `totp` and `app-push` factor types in Verify push **(breaking change)**
+
+
 [2020-06-25] Version 2.4.0
 --------------------------
 **Library - Feature**
