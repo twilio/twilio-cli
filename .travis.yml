@@ -1,7 +1,9 @@
 language: node_js
 dist: xenial
 node_js:
-  - lts/*
+  - "node"
+  - "lts/*"
+  - "10"
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y libsecret-1-dev
