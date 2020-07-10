@@ -230,8 +230,8 @@ class ProfilesCreate extends BaseCommand {
 
     const twilioClient = this.getTwilioClient();
     try {
+      // Don't log the response since it contains the secret.
       apiKey = await twilioClient.newKeys.create({ friendlyName: apiKeyFriendlyName });
-      this.logger.debug(apiKey);
     } catch (error) {
       this.logger.debug(error);
       throw new TwilioCliError('Could not create an API Key.');
