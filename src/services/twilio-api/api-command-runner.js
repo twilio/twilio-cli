@@ -69,10 +69,11 @@ class ApiCommandRunner {
 
     const pathParams = {};
     const queryParams = {};
+    const headerParams = {};
 
-    // Build the path and query params based on the parameters defined with the API action.
+    // Build the path, query, and header params based on the parameters defined with the API action.
     actionParams.forEach(parameter => {
-      const destination = (parameter.in === 'path' ? pathParams : queryParams);
+      const destination = (parameter.in === 'path' ? pathParams : (parameter.in === 'header' ? headerParams : queryParams));
       this.addParameter(parameter, destination);
     });
 
@@ -87,7 +88,8 @@ class ApiCommandRunner {
       domain: domainName,
       path: path,
       pathParams: pathParams,
-      data: queryParams
+      data: queryParams,
+      headers: headerParams
     });
 
     // TODO: Possible extender event: "afterInvokeApi"
@@ -95,7 +97,6 @@ class ApiCommandRunner {
 
   addParameter(parameter, params) {
     const flag = getFlagConfig(parameter, this.actionDefinition);
-
     // Add the param if it does't exist already and we have a value to add.
     if (!doesObjectHaveProperty(params, parameter.name) && doesObjectHaveProperty(this.flagValues, flag.name)) {
       params[parameter.name] = this.flagValues[flag.name];

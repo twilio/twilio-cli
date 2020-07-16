@@ -57,6 +57,22 @@ describe('base-commands', () => {
         }
       };
 
+      const syncMapItemUpdateActionDefinition = {
+        domainName: 'sync',
+        commandName: 'update',
+        path: '/v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Sid}.json',
+        actionName: 'update',
+        action: {
+          parameters: [
+            { name: 'Sid', in: 'path', schema: { type: 'string' } },
+            { name: 'MapSid', in: 'path', schema: { type: 'string' } },
+            { name: 'ServiceSid', in: 'path', schema: { type: 'string' } },
+            { name: 'Key', in: 'query', schema: { type: 'string' } },
+            { name: 'If-Match', in: 'header', schema: { type: 'string' } }
+          ]
+        }
+      };
+
       const getCommandClass = (actionDefinition = callCreateActionDefinition) => {
         const NewCommandClass = class extends TwilioApiCommand {
         };
@@ -239,6 +255,32 @@ describe('base-commands', () => {
         })
         .it('creates a call with an invalid parameter', ctx => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
+        });
+
+      test
+        .twilioFakeProfile(ConfigData)
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCreateCommand(getCommandClass(syncMapItemUpdateActionDefinition), [
+          '--sid',
+          'unique_name',
+          '--map-sid',
+          'MP0123',
+          '--service-sid',
+          'IS1234',
+          '--key',
+          'test_key',
+          '--if-match',
+          'revision'
+        ])
+        .do(ctx => {
+          ctx.testCmd.twilioApi = { update: sinon.stub().returns({}) };
+          return ctx.testCmd.run();
+        })
+        .it('adds header parameters', ctx => {
+          const syncOptions = ctx.testCmd.twilioApi.update.firstCall.firstArg;
+          expect(syncOptions.headers).to.include({ 'If-Match': 'revision' });
         });
     });
   });
