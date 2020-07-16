@@ -267,7 +267,7 @@ ProfilesCreate.flags = Object.assign(
       hidden: true
     }),
     region: flags.string({
-      hidden: true
+      description: 'Twilio region to use.'
     })
   },
   TwilioClientCommand.flags // Yes! We _do_ want the same flags as TwilioClientCommand
