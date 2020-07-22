@@ -1,6 +1,22 @@
 twilio-cli changelog
 =====================
 
+[2020-07-22] Version 2.6.0
+--------------------------
+**Library - Feature**
+- [PR #200](https://github.com/twilio/twilio-cli/pull/200): add custom HTTP header parameter support. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+**Library - Fix**
+- [PR #201](https://github.com/twilio/twilio-cli/pull/201): unhide the Twilio region flag when creating profiles. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #199](https://github.com/twilio/twilio-cli/pull/199): don't debug log the API key secret when creating profiles. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Add optional Click Tracking and Scheduling parameters to Create action of Message resource
+
+**Supersim**
+- Add callback_url and callback_method parameters to Sim resource update request
+
+
 [2020-07-08] Version 2.5.0
 --------------------------
 **Library - Docs**
