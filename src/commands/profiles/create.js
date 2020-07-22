@@ -1,6 +1,6 @@
 const os = require('os');
-const { flags } = require('@oclif/command');
 
+const { flags } = require('@oclif/command');
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CliRequestClient } = require('@twilio/cli-core').services;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
@@ -11,7 +11,7 @@ const helpMessages = require('../../services/messaging/help-messages');
 const FRIENDLY_STORAGE_LOCATIONS = {
   [STORAGE_LOCATIONS.KEYCHAIN]: 'in your keychain',
   [STORAGE_LOCATIONS.WIN_CRED_VAULT]: 'in the Windows credential vault',
-  [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret'
+  [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret',
 };
 
 const SKIP_VALIDATION = 'skip-parameter-validation';
@@ -60,8 +60,8 @@ class ProfilesCreate extends BaseCommand {
         {
           name: 'profileId',
           message: this.getPromptMessage(ProfilesCreate.flags.profile.description),
-          validate: input => Boolean(input.trim())
-        }
+          validate: (input) => Boolean(input.trim()),
+        },
       ]);
       this.profileId = answer.profileId;
     }
@@ -79,7 +79,7 @@ class ProfilesCreate extends BaseCommand {
       this.questions.push({
         name: 'accountSid',
         message: this.getPromptMessage(ProfilesCreate.args[0].description),
-        validate: input => this.validAccountSid(input)
+        validate: (input) => this.validAccountSid(input),
       });
     }
   }
@@ -91,7 +91,7 @@ class ProfilesCreate extends BaseCommand {
         type: 'password',
         name: 'authToken',
         message: this.getPromptMessage(ProfilesCreate.flags['auth-token'].description),
-        validate: input => this.validAuthToken(input)
+        validate: (input) => this.validAuthToken(input),
       });
     }
   }
@@ -133,7 +133,7 @@ class ProfilesCreate extends BaseCommand {
       this.authToken = answers.authToken || this.authToken;
     }
 
-    const throwIfInvalid = valid => {
+    const throwIfInvalid = (valid) => {
       if (valid !== true) {
         throw new TwilioCliError(valid || 'You must provide a valid value');
       }
@@ -153,9 +153,10 @@ class ProfilesCreate extends BaseCommand {
             type: 'confirm',
             name: 'overwrite',
             message: `Overwrite existing profile credentials for "${this.profileId}"?`,
-            default: false
-          }
+            default: false,
+          },
         ]);
+        // eslint-disable-next-line prefer-destructuring
         overwrite = confirm.overwrite;
       }
     }
@@ -173,9 +174,10 @@ class ProfilesCreate extends BaseCommand {
             'Account credentials are currently stored in environment variables and will take precedence over ' +
             `the "${this.profileId}" profile when connecting to Twilio, unless the "${this.profileId}" profile is ` +
             `explicitly specified. Continue setting up "${this.profileId}" profile?`,
-          default: false
-        }
+          default: false,
+        },
       ]);
+      // eslint-disable-next-line prefer-destructuring
       affirmative = confirm.affirmative;
     }
     return affirmative;
@@ -190,7 +192,7 @@ class ProfilesCreate extends BaseCommand {
     if (!this.twilioClient) {
       this.twilioClient = require('twilio')(this.accountSid, this.authToken, {
         httpClient: new CliRequestClient(this.id, this.logger),
-        region: this.region
+        region: this.region,
       });
     }
     return this.twilioClient;
@@ -211,7 +213,7 @@ class ProfilesCreate extends BaseCommand {
 
   getApiKeyFriendlyName() {
     const username = this.getUsername();
-    const friendlyName = `twilio-cli${username ? ' for ' + username : ''} on ${os.hostname()}`;
+    const friendlyName = `twilio-cli${username ? ` for ${username}` : ''} on ${os.hostname()}`;
     return friendlyName.substring(0, 64);
   }
 
@@ -221,6 +223,8 @@ class ProfilesCreate extends BaseCommand {
     } catch (error) {
       // Throws a SystemError if a user has no username or homedir.
       this.logger.debug(error);
+
+      return undefined;
     }
   }
 
@@ -244,7 +248,7 @@ class ProfilesCreate extends BaseCommand {
     this.logger.info(
       `Created API Key ${apiKey.sid} and stored the secret ${
         FRIENDLY_STORAGE_LOCATIONS[this.secureStorage.storageLocation]
-      }. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`
+      }. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
     );
     this.logger.info(configSavedMessage);
   }
@@ -253,31 +257,29 @@ class ProfilesCreate extends BaseCommand {
 ProfilesCreate.aliases = ['profiles:add', 'login'];
 ProfilesCreate.description = 'create a new profile to store Twilio Account credentials and configuration';
 
-ProfilesCreate.flags = Object.assign(
-  {
-    'auth-token': flags.string({
-      description: 'Your Twilio Auth Token for your Twilio Account or Subaccount.'
-    }),
-    force: flags.boolean({
-      char: 'f',
-      description: 'Force overwriting existing profile credentials.'
-    }),
-    [SKIP_VALIDATION]: flags.boolean({
-      default: false,
-      hidden: true
-    }),
-    region: flags.string({
-      description: 'Twilio region to use.'
-    })
-  },
-  TwilioClientCommand.flags // Yes! We _do_ want the same flags as TwilioClientCommand
-);
+ProfilesCreate.flags = {
+  'auth-token': flags.string({
+    description: 'Your Twilio Auth Token for your Twilio Account or Subaccount.',
+  }),
+  force: flags.boolean({
+    char: 'f',
+    description: 'Force overwriting existing profile credentials.',
+  }),
+  [SKIP_VALIDATION]: flags.boolean({
+    default: false,
+    hidden: true,
+  }),
+  region: flags.string({
+    description: 'Twilio region to use.',
+  }),
+  ...TwilioClientCommand.flags, // Yes! We _do_ want the same flags as TwilioClientCommand
+};
 
 ProfilesCreate.args = [
   {
     name: 'account-sid',
-    description: 'The Account SID for your Twilio Account or Subaccount.'
-  }
+    description: 'The Account SID for your Twilio Account or Subaccount.',
+  },
 ];
 
 module.exports = ProfilesCreate;

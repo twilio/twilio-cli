@@ -1,12 +1,15 @@
 /* eslint no-warning-comments: "off" */
-// TODO: Remove the above eslint directive when this file
-// is free of TODO's.
+/*
+ * TODO: Remove the above eslint directive when this file
+ * is free of TODO's.
+ */
 
 const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { camelCase } = require('@twilio/cli-core').services.namingConventions;
+
 const { ApiCommandRunner, getActionDescription, getFlagConfig } = require('../services/twilio-api');
 
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
@@ -17,10 +20,10 @@ const typeMap = {
   number: flags.string,
   string: flags.string,
   object: flags.string,
-  undefined: flags.string // TODO: Handle "anyOf" case more explicitly
+  undefined: flags.string, // TODO: Handle "anyOf" case more explicitly
 };
 
-const isRemoveCommand = actionDefinition => actionDefinition.commandName === 'remove';
+const isRemoveCommand = (actionDefinition) => actionDefinition.commandName === 'remove';
 
 class TwilioApiCommand extends TwilioClientCommand {
   async run() {
@@ -30,7 +33,7 @@ class TwilioApiCommand extends TwilioClientCommand {
       this.twilioApiClient,
       this.constructor.actionDefinition,
       this.constructor.flags,
-      this.flags
+      this.flags,
     );
 
     const response = await runner.run();
@@ -44,49 +47,53 @@ class TwilioApiCommand extends TwilioClientCommand {
   }
 }
 
-TwilioApiCommand.flags = Object.assign(
-  {
-    'skip-parameter-validation': flags.boolean({
-      default: false,
-      hidden: true
-    })
-  },
-  TwilioClientCommand.flags
-);
+TwilioApiCommand.flags = {
+  'skip-parameter-validation': flags.boolean({
+    default: false,
+    hidden: true,
+  }),
+  ...TwilioClientCommand.flags,
+};
 
-// A static function to help us add the other static
-// fields required by oclif on our dynamically created
-// command class.
-TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
-  const resource = NewCommandClass.actionDefinition.resource;
-  const action = NewCommandClass.actionDefinition.action;
-  const commandId = NewCommandClass.actionDefinition.topicName + ':' + NewCommandClass.actionDefinition.commandName;
+/*
+ * A static function to help us add the other static
+ * fields required by oclif on our dynamically created
+ * command class.
+ */
+TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
+  const { resource } = NewCommandClass.actionDefinition;
+  const { action } = NewCommandClass.actionDefinition;
+  const commandId = `${NewCommandClass.actionDefinition.topicName}:${NewCommandClass.actionDefinition.commandName}`;
 
   // Parameters
   let cmdFlags = {};
-  (action.parameters || []).forEach(param => {
+  (action.parameters || []).forEach((param) => {
     const flagConfig = getFlagConfig(param, NewCommandClass.actionDefinition);
     const flagType = typeMap[param.schema.type];
 
     flagConfig.apiDetails = {
       parameter: param,
-      action: action,
-      resource: resource
+      action,
+      resource,
     };
 
     if (doesObjectHaveProperty(param.schema, 'enum')) {
-      // We want the best of all worlds. We want the help to show just lower-case options, but accept all options. Since
-      // oclif doesn't support this, we'll create a string that matches the enum flag text and let the schema validator
-      // take care of the actual validation.
+      /*
+       * We want the best of all worlds. We want the help to show just lower-case options, but accept all options. Since
+       * oclif doesn't support this, we'll create a string that matches the enum flag text and let the schema validator
+       * take care of the actual validation.
+       */
       const options = param.schema.enum
-        .map(value => value.toLowerCase()) // standardize the enum values
+        .map((value) => value.toLowerCase()) // standardize the enum values
         .filter((value, index, self) => self.indexOf(value) === index); // remove duplicates
       flagConfig.helpValue = `(${options.join('|')})`; // format it like the help plugin
     }
 
     if (flagType) {
-      // If the flag already exists, issue a warning. We're not equipped to
-      // handle such issues at the moment.
+      /*
+       * If the flag already exists, issue a warning. We're not equipped to
+       * handle such issues at the moment.
+       */
       if (cmdFlags[flagConfig.name]) {
         logger.warn(`The command "${commandId}" contains a conflicting flag: "--${flagConfig.name}"`);
       }
@@ -103,8 +110,8 @@ TwilioApiCommand.setUpNewCommandClass = NewCommandClass => {
 
     cmdFlags.properties = flags.string({
       // Camel-cased, CSV of the provided property list. Or just the SID.
-      default: defaultProperties.map(prop => camelCase(prop)).join(',') || 'sid',
-      description: 'The properties you would like to display (JSON output always shows all properties).'
+      default: defaultProperties.map((prop) => camelCase(prop)).join(',') || 'sid',
+      description: 'The properties you would like to display (JSON output always shows all properties).',
     });
   }
 

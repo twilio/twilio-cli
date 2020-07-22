@@ -1,5 +1,6 @@
 const Plugins = require('@oclif/plugin-plugins').default;
 const { logger } = require('@twilio/cli-core').services.logging;
+
 const { getSupportedPlugin, isPluginInstalled } = require('../services/plugins');
 
 const installPlugin = async (config, pluginName) => {
@@ -10,19 +11,21 @@ const installPlugin = async (config, pluginName) => {
   return plugins.install(pluginName);
 };
 
-module.exports = async function (options) {
+module.exports = async function commandNotFound(options) {
   const pluginName = getSupportedPlugin(options.id);
 
   if (pluginName && !isPluginInstalled(options.config, pluginName)) {
     logger.warn(`Plugin ${pluginName} not installed for command "${options.id}"`);
 
-    const prompt = require('inquirer').prompt;
-    const response = await prompt([{
-      type: 'confirm',
-      name: 'install',
-      message: 'Would you like to install the plugin?',
-      default: false
-    }]);
+    const { prompt } = require('inquirer');
+    const response = await prompt([
+      {
+        type: 'confirm',
+        name: 'install',
+        message: 'Would you like to install the plugin?',
+        default: false,
+      },
+    ]);
     if (response.install) {
       logger.warn(`Installing plugin ${pluginName} ...`);
 

@@ -11,16 +11,14 @@ class NumberList extends TwilioClientCommand {
 
 NumberList.description = 'show what Twilio phone numbers you have configured';
 
-NumberList.flags = Object.assign(
-  {
-    properties: flags.string({
-      default: 'sid, phoneNumber, friendlyName',
-      description:
-        'The incomingPhoneNumber object properties you would like to display (JSON output always shows all properties).'
-    })
-  },
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
-);
+NumberList.flags = {
+  properties: flags.string({
+    default: 'sid, phoneNumber, friendlyName',
+    description:
+      'The incomingPhoneNumber object properties you would like to display (JSON output always shows all properties).',
+  }),
+  ...TwilioClientCommand.flags,
+  ...TwilioClientCommand.accountSidFlag,
+};
 
 module.exports = NumberList;

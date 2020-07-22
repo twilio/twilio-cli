@@ -1,9 +1,10 @@
 const sinon = require('sinon');
+const { expect, test } = require('@twilio/cli-test');
+const { Config, ConfigData } = require('@twilio/cli-core').services.config;
+
+const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
 const TwilioApiCommand = require('../../src/base-commands/twilio-api-command');
 const { getTopicName } = require('../../src/services/twilio-api');
-const { expect, test } = require('@twilio/cli-test');
-const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
-const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
 const NUMBER_OF_BASE_COMMAND_FLAGS = 5;
 const NUMBER_OF_PARAMS_FOR_CALL_CREATE = fakeResource.actions.create.parameters.length;
@@ -17,7 +18,7 @@ describe('base-commands', () => {
         path: '/2010-04-01/Accounts/{AccountSid}/Calls.json',
         resource: fakeResource,
         actionName: 'create',
-        action: fakeResource.actions.create
+        action: fakeResource.actions.create,
       };
 
       const callListActionDefinition = {
@@ -28,9 +29,9 @@ describe('base-commands', () => {
         action: {
           parameters: [
             { name: 'StartTime<', in: 'query', schema: { type: 'string' } },
-            { name: 'StartTime>', in: 'query', schema: { type: 'string' } }
-          ]
-        }
+            { name: 'StartTime>', in: 'query', schema: { type: 'string' } },
+          ],
+        },
       };
 
       const callRemoveActionDefinition = {
@@ -39,8 +40,8 @@ describe('base-commands', () => {
         path: '/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json',
         actionName: 'remove',
         action: {
-          parameters: [{ name: 'Sid', in: 'path', schema: { type: 'string' } }]
-        }
+          parameters: [{ name: 'Sid', in: 'path', schema: { type: 'string' } }],
+        },
       };
 
       const numberUpdateActionDefinition = {
@@ -52,9 +53,9 @@ describe('base-commands', () => {
           parameters: [
             { name: 'Sid', in: 'path', schema: { type: 'string' } },
             { name: 'AccountSid', in: 'path', schema: { type: 'string' } },
-            { name: 'AccountSid', in: 'query', schema: { type: 'string' } }
-          ]
-        }
+            { name: 'AccountSid', in: 'query', schema: { type: 'string' } },
+          ],
+        },
       };
 
       const syncMapItemUpdateActionDefinition = {
@@ -68,16 +69,15 @@ describe('base-commands', () => {
             { name: 'MapSid', in: 'path', schema: { type: 'string' } },
             { name: 'ServiceSid', in: 'path', schema: { type: 'string' } },
             { name: 'Key', in: 'query', schema: { type: 'string' } },
-            { name: 'If-Match', in: 'header', schema: { type: 'string' } }
-          ]
-        }
+            { name: 'If-Match', in: 'header', schema: { type: 'string' } },
+          ],
+        },
       };
 
       const getCommandClass = (actionDefinition = callCreateActionDefinition) => {
-        const NewCommandClass = class extends TwilioApiCommand {
-        };
+        const NewCommandClass = class extends TwilioApiCommand {};
         NewCommandClass.actionDefinition = actionDefinition;
-        NewCommandClass.actionDefinition.topicName = 'api:' + getTopicName(NewCommandClass.actionDefinition);
+        NewCommandClass.actionDefinition.topicName = `api:${getTopicName(NewCommandClass.actionDefinition)}`;
         TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
 
         return NewCommandClass;
@@ -93,14 +93,14 @@ describe('base-commands', () => {
         expect(NewCommandClass.flags['account-sid'].required).to.be.false;
         expect(NewCommandClass.flags['account-sid'].apiDetails.parameter.name).to.equal('AccountSid');
         expect(NewCommandClass.flags['account-sid'].apiDetails.action).to.equal(
-          NewCommandClass.actionDefinition.action
+          NewCommandClass.actionDefinition.action,
         );
         expect(NewCommandClass.flags['account-sid'].apiDetails.resource).to.equal(
-          NewCommandClass.actionDefinition.resource
+          NewCommandClass.actionDefinition.resource,
         );
         expect(NewCommandClass.flags.to.required).to.be.true;
         expect(NewCommandClass.flags.to.description).to.equal(
-          'Phone number, SIP address, or `client identifier` to call'
+          'Phone number, SIP address, or `client identifier` to call',
         );
         expect(NewCommandClass.flags.from.required).to.be.true;
         expect(NewCommandClass.flags.method.required).to.be.false;
@@ -110,7 +110,7 @@ describe('base-commands', () => {
         expect(NewCommandClass.flags.properties.default).to.equal('sid,friendlyName,status');
 
         expect(Object.keys(NewCommandClass.flags).length).to.equal(
-          NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS
+          NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS,
         );
       });
 
@@ -141,13 +141,13 @@ describe('base-commands', () => {
           '--to',
           '+14155555555',
           '--url',
-          'http://example.com/'
+          'http://example.com/',
         ])
-        .do(ctx => {
+        .do((ctx) => {
           ctx.testCmd.twilioApi = { create: sinon.stub().returns(fakeCallResponse) };
           return ctx.testCmd.run();
         })
-        .it('creates a call', ctx => {
+        .it('creates a call', (ctx) => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
         });
 
@@ -162,13 +162,13 @@ describe('base-commands', () => {
           '--start-time-before',
           'before-that',
           '--limit',
-          '1'
+          '1',
         ])
-        .do(ctx => {
+        .do((ctx) => {
           ctx.testCmd.twilioApi = { list: sinon.stub().returns([]) };
           return ctx.testCmd.run();
         })
-        .it('lists calls', ctx => {
+        .it('lists calls', (ctx) => {
           const callOptions = ctx.testCmd.twilioApi.list.firstCall.args[0];
           expect(callOptions.data).to.include({ 'StartTime>': 'after-this' });
           expect(callOptions.data).to.include({ 'StartTime<': 'before-that' });
@@ -184,11 +184,11 @@ describe('base-commands', () => {
         .stdout()
         .stderr()
         .twilioCreateCommand(getCommandClass(callRemoveActionDefinition), ['--sid', fakeCallResponse.sid])
-        .do(ctx => {
+        .do((ctx) => {
           ctx.testCmd.twilioApi = { remove: sinon.stub().returns(true) };
           return ctx.testCmd.run();
         })
-        .it('deletes a call', ctx => {
+        .it('deletes a call', (ctx) => {
           expect(ctx.stdout).to.be.empty;
           expect(ctx.stderr).to.contain('success');
         });
@@ -203,13 +203,13 @@ describe('base-commands', () => {
           '--account-sid',
           'AC012',
           '--target-account-sid',
-          'AC123'
+          'AC123',
         ])
-        .do(ctx => {
+        .do((ctx) => {
           ctx.testCmd.twilioApi = { update: sinon.stub().returns({}) };
           return ctx.testCmd.run();
         })
-        .it('updates a call', ctx => {
+        .it('updates a call', (ctx) => {
           const callOptions = ctx.testCmd.twilioApi.update.firstCall.args[0];
           expect(callOptions.data).to.include({ AccountSid: 'AC123' });
         });
@@ -226,10 +226,10 @@ describe('base-commands', () => {
           '--url',
           'http://example.com/',
           '--application-sid',
-          'ap12345678901234567890123456789012' // Lower-cased 'ap'
+          'ap12345678901234567890123456789012', // Lower-cased 'ap'
         ])
         .catch(/Cannot execute command/)
-        .it('exits with a failure code and prints validation errors', ctx => {
+        .it('exits with a failure code and prints validation errors', (ctx) => {
           expect(ctx.stderr).to.contain('validation errors');
         });
 
@@ -247,13 +247,13 @@ describe('base-commands', () => {
           '--url',
           'http://example.com/',
           '--application-sid',
-          'ap12345678901234567890123456789012' // Lower-cased 'ap'
+          'ap12345678901234567890123456789012', // Lower-cased 'ap'
         ])
-        .do(ctx => {
+        .do((ctx) => {
           ctx.testCmd.twilioApi = { create: sinon.stub().returns(fakeCallResponse) };
           return ctx.testCmd.run();
         })
-        .it('creates a call with an invalid parameter', ctx => {
+        .it('creates a call with an invalid parameter', (ctx) => {
           expect(ctx.stdout).to.contain(fakeCallResponse.sid);
         });
 
@@ -272,13 +272,13 @@ describe('base-commands', () => {
           '--key',
           'test_key',
           '--if-match',
-          'revision'
+          'revision',
         ])
-        .do(ctx => {
+        .do((ctx) => {
           ctx.testCmd.twilioApi = { update: sinon.stub().returns({}) };
           return ctx.testCmd.run();
         })
-        .it('adds header parameters', ctx => {
+        .it('adds header parameters', (ctx) => {
           const syncOptions = ctx.testCmd.twilioApi.update.firstCall.firstArg;
           expect(syncOptions.headers).to.include({ 'If-Match': 'revision' });
         });

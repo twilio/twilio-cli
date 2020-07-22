@@ -1,6 +1,7 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
+
 const emailUtilities = require('../../services/email-utility');
 
 class Set extends BaseCommand {
@@ -20,18 +21,18 @@ class Set extends BaseCommand {
 
   reminderCurrentData() {
     if (this.userConfig.email.fromEmail) {
-      this.logger.info('Current default sending email: ' + this.userConfig.email.fromEmail);
+      this.logger.info(`Current default sending email: ${this.userConfig.email.fromEmail}`);
     }
     if (this.userConfig.email.subjectLine) {
-      this.logger.info('Current default subject line: ' + this.userConfig.email.subjectLine);
+      this.logger.info(`Current default subject line: ${this.userConfig.email.subjectLine}`);
     }
   }
 
   setDefaults(email, subject) {
     this.userConfig.email.fromEmail = email;
     this.userConfig.email.subjectLine = subject;
-    this.logger.info('Default sending email address has been set to: ' + this.userConfig.email.fromEmail);
-    this.logger.info('Default subject line has been set to: ' + this.userConfig.email.subjectLine);
+    this.logger.info(`Default sending email address has been set to: ${this.userConfig.email.fromEmail}`);
+    this.logger.info(`Default subject line has been set to: ${this.userConfig.email.subjectLine}`);
   }
 
   async promptSetDefaultEmail() {
@@ -39,9 +40,9 @@ class Set extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'from',
-          message: Set.flags.from.description + ':',
-          default: this.userConfig.email.fromEmail
-        }
+          message: `${Set.flags.from.description}:`,
+          default: this.userConfig.email.fromEmail,
+        },
       ]);
       return answer.from;
     }
@@ -53,9 +54,9 @@ class Set extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: 'subject',
-          message: Set.flags.subject.description + ':',
-          default: this.userConfig.email.subjectLine
-        }
+          message: `${Set.flags.subject.description}:`,
+          default: this.userConfig.email.subjectLine,
+        },
       ]);
       return answer.subject;
     }
@@ -67,11 +68,11 @@ Set.description = 'sets a default sending email address and subject line';
 
 Set.flags = {
   from: flags.string({
-    description: 'Default email address of the sender'
+    description: 'Default email address of the sender',
   }),
   subject: flags.string({
-    description: 'Default subject line for all emails'
-  })
+    description: 'Default subject line for all emails',
+  }),
 };
 
 module.exports = Set;

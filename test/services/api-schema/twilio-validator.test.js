@@ -1,6 +1,6 @@
-const TwilioSchemaValidator = require('../../../src/services/api-schema/twilio-validator');
-
 const { expect, test, logger } = require('@twilio/cli-test');
+
+const TwilioSchemaValidator = require('../../../src/services/api-schema/twilio-validator');
 
 const validateSchema = (schema, value) => {
   const schemaValidator = new TwilioSchemaValidator(logger);
@@ -13,7 +13,7 @@ describe('services/api-schema', () => {
     describe('string-type-date', () => {
       const schema = {
         type: 'string',
-        format: 'date'
+        format: 'date',
       };
 
       test.it('accepts any string', () => {
@@ -32,7 +32,7 @@ describe('services/api-schema', () => {
     describe('string-type-date-time', () => {
       const schema = {
         type: 'string',
-        format: 'date-time'
+        format: 'date-time',
       };
 
       test.it('accepts any string', () => {
@@ -49,7 +49,7 @@ describe('services/api-schema', () => {
     describe('string-type-uri', () => {
       const schema = {
         type: 'string',
-        format: 'uri'
+        format: 'uri',
       };
 
       test.it('accepts any string', () => {

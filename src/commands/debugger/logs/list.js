@@ -1,8 +1,9 @@
-const { flags } = require('@oclif/command');
+const querystring = require('querystring');
+
+const { flags: oclifFlags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { sleep } = require('@twilio/cli-core').services.JSUtils;
-const querystring = require('querystring');
 
 const STREAMING_DELAY_IN_SECONDS = 1;
 const STREAMING_HISTORY_IN_MINUTES = 5;
@@ -30,13 +31,15 @@ class DebuggerLogsList extends TwilioClientCommand {
     while (this.flags.streaming) {
       await sleep(STREAMING_DELAY_IN_SECONDS * 1000);
 
-      // If streaming, just look at the last X minutes. This allows for delayed
-      // events to show up.
-      props.startDate = new Date(new Date() - (STREAMING_HISTORY_IN_MINUTES * 60 * 1000));
+      /*
+       * If streaming, just look at the last X minutes. This allows for delayed
+       * events to show up.
+       */
+      props.startDate = new Date(new Date() - STREAMING_HISTORY_IN_MINUTES * 60 * 1000);
       props.endDate = undefined; // Eh, why not?
 
-      const logEvents = await this.getLogEvents(props);
-      this.outputLogEvents(logEvents);
+      const events = await this.getLogEvents(props);
+      this.outputLogEvents(events);
     }
   }
 
@@ -60,18 +63,18 @@ class DebuggerLogsList extends TwilioClientCommand {
 
   filterLogEvents(logEvents) {
     const previousLogEvents = new Set(this.latestLogEvents);
-    this.latestLogEvents = new Set(logEvents.map(event => event.sid));
+    this.latestLogEvents = new Set(logEvents.map((event) => event.sid));
 
-    // Filter out any events that we just saw, and then reverse them so they're
-    // in ascending order.
-    return logEvents
-      .filter(event => !previousLogEvents.has(event.sid))
-      .reverse();
+    /*
+     * Filter out any events that we just saw, and then reverse them so they're
+     * in ascending order.
+     */
+    return logEvents.filter((event) => !previousLogEvents.has(event.sid)).reverse();
   }
 
   outputLogEvents(logEvents) {
     if (logEvents.length > 0) {
-      logEvents.forEach(e => {
+      logEvents.forEach((e) => {
         e.alertText = this.formatAlertText(e.alertText);
       });
       this.output(logEvents, this.flags.properties, { showHeaders: this.showHeaders });
@@ -94,32 +97,29 @@ DebuggerLogsList.description = `Show a list of log events generated for the acco
 Argg, this is only a subset of the log events and live tailing isn't quite ready! Think this is a killer feature? Let us know here: https://twil.io/twilio-cli-feedback`;
 
 DebuggerLogsList.PropertyFlags = {
-  'log-level': flags.enum({
+  'log-level': oclifFlags.enum({
     options: ['error', 'warning', 'notice', 'debug'],
-    description: 'Only show log events for this log level'
+    description: 'Only show log events for this log level',
   }),
-  'start-date': flags.string({
-    description: 'Only show log events on or after this date'
+  'start-date': oclifFlags.string({
+    description: 'Only show log events on or after this date',
   }),
-  'end-date': flags.string({
-    description: 'Only show log events on or before this date'
-  })
+  'end-date': oclifFlags.string({
+    description: 'Only show log events on or before this date',
+  }),
 };
 
-DebuggerLogsList.flags = Object.assign(
-  {
-    properties: flags.string({
-      default: 'dateCreated, logLevel, errorCode, alertText',
-      description:
-        'The event properties you would like to display (JSON output always shows all properties)'
-    }),
-    streaming: flags.boolean({
-      char: 's',
-      description: 'Continuously stream incoming log events'
-    })
-  },
-  DebuggerLogsList.PropertyFlags,
-  TwilioClientCommand.flags
-);
+DebuggerLogsList.flags = {
+  properties: oclifFlags.string({
+    default: 'dateCreated, logLevel, errorCode, alertText',
+    description: 'The event properties you would like to display (JSON output always shows all properties)',
+  }),
+  streaming: oclifFlags.boolean({
+    char: 's',
+    description: 'Continuously stream incoming log events',
+  }),
+  ...DebuggerLogsList.PropertyFlags,
+  ...TwilioClientCommand.flags,
+};
 
 module.exports = DebuggerLogsList;

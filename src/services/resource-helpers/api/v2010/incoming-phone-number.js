@@ -7,13 +7,13 @@ class IncomingPhoneNumberHelper {
 
   async findPhoneNumber(userInput) {
     let response = null;
-    let sid = userInput.startsWith('PN') ? userInput : null;
+    const sid = userInput.startsWith('PN') ? userInput : null;
 
     if (sid) {
       try {
         response = await this.twilioClient.incomingPhoneNumbers(sid).fetch();
       } catch (error) {
-        const errorMessage = error.code === 20404 ? 'Could not find phone number ' + userInput : error.message;
+        const errorMessage = error.code === 20404 ? `Could not find phone number ${userInput}` : error.message;
         throw new TwilioCliError(errorMessage);
       }
       return response;
@@ -28,7 +28,7 @@ class IncomingPhoneNumberHelper {
 
     if (matches && matches.length > 0) return matches[0];
 
-    throw new TwilioCliError('Could not find phone number ' + userInput);
+    throw new TwilioCliError(`Could not find phone number ${userInput}`);
   }
 }
 

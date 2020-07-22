@@ -7,7 +7,9 @@ class ProfilesUse extends BaseCommand {
 
     const profile = this.userConfig.setActiveProfile(this.args.profile);
     if (!profile) {
-      throw new TwilioCliError(`The profile "${this.args.profile}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`);
+      throw new TwilioCliError(
+        `The profile "${this.args.profile}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`,
+      );
     }
     const configSavedMessage = await this.configFile.save(this.userConfig);
     this.logger.info(`set "${profile.id}" as active profile`);
@@ -21,8 +23,8 @@ ProfilesUse.args = [
   {
     name: 'profile',
     description: 'Shorthand identifier for your profile',
-    required: true
-  }
+    required: true,
+  },
 ];
 ProfilesUse.flags = BaseCommand.flags;
 

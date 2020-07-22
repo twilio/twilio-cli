@@ -1,7 +1,7 @@
-const JSONSchemaValidator = require('../../../src/services/api-schema/json-validator');
-
 const { expect, test } = require('@twilio/cli-test');
 const { Logger, LoggingLevel } = require('@twilio/cli-core').services.logging;
+
+const JSONSchemaValidator = require('../../../src/services/api-schema/json-validator');
 
 const validateSchema = (schema, value) => {
   const logger = new Logger({ level: LoggingLevel.debug });
@@ -19,11 +19,11 @@ describe('services/api-schema', () => {
           type: 'string',
           minLength: 3,
           maxLength: 20,
-          pattern: '^\\w+$'
+          pattern: '^\\w+$',
         },
         minItems: 1,
         maxItems: 2,
-        uniqueItems: true
+        uniqueItems: true,
       };
 
       test.it('validates happy paths', () => {
@@ -58,7 +58,7 @@ describe('services/api-schema', () => {
 
     describe('boolean-type', () => {
       const schema = {
-        type: 'boolean'
+        type: 'boolean',
       };
 
       test.it('validates happy paths', () => {
@@ -79,7 +79,7 @@ describe('services/api-schema', () => {
         type: 'integer',
         minimum: -10,
         maximum: 10,
-        multipleOf: 2
+        multipleOf: 2,
       };
 
       test.it('validates happy paths', () => {
@@ -118,7 +118,7 @@ describe('services/api-schema', () => {
         minimum: 1,
         maximum: 2,
         exclusiveMinimum: true,
-        exclusiveMaximum: true
+        exclusiveMaximum: true,
       };
 
       test.it('validates happy paths', () => {
@@ -138,7 +138,7 @@ describe('services/api-schema', () => {
       const schema = {
         type: 'string',
         minLength: 6,
-        maxLength: 20
+        maxLength: 20,
       };
 
       test.it('validates happy paths', () => {
@@ -156,7 +156,7 @@ describe('services/api-schema', () => {
     describe('string-type-enum', () => {
       const schema = {
         type: 'string',
-        enum: ['this', 'that']
+        enum: ['this', 'that'],
       };
 
       test.it('validates happy paths', () => {
@@ -172,7 +172,7 @@ describe('services/api-schema', () => {
     describe('string-type-date', () => {
       const schema = {
         type: 'string',
-        format: 'date'
+        format: 'date',
       };
 
       test.it('validates happy paths', () => {
@@ -190,7 +190,7 @@ describe('services/api-schema', () => {
     describe('string-type-date-time', () => {
       const schema = {
         type: 'string',
-        format: 'date-time'
+        format: 'date-time',
       };
 
       test.it('validates happy paths', () => {
@@ -206,7 +206,7 @@ describe('services/api-schema', () => {
     describe('string-type-uri', () => {
       const schema = {
         type: 'string',
-        format: 'uri'
+        format: 'uri',
       };
 
       test.it('validates happy paths', () => {
@@ -221,7 +221,7 @@ describe('services/api-schema', () => {
 
     test.it('handles new schema types', () => {
       const schema = {
-        type: 'object'
+        type: 'object',
       };
       expect(validateSchema(schema, { key: 'value' })).to.be.empty;
     });
@@ -229,7 +229,7 @@ describe('services/api-schema', () => {
     test.it('handles new string formats', () => {
       const schema = {
         type: 'string',
-        format: 'password'
+        format: 'password',
       };
       expect(validateSchema(schema, 'super_secret')).to.be.empty;
     });

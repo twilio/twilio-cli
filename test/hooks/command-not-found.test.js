@@ -8,12 +8,12 @@ function PluginsMock() {
 }
 
 const hookFunc = proxyquire('../../src/hooks/command-not-found', {
-  '@oclif/plugin-plugins': { default: PluginsMock }
+  '@oclif/plugin-plugins': { default: PluginsMock },
 });
 
 const config = {
   plugins: [{ name: '@twilio-labs/plugin-watch' }],
-  runHook: sinon.stub()
+  runHook: sinon.stub(),
 };
 
 describe('hooks', () => {
@@ -28,20 +28,20 @@ describe('hooks', () => {
       delete inquirer._prompt;
     });
 
-    test.stderr().it('warns and installs non-installed plugin topics', async ctx => {
+    test.stderr().it('warns and installs non-installed plugin topics', async (ctx) => {
       ctx.exit = sinon.stub().resolves(1);
       await hookFunc.call(ctx, { id: 'serverless', config });
       expect(ctx.stderr).to.contain('not installed');
     });
 
-    test.stderr().it('warns and install non-installed plugins commands', async ctx => {
+    test.stderr().it('warns and install non-installed plugins commands', async (ctx) => {
       ctx.exit = sinon.stub().resolves(1);
       await hookFunc.call(ctx, { id: 'serverless:init', config });
       expect(ctx.stderr).to.contain('not installed');
     });
 
     /* eslint-disable no-unused-expressions */
-    test.stderr().it('does nothing for installed plugins or unknown commands', async ctx => {
+    test.stderr().it('does nothing for installed plugins or unknown commands', async (ctx) => {
       await hookFunc.call(ctx, { id: 'watch', config });
       expect(ctx.stderr).to.be.empty;
       await hookFunc.call(ctx, { id: 'serverless-schmerverless', config });

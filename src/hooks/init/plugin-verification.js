@@ -9,35 +9,35 @@ const checkCommandConflicts = (corePlugins, installedPlugins) => {
   const collisionCheck = (plugin, command) => {
     // If there's a collision or conflict, issue a stern warning.
     if (commandSet.has(command)) {
-      logger.warn(MessageTemplates.commandConflict({ plugin: plugin.name, command: command }));
+      logger.warn(MessageTemplates.commandConflict({ plugin: plugin.name, command }));
     }
     commandSet.add(command);
   };
 
   // Add every command and alias from the our core plugins to the unique collection.
-  corePlugins.forEach(plugin => {
-    plugin.commands.forEach(command => {
+  corePlugins.forEach((plugin) => {
+    plugin.commands.forEach((command) => {
       commandSet.add(command.id);
 
-      if (command.aliases)
-        command.aliases.forEach(alias => commandSet.add(alias));
+      if (command.aliases) command.aliases.forEach((alias) => commandSet.add(alias));
     });
   });
 
-  // Check all commands and aliases from installed plugins for collisions/conflicts with our core plugins, other
-  // installed plugins, and the plugin itself.
-  installedPlugins.forEach(plugin => {
-    plugin.commands.forEach(command => {
+  /*
+   * Check all commands and aliases from installed plugins for collisions/conflicts with our core plugins, other
+   * installed plugins, and the plugin itself.
+   */
+  installedPlugins.forEach((plugin) => {
+    plugin.commands.forEach((command) => {
       collisionCheck(plugin, command.id);
 
-      if (command.aliases)
-        command.aliases.forEach(alias => collisionCheck(plugin, alias));
+      if (command.aliases) command.aliases.forEach((alias) => collisionCheck(plugin, alias));
     });
   });
 };
 
-module.exports = function () {
-  const isCorePlugin = plugin => plugin.type === 'core';
+module.exports = function pluginVerification() {
+  const isCorePlugin = (plugin) => plugin.type === 'core';
 
   // Split the plugins into "core" and "installed".
   const [corePlugins, installedPlugins] = splitArray(this.config.plugins, isCorePlugin);

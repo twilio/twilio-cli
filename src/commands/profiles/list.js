@@ -6,18 +6,18 @@ class ProfilesList extends BaseCommand {
     await super.run();
     if (this.userConfig.profiles.length > 0) {
       // If none of the profiles have a region, delete it from all of them so it doesn't show up in the output.
-      if (!this.userConfig.profiles.some(p => p.region)) {
-        this.userConfig.profiles.forEach(p => delete p.region);
+      if (!this.userConfig.profiles.some((p) => p.region)) {
+        this.userConfig.profiles.forEach((p) => delete p.region);
       }
       const activeProfile = this.userConfig.getActiveProfile();
-      this.userConfig.profiles.forEach(p => {
+      this.userConfig.profiles.forEach((p) => {
         if (p.id === activeProfile.id) {
           p.active = true;
         }
       });
       this.output(this.userConfig.profiles);
     } else {
-      this.logger.warn('No profiles have been configured. Run ' + chalk.bold('twilio profiles:create') + ' to create one!');
+      this.logger.warn(`No profiles have been configured. Run ${chalk.bold('twilio profiles:create')} to create one!`);
     }
   }
 }

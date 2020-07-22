@@ -1,12 +1,39 @@
 {
   "name": "twilio-cli",
-  "description": "unleash the power of Twilio from your command prompt",
   "version": "2.6.0",
+  "description": "unleash the power of Twilio from your command prompt",
+  "keywords": [
+    "oclif"
+  ],
+  "homepage": "https://github.com/twilio/twilio-cli",
+  "bugs": "https://github.com/twilio/twilio-cli/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twilio/twilio-cli.git"
+  },
+  "license": "MIT",
   "author": "Twilio @twilio",
+  "main": "src/index.js",
   "bin": {
     "twilio": "./bin/run"
   },
-  "bugs": "https://github.com/twilio/twilio-cli/issues",
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src",
+    "/welcome.js"
+  ],
+  "scripts": {
+    "postinstall": "node welcome.js",
+    "lint": "eslint --ext js --ext jsx src/ test/",
+    "lint:fix": "npm run lint -- --fix",
+    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
+    "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
+    "test": "nyc --check-coverage --lines 90 --reporter=html --reporter=text mocha --forbid-only \"test/**/*.test.js\"",
+    "posttest": "npm run lint && npm audit",
+    "version": "oclif-dev readme && git add README.md"
+  },
   "dependencies": {
     "@oclif/color": "^0.1.2",
     "@oclif/command": "^1.7.0",
@@ -22,18 +49,15 @@
     "inquirer": "^7.3.0",
     "twilio": "^3.48.1"
   },
-  "optionalDependencies": {
-    "ngrok": "^3.2.7"
-  },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.6",
     "@twilio/cli-test": "^2.1.0",
     "aws-sdk": "^2.709.0",
     "chai": "^4.2.0",
-    "eslint": "^7.3.1",
-    "eslint-config-oclif": "^3.1.0",
-    "eslint-plugin-mocha": "^7.0.1",
+    "eslint": "^7.5.0",
+    "eslint-config-twilio": "^1.28.0",
+    "eslint-config-twilio-mocha": "^1.28.0",
     "globby": "^11.0.1",
     "mocha": "^8.0.1",
     "nock": "^13.0.2",
@@ -42,22 +66,12 @@
     "sinon": "^9.0.2",
     "tmp": "^0.2.1"
   },
+  "optionalDependencies": {
+    "ngrok": "^3.2.7"
+  },
   "engines": {
     "node": ">=10.12.0"
   },
-  "files": [
-    "/bin",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json",
-    "/src",
-    "/welcome.js"
-  ],
-  "homepage": "https://github.com/twilio/twilio-cli",
-  "keywords": [
-    "oclif"
-  ],
-  "license": "MIT",
-  "main": "src/index.js",
   "oclif": {
     "commands": "./src/commands",
     "bin": "twilio",
@@ -102,17 +116,5 @@
         "bucket": "twilio-cli-prod"
       }
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/twilio/twilio-cli.git"
-  },
-  "scripts": {
-    "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
-    "posttest": "eslint --ignore-path .gitignore . && npm audit",
-    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
-    "test": "nyc --check-coverage --lines 90 --reporter=html --reporter=text mocha --forbid-only \"test/**/*.test.js\"",
-    "version": "oclif-dev readme && git add README.md",
-    "postinstall": "node welcome.js"
   }
 }

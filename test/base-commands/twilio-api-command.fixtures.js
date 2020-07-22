@@ -8,21 +8,21 @@ const fakeResource = {
           in: 'path',
           description: null,
           required: true,
-          schema: { type: 'string', minLength: 34, maxLength: 34, pattern: '^AC[0-9a-fA-F]{32}$' }
+          schema: { type: 'string', minLength: 34, maxLength: 34, pattern: '^AC[0-9a-fA-F]{32}$' },
         },
         {
           name: 'To',
           in: 'query',
           description: 'Phone number, SIP address, or `client identifier` to call',
           required: true,
-          schema: { type: 'string' }
+          schema: { type: 'string' },
         },
         {
           name: 'From',
           in: 'query',
           description: 'Twilio number from which to originate the call',
           required: true,
-          schema: { type: 'string' }
+          schema: { type: 'string' },
         },
         {
           name: 'Method',
@@ -31,15 +31,15 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
-          }
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+          },
         },
         {
           name: 'FallbackUrl',
           in: 'query',
           description: 'Fallback URL in case of error',
           required: false,
-          schema: { type: 'string', format: 'uri' }
+          schema: { type: 'string', format: 'uri' },
         },
         {
           name: 'FallbackMethod',
@@ -48,22 +48,22 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
-          }
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+          },
         },
         {
           name: 'StatusCallback',
           in: 'query',
           description: 'Status Callback URL',
           required: false,
-          schema: { type: 'string', format: 'uri' }
+          schema: { type: 'string', format: 'uri' },
         },
         {
           name: 'StatusCallbackEvent',
           in: 'query',
           description: 'The call progress events that Twilio will send webhooks on.',
           required: false,
-          schema: { type: 'array', items: { type: 'string' } }
+          schema: { type: 'array', items: { type: 'string' } },
         },
         {
           name: 'StatusCallbackMethod',
@@ -72,8 +72,8 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
-          }
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+          },
         },
         { name: 'SendDigits', in: 'query', description: 'Digits to send', required: false, schema: { type: 'string' } },
         { name: 'IfMachine', in: 'query', description: null, required: false, schema: { type: 'string' } },
@@ -82,28 +82,28 @@ const fakeResource = {
           in: 'query',
           description: 'Number of seconds to wait for an answer',
           required: false,
-          schema: { type: 'integer' }
+          schema: { type: 'integer' },
         },
         {
           name: 'Record',
           in: 'query',
           description: 'Whether or not to record the Call',
           required: false,
-          schema: { type: 'boolean' }
+          schema: { type: 'boolean' },
         },
         {
           name: 'RecordingChannels',
           in: 'query',
           description: 'mono or dualSet this parameter to specify the number of channels in the final recording.',
           required: false,
-          schema: { type: 'string' }
+          schema: { type: 'string' },
         },
         {
           name: 'RecordingStatusCallback',
           in: 'query',
           description: 'A URL that Twilio will send a webhook request to when the recording is available for access.',
           required: false,
-          schema: { type: 'string' }
+          schema: { type: 'string' },
         },
         {
           name: 'RecordingStatusCallbackMethod',
@@ -112,8 +112,8 @@ const fakeResource = {
           required: false,
           schema: {
             type: 'string',
-            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE']
-          }
+            enum: ['head', 'get', 'post', 'patch', 'put', 'delete', 'HEAD', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+          },
         },
         { name: 'SipAuthUsername', in: 'query', description: null, required: false, schema: { type: 'string' } },
         { name: 'SipAuthPassword', in: 'query', description: null, required: false, schema: { type: 'string' } },
@@ -122,14 +122,14 @@ const fakeResource = {
           in: 'query',
           description: 'Enable machine detection or end of greeting detection',
           required: false,
-          schema: { type: 'string' }
+          schema: { type: 'string' },
         },
         {
           name: 'MachineDetectionTimeout',
           in: 'query',
           description: 'Number of miliseconds to wait for machine detection',
           required: false,
-          schema: { type: 'integer' }
+          schema: { type: 'integer' },
         },
         {
           name: 'RecordingStatusCallbackEvent',
@@ -137,14 +137,14 @@ const fakeResource = {
           description:
             'The recording status changes that Twilio will send webhooks on to the URL specified in RecordingStatusCallback.',
           required: false,
-          schema: { type: 'array', items: { type: 'string' } }
+          schema: { type: 'array', items: { type: 'string' } },
         },
         {
           name: 'Trim',
           in: 'query',
           description: 'Set this parameter to control trimming of silence on the recording.',
           required: false,
-          schema: { type: 'string' }
+          schema: { type: 'string' },
         },
         {
           name: 'CallerId',
@@ -152,31 +152,31 @@ const fakeResource = {
           description:
             'The phone number, SIP address, or Client identifier that made this Call. Phone numbers are in E.164 format (e.g., +16175551212). SIP addresses are formatted as `name@company.com`.',
           required: false,
-          schema: { type: 'string' }
+          schema: { type: 'string' },
         },
         {
           name: 'Url',
           in: 'query',
           description: 'Url from which to fetch TwiML',
           required: false,
-          schema: { type: 'string', format: 'uri' }
+          schema: { type: 'string', format: 'uri' },
         },
         {
           name: 'ApplicationSid',
           in: 'query',
           description: 'ApplicationSid that configures from where to fetch TwiML',
           required: false,
-          schema: { type: 'string', minLength: 34, maxLength: 34, pattern: '^AP[0-9a-fA-F]{32}$' }
-        }
+          schema: { type: 'string', minLength: 34, maxLength: 34, pattern: '^AP[0-9a-fA-F]{32}$' },
+        },
       ],
       responses: {
-        201: { content: { 'application/json': { schema: { $ref: '#/components/schemas/api.v2010.account.call' } } } }
+        201: { content: { 'application/json': { schema: { $ref: '#/components/schemas/api.v2010.account.call' } } } },
       },
-      security: [{ accountSid_authToken: [] }] // eslint-disable-line camelcase
-    }
+      security: [{ accountSid_authToken: [] }], // eslint-disable-line camelcase
+    },
   },
   description: 'TODO: Resource-level docs',
-  defaultOutputProperties: ['sid', 'friendly_name', 'status']
+  defaultOutputProperties: ['sid', 'friendly_name', 'status'],
 };
 
 /* eslint-disable camelcase */
@@ -213,12 +213,12 @@ const fakeCallResponse = {
       '/2010-04-01/Accounts/AC1234567890abcdef1234567890abcdef/Calls/CA1234567890abcdef1234567890abcdef/Recordings.json',
     feedback:
       '/2010-04-01/Accounts/AC1234567890abcdef1234567890abcdef/Calls/CA1234567890abcdef1234567890abcdef/Feedback.json',
-    feedback_summaries: '/2010-04-01/Accounts/AC1234567890abcdef1234567890abcdef/Calls/FeedbackSummary.json'
-  }
+    feedback_summaries: '/2010-04-01/Accounts/AC1234567890abcdef1234567890abcdef/Calls/FeedbackSummary.json',
+  },
 };
 /* eslint-enable camelcase */
 
 module.exports = {
   fakeResource,
-  fakeCallResponse
+  fakeCallResponse,
 };

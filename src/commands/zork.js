@@ -9,7 +9,7 @@ class Zork extends BaseCommand {
       const zork = await this.install('zorkjs');
       zork();
     } catch (error) {
-      this.logger.debug('Error loading zork: ' + JSON.stringify(error));
+      this.logger.debug(`Error loading zork: ${JSON.stringify(error)}`);
       throw new TwilioCliError('I don\'t know the word "zork".');
     }
   }
