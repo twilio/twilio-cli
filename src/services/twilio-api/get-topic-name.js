@@ -17,8 +17,8 @@ const getTopicName = (actionDefinition) => {
     )
       // Chop the legacy API version down
       .replace(/api:2010-04-01:accounts(?=:)/, CORE_TOPIC_NAME) // First non-account level APIs
-      .replace(/api:2010-04-01/, CORE_TOPIC_NAME)
-  ); // Then account APIs (i.e., modifying Twilio accounts or subaccounts)
+      .replace(/api:2010-04-01/, CORE_TOPIC_NAME)  // Then account APIs (i.e., modifying Twilio accounts or subaccounts)
+  );
 };
 
 module.exports = {
