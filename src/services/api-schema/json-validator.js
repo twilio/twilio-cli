@@ -6,14 +6,18 @@ const SCHEMA_TYPE_TO_VALIDATE_FUNC_MAP = {
   boolean: 'validateBoolean',
   integer: 'validateInteger',
   number: 'validateNumber',
-  string: 'validateString'
+  string: 'validateString',
 };
 
 const STRING_FORMAT_TO_VALIDATE_FUNC_MAP = {
   date: 'validateDate',
   'date-time': 'validateDateTime',
-  uri: 'validateURI'
+  uri: 'validateURI',
 };
+
+function isString(value) {
+  return typeof value === 'string' || value instanceof String;
+}
 
 /**
  * A JSON Schema validator that implements validation as defined here:
@@ -42,7 +46,7 @@ class JSONSchemaValidator {
     }
 
     // Recurse into the value using the schema's items schema.
-    value.forEach(item => this.validateSchema(schema.items, item));
+    value.forEach((item) => this.validateSchema(schema.items, item));
 
     if (schema.minItems && value.length < schema.minItems) {
       this.errors.push(`"${value}" item count (${value.length}) less than min (${schema.minItems})`);
@@ -79,15 +83,19 @@ class JSONSchemaValidator {
     }
 
     if (schema.minimum !== undefined) {
-      if ((schema.exclusiveMinimum && value <= schema.minimum) ||
-        (!schema.exclusiveMinimum && value < schema.minimum)) {
+      if (
+        (schema.exclusiveMinimum && value <= schema.minimum) ||
+        (!schema.exclusiveMinimum && value < schema.minimum)
+      ) {
         this.errors.push(`"${value}" is less than min (${schema.minimum})`);
       }
     }
 
     if (schema.maximum !== undefined) {
-      if ((schema.exclusiveMaximum && value >= schema.maximum) ||
-        (!schema.exclusiveMaximum && value > schema.maximum)) {
+      if (
+        (schema.exclusiveMaximum && value >= schema.maximum) ||
+        (!schema.exclusiveMaximum && value > schema.maximum)
+      ) {
         this.errors.push(`"${value}" is greater than max (${schema.maximum})`);
       }
     }
@@ -111,7 +119,7 @@ class JSONSchemaValidator {
       this.errors.push(`"${value}" length (${value.length}) is greater than max (${schema.maxLength})`);
     }
 
-    if (schema.pattern && !(new RegExp(schema.pattern).test(value))) {
+    if (schema.pattern && !new RegExp(schema.pattern).test(value)) {
       this.errors.push(`"${value}" does not match pattern "${schema.pattern}"`);
     }
 
@@ -155,10 +163,6 @@ class JSONSchemaValidator {
       this.errors.push(`"${value}" does not match URI pattern`);
     }
   }
-}
-
-function isString(value) {
-  return (typeof value === 'string' || value instanceof String);
 }
 
 module.exports = JSONSchemaValidator;

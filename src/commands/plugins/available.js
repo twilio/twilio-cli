@@ -1,12 +1,12 @@
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+
 const { getAvailablePlugins } = require('../../services/plugins');
 
 class PluginsAvailable extends BaseCommand {
   async run() {
     await super.run();
 
-    getAvailablePlugins(this.config)
-      .forEach(pluginName => this.logger.info(pluginName));
+    getAvailablePlugins(this.config).forEach((pluginName) => this.logger.info(pluginName));
   }
 }
 

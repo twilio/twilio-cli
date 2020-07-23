@@ -1,8 +1,4 @@
-const ALLOWED_ORGS = [
-  '@twilio/',
-  '@twilio-labs/',
-  '@dabblelab/plugin-autopilot'
-];
+const ALLOWED_ORGS = ['@twilio/', '@twilio-labs/', '@dabblelab/plugin-autopilot'];
 
 const PLUGIN_COMMANDS = {
   '@twilio-labs/plugin-flex': ['flex'],
@@ -10,27 +6,26 @@ const PLUGIN_COMMANDS = {
   '@twilio-labs/plugin-serverless': ['serverless'],
   '@twilio-labs/plugin-token': ['token'],
   '@twilio-labs/plugin-watch': ['watch'],
-  '@dabblelab/plugin-autopilot': ['autopilot']
+  '@dabblelab/plugin-autopilot': ['autopilot'],
 };
 
-exports.isTwilioPlugin = pluginName => {
+exports.isTwilioPlugin = (pluginName) => {
   if (pluginName === undefined) {
     return false;
   }
-  return ALLOWED_ORGS.find(org => pluginName.startsWith(org));
+  return ALLOWED_ORGS.find((org) => pluginName.startsWith(org));
 };
 
 exports.isPluginInstalled = (config, pluginName) => {
-  return config.plugins.find(p => p.name === pluginName);
+  return config.plugins.find((p) => p.name === pluginName);
 };
 
-exports.getSupportedPlugin = commandId => {
-  return Object.keys(PLUGIN_COMMANDS).find(plugin => {
-    return PLUGIN_COMMANDS[plugin].find(command => commandId === command || commandId.startsWith(command + ':'));
+exports.getSupportedPlugin = (commandId) => {
+  return Object.keys(PLUGIN_COMMANDS).find((plugin) => {
+    return PLUGIN_COMMANDS[plugin].find((command) => commandId === command || commandId.startsWith(`${command}:`));
   });
 };
 
-exports.getAvailablePlugins = config => {
-  return Object.keys(PLUGIN_COMMANDS)
-    .filter(pluginName => !exports.isPluginInstalled(config, pluginName));
+exports.getAvailablePlugins = (config) => {
+  return Object.keys(PLUGIN_COMMANDS).filter((pluginName) => !exports.isPluginInstalled(config, pluginName));
 };

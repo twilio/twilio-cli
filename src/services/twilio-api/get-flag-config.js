@@ -1,22 +1,16 @@
 const { kebabCase } = require('@twilio/cli-core').services.namingConventions;
+
 const { TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('./get-topic-name');
 
 // AccountSid is a special snowflake
 const ACCOUNT_SID_FLAG = 'AccountSid';
 
-const UPDATE_PHONE_NUMBER_COMMAND = [
-  BASE_TOPIC_NAME,
-  CORE_TOPIC_NAME,
-  'incoming-phone-numbers',
-  'update'
-].join(TOPIC_SEPARATOR);
+const UPDATE_PHONE_NUMBER_COMMAND = [BASE_TOPIC_NAME, CORE_TOPIC_NAME, 'incoming-phone-numbers', 'update'].join(
+  TOPIC_SEPARATOR,
+);
 
-const getFlagName = paramName => {
-  return kebabCase(
-    paramName
-      .replace('<', 'Before')
-      .replace('>', 'After')
-  );
+const getFlagName = (paramName) => {
+  return kebabCase(paramName.replace('<', 'Before').replace('>', 'After'));
 };
 
 /**
@@ -31,16 +25,18 @@ const getFlagConfig = (parameter, actionDefinition) => {
   let flagDescription = parameter.description || '';
 
   const commandId = [actionDefinition.topicName, actionDefinition.commandName].join(TOPIC_SEPARATOR);
-  const isCoreAccountSidFlag = (parameter.name === ACCOUNT_SID_FLAG && actionDefinition.domainName === BASE_TOPIC_NAME);
+  const isCoreAccountSidFlag = parameter.name === ACCOUNT_SID_FLAG && actionDefinition.domainName === BASE_TOPIC_NAME;
 
   if (isCoreAccountSidFlag && commandId === UPDATE_PHONE_NUMBER_COMMAND) {
     if (parameter.in === 'query') {
       // Turn 'account-sid' into 'target-account-sid'
-      flagName = 'target-' + flagName;
-      // Converting something like this:
-      // "The SID of the Account that created the IncomingPhoneNumber resource to update."
-      // to:
-      // "The SID of the Account that you wish to own the number."
+      flagName = `target-${flagName}`;
+      /*
+       * Converting something like this:
+       * "The SID of the Account that created the IncomingPhoneNumber resource to update."
+       * to:
+       * "The SID of the Account that you wish to own the number."
+       */
       flagDescription = flagDescription.replace(/that created.*?\./, 'that you wish to own the number.');
     }
   }
@@ -52,11 +48,11 @@ const getFlagConfig = (parameter, actionDefinition) => {
     required: isCoreAccountSidFlag ? false : parameter.required,
     multiple: parameter.schema && parameter.schema.type === 'array',
     // Allow negated booleans ('-no' option)
-    allowNo: true
+    allowNo: true,
   };
 };
 
 module.exports = {
   getFlagConfig,
-  getFlagName
+  getFlagName,
 };

@@ -12,7 +12,7 @@ class ProfilesRemove extends TwilioClientCommand {
       const keyVerdict = await this.confirmRemoveKey();
       const credentials = await this.deleteLocalKey(deleteProfile);
       await this.deleteRemoteKey(deleteProfile, keyVerdict, credentials);
-      this.logger.info('Deleted ' + deleteProfile.id + ' profile.');
+      this.logger.info(`Deleted ${deleteProfile.id} profile.`);
       this.userConfig.removeProfile(deleteProfile);
     } else {
       throw new TwilioCliError('Cancelled');
@@ -24,13 +24,19 @@ class ProfilesRemove extends TwilioClientCommand {
   removeProfileStatus(deleteProfile, profileId) {
     const activeProfile = this.userConfig.getActiveProfile();
     if (!deleteProfile) {
-      throw new TwilioCliError('The profile "' + profileId + '" does not exist. Run "twilio profiles:list" to see the list of configured profiles.');
+      throw new TwilioCliError(
+        `The profile "${profileId}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`,
+      );
     }
     if (activeProfile.id === deleteProfile.id) {
-      this.logger.warn('Are you sure you want to remove the active profile? Run "twilio profiles:use" to set another profile as active.');
+      this.logger.warn(
+        'Are you sure you want to remove the active profile? Run "twilio profiles:use" to set another profile as active.',
+      );
     }
     if (this.userConfig.profiles.length === 1) {
-      this.logger.warn('Are you sure you want to remove the last profile? Run "twilio profiles:create" to create another profile.');
+      this.logger.warn(
+        'Are you sure you want to remove the last profile? Run "twilio profiles:create" to create another profile.',
+      );
     }
   }
 
@@ -51,33 +57,38 @@ class ProfilesRemove extends TwilioClientCommand {
         await this.twilioClient.api.keys(credentials.apiKey).remove();
         this.logger.info('The API Key has been deleted from The Twilio console.');
       } catch (error) {
-        this.logger.error('Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API Key from The Twilio Console.');
+        this.logger.error(
+          'Could not delete the API Key. See: https://www.twilio.com/console/runtime/api-keys to delete the API Key from The Twilio Console.',
+        );
         this.logger.debug(error.message);
       }
     }
     if (keyVerdict === false) {
-      this.logger.warn('The API Key for ' + profileDelete.id + ' profile still exists in The Twilio console.');
+      this.logger.warn(`The API Key for ${profileDelete.id} profile still exists in The Twilio console.`);
     }
   }
 
   async confirmRemoveProfile() {
-    const confirm = await this.inquirer.prompt([{
-      type: 'confirm',
-      name: 'affirmative',
-      message: 'Are you sure you want to remove ' +
-        `the "${this.args.profile}" profile?`,
-      default: false
-    }]);
+    const confirm = await this.inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'affirmative',
+        message: `Are you sure you want to remove the "${this.args.profile}" profile?`,
+        default: false,
+      },
+    ]);
     return confirm.affirmative;
   }
 
   async confirmRemoveKey() {
-    const confirm = await this.inquirer.prompt([{
-      type: 'confirm',
-      name: 'affirmative',
-      message: 'Would you like to attempt to delete the API Key?',
-      default: false
-    }]);
+    const confirm = await this.inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'affirmative',
+        message: 'Would you like to attempt to delete the API Key?',
+        default: false,
+      },
+    ]);
     return confirm.affirmative;
   }
 }
@@ -87,8 +98,8 @@ ProfilesRemove.args = [
   {
     name: 'profile',
     description: 'Shorthand identifier for your profile',
-    required: true
-  }
+    required: true,
+  },
 ];
 ProfilesRemove.flags = TwilioClientCommand.flags;
 

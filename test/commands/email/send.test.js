@@ -1,6 +1,7 @@
 const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
+
 const emailSend = require('../../../src/commands/email/send');
 
 describe('commands', () => {
@@ -15,10 +16,10 @@ describe('commands', () => {
         fromEmail = '',
         bodyText = 'Hello world',
         attachmentVerdict = false,
-        filePath = 'test/commands/email/test.txt'
+        filePath = 'test/commands/email/test.txt',
       } = {}) =>
         test
-          .do(ctx => {
+          .do((ctx) => {
             ctx.userConfig = new ConfigData();
             ctx.userConfig.email.fromEmail = 'default@test.com';
             ctx.userConfig.email.subjectLine = 'default';
@@ -27,21 +28,21 @@ describe('commands', () => {
           .twilioCreateCommand(emailSend, flags)
           .stdout()
           .stderr()
-          .do(ctx => {
+          .do((ctx) => {
             const fakePrompt = sinon.stub();
             fakePrompt.resolves({
               to: toEmail,
               from: fromEmail,
-              subjectLine: subjectLine,
+              subjectLine,
               text: bodyText,
               sendAttachment: attachmentVerdict,
-              path: filePath
+              path: filePath,
             });
             ctx.testCmd.inquirer.prompt = fakePrompt;
 
             process.env.SENDGRID_API_KEY = 'SG.1234567890';
           })
-          .nock('https://api.sendgrid.com', api => {
+          .nock('https://api.sendgrid.com', (api) => {
             api.post('/v3/mail/send').optionally().reply(200, {});
           });
 
@@ -50,31 +51,31 @@ describe('commands', () => {
         toEmail = '',
         subjectLine = '',
         fromEmail = '',
-        bodyText = 'Hello world'
+        bodyText = 'Hello world',
       } = {}) =>
         test
           .twilioCliEnv(Config)
           .twilioCreateCommand(emailSend, flags)
           .stdout()
           .stderr()
-          .do(ctx => {
+          .do((ctx) => {
             const fakePrompt = sinon.stub();
             fakePrompt.resolves({
               to: toEmail,
               from: fromEmail,
               subject: subjectLine,
-              text: bodyText
+              text: bodyText,
             });
             ctx.testCmd.inquirer.prompt = fakePrompt;
 
             process.env.SENDGRID_API_KEY = 'SG.1234567890';
           })
-          .nock('https://api.sendgrid.com', api => {
+          .nock('https://api.sendgrid.com', (api) => {
             api.post('/v3/mail/send').optionally().reply(200, {});
           });
 
       defaultSetup({ toEmail: 'jen@test.com , mike@test.com, tamu@test.com' })
-        .do(ctx => {
+        .do((ctx) => {
           delete process.env.SENDGRID_API_KEY;
           return ctx.testCmd.run();
         })
@@ -85,25 +86,25 @@ describe('commands', () => {
         toEmail: 'JonSnow, BranStark@winterfell',
         fromEmail: 'Ygritte@wall.com',
         flags: ['--subject', 'Open ASAP'],
-        bodyText: 'You know nothing Jon Snow.'
+        bodyText: 'You know nothing Jon Snow.',
       })
-        .do(ctx => ctx.testCmd.run())
+        .do((ctx) => ctx.testCmd.run())
         .catch(/Email could not be sent/)
         .it(
           'run email:send without defaults and with multiple recipients including an incorrect to email address',
-          ctx => {
+          (ctx) => {
             expect(ctx.stderr).to.contain('"JonSnow" is not a valid email');
-          }
+          },
         );
 
       noDefault({
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte@wall.com',
         subjectLine: 'Secret Message',
-        bodyText: 'You know nothing Jon Snow.'
+        bodyText: 'You know nothing Jon Snow.',
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with filled out inquirer prompts', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with filled out inquirer prompts', (ctx) => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
@@ -114,10 +115,10 @@ describe('commands', () => {
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte@wall.com',
         flags: ['--subject', 'Open ASAP'],
-        bodyText: 'You know nothing Jon Snow.'
+        bodyText: 'You know nothing Jon Snow.',
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send use inquire and a flag to set information', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send use inquire and a flag to set information', (ctx) => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
@@ -128,17 +129,17 @@ describe('commands', () => {
         toEmail: 'JonSnow@castleBlack.com',
         fromEmail: 'Ygritte',
         subjectLine: 'Secret Message',
-        bodyText: 'You know nothing Jon Snow.'
+        bodyText: 'You know nothing Jon Snow.',
       })
-        .do(ctx => ctx.testCmd.run())
+        .do((ctx) => ctx.testCmd.run())
         .catch(/Email could not be sent/)
-        .it('run email:send without defaults and an invalid from email address', ctx => {
+        .it('run email:send without defaults and an invalid from email address', (ctx) => {
           expect(ctx.stderr).to.contain('"Ygritte" is not a valid email');
         });
 
       defaultSetup({ toEmail: 'jen@test.com' })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with default subject line and sending email address', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with default subject line and sending email address', (ctx) => {
           expect(ctx.stderr).to.contain('Hello world');
           expect(ctx.stderr).to.contain('default@test.com');
           expect(ctx.stderr).to.contain('jen@test.com');
@@ -146,8 +147,8 @@ describe('commands', () => {
         });
 
       defaultSetup({ toEmail: 'jen@test.com, mike@test.com, tamu@test.com' })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with defaults and multiple recipients', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with defaults and multiple recipients', (ctx) => {
           expect(ctx.stderr).to.contain('Hello world');
           expect(ctx.stderr).to.contain('default@test.com');
           expect(ctx.stderr).to.contain('jen@test.com');
@@ -165,11 +166,11 @@ describe('commands', () => {
           '--subject',
           'Greetings',
           '--text',
-          'Short cuts make delays, but inns make longer ones.'
-        ]
+          'Short cuts make delays, but inns make longer ones.',
+        ],
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with all flags', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with all flags', (ctx) => {
           expect(ctx.stderr).to.contain('Short cuts make delays, but inns make longer ones');
           expect(ctx.stderr).to.contain('Bilbo@test.com');
           expect(ctx.stderr).to.contain('Frodo@test.com');
@@ -183,11 +184,11 @@ describe('commands', () => {
           '--from',
           'Bilbo@test.com',
           '--text',
-          'Short cuts make delays, but inns make longer ones.'
-        ]
+          'Short cuts make delays, but inns make longer ones.',
+        ],
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with flags and default subject line', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with flags and default subject line', (ctx) => {
           expect(ctx.stderr).to.contain('Short cuts make delays, but inns make longer ones');
           expect(ctx.stderr).to.contain('Bilbo@test.com');
           expect(ctx.stderr).to.contain('Frodo@test.com');
@@ -205,11 +206,11 @@ describe('commands', () => {
           '--text',
           'You know nothing Jon Snow.',
           '--attachment',
-          'test/commands/email/test.txt'
-        ]
+          'test/commands/email/test.txt',
+        ],
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send using flags to set information using relative file path', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send using flags to set information using relative file path', (ctx) => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
@@ -228,29 +229,29 @@ describe('commands', () => {
           '--text',
           'You know nothing Jon Snow.',
           '--attachment',
-          'test/commands/email/invalid.txt'
-        ]
+          'test/commands/email/invalid.txt',
+        ],
       })
-        .do(ctx => ctx.testCmd.run())
+        .do((ctx) => ctx.testCmd.run())
         .catch(/Unable to read the file/)
         .it('run email:send using flags to set information using invalid file path');
 
       defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true })
-        .do(ctx => ctx.testCmd.run())
+        .do((ctx) => ctx.testCmd.run())
         .it(
           'run email:send with default subject line and sending email address and relative path for attachment',
-          ctx => {
+          (ctx) => {
             expect(ctx.stderr).to.contain('Hello world');
             expect(ctx.stderr).to.contain('default@test.com');
             expect(ctx.stderr).to.contain('jen@test.com');
             expect(ctx.stderr).to.contain('"default"');
             expect(ctx.stderr).to.contain('test.txt');
-          }
+          },
         );
 
       defaultSetup({ flags: ['--no-attachment'], toEmail: 'me@you.com', attachmentVerdict: true })
-        .do(ctx => ctx.testCmd.run())
-        .it('runs email:send without an attachment or prompt for one', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('runs email:send without an attachment or prompt for one', (ctx) => {
           expect(ctx.stderr).to.not.contain('test.txt');
         });
 
@@ -263,12 +264,12 @@ describe('commands', () => {
           '--from',
           'Ygritte@wall.com',
           '--text',
-          'You know nothing Jon Snow.'
-        ]
+          'You know nothing Jon Snow.',
+        ],
       })
         .stdin('this is some piped data', 100)
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send using stdin as the attachment source', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send using stdin as the attachment source', (ctx) => {
           expect(ctx.stderr).to.contain('You know nothing Jon Snow');
           expect(ctx.stderr).to.contain('Ygritte@wall.com');
           expect(ctx.stderr).to.contain('JonSnow@castleBlack.com');
@@ -277,10 +278,10 @@ describe('commands', () => {
         });
 
       defaultSetup({
-        flags: ['--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.']
+        flags: ['--from', 'Ygritte@wall.com', '--text', 'You know nothing Jon Snow.'],
       })
         .stdin('this is some piped data', 100)
-        .do(ctx => ctx.testCmd.run())
+        .do((ctx) => ctx.testCmd.run())
         .catch(/No terminal.*Please provide/)
         .it('run email:send using stdin as the attachment source but missing a To');
 
@@ -295,11 +296,11 @@ describe('commands', () => {
           '--text',
           'You know nothing Jon Snow.',
           '--attachment',
-          'test/commands/email/test.txt'
-        ]
+          'test/commands/email/test.txt',
+        ],
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with an attachment and set the correct content-type for plaintext files', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with an attachment and set the correct content-type for plaintext files', (ctx) => {
           expect(ctx.stderr).to.contain('test.txt');
           expect(ctx.stderr).to.contain('text/plain');
         });
@@ -315,11 +316,11 @@ describe('commands', () => {
           '--text',
           'You know nothing Jon Snow.',
           '--attachment',
-          'test/commands/email/test.png'
-        ]
+          'test/commands/email/test.png',
+        ],
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with an attachment and set the correct content-type for non-text files', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with an attachment and set the correct content-type for non-text files', (ctx) => {
           expect(ctx.stderr).to.contain('test.png');
           expect(ctx.stderr).to.contain('image/png');
         });
@@ -335,11 +336,11 @@ describe('commands', () => {
           '--text',
           'You know nothing Jon Snow.',
           '--attachment',
-          'test/commands/email/test.bin'
-        ]
+          'test/commands/email/test.bin',
+        ],
       })
-        .do(ctx => ctx.testCmd.run())
-        .it('run email:send with an attachment and fall back to text/plain for unknown file types', ctx => {
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send with an attachment and fall back to text/plain for unknown file types', (ctx) => {
           expect(ctx.stderr).to.contain('test.bin');
           expect(ctx.stderr).to.contain('text/plain');
         });

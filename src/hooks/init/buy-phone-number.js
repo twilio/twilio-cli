@@ -1,25 +1,18 @@
+/* eslint-disable max-classes-per-file */
 const { Plugin } = require('@oclif/config');
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { OutputFormats } = require('@twilio/cli-core').services.outputFormats;
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
+
 const { ApiCommandRunner, TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('../../services/twilio-api');
 
-const LIST_COMMAND = [
-  BASE_TOPIC_NAME,
-  CORE_TOPIC_NAME,
-  'available-phone-numbers',
-  '(.+)',
-  'list'
-].join(TOPIC_SEPARATOR);
+const LIST_COMMAND = [BASE_TOPIC_NAME, CORE_TOPIC_NAME, 'available-phone-numbers', '(.+)', 'list'].join(
+  TOPIC_SEPARATOR,
+);
 const LIST_COMMAND_TYPE_GROUP_INDEX = 1;
 
-const CREATE_COMMAND = [
-  BASE_TOPIC_NAME,
-  CORE_TOPIC_NAME,
-  'incoming-phone-numbers',
-  'create'
-].join(TOPIC_SEPARATOR);
+const CREATE_COMMAND = [BASE_TOPIC_NAME, CORE_TOPIC_NAME, 'incoming-phone-numbers', 'create'].join(TOPIC_SEPARATOR);
 
 const LIST_COMMAND_PATTERN = new RegExp(`^${LIST_COMMAND}$`);
 
@@ -32,10 +25,10 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
 
     this.commandTopic = {
       name: ['phone-numbers', 'buy'].join(TOPIC_SEPARATOR),
-      description: 'purchase Twilio phone numbers'
+      description: 'purchase Twilio phone numbers',
     };
 
-    this.commands = listPhoneNumberCommands.map(listCommand => {
+    this.commands = listPhoneNumberCommands.map((listCommand) => {
       const commandIdMatch = listCommand.id.match(LIST_COMMAND_PATTERN);
       const phoneNumberType = commandIdMatch[LIST_COMMAND_TYPE_GROUP_INDEX];
 
@@ -50,7 +43,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
 
         const phoneNumber = await this.getPhoneNumber();
 
-        if (!await this.confirmPurchase(phoneNumber)) {
+        if (!(await this.confirmPurchase(phoneNumber))) {
           throw new TwilioCliError('Cancelled');
         }
 
@@ -62,7 +55,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
           this.twilioApiClient,
           listCommand.actionDefinition,
           listCommand.flags,
-          this.flags
+          this.flags,
         );
 
         const response = await listCommandRunner.run();
@@ -80,17 +73,19 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
 
         const choices = response.map((item, index) => ({
           name: phoneNumberLines[index],
-          value: item.phoneNumber
+          value: item.phoneNumber,
         }));
 
-        const phoneNumberSelection = await this.inquirer.prompt([{
-          type: 'list',
-          name: 'phoneNumber',
-          // Throw on a newline (and space) so the selected phone number shows on the next line.
-          message: outputHeader + '\n ',
-          choices: choices,
-          pageSize: 10 // Seems like a reasonable size.
-        }]);
+        const phoneNumberSelection = await this.inquirer.prompt([
+          {
+            type: 'list',
+            name: 'phoneNumber',
+            // Throw on a newline (and space) so the selected phone number shows on the next line.
+            message: `${outputHeader}\n `,
+            choices,
+            pageSize: 10, // Seems like a reasonable size.
+          },
+        ]);
 
         this.logger.debug(`Selected phone number: ${phoneNumberSelection.phoneNumber}`);
 
@@ -98,18 +93,22 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
       }
 
       async confirmPurchase(phoneNumber) {
-        const confirm = await this.inquirer.prompt([{
-          type: 'confirm',
-          name: 'affirmative',
-          message: `Are you sure you want to purchase the phone number "${phoneNumber}"?`
-        }]);
+        const confirm = await this.inquirer.prompt([
+          {
+            type: 'confirm',
+            name: 'affirmative',
+            message: `Are you sure you want to purchase the phone number "${phoneNumber}"?`,
+          },
+        ]);
 
         return confirm.affirmative;
       }
 
       async purchasePhoneNumber(phoneNumber) {
-        // Set the phone number flag and drop the area code flag (if present)
-        // as they are mutually exclusive for the create command.
+        /*
+         * Set the phone number flag and drop the area code flag (if present)
+         * as they are mutually exclusive for the create command.
+         */
         this.flags[PHONE_NUMBER_FLAG] = phoneNumber;
         delete this.flags[AREA_CODE_FLAG];
 
@@ -117,7 +116,7 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
           this.twilioApiClient,
           createCommand.actionDefinition,
           createCommand.flags,
-          this.flags
+          this.flags,
         );
 
         const response = await createCommandRunner.run();
@@ -132,12 +131,16 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
     NewCommandClass.id = [this.commandTopic.name, phoneNumberType].join(TOPIC_SEPARATOR);
     NewCommandClass.description = `purchase a ${phoneNumberType} phone number`;
     NewCommandClass.args = listCommand.args;
-    // Merge the flags for the commands we're utilizing. Place the list command
-    // last so it takes precedence for conflicting flags (like the output
-    // properties flag).
-    NewCommandClass.flags = Object.assign({}, createCommand.flags, listCommand.flags);
-    // Drop the phone number flag (part of the create command) since the
-    // objective is to use the list command to figure it out.
+    /*
+     * Merge the flags for the commands we're utilizing. Place the list command
+     * last so it takes precedence for conflicting flags (like the output
+     * properties flag).
+     */
+    NewCommandClass.flags = { ...createCommand.flags, ...listCommand.flags };
+    /*
+     * Drop the phone number flag (part of the create command) since the
+     * objective is to use the list command to figure it out.
+     */
     delete NewCommandClass.flags[PHONE_NUMBER_FLAG];
     NewCommandClass.flags.properties.default = 'phoneNumber, region, isoCountry, addressRequirements';
     NewCommandClass.load = () => NewCommandClass;
@@ -155,16 +158,16 @@ class TwilioBuyPhoneNumberPlugin extends Plugin {
   }
 }
 
-module.exports = function () {
-  const twilioApiPlugin = this.config.plugins.find(p => p.name === 'api-cli-commands');
+module.exports = function buyPhoneNumbers() {
+  const twilioApiPlugin = this.config.plugins.find((p) => p.name === 'api-cli-commands');
 
   if (!twilioApiPlugin) {
     logger.warn('Failed to locate the Twilio API Plugin');
     return;
   }
 
-  const listPhoneNumberCommands = twilioApiPlugin.commands.filter(command => command.id.match(LIST_COMMAND_PATTERN));
-  const createPhoneNumberCommand = twilioApiPlugin.commands.find(command => command.id === CREATE_COMMAND);
+  const listPhoneNumberCommands = twilioApiPlugin.commands.filter((command) => command.id.match(LIST_COMMAND_PATTERN));
+  const createPhoneNumberCommand = twilioApiPlugin.commands.find((command) => command.id === CREATE_COMMAND);
 
   if (listPhoneNumberCommands.length === 0) {
     logger.warn('Failed to locate available phone number list commands.');

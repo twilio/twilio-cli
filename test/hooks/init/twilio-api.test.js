@@ -1,12 +1,13 @@
-const pluginFunc = require('../../../src/hooks/init/twilio-api');
 const { expect, test } = require('@twilio/cli-test');
+
+const pluginFunc = require('../../../src/hooks/init/twilio-api');
 
 const getFakeConfig = () => ({ plugins: [] });
 
 describe('hooks', () => {
   describe('init', () => {
     describe('twilio-api', () => {
-      test.stderr().it('provides multiple resources and actions', ctx => {
+      test.stderr().it('provides multiple resources and actions', (ctx) => {
         ctx.config = getFakeConfig();
         pluginFunc.call(ctx);
 
@@ -20,13 +21,13 @@ describe('hooks', () => {
         expect(plugin.commands.length).to.equal(plugin.commandIDs.length);
 
         /* eslint-disable max-nested-callbacks */
-        const domainTopic = plugin.topics.find(t => t.name === 'api:accounts');
-        const versionTopic = plugin.topics.find(t => t.name === 'api:accounts:v1');
+        const domainTopic = plugin.topics.find((t) => t.name === 'api:accounts');
+        const versionTopic = plugin.topics.find((t) => t.name === 'api:accounts:v1');
 
         expect(domainTopic.description).to.equal('resources under accounts.twilio.com');
         expect(versionTopic.description).to.equal('version 1 of the API');
 
-        const previewCommand = plugin.topics.find(t => t.name === 'api:preview');
+        const previewCommand = plugin.topics.find((t) => t.name === 'api:preview');
 
         expect(previewCommand).to.equal(undefined);
       });

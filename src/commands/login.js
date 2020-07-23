@@ -1,7 +1,6 @@
 const ProfilesCreate = require('./profiles/create');
 
-class Login extends ProfilesCreate {
-}
+class Login extends ProfilesCreate {}
 
 Login.aliases = ['profiles:create', 'profiles:add'];
 Login.flags = ProfilesCreate.flags;

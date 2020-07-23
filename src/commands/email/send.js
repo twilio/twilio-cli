@@ -1,15 +1,16 @@
 const { flags } = require('@oclif/command');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
-const emailUtilities = require('../../services/email-utility');
-const { readFileOrStdIn, readFile } = require('../../services/file-io');
 const sgMail = require('@sendgrid/mail');
 const FileType = require('file-type');
+
+const emailUtilities = require('../../services/email-utility');
+const { readFileOrStdIn, readFile } = require('../../services/file-io');
 
 const DEFAULT_ENCODING = 'base64';
 const FLAGS = {
   attachment: 'attachment',
-  noAttachment: 'no-attachment'
+  noAttachment: 'no-attachment',
 };
 
 class Send extends BaseCommand {
@@ -19,7 +20,7 @@ class Send extends BaseCommand {
     if (!process.env.SENDGRID_API_KEY) {
       throw new TwilioCliError(
         'Make sure you have the environment variable SENDGRID_API_KEY set up with your Twilio SendGrid API key. ' +
-        'Visit https://app.sendgrid.com/settings/api_keys to get an API key.'
+          'Visit https://app.sendgrid.com/settings/api_keys to get an API key.',
       );
     }
 
@@ -40,7 +41,7 @@ class Send extends BaseCommand {
       from: validFromEmail[0],
       subject: this.subjectLine,
       text: this.emailText,
-      html: '<p>' + this.emailText + '</p>'
+      html: `<p>${this.emailText}</p>`,
     };
 
     if (!this.flags[FLAGS.noAttachment]) {
@@ -67,8 +68,8 @@ class Send extends BaseCommand {
         type: 'confirm',
         name: 'sendAttachment',
         message: 'Would you like to send an attachment?',
-        default: false
-      }
+        default: false,
+      },
     ]);
     return verdict.sendAttachment;
   }
@@ -78,11 +79,13 @@ class Send extends BaseCommand {
       const file = await this.inquirer.prompt([
         {
           name: 'path',
-          message: this.getPromptMessage(Send.flags.attachment.description)
-        }
+          message: this.getPromptMessage(Send.flags.attachment.description),
+        },
       ]);
       return file.path;
     }
+
+    return undefined;
   }
 
   async createAttachmentArray(fileInfo) {
@@ -95,8 +98,8 @@ class Send extends BaseCommand {
         filename: fileInfo.filename,
         type: (type && type.mime) || 'text/plain',
         disposition: 'attachment',
-        contentId: 'attachmentText'
-      }
+        contentId: 'attachmentText',
+      },
     ];
   }
 
@@ -105,12 +108,12 @@ class Send extends BaseCommand {
     let validEmail = true;
 
     if (email.includes(',')) {
-      emailList = email.split(',').map(item => item.trim());
+      emailList = email.split(',').map((item) => item.trim());
     } else {
       emailList = [email];
     }
 
-    emailList.forEach(emailAddress => {
+    emailList.forEach((emailAddress) => {
       if (!emailUtilities.validateEmail(emailAddress)) {
         this.logger.error(`"${emailAddress}" is not a valid email.`);
         validEmail = false;
@@ -137,8 +140,8 @@ class Send extends BaseCommand {
       const answer = await this.inquirer.prompt([
         {
           name: flagKey,
-          message: this.getPromptMessage(Send.flags[flagKey].description)
-        }
+          message: this.getPromptMessage(Send.flags[flagKey].description),
+        },
       ]);
       this[key] = answer[flagKey];
     }
@@ -167,7 +170,7 @@ class Send extends BaseCommand {
     const messageParts = [
       `Your email containing the message "${sendInformation.text}"`,
       `sent from "${sendInformation.from}" to "${sendInformation.to}"`,
-      `with the subject line "${sendInformation.subject}"`
+      `with the subject line "${sendInformation.subject}"`,
     ];
     if (sendInformation.attachments) {
       messageParts.push(`with a "${sendInformation.attachments[0].type}"`);
@@ -180,32 +183,30 @@ class Send extends BaseCommand {
 }
 
 Send.description = 'sends emails to single or multiple recipients using Twilio SendGrid';
-Send.flags = Object.assign(
-  {
-    to: flags.string({
-      description: 'Email address of recipient (for multiple email addresses separate each email with a comma).'
-    }),
-    from: flags.string({
-      description: 'Email address of the sender.'
-    }),
-    subject: flags.string({
-      description: 'The subject line for an email.'
-    }),
-    text: flags.string({
-      description: 'Text to send within the email body.'
-    }),
-    [FLAGS.attachment]: flags.string({
-      description: 'Path for the file that you want to attach.',
-      exclusive: [FLAGS.noAttachment]
-    }),
-    [FLAGS.noAttachment]: flags.boolean({
-      description: 'Do not include or prompt for an attachment.',
-      default: false,
-      exclusive: [FLAGS.attachment]
-    })
-  },
-  BaseCommand.flags
-);
+Send.flags = {
+  to: flags.string({
+    description: 'Email address of recipient (for multiple email addresses separate each email with a comma).',
+  }),
+  from: flags.string({
+    description: 'Email address of the sender.',
+  }),
+  subject: flags.string({
+    description: 'The subject line for an email.',
+  }),
+  text: flags.string({
+    description: 'Text to send within the email body.',
+  }),
+  [FLAGS.attachment]: flags.string({
+    description: 'Path for the file that you want to attach.',
+    exclusive: [FLAGS.noAttachment],
+  }),
+  [FLAGS.noAttachment]: flags.boolean({
+    description: 'Do not include or prompt for an attachment.',
+    default: false,
+    exclusive: [FLAGS.attachment],
+  }),
+  ...BaseCommand.flags,
+};
 Send.args = [];
 
 module.exports = Send;

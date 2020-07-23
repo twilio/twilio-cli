@@ -10,5 +10,5 @@ module.exports = {
   TOPIC_SEPARATOR,
   BASE_TOPIC_NAME,
   CORE_TOPIC_NAME,
-  getActionDescription
+  getActionDescription,
 };

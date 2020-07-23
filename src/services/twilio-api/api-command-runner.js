@@ -1,11 +1,14 @@
 /* eslint no-warning-comments: "off" */
-// TODO: Remove the above eslint directive when this file
-// is free of TODO's.
+/*
+ * TODO: Remove the above eslint directive when this file
+ * is free of TODO's.
+ */
 
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { TwilioApiFlags } = require('@twilio/cli-core').services.TwilioApi;
+
 const { validateSchema } = require('../api-schema/schema-validator');
 const { getFlagConfig } = require('./get-flag-config');
 
@@ -27,12 +30,12 @@ class ApiCommandRunner {
     // TODO: Possible extender event: "beforeValidateParameters"
 
     const flagErrors = {};
-    Object.keys(this.flagValues).forEach(key => {
+    Object.keys(this.flagValues).forEach((key) => {
       const flagValue = this.flagValues[key];
 
       if (doesObjectHaveProperty(this.flagDefinitions[key], 'apiDetails')) {
-        const schema = this.flagDefinitions[key].apiDetails.parameter.schema;
-        logger.debug(`Schema for "${key}": ` + JSON.stringify(schema));
+        const { schema } = this.flagDefinitions[key].apiDetails.parameter;
+        logger.debug(`Schema for "${key}": ${JSON.stringify(schema)}`);
 
         const validationErrors = validateSchema(schema, flagValue, logger);
 
@@ -42,14 +45,16 @@ class ApiCommandRunner {
       }
     });
 
-    logger.debug('Provided flags: ' + JSON.stringify(this.flagValues));
+    logger.debug(`Provided flags: ${JSON.stringify(this.flagValues)}`);
 
-    // If there were any errors validating the flag values, log them by flag
-    // key and throw.
+    /*
+     * If there were any errors validating the flag values, log them by flag
+     * key and throw.
+     */
     if (Object.keys(flagErrors).length > 0 && !this.flagValues['skip-parameter-validation']) {
       logger.error('Flag value validation errors:');
-      Object.keys(flagErrors).forEach(key => {
-        flagErrors[key].forEach(error => {
+      Object.keys(flagErrors).forEach((key) => {
+        flagErrors[key].forEach((error) => {
           logger.error(`  ${key}: ${error}`);
         });
       });
@@ -60,9 +65,7 @@ class ApiCommandRunner {
   }
 
   async execute() {
-    const domainName = this.actionDefinition.domainName;
-    const path = this.actionDefinition.path;
-    const actionName = this.actionDefinition.actionName;
+    const { domainName, path, actionName } = this.actionDefinition;
     const actionParams = this.actionDefinition.action.parameters;
 
     logger.debug(`domainName=${domainName}, path=${path}, actionName=${actionName}`);
@@ -72,13 +75,21 @@ class ApiCommandRunner {
     const headerParams = {};
 
     // Build the path, query, and header params based on the parameters defined with the API action.
-    actionParams.forEach(parameter => {
-      const destination = (parameter.in === 'path' ? pathParams : (parameter.in === 'header' ? headerParams : queryParams));
-      this.addParameter(parameter, destination);
+    actionParams.forEach((parameter) => {
+      switch (parameter.in) {
+        case 'path':
+          this.addParameter(parameter, pathParams);
+          break;
+        case 'header':
+          this.addParameter(parameter, headerParams);
+          break;
+        default:
+          this.addParameter(parameter, queryParams);
+      }
     });
 
     // Also add any API "snowflake" flags to the query params.
-    Object.values(TwilioApiFlags).forEach(apiFlagName => {
+    Object.values(TwilioApiFlags).forEach((apiFlagName) => {
       this.addParameter({ name: apiFlagName }, queryParams);
     });
 
@@ -86,10 +97,10 @@ class ApiCommandRunner {
 
     return this.twilioClient[actionName]({
       domain: domainName,
-      path: path,
-      pathParams: pathParams,
+      path,
+      pathParams,
       data: queryParams,
-      headers: headerParams
+      headers: headerParams,
     });
 
     // TODO: Possible extender event: "afterInvokeApi"

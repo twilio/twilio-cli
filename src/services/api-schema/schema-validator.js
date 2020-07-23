@@ -16,5 +16,5 @@ function validateSchema(schema, value, logger) {
 }
 
 module.exports = {
-  validateSchema
+  validateSchema,
 };

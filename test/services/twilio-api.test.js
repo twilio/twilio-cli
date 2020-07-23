@@ -1,34 +1,42 @@
-const { getTopicName, getActionDescription } = require('../../src/services/twilio-api');
-
 const { expect, test } = require('@twilio/cli-test');
+
+const { getTopicName, getActionDescription } = require('../../src/services/twilio-api');
 
 describe('services', () => {
   describe('twilio-api', () => {
     describe('getTopicName', () => {
       test.it('handles a simple, non-nested resource path', () => {
-        expect(getTopicName({
-          domainName: 'foo',
-          path: '/v1/Bars'
-        })).to.equal('foo:v1:bars');
+        expect(
+          getTopicName({
+            domainName: 'foo',
+            path: '/v1/Bars',
+          }),
+        ).to.equal('foo:v1:bars');
       });
 
       test.it('handles a nested resource path with parameters', () => {
-        expect(getTopicName({
-          domainName: 'foo',
-          path: '/v1/Bars/{BarId}/SubBars/{SubBarId}.json'
-        })).to.equal('foo:v1:bars:sub-bars');
+        expect(
+          getTopicName({
+            domainName: 'foo',
+            path: '/v1/Bars/{BarId}/SubBars/{SubBarId}.json',
+          }),
+        ).to.equal('foo:v1:bars:sub-bars');
       });
 
       test.it('handles v2010 APIs', () => {
-        expect(getTopicName({
-          domainName: 'api',
-          path: '/2010-04-01/Accounts/{Sid}.json'
-        })).to.equal('core:accounts');
+        expect(
+          getTopicName({
+            domainName: 'api',
+            path: '/2010-04-01/Accounts/{Sid}.json',
+          }),
+        ).to.equal('core:accounts');
 
-        expect(getTopicName({
-          domainName: 'api',
-          path: '/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json'
-        })).to.equal('core:addresses');
+        expect(
+          getTopicName({
+            domainName: 'api',
+            path: '/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json',
+          }),
+        ).to.equal('core:addresses');
       });
     });
 
@@ -36,8 +44,8 @@ describe('services', () => {
       test.it('returns existing action description', () => {
         const result = getActionDescription({
           action: {
-            description: 'Hey there!'
-          }
+            description: 'Hey there!',
+          },
         });
         expect(result).to.equal('Hey there!');
       });
@@ -45,10 +53,10 @@ describe('services', () => {
       test.it('returns a default List action description', () => {
         const result = getActionDescription({
           action: {
-            description: null
+            description: null,
           },
           actionName: 'list',
-          path: '/Foo/Bar'
+          path: '/Foo/Bar',
         });
         expect(result).to.equal('list multiple Bar resources');
       });
@@ -56,10 +64,10 @@ describe('services', () => {
       test.it('returns a default Create action description', () => {
         const result = getActionDescription({
           action: {
-            description: null
+            description: null,
           },
           actionName: 'create',
-          path: '/Foo/Bar.json'
+          path: '/Foo/Bar.json',
         });
         expect(result).to.equal('create a Bar resource');
       });
@@ -67,10 +75,10 @@ describe('services', () => {
       test.it('returns a default Fetch action description', () => {
         const result = getActionDescription({
           action: {
-            description: null
+            description: null,
           },
           actionName: 'fetch',
-          path: '/Foo/{Account}/Bar/{BarSid}.json'
+          path: '/Foo/{Account}/Bar/{BarSid}.json',
         });
         expect(result).to.equal('fetch a Bar resource');
       });
@@ -78,10 +86,10 @@ describe('services', () => {
       test.it('returns a default Remove action description', () => {
         const result = getActionDescription({
           action: {
-            description: null
+            description: null,
           },
           actionName: 'remove',
-          path: '/Foo/Bar/excellentSubResource'
+          path: '/Foo/Bar/excellentSubResource',
         });
         expect(result).to.equal('remove an ExcellentSubResource resource');
       });
@@ -90,9 +98,9 @@ describe('services', () => {
         const result = getActionDescription({
           action: {
             description: 'Beeta!',
-            tags: ['beta']
+            tags: ['beta'],
           },
-          domain: {}
+          domain: {},
         });
         expect(result).to.equal('[BETA] Beeta!');
       });
@@ -101,9 +109,9 @@ describe('services', () => {
         const result = getActionDescription({
           action: {
             description: 'Generally Beta!',
-            tags: ['beta', 'ga']
+            tags: ['beta', 'ga'],
           },
-          domain: {}
+          domain: {},
         });
         expect(result).to.equal('[BETA] Generally Beta!');
       });
@@ -112,14 +120,16 @@ describe('services', () => {
         const result = getActionDescription({
           action: {
             description: 'Pree-vue!',
-            tags: ['preview']
+            tags: ['preview'],
           },
           domain: {
-            tags: [{
-              name: 'preview',
-              description: 'shhhh'
-            }]
-          }
+            tags: [
+              {
+                name: 'preview',
+                description: 'shhhh',
+              },
+            ],
+          },
         });
         expect(result).to.equal('[PREVIEW] Pree-vue!\n\nshhhh');
       });
@@ -128,17 +138,20 @@ describe('services', () => {
         const result = getActionDescription({
           action: {
             description: 'Pre-beta!',
-            tags: ['beta', 'preview']
+            tags: ['beta', 'preview'],
           },
           domain: {
-            tags: [{
-              name: 'beta',
-              description: '???'
-            }, {
-              name: 'preview',
-              description: 'shhhh'
-            }]
-          }
+            tags: [
+              {
+                name: 'beta',
+                description: '???',
+              },
+              {
+                name: 'preview',
+                description: 'shhhh',
+              },
+            ],
+          },
         });
         expect(result).to.equal('[BETA] [PREVIEW] Pre-beta!\n\n???\n\nshhhh');
       });

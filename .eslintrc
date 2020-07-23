@@ -1,22 +1,13 @@
 {
-  "extends": "oclif",
-  "plugins": ["mocha"],
-  "env": {
-    "mocha": true
+  "extends": [
+    "twilio", 
+    "twilio-mocha"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018
   },
   "rules": {
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "object-curly-spacing": ["error", "always"],
-    "comma-dangle": ["error", "never"],
-    "mocha/no-exclusive-tests": "error",
-    "node/no-extraneous-require": [
-      "error",
-      {
-        "allowModules": ["lodash", "request", "q"]
-      }
-    ]
+    "global-require": "off",
+    "prefer-named-capture-group": "off"
   }
 }
