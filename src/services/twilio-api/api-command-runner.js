@@ -65,9 +65,7 @@ class ApiCommandRunner {
   }
 
   async execute() {
-    const { domainName } = this.actionDefinition;
-    const { path } = this.actionDefinition;
-    const { actionName } = this.actionDefinition;
+    const { domainName, path, actionName } = this.actionDefinition;
     const actionParams = this.actionDefinition.action.parameters;
 
     logger.debug(`domainName=${domainName}, path=${path}, actionName=${actionName}`);
