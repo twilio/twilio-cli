@@ -61,7 +61,7 @@ describe('debugger:logs:list', () => {
       .it('prints errors');
   });
 
-  describe('streaming', () => {
+  describe('streaming', function streaming() {
     // Give the stream enough time to complete.
     this.timeout(5000);
 
