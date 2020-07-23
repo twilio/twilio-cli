@@ -61,8 +61,7 @@ TwilioApiCommand.flags = {
  * command class.
  */
 TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
-  const { resource } = NewCommandClass.actionDefinition;
-  const { action } = NewCommandClass.actionDefinition;
+  const { resource, action } = NewCommandClass.actionDefinition;
   const commandId = `${NewCommandClass.actionDefinition.topicName}:${NewCommandClass.actionDefinition.commandName}`;
 
   // Parameters
