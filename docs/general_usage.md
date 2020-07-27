@@ -4,9 +4,11 @@
 
 When you run `twilio login` (an alias for `twilio profiles:create`), it stores your credentials and associates them with the provided profile ID. The first profile created will default to being the "active" profile. The active profile is used for all subsequent commands.
 
-To create additional profiles, run `twilio login` again but provide a different profile ID (like, `my_other_profile`). Then, when you run subsequent commands, just include `-p my_other_profile` in the command (e.g. `twilio phone-numbers:list -p my_other_profile`).
+To create additional profiles, run `twilio login` again but provide a different profile ID (like, `my_other_profile`). Then, when you run subsequent commands, just include `-p my_other_profile` in the command (e.g., `twilio phone-numbers:list -p my_other_profile`).
 
 Alternatively, you may switch which profile is active using the `twilio profiles:use` command. To see the full list of local profiles (including which profile is active), run `twilio profiles:list`.
+
+To take advantage of Twilio's [Global Infrastructure], you can specify the target Region for the profile using the `--region` flag (e.g., `twilio login --region au1`).
 
 ### Want to use environment variables instead of creating a profile?
 
@@ -16,10 +18,12 @@ You can also use credentials stored in environment variables:
 * `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
 * `TWILIO_API_KEY` = an API Key created in [your console](https://twil.io/get-api-key)
 * `TWILIO_API_SECRET` = the secret for the API Key (you would have received this when you created an API key)
+* _(optional)_ `TWILIO_REGION` = the Region for the account (default is 'us1')
 
 #### OPTION 2
 * `TWILIO_ACCOUNT_SID` = your Account SID from [your console](https://www.twilio.com/console)
 * `TWILIO_AUTH_TOKEN` = your Auth Token from [your console](https://www.twilio.com/console)
+* _(optional)_ `TWILIO_REGION` = the Region for the account (default is 'us1')
 
 _NOTE: Option 2 should only be used in cases where you are unable to make use of option 1 (which are uncommon)._
 
@@ -27,11 +31,15 @@ Once these environment variables are set, a profile is not required to move forw
 
 ### Precedence of stored credentials
 
-The CLI will attempt to load credentials in the following order of priority:
+`twilio-cli` will attempt to load credentials in the following order of priority:
 
 1. From the profile specified with the `-p` parameter
 1. From environment variables, if set
 1. From the active profile
+
+### Specify Edge
+
+To take advantage of Twilio's [Global Infrastructure], authorization using profiles or environment variables both support a target Edge environment variable: `TWILIO_EDGE`
 
 ## Subaccounts
 
@@ -180,3 +188,5 @@ Substitute X.X.X below with the desired version.
 * When listing resources, only the first 50 records will be displayed, by default. Use the `--limit` flag to modify this behavior.
   * You can filter these results based on date, to, from, etc. to further limit the results.
   * Pass the `--help` flag to the command for details on which fields you may filter by.
+
+[Global Infrastructure]: https://www.twilio.com/docs/global-infrastructure
