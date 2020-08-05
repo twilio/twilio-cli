@@ -555,7 +555,7 @@ twilio-cli changelog
 --------------------------
 **Library**
 - [PR #126](https://github.com/twilio/twilio-cli/pull/126): Rename 'profiles:add' to 'profiles:create'. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
-- [PR #124](https://github.com/twilio/twilio-cli/pull/124): Auto-deploy via Travis CI upon tagged commit to master. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+- [PR #124](https://github.com/twilio/twilio-cli/pull/124): Auto-deploy via Travis CI upon tagged commit to main. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
 - [PR #125](https://github.com/twilio/twilio-cli/pull/125): fix(chore): Fix error message when exceeding schema max items. Thanks to [@jamesgeorge007](https://github.com/jamesgeorge007)!
 
 **Api**
