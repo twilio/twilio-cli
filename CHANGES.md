@@ -1,6 +1,29 @@
 twilio-cli changelog
 =====================
 
+[2020-08-05] Version 2.7.0
+--------------------------
+**Library - Feature**
+- [PR #208](https://github.com/twilio/twilio-cli/pull/208): block installation via npm when Node.js requirement not met. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Library - Docs**
+- [PR #206](https://github.com/twilio/twilio-cli/pull/206): add regional flag and regional/edge env vars to general usage doc. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Library - Chore**
+- [PR #204](https://github.com/twilio/twilio-cli/pull/204): lint using twilio-style. Thanks to [@ktalebian](https://github.com/ktalebian)!
+
+**Messaging**
+- Add rejection reason support to WhatsApp API
+- Removed status parameter for create and update in WhatsApp Templates API
+
+**Proxy**
+- Add FailOnParticipantConflict param to Proxy Session update
+
+**Verify**
+- Add `CustomFriendlyName` optional parameter on Verification creation.
+- Changes in `Challenge` resource to update documentation of both `details` and `hidden_details` properties.
+
+
 [2020-07-22] Version 2.6.0
 --------------------------
 **Library - Feature**
