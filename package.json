@@ -46,7 +46,7 @@
     "@twilio/cli-core": "^5.8.0",
     "chalk": "^4.1.0",
     "file-type": "^14.6.2",
-    "inquirer": "^7.3.0",
+    "inquirer": "^7.3.3",
     "twilio": "^3.48.1"
   },
   "devDependencies": {
