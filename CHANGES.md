@@ -1,6 +1,31 @@
 twilio-cli changelog
 =====================
 
+[2020-08-19] Version 2.8.0
+--------------------------
+**Library - Chore**
+- [PR #213](https://github.com/twilio/twilio-cli/pull/213): Upgrade @sendgrid/mail from 7.2.1 to 7.2.2. Thanks to [@snyk-bot](https://github.com/snyk-bot)!
+- [PR #214](https://github.com/twilio/twilio-cli/pull/214): Upgrade inquirer from 7.3.2 to 7.3.3. Thanks to [@snyk-bot](https://github.com/snyk-bot)!
+- [PR #210](https://github.com/twilio/twilio-cli/pull/210): update GitHub branch references to use HEAD. Thanks to [@thinkingserious](https://github.com/thinkingserious)!
+
+**Conversations**
+- Allow Identity addition to Participants
+
+**Events**
+- Sinks API Get all Sinks
+
+**Proxy**
+- Clarified usage of FailOnParticipantConflict param as experimental
+- Add FailOnParticipantConflict param to Proxy Session create and Proxy Participant create
+
+**Supersim**
+- Add fleet, network, and isoCountryCode to the UsageRecords resource
+- Change sort order of UsageRecords from ascending to descending with respect to start time field, records are now returned newest to oldest
+
+**Wireless**
+- Removed `Start` and `End` parameters from the Data Sessions list endpoint. **(breaking change)**
+
+
 [2020-08-05] Version 2.7.0
 --------------------------
 **Library - Feature**
