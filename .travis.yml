@@ -18,8 +18,7 @@ deploy:
     skip_cleanup: true
     edge: true
     email: twilio-ci@twilio.com
-    api_key:
-      secure: wl//atwY07ScAGJvoPdNzVQ71xK44KsahgqDSZFz869Y1UZmo12MZavBpB8z8BtiVDdiipM5SmvKqUByAPgRWZCwJeFFD7KMzc36CZ1oC6bnzRtTWbz0XmSZfccY3gSKD2FP7iGYAFZOjb+XRc9N9hZFKBcdDUCX+aQMuhGHLWskzPpYC2tVaGH+bAiUaSDcqIZaPUbjJ7czokA5jBG8uZRLxieN6vY6ie5tyiT6yAiLO+GG8Pyx9Jdkq93x1CEmy8ix62ggelUPmbnUNOEuchEX+vZKH6XabEv08Oqrj0lwqPE2izGVuGOpxOt7b7WFEmWQFVD6mKYlNoDkSWCzGaJZDJ0CVsrvIyayRWtpB9nZAtarprOz048tPvCC33qJ/HoGi4wHmF/yButnunIdt9iec4mAKQbk1j6rpiw0notNHSY/3oONBchYkpDE05cJ2a8IbAmUUDlkD0IlDIuBVQ9yi3opeO+1omjlLkiYte9pHNpi6fUgzpuL+cl4Gaktj1BLUjSpbI9ZZIo8VzFUoC4EiCNuC4kMnmKwoBIu82V8inQQCfgRQt5O4MgINkK8d40HOzLEWkT8+q6xb4vvEBGWw+o1cxsPorVirXxpS8lI63dicmU2IhxBRlyP8m0hoT1L7XP4j4S/kIroIB9bbZ8hS/8yfKhCpHgddbnu6Lc=
+    api_key: $NPM_TOKEN
     on:
       tags: true
       node: lts/*
@@ -30,5 +29,4 @@ notifications:
     on_pull_requests: false
     on_success: never
     on_failure: change
-    rooms:
-      - secure: 29sEar31N6pE/HO69wGN3Zti4Kx2VPiVjqMul8gfSAGevXzlJC/kVnjo26PcPCg8KzuJugxmSr8kH+RyQxSfl3VOQ3hP2DwlpRaMfLNn+3Fa58Lz2t1qTFUsd6TrvJTIMw8hjVd00TgH0Q+3e4fUekscqxxRxYh1GwqvKNNsBqXlnXi3sd9U5S5fu8gILRjSmOf5Zyw9DmVJ/Mu2TOpHCHJiPAyJ/RbHWKTXLxKbb3k7LF8XBEVC+QRpkKp5n1fKp8oa8FbhrlMBSa4B26cEzE9YYeDoRtk5orrzhCCTlQJq0OQcI1w4MIVZYjmLN4gVmW4046r0hn0PBNtXL6iElkHF84m/xSh+8UOryT8oiZu987nHJc8yCykrB+SPQAqge5Y9l5wAg0prEraQ41OPnusw/molrqTMxQhbVidLYEgaXvVJ+k3IPaubrb+5MAGRZRlbsyfA5EcOBwF6Tbstb51AM2rTVgfWrDTNl8gnMVjH1wJB0DIUUNBnU1NVTSxRDVAeqh5str6YAT3qyee/AI0IQWkpPP7+phJhvmALjPmWX9GU2qwTKLtoSvwuxclJ6KSy9rOT/3sI+RxOubVRJzKdO45fNwTeTVlZ1yGg5kI+1sainXP1vKXGYViC1hWtR0Sagh29VWsUqxveeK6zhZYKbvIF+Z9P2ygDmD2Ec9o=
+    rooms: $SLACK_TOKEN
