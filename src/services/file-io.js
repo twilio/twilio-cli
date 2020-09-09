@@ -3,6 +3,7 @@ const path = require('path');
 
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
+const untildify = require('untildify');
 
 function getStdin() {
   return new Promise((resolve) => {
@@ -16,14 +17,15 @@ function getStdin() {
 }
 
 function readFile(filePath, encoding) {
+  const resolvedFilePath = untildify(filePath);
   try {
     return {
-      filename: path.basename(filePath),
-      content: fs.readFileSync(filePath, encoding),
+      filename: path.basename(resolvedFilePath),
+      content: fs.readFileSync(resolvedFilePath, encoding),
     };
   } catch (error) {
     logger.debug(error);
-    throw new TwilioCliError(`Unable to read the file: ${filePath}`);
+    throw new TwilioCliError(`Unable to read the file: ${resolvedFilePath}`);
   }
 }
 

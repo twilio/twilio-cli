@@ -1,6 +1,9 @@
+const { resolve } = require('path');
+
 const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
+const tildify = require('tildify');
 
 const emailSend = require('../../../src/commands/email/send');
 
@@ -235,6 +238,15 @@ describe('commands', () => {
         .do((ctx) => ctx.testCmd.run())
         .catch(/Unable to read the file/)
         .it('run email:send using flags to set information using invalid file path');
+
+      defaultSetup({
+        toEmail: 'jen@test.com',
+        flags: ['--attachment', tildify(resolve('test/commands/email/test.txt'))],
+      })
+        .do((ctx) => ctx.testCmd.run())
+        .it('run email:send using flags to set information using tilde in file path', (ctx) => {
+          expect(ctx.stderr).to.contain('test.txt');
+        });
 
       defaultSetup({ toEmail: 'jen@test.com', attachmentVerdict: true })
         .do((ctx) => ctx.testCmd.run())
