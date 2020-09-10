@@ -17,15 +17,15 @@ function getStdin() {
 }
 
 function readFile(filePath, encoding) {
-  const resolvedFilePath = untildify(filePath);
   try {
+    const resolvedFilePath = untildify(filePath);
     return {
       filename: path.basename(resolvedFilePath),
       content: fs.readFileSync(resolvedFilePath, encoding),
     };
   } catch (error) {
     logger.debug(error);
-    throw new TwilioCliError(`Unable to read the file: ${resolvedFilePath}`);
+    throw new TwilioCliError(`Unable to read the file: ${filePath}`);
   }
 }
 
