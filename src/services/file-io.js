@@ -3,6 +3,7 @@ const path = require('path');
 
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
+const untildify = require('untildify');
 
 function getStdin() {
   return new Promise((resolve) => {
@@ -17,9 +18,10 @@ function getStdin() {
 
 function readFile(filePath, encoding) {
   try {
+    const resolvedFilePath = untildify(filePath);
     return {
-      filename: path.basename(filePath),
-      content: fs.readFileSync(filePath, encoding),
+      filename: path.basename(resolvedFilePath),
+      content: fs.readFileSync(resolvedFilePath, encoding),
     };
   } catch (error) {
     logger.debug(error);
