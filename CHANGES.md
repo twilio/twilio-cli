@@ -1,6 +1,33 @@
 twilio-cli changelog
 =====================
 
+[2020-09-16] Version 2.9.0
+--------------------------
+**Library - Feature**
+- [PR #218](https://github.com/twilio/twilio-cli/pull/218): Makes file paths with tildes work for email:send. Thanks to [@philnash](https://github.com/philnash)!
+
+**Conversations**
+- Expose Configuration and Service Configuration resources
+- Add Unique Name support for Conversations
+- Add Services Push Notification resource
+- Add Service scoped Conversation resources
+- Support Identity in Users resource endpoint
+
+**Messaging**
+- GA Deactivation List API
+- Add domain cert API's(fetch, update, create) for link tracker
+
+**Numbers**
+- Add API endpoint for Supporting Document deletion
+
+**Proxy**
+- Updated usage of FailOnParticipantConflict param to apply only to accounts with ProxyAllowParticipantConflict account flag
+
+**Supersim**
+- Add `AccountSid` parameter to Sim resource update request
+- Add `ready` status as an available status for a Sim resource
+
+
 [2020-09-02] Version 2.8.1
 --------------------------
 **Ai**
