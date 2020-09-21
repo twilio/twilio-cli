@@ -4,6 +4,7 @@ const PLUGIN_COMMANDS = {
   '@twilio-labs/plugin-flex': ['flex'],
   '@twilio-labs/plugin-rtc': ['rtc'],
   '@twilio-labs/plugin-serverless': ['serverless'],
+  '@twilio-labs/plugin-signal2020': ['signal', 'signal2020'],
   '@twilio-labs/plugin-token': ['token'],
   '@twilio-labs/plugin-watch': ['watch'],
   '@dabblelab/plugin-autopilot': ['autopilot'],
