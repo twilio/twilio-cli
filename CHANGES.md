@@ -1,6 +1,21 @@
 twilio-cli changelog
 =====================
 
+[2020-09-21] Version 2.10.0
+---------------------------
+**Library - Feature**
+- [PR #220](https://github.com/twilio/twilio-cli/pull/220): add signal2020 plugin to known commands list. Thanks to [@dkundel](https://github.com/dkundel)!
+
+**Accounts**
+- Add Auth Token rotation API
+
+**Conversations**
+- Change resource path for Webhook Configuration
+
+**Events**
+- Schemas API get all Schemas names and versions
+
+
 [2020-09-16] Version 2.9.0
 --------------------------
 **Library - Feature**
