@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "unleash the power of Twilio from your command prompt",
   "keywords": [
     "oclif"
@@ -47,14 +47,14 @@
     "chalk": "^4.1.0",
     "file-type": "^14.6.2",
     "inquirer": "^7.3.0",
-    "twilio": "^3.49.2",
+    "twilio": "^3.49.3",
     "untildify": "^4.0.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.6",
     "@twilio/cli-test": "^2.1.0",
-    "aws-sdk": "^2.709.0",
+    "aws-sdk": "^2.757.0",
     "chai": "^4.2.0",
     "eslint": "^7.5.0",
     "eslint-config-twilio": "^1.28.0",
