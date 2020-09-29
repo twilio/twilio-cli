@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2020-09-29] Version 2.10.2
+---------------------------
+**Library - Chore**
+- updating core version
+
+
 [2020-09-28] Version 2.10.1
 ---------------------------
 **Api**
