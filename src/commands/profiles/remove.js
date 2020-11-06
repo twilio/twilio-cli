@@ -1,4 +1,4 @@
-const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
+const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 
 class ProfilesRemove extends TwilioClientCommand {
@@ -101,6 +101,6 @@ ProfilesRemove.args = [
     required: true,
   },
 ];
-ProfilesRemove.flags = TwilioClientCommand.flags;
+ProfilesRemove.flags = BaseCommand.flags;
 
 module.exports = ProfilesRemove;
