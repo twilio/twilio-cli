@@ -1,6 +1,33 @@
 twilio-cli changelog
 =====================
 
+[2020-11-18] Version 2.13.0
+---------------------------
+**Library - Fix**
+- [PR #226](https://github.com/twilio/twilio-cli/pull/226): remove the profile option from the "profiles:remove" command. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Add new call events resource - GET /2010-04-01/Accounts/{account_sid}/Calls/{call_sid}/Events.json
+
+**Conversations**
+- Fixed default response property issue for Service Notifications Configuration
+
+**Insights**
+- Removing call_sid from participant summary. **(breaking change)**
+
+**Serverless**
+- Allow Service unique name to be used in path (in place of SID) in Service update request
+
+**Sync**
+- Added HideExpired query parameter for filtering Sync Documents with expired
+
+**Verify**
+- Challenge `Details` and `HiddenDetails` properties are now marked as `PII`
+- Challenge `expiration_date` attribute updated to set a default value of five (5) minutes and to allow max dates of one (1) hour after creation.
+- Entity `identity` attribute updated to allow values between 8 and 64 characters.
+- Verify Service frinedly_name attribute updated from 64 max lenght to 30 characters.
+
+
 [2020-11-05] Version 2.12.0
 ---------------------------
 **Api**
