@@ -1,6 +1,23 @@
 twilio-cli changelog
 =====================
 
+[2020-12-02] Version 2.14.0
+---------------------------
+**Library - Fix**
+- [PR #230](https://github.com/twilio/twilio-cli/pull/230): commands with actions without parameters. Thanks to [@sergiofbsilva](https://github.com/sergiofbsilva)!
+
+**Api**
+- Remove `RecordingTrack` parameter for create calls, create participants, and create call recordings **(breaking change)**
+- Added `RecordingTrack` parameter for create calls and create call recordings
+- Add optional property `recording_track` in the participant create request
+
+**Lookups**
+- Changed `caller_name` and `carrier` properties type to object **(breaking change)**
+
+**Trunking**
+- Added dual channel recording options for Trunks.
+
+
 [2020-11-18] Version 2.13.0
 ---------------------------
 **Library - Fix**
