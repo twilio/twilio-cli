@@ -94,36 +94,36 @@ describe('services', () => {
         expect(result).to.equal('remove an ExcellentSubResource resource');
       });
 
-      test.it('handles actions with tags', () => {
+      test.it('handles actions with maturity', () => {
         const result = getActionDescription({
           action: {
             description: 'Beeta!',
-            tags: ['beta'],
+            'x-maturity': ['beta'],
           },
           domain: {},
         });
         expect(result).to.equal('[BETA] Beeta!');
       });
 
-      test.it('ignores GA tags', () => {
+      test.it('ignores GA maturity level', () => {
         const result = getActionDescription({
           action: {
             description: 'Generally Beta!',
-            tags: ['beta', 'ga'],
+            'x-maturity': ['beta', 'ga'],
           },
           domain: {},
         });
         expect(result).to.equal('[BETA] Generally Beta!');
       });
 
-      test.it('handles actions with tags and descriptions', () => {
+      test.it('handles actions with maturity and descriptions', () => {
         const result = getActionDescription({
           action: {
             description: 'Pree-vue!',
-            tags: ['preview'],
+            'x-maturity': ['preview'],
           },
           domain: {
-            tags: [
+            'x-maturity': [
               {
                 name: 'preview',
                 description: 'shhhh',
@@ -134,14 +134,14 @@ describe('services', () => {
         expect(result).to.equal('[PREVIEW] Pree-vue!\n\nshhhh');
       });
 
-      test.it('handles actions with multiple tags and description', () => {
+      test.it('handles actions with multiple maturities and description', () => {
         const result = getActionDescription({
           action: {
             description: 'Pre-beta!',
-            tags: ['beta', 'preview'],
+            'x-maturity': ['beta', 'preview'],
           },
           domain: {
-            tags: [
+            'x-maturity': [
               {
                 name: 'beta',
                 description: '???',
