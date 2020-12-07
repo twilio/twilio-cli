@@ -1,7 +1,7 @@
 const { capitalize } = require('@twilio/cli-core').services.namingConventions;
 
-// The (upper-case) name of any tags that we should ignore when building command descriptions.
-const IGNORED_TAGS = new Set(['GA']);
+// The (upper-case) name of any maturity levels that we should ignore when building command descriptions.
+const IGNORED_MATURITY = new Set(['GA']);
 const DESCRIPTION_SEPARATOR = '\n\n';
 
 const getSummaryDescription = (actionDefinition) => {
@@ -26,30 +26,31 @@ const getSummaryDescription = (actionDefinition) => {
 
 const getActionDescription = (actionDefinition) => {
   let summaryDescription = getSummaryDescription(actionDefinition);
+  if (actionDefinition.action['x-maturity']) {
+    // Get the list of maturity levels that we care about.
+    const maturity = actionDefinition.action['x-maturity'].filter(
+      (maturityName) => !IGNORED_MATURITY.has(maturityName.toUpperCase()),
+    );
 
-  if (actionDefinition.action.tags) {
-    // Get the list of tags that we care about.
-    const tags = actionDefinition.action.tags.filter((tagName) => !IGNORED_TAGS.has(tagName.toUpperCase()));
+    // Build maturity IDs and prepend them to the summary description.
+    const maturityIds = maturity.map((maturityName) => `[${maturityName.toUpperCase()}]`).join(' ');
 
-    // Build tag IDs and prepend them to the summary description.
-    const tagIds = tags.map((tagName) => `[${tagName.toUpperCase()}]`).join(' ');
+    summaryDescription = `${maturityIds} ${summaryDescription}`;
 
-    summaryDescription = `${tagIds} ${summaryDescription}`;
-
-    if (actionDefinition.domain.tags) {
+    if (actionDefinition.domain['x-maturity']) {
       /*
-       * Build the tag descriptions and append them to the summary description.
-       * We map from domain tags to action tags (rather the the other way
-       * around) in order to maintain the ordering of the domain tags. It also
-       * allows to not fail when there's an unaccounted for action tag.
+       * Build the maturity descriptions and append them to the summary description.
+       * We map from domain maturity to action maturity (rather the the other way
+       * around) in order to maintain the ordering of the maturity levels. It also
+       * allows to not fail when there's an unaccounted for action maturity levels.
        */
-      const tagSet = new Set(tags);
-      const tagDescriptions = actionDefinition.domain.tags
-        .filter((tag) => tagSet.has(tag.name))
-        .map((tag) => tag.description)
+      const maturitySet = new Set(maturity);
+      const maturityDescriptions = actionDefinition.domain['x-maturity']
+        .filter((m) => maturitySet.has(m.name))
+        .map((m) => m.description)
         .join(DESCRIPTION_SEPARATOR);
 
-      summaryDescription = `${summaryDescription}${DESCRIPTION_SEPARATOR}${tagDescriptions}`;
+      summaryDescription = `${summaryDescription}${DESCRIPTION_SEPARATOR}${maturityDescriptions}`;
     }
   }
 
