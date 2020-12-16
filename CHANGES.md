@@ -1,6 +1,20 @@
 twilio-cli changelog
 =====================
 
+[2020-12-16] Version 2.15.1
+---------------------------
+**Api**
+- Updated `call_event` default_output_properties to request and response.
+
+**Conversations**
+- Added `last_read_message_index` and `last_read_timestamp` to Participant's resource update operation
+- Added `is_notifiable` and `is_online` to User's resource
+- Added `reachability_enabled` parameters to update method for Conversation Service Configuration resource
+
+**Messaging**
+- Added WA template quick reply, URL, and phone number buttons
+
+
 [2020-12-08] Version 2.15.0
 ---------------------------
 **Library - Chore**
