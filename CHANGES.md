@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2021-01-06] Version 2.15.2
+---------------------------
+**Library - Chore**
+- [PR #237](https://github.com/twilio/twilio-cli/pull/237): update template files and dependencies. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+
 [2020-12-16] Version 2.15.1
 ---------------------------
 **Api**
