@@ -17,7 +17,7 @@ deploy:
   - provider: npm
     skip_cleanup: true
     edge: true
-    email: twilio-ci@twilio.com
+    email: team_interfaces@twilio.com
     api_key: $NPM_TOKEN
     on:
       tags: true
