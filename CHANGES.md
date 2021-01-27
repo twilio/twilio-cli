@@ -1,6 +1,15 @@
 twilio-cli changelog
 =====================
 
+[2021-01-27] Version 2.16.1
+---------------------------
+**Studio**
+- Studio V2 API is now GA
+
+**Supersim**
+- Allow updating `CommandsUrl` and `CommandsMethod` on a Fleet
+
+
 [2021-01-13] Version 2.16.0
 ---------------------------
 **Api**
