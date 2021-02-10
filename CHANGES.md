@@ -1,6 +1,31 @@
 twilio-cli changelog
 =====================
 
+[2021-02-10] Version 2.17.0
+---------------------------
+**Api**
+- Revert change that conference participant create `from` and `to` param to be endpoint type for supporting client identifier and sip address
+- Update the conference participant create `from` and `to` param to be endpoint type for supporting client identifier and sip address
+
+**Events**
+- Documentation should state that no fields are PII
+
+**Flex**
+- Adding `notifications` and `markdown` to Flex Configuration
+
+**Messaging**
+- Add A2P use cases API
+- Add Brand Registrations API
+- Add Campaigns API
+
+**Serverless**
+- Add runtime field to Build response and as an optional parameter to the Build create endpoint.
+- Add @twilio/runtime-handler dependency to Build response example.
+
+**Sync**
+- Remove If-Match header for Document **(breaking change)**
+
+
 [2021-01-27] Version 2.16.1
 ---------------------------
 **Studio**
