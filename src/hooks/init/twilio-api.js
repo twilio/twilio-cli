@@ -42,10 +42,6 @@ class TwilioRestApiPlugin extends Plugin {
   }
 
   scanDomain(domainName) {
-    if (domainName === 'preview') {
-      return;
-    }
-
     const actionDefinition = {
       domainName,
       domain: this.apiBrowser.domains[domainName],
