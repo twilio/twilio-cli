@@ -1,6 +1,24 @@
 twilio-cli changelog
 =====================
 
+[2021-03-15] Version 2.19.0
+---------------------------
+**Library - Chore**
+- [PR #243](https://github.com/twilio/twilio-cli/pull/243): remove preview gate. Thanks to [@eshanholtz](https://github.com/eshanholtz)!
+
+**Events**
+- Set maturity to beta
+
+**Messaging**
+- Adjust A2P brand registration status enum **(breaking change)**
+
+**Studio**
+- Remove internal safeguards for Studio V2 API usage now that it's GA
+
+**Verify**
+- Add support for creating and verifying totp factors. Support for totp factors is behind the `api.verify.totp` beta feature.
+
+
 [2021-02-24] Version 2.18.0
 ---------------------------
 **Events**
