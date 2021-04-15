@@ -13,7 +13,7 @@ class ProfilesList extends BaseCommand {
         accountSid: ENVIRONMENT_ACCOUNT_SID,
         region: ENVIRONMENT_REGION,
       };
-      this.userConfig.profiles.push(strippedEnvProfile);
+      this.userConfig.profiles.unshift(strippedEnvProfile);
       this.userConfig.setActiveProfile(strippedEnvProfile.id);
     }
     if (this.userConfig.profiles.length > 0) {
