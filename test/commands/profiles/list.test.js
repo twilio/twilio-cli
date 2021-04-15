@@ -34,6 +34,23 @@ describe('commands', () => {
         });
 
       test
+        .do(() => {
+          process.env.TWILIO_ACCOUNT_SID = constants.FAKE_ACCOUNT_SID;
+          process.env.TWILIO_AUTH_TOKEN = constants.FAKE_API_SECRET;
+        })
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCommand(ProfilesList, [])
+        .it('runs profiles:list with environment variables set', (ctx) => {
+          expect(ctx.stdout).to.contain('[env]');
+          expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
+          expect(ctx.stdout).to.not.contain('Region');
+          expect(ctx.stdout.match(/true/g)).to.have.length(1);
+          expect(ctx.stderr).to.equal('');
+        });
+
+      test
         .do((ctx) => {
           ctx.userConfig = new ConfigData();
           ctx.userConfig.addProfile('profile1', constants.FAKE_ACCOUNT_SID);
