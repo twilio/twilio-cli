@@ -1,6 +1,34 @@
 twilio-cli changelog
 =====================
 
+[2021-04-21] Version 2.22.0
+---------------------------
+**Library - Chore**
+- [PR #248](https://github.com/twilio/twilio-cli/pull/248): Updating help description to include the quickstart doc url. Thanks to [@Sindhura3](https://github.com/Sindhura3)!
+- [PR #247](https://github.com/twilio/twilio-cli/pull/247): Indicate environment variables being used in profiles:list. Thanks to [@onuzbee](https://github.com/onuzbee)!
+
+**Api**
+- Revert Update the conference participant create `from` and `to` param to be endpoint type for supporting client identifier and sip address
+- Update the conference participant create `from` and `to` param to be endpoint type for supporting client identifier and sip address
+
+**Bulkexports**
+- moving enum to doc root for auto generating documentation
+- adding status enum and default output properties
+
+**Events**
+- Change schema_versions prop and key to versions **(breaking change)**
+
+**Messaging**
+- Add `use_inbound_webhook_on_number` field in Service API for fetch, create, update, read
+
+**Taskrouter**
+- Add `If-Match` Header based on ETag for Task Delete
+
+**Verify**
+- Add `AuthPayload` parameter to support verifying a `Challenge` upon creation. This is only supported for `totp` factors.
+- Add support to resend the notifications of a `Challenge`. This is only supported for `push` factors.
+
+
 [2021-04-07] Version 2.21.0
 ---------------------------
 **Api**
