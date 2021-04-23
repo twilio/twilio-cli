@@ -1,28 +1,27 @@
 language: node_js
 dist: xenial
 node_js:
-  - "node"
-  - "lts/*"
-  - "10"
+- node
+- lts/*
+- '10'
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y libsecret-1-dev
+- sudo apt-get update
+- sudo apt-get install -y libsecret-1-dev
 deploy:
-  - provider: script
-    script: make docker-build && make docker-push
-    skip_cleanup: true
-    on:
-      tags: true
-      node: lts/*
-  - provider: npm
-    skip_cleanup: true
-    edge: true
-    email: team_interfaces@twilio.com
-    api_key: $NPM_TOKEN
-    on:
-      tags: true
-      node: lts/*
-
+- provider: script
+  script: make docker-build && make docker-push
+  skip_cleanup: true
+  on:
+    tags: true
+    node: lts/*
+- provider: npm
+  skip_cleanup: true
+  edge: true
+  email: team_interfaces@twilio.com
+  api_key: "$NPM_TOKEN"
+  on:
+    tags: true
+    node: lts/*
 notifications:
   slack:
     if: branch = main
@@ -30,4 +29,4 @@ notifications:
     on_success: never
     on_failure: change
     rooms:
-      - secure: 29sEar31N6pE/HO69wGN3Zti4Kx2VPiVjqMul8gfSAGevXzlJC/kVnjo26PcPCg8KzuJugxmSr8kH+RyQxSfl3VOQ3hP2DwlpRaMfLNn+3Fa58Lz2t1qTFUsd6TrvJTIMw8hjVd00TgH0Q+3e4fUekscqxxRxYh1GwqvKNNsBqXlnXi3sd9U5S5fu8gILRjSmOf5Zyw9DmVJ/Mu2TOpHCHJiPAyJ/RbHWKTXLxKbb3k7LF8XBEVC+QRpkKp5n1fKp8oa8FbhrlMBSa4B26cEzE9YYeDoRtk5orrzhCCTlQJq0OQcI1w4MIVZYjmLN4gVmW4046r0hn0PBNtXL6iElkHF84m/xSh+8UOryT8oiZu987nHJc8yCykrB+SPQAqge5Y9l5wAg0prEraQ41OPnusw/molrqTMxQhbVidLYEgaXvVJ+k3IPaubrb+5MAGRZRlbsyfA5EcOBwF6Tbstb51AM2rTVgfWrDTNl8gnMVjH1wJB0DIUUNBnU1NVTSxRDVAeqh5str6YAT3qyee/AI0IQWkpPP7+phJhvmALjPmWX9GU2qwTKLtoSvwuxclJ6KSy9rOT/3sI+RxOubVRJzKdO45fNwTeTVlZ1yGg5kI+1sainXP1vKXGYViC1hWtR0Sagh29VWsUqxveeK6zhZYKbvIF+Z9P2ygDmD2Ec9o=
+      secure: KQn/oMX7mIUMqDWd/ppQTB8iRtIFPfcZn+/rZfgZrJbPR5nOKdU+Kl+/C3721SueZHsau0QM8g1rl9XVlFweHOamkd+nHeD1hu4eUPIGfDPwmTBiutKgwinDXqCCFAPr2VDzwJiBkwRPO4TW1iHmGItrX7/Ew98mA4l9YY0CSmz/9ifXD/1o1rd1xJYYBcmzjB9+L4BubtSCHW8xPfDmZMESfz3aaptQ/Ad2CDg5srQJXbHpEdhgXH3vIG41t4L7LXomi01jQYT68npUS60JyUD1HiVrgPY8VYKIpw9idQO2Vote5eutZLy9EhKQbtqxh7Cq9pmVnyYnohGE36NaaoAk/uXXRLoCjXIHOcjrqy5xaTnYo04Xoq40olS2iEqMtcsh/itGCJTlvX0IJ7nACPMO/R0isFRoipWNDfgTulWgUaMohZlQxIVitYA7G3Os0rrV5CdhXQGghS47rhIHtYz3NhZIlBLW11RrWkB0peMhJIkA7DLfYaLLBNoTyZ0TNgW/ruAX63smNa+zors4timghGSuIwmADkcaVeYC/csnn+PM3ux/M4u2tbR9rzlcLlt4l9g8HJpwXNrMBqy4/E2Gb8EJtADookUt4VDeQU6TAgLIB62dLkDzMgt0BrAgv+6IVg363vA3z+vD4zQwXP0cDpea2ThLFvRbJhVG4mI=
