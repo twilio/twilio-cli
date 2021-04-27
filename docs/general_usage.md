@@ -10,6 +10,8 @@ Alternatively, you may switch which profile is active using the `twilio profiles
 
 To take advantage of Twilio's [Global Infrastructure], you can specify the target Region for the profile using the `--region` flag (e.g., `twilio login --region au1`).
 
+_NOTE: `twilio-cli` does not currently support logging in with test credentials._
+
 ### Want to use environment variables instead of creating a profile?
 
 You can also use credentials stored in environment variables:
