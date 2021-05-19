@@ -7,6 +7,7 @@ node_js:
 before_install:
 - sudo apt-get update
 - sudo apt-get install -y libsecret-1-dev
+install: make install
 deploy:
 - provider: script
   script: make docker-build && make docker-push
