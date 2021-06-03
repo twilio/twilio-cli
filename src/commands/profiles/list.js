@@ -5,7 +5,7 @@ class ProfilesList extends BaseCommand {
   async run() {
     await super.run();
     const envProfile = this.userConfig.getProfileFromEnvironment();
-    // If environment profile exists, add required details to userConfig.profiles, and mark as active.
+    // If environment profile exists, add required details to userConfig.projects, and mark as active.
     if (envProfile) {
       const { accountSid: ENVIRONMENT_ACCOUNT_SID, region: ENVIRONMENT_REGION } = envProfile;
       const strippedEnvProfile = {
