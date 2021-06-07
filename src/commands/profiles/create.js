@@ -4,21 +4,14 @@ const { flags } = require('@oclif/command');
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CliRequestClient } = require('@twilio/cli-core').services;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
-const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
 
 const helpMessages = require('../../services/messaging/help-messages');
-
-const FRIENDLY_STORAGE_LOCATIONS = {
-  [STORAGE_LOCATIONS.KEYCHAIN]: 'in your keychain',
-  [STORAGE_LOCATIONS.WIN_CRED_VAULT]: 'in the Windows credential vault',
-  [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret',
-};
 
 const SKIP_VALIDATION = 'skip-parameter-validation';
 
 class ProfilesCreate extends BaseCommand {
-  constructor(argv, config, secureStorage) {
-    super(argv, config, secureStorage);
+  constructor(argv, config) {
+    super(argv, config);
 
     this.accountSid = undefined;
     this.authToken = undefined;
@@ -241,14 +234,12 @@ class ProfilesCreate extends BaseCommand {
       throw new TwilioCliError('Could not create an API Key.');
     }
 
-    this.userConfig.addProfile(this.profileId, this.accountSid, apiKey.sid, apiKey.secret, this.region);
-    // await this.secureStorage.saveCredentials(this.profileId, apiKey.sid, apiKey.secret);
+    this.userConfig.addProfile(this.profileId, this.accountSid, this.region, apiKey.sid, apiKey.secret);
     const configSavedMessage = await this.configFile.save(this.userConfig);
 
     this.logger.info(
-      `Created API Key ${apiKey.sid} and stored the secret ${
-        FRIENDLY_STORAGE_LOCATIONS[this.secureStorage.storageLocation]
-      }. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
+      `Created API Key ${apiKey.sid} and stored the secret in Config.
+      See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
     );
     this.logger.info(configSavedMessage);
   }
