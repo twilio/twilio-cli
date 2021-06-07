@@ -35,7 +35,6 @@ describe('commands', () => {
                 overwrite: true,
               });
             ctx.testCmd.inquirer.prompt = fakePrompt;
-            ctx.testCmd.secureStorage.loadKeytar = sinon.fake.resolves(true);
           });
 
       const mockSuccess = (api) => {
