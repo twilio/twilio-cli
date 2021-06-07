@@ -241,8 +241,8 @@ class ProfilesCreate extends BaseCommand {
       throw new TwilioCliError('Could not create an API Key.');
     }
 
-    this.userConfig.addProfile(this.profileId, this.accountSid, this.region);
-    await this.secureStorage.saveCredentials(this.profileId, apiKey.sid, apiKey.secret);
+    this.userConfig.addProfile(this.profileId, this.accountSid, apiKey.sid, apiKey.secret, this.region);
+    // await this.secureStorage.saveCredentials(this.profileId, apiKey.sid, apiKey.secret);
     const configSavedMessage = await this.configFile.save(this.userConfig);
 
     this.logger.info(
