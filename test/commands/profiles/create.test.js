@@ -177,14 +177,6 @@ describe('commands', () => {
         .catch(/Could not create an API Key/)
         .it('fails to create an API key');
 
-      createTest()
-        .do((ctx) => {
-          ctx.testCmd.secureStorage.loadKeytar = sinon.fake.rejects('ugh');
-        })
-        .do((ctx) => ctx.testCmd.run())
-        .catch(/ugh/)
-        .it('fails early if keytar cannot be loaded');
-
       createTest(['--region', 'dev'])
         .nock('https://api.dev.twilio.com', mockSuccess)
         .do(async (ctx) => ctx.testCmd.run())
