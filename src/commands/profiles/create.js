@@ -235,8 +235,7 @@ class ProfilesCreate extends BaseCommand {
     const configSavedMessage = await this.configFile.save(this.userConfig);
 
     this.logger.info(
-      `Created API Key ${apiKey.sid} and stored the secret in Config.
-      See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
+      `Created API Key ${apiKey.sid} and stored the secret in Config. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
     );
     this.logger.info(configSavedMessage);
   }
