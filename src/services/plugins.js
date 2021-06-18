@@ -7,6 +7,7 @@ const PLUGIN_COMMANDS = {
   '@twilio-labs/plugin-signal2020': ['signal', 'signal2020'],
   '@twilio-labs/plugin-token': ['token'],
   '@twilio-labs/plugin-watch': ['watch'],
+  '@twilio-labs/plugin-assets': ['assets'],
   '@dabblelab/plugin-autopilot': ['autopilot'],
 };
 
