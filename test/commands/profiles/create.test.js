@@ -35,7 +35,6 @@ describe('commands', () => {
                 overwrite: true,
               });
             ctx.testCmd.inquirer.prompt = fakePrompt;
-            ctx.testCmd.secureStorage.loadKeytar = sinon.fake.resolves(true);
           });
 
       const mockSuccess = (api) => {
@@ -60,9 +59,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
           expect(ctx.stderr).to.contain('configuration saved');
-          expect(ctx.stderr).to.contain(
-            `Created API Key ${constants.FAKE_API_KEY} and stored the secret using libsecret`,
-          );
+          expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret in Config.`);
           expect(ctx.stderr).to.contain(
             `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`,
           );
@@ -178,14 +175,6 @@ describe('commands', () => {
         .do((ctx) => ctx.testCmd.run())
         .catch(/Could not create an API Key/)
         .it('fails to create an API key');
-
-      createTest()
-        .do((ctx) => {
-          ctx.testCmd.secureStorage.loadKeytar = sinon.fake.rejects('ugh');
-        })
-        .do((ctx) => ctx.testCmd.run())
-        .catch(/ugh/)
-        .it('fails early if keytar cannot be loaded');
 
       createTest(['--region', 'dev'])
         .nock('https://api.dev.twilio.com', mockSuccess)
