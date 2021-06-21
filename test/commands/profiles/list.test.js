@@ -17,6 +17,7 @@ describe('commands', () => {
         });
 
       /*
+       * TODO: To be fixed with profiles:list changes
        * test
        *   .do((ctx) => {
        *     ctx.userConfig = new ConfigData();
@@ -53,6 +54,7 @@ describe('commands', () => {
         });
 
       /*
+       * TODO: To be fixed with profiles:list changes
        * test
        *   .do((ctx) => {
        *     ctx.userConfig = new ConfigData();
