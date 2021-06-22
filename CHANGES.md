@@ -1,6 +1,32 @@
 twilio-cli changelog
 =====================
 
+[2021-06-22] Version 2.25.0
+---------------------------
+**Library - Feature**
+- [PR #261](https://github.com/twilio/twilio-cli/pull/261): add assets plugin to available plugins. Thanks to [@philnash](https://github.com/philnash)!
+
+**Api**
+- Update `status` enum for Messages to include 'canceled'
+- Update `update_status` enum for Messages to include 'canceled'
+
+**Conversations**
+- Read-only Conversation Email Binding property `binding`
+
+**Events**
+- join Sinks and Subscriptions service
+
+**Taskrouter**
+- Add `transcribe` & `transcription_configuration` form params to Reservation update endpoint
+
+**Trusthub**
+- Corrected the sid for policy sid in customer_profile_evaluation.json and trust_product_evaluation.json **(breaking change)**
+
+**Verify**
+- Improved the documentation of `challenge` adding the maximum and minimum expected lengths of some fields.
+- Improve documentation regarding `notification` by updating the documentation of the field `ttl`.
+
+
 [2021-05-19] Version 2.24.0
 ---------------------------
 **Library - Fix**
