@@ -218,6 +218,17 @@ class ProfilesCreate extends BaseCommand {
     }
   }
 
+  async removeKeytarKeysByProfileId(profileId) {
+    if (this.userConfig.projects.find((p) => p.id === profileId)) {
+      const removed = await this.secureStorage.removeCredentials(profileId);
+      if (removed === true) {
+        this.logger.info('Deleted key from keytar.');
+      } else {
+        this.logger.warn('Could not delete key from keytar.');
+      }
+    }
+  }
+
   async saveCredentials() {
     const apiKeyFriendlyName = this.getApiKeyFriendlyName();
     let apiKey = null;
@@ -230,7 +241,7 @@ class ProfilesCreate extends BaseCommand {
       this.logger.debug(error);
       throw new TwilioCliError('Could not create an API Key.');
     }
-
+    await this.removeKeytarKeysByProfileId(this.profileId);
     this.userConfig.addProfile(this.profileId, this.accountSid, this.region, apiKey.sid, apiKey.secret);
     const configSavedMessage = await this.configFile.save(this.userConfig);
 
