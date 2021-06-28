@@ -218,17 +218,6 @@ class ProfilesCreate extends BaseCommand {
     }
   }
 
-  async removeKeytarKeysByProfileId(profileId) {
-    if (this.userConfig.projects.find((p) => p.id === profileId)) {
-      const removed = await this.secureStorage.removeCredentials(profileId);
-      if (removed === true) {
-        this.logger.info('Deleted key from keytar.');
-      } else {
-        this.logger.warn('Could not delete key from keytar.');
-      }
-    }
-  }
-
   async saveCredentials() {
     const apiKeyFriendlyName = this.getApiKeyFriendlyName();
     let apiKey = null;
@@ -249,6 +238,17 @@ class ProfilesCreate extends BaseCommand {
       `Created API Key ${apiKey.sid} and stored the secret in Config. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
     );
     this.logger.info(configSavedMessage);
+  }
+
+  async removeKeytarKeysByProfileId(profileId) {
+    if (this.userConfig.projects.find((p) => p.id === profileId)) {
+      const removed = await this.secureStorage.removeCredentials(profileId);
+      if (removed === true) {
+        this.logger.info('Deleted key from keytar.');
+      } else {
+        this.logger.warn(`Could not delete ${profileId} key from keytar.`);
+      }
+    }
   }
 }
 

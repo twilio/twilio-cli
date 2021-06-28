@@ -16,9 +16,7 @@ describe('commands', () => {
           .twilioFakeProfile(ConfigData)
           .do((ctx) => {
             ctx.userConfig = new ConfigData();
-            for (let i = 0; i <= addProjects.length; i++) {
-              ctx.userConfig.addProject(addProjects[i], constants.FAKE_ACCOUNT_SID);
-            }
+            addProjects.forEach((project) => ctx.userConfig.addProject(project, constants.FAKE_ACCOUNT_SID));
           })
           .twilioCliEnv(Config)
           .twilioCreateCommand(ProfilesCreate, commandArgs)
@@ -98,7 +96,7 @@ describe('commands', () => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved profile1.');
-          expect(ctx.stderr).to.contain('Could not delete key from keytar');
+          expect(ctx.stderr).to.contain('Could not delete profile1 key from keytar.');
           expect(ctx.stderr).to.contain('configuration saved');
           expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret in Config.`);
           expect(ctx.stderr).to.contain(
