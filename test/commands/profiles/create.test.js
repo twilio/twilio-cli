@@ -16,7 +16,7 @@ describe('commands', () => {
           .twilioFakeProfile(ConfigData)
           .do((ctx) => {
             ctx.userConfig = new ConfigData();
-            for (let i = 0; i <=addProjects.length; i++) {
+            for (let i = 0; i <= addProjects.length; i++) {
               ctx.userConfig.addProject(addProjects[i], constants.FAKE_ACCOUNT_SID);
             }
           })
