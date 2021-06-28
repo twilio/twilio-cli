@@ -11,13 +11,13 @@ const helpMessages = require('../../../src/services/messaging/help-messages');
 describe('commands', () => {
   describe('profiles', () => {
     describe('create', () => {
-      const createTest = (commandArgs = [], { profileId = 'default', addProjects = 0, removeCred = true } = {}) =>
+      const createTest = (commandArgs = [], { profileId = 'default', addProjects = [], removeCred = true } = {}) =>
         test
           .twilioFakeProfile(ConfigData)
           .do((ctx) => {
             ctx.userConfig = new ConfigData();
-            for (let i = 1; i <= addProjects; i++) {
-              ctx.userConfig.addProject(`profile${i}`, constants.FAKE_ACCOUNT_SID);
+            for (let i = 0; i <=addProjects.length; i++) {
+              ctx.userConfig.addProject(addProjects[i], constants.FAKE_ACCOUNT_SID);
             }
           })
           .twilioCliEnv(Config)
@@ -76,7 +76,7 @@ describe('commands', () => {
           );
         });
 
-      createTest([], { profileId: 'profile1', addProjects: 1 })
+      createTest([], { profileId: 'profile1', addProjects: ['profile1'] })
         .nock('https://api.twilio.com', mockSuccess)
         .do((ctx) => ctx.testCmd.run())
         .it('runs profiles:create with existing profile in Projects', (ctx) => {
@@ -91,7 +91,7 @@ describe('commands', () => {
           );
         });
 
-      createTest([], { profileId: 'profile1', addProjects: 1, removeCred: false })
+      createTest([], { profileId: 'profile1', addProjects: ['profile1'], removeCred: false })
         .nock('https://api.twilio.com', mockSuccess)
         .do((ctx) => ctx.testCmd.run())
         .it('runs profiles:create with existing profile in Projects with Keytar remove failed', (ctx) => {
