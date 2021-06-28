@@ -11,9 +11,13 @@ const helpMessages = require('../../../src/services/messaging/help-messages');
 describe('commands', () => {
   describe('profiles', () => {
     describe('create', () => {
-      const createTest = (commandArgs = [], profileId = 'default') =>
+      const createTest = (commandArgs = [], { profileId = 'default', addProjects = [], removeCred = true } = {}) =>
         test
           .twilioFakeProfile(ConfigData)
+          .do((ctx) => {
+            ctx.userConfig = new ConfigData();
+            addProjects.forEach((project) => ctx.userConfig.addProject(project, constants.FAKE_ACCOUNT_SID));
+          })
           .twilioCliEnv(Config)
           .twilioCreateCommand(ProfilesCreate, commandArgs)
           .stdout()
@@ -35,6 +39,11 @@ describe('commands', () => {
                 overwrite: true,
               });
             ctx.testCmd.inquirer.prompt = fakePrompt;
+          })
+          .do((ctx) => {
+            ctx.testCmd.secureStorage.removeCredentials = () => {
+              return removeCred;
+            };
           });
 
       const mockSuccess = (api) => {
@@ -58,6 +67,36 @@ describe('commands', () => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved default.');
+          expect(ctx.stderr).to.contain('configuration saved');
+          expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret in Config.`);
+          expect(ctx.stderr).to.contain(
+            `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`,
+          );
+        });
+
+      createTest([], { profileId: 'profile1', addProjects: ['profile1'] })
+        .nock('https://api.twilio.com', mockSuccess)
+        .do((ctx) => ctx.testCmd.run())
+        .it('runs profiles:create with existing profile in Projects', (ctx) => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
+          expect(ctx.stderr).to.contain('Saved profile1.');
+          expect(ctx.stderr).to.contain('Deleted key from keytar.');
+          expect(ctx.stderr).to.contain('configuration saved');
+          expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret in Config.`);
+          expect(ctx.stderr).to.contain(
+            `See: https://www.twilio.com/console/runtime/api-keys/${constants.FAKE_API_KEY}`,
+          );
+        });
+
+      createTest([], { profileId: 'profile1', addProjects: ['profile1'], removeCred: false })
+        .nock('https://api.twilio.com', mockSuccess)
+        .do((ctx) => ctx.testCmd.run())
+        .it('runs profiles:create with existing profile in Projects with Keytar remove failed', (ctx) => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
+          expect(ctx.stderr).to.contain('Saved profile1.');
+          expect(ctx.stderr).to.contain('Could not delete profile1 key from keytar.');
           expect(ctx.stderr).to.contain('configuration saved');
           expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret in Config.`);
           expect(ctx.stderr).to.contain(
