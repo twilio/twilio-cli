@@ -16,16 +16,24 @@ class ProfilesList extends BaseCommand {
       this.userConfig.projects.unshift(strippedEnvProfile);
       this.userConfig.setActiveProfile(strippedEnvProfile.id);
     }
-    if (this.userConfig.projects.length > 0) {
+    const profiles = this.userConfig.projects;
+    Object.keys(this.userConfig.profiles).forEach((id) =>
+      profiles.push({
+        id,
+        accountSid: this.userConfig.profiles[id].accountSid,
+        region: this.userConfig.profiles[id].region,
+      }),
+    );
+    if (profiles.length > 0) {
       // If none of the profiles have a region, delete it from all of them so it doesn't show up in the output.
-      if (!this.userConfig.projects.some((p) => p.region)) {
-        this.userConfig.projects.forEach((p) => delete p.region);
+      if (!profiles.some((p) => p.region)) {
+        profiles.forEach((p) => delete p.region);
       }
       const activeProfile = this.userConfig.getActiveProfile();
-      this.userConfig.projects.forEach((p) => {
+      profiles.forEach((p) => {
         p.active = p.id === activeProfile.id;
       });
-      this.output(this.userConfig.projects);
+      this.output(profiles);
     } else {
       this.logger.warn(`No profiles have been configured. Run ${chalk.bold('twilio profiles:create')} to create one!`);
     }
