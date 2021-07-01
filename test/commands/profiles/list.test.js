@@ -59,8 +59,20 @@ describe('commands', () => {
       test
         .do((ctx) => {
           ctx.userConfig = new ConfigData();
-          ctx.userConfig.addProfile('profile1', constants.FAKE_ACCOUNT_SID, '', constants.FAKE_API_KEY, constants.FAKE_API_SECRET);
-          ctx.userConfig.addProfile('profile2', constants.FAKE_ACCOUNT_SID, '', constants.FAKE_API_KEY, constants.FAKE_API_SECRET);
+          ctx.userConfig.addProfile(
+            'profile1',
+            constants.FAKE_ACCOUNT_SID,
+            '',
+            constants.FAKE_API_KEY,
+            constants.FAKE_API_SECRET,
+          );
+          ctx.userConfig.addProfile(
+            'profile2',
+            constants.FAKE_ACCOUNT_SID,
+            '',
+            constants.FAKE_API_KEY,
+            constants.FAKE_API_SECRET,
+          );
         })
         .twilioCliEnv(Config)
         .stdout()
@@ -165,7 +177,7 @@ describe('commands', () => {
             constants.FAKE_API_KEY,
             constants.FAKE_API_SECRET,
           );
-          ctx.userConfig.addProject('profile2', constants.FAKE_ACCOUNT_SID)
+          ctx.userConfig.addProject('profile2', constants.FAKE_ACCOUNT_SID);
         })
         .twilioCliEnv(Config)
         .stdout()
@@ -176,31 +188,6 @@ describe('commands', () => {
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
           expect(ctx.stdout).to.contain('dev');
           expect(ctx.stdout).to.contain('Region');
-          expect(ctx.stdout.match(/true/g)).to.have.length(1);
-          expect(ctx.stderr).to.equal('');
-        });
-
-      test
-        .do((ctx) => {
-          ctx.userConfig = new ConfigData();
-          ctx.userConfig.addProfile(
-            'profile1',
-            constants.FAKE_ACCOUNT_SID,
-            '',
-            constants.FAKE_API_KEY,
-            constants.FAKE_API_SECRET,
-          );
-          ctx.userConfig.addProject('profile2', constants.FAKE_ACCOUNT_SID);
-        })
-        .twilioCliEnv(Config)
-        .stdout()
-        .stderr()
-        .twilioCommand(ProfilesList, [])
-        .it('runs profiles:list with multiple profiles in profiles and projects', (ctx) => {
-          expect(ctx.stdout).to.contain('profile1');
-          expect(ctx.stdout).to.contain('profile2');
-          expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
-          expect(ctx.stdout).to.not.contain('Region');
           expect(ctx.stdout.match(/true/g)).to.have.length(1);
           expect(ctx.stderr).to.equal('');
         });
