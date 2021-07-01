@@ -82,7 +82,7 @@ describe('commands', () => {
           expect(ctx.testCmd.userConfig.projects).to.have.length(4);
           expect(Object.keys(ctx.testCmd.userConfig.profiles)).to.have.length(3);
           expect(ctx.stderr).to.contain(
-            "Unable to port profile profileNotExisting since it doesn't exist or has already been ported!"
+            "Unable to port profile profileNotExisting since it doesn't exist or has already been ported!",
           );
         });
 
