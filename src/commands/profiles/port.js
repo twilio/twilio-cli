@@ -23,17 +23,17 @@ class ProfilesPort extends BaseCommand {
     const { projects } = this.userConfig;
 
     if (this.args.profile) {
-      const sanitizedProfile = this.args.profile.trim();
-      const project = this.userConfig.projects.filter((p) => p.id === sanitizedProfile);
+      const sanitizedProfileId = this.args.profile.trim();
+      const project = this.userConfig.projects.find((p) => p.id === sanitizedProfileId);
 
-      if (project.length === 0) {
+      if (!project) {
         this.logger.error(
-          `Unable to port profile ${sanitizedProfile} since it doesn't exist or has already been ported!`,
+          `Unable to port profile ${sanitizedProfileId} since it doesn't exist or has already been ported!`,
         );
         return;
       }
 
-      await this.portProfile(project[0]);
+      await this.portProfile(project);
     } else {
       if (projects.length === 0) {
         this.logger.info('All profiles already ported to config file!');
