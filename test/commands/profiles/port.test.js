@@ -48,7 +48,7 @@ describe('commands', () => {
             ctx.testCmd.secureStorage.getCredentials = (projectId) => {
               return {
                 apiKey: getCreds === true ? constants.FAKE_API_KEY : 'error',
-                apiSecret: constants.FAKE_API_SECRET,
+                apiSecret: getCreds === true ? constants.FAKE_API_SECRET : 'error_message',
               };
             };
           });
