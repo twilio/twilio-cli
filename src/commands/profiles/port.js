@@ -12,6 +12,7 @@ class ProfilesPort extends BaseCommand {
         message:
           `This command will port profile(s) from keytar` +
           ` to config file at location ${this.configFile.filePath}. Continue?`,
+        default: false,
       },
     ]);
 
@@ -24,7 +25,7 @@ class ProfilesPort extends BaseCommand {
 
     if (this.args.profile) {
       const sanitizedProfileId = this.args.profile.trim();
-      const project = this.userConfig.projects.find((p) => p.id === sanitizedProfileId);
+      const project = projects.find((p) => p.id === sanitizedProfileId);
 
       if (!project) {
         this.logger.error(
@@ -53,7 +54,7 @@ class ProfilesPort extends BaseCommand {
 
     const creds = await this.secureStorage.getCredentials(project.id);
     if (creds.apiKey === 'error') {
-      cli.action.stop('Failed: Unable to retrieve credentials from Keytar.');
+      cli.action.stop('Failed: Unable to retrieve credentials from keytar.');
       return;
     }
 
@@ -70,7 +71,7 @@ class ProfilesPort extends BaseCommand {
   }
 }
 
-ProfilesPort.description = 'Port profiles from KeyTar to config file.';
+ProfilesPort.description = 'Port profiles from keytar to config file.';
 ProfilesPort.args = [
   {
     name: 'profile',

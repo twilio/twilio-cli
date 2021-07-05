@@ -118,10 +118,10 @@ describe('commands', () => {
 
       setup(['profile2'], { portProfiles: true, removeCred: true, getCreds: false })
         .do((ctx) => ctx.testCmd.run())
-        .it('Should not port profile in case credentials can not be fetched from keyTar', (ctx) => {
+        .it('Should not port profile in case credentials can not be fetched from keytar', (ctx) => {
           expect(ctx.testCmd.userConfig.projects).to.have.length(4);
           expect(Object.keys(ctx.testCmd.userConfig.profiles)).to.have.length(3);
-          expect(ctx.stderr).to.contain('Porting profile2... Failed: Unable to retrieve credentials from Keytar.');
+          expect(ctx.stderr).to.contain('Porting profile2... Failed: Unable to retrieve credentials from keytar.');
         });
     });
   });
