@@ -33,6 +33,8 @@ describe('commands', () => {
                 constants.FAKE_API_SECRET,
               );
             }
+          })
+          .do((ctx) => {
             if (setActiveProfile) {
               ctx.userConfig.setActiveProfile(setActiveProfile);
             }
