@@ -10,7 +10,7 @@ class ProfilesPort extends BaseCommand {
         type: 'confirm',
         name: 'confirmation',
         message:
-          `This command will port profile(s) from keytar` +
+          `This command will port API keys from keytar` +
           ` to config file at location ${this.configFile.filePath}. Continue?`,
         default: false,
       },
@@ -29,7 +29,7 @@ class ProfilesPort extends BaseCommand {
 
       if (!project) {
         this.logger.error(
-          `Unable to port profile ${sanitizedProfileId} since it doesn't exist or has already been ported!`,
+          `Unable to port keys for profile ${sanitizedProfileId} since it doesn't exist or has already been ported!`,
         );
         return;
       }
@@ -37,7 +37,7 @@ class ProfilesPort extends BaseCommand {
       await this.portProfile(project);
     } else {
       if (projects.length === 0) {
-        this.logger.info('All profiles already ported to config file!');
+        this.logger.info('No profiles have keys in keytar. Nothing to do.');
         return;
       }
 
@@ -71,11 +71,13 @@ class ProfilesPort extends BaseCommand {
   }
 }
 
-ProfilesPort.description = 'Port profiles from keytar to config file.';
+ProfilesPort.description =
+  'Port API keys from keytar to config file. This command ports ALL keys by default,' +
+  'although to only port a specific key append the profile-id as additional argument.';
 ProfilesPort.args = [
   {
     name: 'profile',
-    description: 'Profile to be ported',
+    description: 'Profile-id for porting keys standalone',
   },
 ];
 ProfilesPort.flags = BaseCommand.flags;

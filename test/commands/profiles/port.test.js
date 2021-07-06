@@ -82,7 +82,7 @@ describe('commands', () => {
           expect(ctx.testCmd.userConfig.projects).to.have.length(4);
           expect(Object.keys(ctx.testCmd.userConfig.profiles)).to.have.length(3);
           expect(ctx.stderr).to.contain(
-            "Unable to port profile profileNotExisting since it doesn't exist or has already been ported!",
+            "Unable to port keys for profile profileNotExisting since it doesn't exist or has already been ported!",
           );
         });
 
@@ -110,10 +110,10 @@ describe('commands', () => {
 
       setup([], { addProjects: 0, portProfiles: true, removeCred: true })
         .do((ctx) => ctx.testCmd.run())
-        .it('Should inform in case of no profiles to port', (ctx) => {
+        .it('should inform in case of no profiles to port', (ctx) => {
           expect(ctx.testCmd.userConfig.projects).to.have.length(0);
           expect(Object.keys(ctx.testCmd.userConfig.profiles)).to.have.length(3);
-          expect(ctx.stderr).to.contain('All profiles already ported to config file!');
+          expect(ctx.stderr).to.contain('No profiles have keys in keytar. Nothing to do.');
         });
 
       setup(['profile2'], { portProfiles: true, removeCred: true, getCreds: false })
