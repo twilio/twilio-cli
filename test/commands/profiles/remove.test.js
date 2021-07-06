@@ -9,7 +9,14 @@ describe('commands', () => {
     describe('remove', () => {
       const setup = (
         commandArgs = [],
-        { addProjects = 4, addProfiles = 3, deleteProfile = true, deleteKey = true, removeCred = true } = {},
+        {
+          addProjects = 4,
+          addProfiles = 3,
+          deleteProfile = true,
+          deleteKey = true,
+          removeCred = true,
+          setActiveProfile = '',
+        } = {},
       ) =>
         test
           .do((ctx) => {
@@ -25,6 +32,9 @@ describe('commands', () => {
                 `${constants.FAKE_API_KEY}configProfile${i}`,
                 constants.FAKE_API_SECRET,
               );
+            }
+            if (setActiveProfile) {
+              ctx.userConfig.setActiveProfile(setActiveProfile);
             }
           })
           .twilioCliEnv(Config)
@@ -93,7 +103,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      setup(['configProfile1'], { addProjects: 0 })
+      setup(['configProfile1'], { addProjects: 0, setActiveProfile: 'configProfile1' })
         .nock('https://api.twilio.com', (api) => {
           api
             .delete(
@@ -145,7 +155,7 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      setup(['configProfile1'], { addProjects: 0, addProfiles: 1 })
+      setup(['configProfile1'], { addProjects: 0, addProfiles: 1, setActiveProfile: 'configProfile1' })
         .nock('https://api.twilio.com', (api) => {
           api
             .delete(
