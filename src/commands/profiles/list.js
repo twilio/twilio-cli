@@ -16,7 +16,7 @@ class ProfilesList extends BaseCommand {
       this.userConfig.projects.unshift(strippedEnvProfile);
       this.userConfig.setActiveProfile(strippedEnvProfile.id);
     }
-    const profiles = this.userConfig.projects;
+    const profiles = this.userConfig.projects.slice(0);
     Object.keys(this.userConfig.profiles).forEach((id) =>
       profiles.push({
         id,
@@ -31,8 +31,9 @@ class ProfilesList extends BaseCommand {
       }
       const activeProfile = this.userConfig.getActiveProfile();
       profiles.forEach((p) => {
-        p.active = p.id === activeProfile.id;
+        p.active = activeProfile ? p.id === activeProfile.id : false;
       });
+
       this.output(profiles);
     } else {
       this.logger.warn(`No profiles have been configured. Run ${chalk.bold('twilio profiles:create')} to create one!`);

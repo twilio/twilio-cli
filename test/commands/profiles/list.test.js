@@ -26,6 +26,7 @@ describe('commands', () => {
             constants.FAKE_API_KEY,
             constants.FAKE_API_SECRET,
           );
+          ctx.userConfig.setActiveProfile('profile1');
         })
         .twilioCliEnv(Config)
         .stdout()
@@ -36,6 +37,29 @@ describe('commands', () => {
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
           expect(ctx.stdout).to.not.contain('Region');
           expect(ctx.stdout.match(/true/g)).to.have.length(1);
+          expect(ctx.stderr).to.equal('');
+        });
+
+      test
+        .do((ctx) => {
+          ctx.userConfig = new ConfigData();
+          ctx.userConfig.addProfile(
+            'profile1',
+            constants.FAKE_ACCOUNT_SID,
+            '',
+            constants.FAKE_API_KEY,
+            constants.FAKE_API_SECRET,
+          );
+        })
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCommand(ProfilesList, [])
+        .it('runs profiles:list with 1 profile without active profile', (ctx) => {
+          expect(ctx.stdout).to.contain('profile1');
+          expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
+          expect(ctx.stdout).to.not.contain('Region');
+          expect(ctx.stdout.match(/false/g)).to.have.length(1);
           expect(ctx.stderr).to.equal('');
         });
 
@@ -73,17 +97,49 @@ describe('commands', () => {
             constants.FAKE_API_KEY,
             constants.FAKE_API_SECRET,
           );
+          ctx.userConfig.setActiveProfile('profile1');
         })
         .twilioCliEnv(Config)
         .stdout()
         .stderr()
         .twilioCommand(ProfilesList, [])
-        .it('runs profiles:list with multiple profiles', (ctx) => {
+        .it('runs profiles:list with multiple profiles and with active profile', (ctx) => {
           expect(ctx.stdout).to.contain('profile1');
           expect(ctx.stdout).to.contain('profile2');
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
           expect(ctx.stdout).to.not.contain('Region');
           expect(ctx.stdout.match(/true/g)).to.have.length(1);
+          expect(ctx.stderr).to.equal('');
+        });
+
+      test
+        .do((ctx) => {
+          ctx.userConfig = new ConfigData();
+          ctx.userConfig.addProfile(
+            'profile1',
+            constants.FAKE_ACCOUNT_SID,
+            '',
+            constants.FAKE_API_KEY,
+            constants.FAKE_API_SECRET,
+          );
+          ctx.userConfig.addProfile(
+            'profile2',
+            constants.FAKE_ACCOUNT_SID,
+            '',
+            constants.FAKE_API_KEY,
+            constants.FAKE_API_SECRET,
+          );
+        })
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCommand(ProfilesList, [])
+        .it('runs profiles:list with multiple profiles without a active profile', (ctx) => {
+          expect(ctx.stdout).to.contain('profile1');
+          expect(ctx.stdout).to.contain('profile2');
+          expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
+          expect(ctx.stdout).to.not.contain('Region');
+          expect(ctx.stdout.match(/false/g)).to.have.length(2);
           expect(ctx.stderr).to.equal('');
         });
 

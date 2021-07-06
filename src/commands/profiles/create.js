@@ -33,6 +33,9 @@ class ProfilesCreate extends BaseCommand {
       await this.loadProfileId();
       await this.saveCredentials();
       this.logger.info(`Saved ${this.profileId}.`);
+      if (!this.userConfig.getActiveProfile()) {
+        this.logger.warn(`You don't have any active profile set, run "twilio profiles:use" to set a profile as active`);
+      }
     } else {
       this.cancel();
     }
