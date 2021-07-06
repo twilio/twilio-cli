@@ -73,7 +73,7 @@ class ProfilesPort extends BaseCommand {
 
 ProfilesPort.description =
   'Port API keys from keytar to config file. This command ports ALL keys by default,' +
-  'although to only port a specific key append the profile-id as additional argument.';
+  ' although to only port a specific key append the profile-id as additional argument.';
 ProfilesPort.args = [
   {
     name: 'profile',
