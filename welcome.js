@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
-const { PostInstallDisplayManager } = require('@twilio/cli-core').postInstallUtility;
+const { PostInstallDisplayManager } = require('./src/services/post-install-utility');
 
 new PostInstallDisplayManager().displayMessage();
