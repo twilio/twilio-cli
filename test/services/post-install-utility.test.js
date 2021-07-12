@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
 const tmp = require('tmp');
-const chalk = require('chalk');
 const { expect, test, constants } = require('@twilio/cli-test');
 const sinon = require('sinon');
 const { ConfigData } = require('@twilio/cli-core').services.config;
 
-const { PostInstallDisplayManager, PORT_WARNING } = require('../../src/services/post-install-utility');
+const { PostInstallDisplayManager } = require('../../src/services/post-install-utility');
 
 describe('services', () => {
   describe('post-install-utility', () => {
@@ -27,14 +26,9 @@ describe('services', () => {
 
       displayManager.displayMessage();
       expect(displayManager.userConfig).to.not.be.undefined;
-      expect(console.log.calledWith('* To get started, please create a twilio-cli profile:                   *')).to.be
-        .true;
-      expect(console.log.calledWith('*     twilio profiles:create                                            *')).to.be
-        .true;
-      expect(console.log.calledWith('*     OR                                                                *')).to.be
-        .true;
-      expect(console.log.calledWith('*     twilio login                                                      *')).to.be
-        .true;
+      expect(console.warn.called).to.be.false;
+      expect(console.log.calledWith(sinon.match('twilio profiles:create'))).to.be.true;
+      expect(console.log.calledWith(sinon.match('twilio login'))).to.be.true;
     });
 
     test.it('should display port warning if projects set', () => {
@@ -44,7 +38,7 @@ describe('services', () => {
 
       displayManager.displayMessage();
       expect(console.warn.calledOnce).to.be.true;
-      expect(console.warn.calledWith(chalk.yellowBright(` » ${PORT_WARNING}`))).to.be.true;
+      expect(console.warn.calledWith(sinon.match('twilio profiles:port'))).to.be.true;
       expect(console.log.called).to.be.false; // Grid shouldn't be displayed
     });
 
@@ -62,7 +56,6 @@ describe('services', () => {
 
       displayManager.displayMessage();
       expect(console.warn.called).to.be.false;
-      expect(console.warn.calledWith(chalk.yellowBright(` » ${PORT_WARNING}`))).to.be.false;
       expect(console.log.called).to.be.false;
     });
 
