@@ -53,7 +53,7 @@ describe('commands', () => {
         })
         .it('runs config:set --edge=createEdge, will show warning if environment variable exists', (ctx) => {
           expect(ctx.testCmd.userConfig.edge).to.contain('createEdge');
-          expect(ctx.stderr).to.contain('There is an environment variable already set: envEdge');
+          expect(ctx.stderr).to.contain('There is an environment variable already set for edge : envEdge');
           expect(ctx.stderr).to.contain('configuration saved');
         });
       createConfig(['--edge='], { addEdge: 'createEdge' })

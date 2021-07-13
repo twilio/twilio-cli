@@ -83,6 +83,6 @@ ConfigSet.flags = {
     char: 'e',
     description: 'Sets an Edge for your Twilio Account.',
   }),
-  ...BaseCommand.flags, // Yes! We _do_ want the same flags as TwilioClientCommand
+  ...BaseCommand.flags, // To add the same flags as TwilioClientCommand
 };
 module.exports = ConfigSet;
