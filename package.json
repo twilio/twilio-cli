@@ -97,6 +97,9 @@
       },
       "profiles": {
         "description": "manage credentials for Twilio profiles"
+      },
+      "config": {
+        "description": "manage Twilio configurations"
       }
     },
     "hooks": {
