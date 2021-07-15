@@ -1,6 +1,27 @@
 twilio-cli changelog
 =====================
 
+[2021-07-15] Version 2.26.0
+---------------------------
+**Library - Chore**
+- [PR #268](https://github.com/twilio/twilio-cli/pull/268): updating plugin-help version. Thanks to [@kridai](https://github.com/kridai)!
+
+**Conversations**
+- Changed `last_read_message_index` and `unread_messages_count` type in User Conversation's resource **(breaking change)**
+- Expose UserConversations resource
+
+**Messaging**
+- Add brand_score field to brand registration responses
+
+**Supersim**
+- Add Billing Period resource for the Super Sim Pilot
+- Add List endpoint to Billing Period resource for Super Sim Pilot
+- Add Fetch endpoint to Billing Period resource for Super Sim Pilot
+
+**Taskrouter**
+- Update `transcribe` & `transcription_configuration` form params in Reservation update endpoint to have private visibility **(breaking change)**
+
+
 [2021-06-22] Version 2.25.0
 ---------------------------
 **Library - Feature**
