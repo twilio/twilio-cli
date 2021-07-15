@@ -76,12 +76,12 @@ class ConfigSet extends BaseCommand {
     return confirm[type];
   }
 }
-ConfigSet.description = 'sets a config to Twilio configuration.';
+ConfigSet.description = 'update Twilio CLI configurations';
 
 ConfigSet.flags = {
   edge: flags.string({
     char: 'e',
-    description: 'Sets an Edge for your Twilio Account.',
+    description: 'Sets an Edge configuration.',
   }),
   ...BaseCommand.flags, // To add the same flags as TwilioClientCommand
 };

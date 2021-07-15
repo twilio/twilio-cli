@@ -99,7 +99,7 @@
         "description": "manage credentials for Twilio profiles"
       },
       "config": {
-        "description": "manage Twilio configurations"
+        "description": "manage Twilio CLI configurations"
       }
     },
     "hooks": {
