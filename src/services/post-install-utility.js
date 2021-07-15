@@ -5,7 +5,7 @@ const { configureEnv } = require('@twilio/cli-core');
 
 const PORT_WARNING = `Profiles exist with API keys in system keychain. Please run ${chalk.bold(
   'twilio profiles:port',
-)} to port keys to config.`;
+)} to port all keys to the config file`;
 
 class PostInstallDisplayManager {
   constructor(configDir, userConfig) {
