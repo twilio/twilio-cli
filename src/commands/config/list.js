@@ -23,7 +23,7 @@ class ConfigList extends BaseCommand {
     return undefined;
   }
 }
-ConfigList.description = 'list the Twilio configuration.';
+ConfigList.description = 'list Twilio CLI configurations.';
 
 ConfigList.flags = BaseCommand.flags;
 module.exports = {

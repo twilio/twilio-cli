@@ -76,7 +76,7 @@ class ConfigSet extends BaseCommand {
     return confirm[type];
   }
 }
-ConfigSet.description = 'update Twilio CLI configurations';
+ConfigSet.description = 'update Twilio CLI configurations.';
 
 ConfigSet.flags = {
   edge: flags.string({
