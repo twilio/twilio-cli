@@ -1,9 +1,6 @@
 const availableConfigs = ['edge'];
 function getFromEnvironment(config) {
   const configEnv = `TWILIO_${config.toUpperCase()}`;
-  if (process.env[configEnv]) {
-    return process.env[configEnv];
-  }
-  return undefined;
+  return process.env[configEnv];
 }
 module.exports = { availableConfigs, getFromEnvironment };
