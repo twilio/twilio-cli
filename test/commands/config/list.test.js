@@ -1,7 +1,7 @@
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
 
-const { ConfigList } = require('../../../src/commands/config/list');
+const ConfigList = require('../../../src/commands/config/list');
 
 describe('commands', () => {
   describe('config', () => {

@@ -2,7 +2,7 @@ const { TwilioCliError } = require('@twilio/cli-core/src/services/error');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const { flags } = require('@oclif/command');
 
-const { availableConfigs } = require('./list');
+const { availableConfigs, getFromEnvironment } = require('../../services/config-utility');
 
 class ConfigSet extends BaseCommand {
   async run() {
@@ -34,9 +34,9 @@ class ConfigSet extends BaseCommand {
   }
 
   preWarnings(flag) {
-    const configEnv = `TWILIO_${flag.toUpperCase()}`;
-    if (process.env[configEnv]) {
-      this.logger.warn(`There is an environment variable already set for ${flag} : ${process.env[configEnv]}`);
+    const flagEnvValue = getFromEnvironment(flag);
+    if (flagEnvValue) {
+      this.logger.warn(`There is an environment variable already set for ${flag} : ${flagEnvValue}`);
     }
   }
 
