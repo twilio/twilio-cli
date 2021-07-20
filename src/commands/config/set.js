@@ -34,8 +34,9 @@ class ConfigSet extends BaseCommand {
   }
 
   preWarnings(flag) {
-    if (flag === 'edge' && process.env.TWILIO_EDGE) {
-      this.logger.warn(`There is an environment variable already set for ${flag} : ${process.env.TWILIO_EDGE}`);
+    const configEnv = `TWILIO_${flag.toUpperCase()}`;
+    if (process.env[configEnv]) {
+      this.logger.warn(`There is an environment variable already set for ${flag} : ${process.env[configEnv]}`);
     }
   }
 
@@ -83,6 +84,6 @@ ConfigSet.flags = {
     char: 'e',
     description: 'Sets an Edge configuration.',
   }),
-  ...BaseCommand.flags, // To add the same flags as TwilioClientCommand
+  ...BaseCommand.flags, // To add the same flags as BaseCommand
 };
 module.exports = ConfigSet;
