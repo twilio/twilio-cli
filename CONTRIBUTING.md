@@ -93,13 +93,13 @@ Before you submit your pull request consider the following guidelines:
   * `npm uninstall -g twilio-cli`
   * `git clone https://github.com/twilio/twilio-cli-core.git`
   * `cd twilio-cli-core`
-  * ``make clean install`
+  * `make clean install`
   * `cd ..`
   * `git clone https://github.com/twilio/twilio-cli.git`
   * `cd twilio-cli`
   * In `package.json` replace `"@twilio/cli-core": "<Version Number>"` with `"@twilio/cli-core": "file:../twilio-cli-core"`
   * `make clean install`
-  * Test that everything is wired up correctuly with `./bin/run`
+  * Test that everything is wired up correctly with `./bin/run`
 
 * Understanding the code base:
   * The Twilio CLI utilizes the Open CLI Framework ([oclif](https://oclif.io/)). It may be useful to familiarize yourself with it, in particular, the [multi-command CLI](https://oclif.io/docs/multi).
