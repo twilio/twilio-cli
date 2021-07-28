@@ -43,7 +43,7 @@
     "@oclif/plugin-plugins": "^1.8.3",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "@sendgrid/mail": "^7.2.1",
-    "@twilio/cli-core": "^5.9.1",
+    "@twilio/cli-core": "twilio/twilio-cli-core#5.26.1-rc",
     "chalk": "^4.1.0",
     "cli-ux": "^5.6.2",
     "file-type": "^14.6.2",
