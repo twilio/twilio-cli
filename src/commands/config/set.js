@@ -21,7 +21,7 @@ class ConfigSet extends BaseCommand {
           continue;
         }
         if (await this.isOverwrite(configProperty)) {
-          if (ConfigSet.flags[flag].type === 'string') {
+          if (typeof this.flags[flag] === 'string') {
             this.userConfig[configProperty] = this.userConfig.sanitize(this.flags[flag]);
           } else {
             this.userConfig[configProperty] = this.flags[flag];

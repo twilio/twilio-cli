@@ -18,23 +18,22 @@ describe('commands', () => {
           .twilioCreateCommand(ConfigList, [])
           .stdout()
           .stderr();
-      const configFixture = [
-        {
-          configProperty: 'edge',
-          configPropertyValue: 'testEdge',
-        },
-        {
-          configProperty: 'requireProfileInput',
-          configPropertyValue: true,
-        },
-      ];
+
+      //
+      const parseOutputToMap = (output) => {
+        const propertyWithValue = output.split('\n');
+        const propertyMap = new Map();
+        propertyWithValue.forEach((value) => {
+          const entry = value.trim().split(/\s{2,}/);
+          propertyMap.set(entry[0], entry[1]);
+        });
+        return propertyMap;
+      };
       listConfig({ configProperty: 'edge', configPropertyValue: 'testEdge' })
         .do((ctx) => ctx.testCmd.run())
         .it('runs config:list, should list config variables', (ctx) => {
-          expect(ctx.stdout).to.contain('Config Name');
-          expect(ctx.stdout).to.contain('Value');
-          expect(ctx.stdout).to.contain('testEdge');
-          expect(ctx.stdout).to.contain('edge');
+          const configListOutput = parseOutputToMap(ctx.stdout);
+          expect(configListOutput.get('edge')).is.equal('testEdge');
         });
       listConfig({ configProperty: 'edge', configPropertyValue: 'testEdge' })
         .do((ctx) => {
@@ -42,40 +41,33 @@ describe('commands', () => {
           return ctx.testCmd.run();
         })
         .it('runs config:list, should prioritize environment if both environment and config edge set', (ctx) => {
-          expect(ctx.stdout).to.contain('Config Name');
-          expect(ctx.stdout).to.contain('Value');
-          expect(ctx.stdout).to.contain('fakeEdge[env]');
-          expect(ctx.stdout).to.contain('edge');
+          const configListOutput = parseOutputToMap(ctx.stdout);
+          expect(configListOutput.get('edge')).is.not.undefined;
+          expect(configListOutput.get('edge')).is.equal('fakeEdge[env]');
         });
       listConfig({})
         .do((ctx) => ctx.testCmd.run())
-        .it('runs config:list, should list empty as edge is not set', (ctx) => {
-          expect(ctx.stdout).to.contain('Config Name');
-          expect(ctx.stdout).to.contain('Value');
-          expect(ctx.stdout).to.contain('');
-          expect(ctx.stdout).to.contain('edge');
+        .it('runs config:list, should list empty config properties are not set', (ctx) => {
+          const configListOutput = parseOutputToMap(ctx.stdout);
+          expect(configListOutput.get('edge')).is.undefined;
+          expect(configListOutput.get('requireProfileInput')).is.undefined;
+          expect(configListOutput.get('email')).is.equal('{}');
+          expect(configListOutput.get('projects')).is.equal('[]');
+          expect(configListOutput.get('activeProfile')).is.undefined;
+          expect(configListOutput.get('profiles')).is.equal('{}');
         });
       listConfig({ configProperty: 'requireProfileInput', configPropertyValue: true })
         .do((ctx) => ctx.testCmd.run())
-        .it('runs config:list, should list config variables as requireProfileInput set', (ctx) => {
-          expect(ctx.stdout).to.contain('Config Name');
-          expect(ctx.stdout).to.contain('Value');
-          expect(ctx.stdout).to.contain('true');
-          expect(ctx.stdout).to.contain('requireProfileInput');
-        });
-      listConfig({})
-        .do((ctx) => ctx.testCmd.run())
-        .it('runs config:list, should list config variables as requireProfileInput not set', (ctx) => {
-          expect(ctx.stdout).to.contain('Config Name');
-          expect(ctx.stdout).to.contain('Value');
-          expect(ctx.stdout).to.contain('');
-          expect(ctx.stdout).to.contain('requireProfileInput');
+        .it('runs config:list, should list requireProfileInput as set', (ctx) => {
+          const configListOutput = parseOutputToMap(ctx.stdout);
+          expect(configListOutput.get('requireProfileInput')).is.not.undefined;
+          expect(configListOutput.get('requireProfileInput')).is.equal('true');
         });
       listConfig({})
         .do((ctx) => ctx.testCmd.run())
         .it('runs config:list, should list all config properties in userConfig', (ctx) => {
-          Object.keys(new ConfigData()).forEach((value) => {
-            expect(ctx.stdout).to.contain(value);
+          Object.keys(new ConfigData()).forEach((configProperty) => {
+            expect(ctx.stdout).to.contain(configProperty);
           });
         });
     });
