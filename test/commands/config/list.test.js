@@ -33,7 +33,7 @@ describe('commands', () => {
         .do((ctx) => ctx.testCmd.run())
         .it('runs config:list, should list config variables', (ctx) => {
           const configListOutput = parseOutputToMap(ctx.stdout);
-          expect(configListOutput.get('edge')).is.equal('testEdge');
+          expect(configListOutput.get('edge')).is.equal('"testEdge"');
         });
       listConfig({ configProperty: 'edge', configPropertyValue: 'testEdge' })
         .do((ctx) => {
@@ -43,7 +43,7 @@ describe('commands', () => {
         .it('runs config:list, should prioritize environment if both environment and config edge set', (ctx) => {
           const configListOutput = parseOutputToMap(ctx.stdout);
           expect(configListOutput.get('edge')).is.not.undefined;
-          expect(configListOutput.get('edge')).is.equal('fakeEdge[env]');
+          expect(configListOutput.get('edge')).is.equal('"fakeEdge[env]"');
         });
       listConfig({})
         .do((ctx) => ctx.testCmd.run())
@@ -53,7 +53,7 @@ describe('commands', () => {
           expect(configListOutput.get('requireProfileInput')).is.undefined;
           expect(configListOutput.get('email')).is.equal('{}');
           expect(configListOutput.get('projects')).is.equal('[]');
-          expect(configListOutput.get('activeProfile')).is.undefined;
+          expect(configListOutput.get('activeProfile')).is.equal('null');
           expect(configListOutput.get('profiles')).is.equal('{}');
         });
       listConfig({ configProperty: 'requireProfileInput', configPropertyValue: true })

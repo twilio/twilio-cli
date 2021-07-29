@@ -6,13 +6,6 @@ class ConfigList extends BaseCommand {
   async run() {
     await super.run();
     const configData = [];
-    const parseUserConfigValue = (config) => {
-      // only parse to JSON string in case of Objects/ Arrays
-      if (this.userConfig[config] instanceof Array || this.userConfig[config] instanceof Object) {
-        return JSON.stringify(this.userConfig[config]);
-      }
-      return this.userConfig[config];
-    };
     Object.keys(this.userConfig).forEach((config) => {
       let configEnvValue = getFromEnvironment(config);
       if (configEnvValue) {
@@ -21,7 +14,7 @@ class ConfigList extends BaseCommand {
 
       configData.push({
         configName: config,
-        value: configEnvValue || parseUserConfigValue(config),
+        value: JSON.stringify(configEnvValue || this.userConfig[config]),
       });
     });
     this.output(configData);

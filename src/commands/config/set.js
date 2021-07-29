@@ -20,7 +20,7 @@ class ConfigSet extends BaseCommand {
           continue;
         }
         if (await this.isOverwrite(configProperty)) {
-          this.userConfig[configProperty] = this.flags[flag];
+          this.userConfig[configProperty] = this.sanitizeFlag(this.flags[flag]);
           isUserConfigUpdated = true;
         }
       }
