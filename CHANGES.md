@@ -1,6 +1,68 @@
 twilio-cli changelog
 =====================
 
+[2021-07-29] Version 2.27.0
+---------------------------
+**Api**
+- Added `domain_sid` in sip_credential_list_mapping and sip_ip_access_control_list_mapping APIs **(breaking change)**
+
+**Conversations**
+- Expose ParticipantConversations resource
+
+**Taskrouter**
+- Adding `links` to the activity resource
+
+**Verify**
+- Added a `Version` to Verify Factors `Webhooks` to add new fields without breaking old Webhooks.
+
+
+[2021-07-15] Version 2.26.0
+---------------------------
+**Library - Chore**
+- [PR #268](https://github.com/twilio/twilio-cli/pull/268): updating plugin-help version. Thanks to [@kridai](https://github.com/kridai)!
+
+**Conversations**
+- Changed `last_read_message_index` and `unread_messages_count` type in User Conversation's resource **(breaking change)**
+- Expose UserConversations resource
+
+**Messaging**
+- Add brand_score field to brand registration responses
+
+**Supersim**
+- Add Billing Period resource for the Super Sim Pilot
+- Add List endpoint to Billing Period resource for Super Sim Pilot
+- Add Fetch endpoint to Billing Period resource for Super Sim Pilot
+
+**Taskrouter**
+- Update `transcribe` & `transcription_configuration` form params in Reservation update endpoint to have private visibility **(breaking change)**
+
+
+[2021-06-22] Version 2.25.0
+---------------------------
+**Library - Feature**
+- [PR #261](https://github.com/twilio/twilio-cli/pull/261): add assets plugin to available plugins. Thanks to [@philnash](https://github.com/philnash)!
+
+**Api**
+- Update `status` enum for Messages to include 'canceled'
+- Update `update_status` enum for Messages to include 'canceled'
+
+**Conversations**
+- Read-only Conversation Email Binding property `binding`
+
+**Events**
+- join Sinks and Subscriptions service
+
+**Taskrouter**
+- Add `transcribe` & `transcription_configuration` form params to Reservation update endpoint
+
+**Trusthub**
+- Corrected the sid for policy sid in customer_profile_evaluation.json and trust_product_evaluation.json **(breaking change)**
+
+**Verify**
+- Improved the documentation of `challenge` adding the maximum and minimum expected lengths of some fields.
+- Improve documentation regarding `notification` by updating the documentation of the field `ttl`.
+
+
 [2021-05-19] Version 2.24.0
 ---------------------------
 **Library - Fix**
