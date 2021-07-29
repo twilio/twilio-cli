@@ -1,6 +1,21 @@
 twilio-cli changelog
 =====================
 
+[2021-07-29] Version 2.27.0
+---------------------------
+**Api**
+- Added `domain_sid` in sip_credential_list_mapping and sip_ip_access_control_list_mapping APIs **(breaking change)**
+
+**Conversations**
+- Expose ParticipantConversations resource
+
+**Taskrouter**
+- Adding `links` to the activity resource
+
+**Verify**
+- Added a `Version` to Verify Factors `Webhooks` to add new fields without breaking old Webhooks.
+
+
 [2021-07-15] Version 2.26.0
 ---------------------------
 **Library - Chore**
