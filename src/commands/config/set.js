@@ -21,11 +21,7 @@ class ConfigSet extends BaseCommand {
           continue;
         }
         if (await this.isOverwrite(configProperty)) {
-          if (typeof this.flags[flag] === 'string') {
-            this.userConfig[configProperty] = this.userConfig.sanitize(this.flags[flag]);
-          } else {
-            this.userConfig[configProperty] = this.flags[flag];
-          }
+          this.userConfig[configProperty] = this.flags[flag];
           isUserConfigUpdated = true;
         }
       }
@@ -38,6 +34,10 @@ class ConfigSet extends BaseCommand {
     if (isUserConfigUpdated) {
       await this.saveConfiguration();
     }
+  }
+
+  sanitizeFlag(flag) {
+    return typeof flag === 'string' ? this.userConfig.sanitize(flag) : flag;
   }
 
   preWarnings(flag) {
