@@ -15,7 +15,6 @@ class ConfigSet extends BaseCommand {
       if (this.flags[flag] !== undefined) {
         isError = false;
         this.preWarnings(flag);
-
         if (this.flags[flag] === '') {
           isUserConfigUpdated = await this.removeConfig(flag, isUserConfigUpdated);
           continue;

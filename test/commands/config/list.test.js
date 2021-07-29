@@ -19,7 +19,7 @@ describe('commands', () => {
           .stdout()
           .stderr();
 
-      //
+      // parsing the stdout to a key value pair
       const parseOutputToMap = (output) => {
         const propertyWithValue = output.split('\n');
         const propertyMap = new Map();
