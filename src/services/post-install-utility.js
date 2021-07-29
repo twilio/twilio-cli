@@ -7,9 +7,9 @@ const PORT_WARNING = `Profiles exist with API keys in system keychain. Please ru
   'twilio profiles:port',
 )} to port all keys to the config file`;
 
-const AUTOCOMLETE_WARNING = `If you’re using autocomplete, you’ll need to run ${chalk.bold(
+const AUTOCOMLETE_WARNING = `If you’re using autocomplete, you’ll need to run '${chalk.bold(
   'twilio autocomplete',
-)} after installing a plugin and then open a new terminal window. The CLI needs to re-build its cache.`;
+)}' after installing a plugin and then open a new terminal window. The CLI needs to re-build its cache.`;
 
 class PostInstallDisplayManager {
   constructor(configDir, userConfig) {
@@ -52,8 +52,8 @@ class PostInstallDisplayManager {
 
     if (this.hasProjects()) {
       console.warn(chalk.yellowBright(` » ${PORT_WARNING}`));
-      console.warn(chalk.yellowBright(` » ${AUTOCOMLETE_WARNING}`));
     }
+    console.warn(chalk.yellowBright(` » ${AUTOCOMLETE_WARNING}`));
   }
 }
 
