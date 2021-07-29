@@ -10,7 +10,6 @@ const AUTOCOMLETE_ALERT = `If you are running bash or zsh on macOS or Linux, you
 )} or ${chalk.bold('twilio autocomplete zsh')}`;
 
 module.exports = async function pluginPostRun(options) {
-  // console.log(options);
   if (options.Command.id === 'plugins:update') {
     console.warn(chalk.yellowBright(` » ${AUTOCOMLETE_WARNING}`));
   }
