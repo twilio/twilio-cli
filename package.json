@@ -30,7 +30,7 @@
     "lint:fix": "npm run lint -- --fix",
     "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
-    "test": "nyc --check-coverage --lines 90 --reporter=html --reporter=text mocha --forbid-only \"test/**/*.test.js\"",
+    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
     "posttest": "npm run lint && npm audit",
     "version": "oclif-dev readme && git add README.md"
   },
