@@ -58,7 +58,7 @@
     "@twilio/cli-test": "^2.1.0",
     "aws-sdk": "^2.757.0",
     "chai": "^4.2.0",
-    "eslint": "^7.5.0",
+    "eslint": "^7.31.0",
     "eslint-config-twilio": "~1.31.0",
     "eslint-config-twilio-mocha": "~1.31.0",
     "globby": "^11.0.1",
@@ -110,6 +110,9 @@
       ],
       "plugins:preinstall": [
         "./src/hooks/plugin-install"
+      ],
+      "postrun": [
+        "./src/hooks/postrun/plugin-postrun"
       ],
       "command_not_found": [
         "./src/hooks/command-not-found"
