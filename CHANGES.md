@@ -1,6 +1,12 @@
 twilio-cli changelog
 =====================
 
+[2021-07-29] Version 2.27.1
+---------------------------
+**Messaging**
+- Add brand_type field to a2p brand_registration api
+
+
 [2021-07-29] Version 2.27.0
 ---------------------------
 **Api**
