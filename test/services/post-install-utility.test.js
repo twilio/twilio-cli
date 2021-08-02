@@ -26,7 +26,7 @@ describe('services', () => {
 
       displayManager.displayMessage();
       expect(displayManager.userConfig).to.not.be.undefined;
-      expect(console.warn.called).to.be.false;
+      expect(console.warn.calledWith(sinon.match('twilio autocomplete'))).to.be.true;
       expect(console.log.calledWith(sinon.match('twilio profiles:create'))).to.be.true;
       expect(console.log.calledWith(sinon.match('twilio login'))).to.be.true;
     });
@@ -37,7 +37,7 @@ describe('services', () => {
       const displayManager = new PostInstallDisplayManager(tempConfigDir.name, configData);
 
       displayManager.displayMessage();
-      expect(console.warn.calledOnce).to.be.true;
+      expect(console.warn.calledWith(sinon.match('twilio autocomplete'))).to.be.true;
       expect(console.warn.calledWith(sinon.match('twilio profiles:port'))).to.be.true;
       expect(console.log.called).to.be.false; // Grid shouldn't be displayed
     });
@@ -55,7 +55,7 @@ describe('services', () => {
       const displayManager = new PostInstallDisplayManager(tempConfigDir.name, configData);
 
       displayManager.displayMessage();
-      expect(console.warn.called).to.be.false;
+      expect(console.warn.calledWith(sinon.match('twilio autocomplete'))).to.be.true;
       expect(console.log.called).to.be.false;
     });
 
