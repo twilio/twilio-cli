@@ -1,19 +1,20 @@
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 
-const { availableConfigs, getFromEnvironment } = require('../../services/config-utility');
+const { getFromEnvironment } = require('../../services/config-utility');
 
 class ConfigList extends BaseCommand {
   async run() {
     await super.run();
     const configData = [];
-    availableConfigs.forEach((config) => {
+    Object.keys(this.userConfig).forEach((config) => {
       let configEnvValue = getFromEnvironment(config);
       if (configEnvValue) {
         configEnvValue += '[env]';
       }
+
       configData.push({
         configName: config,
-        value: configEnvValue || this.userConfig[config],
+        value: JSON.stringify(configEnvValue || this.userConfig[config]),
       });
     });
     this.output(configData);

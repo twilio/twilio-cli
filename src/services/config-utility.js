@@ -1,4 +1,4 @@
-const availableConfigs = ['edge'];
+const availableConfigs = ['edge', 'require-profile-input'];
 function getFromEnvironment(config) {
   const configEnv = `TWILIO_${config.toUpperCase()}`;
   return process.env[configEnv];

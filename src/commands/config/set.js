@@ -1,6 +1,7 @@
 const { TwilioCliError } = require('@twilio/cli-core/src/services/error');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const { flags } = require('@oclif/command');
+const { camelCase } = require('@twilio/cli-core').services.namingConventions;
 
 const { availableConfigs, getFromEnvironment } = require('../../services/config-utility');
 
@@ -10,6 +11,7 @@ class ConfigSet extends BaseCommand {
     let isError = true;
     let isUserConfigUpdated = false;
     for (const flag of availableConfigs) {
+      const configProperty = camelCase(flag);
       if (this.flags[flag] !== undefined) {
         isError = false;
         this.preWarnings(flag);
@@ -17,8 +19,8 @@ class ConfigSet extends BaseCommand {
           isUserConfigUpdated = await this.removeConfig(flag, isUserConfigUpdated);
           continue;
         }
-        if (await this.isOverwrite(flag)) {
-          this.userConfig[flag] = this.userConfig.sanitize(this.flags[flag]);
+        if (await this.isOverwrite(configProperty)) {
+          this.userConfig[configProperty] = this.sanitizeFlag(this.flags[flag]);
           isUserConfigUpdated = true;
         }
       }
@@ -31,6 +33,10 @@ class ConfigSet extends BaseCommand {
     if (isUserConfigUpdated) {
       await this.saveConfiguration();
     }
+  }
+
+  sanitizeFlag(flag) {
+    return typeof flag === 'string' ? this.userConfig.sanitize(flag) : flag;
   }
 
   preWarnings(flag) {
@@ -83,6 +89,10 @@ ConfigSet.flags = {
   edge: flags.string({
     char: 'e',
     description: 'Sets an Edge configuration.',
+  }),
+  'require-profile-input': flags.boolean({
+    description: 'Whether the profile flag for Twilio CLI commands is required or not.',
+    allowNo: true,
   }),
   ...BaseCommand.flags, // To add the same flags as BaseCommand
 };
