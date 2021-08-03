@@ -90,7 +90,7 @@
     ],
     "warn-if-update-available": {
       "timeoutInDays": 1,
-      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>.",
+      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>.\nTry running '<%= chalk.greenBright('twilio update') %>' to update the CLI",
       "registry": "https://registry.npmjs.org"
     },
     "topics": {
