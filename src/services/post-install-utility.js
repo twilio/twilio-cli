@@ -9,7 +9,7 @@ const PORT_WARNING = `Profiles exist with API keys in system keychain. Please ru
 
 const AUTOCOMLETE_WARNING = `If you’re using autocomplete, you’ll need to run '${chalk.bold(
   'twilio autocomplete',
-)}' after installing a plugin and then open a new terminal window. The CLI needs to re-build its cache.`;
+)}' after the install and then open a new terminal window. The CLI needs to re-build its cache.`;
 
 class PostInstallDisplayManager {
   constructor(configDir, userConfig) {
