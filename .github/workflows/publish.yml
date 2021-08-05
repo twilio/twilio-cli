@@ -1,0 +1,80 @@
+name: Cli Publish
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test
+
+  #   release:
+  #     runs-on: ubuntu-latest
+  #     needs: [build]
+  #     steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #         cache: 'npm'
+  #     - run: npm ci
+  #     - run: npx semantic-release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  oclifRelease:
+    name: Publish for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: [build]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: deb/twilio_2.27.1-1_amd64.deb
+            asset_name: twilio.deb
+            command_name: sudo oclif-dev pack:deb
+          - os: macos-latest
+            artifact_name: win/twilio-v2.27.1-x86.exe
+            asset_name: twilio.exe
+            command_name: oclif-dev pack:win
+          - os: macos-latest
+            artifact_name: macos/twilio-v2.27.1.pkg
+            asset_name: twilio.pkg
+            command_name: oclif-dev pack:macos
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 2.27.1
+      - run: npm cache clear & npm ci
+      - run: npm install -g @oclif/dev-cli
+      - run: |
+          if [ "$RUNNER_OS" == "macOS" ]; then
+            brew install makensis
+          fi
+      - run: ${{ matrix.command_name }}
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/${{ matrix.artifact_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ steps.previoustag.outputs.tag }}
