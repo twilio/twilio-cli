@@ -17,6 +17,7 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    condition: $TRAVIS_TAG =~ ^[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$
     node: lts/*
 - provider: npm
   skip_cleanup: true
@@ -25,6 +26,7 @@ deploy:
   api_key: "$NPM_TOKEN"
   on:
     tags: true
+    condition: $TRAVIS_TAG =~ ^[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$
     node: lts/*
 notifications:
   slack:
