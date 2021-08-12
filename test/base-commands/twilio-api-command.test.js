@@ -6,7 +6,7 @@ const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixture
 const TwilioApiCommand = require('../../src/base-commands/twilio-api-command');
 const { getTopicName } = require('../../src/services/twilio-api');
 
-const NUMBER_OF_BASE_COMMAND_FLAGS = 5;
+const NUMBER_OF_BASE_COMMAND_FLAGS = 6;
 const NUMBER_OF_PARAMS_FOR_CALL_CREATE = fakeResource.actions.create.parameters.length;
 
 describe('base-commands', () => {
