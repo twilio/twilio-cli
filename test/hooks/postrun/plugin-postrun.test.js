@@ -10,6 +10,18 @@ const pluginUpdate = {
   },
 };
 
+const update = {
+  Command: {
+    id: 'update',
+  },
+};
+
+const pluginInstall = {
+  Command: {
+    id: 'plugins:install',
+  },
+};
+
 const pluginAvailable = {
   Command: {
     id: 'plugins:available',
@@ -49,6 +61,16 @@ describe('hooks', () => {
       test.it('warning when plugin is updated', () => {
         pluginFunc(pluginUpdate);
         expect(console.warn.calledOnce).to.be.true;
+        expect(console.warn.calledWith(sinon.match('twilio autocomplete'))).to.be.true;
+      });
+
+      test.it('warning when cli is updated', () => {
+        pluginFunc(update);
+        expect(console.warn.calledWith(sinon.match('twilio autocomplete'))).to.be.true;
+      });
+
+      test.it('warning when plugin is installed', () => {
+        pluginFunc(pluginInstall);
         expect(console.warn.calledWith(sinon.match('twilio autocomplete'))).to.be.true;
       });
 
