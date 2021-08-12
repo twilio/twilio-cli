@@ -1,6 +1,34 @@
 twilio-cli changelog
 =====================
 
+[2021-08-12] Version 2.28.0
+---------------------------
+**Library - Fix**
+- [PR #280](https://github.com/twilio/twilio-cli/pull/280): Fixing failing test on twilio-cli. Thanks to [@kridai](https://github.com/kridai)!
+- [PR #279](https://github.com/twilio/twilio-cli/pull/279): Added the condition to check the tag regex. Thanks to [@ravali-rimmalapudi](https://github.com/ravali-rimmalapudi)!
+
+**Library - Chore**
+- [PR #276](https://github.com/twilio/twilio-cli/pull/276): Add sonarcloud configurations. Thanks to [@onuzbee](https://github.com/onuzbee)!
+
+**Api**
+- Corrected the `price`, `call_sid_to_coach`, and `uri` data types for Conference, Participant, and Recording **(breaking change)**
+- Made documentation for property `time_limit` in the call api public. **(breaking change)**
+
+**Insights**
+- Added new endpoint to fetch Call Summaries
+
+**Messaging**
+- Revert brand registration api update to add brand_type field
+- Add brand_type field to a2p brand_registration api
+
+**Taskrouter**
+- Add `X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit-Config` as Response Headers to all TaskRouter endpoints
+
+**Verify**
+- Add `TemplateSid` optional parameter on Verification creation.
+- Include `whatsapp` as a channel type in the verifications API.
+
+
 [2021-07-29] Version 2.27.1
 ---------------------------
 **Messaging**
