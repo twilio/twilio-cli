@@ -118,6 +118,7 @@
       "s3": {
         "bucket": "twilio-cli-prod"
       }
-    }
+    },
+    "helpClass": "./src/services/twilio-help/custom-help"
   }
 }
