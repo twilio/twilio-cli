@@ -25,12 +25,16 @@ class DummyCommand extends Command {
 const testHelp = test
   .loadConfig()
   .add('help', (ctx) => new TwilioHelp(ctx.config))
-  .register('commandHelp', (args, addReqFlag) => {
+  .register('commandHelp', (args, addReqFlag = false, emptyFlags = false) => {
     return {
       async run(ctx) {
         const dummyHelpCommand = new DummyCommand(args, ctx.config);
         if (addReqFlag) {
           dummyHelpCommand.flags.foo = flags.string({ char: 'f', description: 'foobar'.repeat(15), required: true });
+        }
+
+        if (emptyFlags) {
+          dummyHelpCommand.flags = {};
         }
 
         const help = ctx.help.formatCommand(dummyHelpCommand);
@@ -53,11 +57,21 @@ describe('Should display required flags', () => {
 });
 
 describe('Should not display required flags if not configured', () => {
-  testHelp.commandHelp([], false).it('should log help', (ctx) => {
+  testHelp.commandHelp([]).it('should log help', (ctx) => {
     expect(ctx.commandHelp).to.contain('api:testHelp');
     expect(ctx.commandHelp).to.contain('OPTIONS');
     expect(ctx.commandHelp).to.not.contain('REQUIRED FLAGS');
     expect(ctx.commandHelp).to.contain('OPTIONAL FLAGS');
     expect(ctx.commandHelp).to.contain('USAGE');
+  });
+});
+
+describe('Should not display Options in case no flags configured.', () => {
+  testHelp.commandHelp([], false, true).it('should log help', (ctx) => {
+    expect(ctx.commandHelp).to.contain('api:testHelp');
+    expect(ctx.commandHelp).to.contain('USAGE');
+    expect(ctx.commandHelp).to.not.contain('OPTIONS');
+    expect(ctx.commandHelp).to.not.contain('REQUIRED FLAGS');
+    expect(ctx.commandHelp).to.not.contain('OPTIONAL FLAGS');
   });
 });
