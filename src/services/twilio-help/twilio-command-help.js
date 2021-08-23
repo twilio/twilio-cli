@@ -10,6 +10,7 @@ const indent = require('indent-string');
  * author: abadhwar
  */
 class TwilioCommandHelp extends CommandHelp.default {
+  // Override parent flags() functionality
   flags(flags) {
     if (flags.length === 0) return '';
 
@@ -30,6 +31,10 @@ class TwilioCommandHelp extends CommandHelp.default {
     return returnList.join('\n');
   }
 
+  /**
+   *   Forked from oclif default implementation and indentation.
+   *   Link: https://github.com/oclif/plugin-help/blob/master/src/command.ts#L125-L154
+   */
   generateFlagsOutput(flags) {
     return list.renderList(
       flags.map((flag) => {
