@@ -15,6 +15,7 @@ class DummyCommand extends Command {
       ss: flags.boolean({ description: 'newliney\n'.repeat(4) }),
       remote: flags.string({ char: 'r' }),
       def: flags.string({ char: 'd', default: 'default' }),
+      tst: flags.string({ char: 't', options: ['a', 'b', 'c'] }),
     };
     this.description = 'description of apps:create';
     this.aliases = ['app:init', 'create'];
