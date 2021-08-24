@@ -1,0 +1,8 @@
+name: RPM build and publish
+on:
+  push:
+    branch: [ main ]
+env: SERVER
+jobs: 
+  build: 
+  

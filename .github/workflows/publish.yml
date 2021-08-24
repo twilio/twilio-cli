@@ -66,6 +66,17 @@ jobs:
           fallback: 2.27.1
       - run: npm cache clear & npm ci
       - run: npm install -g @oclif/dev-cli
+      - name: 'Get certificate for macos'
+        if: "$RUNNER_OS" == "macOS"
+        env: 
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ''
+        run: |
+          echo $MACOS_CERTIFICATE | base64 —decode > certificate.p12
+          security create-keychain -p <your-password> build.keychain security default-keychain -s build.keychain
+          security unlock-keychain -p <your-password> build.keychain
+          security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k <your-password> build.keychain 
       - run: |
           if [ "$RUNNER_OS" == "macOS" ]; then
             brew install makensis
