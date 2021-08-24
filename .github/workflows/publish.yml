@@ -48,14 +48,17 @@ jobs:
             artifact_name: deb/twilio_2.27.1-1_amd64.deb
             asset_name: twilio.deb
             command_name: sudo oclif-dev pack:deb
+            exec_name: ubuntu
           - os: macos-latest
             artifact_name: win/twilio-v2.27.1-x86.exe
             asset_name: twilio.exe
             command_name: oclif-dev pack:win
+            exec_name: windows
           - os: macos-latest
             artifact_name: macos/twilio-v2.27.1.pkg
             asset_name: twilio.pkg
             command_name: oclif-dev pack:macos
+            exec_name: macos
 
     steps:
       - uses: actions/checkout@v2
@@ -66,7 +69,7 @@ jobs:
           fallback: 2.27.1
       - run: npm cache clear & npm ci
       - run: npm install -g @oclif/dev-cli
-        if: ${{ "$RUNNER_OS" == "macOS" }}
+        if: ${{ matrix.exec_name == 'macos' }} 
         env: 
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ''
@@ -78,7 +81,7 @@ jobs:
             security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k <your-password> build.keychain
             brew install makensis
             ${{ matrix.command_name }}
-        if: ${{ "$RUNNER_OS" != "macOS" }}
+        if: ${{ matrix.exec_name != 'macos' }} 
       - run: ${{ matrix.command_name }}
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
