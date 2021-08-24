@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm test
+  #    - run: npm ci
+  #    - run: npm test
 
   #   release:
   #     runs-on: ubuntu-latest
@@ -44,16 +44,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            artifact_name: deb/twilio_2.27.1-1_amd64.deb
-            asset_name: twilio.deb
-            command_name: sudo oclif-dev pack:deb
-            exec_name: ubuntu
-          - os: macos-latest
-            artifact_name: win/twilio-v2.27.1-x86.exe
-            asset_name: twilio.exe
-            command_name: oclif-dev pack:win
-            exec_name: windows
+    #      - os: ubuntu-latest
+    #        artifact_name: deb/twilio_2.27.1-1_amd64.deb
+     #       asset_name: twilio.deb
+      #      command_name: sudo oclif-dev pack:deb
+     #       exec_name: ubuntu
+     #     - os: macos-latest
+    #        artifact_name: win/twilio-v2.27.1-x86.exe
+    #        asset_name: twilio.exe
+    #        command_name: oclif-dev pack:win
+    #        exec_name: windows
           - os: macos-latest
             artifact_name: macos/twilio-v2.27.1.pkg
             asset_name: twilio.pkg
@@ -67,7 +67,7 @@ jobs:
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
         with:
           fallback: 2.27.1
-      - run: npm cache clear & npm ci
+  #    - run: npm cache clear & npm ci
       - run: npm install -g @oclif/dev-cli
         if: ${{ matrix.exec_name == 'macos' }} 
         env: 
