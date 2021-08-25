@@ -73,12 +73,13 @@ jobs:
         env: 
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
           MACOS_CERTIFICATE_PWD: ''
+          OSX_KEYCHAIN:  ${{ secrets.OSX_KEYCHAIN_PASSWORD }}
       - run: |
-            echo $MACOS_CERTIFICATE | base64 —decode > certificate.p12
-            security create-keychain -p <your-password> build.keychain security default-keychain -s build.keychain
-            security unlock-keychain -p <your-password> build.keychain
+            echo $MACOS_CERTIFICATE | base64 -—decode > certificate.p12
+            security create-keychain -p $OSX_KEYCHAIN build.keychain security default-keychain -s build.keychain
+            security unlock-keychain -p $OSX_KEYCHAIN build.keychain
             security import certificate.p12 -k build.keychain -P $MACOS_CERTIFICATE_PWD -T /usr/bin/codesign
-            security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k <your-password> build.keychain
+            security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $OSX_KEYCHAIN build.keychain
             brew install makensis
             ${{ matrix.command_name }}
         if: ${{ matrix.exec_name != 'macos' }} 
