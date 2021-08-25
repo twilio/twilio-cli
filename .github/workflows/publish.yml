@@ -41,7 +41,7 @@ jobs:
     env: 
       BUILD_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE }}
       P12_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-      OSX_KEYCHAIN:  ${{ secrets.OSX_KEYCHAIN_PASSWORD }}
+      OSX_KEYCHAIN_PASSWORD:  ${{ secrets.OSX_KEYCHAIN_PASSWORD }}
     runs-on: ${{ matrix.os }}
     needs: [build]
     strategy:
@@ -84,13 +84,13 @@ jobs:
             ls "$RUNNER_TEMP"
 
             # create temporary keychain
-            security create-keychain -p "$OSX_KEYCHAIN" build.keychain
+            security create-keychain -p "$OSX_KEYCHAIN_PASSWORD" build.keychain
             security default-keychain -s build.keychain
-            security unlock-keychain -p "$OSX_KEYCHAIN" build.keychain
+            security unlock-keychain -p "$OSX_KEYCHAIN_PASSWORD" build.keychain
             # find identity
             security find-identity
             # import certificate to keychain
-            echo p12 password is $P12_PASSWORD and osxKEyChain is $OSX_KEYCHAIN
+            echo p12 password is $P12_PASSWORD and osxKEyChain is $OSX_KEYCHAIN_PASSWORD
             #security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
             security import $CERTIFICATE_PATH -k build.keychain -P $P12_PASSWORD -T /usr/bin/codesign
             security find-identity
@@ -110,5 +110,4 @@ jobs:
       - name: Clean up keychain and provisioning profile
         if: ${{ matrix.exec_name == 'macos' }} 
         run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+          security delete-keychain build.keychain
