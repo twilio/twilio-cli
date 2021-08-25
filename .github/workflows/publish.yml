@@ -92,7 +92,7 @@ jobs:
             # import certificate to keychain
             echo p12 password is $P12_PASSWORD and osxKEyChain is $OSX_KEYCHAIN_PASSWORD
             #security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-            security import $CERTIFICATE_PATH -k build.keychain -P $P12_PASSWORD -T /usr/bin/codesign
+            security import $CERTIFICATE_PATH -k build.keychain -A -P $P12_PASSWORD -T /usr/bin/codesign
             security find-identity
             security list-keychain -d user
             brew install makensis
