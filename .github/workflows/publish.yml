@@ -67,7 +67,7 @@ jobs:
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
         with:
           fallback: 2.27.1
-  #    - run: npm cache clear & npm ci
+      - run: npm cache clear & npm ci
       - run: npm install -g @oclif/dev-cli
         if: ${{ matrix.exec_name == 'macos' }} 
         env: 
