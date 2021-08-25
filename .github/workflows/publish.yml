@@ -89,8 +89,8 @@ jobs:
             security unlock-keychain -p "$OSX_KEYCHAIN" $KEYCHAIN_PATH
 
             # import certificate to keychain
-            #security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-            #security list-keychain -d user -s $KEYCHAIN_PATH
+            security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+            security list-keychain -d user -s $KEYCHAIN_PATH
             brew install makensis
             ${{ matrix.command_name }}
  #       if: ${{ matrix.exec_name != 'macos' }} 
