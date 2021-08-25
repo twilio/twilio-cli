@@ -81,10 +81,11 @@ jobs:
 
             # import certificate from secrets
             echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
+            ls "$RUNNER_TEMP"
 
             # create temporary keychain
-            #security create-keychain -p "$OSX_KEYCHAIN" $KEYCHAIN_PATH
-            #security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+            security create-keychain -p "$OSX_KEYCHAIN" $KEYCHAIN_PATH
+            security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
             #security unlock-keychain -p "$OSX_KEYCHAIN" $KEYCHAIN_PATH
 
             # import certificate to keychain
