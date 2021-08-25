@@ -38,6 +38,10 @@ jobs:
   #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   oclifRelease:
     name: Publish for ${{ matrix.os }}
+    env: 
+      BUILD_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE }}
+      P12_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+      OSX_KEYCHAIN:  ${{ secrets.OSX_KEYCHAIN_PASSWORD }}
     runs-on: ${{ matrix.os }}
     needs: [build]
     strategy:
@@ -63,10 +67,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: 'Get Previous tag'
-        env: 
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE }}
-          P12_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-          OSX_KEYCHAIN:  ${{ secrets.OSX_KEYCHAIN_PASSWORD }}
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
         with:
