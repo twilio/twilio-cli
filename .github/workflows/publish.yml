@@ -107,6 +107,7 @@ jobs:
           file: dist/${{ matrix.artifact_name }}
           asset_name: ${{ matrix.asset_name }}
           tag: ${{ steps.previoustag.outputs.tag }}
+          overwrite: true
           
       - name: Clean up keychain and provisioning profile
         if: ${{ matrix.exec_name == 'macos' }} 
