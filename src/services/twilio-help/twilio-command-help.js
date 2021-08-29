@@ -3,7 +3,9 @@ const CommandHelp = require('@oclif/plugin-help/lib/command.js');
 const list = require('@oclif/plugin-help/lib/list');
 const chalk = require('chalk');
 const indent = require('indent-string');
+const util = require('@oclif/plugin-help/lib/util');
 
+const { getDocLink } = require('../twilio-api');
 /**
  * Extended functionality from @oclif/plugin-help.
  * Link: https://github.com/oclif/plugin-help
@@ -29,6 +31,30 @@ class TwilioCommandHelp extends CommandHelp.default {
     returnList.push(chalk.bold('OPTIONAL FLAGS'));
     returnList.push(indent(optionalBody, 2));
     return returnList.join('\n');
+  }
+
+  // overriding to include help document link
+  examples(examples) {
+    if ((examples === undefined || !examples || examples.length === 0) && this.command.docLink === '') return '';
+    const listOfDetails = [];
+    if (examples !== undefined && examples.length !== 0) {
+      const body = util
+        .castArray(examples)
+        .map((a) => this.render(a))
+        .join('\n');
+      listOfDetails.push(chalk.bold(`EXAMPLE${examples.length > 1 ? 'S' : ''}`), indent(body, 2));
+    }
+    listOfDetails.join('\n\n');
+    const helpDoc = this.command.docLink || this.getHelpDocForTopic(this.command.id);
+    if (helpDoc !== undefined) {
+      listOfDetails.push(chalk.bold('MORE INFO'));
+      listOfDetails.push(indent(helpDoc, 2));
+    }
+    return listOfDetails.join('\n\n');
+  }
+
+  getHelpDocForTopic(key) {
+    return getDocLink(key);
   }
 
   /**
