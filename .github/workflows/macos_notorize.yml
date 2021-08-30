@@ -1,0 +1,18 @@
+name: macos notarization
+on:
+  workflow_run:
+    workflows: ["Cli Publish"]
+    types: [completed]
+
+jobs:
+  on-success:
+    runs-on: macos-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: "Notarize Release Build"
+        uses: devbotsxyz/xcode-notarize@v1
+        with:
+          product-path: "dist/macos/twilio-v2.27.1.pkg"
+          appstore-connect-username: ${{ secrets.NOTARIZATION_USERNAME }}
+          appstore-connect-password: ${{ secrets.NOTARIZATION_PASSWORD }}
+          verbose: true
