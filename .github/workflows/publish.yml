@@ -104,12 +104,6 @@ jobs:
         if: ${{ matrix.exec_name == 'macos' }} 
         run: |
           security delete-keychain build.keychain
-  
-  notorizePackage:
-    name: Notorize package for mac os
-    runs-on: macos-latest
-    needs: [oclifRelease]
-    steps:
       - name: "Notarize Release Build"
         uses: devbotsxyz/xcode-notarize@v1
         with:
@@ -117,7 +111,6 @@ jobs:
           appstore-connect-username: ${{ secrets.NOTARIZATION_USERNAME }}
           appstore-connect-password: ${{ secrets.NOTARIZATION_PASSWORD }}
           verbose: true
-
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
