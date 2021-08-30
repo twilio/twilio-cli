@@ -37,7 +37,7 @@
            "feedback": "twilio-cli/quickstart#send-us-feedback",
            "phone-numbers": "twilio-cli/quickstart#list-your-phone-numbers",
            "plugins": "twilio-cli/plugins",
-           "login": "twilio-cli/general-usage#profiles"   
+           "profiles": "twilio-cli/general-usage#profiles"   
        },
      "commands":{
        "autocomplete" : "twilio-cli/quickstart#install-cli-autocomplete-bash-or-zsh-only",

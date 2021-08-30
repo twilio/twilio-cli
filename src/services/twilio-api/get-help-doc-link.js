@@ -1,5 +1,5 @@
 const jsonMap = require('../api-doc-mapping.json');
-// url: {path : {topics: {}, commands: {}}, subpath : {wherever applicable}}
+// json structure = url: {path : {topics: {}, commands: {}}, subpath : {wherever applicable}}
 const urlMap = new Map(Object.entries(jsonMap));
 
 const getSubroute = (cmdDetailsArr, subpathMap) => {
@@ -28,6 +28,9 @@ const getRootPath = (cmdDetailsArr, subpathMap, topicsMap, commandsMap) => {
     }
     const mapOfAPIs = new Map(Object.entries(arrOfAllApis));
     url = mapOfAPIs.get(apiName);
+    if (url === undefined) {
+      return '';
+    }
     url += getSubroute(cmdDetailsArr, subpathMap) || '';
   } else {
     // its a command or another topic
@@ -38,6 +41,7 @@ const getRootPath = (cmdDetailsArr, subpathMap, topicsMap, commandsMap) => {
 };
 
 const getDocLink = (key) => {
+  // key format : baseTopicName:topicName:actionName
   const pathMap = new Map(Object.entries(urlMap.get('path')));
   const subpathMap = new Map(Object.entries(urlMap.get('subpath')));
   const topicsMap = new Map(Object.entries(pathMap.get('topics')));
@@ -50,7 +54,7 @@ const getDocLink = (key) => {
   if (topicsMap.has(cmd) || commandsMap.has(cmd)) {
     url = getRootPath(cmdDetailsArr, subpathMap, topicsMap, commandsMap);
   } else {
-    url = 'rest/';
+    url = 'api/';
   }
   return baseUrl + (url || '');
 };

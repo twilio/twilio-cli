@@ -1,6 +1,6 @@
 const { expect, test } = require('@twilio/cli-test');
 
-const { getTopicName, getActionDescription } = require('../../src/services/twilio-api');
+const { getTopicName, getActionDescription, getDocLink } = require('../../src/services/twilio-api');
 
 describe('services', () => {
   describe('twilio-api', () => {
@@ -154,6 +154,36 @@ describe('services', () => {
           },
         });
         expect(result).to.equal('[BETA] [PREVIEW] Pre-beta!\n\n???\n\nshhhh');
+      });
+    });
+    describe('getDocLink', () => {
+      test.it('handles a simple core api', () => {
+        expect(getDocLink('api:core:accounts:create')).to.equal('https://twilio.com/docs/usage/api');
+      });
+
+      test.it('handles another topic', () => {
+        expect(getDocLink('debugger:logs:list')).to.equal('https://twilio.com/docs/flex/end-user-guide/debugger');
+      });
+      test.it('checks for an api which doesnt have a specific reference doc', () => {
+        expect(getDocLink('api:ip:v1:credentials:create')).to.equal('https://twilio.com/docs/');
+      });
+      test.it('checks for command that doesnt have any reference doc, returns default url', () => {
+        expect(getDocLink('help')).to.equal('https://twilio.com/docs/api/');
+      });
+      test.it('handles a command', () => {
+        expect(getDocLink('autocomplete')).to.equal(
+          'https://twilio.com/docs/twilio-cli/quickstart#install-cli-autocomplete-bash-or-zsh-only',
+        );
+      });
+      test.it('handles an api with subroute url', () => {
+        expect(getDocLink('api:chat:v2:credentials:list')).to.equal(
+          'https://twilio.com/docs/chat/api/credential-resource',
+        );
+      });
+      test.it('handles an api with subroute url', () => {
+        expect(getDocLink('api:events:v1:subscriptions:fetch')).to.equal(
+          'https://twilio.com/docs/events/event-streams/subscription',
+        );
       });
     });
   });

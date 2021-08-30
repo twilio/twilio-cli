@@ -33,28 +33,43 @@ class TwilioCommandHelp extends CommandHelp.default {
     return returnList.join('\n');
   }
 
-  // overriding to include help document link
-  examples(examples) {
-    if ((examples === undefined || !examples || examples.length === 0) && this.command.docLink === '') return '';
+  // To add the API help document url
+  docs() {
     const listOfDetails = [];
-    if (examples !== undefined && examples.length !== 0) {
-      const body = util
-        .castArray(examples)
-        .map((a) => this.render(a))
-        .join('\n');
-      listOfDetails.push(chalk.bold(`EXAMPLE${examples.length > 1 ? 'S' : ''}`), indent(body, 2));
-    }
-    listOfDetails.join('\n\n');
-    const helpDoc = this.command.docLink || this.getHelpDocForTopic(this.command.id);
+    const helpDoc = this.command.docLink || getDocLink(this.command.id);
     if (helpDoc !== undefined) {
       listOfDetails.push(chalk.bold('MORE INFO'));
       listOfDetails.push(indent(helpDoc, 2));
     }
-    return listOfDetails.join('\n\n');
+    return listOfDetails.join('\n');
   }
 
-  getHelpDocForTopic(key) {
-    return getDocLink(key);
+  // overriding to include docs()
+  generate() {
+    const cmd = this.command;
+    const flags = util.sortBy(
+      Object.entries(cmd.flags || {})
+        .filter(([, v]) => !v.hidden)
+        .map(([k, v]) => {
+          v.name = k;
+          return v;
+        }),
+      (f) => [!f.char, f.char, f.name],
+    );
+    const args = (cmd.args || []).filter((a) => !a.hidden);
+    let output = util
+      .compact([
+        this.usage(flags),
+        this.args(args),
+        this.flags(flags),
+        this.description(),
+        this.aliases(cmd.aliases),
+        this.examples(cmd.examples || cmd.example),
+        this.docs(),
+      ])
+      .join('\n\n');
+    if (this.opts.stripAnsi) output = stripAnsi(output);
+    return output;
   }
 
   /**
