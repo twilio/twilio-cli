@@ -110,6 +110,7 @@ jobs:
           product-path: "dist/macos/twilio-v2.27.1.pkg"
           appstore-connect-username: ${{ secrets.NOTARIZATION_USERNAME }}
           appstore-connect-password: ${{ secrets.NOTARIZATION_PASSWORD }}
+          primary-bundle-id: "com.twilio.cli"
           verbose: true
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
