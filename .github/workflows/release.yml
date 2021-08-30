@@ -18,6 +18,7 @@ jobs:
     steps:
       - name: Checkout to cli
         uses: actions/checkout@v2
+      - name: NPM Install
         run: npm install
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -42,7 +43,8 @@ jobs:
     needs: [update-api-definitions-changelog]
     steps:
       - name: Checkout to cli
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
+      - name: Run git and npm update
         run: |
           git pull
           npm install
