@@ -54,6 +54,8 @@
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.6",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@twilio/cli-test": "^2.1.0",
     "aws-sdk": "^2.757.0",
     "chai": "^4.2.0",
@@ -120,5 +122,41 @@
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"
+  },
+  "release": {
+    "branches": [
+      "main",
+      {
+        "name": "github_action_changes",
+        "prerelease": "rc"
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGES.md"
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGES.md",
+            "package.json"
+          ],
+          "message": "chore(release): set `package.json` to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
   }
 }

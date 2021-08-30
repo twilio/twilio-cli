@@ -1,0 +1,80 @@
+name: Cli Release
+on:
+  workflow_dispatch:
+    inputs:
+      change-log:
+        description: 'Open API Changelog, Please provide as a string.'
+        required: true
+      version-type:
+        description: 'Version to upgrade, Major: 0, Minor:1, Patch: 2'
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - name: Checkout to cli
+        uses: actions/checkout@v2
+        run: npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run tests
+        run: |
+          npm ci
+          npm test
+  update-api-definitions-changelog:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout to cli
+        uses: actions/checkout@v2
+      - name: Update Changelog
+        run: |
+          bash scripts/updateApiDefinitions.sh "${{ github.event.inputs.changeLog }}" ${{ github.event.inputs.versionType }}
+  release:
+    runs-on: ubuntu-latest
+    needs: [update-api-definitions-changelog]
+    steps:
+      - name: Checkout to cli
+      - uses: actions/checkout@v2
+        run: |
+          git pull
+          npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Semantic Release runs
+        run: |
+          npm install --save-dev @semantic-release/changelog @semantic-release/git
+          npm ci
+          npx semantic-release -t \${version}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  update-release:
+    runs-on: ubuntu-latest
+    needs: [ release ]
+    steps:
+      - name: Checkout to cli
+        uses: actions/checkout@v2
+      - name: Getting tag
+        id: get-tag
+        run: |
+          git fetch --tags
+          echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+      - run: echo "${{steps.get-tag.outputs.TAG_NAME}}"
+      - name: Update release
+        uses: tubone24/update_release@v1.2.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
+        with:
+          is_append_body: true
+          body: ${{ github.event.inputs.changeLog }}
