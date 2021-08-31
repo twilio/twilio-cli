@@ -23,7 +23,7 @@ const getRootPath = (cmdDetailsArr, subpathMap, topicsMap, commandsMap) => {
   if (topicName === 'api') {
     // get the array of apis and convert to a map
     const arrOfAllApis = topicsMap.get(topicName);
-    if (arrOfAllApis === null) {
+    if (!arrOfAllApis) {
       return '';
     }
     const mapOfAPIs = new Map(Object.entries(arrOfAllApis));
