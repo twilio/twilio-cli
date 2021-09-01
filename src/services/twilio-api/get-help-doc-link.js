@@ -37,7 +37,7 @@ const getRootPath = (cmdDetailsArr, subpathMap, topicsMap, commandsMap) => {
     url = topicsMap.get(topicName) || commandsMap.get(topicName);
   }
 
-  return url || '';
+  return url;
 };
 
 const getDocLink = (key) => {
@@ -61,4 +61,5 @@ const getDocLink = (key) => {
 
 module.exports = {
   getDocLink,
+  getRootPath,
 };

@@ -37,10 +37,13 @@ class TwilioCommandHelp extends CommandHelp.default {
   docs() {
     const listOfDetails = [];
     const helpDoc = this.command.docLink || getDocLink(this.command.id);
-    if (helpDoc !== undefined) {
-      listOfDetails.push(chalk.bold('MORE INFO'));
-      listOfDetails.push(indent(helpDoc, 2));
+    if (!helpDoc) {
+      return '';
     }
+
+    listOfDetails.push(chalk.bold('MORE INFO'));
+    listOfDetails.push(indent(helpDoc, 2));
+
     return listOfDetails.join('\n');
   }
 

@@ -1,6 +1,7 @@
 const { expect, test } = require('@twilio/cli-test');
 
 const { getTopicName, getActionDescription, getDocLink } = require('../../src/services/twilio-api');
+const { getRootPath } = require('../../src/services/twilio-api/get-help-doc-link');
 
 describe('services', () => {
   describe('twilio-api', () => {
@@ -184,6 +185,16 @@ describe('services', () => {
         expect(getDocLink('api:events:v1:subscriptions:fetch')).to.equal(
           'https://twilio.com/docs/events/event-streams/subscription',
         );
+      });
+      test.it('handles the json with empty api list {}', () => {
+        const jsonMap = require('./api-doc-mapping-test.json');
+        const urlMap = new Map(Object.entries(jsonMap));
+        const pathMap = new Map(Object.entries(urlMap.get('path')));
+        const subpathMap = new Map(Object.entries(urlMap.get('subpath')));
+        const topicsMap = new Map(Object.entries(pathMap.get('topics')));
+        const commandsMap = new Map(Object.entries(pathMap.get('commands')));
+        const cmdDetailsArr = 'api:events:v1:subscriptions:fetch'.split(':');
+        expect(getRootPath(cmdDetailsArr, subpathMap, topicsMap, commandsMap)).to.equal('');
       });
     });
   });

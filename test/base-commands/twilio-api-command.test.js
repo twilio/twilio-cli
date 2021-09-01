@@ -74,6 +74,17 @@ describe('base-commands', () => {
         },
       };
 
+      const callApiHelpDoc = {
+        domainName: 'sync',
+        commandName: 'services',
+        path: '',
+        actionName: 'list',
+        action: {
+          description: null,
+        },
+        docLink: undefined,
+      };
+
       const getCommandClass = (actionDefinition = callCreateActionDefinition) => {
         const NewCommandClass = class extends TwilioApiCommand {};
         NewCommandClass.actionDefinition = actionDefinition;
@@ -129,6 +140,12 @@ describe('base-commands', () => {
         expect(NewCommandClass.id).to.equal('api:core:calls:create');
         expect(NewCommandClass.description).to.equal(fakeResource.actions.create.description);
         expect(NewCommandClass.docLink).to.equal('https://twilio.com/docs/usage/api');
+      });
+
+      test.it('checks the help document url', () => {
+        const NewCommandClass = getCommandClass(callApiHelpDoc);
+        expect(NewCommandClass.id).to.equal('api:sync:services');
+        expect(NewCommandClass.docLink).to.equal('https://twilio.com/docs/sync/api');
       });
 
       test.it('handles remove action', () => {
