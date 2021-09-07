@@ -9,6 +9,10 @@ const updateChangeLog = async () => {
     const changes = process.argv[2];
     if (changes) {
       const data = fs.readFileSync(cliChangelogFilename);
+      if (data.toString().includes(changes)) {
+        console.log(`Provided changes are already in cli changelog : ${changes}`);
+        return;
+      }
       const fd = fs.openSync(cliChangelogFilename, 'w+');
       const insert = Buffer.from(changes);
       fs.writeSync(fd, insert, 0, insert.length, 0);
