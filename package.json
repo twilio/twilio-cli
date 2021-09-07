@@ -59,6 +59,7 @@
     "@twilio/cli-test": "^2.1.0",
     "aws-sdk": "^2.757.0",
     "chai": "^4.2.0",
+    "conventional-changelog-conventionalcommits": "^4.6.0",
     "eslint": "^7.5.0",
     "eslint-config-twilio": "~1.31.0",
     "eslint-config-twilio-mocha": "~1.31.0",
@@ -132,8 +133,56 @@
       }
     ],
     "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": [
+            {
+              "type": "chore",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Library - Features"
+              },
+              {
+                "type": "fix",
+                "section": "Library - Fixes"
+              },
+              {
+                "type": "chore",
+                "section": "Library - Chores"
+              },
+              {
+                "type": "test",
+                "section": "Library - Test"
+              },
+              {
+                "type": "docs",
+                "section": "Library - Docs"
+              }
+            ]
+          }
+        }
+      ],
       [
         "@semantic-release/changelog",
         {

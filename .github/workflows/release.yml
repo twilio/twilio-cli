@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [14.x]
     steps:
-      - name: Checkout to cli
+      - name: Checkout cli
         uses: actions/checkout@v2
       - name: NPM Install
         run: npm install
@@ -26,23 +26,21 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Run tests
-        run: |
-          npm ci
-          npm test
+        run: npm test
   update-api-definitions-changelog:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
-      - name: Checkout to cli
+      - name: Checkout cli
         uses: actions/checkout@v2
       - name: Update Changelog
         run: |
-          bash scripts/updateApiDefinitions.sh "${{ github.event.inputs.changeLog }}" ${{ github.event.inputs.versionType }}
+          bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
   release:
     runs-on: ubuntu-latest
     needs: [update-api-definitions-changelog]
     steps:
-      - name: Checkout to cli
+      - name: Checkout cli
         uses: actions/checkout@v2
       - name: Run git and npm update
         run: |
@@ -54,17 +52,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Semantic Release runs
-        run: |
-          npm install --save-dev @semantic-release/changelog @semantic-release/git
-          npm ci
-          npx semantic-release -t \${version}
+        run: npx semantic-release -t \${version}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   update-release:
     runs-on: ubuntu-latest
     needs: [ release ]
     steps:
-      - name: Checkout to cli
+      - name: Checkout cli
         uses: actions/checkout@v2
       - name: Getting tag
         id: get-tag
@@ -79,4 +74,4 @@ jobs:
           TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
         with:
           is_append_body: true
-          body: ${{ github.event.inputs.changeLog }}
+          body: ${{ github.event.inputs.change-log }}
