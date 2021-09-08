@@ -4,7 +4,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
 jobs:
-  build:
+  rpmbuild:
     runs-on: ubuntu-latest
     container: centos:latest
     steps:
