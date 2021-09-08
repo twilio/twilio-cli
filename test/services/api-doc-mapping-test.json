@@ -1,0 +1,89 @@
+{
+    "path": {
+       "topics":{
+           "debugger": "flex/end-user-guide/debugger",
+           "email":"/email",
+           "feedback": "twilio-cli/quickstart#send-us-feedback",
+           "phone-numbers": "twilio-cli/quickstart#list-your-phone-numbers",
+           "plugins": "twilio-cli/plugins",
+           "profiles": "twilio-cli/general-usage#profiles"   
+       },
+     "commands":{
+       "autocomplete" : "twilio-cli/quickstart#install-cli-autocomplete-bash-or-zsh-only",
+       "login": "twilio-cli/quickstart#login-to-your-twilio-account",
+       "plugins": "twilio-cli/quickstart#explore-plugins"
+     }    
+  },
+  "subpath":{
+     "chat/v2":{
+       "credentials": "/credential-resource",
+       "services": "/service-resource",
+       "services-channels" : "/channel-resource",
+       "services-bindings": "/binding-resource" ,
+       "services-roles": "/role-resource",
+       "services-users": "user-resource"
+     },
+     "conversations/v1":{
+        "configuration": "/configuration-resource",
+        "conversation": "/conversation-resource",
+        "credentials": "/credential-resource",
+        "participant": "/participant-conversation-resource",
+        "roles" : "/role-resource",
+        "services": "/service-resource",
+        "users": "/user-resource"
+     },
+     "events/v1": {
+        "schemes": "/event-streams/schema-resource",
+        "sinks": "/event-streams/sink-resource",
+        "subscriptions": "/event-streams/subscription",
+        "types": "/event-streams/event-type-resource"
+    },
+    "fax/v1": {
+       "faxes": "/fax-resource"
+    },
+    "frontline/v1": {
+       "users": "/user-resource"
+    },
+    "notify/v1": {
+       "credentials": "/credential-resource",
+       "services": "/service-resource"
+    },
+    "proxy/v1": {
+       "services": "/service"
+    },
+    "serverless/v1": {
+       "services": "/functions-assets-api/api/service"
+    },
+    "studio/v2": {
+       "flows": "/rest-api/v2/flow"
+    },
+    "supersim/v1": {
+       "commands": "/command-resource",
+       "fleets": "/fleet-resource",
+       "network-access-profiles": "/networkaccessprofile-resource",
+       "networks": "/network-resource",
+       "sims": "/sim-resource",
+       "sms-commands": "/smscommand-resource",
+       "usage-records": "/usage-record-resource"
+    },
+    "sync/v1": {
+       "services": "/service"
+    },
+    "taskrouter/v1": {
+       "workspaces": "/workspace"
+    },
+    "trunking/v1": {
+       "trunks":"/trunk-resource"
+    },
+    "verify/v2": {
+       "services": "/service"
+    },
+    "voice/v1": {
+       "byoc-trunks": "/bring-your-own-carrier-byoc",
+       "connection-policies": "/bring-your-own-carrier-byoc/api/connectionpolicy-resource",
+       "dialing-permissions": "/api/dialingpermissions-settings-resource",
+       "ip-records": "/bring-your-own-carrier-byoc/api/iprecord-resource",
+       "source-ip-mappings": "/bring-your-own-carrier-byoc/api/sourceipmapping-resource"
+    }
+    }
+ }

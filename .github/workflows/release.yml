@@ -1,14 +1,6 @@
 name: Cli Release
 on:
   workflow_dispatch:
-    inputs:
-      change-log:
-        description: 'Open API Changelog.'
-        required: true
-      version-type:
-        description: 'Version to upgrade, Major: 0, Minor:1, Patch: 2'
-        required: true
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,10 +8,9 @@ jobs:
       matrix:
         node-version: [14.x]
     steps:
-      - name: Checkout cli
+      - name: Checkout cli-core repo
         uses: actions/checkout@v2
-      - name: NPM Install
-        run: npm install
+      - run: npm install
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:

@@ -3,7 +3,9 @@ const CommandHelp = require('@oclif/plugin-help/lib/command.js');
 const list = require('@oclif/plugin-help/lib/list');
 const chalk = require('chalk');
 const indent = require('indent-string');
+const util = require('@oclif/plugin-help/lib/util');
 
+const { getDocLink } = require('../twilio-api');
 /**
  * Extended functionality from @oclif/plugin-help.
  * Link: https://github.com/oclif/plugin-help
@@ -29,6 +31,48 @@ class TwilioCommandHelp extends CommandHelp.default {
     returnList.push(chalk.bold('OPTIONAL FLAGS'));
     returnList.push(indent(optionalBody, 2));
     return returnList.join('\n');
+  }
+
+  // To add the API help document url
+  docs() {
+    const listOfDetails = [];
+    const helpDoc = this.command.docLink || getDocLink(this.command.id);
+    if (!helpDoc) {
+      return '';
+    }
+
+    listOfDetails.push(chalk.bold('MORE INFO'));
+    listOfDetails.push(indent(helpDoc, 2));
+
+    return listOfDetails.join('\n');
+  }
+
+  // overriding to include docs()
+  generate() {
+    const cmd = this.command;
+    const flags = util.sortBy(
+      Object.entries(cmd.flags || {})
+        .filter(([, v]) => !v.hidden)
+        .map(([k, v]) => {
+          v.name = k;
+          return v;
+        }),
+      (f) => [!f.char, f.char, f.name],
+    );
+    const args = (cmd.args || []).filter((a) => !a.hidden);
+    let output = util
+      .compact([
+        this.usage(flags),
+        this.args(args),
+        this.flags(flags),
+        this.description(),
+        this.aliases(cmd.aliases),
+        this.examples(cmd.examples || cmd.example),
+        this.docs(),
+      ])
+      .join('\n\n');
+    if (this.opts.stripAnsi) output = stripAnsi(output);
+    return output;
   }
 
   /**
