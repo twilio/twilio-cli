@@ -9,4 +9,4 @@ jobs:
     container: centos:latest
     steps:
       - name: setup centos for rpm build
-      - run: rpm/setup.sh
+        run: rpm/setup.sh
