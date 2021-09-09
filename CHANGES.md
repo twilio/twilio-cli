@@ -1,6 +1,16 @@
 twilio-cli changelog
 =====================
 
+[2021-09-09] Version 2.29.1
+---------------------------
+**Library - Fix**
+- [PR #285](https://github.com/twilio/twilio-cli/pull/285): Added missing require statement. Thanks to [@ravali-rimmalapudi](https://github.com/ravali-rimmalapudi)!
+
+**Messaging**
+- Add Identity Status, Russell 3000, Tax Exempt Status and Should Skip SecVet fields for Brand Registrations
+- Add Should Skip Secondary Vetting optional flag parameter to create Brand API
+
+
 [2021-09-09] Version 2.29.0
 ---------------------------
 **Library - Feature**
