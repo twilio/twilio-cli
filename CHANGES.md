@@ -1,6 +1,24 @@
 twilio-cli changelog
 =====================
 
+[2021-09-09] Version 2.29.0
+---------------------------
+**Library - Feature**
+- [PR #283](https://github.com/twilio/twilio-cli/pull/283): link to our API docs when you --help. Thanks to [@shrutiburman](https://github.com/shrutiburman)!
+
+**Api**
+- Revert adding `siprec` resource
+- Add `siprec` resource
+
+**Messaging**
+- Add 'mock' as an optional field to brand_registration api
+- Add 'mock' as an optional field to us_app_to_person api
+- Adds more Use Cases in us_app_to_person_usecase api transaction and updates us_app_to_person_usecase docs
+
+**Verify**
+- Verify List Templates API endpoint added.
+
+
 [2021-08-26] Version 2.28.1
 ---------------------------
 **Library - Chore**
