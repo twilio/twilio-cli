@@ -1,3 +1,16 @@
+## [2.29.0-rc.1](https://github.com/twilio/twilio-cli/compare/2.28.1...2.29.0-rc.1) (2021-09-09)
+
+
+### Library - Features
+
+* Added the GitHub actions for cli ([5c05227](https://github.com/twilio/twilio-cli/commit/5c0522770314020d1be99fb2a6cfcb286da758a7))
+* link to our API docs when you --help ([#283](https://github.com/twilio/twilio-cli/issues/283)) ([37a857d](https://github.com/twilio/twilio-cli/commit/37a857d8ac587ec59d2912f9d2a00cfe77fcb5c3))
+
+
+### Library - Fixes
+
+* Updated api definitions changelog in CHANGES.md ([10902b8](https://github.com/twilio/twilio-cli/commit/10902b83d6a37aa743e36aadcd1420921736e63b))
+
 ---------------------------
 **Api**
 - Revert adding  resource
