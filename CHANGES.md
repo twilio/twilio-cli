@@ -1,4 +1,15 @@
-twilio-cli changelog
+---------------------------
+**Api**
+- Revert adding  resource
+- Add  resource
+
+**Messaging**
+- Add 'mock' as an optional field to brand_registration api
+- Add 'mock' as an optional field to us_app_to_person api
+- Adds more Use Cases in us_app_to_person_usecase api transaction and updates us_app_to_person_usecase docs
+
+**Verify**
+- Verify List Templates API endpoint added.twilio-cli changelog
 =====================
 
 [2021-08-26] Version 2.28.1
