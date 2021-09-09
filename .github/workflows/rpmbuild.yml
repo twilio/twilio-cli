@@ -1,10 +1,11 @@
 name: rpm build
+
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 jobs:
-  pack:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -12,18 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'  
-      - run: | 
-          npm cache clear & npm ci
-          npm install -g @oclif/dev-cli
-          oclif-dev pack --targets=linux-x64
-      - uses: actions/upload-artifact@v2
-        with:
-          name: my-artifact
-          path: dist/twilio-v2.28.1/twilio-v2.28.1-linux-x64.tar.gz
+#   oclifpack:
+#     runs-on: ubuntu-latest
+#     needs: [build]
+    
+      
+#       - run: | 
+#           npm cache clear & npm ci
+#           npm install -g @oclif/dev-cli
+#           oclif-dev pack --targets=linux-x64
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: my-artifact
+#           path: dist/twilio-v2.28.1/twilio-v2.28.1-linux-x64.tar.gz
 #   rpmbuild:
 #     runs-on: ubuntu-latest
 #     steps:
