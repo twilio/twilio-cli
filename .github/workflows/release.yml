@@ -1,4 +1,4 @@
-name: Cli-core Release
+name: Cli Release
 on:
   workflow_dispatch:
     inputs:
