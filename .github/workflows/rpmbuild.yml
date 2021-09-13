@@ -21,7 +21,7 @@ jobs:
     needs: [build]
     steps:
       - name: create package
-      - run: | 
+        run: | 
             npm cache clear & npm ci
             npm install -g @oclif/dev-cli
             oclif-dev pack --targets=linux-x64
