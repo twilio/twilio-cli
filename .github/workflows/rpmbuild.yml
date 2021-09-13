@@ -46,7 +46,6 @@ jobs:
                   console.log(`Deleting artifact with id ${artifact.id}`)
                   const deleteResponse = await github.request(`DELETE /repos/$/actions/artifacts/${artifact.id}`)
                 }
-            const deleteResponse = await github.request(`DELETE /repos/$/actions/artifacts/${artifact.id}`)
     
 #   rpmbuild:
 #     runs-on: ubuntu-latest
