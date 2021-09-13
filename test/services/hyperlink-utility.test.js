@@ -61,8 +61,12 @@ const testLink = test
 describe('supportsHyperlink', () => {
   describe('test hyperlink generation', () => {
     describe('test for Mac terminals', () => {
+      beforeEach(() => {
+        delete process.env.CI;
+      });
       afterEach(() => {
         flush();
+        process.env.CI = '';
       });
       test.it('not supported in Mac Terminal', () => {
         expect(
@@ -93,8 +97,12 @@ describe('supportsHyperlink', () => {
     });
 
     describe('test for iTerm terminals', () => {
+      beforeEach(() => {
+        delete process.env.CI;
+      });
       afterEach(() => {
         flush();
+        process.env.CI = '';
       });
       test.it('supported in iTerm.app 3.1, tty stream', () => {
         expect(
@@ -112,8 +120,12 @@ describe('supportsHyperlink', () => {
     });
 
     describe('test for Windows', () => {
+      beforeEach(() => {
+        delete process.env.CI;
+      });
       afterEach(() => {
         flush();
+        process.env.CI = '';
       });
       test.it('supported in Windows Terminal', () => {
         expect(
@@ -135,6 +147,7 @@ describe('convertToHyperlink', () => {
   describe('test hyperlink generation for dummyURL and dummyText on macOS', () => {
     describe('test for iTerm', () => {
       beforeEach(() => {
+        delete process.env.CI;
         process.env.TERM_PROGRAM = 'iTerm.app';
         process.env.TERM_PROGRAM_VERSION = '3.1.0';
       });
