@@ -49,16 +49,16 @@ jobs:
            npx oclif-dev publish
            brew install coreutils
            echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
-    home-brew-release:
-      name: Trigger homw brew release workflow
-      runs-on: ubuntu-latest
-      needs: [oclif-release]
-      steps:
-        - name: Invoke HomeBrew workflow
-          uses: benc-uk/workflow-dispatch@v1
-          with:
-            workflow: Homebrew Release
-            token: ${{ secrets.REPO_ACCESS_TOKEN }}
-            repo: LakshmiRavali/homebrew-brew
-            ref: ${{ github.event.inputs.home-brew-branch }}
-            inputs: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
+  home-brew-release:
+    name: Trigger homw brew release workflow
+    runs-on: ubuntu-latest
+    needs: [oclif-release]
+    steps:
+      - name: Invoke HomeBrew workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Homebrew Release
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repo: LakshmiRavali/homebrew-brew
+          ref: ${{ github.event.inputs.home-brew-branch }}
+          inputs: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
