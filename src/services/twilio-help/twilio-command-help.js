@@ -6,6 +6,7 @@ const indent = require('indent-string');
 const util = require('@oclif/plugin-help/lib/util');
 const stripAnsi = require('strip-ansi');
 
+const urlUtil = require('../hyperlink-utility');
 const { getDocLink } = require('../twilio-api');
 /**
  * Extended functionality from @oclif/plugin-help.
@@ -41,10 +42,14 @@ class TwilioCommandHelp extends CommandHelp.default {
     if (!helpDoc) {
       return '';
     }
-
-    listOfDetails.push(chalk.bold('MORE INFO'));
-    listOfDetails.push(indent(helpDoc, 2));
-
+    const hyperLink = urlUtil.convertToHyperlink('MORE INFO', helpDoc);
+    // if the terminal doesn't support hyperlink, mention complete url under More Info
+    if (hyperLink.isSupported) {
+      listOfDetails.push(chalk.bold(hyperLink.url));
+    } else {
+      listOfDetails.push(chalk.bold('MORE INFO'));
+      listOfDetails.push(indent(helpDoc, 2));
+    }
     return listOfDetails.join('\n');
   }
 

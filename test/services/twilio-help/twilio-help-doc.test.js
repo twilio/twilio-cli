@@ -2,7 +2,6 @@
 const { expect, test } = require('@oclif/test');
 const { Command, flags } = require('@oclif/command');
 const stripAnsi = require('strip-ansi');
-const { id } = require('@twilio/cli-core/src/base-commands/base-command');
 
 const TwilioHelp = require('../../../src/services/twilio-help/custom-help');
 
