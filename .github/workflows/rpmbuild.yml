@@ -41,7 +41,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-                const response = await github.request(`GET /repos/$/actions/runs/${{ github.run_id }}/artifacts`)
+                const response = await github.request(`GET /repos/${{github.repository}}/actions/runs/${{ github.run_id }}/artifacts`)
                 for (artifact of response.data.artifacts) {
                   console.log(`Deleting artifact with id ${artifact.id}`)
                   const deleteResponse = await github.request(`DELETE /repos/$/actions/artifacts/${artifact.id}`)
