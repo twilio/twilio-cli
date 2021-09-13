@@ -25,11 +25,11 @@ jobs:
             npm cache clear & npm ci
             npm install -g @oclif/dev-cli
             oclif-dev pack --targets=linux-x64
-      - name: upload package
-      - uses: actions/upload-artifact@v2
-        with:
-            name: my-artifact
-            path: dist/twilio-v2.28.1/twilio-v2.28.1-linux-x64.tar.gz
+#       - name: upload package
+#       - uses: actions/upload-artifact@v2
+#         with:
+#             name: my-artifact
+#             path: dist/twilio-v2.28.1/twilio-v2.28.1-linux-x64.tar.gz
 #   rpmbuild:
 #     runs-on: ubuntu-latest
 #     steps:
