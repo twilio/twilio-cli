@@ -87,7 +87,6 @@ describe('supportsHyperlink', () => {
           },
         });
         if ('CI' in process.env) {
-          delete process.env.CI;
           expect(result).to.be.false;
           expect(convertToHyperlink('MORE INFO', 'https://twilio.com/docs/dummyCmd').isSupported).to.be.false;
         } else {
