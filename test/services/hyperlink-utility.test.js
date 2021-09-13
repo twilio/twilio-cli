@@ -30,6 +30,7 @@ const testThisConfig = ({ platform, env, argv, stream }) => {
     env: { value: env },
     argv: { value: [process.argv[0], ...argv] },
   });
+  delete process.env.CI;
 
   const result = supportsHyperlink(stream);
   // restore the original env
@@ -66,7 +67,7 @@ describe('supportsHyperlink', () => {
       });
       afterEach(() => {
         flush();
-        process.env.CI = '';
+        process.env.CI = 'Travis';
       });
       test.it('not supported in Mac Terminal', () => {
         expect(
@@ -102,7 +103,7 @@ describe('supportsHyperlink', () => {
       });
       afterEach(() => {
         flush();
-        process.env.CI = '';
+        process.env.CI = 'Travis';
       });
       test.it('supported in iTerm.app 3.1, tty stream', () => {
         expect(
@@ -125,7 +126,7 @@ describe('supportsHyperlink', () => {
       });
       afterEach(() => {
         flush();
-        process.env.CI = '';
+        process.env.CI = 'Travis';
       });
       test.it('supported in Windows Terminal', () => {
         expect(
