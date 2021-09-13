@@ -48,6 +48,7 @@
     "file-type": "^14.6.2",
     "hyperlinker": "1.0.0",
     "inquirer": "^7.3.0",
+    "ngrok": "^3.2.7",
     "supports-hyperlinks": "2.2.0",
     "twilio": "^3.49.4",
     "untildify": "^4.0.0"

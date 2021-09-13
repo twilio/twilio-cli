@@ -76,19 +76,6 @@ describe('supportsHyperlink', () => {
           }),
         ).to.be.false;
       });
-      test.it('supported in iTerm.app 3.1, tty stream', () => {
-        expect(
-          testThisConfig({
-            env: {
-              TERM_PROGRAM: 'iTerm.app',
-              TERM_PROGRAM_VERSION: '3.1.0',
-            },
-            stream: {
-              isTTY: true,
-            },
-          }),
-        ).to.be.true;
-      });
       test.it('testing convertToHyperlink, supported iTerm.app 3.1, tty stream', () => {
         expect(
           testThisConfig({
@@ -102,6 +89,25 @@ describe('supportsHyperlink', () => {
           }),
         ).to.be.true;
         expect(convertToHyperlink('MORE INFO', 'https://twilio.com/docs/dummyCmd').isSupported).to.be.true;
+      });
+    });
+
+    describe('test for iTerm terminals', () => {
+      afterEach(() => {
+        flush();
+      });
+      test.it('supported in iTerm.app 3.1, tty stream', () => {
+        expect(
+          testThisConfig({
+            env: {
+              TERM_PROGRAM: 'iTerm.app',
+              TERM_PROGRAM_VERSION: '3.1.0',
+            },
+            stream: {
+              isTTY: true,
+            },
+          }),
+        ).to.be.true;
       });
     });
 
