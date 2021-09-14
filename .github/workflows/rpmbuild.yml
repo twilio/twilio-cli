@@ -50,9 +50,9 @@ jobs:
         with:
           spec_file: .github/rpm/twilio.spec
           sources: |
-            github/rpm/twilio-v2.27.1-linux-x64.tar.gz
+            .github/rpm/twilio-v2.27.1-linux-x64.tar.gz
           variables: |
-            _version=1.0.1
+            _version=2.27.1
             _foo=bar
       - name: build_rpm outputs
         run: |
