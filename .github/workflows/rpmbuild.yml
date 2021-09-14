@@ -64,15 +64,6 @@ jobs:
           echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
           echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
           
-      - name: Upload RPM
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: twilio.rpm
-          asset_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
-          asset_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
-          asset_content_type: application/octet-stream
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
