@@ -58,6 +58,7 @@ jobs:
         run: npx semantic-release -t \${version}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   update-release:
     runs-on: ubuntu-latest
     needs: [ release ]
