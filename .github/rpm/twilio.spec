@@ -1,5 +1,5 @@
 Name:           twilio
-Version:        2.27.1
+Version:        _version
 Release:        1%{?dist}
 Summary:        A CLI for Twilio
 BuildArch:      x86_64
