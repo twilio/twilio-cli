@@ -2,7 +2,7 @@
   "branches": [
     "main",
     {
-      "name": "github_action_changes",
+      "name": "release_feature_branch",
       "prerelease": "rc"
     }
   ],

@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [14.x, 10.x]
     steps:
       - name: Checkout cli-core repo
         uses: actions/checkout@v2
@@ -83,5 +83,6 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: Oclif Release
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repo: twilio/twilio-cli
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           inputs: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
