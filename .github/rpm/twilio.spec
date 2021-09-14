@@ -16,7 +16,8 @@ Requires:       bash
 # which errors out on any file with versionless `python` in its shebang
 # See: https://github.com/atom/atom/issues/21937
 %undefine __brp_mangle_shebangs
-
+# Disable debug package
+%global debug_package %{nil}
 
 %description
 The Twilio CLI allows you to manage your Twilio resources from your terminal or command prompt.
