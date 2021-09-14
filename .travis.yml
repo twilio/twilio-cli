@@ -9,7 +9,6 @@ before_install:
 - sudo apt-get install -y libsecret-1-dev
 script:
 - npm run test
-- sonar-scanner
 install: make install
 deploy:
 - provider: script

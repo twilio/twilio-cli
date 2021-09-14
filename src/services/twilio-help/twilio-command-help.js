@@ -4,6 +4,7 @@ const list = require('@oclif/plugin-help/lib/list');
 const chalk = require('chalk');
 const indent = require('indent-string');
 const util = require('@oclif/plugin-help/lib/util');
+const stripAnsi = require('strip-ansi');
 
 const { getDocLink } = require('../twilio-api');
 /**
