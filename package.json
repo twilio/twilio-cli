@@ -46,8 +46,10 @@
     "@twilio/cli-core": "^5.9.1",
     "chalk": "^4.1.0",
     "file-type": "^14.6.2",
+    "hyperlinker": "1.0.0",
     "inquirer": "^7.3.0",
     "ngrok": "^3.2.7",
+    "supports-hyperlinks": "2.2.0",
     "twilio": "^3.49.4",
     "untildify": "^4.0.0"
   },
@@ -64,6 +66,7 @@
     "eslint": "^7.5.0",
     "eslint-config-twilio": "~1.31.0",
     "eslint-config-twilio-mocha": "~1.31.0",
+    "flush-cache": "1.0.1",
     "globby": "^11.0.1",
     "mocha": "^8.0.1",
     "nock": "^13.0.2",
