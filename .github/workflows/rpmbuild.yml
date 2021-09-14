@@ -35,6 +35,7 @@ jobs:
             
   rpmbuild:
     runs-on: ubuntu-latest
+    needs: [oclifpack]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
