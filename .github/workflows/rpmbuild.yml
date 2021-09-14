@@ -41,12 +41,16 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: my-artifact
+          path: .github/rpm
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: .github/rpm
       - uses: Antikythera/build-rpm@latest
         id: build_rpm
         with:
           spec_file: .github/rpm/twilio.spec
           sources: |
-            rpm_assets/hello-world-1.0.1.tar.gz
+            github/rpm/hello-world-1.0.1.tar.gz
           variables: |
             _version=1.0.1
             _foo=bar
