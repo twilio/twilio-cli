@@ -38,6 +38,11 @@ jobs:
     needs: [oclifpack]
     steps:
       - uses: actions/checkout@v2
+      - name: get tag
+        id: get-tag
+        run: |
+          git fetch --tags
+          echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
       - uses: actions/download-artifact@v2
         with:
           name: my-artifact
@@ -58,6 +63,7 @@ jobs:
         run: |
           echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
           echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
+          
       - name: Upload RPM
         uses: actions/upload-release-asset@v1
         env:
@@ -67,10 +73,18 @@ jobs:
           asset_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
           asset_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
           asset_content_type: application/octet-stream
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.build_rpm.outputs.rpm_package_path }}
+          asset_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
+          tag: ${{ steps.get-tag.outputs.TAG_NAME }}
+          overwrite: true
 
   removeartifact:
     runs-on: ubuntu-latest
-    needs: [oclifpack]
+    needs: [oclifpack, rpmbuild]
     steps:
       - name: remove artifact
         uses: actions/github-script@v3
