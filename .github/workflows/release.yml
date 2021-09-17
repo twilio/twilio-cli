@@ -8,13 +8,19 @@ on:
       version-type:
         description: 'Version to upgrade, Major: 0, Minor:1, Patch: 2'
         required: true
+      homebrew-branch:
+        description: 'HomeBrew branch name'
+        default: main
+      homebrew-prerelease:
+        description: 'HomeBrew prerelease'
+        default: 'false'
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [14.x, 10.x]
     steps:
       - name: Checkout cli-core repo
         uses: actions/checkout@v2
@@ -52,6 +58,7 @@ jobs:
         run: npx semantic-release -t \${version}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   update-release:
     runs-on: ubuntu-latest
     needs: [ release ]
@@ -67,7 +74,6 @@ jobs:
         with:
           is_append_body: true
           body: ${{ github.event.inputs.change-log }}
-
   deploy-docker:
     runs-on: ubuntu-latest
     needs: [ release ]
@@ -100,3 +106,15 @@ jobs:
       - name: Image digest
         run: |
           echo ${{ steps.docker_build.outputs.digest }}
+  oclif-release:
+    runs-on: ubuntu-latest
+    needs: [ release ]
+    steps:
+      - name: Invoke CLI workflow with changelog and version-type
+        if: ${{needs.release.outputs.tag-name != ''}}
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Oclif Release
+          repo: twilio/twilio-cli
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          inputs: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
