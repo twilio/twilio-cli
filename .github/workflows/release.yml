@@ -1,0 +1,120 @@
+name: Cli Release
+on:
+  workflow_dispatch:
+    inputs:
+      change-log:
+        description: 'Open API Changelog.'
+        required: true
+      version-type:
+        description: 'Version to upgrade, Major: 0, Minor:1, Patch: 2'
+        required: true
+      homebrew-branch:
+        description: 'HomeBrew branch name'
+        default: main
+      homebrew-prerelease:
+        description: 'HomeBrew prerelease'
+        default: 'false'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 10.x]
+    steps:
+      - name: Checkout cli-core repo
+        uses: actions/checkout@v2
+      - run: npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run tests
+        run: npm test
+  update-api-definitions-changelog:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@v2
+      - name: Update Changelog
+        run: |
+          bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
+  release:
+    runs-on: ubuntu-latest
+    needs: [update-api-definitions-changelog]
+    outputs:
+      tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@v2
+      - name: Run git and npm update
+        run: |
+          git pull
+          npm install
+      - name: Semantic Release runs
+        id: semantic-release
+        run: npx semantic-release -t \${version}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  update-release:
+    runs-on: ubuntu-latest
+    needs: [ release ]
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@v2
+      - name: Update release
+        if: ${{needs.release.outputs.tag-name != ''}}
+        uses: tubone24/update_release@v1.2.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{needs.release.outputs.tag-name}}
+        with:
+          is_append_body: true
+          body: ${{ github.event.inputs.change-log }}
+  deploy-docker:
+    runs-on: ubuntu-latest
+    needs: [ release ]
+
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Docker meta
+        uses: docker/metadata-action@v3
+        with:
+          images: twilio/twilio-cli
+          tags: type=semver,pattern={{version}}, value= ${{ needs.release.outputs.tag-name }}
+      - name: Build and push
+        if: ${{needs.release.outputs.tag-name != ''}}
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+      - name: Image digest
+        run: |
+          echo ${{ steps.docker_build.outputs.digest }}
+  oclif-release:
+    runs-on: ubuntu-latest
+    needs: [ release ]
+    steps:
+      - name: Invoke CLI workflow with changelog and version-type
+        if: ${{needs.release.outputs.tag-name != ''}}
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Oclif Release
+          repo: twilio/twilio-cli
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          inputs: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'

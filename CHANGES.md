@@ -1,6 +1,90 @@
 twilio-cli changelog
 =====================
 
+[2021-09-09] Version 2.29.1
+---------------------------
+**Library - Fix**
+- [PR #285](https://github.com/twilio/twilio-cli/pull/285): Added missing require statement. Thanks to [@ravali-rimmalapudi](https://github.com/ravali-rimmalapudi)!
+
+**Messaging**
+- Add Identity Status, Russell 3000, Tax Exempt Status and Should Skip SecVet fields for Brand Registrations
+- Add Should Skip Secondary Vetting optional flag parameter to create Brand API
+
+
+[2021-09-09] Version 2.29.0
+---------------------------
+**Library - Feature**
+- [PR #283](https://github.com/twilio/twilio-cli/pull/283): link to our API docs when you --help. Thanks to [@shrutiburman](https://github.com/shrutiburman)!
+
+**Api**
+- Revert adding `siprec` resource
+- Add `siprec` resource
+
+**Messaging**
+- Add 'mock' as an optional field to brand_registration api
+- Add 'mock' as an optional field to us_app_to_person api
+- Adds more Use Cases in us_app_to_person_usecase api transaction and updates us_app_to_person_usecase docs
+
+**Verify**
+- Verify List Templates API endpoint added.
+
+
+[2021-08-26] Version 2.28.1
+---------------------------
+**Library - Chore**
+- [PR #281](https://github.com/twilio/twilio-cli/pull/281): Custom help implementation for displaying required flags. Thanks to [@onuzbee](https://github.com/onuzbee)!
+
+**Api**
+- Add Programmabled Voice SIP Refer call transfers (`calls-transfers`) to usage records
+- Add Flex Voice Usage category (`flex-usage`) to usage records
+
+**Conversations**
+- Add `Order` query parameter to Message resource read operation
+
+**Insights**
+- Added `partial` to enum processing_state_request
+- Added abnormal session filter in Call Summaries
+
+**Messaging**
+- Add brand_registration_sid as an optional query param for us_app_to_person_usecase api
+
+**Pricing**
+- add trunking_numbers resource (v2)
+- add trunking_country resource (v2)
+
+**Verify**
+- Changed to private beta the `TemplateSid` optional parameter on Verification creation.
+- Added the optional parameter `Order` to the list Challenges endpoint to define the list order.
+
+
+[2021-08-12] Version 2.28.0
+---------------------------
+**Library - Fix**
+- [PR #280](https://github.com/twilio/twilio-cli/pull/280): Fixing failing test on twilio-cli. Thanks to [@kridai](https://github.com/kridai)!
+- [PR #279](https://github.com/twilio/twilio-cli/pull/279): Added the condition to check the tag regex. Thanks to [@ravali-rimmalapudi](https://github.com/ravali-rimmalapudi)!
+
+**Library - Chore**
+- [PR #276](https://github.com/twilio/twilio-cli/pull/276): Add sonarcloud configurations. Thanks to [@onuzbee](https://github.com/onuzbee)!
+
+**Api**
+- Corrected the `price`, `call_sid_to_coach`, and `uri` data types for Conference, Participant, and Recording **(breaking change)**
+- Made documentation for property `time_limit` in the call api public. **(breaking change)**
+
+**Insights**
+- Added new endpoint to fetch Call Summaries
+
+**Messaging**
+- Revert brand registration api update to add brand_type field
+- Add brand_type field to a2p brand_registration api
+
+**Taskrouter**
+- Add `X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit-Config` as Response Headers to all TaskRouter endpoints
+
+**Verify**
+- Add `TemplateSid` optional parameter on Verification creation.
+- Include `whatsapp` as a channel type in the verifications API.
+
+
 [2021-07-29] Version 2.27.1
 ---------------------------
 **Messaging**

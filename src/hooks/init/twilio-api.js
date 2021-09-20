@@ -6,7 +6,13 @@ const { logger } = require('@twilio/cli-core').services.logging;
 const { TwilioApiBrowser } = require('@twilio/cli-core').services.TwilioApi;
 
 const TwilioApiCommand = require('../../base-commands/twilio-api-command');
-const { getTopicName, TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('../../services/twilio-api');
+const {
+  getTopicName,
+  TOPIC_SEPARATOR,
+  BASE_TOPIC_NAME,
+  CORE_TOPIC_NAME,
+  getDocLink,
+} = require('../../services/twilio-api');
 
 const METHOD_TO_ACTION_MAP = {
   list: {
@@ -113,8 +119,10 @@ class TwilioRestApiPlugin extends Plugin {
        * the constructor, so we make it a static property
        * of the newly created command class.
        */
+      const commandId = `${actionDefinition.topicName}:${actionDefinition.commandName}`;
       const NewCommandClass = class extends TwilioApiCommand {};
       NewCommandClass.actionDefinition = actionDefinition;
+      NewCommandClass.docLink = getDocLink(commandId);
       TwilioApiCommand.setUpNewCommandClass(NewCommandClass);
       return NewCommandClass;
     });

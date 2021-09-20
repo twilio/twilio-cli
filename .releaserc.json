@@ -1,0 +1,74 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "release_feature_branch",
+      "prerelease": "rc"
+    }
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [{
+          "type": "chore",
+          "release": "patch"
+        }]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [{
+            "type": "feat",
+            "section": "Library - Features"
+          },
+            {
+              "type": "fix",
+              "section": "Library - Fixes"
+            },
+            {
+              "type": "chore",
+              "section": "Library - Chores"
+            },
+            {
+              "type": "test",
+              "section": "Library - Test"
+            },
+            {
+              "type": "docs",
+              "section": "Library - Docs"
+            }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGES.md"
+      }
+    ],
+    "@semantic-release/npm",
+    "@semantic-release/github",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGES.md",
+          "package.json"
+        ],
+        "message": "chore(release): set `package.json` to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "successCmd": "echo '::set-output name=TAG_NAME::${nextRelease.version}'"
+      }
+    ]
+  ]
+}
