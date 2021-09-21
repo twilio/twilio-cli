@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm test
+  #    - run: npm ci
+  #    - run: npm test
 
   #   release:
   #     runs-on: ubuntu-latest
@@ -38,24 +38,31 @@ jobs:
   #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   oclifRelease:
     name: Publish for ${{ matrix.os }}
+    env: 
+      BUILD_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE }}
+      P12_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+      OSX_KEYCHAIN_PASSWORD:  ${{ secrets.OSX_KEYCHAIN_PASSWORD }}
     runs-on: ${{ matrix.os }}
     needs: [build]
     strategy:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            artifact_name: deb/twilio_2.27.1-1_amd64.deb
-            asset_name: twilio.deb
-            command_name: sudo oclif-dev pack:deb
-          - os: macos-latest
-            artifact_name: win/twilio-v2.27.1-x86.exe
-            asset_name: twilio.exe
-            command_name: oclif-dev pack:win
+    #      - os: ubuntu-latest
+    #        artifact_name: deb/twilio_2.27.1-1_amd64.deb
+     #       asset_name: twilio.deb
+      #      command_name: sudo oclif-dev pack:deb
+     #       exec_name: ubuntu
+     #     - os: macos-latest
+    #        artifact_name: win/twilio-v2.27.1-x86.exe
+    #        asset_name: twilio.exe
+    #        command_name: oclif-dev pack:win
+    #        exec_name: windows
           - os: macos-latest
             artifact_name: macos/twilio-v2.27.1.pkg
             asset_name: twilio.pkg
             command_name: oclif-dev pack:macos
+            exec_name: macos
 
     steps:
       - uses: actions/checkout@v2
@@ -66,11 +73,45 @@ jobs:
           fallback: 2.27.1
       - run: npm cache clear & npm ci
       - run: npm install -g @oclif/dev-cli
+        if: ${{ matrix.exec_name == 'macos' }} 
       - run: |
-          if [ "$RUNNER_OS" == "macOS" ]; then
+            # create variables
+            CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+            KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+            # import certificate from secrets
+            echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
+            ls "$RUNNER_TEMP"
+
+            # create temporary keychain
+            security create-keychain -p "$OSX_KEYCHAIN_PASSWORD" build.keychain
+            security default-keychain -s build.keychain
+            security unlock-keychain -p "$OSX_KEYCHAIN_PASSWORD" build.keychain
+            # find identity
+            security find-identity
+            # import certificate to keychain
+            echo p12 password is $P12_PASSWORD and osxKEyChain is $OSX_KEYCHAIN_PASSWORD
+            #security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+            security import $CERTIFICATE_PATH -k build.keychain -A -P $P12_PASSWORD -T /usr/bin/codesign
+            security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $OSX_KEYCHAIN_PASSWORD build.keychain
+            security find-identity
+            security list-keychain -d user
             brew install makensis
-          fi
-      - run: ${{ matrix.command_name }}
+            ${{ matrix.command_name }}
+ #       if: ${{ matrix.exec_name != 'macos' }} 
+ #     - run: ${{ matrix.command_name }}
+      - name: Clean up keychain and provisioning profile
+        if: ${{ matrix.exec_name == 'macos' }} 
+        run: |
+          security delete-keychain build.keychain
+      - name: "Notarize Release Build"
+        uses: devbotsxyz/xcode-notarize@v1
+        with:
+          product-path: "dist/macos/twilio-v2.27.1.pkg"
+          appstore-connect-username: ${{ secrets.NOTARIZATION_USERNAME }}
+          appstore-connect-password: ${{ secrets.NOTARIZATION_PASSWORD }}
+          primary-bundle-id: "com.twilio.cli"
+          verbose: true
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -78,3 +119,6 @@ jobs:
           file: dist/${{ matrix.artifact_name }}
           asset_name: ${{ matrix.asset_name }}
           tag: ${{ steps.previoustag.outputs.tag }}
+          overwrite: true
+          
+      

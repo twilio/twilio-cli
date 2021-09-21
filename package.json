@@ -43,7 +43,7 @@
     "@oclif/plugin-plugins": "^1.8.3",
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "@sendgrid/mail": "^7.2.1",
-    "@twilio/cli-core": "kridai/twilio-cli-core#main",
+    "@twilio/cli-core": "^5.9.1",
     "chalk": "^4.1.0",
     "file-type": "^14.6.2",
     "hyperlinker": "1.0.0",
@@ -119,7 +119,8 @@
       ]
     },
     "macos": {
-      "identifier": "com.twilio.cli"
+      "identifier": "com.twilio.cli",
+      "sign": "Developer ID Installer: Twilio, Inc"
     },
     "update": {
       "s3": {
