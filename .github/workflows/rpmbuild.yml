@@ -50,7 +50,7 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
         working-directory: .github/rpm
-      - uses: Antikythera/build-rpm@latest
+      - uses: ./.github/actions/build-rpm
         id: build_rpm
         with:
           spec_file: .github/rpm/twilio.spec
