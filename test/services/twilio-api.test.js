@@ -229,59 +229,6 @@ describe('services', () => {
         ).to.contain('[Account](https://www.twilio.com/docs/iam/api/account)');
       });
 
-      test.it('handles a description on a supported terminal : iTerm', () => {
-        process.env.TERM_PROGRAM = 'iTerm.app';
-        process.env.TERM_PROGRAM_VERSION = '3.1.0';
-        const desc = getFlagConfig(
-          {
-            name: 'DummyCmd',
-            schema: {
-              description:
-                "The SID of the [Account](https://www.twilio.com/docs/iam/api/account) to which the Sim resource should belong. Account or that of a [Subaccount](https://www.twilio.com/docs/iam/api/subaccounts) of the requesting Account. Only valid when the Sim resource's status is `new`. For more information, see the [Move SIMs between Subaccounts documentation](https://www.twilio.com/docs/wireless/api/sim-resource#move-sims-between-subaccounts).",
-              type: 'string',
-            },
-            in: 'query',
-            required: false,
-            description:
-              "The SID of the [Account](https://www.twilio.com/docs/iam/api/account) to which the Sim resource should belong. Account or that of a [Subaccount](https://www.twilio.com/docs/iam/api/subaccounts) of the requesting Account. Only valid when the Sim resource's status is `new`. For more information, see the [Move SIMs between Subaccounts documentation](https://www.twilio.com/docs/wireless/api/sim-resource#move-sims-between-subaccounts).",
-          },
-          {
-            domainName: 'foo',
-            path: '/v1/Bars',
-          },
-        ).description;
-        if ('CI' in process.env) {
-          expect(desc).to.not.contain('\u001b]8;;https:');
-        } else {
-          expect(desc).to.contain('\u001b]8;;https:');
-        }
-      });
-
-      test.it('handles a description which doesnt match the regex, on a supported terminal : iTerm', () => {
-        process.env.TERM_PROGRAM = 'iTerm.app';
-        process.env.TERM_PROGRAM_VERSION = '3.1.0';
-        expect(
-          getFlagConfig(
-            {
-              name: 'DummyCmd',
-              schema: {
-                description:
-                  'The SID of the [Account](https://www.twi lio.com/docs/iam/api/account) to which the Sim resource should belong. ',
-                type: 'string',
-              },
-              in: 'query',
-              required: false,
-              description:
-                'The SID of the [Account](https://www.twi lio.com/docs/iam/api/account) to which the Sim resource should belong.  ',
-            },
-            {
-              domainName: 'foo',
-              path: '/v1/Bars',
-            },
-          ).description,
-        ).to.not.contain('\u001b]8;;https:');
-      });
-
       test.it('handles a description on a non-supported terminal : MAC', () => {
         process.env.TERM_PROGRAM = 'Apple_Terminal';
         process.env.TERM_PROGRAM_VERSION = '440';
