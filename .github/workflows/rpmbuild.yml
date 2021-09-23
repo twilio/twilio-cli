@@ -4,6 +4,11 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Cli Release"]
+    branches: [main]
+    types: 
+      - completed
 jobs:
   build:
     runs-on: ubuntu-latest
