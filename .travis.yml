@@ -8,8 +8,7 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install -y libsecret-1-dev
 script:
-  - npm run test
-  - sonar-scanner
+- npm run test
 install: make install
 deploy:
 - provider: script
@@ -17,6 +16,7 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    condition: "$TRAVIS_TAG =~ ^[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+$"
     node: lts/*
 - provider: npm
   skip_cleanup: true
@@ -25,6 +25,7 @@ deploy:
   api_key: "$NPM_TOKEN"
   on:
     tags: true
+    condition: "$TRAVIS_TAG =~ ^[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+$"
     node: lts/*
 notifications:
   slack:
@@ -37,4 +38,4 @@ notifications:
 addons:
   sonarcloud:
     token:
-      secure: HoD6oJ03Y60apDszjFZ8AN+ujnkbQAPM41bBb/YNNMtgslfnJPp63bQy5m0hoCsTVRoPiZvuZRpfxQpcJLmlEScY4ulQI7DRf+FFh6/2B80+kl1FRLsyar0/JtZvn/LDsP5GjksIZUD2cdPho2rRnmGiS9bmrKIc4YRKKxMO/zi33EUPgiwea23rCB/6/CK6AnAyD7ufwM/ldewqKiU5T67IbAQM2mKEMqyM+oPSx/HL6f9NrtpenZs9pP3y8oRCCty8yP5BOyoLqOJvn0lRqdAAL5S8Jsrb6NB7Mk+lrU4AcfcgEmDGbj+wKFdV/xlqZcCDGDvytqGocGsQZLwbaNlOzSTkoJVvzy1crMxySsqVFoGusISPXA3iJgBQn08E8bwSI1SWDfdvQTFZFYcoc/1OWNutH6EvoHC9uM9rmIRJPVDqGeBevlJq7vffspnuwpWZeH6hWQt7kHBGxQSYtCyOUkFU0IntRFiX2KvyP38rRIlfeoDM2fqaD/NUg0+C77YYhi9on74mQrw8EEjq5QErht458shfjiPPoq8PHpN2WNXjJ8lRHc6h8eqNzX0Uz2ooPOvxgFnyjergBbe5KADQkPLhJehZQhNtHiAfAX5dtkP8IJizu0tpwrTkMWrMMT51nbqL/zOtH6yflr1+AjKrLM7YFRSj8by3yokNzI4=
+      secure: G/WNZRQ0JZbdt0OqdR/ut9B9DoNXnKnVVGpb7rZvWz7tEvGL6ehJ9M4Q9x2Eht5Qov0rrlBGIMNazvla91m5DXQkkpNtg0ZWagtq5mB/f4HVh2IOfcZhC4Ib/t1QALlqgUGWJ/FRxWO64qKLgnVjydTw37T+DENRL72vAGB0VpVhERjYyMiDIaP8/MJBBn4Wx4T2GwB0L+hb9DkxGtjNP9W4pYjy7WGbOrgaVjvCsTfnt7AZzDnsTUhOQvd25MzB2NKiNr3I2PWGih3XNZjqfpW9q94bmFSQWRaj/xxl4c243MhvpG3AXNyKfniQnKJS15xVQlwoLmt9Erf2f2Phe4yJfNkzqTU0TOjzjot/+GB83jKltsZc+MkGXAP2OlfwhwXymmyXt0CJwu7KywLIGECqKxR7AphrC04ZukOIE4IBbWTx8e0rcxzn4NE7XdL157GlQ2hTrtPJUy7uKNqghmIVSJ5rUuISTf92hpQbw83KGj24gDheztO/KzOh336zMBKF4cG/IAQMnih/Uqr9XrBfyiNZ7U6g5sILPb0iY50aibvWlQlnpZ60+I4pFWNvWhnchTsSpivHpznzUhpDECGvz9OtVBQr4uOJSdFJylBoawbi9uqm8+Rql2J+JWxU6dJwrsraZ26YL/pKy6E9x4+MtJESi047DKKwX+V4qXA=
