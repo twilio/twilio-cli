@@ -1,4 +1,11 @@
-twilio-cli changelog
+---------------------------
+**Events**
+- Add segment sink
+
+**Messaging**
+- Add post_approval_required attribute in GET us_app_to_person_usecase api response
+- Add Identity Status, Russell 3000, Tax Exempt Status and Should Skip SecVet fields for Brand Registrations
+- Add Should Skip Secondary Vetting optional flag parameter to create Brand APItwilio-cli changelog
 =====================
 
 [2021-09-09] Version 2.29.1
