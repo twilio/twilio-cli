@@ -1,3 +1,22 @@
+## [2.30.0](https://github.com/twilio/twilio-cli/compare/2.29.1...2.30.0) (2021-09-23)
+
+
+### Library - Chores
+
+* Add docker workflow to github actions ([#289](https://github.com/twilio/twilio-cli/issues/289)) ([7e9d233](https://github.com/twilio/twilio-cli/commit/7e9d233a5299f0f108af97b3299d286c39bfa226))
+
+
+### Library - Features
+
+* Added github actions for publish to s3 and trigger homebrew release ([#287](https://github.com/twilio/twilio-cli/issues/287)) ([5d7acd6](https://github.com/twilio/twilio-cli/commit/5d7acd6f9d04361d3b5a43ff9bfc5ae5c9d3be38))
+* Added the GitHub actions for cli ([#284](https://github.com/twilio/twilio-cli/issues/284)) ([49e2376](https://github.com/twilio/twilio-cli/commit/49e23764205487d132cf84cf7ad9ee7c11ca53d1))
+* DII 47 hyperlinks in help ([#290](https://github.com/twilio/twilio-cli/issues/290)) ([ce15661](https://github.com/twilio/twilio-cli/commit/ce156611cea15af15dee6fefd9761f31e8754a19)), closes [#286](https://github.com/twilio/twilio-cli/issues/286) [#285](https://github.com/twilio/twilio-cli/issues/285)
+
+
+### Library - Fixes
+
+* Updated api definitions changelog in CHANGES.md ([3236031](https://github.com/twilio/twilio-cli/commit/32360314cc5ec00f752138c4127c37d59669fe76))
+
 ---------------------------
 **Events**
 - Add segment sink
