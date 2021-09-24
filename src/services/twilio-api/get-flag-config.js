@@ -29,7 +29,7 @@ const scanForUrl = (description) => {
     const url = details[1].substr(0, details[1].indexOf(')')); // takes out url from (url)
 
     const hyperLink = urlUtil.convertToHyperlink(text, url);
-    description = description.replaceAll(match, hyperLink.url);
+    description = description.replace(`${match}\g`, hyperLink.url);
   }
 
   return description;
