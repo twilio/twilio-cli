@@ -1,3 +1,4 @@
+# Spec file is needed to build a rpm package
 Name:           twilio
 Version:        %{_version}
 Release:        1%{?dist}

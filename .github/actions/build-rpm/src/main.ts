@@ -17,6 +17,8 @@ const rpmSourcesTmp = `${rpmBuildTmp}/SOURCES`
 const targetRpmBuildTmp = `${rpmBuildTmp}/RPMS`
 const outputRpmDir = `${process.env.GITHUB_WORKSPACE}/RPMS`
 
+// changes taken from https://github.com/Antikythera/build-rpm
+
 async function run(): Promise<void> {
   try {
     const inputSpecFile = validateInputFile(core.getInput('spec_file'))

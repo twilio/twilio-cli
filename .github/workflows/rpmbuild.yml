@@ -3,6 +3,7 @@ name: RPB Build
 on:
   workflow_dispatch:
   workflow_run:
+    # wait for Cli Release to complete, when it completes, start this workflow 
     workflows: ["Cli Release"]
     branches: [main]
     types: 
@@ -35,7 +36,6 @@ jobs:
             dist/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}-linux-x64.tar.gz
           variables: |
             _version=${{ steps.get-tag.outputs.TAG_NAME }}
-           # _foo=bar
           gpg_signing_key: ${{ secrets.GPG_SIGNING_KEY }}
           gpg_signing_key_id: ${{ secrets.GPG_SIGNING_KEY_ID }}
           gpg_signing_key_passphrase: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}

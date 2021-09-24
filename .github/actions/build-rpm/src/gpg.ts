@@ -3,16 +3,18 @@ import * as fs from 'fs'
 import * as exec from '@actions/exec';
 import * as path from 'path'
 
+
+// implementation sourced from https://github.com/crazy-max/ghaction-import-gpg/blob/8c43807e82148a7bafc633cc9584d04bf54be8d0/src/gpg.ts
 export interface PrivateKey {
     fingerprint: string;
     keyID: string;
 }
 
+// config settings to cache the passphrase for private key
 export const agentConfig = `default-cache-ttl 7200
 max-cache-ttl 31536000
 allow-preset-passphrase`;
   
-
 export const readPrivateKey = async (key: string): Promise<PrivateKey> => {
     const privateKey = await openpgp.readKey({
         armoredKey: key
@@ -27,6 +29,7 @@ export const readPrivateKey = async (key: string): Promise<PrivateKey> => {
     }
 }
 
+// keygrip of a private key is needed to uniquely identify and add the passphrase in cache
 export const getKeygrips = async (fingerprint: string): Promise<Array<string>> => {
     return await exec.getExecOutput('gpg', ['--batch', '--with-colons', '--with-keygrip', '--list-secret-keys', fingerprint], {
         ignoreReturnCode: true,
