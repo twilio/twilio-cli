@@ -44,12 +44,12 @@ export function parseInputSources(sources: string): string[] {
   return sources.split('\n').map(validatePath)
 }
 
-export function validateInputSpecFile(specFile: string): string {
-  const fullPath = path.resolve(specFile)
+export function validateInputFile(filePath: string): string {
+  const fullPath = path.resolve(filePath)
   if (fs.existsSync(fullPath)) {
     return fullPath
   } else {
-    throw new Error(`RPM Spec file doesn't exist in: ${fullPath}`)
+    throw new Error(`File doesn't exist in: ${fullPath}`)
   }
 }
 

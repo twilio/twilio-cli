@@ -119,8 +119,7 @@
       ]
     },
     "macos": {
-      "identifier": "com.twilio.cli",
-      "sign": "Developer ID Installer: Twilio, Inc"
+      "identifier": "com.twilio.cli"
     },
     "update": {
       "s3": {

@@ -1,13 +1,14 @@
 import * as core from '@actions/core'
-import {exec} from '@actions/exec'
+import * as exec from '@actions/exec'
 import * as fs from 'fs'
 import * as path from 'path'
+import * as gpg from './gpg';
 import {
   copyFileToDir,
   parseInputVariables,
   parseInputSources,
   findFileByExt,
-  validateInputSpecFile,
+  validateInputFile,
   VariableKeyPair
 } from './util'
 
@@ -18,15 +19,46 @@ const outputRpmDir = `${process.env.GITHUB_WORKSPACE}/RPMS`
 
 async function run(): Promise<void> {
   try {
-    const inputSpecFile = validateInputSpecFile(core.getInput('spec_file'))
+    const inputSpecFile = validateInputFile(core.getInput('spec_file'))
+    const inputGpgPubKeyFile = validateInputFile(core.getInput('gpg_pub_key'))
     const targetSpecFile = `${rpmBuildTmp}/SPECS/${path.basename(
       inputSpecFile
     )}`
     const inputVariables = parseInputVariables(core.getInput('variables'))
     const inputSources = parseInputSources(core.getInput('sources'))
+    const gpgKeyId = core.getInput('gpg_signing_key_id')
+    const passphrase = core.getInput('gpg_signing_key_passphrase')
+
+    //Importing public key
+    core.debug(`Importing pub key from ${inputGpgPubKeyFile}`)
+    await exec.exec(
+    'gpg',
+    [
+      '--import',
+      inputGpgPubKeyFile
+    ]
+    )
+
+    // Importing private key
+    gpg.importKey(core.getInput('gpg_signing_key'))
+    const privateKey = await gpg.readPrivateKey(core.getInput('gpg_signing_key'));
+    if (passphrase) {
+      core.info('Configuring GnuPG agent');
+      await gpg.configureAgent(gpg.agentConfig);
+
+      await core.group(`Getting keygrips`, async () => {
+        for (let keygrip of await gpg.getKeygrips(privateKey.fingerprint)) {
+          core.info(`Presetting passphrase for ${keygrip}`);
+          await gpg.presetPassphrase(keygrip, passphrase).then(stdout => {
+            core.debug(stdout);
+          });
+        }
+      });
+    }
+     
 
     // Init rpmbuild dir tree
-    await exec('rpmdev-setuptree')
+    await exec.exec('rpmdev-setuptree')
 
     // Copy spec file to dir tree
     core.debug(`Copying spec file ${inputSpecFile} to ${targetSpecFile}...`)
@@ -48,6 +80,8 @@ async function run(): Promise<void> {
     const builtRpmFilePath = await runRpmbuild(
       buildRpmArgs(targetSpecFile, inputVariables)
     )
+
+    await exec.exec('rpmsign', ['--define', `_gpg_name ${gpgKeyId}`, '--resign', builtRpmFilePath])
     core.debug(`Done, result: ${builtRpmFilePath}`)
 
     const builtRpmFileName = path.basename(builtRpmFilePath)
@@ -78,7 +112,7 @@ function buildRpmArgs(
   specFile: string,
   variables: VariableKeyPair[]
 ): string[] {
-  const cmd = []
+  const cmd : Array<string> = [];
 
   for (const varPair of variables) {
     cmd.push('-D', `${varPair.name} ${varPair.value}`)
@@ -90,7 +124,7 @@ function buildRpmArgs(
 
 async function runRpmbuild(args: string[]): Promise<string> {
   const targetArgs = ['-bb'].concat(args)
-  if ((await exec('rpmbuild', targetArgs)) === 0) {
+  if ((await exec.exec('rpmbuild', targetArgs)) === 0) {
     const rpmFiles = findFileByExt(targetRpmBuildTmp, 'rpm')
     if (rpmFiles.length === 0) {
       throw new Error(`couldn't find the rpm file in ${targetRpmBuildTmp}`)

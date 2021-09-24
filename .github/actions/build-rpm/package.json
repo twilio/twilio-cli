@@ -13,16 +13,15 @@
     "node",
     "setup"
   ],
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/exec": "^1.0.4"
+    "@actions/exec": "^1.0.4",
+    "openpgp": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.4.10",
     "@vercel/ncc": "^0.25.1",
-    "js-yaml": "^3.14.0",
     "typescript": "^4.0.5"
   }
 }

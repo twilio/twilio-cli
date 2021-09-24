@@ -10,6 +10,18 @@ inputs:
   variables:
     required: false
     description: 'variables to be consumed in the spec file as rpmbuild macros, delimited by new lines'
+  gpg_signing_key:
+    description: "ASCII-armored content of the GPG signing key's secret/private key"
+    required: true
+  gpg_signing_key_id:
+    description: "GPG signing key's GPG ID (name)"
+    required: true
+  gpg_signing_key_passphrase:
+    description: 'Passphrase to use the GPG signing key'
+    required: true
+  gpg_pub_key:
+    description: 'path to your gpg pub key'
+    required: true
 outputs:
   rpm_package_name:
     description: 'name of the RPM package'
