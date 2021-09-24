@@ -59,41 +59,47 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-  update-release:
-    runs-on: ubuntu-latest
-    needs: [ release ]
-    steps:
-      - name: Checkout cli
-        uses: actions/checkout@v2
       - name: Update release
-        if: ${{needs.release.outputs.tag-name != ''}}
-        uses: tubone24/update_release@v1.2.0
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{needs.release.outputs.tag-name}}
-        with:
-          is_append_body: true
-          body: ${{ github.event.inputs.change-log }}
+          if: ${{steps.semantic-release.outputs.tag-name != ''}}
+          run: node .github/scripts/update-release.js
+          env:
+            GITHUB_TOKEN: ${{ github.token }}
+            TAG_NAME: ${{steps.semantic-release.outputs.tag-name}}
+            RELEASE_BODY: ${{github.event.inputs.change-log}}
+            REPO_NAME: twilio/twilio-cli-core
   oclif-release:
     runs-on: ubuntu-latest
     needs: [ release ]
     steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - run: |
+          git pull
+          npm install
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke Oclif workflow
         if: ${{needs.release.outputs.tag-name != ''}}
-        uses: benc-uk/workflow-dispatch@v1
+        run: node .github/scripts/trigger-workflow.js
         with:
-          workflow: Oclif Release
-          repo: twilio/twilio-cli
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          inputs: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+          WORKFLOW_NAME: 'oclif-release.yml'
+          REPO_NAME: twilio/twilio-cli
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
   docker-release:
     runs-on: ubuntu-latest
     needs: [ release ]
     steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke Docker workflow
         if: ${{needs.release.outputs.tag-name != ''}}
-        uses: benc-uk/workflow-dispatch@v1
+        run: node .github/scripts/trigger-workflow.js
         with:
-          workflow: Docker Hub Release
-          repo: twilio/twilio-cli
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          WORKFLOW_NAME: 'docker-release.yml'
+          REPO_NAME: twilio/twilio-cli
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
