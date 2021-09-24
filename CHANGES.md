@@ -1,3 +1,10 @@
+### [2.30.2](https://github.com/twilio/twilio-cli/compare/2.30.1...2.30.2) (2021-09-24)
+
+
+### Library - Fixes
+
+* replaceAll bug ([#297](https://github.com/twilio/twilio-cli/issues/297)) ([3e85ed2](https://github.com/twilio/twilio-cli/commit/3e85ed2b1223aa5111bcd4690fb55ae5e5dae26a))
+
 ### [2.30.1](https://github.com/twilio/twilio-cli/compare/2.30.0...2.30.1) (2021-09-24)
 
 
