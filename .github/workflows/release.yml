@@ -99,12 +99,12 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
   platform-executables-release:
     runs-on: ubuntu-latest
-      needs: [ release ]
-      steps:
-        - name: Invoke Docker workflow
-          if: ${{needs.release.outputs.tag-name != ''}}
-          uses: benc-uk/workflow-dispatch@v1
-          with:
-            workflow: PlatformExecutable Release
-            repo: twilio/twilio-cli
-            token: ${{ secrets.REPO_ACCESS_TOKEN }}
+    needs: [ release ]
+    steps:
+      - name: Invoke Docker workflow
+        if: ${{needs.release.outputs.tag-name != ''}}
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: PlatformExecutable Release
+          repo: twilio/twilio-cli
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
