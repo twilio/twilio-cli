@@ -1,4 +1,4 @@
-#Dockerfile to setup enviropment for centos rpm package 
+#Dockerfile to setup environment for centos rpm package 
 FROM node:14-alpine as builder
 WORKDIR /app
 COPY ./ /app
@@ -8,7 +8,7 @@ RUN npm install && \
 
 FROM centos:latest
 USER 0
-# library need to generate rpm pacakge
+# library need to generate rpm package
 RUN yum install -y rpm-build rpmdevtools gcc rpm-sign
 RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
 RUN yum install -y nodejs
