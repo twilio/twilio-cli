@@ -1,7 +1,8 @@
-import * as openpgp from 'openpgp'
-import * as fs from 'fs'
+import * as openpgp from 'openpgp';
+import * as fs from 'fs';
 import * as exec from '@actions/exec';
-import * as path from 'path'
+import * as core from '@actions/core';
+import * as path from 'path';
 
 
 // implementation sourced from https://github.com/crazy-max/ghaction-import-gpg/blob/8c43807e82148a7bafc633cc9584d04bf54be8d0/src/gpg.ts

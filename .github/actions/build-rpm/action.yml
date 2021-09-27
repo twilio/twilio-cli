@@ -1,5 +1,5 @@
 name: 'Build RPM Centos'
-description: 'Build RPM package for on Centos. Supports RPM macros with --define.'
+description: 'Build RPM package for Centos. Supports RPM macros with --define.'
 inputs:
   sources:
     required: true

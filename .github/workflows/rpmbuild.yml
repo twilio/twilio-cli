@@ -1,4 +1,4 @@
-name: RPB Build
+name: RPM Build
 
 on:
   workflow_dispatch:
