@@ -1,9 +1,9 @@
-name: PlatformExecutable Release
+name: Platform Executable Release
 on:
   workflow_dispatch:
     inputs:
       formula:
-        description: 'Artifact formula name'
+        description: 'Artifact Prefix'
         default: twilio
 jobs:
   get-tag:
