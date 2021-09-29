@@ -1,7 +1,6 @@
 import * as openpgp from 'openpgp';
 import * as fs from 'fs';
 import * as exec from '@actions/exec';
-import * as core from '@actions/core';
 import * as path from 'path';
 
 
@@ -30,23 +29,6 @@ export const readPrivateKey = async (key: string): Promise<PrivateKey> => {
     }
 }
 
-// keygrip of a private key is needed to uniquely identify and add the passphrase in cache
-export const getKeygrips = async (fingerprint: string): Promise<Array<string>> => {
-    return await exec.getExecOutput('gpg', ['--batch', '--with-colons', '--with-keygrip', '--list-secret-keys', fingerprint], {
-        ignoreReturnCode: true,
-        silent: true
-      })
-      .then(res => {
-        let keygrips: Array<string> = [];
-        for (let line of res.stdout.replace(/\r/g, '').trim().split(/\n/g)) {
-          if (line.startsWith('grp')) {
-            keygrips.push(line.replace(/(grp|:)/g, '').trim());
-          }
-        }
-        return keygrips;
-      });
-  };
-
   export const importKey = async(key: string): Promise<void> => {
     const keyPath: string = `key.pgp`;
     fs.writeFileSync(keyPath, key);
@@ -60,12 +42,6 @@ export const getKeygrips = async (fingerprint: string): Promise<Array<string>> =
         }
       })
   }
-
-  export const presetPassphrase = async (keygrip: string, passphrase: string): Promise<string> => {
-    const hexPassphrase: string = Buffer.from(passphrase, 'utf8').toString('hex').toUpperCase();
-    await gpgConnectAgent(`PRESET_PASSPHRASE ${keygrip} -1 ${hexPassphrase}`);
-    return await gpgConnectAgent(`KEYINFO ${keygrip}`);
-  };
 
   const gpgConnectAgent = async (command: string): Promise<string> => {
     return await exec
@@ -93,5 +69,3 @@ export const getKeygrips = async (fingerprint: string): Promise<Array<string>> =
     });
     await gpgConnectAgent('RELOADAGENT');
   };
-
-

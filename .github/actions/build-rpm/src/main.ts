@@ -14,6 +14,10 @@ const outputRpmDir = `${process.env.GITHUB_WORKSPACE}/RPMS`;
 
 async function run(): Promise<void> {
   try {
+    // install earlier version of gpg
+
+    const gpgversion = await exec.getExecOutput('gpg', ['--version']).then(res => res.stdout);
+    core.debug(`gpg version  is ${gpgversion}`);
     const inputSpecFile = util.validateInputFile(core.getInput('spec_file'));
     const inputGpgPubKeyFile = util.validateInputFile(core.getInput('gpg_pub_key'));
     const targetSpecFile = `${rpmBuildTmp}/SPECS/${path.basename(
@@ -44,15 +48,6 @@ async function run(): Promise<void> {
     if (passphrase) {
       core.info('Configuring GnuPG agent');
       await gpg.configureAgent(gpg.agentConfig);
-
-      await core.group(`Getting keygrips`, async () => {
-        for (let keygrip of await gpg.getKeygrips(privateKey.fingerprint)) {
-          core.info(`Presetting passphrase for ${keygrip}`);
-          await gpg.presetPassphrase(keygrip, passphrase).then(stdout => {
-            core.debug(stdout);
-          });
-        }
-      });
     }
      
 
@@ -79,9 +74,7 @@ async function run(): Promise<void> {
     const builtRpmFilePath = await runRpmbuild(
       buildRpmArgs(targetSpecFile, inputVariables)
     );
-    //due to https://stackoverflow.com/questions/51504367/gpg-agent-forwarding-inappropriate-ioctl-for-device
-    await exec.exec('export',['GPG_TTY=${tty}']);
-    await exec.exec('rpmsign', ['--define', `_gpg_name ${gpgKeyId}`, '--resign', builtRpmFilePath]);
+    await exec.exec('rpmsign', ['--define', `_gpg_name ${gpgKeyId}`,'--define', `__gpg_sign_cmd %{__gpg} gpg --no-armor --batch --pinentry-mode loopback --no-tty --yes --passphrase=${passphrase} -u "%{_gpg_name}" -sbo %{__signature_filename} %{__plaintext_filename}`,  '--resign', builtRpmFilePath]);
     core.debug(`Done, result: ${builtRpmFilePath}`);
 
     const builtRpmFileName = path.basename(builtRpmFilePath);

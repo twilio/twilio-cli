@@ -46,12 +46,14 @@ jobs:
           echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
           echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
           
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ steps.build_rpm.outputs.rpm_package_path }}
-          asset_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
-          tag: ${{ steps.get-tag.outputs.TAG_NAME }}
-          overwrite: true
+      - name: Upload rpm package to release
+        run: node .github/scripts/update-platform-executables.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE: ${{ steps.build_rpm.outputs.rpm_package_path }}
+          ASSET_NAME: ${{ steps.build_rpm.outputs.rpm_package_name }}
+          TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
+          REPO_NAME: twilio/twilio-cli
+
+        
 
