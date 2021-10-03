@@ -30,7 +30,6 @@ const testThisConfig = ({ platform, env, argv, stream }) => {
     env: { value: env },
     argv: { value: [process.argv[0], ...argv] },
   });
-
   const result = supportsHyperlink(stream);
   // restore the original env
   Object.defineProperties(process, {
@@ -76,33 +75,28 @@ describe('supportsHyperlink', () => {
           }),
         ).to.be.false;
       });
-      test.it('testing convertToHyperlink, supported iTerm.app 3.1, tty stream', () => {
+    });
+
+    describe('test for iTerm terminals', () => {
+      beforeEach(flush);
+      afterEach(() => {
+        process.env = ORIG_ENV;
+      });
+      test.it('testing convertToHyperlink, supported iTerm.app 3.1, tty stream', (done) => {
         const result = testThisConfig({
+          argv: ['--hyperlink=true'],
           env: {
             TERM_PROGRAM: 'iTerm.app',
             TERM_PROGRAM_VERSION: '3.1.0',
           },
-          stream: {
-            isTTY: true,
-          },
         });
-        if ('CI' in process.env) {
-          expect(result).to.be.false;
-          expect(convertToHyperlink('MORE INFO', 'https://twilio.com/docs/dummyCmd').isSupported).to.be.false;
-        } else {
-          expect(result).to.be.true;
-          expect(convertToHyperlink('MORE INFO', 'https://twilio.com/docs/dummyCmd').isSupported).to.be.true;
-        }
-      });
-    });
-
-    describe('test for iTerm terminals', () => {
-      afterEach(() => {
-        flush();
+        expect(result).to.be.true;
+        expect(convertToHyperlink('MORE INFO', 'https://twilio.com/docs/dummyCmd').isSupported).to.be.true;
       });
       test.it('supported in iTerm.app 3.1, tty stream', () => {
         const result = testThisConfig({
           env: {
+            FORCE_HYPERLINK: '1',
             TERM_PROGRAM: 'iTerm.app',
             TERM_PROGRAM_VERSION: '3.1.0',
           },
@@ -110,11 +104,7 @@ describe('supportsHyperlink', () => {
             isTTY: true,
           },
         });
-        if ('CI' in process.env) {
-          expect(result).to.be.false;
-        } else {
-          expect(result).to.be.true;
-        }
+        expect(result).to.be.true;
       });
     });
 
@@ -139,25 +129,21 @@ describe('supportsHyperlink', () => {
 });
 
 describe('convertToHyperlink', () => {
-  describe('test hyperlink generation for dummyURL and dummyText on macOS', () => {
-    describe('test for iTerm', () => {
+  describe('test for iTerm', () => {
+    describe('test hyperlink generation for dummyURL and dummyText on macOS', () => {
       beforeEach(() => {
+        flush();
         process.env.TERM_PROGRAM = 'iTerm.app';
         process.env.TERM_PROGRAM_VERSION = '3.1.0';
+        process.argv = ['--hyperlink=true'];
       });
       afterEach(() => {
-        flush();
+        process.argv = [];
         process.env = ORIG_ENV;
       });
-      testLink.cmdTestLink([]).it('test', (ctx) => {
+      testLink.cmdTestLink([]).it('verify the contents of dummy Command', (ctx) => {
         const result = convertToHyperlink('MORE INFO', 'https://twilio.com/docs/dummyCmd').isSupported;
-        if ('CI' in process.env) {
-          expect(result).to.be.false;
-        } else {
-          expect(result).to.be.true;
-        }
-        expect(ctx.cmdTestLink).to.contain('MORE INFO');
-        expect(ctx.cmdTestLink).to.contain('https://twilio.com/docs/dummyCmd');
+        expect(result).to.be.true;
       });
     });
   });
