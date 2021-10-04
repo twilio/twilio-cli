@@ -46,14 +46,10 @@ jobs:
           echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
           echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
           
-      - name: Upload rpm package to release
-        run: node .github/scripts/update-platform-executables.js
+      - name: Upload rpm package to release  
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE: ${{ steps.build_rpm.outputs.rpm_package_path }}
-          ASSET_NAME: ${{ steps.build_rpm.outputs.rpm_package_name }}
-          TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
-          REPO_NAME: twilio/twilio-cli
+        run: gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm.outputs.rpm_package_path }} --clobber
 
         
 
