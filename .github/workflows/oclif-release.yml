@@ -6,7 +6,7 @@ on:
         description: 'Run workflow in home brew branch'
         default: main
       tag-name:
-        description: 'Tag released recently'
+        description: 'Tag to be released in Homebrew (Same as CLI latest tag name)'
         required: true
       formula:
           description: 'Formula to release in homebrew'

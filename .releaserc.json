@@ -14,6 +14,12 @@
         "releaseRules": [{
           "type": "chore",
           "release": "patch"
+        },{
+          "type": "oaiFix",
+          "release": "patch"
+        },{
+          "type": "oaiFeat",
+          "release": "minor"
         }]
       }
     ],
