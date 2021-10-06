@@ -1,3 +1,15 @@
+### [2.30.3](https://github.com/ravali-rimmalapudi/twilio-cli/compare/2.30.2...2.30.3) (2021-10-06)
+
+
+### Library - Chores
+
+* Replaced the community actions with the scripts ([#298](https://github.com/ravali-rimmalapudi/twilio-cli/issues/298)) ([316aeb6](https://github.com/ravali-rimmalapudi/twilio-cli/commit/316aeb6cc98beab8c145d9be1b93f381aea56cfb))
+
+
+### Library - Fixes
+
+* Added the following changes: ([#301](https://github.com/ravali-rimmalapudi/twilio-cli/issues/301)) ([c69e226](https://github.com/ravali-rimmalapudi/twilio-cli/commit/c69e2261429eac4068854f3012d709d8e8f7841a))
+
 ---------------------------
 **Events**
 - Add segment sink
