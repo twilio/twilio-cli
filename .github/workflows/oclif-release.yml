@@ -60,6 +60,6 @@ jobs:
         with:
           workflow: Homebrew Release
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repo: twilio/homebrew-brew
+          repo: ravali-rimmalapudi/homebrew-brew
           ref: ${{ github.event.inputs.home-brew-branch }}
           inputs: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
