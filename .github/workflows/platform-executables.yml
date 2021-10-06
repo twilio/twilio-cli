@@ -53,4 +53,4 @@ jobs:
           FILE: dist/${{ matrix.artifact_name }}
           ASSET_NAME: ${{ matrix.asset_name }}
           TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ravali-rimmalapudi/twilio-cli
