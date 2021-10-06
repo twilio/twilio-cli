@@ -9,7 +9,7 @@
   "bugs": "https://github.com/twilio/twilio-cli/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/twilio/twilio-cli.git"
+    "url": "https://github.com/ravali-rimmalapudi/twilio-cli.git"
   },
   "license": "MIT",
   "author": "Twilio @twilio",
@@ -125,7 +125,7 @@
     },
     "update": {
       "s3": {
-        "bucket": "twilio-cli-prod"
+        "bucket": "sr-buck"
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"
