@@ -1,4 +1,36 @@
-### [2.30.2](https://github.com/twilio/twilio-cli/compare/2.30.1...2.30.2) (2021-09-24)
+---------------------------
+**Library - Fix**
+- [PR #44](https://github.com/twilio/twilio-oai/pull/44): fix naming of params. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+**Api**
+- Add  attribute to  response.
+- Add  resource
+
+**Conversations**
+- Added attachment parameters in configuration for  type of push notifications
+
+**Flex**
+- Adding  object to Flex Configuration
+
+**Numbers**
+- Add API endpoint for Bundle ReplaceItems resource
+- Add API endpoint for Bundle Copies resource
+
+**Serverless**
+- Add domain_base field to Service response
+
+**Taskrouter**
+- Add  Header based on ETag for Worker Delete **(breaking change)**
+- Add  Header based on Etag for Reservation Update
+- Add  Header based on ETag for Worker Update
+- Add  Header based on ETag for Worker Delete
+- Add  as Response Header to Worker
+
+**Trunking**
+- Added  property on Trunks.
+
+**Verify**
+- Document new pilot  channel.### [2.30.2](https://github.com/twilio/twilio-cli/compare/2.30.1...2.30.2) (2021-09-24)
 
 
 ### Library - Fixes
