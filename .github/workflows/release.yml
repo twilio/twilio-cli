@@ -102,7 +102,7 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke Docker workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
+#         if: ${{needs.release.outputs.tag-name != ''}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'docker-release.yml'
