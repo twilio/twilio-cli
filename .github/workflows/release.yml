@@ -107,7 +107,7 @@ jobs:
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'docker-release.yml'
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ravali-rimmalapudi/twilio-cli
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
 #   platform-executables-release:
