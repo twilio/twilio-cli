@@ -14,114 +14,118 @@ on:
         default: 'false'
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x, 10.x]
-    steps:
-      - name: Checkout cli repo
-        uses: actions/checkout@v2
-      - run: npm install
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: Run tests
-        run: npm test
-  update-api-definitions-changelog:
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
-      - name: Checkout cli
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-      - name: Update Changelog
-        run: |
-          bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
-  release:
-    runs-on: ubuntu-latest
-    needs: [update-api-definitions-changelog]
-    outputs:
-      tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
-    steps:
-      - name: Checkout cli
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-      - name: Run git and npm update
-        run: |
-          git pull
-          npm install
-      - name: Semantic Release runs
-        id: semantic-release
-        run: npx semantic-release -t \${version}
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Update release
-        if: ${{steps.semantic-release.outputs.TAG_NAME != ''}}
-        run: node .github/scripts/update-release.js
-        env:
-          REPO_ACCESS_TOKEN: ${{ github.token }}
-          TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
-          RELEASE_BODY: ${{github.event.inputs.change-log}}
-          REPO_NAME: ravali-rimmalapudi/twilio-cli
-  oclif-release:
-    runs-on: ubuntu-latest
-    needs: [ release ]
-    steps:
-      - name: Checkout cli repo
-        uses: actions/checkout@v2
-      - run: |
-          git pull
-          npm install
-      - name: Extract branch name
-        id: extract_branch
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Invoke Oclif workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
-        run: node .github/scripts/trigger-workflow.js
-        env:
-          WORKFLOW_NAME: 'oclif-release.yml'
-          REPO_NAME: ravali-rimmalapudi/twilio-cli
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
-#   docker-release:
+#   test:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [14.x, 10.x]
+#     steps:
+#       - name: Checkout cli repo
+#         uses: actions/checkout@v2
+#       - run: npm install
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: 'npm'
+#       - name: Run tests
+#         run: npm test
+#   update-api-definitions-changelog:
+#     runs-on: ubuntu-latest
+#     needs: [test]
+#     steps:
+#       - name: Checkout cli
+#         uses: actions/checkout@v2
+#         with:
+#           token: ${{ secrets.REPO_ACCESS_TOKEN }}
+#       - name: Update Changelog
+#         run: |
+#           bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
+#   release:
+#     runs-on: ubuntu-latest
+#     needs: [update-api-definitions-changelog]
+#     outputs:
+#       tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
+#     steps:
+#       - name: Checkout cli
+#         uses: actions/checkout@v2
+#         with:
+#           persist-credentials: false
+#       - name: Run git and npm update
+#         run: |
+#           git pull
+#           npm install
+#       - name: Semantic Release runs
+#         id: semantic-release
+#         run: npx semantic-release -t \${version}
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+#           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#       - name: Update release
+#         if: ${{steps.semantic-release.outputs.TAG_NAME != ''}}
+#         run: node .github/scripts/update-release.js
+#         env:
+#           REPO_ACCESS_TOKEN: ${{ github.token }}
+#           TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
+#           RELEASE_BODY: ${{github.event.inputs.change-log}}
+#           REPO_NAME: ravali-rimmalapudi/twilio-cli
+#   oclif-release:
 #     runs-on: ubuntu-latest
 #     needs: [ release ]
 #     steps:
+#       - name: Checkout cli repo
+#         uses: actions/checkout@v2
+#       - run: |
+#           git pull
+#           npm install
 #       - name: Extract branch name
 #         id: extract_branch
 #         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-#       - name: Invoke Docker workflow
+#       - name: Invoke Oclif workflow
 #         if: ${{needs.release.outputs.tag-name != ''}}
 #         run: node .github/scripts/trigger-workflow.js
 #         env:
-#           WORKFLOW_NAME: 'docker-release.yml'
-#           REPO_NAME: twilio/twilio-cli
+#           WORKFLOW_NAME: 'oclif-release.yml'
+#           REPO_NAME: ravali-rimmalapudi/twilio-cli
 #           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
 #           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-  platform-executables-release:
+#           INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+  docker-release:
     runs-on: ubuntu-latest
-    needs: [ release ]
+#     needs: [ release ]
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - run: |
           git pull
-          npm install
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Invoke Platform Executables workflow
+      - name: Invoke Docker workflow
         if: ${{needs.release.outputs.tag-name != ''}}
         run: node .github/scripts/trigger-workflow.js
         env:
-          WORKFLOW_NAME: 'platform-executables.yml'
-          REPO_NAME: ravali-rimmalapudi/twilio-cli
+          WORKFLOW_NAME: 'docker-release.yml'
+          REPO_NAME: twilio/twilio-cli
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+#   platform-executables-release:
+#     runs-on: ubuntu-latest
+#     needs: [ release ]
+#     steps:
+#       - name: Checkout cli repo
+#         uses: actions/checkout@v2
+#       - run: |
+#           git pull
+#           npm install
+#       - name: Extract branch name
+#         id: extract_branch
+#         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+#       - name: Invoke Platform Executables workflow
+#         if: ${{needs.release.outputs.tag-name != ''}}
+#         run: node .github/scripts/trigger-workflow.js
+#         env:
+#           WORKFLOW_NAME: 'platform-executables.yml'
+#           REPO_NAME: ravali-rimmalapudi/twilio-cli
+#           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+#           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
