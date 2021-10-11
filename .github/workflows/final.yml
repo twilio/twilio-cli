@@ -1,4 +1,4 @@
-name: RPM Build
+name: Final Build
 
 on:
   workflow_dispatch:
