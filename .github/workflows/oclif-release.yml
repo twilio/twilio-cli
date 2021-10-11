@@ -59,6 +59,8 @@ jobs:
     name: Trigger homebrew release workflow
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
       - name: Invoke HomeBrew workflow
         run: source .github/scripts/trigger-and-wait.sh
         env:
