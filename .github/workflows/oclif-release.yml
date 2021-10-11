@@ -25,7 +25,7 @@ jobs:
     name: Dummy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/heckout@v2
+      - uses: actions/checkout@v2
 #   oclif-release:
 #     name: Publish for ${{ matrix.os }}
 #     runs-on: ${{ matrix.os }}
