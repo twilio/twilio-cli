@@ -5,7 +5,7 @@ on:
   workflow_run:
     # wait for Cli Release to complete, when it completes, start this workflow 
     workflows: 
-      - Docker Hub Release
+      - Oclif Release
     branches: [main]
     types: 
       - completed
