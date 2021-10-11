@@ -14,6 +14,12 @@ on:
       pre-release:
         description: 'Homebrew release type'
         default: 'false'
+  workflow_run:
+    # wait for Cli Release to complete, when it completes, start this workflow 
+    workflows: ["Platform Executable Release", "Docker Hub Release", "RPM Build"]
+    branches: [main]
+    types: 
+      - completed
 jobs:
   oclif-release:
     name: Publish for ${{ matrix.os }}
