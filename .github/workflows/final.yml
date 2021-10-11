@@ -25,7 +25,7 @@ jobs:
           INPUT_REF: main
           INPUT_WAITING_INTERVAL: 10
           INPUT_PROPAGATE_FAILURE: true
-          INPUT_WAIT_WORKFLOW: true
+          INPUT_TRIGGER_WORKFLOW: false
       - name: Wait for Oclif Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
@@ -36,7 +36,7 @@ jobs:
           INPUT_REF: main
           INPUT_WAITING_INTERVAL: 10
           INPUT_PROPAGATE_FAILURE: true
-          INPUT_WAIT_WORKFLOW: true
+          INPUT_TRIGGER_WORKFLOW: false
       - name: Wait for Platform Executables Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
@@ -47,7 +47,7 @@ jobs:
           INPUT_REF: main
           INPUT_WAITING_INTERVAL: 10
           INPUT_PROPAGATE_FAILURE: true
-          INPUT_WAIT_WORKFLOW: true
+          INPUT_TRIGGER_WORKFLOW: false
       - name: Wait for RPM Build
         run: source .github/scripts/trigger-and-wait.sh
         env:
@@ -58,7 +58,7 @@ jobs:
           INPUT_REF: main
           INPUT_WAITING_INTERVAL: 10
           INPUT_PROPAGATE_FAILURE: true
-          INPUT_WAIT_WORKFLOW: true
+          INPUT_TRIGGER_WORKFLOW: false
   notify-complete-success:
     needs: [ wait-for-releases ]
     name: Notify Release Completed
