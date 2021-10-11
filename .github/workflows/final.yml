@@ -13,6 +13,8 @@ jobs:
     name: Wait for Docker, Homebrew, RPM and Platform executables Release
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
       - name: Wait for Docker Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
