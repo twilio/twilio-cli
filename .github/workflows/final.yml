@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   workflow_run:
     # wait for Cli Release to complete, when it completes, start this workflow 
-    workflows: ["Docker Hub Release, Oclif Release"]
+    workflows: ["Docker Hub Release", "Oclif Release"]
     branches: [main]
     types: 
       - completed
@@ -14,3 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ahmadnassri/action-workflow-run-wait@v1
+      - run: echo "Done"
+
