@@ -6,7 +6,6 @@ on:
     # wait for Cli Release to complete, when it completes, start this workflow 
     workflows: 
       - Docker Hub Release
-      - Oclif Release
     branches: [main]
     types: 
       - completed
@@ -15,6 +14,21 @@ jobs:
     name: Dummy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: print ${{ github.event.workflow_run}}
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: docker-release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Docker Hub Release
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: oclif-release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Oclif Release
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Do something with a passing build
+        if: steps.docker-release.outputs.conclusion == 'success' && steps.oclif-release.outputs.conclusion == 'success':
+        run: echo "Done"
 
