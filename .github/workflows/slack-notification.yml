@@ -13,6 +13,9 @@ jobs:
     name: Wait for Docker, Homebrew, RPM and Platform executables Release
     runs-on: ubuntu-latest
     steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Wait for Docker Release
         uses: convictional/trigger-workflow-and-wait@v1.3.0
         with:
@@ -20,7 +23,7 @@ jobs:
           repo: twilio-cli
           github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
           workflow_file_name: docker-release.yml
-          ref: main
+          ref: ${{steps.extract_branch.outputs.branch}}
           wait_interval: 10
           trigger_workflow: false
           wait_workflow: true
@@ -31,7 +34,7 @@ jobs:
           repo: twilio-cli
           github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
           workflow_file_name: oclif-release.yml
-          ref: main
+          ref: ${{steps.extract_branch.outputs.branch}}
           wait_interval: 10
           trigger_workflow: false
           wait_workflow: true
@@ -42,7 +45,7 @@ jobs:
           repo: twilio-cli
           github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
           workflow_file_name: platform-executables.yml
-          ref: main
+          ref: ${{steps.extract_branch.outputs.branch}}
           wait_interval: 10
           trigger_workflow: false
           wait_workflow: true
@@ -53,7 +56,7 @@ jobs:
           repo: twilio-cli
           github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
           workflow_file_name: rpmbuild.yml
-          ref: main
+          ref: ${{steps.extract_branch.outputs.branch}}
           wait_interval: 10
           trigger_workflow: false
           wait_workflow: true
