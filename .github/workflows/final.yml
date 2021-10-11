@@ -5,7 +5,7 @@ on:
   workflow_run:
     # wait for Cli Release to complete, when it completes, start this workflow 
     workflows: 
-      - Oclif Release
+      - Platform Executable Release
     branches: [main]
     types: 
       - completed
@@ -22,7 +22,6 @@ jobs:
           workflow_file_name: docker-release.yml
           ref: main
           wait_interval: 10
-          propagate_failure: true
           trigger_workflow: false
           wait_workflow: true
       - uses: convictional/trigger-workflow-and-wait@v1.3.0
@@ -33,7 +32,16 @@ jobs:
           workflow_file_name: oclif-release.yml
           ref: main
           wait_interval: 10
-          propagate_failure: true
+          trigger_workflow: false
+          wait_workflow: true
+      - uses: convictional/trigger-workflow-and-wait@v1.3.0
+        with:
+          owner: ravali-rimmalapudi
+          repo: twilio-cli
+          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          workflow_file_name: platform-executables.yml
+          ref: main
+          wait_interval: 10
           trigger_workflow: false
           wait_workflow: true
       - name: Do something with a passing build
