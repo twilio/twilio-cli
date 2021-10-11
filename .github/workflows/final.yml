@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows:
-      - Platform Executable Release
+      - Cli Release
     branches: [main]
     types:
       - completed
