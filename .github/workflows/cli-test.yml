@@ -12,5 +12,6 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - run: npm install
+      - run: npm ls ansi-regex
       - name: Run tests
         run: npm test
