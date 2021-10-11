@@ -1,0 +1,37 @@
+name: Slack 
+
+on:
+  workflow_dispatch:
+jobs:
+  dummy:
+    name: Dummy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Message
+        uses: archive/github-actions-slack@master
+        id: send-message
+
+        with:
+          slack-function: send-message
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_TOKEN }}
+          slack-channel: D020WKZ9HGR
+          slack-text: This is a message
+
+      - name: Send "Slack Message" Result
+        run: echo "Data - ${{ steps.send-message.outputs.slack-result }}"
+
+      - name: Some step in between
+        run: echo "..."
+
+      - name: Send Thread Message
+        uses: archive/github-actions-slack@master
+        with:
+          slack-function: send-message
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_TOKEN }}
+          slack-channel: ${{ fromJson(steps.send-message.outputs.slack-result).response.channel }}
+          slack-text: This is a thread reply
+          slack-optional-thread_ts: ${{ fromJson(steps.send-message.outputs.slack-result).response.message.ts }}
+          #slack-optional-reply_broadcast: true # To broadcast thread reply in channel
+
+      - name: Send "Send Thread Message" Result
+        run: echo "Data - ${{ steps.send-message.outputs.slack-result }}"
