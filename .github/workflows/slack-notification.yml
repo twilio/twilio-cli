@@ -16,50 +16,52 @@ jobs:
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Wait for Docker Release
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: twilio
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: docker-release.yml
-          ref: ${{steps.extract_branch.outputs.branch}}
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
-      - name: Wait for Oclif Release
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: twilio
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: oclif-release.yml
-          ref: ${{steps.extract_branch.outputs.branch}}
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
-      - name: Wait for Platform Executables Release
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: twilio
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: platform-executables.yml
-          ref: ${{steps.extract_branch.outputs.branch}}
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
-      - name: Wait for RPM Build
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: twilio
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: rpmbuild.yml
-          ref: ${{steps.extract_branch.outputs.branch}}
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
+      - name: Checkout cli repo
+          uses: actions/checkout@v2
+            - name: Wait for Docker Release
+              run: source .github/scripts/trigger-and-wait.sh
+              env:
+                INPUT_OWNER: twilio
+                INPUT_REPO: twilio-cli
+                INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+                INPUT_WORKFLOW_FILE_NAME: docker-release.yml
+                INPUT_REF: ${{steps.extract_branch.outputs.branch}}
+                INPUT_WAITING_INTERVAL: 10
+                INPUT_PROPAGATE_FAILURE: true
+                INPUT_TRIGGER_WORKFLOW: false
+            - name: Wait for Oclif Release
+              run: source .github/scripts/trigger-and-wait.sh
+              env:
+                INPUT_OWNER: twilio
+                INPUT_REPO: twilio-cli
+                INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+                INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
+                INPUT_REF: ${{steps.extract_branch.outputs.branch}}
+                INPUT_WAITING_INTERVAL: 10
+                INPUT_PROPAGATE_FAILURE: true
+                INPUT_TRIGGER_WORKFLOW: false
+            - name: Wait for Platform Executables Release
+              run: source .github/scripts/trigger-and-wait.sh
+              env:
+                INPUT_OWNER: twilio
+                INPUT_REPO: twilio-cli
+                INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+                INPUT_WORKFLOW_FILE_NAME: platform-executables.yml
+                INPUT_REF: ${{steps.extract_branch.outputs.branch}}
+                INPUT_WAITING_INTERVAL: 10
+                INPUT_PROPAGATE_FAILURE: true
+                INPUT_TRIGGER_WORKFLOW: false
+            - name: Wait for RPM Build
+              run: source .github/scripts/trigger-and-wait.sh
+              env:
+                INPUT_OWNER: twilio
+                INPUT_REPO: twilio-cli
+                INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+                INPUT_WORKFLOW_FILE_NAME: rpmbuild.yml
+                INPUT_REF: ${{steps.extract_branch.outputs.branch}}
+                INPUT_WAITING_INTERVAL: 10
+                INPUT_PROPAGATE_FAILURE: true
+                INPUT_TRIGGER_WORKFLOW: false
   notify-complete-success:
     needs: [ wait-for-releases ]
     name: Notify Release Completed
