@@ -11,10 +11,10 @@ jobs:
       - run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_OWNER: ravali-rimmalapudi
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: docker-release.yml
-          ref: main
-          wait_interval: 10
-          trigger_workflow: true
-          wait_workflow: true
+          INPUT_REPO: twilio-cli
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: docker-release.yml
+          INPUT_REF: main
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_TRIGGER_WORKFLOW: true
+          INPUT_WAIT_WORKFLOW: true
