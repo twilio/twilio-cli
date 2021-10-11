@@ -29,6 +29,6 @@ jobs:
           checkName: Oclif Release
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Do something with a passing build
-        if: steps.docker-release.outputs.conclusion == 'success' && steps.oclif-release.outputs.conclusion == 'success':
+        if: steps.docker-release.outputs.conclusion == 'success' && steps.oclif-release.outputs.conclusion == 'success'
         run: echo "Done"
 
