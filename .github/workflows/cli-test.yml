@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
       - run: source .github/scripts/trigger-and-wait.sh
         env:
-          owner: ravali-rimmalapudi
+          INPUT_OWNER: ravali-rimmalapudi
           repo: twilio-cli
           github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
           workflow_file_name: docker-release.yml
