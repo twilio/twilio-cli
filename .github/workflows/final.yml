@@ -14,49 +14,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for Docker Release
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: ravali-rimmalapudi
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: docker-release.yml
-          ref: main
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER: ravali-rimmalapudi
+          INPUT_REPO: twilio-cli
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: docker-release.yml
+          INPUT_REF: main
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_PROPAGATE_FAILURE: true
+          INPUT_WAIT_WORKFLOW: true
       - name: Wait for Oclif Release
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: ravali-rimmalapudi
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: oclif-release.yml
-          ref: main
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER: ravali-rimmalapudi
+          INPUT_REPO: twilio-cli
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
+          INPUT_REF: main
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_PROPAGATE_FAILURE: true
+          INPUT_WAIT_WORKFLOW: true
       - name: Wait for Platform Executables Release
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: ravali-rimmalapudi
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: platform-executables.yml
-          ref: main
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER: ravali-rimmalapudi
+          INPUT_REPO: twilio-cli
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: platform-executables.yml
+          INPUT_REF: main
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_PROPAGATE_FAILURE: true
+          INPUT_WAIT_WORKFLOW: true
       - name: Wait for RPM Build
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: ravali-rimmalapudi
-          repo: twilio-cli
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: rpmbuild.yml
-          ref: main
-          wait_interval: 10
-          trigger_workflow: false
-          wait_workflow: true
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER: ravali-rimmalapudi
+          INPUT_REPO: twilio-cli
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: rpmbuild.yml
+          INPUT_REF: main
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_PROPAGATE_FAILURE: true
+          INPUT_WAIT_WORKFLOW: true
   notify-complete-success:
     needs: [ wait-for-releases ]
     name: Notify Release Completed
