@@ -60,15 +60,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Invoke HomeBrew workflow
-        uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: ravali-rimmalapudi
-          repo: homebrew-brew
-          github_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow_file_name: release.yml
-          ref: ${{ github.event.inputs.home-brew-branch }}
-          wait_interval: 10
-          inputs: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
-          propagate_failure: true
-          trigger_workflow: true
-          wait_workflow: true
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER: ravali-rimmalapudi
+          INPUT_REPO: homebrew-brew
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: release.yml
+          INPUT_REF: ${{ github.event.inputs.home-brew-branch }}
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_INPUTS: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
+          INPUT_PROPAGATE_FAILURE: true
+          INPUT_TRIGGER_WORKFLOW: true
+          INPUT_WAIT_WORKFLOW: true
