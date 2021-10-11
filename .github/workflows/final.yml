@@ -1,0 +1,16 @@
+name: RPM Build
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    # wait for Cli Release to complete, when it completes, start this workflow 
+    workflows: ["Docker Hub Release, Oclif Release"]
+    branches: [main]
+    types: 
+      - completed
+jobs:
+  dummy:
+    name: Dummy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
