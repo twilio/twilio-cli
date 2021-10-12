@@ -10,6 +10,14 @@ on:
       - completed
 jobs:
   wait-for-releases:
+    env:
+      INPUT_OWNER: twilio
+      INPUT_REPO: twilio-cli
+      INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      INPUT_REF: ${{steps.extract_branch.outputs.branch}}
+      INPUT_WAITING_INTERVAL: 10
+      INPUT_PROPAGATE_FAILURE: true
+      INPUT_TRIGGER_WORKFLOW: false
     name: Wait for Docker, Homebrew, RPM and Platform executables Release
     runs-on: ubuntu-latest
     steps:
@@ -21,47 +29,19 @@ jobs:
       - name: Wait for Docker Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: twilio
-          INPUT_REPO: twilio-cli
-          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: docker-release.yml
-          INPUT_REF: ${{steps.extract_branch.outputs.branch}}
-          INPUT_WAITING_INTERVAL: 10
-          INPUT_PROPAGATE_FAILURE: true
-          INPUT_TRIGGER_WORKFLOW: false
       - name: Wait for Oclif Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: twilio
-          INPUT_REPO: twilio-cli
-          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
-          INPUT_REF: ${{steps.extract_branch.outputs.branch}}
-          INPUT_WAITING_INTERVAL: 10
-          INPUT_PROPAGATE_FAILURE: true
-          INPUT_TRIGGER_WORKFLOW: false
       - name: Wait for Platform Executables Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: twilio
-          INPUT_REPO: twilio-cli
-          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: platform-executables.yml
-          INPUT_REF: ${{steps.extract_branch.outputs.branch}}
-          INPUT_WAITING_INTERVAL: 10
-          INPUT_PROPAGATE_FAILURE: true
-          INPUT_TRIGGER_WORKFLOW: false
       - name: Wait for RPM Build
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: twilio
-          INPUT_REPO: twilio-cli
-          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: rpmbuild.yml
-          INPUT_REF: ${{steps.extract_branch.outputs.branch}}
-          INPUT_WAITING_INTERVAL: 10
-          INPUT_PROPAGATE_FAILURE: true
-          INPUT_TRIGGER_WORKFLOW: false
   notify-complete-success:
     needs: [ wait-for-releases ]
     name: Notify Release Completed
