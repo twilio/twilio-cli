@@ -1,9 +1,8 @@
 name: Cli Tests
 on:
   push:
-     branches: [ '**' ]
-  pull_request:
      branches: [ main ]
+  pull_request:
 
 jobs:
   test:
