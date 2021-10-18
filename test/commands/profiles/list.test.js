@@ -85,7 +85,7 @@ describe('commands', () => {
           expect(ctx.stdout).to.contain('profile2');
           expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
           expect(ctx.stdout).to.not.contain('Region');
-          expect(ctx.stdout.match(/true/g)).to.have.length(1);
+          expect(ctx.stdout.match(/true/g)).to.have.length(2);
           expect(ctx.stdout).to.match(/profile1.*true/);
           expect(ctx.stderr).to.equal('');
         });
