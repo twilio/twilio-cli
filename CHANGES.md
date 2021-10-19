@@ -1,3 +1,15 @@
+## [2.32.0](https://github.com/twilio/twilio-cli/compare/2.31.0...2.32.0) (2021-10-19)
+
+
+### Library - Features
+
+* Added the slack notifications for Github actions ([#304](https://github.com/twilio/twilio-cli/issues/304)) ([8a14fdb](https://github.com/twilio/twilio-cli/commit/8a14fdb8afb650f1e656b4a3fd9e6b2186c835ff))
+
+
+### Library - Fixes
+
+* Pin node version to 14.18.1 in Dockerfile ([#310](https://github.com/twilio/twilio-cli/issues/310)) ([0588491](https://github.com/twilio/twilio-cli/commit/058849189a2d54695655f5f7b00b8a15eae90148))
+
 ---------------------------
 **Api**
 - Corrected enum values for  values in  response. **(breaking change)**
