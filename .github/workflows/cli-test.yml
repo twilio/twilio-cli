@@ -46,7 +46,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
           SLACK_COLOR: ${{ job.status }}
-          SLACK_USERNAME: CLI Bot
+          SLACK_USERNAME: CLI Github Actions
           SLACK_MSG_AUTHOR: twilio-dx
           SLACK_ICON_EMOJI: ':github:'
           SLACK_TITLE: "Twilio Cli"
