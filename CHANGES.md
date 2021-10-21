@@ -1,4 +1,34 @@
-## [2.31.0](https://github.com/twilio/twilio-cli/compare/2.30.2...2.31.0) (2021-10-07)
+### [2.32.1](https://github.com/twilio/twilio-cli/compare/2.32.0...2.32.1) (2021-10-19)
+
+
+### Library - Fixes
+
+* Revert "Resolve security vulnerability ([#306](https://github.com/twilio/twilio-cli/issues/306))" ([#315](https://github.com/twilio/twilio-cli/issues/315)) ([#316](https://github.com/twilio/twilio-cli/issues/316)) ([53a2ded](https://github.com/twilio/twilio-cli/commit/53a2ded1a89d22bcf18fd2602c89646a4287eb3c))
+
+## [2.32.0](https://github.com/twilio/twilio-cli/compare/2.31.0...2.32.0) (2021-10-19)
+
+
+### Library - Features
+
+* Added the slack notifications for Github actions ([#304](https://github.com/twilio/twilio-cli/issues/304)) ([8a14fdb](https://github.com/twilio/twilio-cli/commit/8a14fdb8afb650f1e656b4a3fd9e6b2186c835ff))
+
+
+### Library - Fixes
+
+* Pin node version to 14.18.1 in Dockerfile ([#310](https://github.com/twilio/twilio-cli/issues/310)) ([0588491](https://github.com/twilio/twilio-cli/commit/058849189a2d54695655f5f7b00b8a15eae90148))
+
+---------------------------
+**Api**
+- Corrected enum values for  values in  response. **(breaking change)**
+- Clarify  values in  response.
+
+**Messaging**
+- Add PUT and List brand vettings api
+- Removes beta feature flag based visibility for us_app_to_person_registered and usecase field.Updates test cases to add POLITICAL usecase. **(breaking change)**
+- Add brand_feedback as optional field to BrandRegistrations
+
+**Video**
+- Add  to create room## [2.31.0](https://github.com/twilio/twilio-cli/compare/2.30.2...2.31.0) (2021-10-07)
 
 
 ### Library - Chores
