@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "version": "2.32.0",
+  "version": "2.32.1",
   "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for documentation.",
   "keywords": [
     "oclif"
@@ -25,7 +25,6 @@
     "/welcome.js"
   ],
   "scripts": {
-    "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
     "postinstall": "node welcome.js",
     "lint": "eslint --ext js --ext jsx src/ test/",
     "lint:fix": "npm run lint -- --fix",
@@ -78,9 +77,6 @@
     "sinon": "^9.0.2",
     "tildify": "^2.0.0",
     "tmp": "^0.2.1"
-  },
-  "resolutions": {
-    "ansi-regex": "5.0.1"
   },
   "optionalDependencies": {
     "ngrok": "^3.2.7"
