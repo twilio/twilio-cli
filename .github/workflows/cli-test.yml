@@ -30,7 +30,7 @@ jobs:
           # Disabling shallow clone is recommended for improving relevancy of reporting.
           fetch-depth: 0
       - name: Unit tests and coverage report
-        run: bundle exec rspec --format doc
+        run: npm run test:coverage
       - name: fix code coverage paths
         working-directory: ./coverage
         run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' lcov.info
