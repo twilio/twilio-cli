@@ -22,7 +22,7 @@ jobs:
           cache: 'npm'
       - name: Run tests
         run: npm test
-      - name: SonarCloud Scan
+      - name: SonarCloud scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
