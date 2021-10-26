@@ -4,9 +4,9 @@ const fs = require('fs');
 
 
 function debArch(arch) {
-  if (arch === 'x64') return 'amd64'
+  if (arch === 'x64') return 'amd64';
   if (arch === 'arm') return 'armel'
-  throw new Error(`invalid arch: ${arch}`)
+  throw new Error(`invalid arch: ${arch}`);
 }
 
 const scripts = {
@@ -65,30 +65,31 @@ eval $(node -p "require('./package').scripts.postinstall")
     await qq.mkdirp(dist);
     const build = async (arch) => {
       // example 'twilio_2.32.1-1_amd64'
-      const versionedDebBase = `twilio_${debVersion}_${debArch(arch)}` 
+      const versionedDebBase = `twilio_${debVersion}_${debArch(arch)}`;
       // 'twilio-cli/tmp/apt/twilio_2.32.1-1_amd64.apt'
-      const workspace = qq.join(rootDir, 'tmp', 'apt', `${versionedDebBase}.apt`)
-      await qq.rm(workspace)
-      await qq.mkdirp([workspace, 'DEBIAN'])
-      await qq.mkdirp([workspace, 'usr/bin'])
-      await qq.mkdirp([workspace, 'usr/lib'])
-      await qq.mkdirp([dist, debArch(arch)])
-      await qq.cp([rootDir,'tmp',`linux-${arch}`, pjson.oclif.bin], [workspace, 'usr/lib', pjson.name])
-      await qq.write([workspace, 'usr/lib', config.dirname, 'bin', config.bin], scripts.bin(config))
-      await qq.write([workspace, 'DEBIAN/control'], scripts.control(debArch(arch), debVersion))
-      await qq.write([workspace, 'DEBIAN/postinst'], scripts.postinst())
-      await qq.chmod([workspace, 'usr/lib', config.dirname, 'bin', config.bin], 0o755)
-      await qq.chmod([workspace, 'DEBIAN/postinst'], 0o755)
-      await qq.x(`ln -s "../lib/${config.dirname}/bin/${config.bin}" "${workspace}/usr/bin/${pjson.oclif.bin}"`)
-      await qq.x(`dpkg --build "${workspace}" "${qq.join(dist, debArch(arch), `${versionedDebBase}.deb`)}"`)
+      const workspace = qq.join(rootDir, 'tmp', 'apt', `${versionedDebBase}.apt`);
+      await qq.rm(workspace);
+      await qq.mkdirp([workspace, 'DEBIAN']);
+      await qq.mkdirp([workspace, 'usr/bin']);
+      await qq.mkdirp([workspace, 'usr/lib']);
+      await qq.mkdirp([dist, debArch(arch)]);
+      await qq.cp([rootDir,'tmp',`linux-${arch}`, pjson.oclif.bin], [workspace, 'usr/lib', pjson.name]);
+      await qq.write([workspace, 'usr/lib', config.dirname, 'bin', config.bin], scripts.bin(config));
+      await qq.write([workspace, 'DEBIAN/control'], scripts.control(debArch(arch), debVersion));
+      await qq.write([workspace, 'DEBIAN/postinst'], scripts.postinst());
+      // making files executable
+      await qq.chmod([workspace, 'usr/lib', config.dirname, 'bin', config.bin], 0o755);
+      await qq.chmod([workspace, 'DEBIAN/postinst'], 0o755);
+      await qq.x(`ln -s "../lib/${config.dirname}/bin/${config.bin}" "${workspace}/usr/bin/${pjson.oclif.bin}"`);
+      await qq.x(`dpkg --build "${workspace}" "${qq.join(dist, debArch(arch), `${versionedDebBase}.deb`)}"`);
     }
     for (const a of arch) {
       await build(a);
-      await qq.x(`apt-ftparchive packages ${debArch(a)}/ >> Packages`, {cwd: dist})
+      await qq.x(`apt-ftparchive packages ${debArch(a)}/ >> Packages`, {cwd: dist});
     } 
-    await qq.x('gzip -c Packages > Packages.gz', {cwd: dist})
-    await qq.x('bzip2 -k Packages', {cwd: dist})
-    await qq.x('xz -k Packages', {cwd: dist})
+    await qq.x('gzip -c Packages > Packages.gz', {cwd: dist});
+    await qq.x('bzip2 -k Packages', {cwd: dist});
+    await qq.x('xz -k Packages', {cwd: dist});
     const ftparchive = qq.join(rootDir, 'tmp', 'apt', 'apt-ftparchive.conf');
     await qq.write(ftparchive, scripts.ftparchive(config));
     await qq.x(`apt-ftparchive -c "${ftparchive}" release . > Release`, {cwd: dist});
@@ -100,13 +101,14 @@ eval $(node -p "require('./package').scripts.postinstall")
     }
     await qq.x(`aws s3 cp ${dist} s3://${pjson.oclif.update.s3.bucket}/apt --recursive --acl public-read`);
   }
+  // importing secret key 
   const importGPG  = async() => {
     let key  = process.env.GPG_SIGNING_KEY;
     const buff = Buffer.from(key, 'base64');
     key = buff.toString("utf8");
     const keyPath = `key.pgp`;
     fs.writeFileSync(keyPath, key);
-    await qq.x(`gpg --import --batch --yes ${keyPath}`)
+    await qq.x(`gpg --import --batch --yes ${keyPath}`);
   }
 
 (async () => {  

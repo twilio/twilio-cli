@@ -32,15 +32,15 @@ jobs:
       run: |
         npm cache clear & npm install
         npm install -g @oclif/dev-cli
-        oclif-dev pack --targets=linux-x64
-        
+        oclif-dev pack -t linux-x64,linux-arm
+
     - name: Build Deb Package
       env:
         GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY}}
         GPG_SIGNING_KEY_ID: ${{ secrets.GPG_SIGNING_KEY_ID }}
         GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
       run: | 
-        node .github/scripts/pack-debian x64
+        node .github/scripts/pack-debian-apt.js x64,arm
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
