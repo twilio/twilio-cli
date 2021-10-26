@@ -27,39 +27,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#   sonarcloud:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#         with:
-#           # Disabling shallow clone is recommended for improving relevancy of reporting.
-#           fetch-depth: 0
-#       - run: npm install
-#       - name: Use Node.js 10.x
-#         uses: actions/setup-node@v2
-#         with:
-#           node-version: 10.x
-#           cache: 'npm'
-#       - name: Run tests
-#         run: |
-#           npm run test
-#           ls
-#           ls coverage
-#       - name: Unit tests and coverage report
-#         run: npm run test:coverage
-#       - name: fix code coverage paths
-#         working-directory: ./coverage
-#         run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' lcov.info
-#       - name: SonarCloud Scan
-#         uses: sonarsource/sonarcloud-github-action@master
-#         with:
-#           projectBaseDir: /home/runner/work/twilio-cli/twilio-cli
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#       - name: testing
-#         run: |
-#           cat /github/workspace/sonar-project.properties
   notify-complete-fail:
     if: ${{ failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     needs: [ test ]
