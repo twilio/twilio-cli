@@ -1,4 +1,15 @@
-### [2.30.1](https://github.com/twilio/twilio-cli/compare/2.30.0...2.30.1) (2021-09-24)
+---------------------------
+**Api**
+- Corrected enum values for  values in  response. **(breaking change)**
+- Clarify  values in  response.
+
+**Messaging**
+- Add PUT and List brand vettings api
+- Removes beta feature flag based visibility for us_app_to_person_registered and usecase field.Updates test cases to add POLITICAL usecase. **(breaking change)**
+- Add brand_feedback as optional field to BrandRegistrations
+
+**Video**
+- Add  to create room### [2.30.1](https://github.com/twilio/twilio-cli/compare/2.30.0...2.30.1) (2021-09-24)
 
 
 ### Library - Fixes
