@@ -60,7 +60,7 @@ jobs:
       - name: Invoke HomeBrew workflow
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: shamantraghav
+          INPUT_OWNER: twilio
           INPUT_REPO: homebrew-brew
           INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: release.yml
