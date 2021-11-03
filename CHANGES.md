@@ -1,3 +1,15 @@
+## [2.33.0-rc.1](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0-rc.1) (2021-11-03)
+
+
+### Library - Features
+
+* Merging main into release-feature-branch ([#322](https://github.com/twilio/twilio-cli/issues/322)) ([ef1f6d3](https://github.com/twilio/twilio-cli/commit/ef1f6d3add577a038bda57bd91e6b17bb309831b))
+
+
+### Library - Fixes
+
+* Changing repo names ([#324](https://github.com/twilio/twilio-cli/issues/324)) ([3ff79d2](https://github.com/twilio/twilio-cli/commit/3ff79d27a5402d7095eee1bb255863225c9bda68)), closes [#313](https://github.com/twilio/twilio-cli/issues/313) [#312](https://github.com/twilio/twilio-cli/issues/312) [#318](https://github.com/twilio/twilio-cli/issues/318) [#289](https://github.com/twilio/twilio-cli/issues/289) [#287](https://github.com/twilio/twilio-cli/issues/287) [#284](https://github.com/twilio/twilio-cli/issues/284) [#286](https://github.com/twilio/twilio-cli/issues/286) [#285](https://github.com/twilio/twilio-cli/issues/285) [#294](https://github.com/twilio/twilio-cli/issues/294) [#295](https://github.com/twilio/twilio-cli/issues/295) [#293](https://github.com/twilio/twilio-cli/issues/293) [#297](https://github.com/twilio/twilio-cli/issues/297) [#298](https://github.com/twilio/twilio-cli/issues/298) [#301](https://github.com/twilio/twilio-cli/issues/301) [#304](https://github.com/twilio/twilio-cli/issues/304) [#310](https://github.com/twilio/twilio-cli/issues/310) [#306](https://github.com/twilio/twilio-cli/issues/306) [#315](https://github.com/twilio/twilio-cli/issues/315) [#316](https://github.com/twilio/twilio-cli/issues/316) [#289](https://github.com/twilio/twilio-cli/issues/289) [#281](https://github.com/twilio/twilio-cli/issues/281) [#298](https://github.com/twilio/twilio-cli/issues/298) [#287](https://github.com/twilio/twilio-cli/issues/287) [#284](https://github.com/twilio/twilio-cli/issues/284) [#304](https://github.com/twilio/twilio-cli/issues/304) [#312](https://github.com/twilio/twilio-cli/issues/312) [#286](https://github.com/twilio/twilio-cli/issues/286) [#285](https://github.com/twilio/twilio-cli/issues/285) [#283](https://github.com/twilio/twilio-cli/issues/283) [#294](https://github.com/twilio/twilio-cli/issues/294) [#285](https://github.com/twilio/twilio-cli/issues/285) [#279](https://github.com/twilio/twilio-cli/issues/279) [#301](https://github.com/twilio/twilio-cli/issues/301) [#280](https://github.com/twilio/twilio-cli/issues/280) [#313](https://github.com/twilio/twilio-cli/issues/313) [#295](https://github.com/twilio/twilio-cli/issues/295) [#293](https://github.com/twilio/twilio-cli/issues/293) [#310](https://github.com/twilio/twilio-cli/issues/310) [#318](https://github.com/twilio/twilio-cli/issues/318) [#297](https://github.com/twilio/twilio-cli/issues/297) [#306](https://github.com/twilio/twilio-cli/issues/306) [#315](https://github.com/twilio/twilio-cli/issues/315) [#316](https://github.com/twilio/twilio-cli/issues/316) [#321](https://github.com/twilio/twilio-cli/issues/321)
+
 ## [2.27.0-rc.1](https://github.com/shamantraghav/twilio-cli/compare/2.26.0...2.27.0-rc.1) (2021-10-27)
 
 
