@@ -2,7 +2,7 @@
   "branches": [
     "main",
     {
-      "name": "release_feature_branch",
+      "name": "release-feature-branch",
       "prerelease": "rc"
     }
   ],
@@ -58,7 +58,12 @@
         "changelogFile": "CHANGES.md"
       }
     ],
-    "@semantic-release/npm",
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],    
     [
       "@semantic-release/github",
       {

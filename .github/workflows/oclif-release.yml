@@ -26,7 +26,7 @@ jobs:
         include:
           - os: macos-latest
             asset_name: ${{ github.event.inputs.formula }}-v${{ github.event.inputs.tag-name }}
-            command_name: npx oclif-dev pack
+            command_name: npx oclif-dev pack --xz
             publish: homebrew
     steps:
       - uses: actions/checkout@v2
@@ -49,7 +49,7 @@ jobs:
         run: |
            npx oclif-dev publish
            brew install coreutils
-           echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
+           echo "::set-output name=sha256::$(sha256sum dist/channels/rc/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
   home-brew-release:
     name: Trigger homebrew release workflow
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
       - name: Invoke HomeBrew workflow
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: twilio
+          INPUT_OWNER: shamantraghav
           INPUT_REPO: homebrew-brew
           INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: release.yml
