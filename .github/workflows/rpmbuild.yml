@@ -2,12 +2,12 @@ name: RPM Build
 
 on:
   workflow_dispatch:
-  workflow_run:
-    # wait for Cli Release to complete, when it completes, start this workflow
-    workflows: ["Cli Release"]
-    branches: [main]
-    types:
-      - completed
+  # workflow_run:
+  #   # wait for Cli Release to complete, when it completes, start this workflow
+  #   workflows: ["Cli Release"]
+  #   branches: [main]
+  #   types:
+  #     - completed
 jobs:
 
   rpmbuild:
