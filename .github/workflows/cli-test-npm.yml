@@ -1,0 +1,34 @@
+name: CLI Tests on npm installations
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 14.x, 10.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+         node-version: ${{ matrix.node-version }}
+      -  name: Global - Testing installation of Twilio CLI (1)
+         run: |
+          npm install -g twilio-cli
+          node .github/asserts/validate_tests.js
+      - name: Global - Testing upgrade Twilio CLI (2)
+        run: |
+         npm install -g twilio-cli@{previous-version}
+            npm install -g twilio-cli
+            node .github/asserts/validate_tests.js
+      - name: Local - Testing installation of Twilio CLI (1)
+        run: |
+         npm install twilio-cli
+         node .github/asserts/validate_tests.js
+      - name: Local - Testing upgrade Twilio CLI (2)
+        run: |
+         npm install twilio-cli@{previous-version}
+          npm install twilio-cli
+          node .github/asserts/validate_tests.js
+          
