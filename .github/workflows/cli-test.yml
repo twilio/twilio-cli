@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
       - run: npm install
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -22,21 +25,14 @@ jobs:
           cache: 'npm'
       - name: Run tests
         run: npm test
-  sonarcloud:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting.
-          fetch-depth: 0
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   notify-complete-fail:
-    if: ${{ failure() || cancelled() }}
-    needs: [ test, sonarcloud ]
+    if: ${{ failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+    needs: [ test ]
     name: Notify Test Failed
     runs-on: ubuntu-latest
     steps:
