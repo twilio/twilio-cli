@@ -1,4 +1,40 @@
-### [2.32.1](https://github.com/twilio/twilio-cli/compare/2.32.0...2.32.1) (2021-10-19)
+## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
+
+
+### Library - Features
+
+* Added the tests and sonarcloud jobs ([#312](https://github.com/twilio/twilio-cli/issues/312)) ([bfc7d57](https://github.com/twilio/twilio-cli/commit/bfc7d573919c6beb23acd9844a923cbf3fb885d4))
+
+
+### Library - Fixes
+
+* Fixing the release issue ([#313](https://github.com/twilio/twilio-cli/issues/313)) ([b893be6](https://github.com/twilio/twilio-cli/commit/b893be61f0ca1543b8f8c5d0728ea1b7fcdfdbed))
+* Pin peer dependency semantic-release ([#318](https://github.com/twilio/twilio-cli/issues/318)) ([00ac1d8](https://github.com/twilio/twilio-cli/commit/00ac1d8809b8c410445be67a7dc6f5154c2452de))
+
+
+### Library - Chores
+
+* Add xz compression for tarballs ([#321](https://github.com/twilio/twilio-cli/issues/321)) ([9bd5494](https://github.com/twilio/twilio-cli/commit/9bd5494264600ace8bd27752a1da59fecf53eda9))
+
+---------------------------
+**Library - Chore**
+- [PR #46](https://github.com/twilio/twilio-oai/pull/46): migrate from travis over to gh actions. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+**Api**
+- Updated  property to be treated as PII
+
+**Messaging**
+- Added a new enum for brand registration status named DELETED **(breaking change)**
+- Add a new K12_EDUCATION use case in us_app_to_person_usecase api transaction
+- Added a new enum for brand registration status named IN_REVIEW
+
+**Serverless**
+- Add node14 as a valid Build runtime
+
+**Verify**
+- Fix typos in Verify Push Factor documentation for the  parameter.
+- Added  on verification creation
+- Make  parameter public for Verification resource and  parameter public for Service resource. **(breaking change)**### [2.32.1](https://github.com/twilio/twilio-cli/compare/2.32.0...2.32.1) (2021-10-19)
 
 
 ### Library - Fixes
