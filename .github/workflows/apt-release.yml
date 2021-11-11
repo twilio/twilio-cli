@@ -15,6 +15,7 @@ jobs:
     steps:
     - name: Check Out Repo
       uses: actions/checkout@v2
+      
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
