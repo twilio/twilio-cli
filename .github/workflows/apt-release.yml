@@ -15,11 +15,6 @@ jobs:
     steps:
     - name: Check Out Repo
       uses: actions/checkout@v2
-    - name: Fetch tag
-      id: get-tag
-      run: |
-        git fetch --tags
-        echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
