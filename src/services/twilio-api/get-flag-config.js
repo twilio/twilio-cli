@@ -1,5 +1,6 @@
 const { kebabCase } = require('@twilio/cli-core').services.namingConventions;
 
+const urlUtil = require('../hyperlink-utility');
 const { TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('./get-topic-name');
 
 // AccountSid is a special snowflake
@@ -13,6 +14,26 @@ const getFlagName = (paramName) => {
   return kebabCase(paramName.replace('<', 'Before').replace('>', 'After'));
 };
 
+const scanForUrl = (description) => {
+  // regex : [checks for any char](checks for https:// | http://, followed by w,d,?,=,#,-)
+  const regex = /\[((.*?)\w+)\]\(((https?:\/\/)[\w\d./?=#/-]+)\)/g;
+  const matches = description.match(regex);
+  if (!matches) {
+    return description;
+  }
+
+  // for all urls in the description
+  for (match of matches) {
+    const details = match.split(']('); // splitting to find out the text and url
+    const text = details[0].substr(1); // takes out text from [text]
+    const url = details[1].substr(0, details[1].indexOf(')')); // takes out url from (url)
+
+    const hyperLink = urlUtil.convertToHyperlink(text, url);
+    description = description.replace(match, hyperLink.url);
+  }
+
+  return description;
+};
 /**
  * Converts a Twilio API parameter into a Twilio CLI flag.
  *
@@ -39,6 +60,9 @@ const getFlagConfig = (parameter, actionDefinition) => {
        */
       flagDescription = flagDescription.replace(/that created.*?\./, 'that you wish to own the number.');
     }
+  }
+  if (urlUtil.supportsHyperlink()) {
+    flagDescription = scanForUrl(flagDescription);
   }
 
   return {

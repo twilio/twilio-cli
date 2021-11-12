@@ -1,0 +1,55 @@
+name: Cli Tests
+on:
+  push:
+     branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x, 14.x, 10.x]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - run: npm install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run tests
+        run: npm test
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting.
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  notify-complete-fail:
+    if: ${{ failure() || cancelled() }}
+    needs: [ test, sonarcloud ]
+    name: Notify Test Failed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_USERNAME: CLI Github Actions
+          SLACK_MSG_AUTHOR: twilio-dx
+          SLACK_ICON_EMOJI: ':github:'
+          SLACK_TITLE: "Twilio Cli"
+          SLACK_MESSAGE: 'Cli tests failed'
+          MSG_MINIMAL: actions url
+          SLACK_FOOTER: Posted automatically using GitHub Actions

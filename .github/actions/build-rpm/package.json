@@ -1,0 +1,27 @@
+{
+  "name": "build-rpm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Github action for building RPM packages",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc",
+    "package": "ncc build --source-map "
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/exec": "^1.0.4",
+    "openpgp": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.10",
+    "@vercel/ncc": "^0.25.1",
+    "typescript": "^4.0.5"
+  }
+}

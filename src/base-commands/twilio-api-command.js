@@ -10,7 +10,7 @@ const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { camelCase } = require('@twilio/cli-core').services.namingConventions;
 
-const { ApiCommandRunner, getActionDescription, getFlagConfig } = require('../services/twilio-api');
+const { ApiCommandRunner, getActionDescription, getFlagConfig, getDocLink } = require('../services/twilio-api');
 
 // Open API type to oclif flag type mapping. For numerical types, we'll do validation elsewhere.
 const typeMap = {
@@ -124,6 +124,7 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
   NewCommandClass.args = [];
   NewCommandClass.flags = Object.assign(cmdFlags, TwilioApiCommand.flags);
   NewCommandClass.description = getActionDescription(NewCommandClass.actionDefinition);
+  NewCommandClass.docLink = getDocLink(NewCommandClass.id);
   NewCommandClass.load = () => NewCommandClass;
 
   return NewCommandClass;
