@@ -4,21 +4,14 @@ const { flags } = require('@oclif/command');
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CliRequestClient } = require('@twilio/cli-core').services;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
-const { STORAGE_LOCATIONS } = require('@twilio/cli-core').services.secureStorage;
 
 const helpMessages = require('../../services/messaging/help-messages');
-
-const FRIENDLY_STORAGE_LOCATIONS = {
-  [STORAGE_LOCATIONS.KEYCHAIN]: 'in your keychain',
-  [STORAGE_LOCATIONS.WIN_CRED_VAULT]: 'in the Windows credential vault',
-  [STORAGE_LOCATIONS.LIBSECRET]: 'using libsecret',
-};
 
 const SKIP_VALIDATION = 'skip-parameter-validation';
 
 class ProfilesCreate extends BaseCommand {
-  constructor(argv, config, secureStorage) {
-    super(argv, config, secureStorage);
+  constructor(argv, config) {
+    super(argv, config);
 
     this.accountSid = undefined;
     this.authToken = undefined;
@@ -30,9 +23,6 @@ class ProfilesCreate extends BaseCommand {
   async run() {
     await super.run();
 
-    // Eagerly load up the credential store. No need to proceed if this fails.
-    await this.secureStorage.loadKeytar();
-
     this.loadArguments();
 
     this.loadAccountSid();
@@ -43,6 +33,9 @@ class ProfilesCreate extends BaseCommand {
       await this.loadProfileId();
       await this.saveCredentials();
       this.logger.info(`Saved ${this.profileId}.`);
+      if (!this.userConfig.getActiveProfile()) {
+        this.logger.warn(`You don't have any active profile set, run "twilio profiles:use" to set a profile as active`);
+      }
     } else {
       this.cancel();
     }
@@ -240,17 +233,25 @@ class ProfilesCreate extends BaseCommand {
       this.logger.debug(error);
       throw new TwilioCliError('Could not create an API Key.');
     }
-
-    this.userConfig.addProfile(this.profileId, this.accountSid, this.region);
-    await this.secureStorage.saveCredentials(this.profileId, apiKey.sid, apiKey.secret);
+    await this.removeKeytarKeysByProfileId(this.profileId);
+    this.userConfig.addProfile(this.profileId, this.accountSid, this.region, apiKey.sid, apiKey.secret);
     const configSavedMessage = await this.configFile.save(this.userConfig);
 
     this.logger.info(
-      `Created API Key ${apiKey.sid} and stored the secret ${
-        FRIENDLY_STORAGE_LOCATIONS[this.secureStorage.storageLocation]
-      }. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
+      `Created API Key ${apiKey.sid} and stored the secret in Config. See: https://www.twilio.com/console/runtime/api-keys/${apiKey.sid}`,
     );
     this.logger.info(configSavedMessage);
+  }
+
+  async removeKeytarKeysByProfileId(profileId) {
+    if (this.userConfig.projects.find((p) => p.id === profileId)) {
+      const removed = await this.secureStorage.removeCredentials(profileId);
+      if (removed === true) {
+        this.logger.info('Deleted key from keytar.');
+      } else {
+        this.logger.warn(`Could not delete ${profileId} key from keytar.`);
+      }
+    }
   }
 }
 

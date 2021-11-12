@@ -38,6 +38,7 @@ describe('commands', () => {
           .do((ctx) => {
             ctx.userConfig = new ConfigData();
             ctx.userConfig.addProfile('default', constants.FAKE_ACCOUNT_SID);
+            ctx.userConfig.setActiveProfile('default');
 
             if (promptAcked) {
               ctx.userConfig.ackPrompt('ngrok-warning');
