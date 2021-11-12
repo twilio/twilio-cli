@@ -1,6 +1,10 @@
 name: CLI Tests on npm installations
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to use for running test cases'
+        required: true
 
 jobs:
   test:
@@ -19,7 +23,7 @@ jobs:
           node .github/asserts/validate_tests.js
       - name: Global - Testing upgrade Twilio CLI (2)
         run: |
-         npm install -g twilio-cli@{previous-version}
+         npm install -g twilio-cli@{version}
             npm install -g twilio-cli
             node .github/asserts/validate_tests.js
       - name: Local - Testing installation of Twilio CLI (1)
@@ -28,7 +32,7 @@ jobs:
          node .github/asserts/validate_tests.js
       - name: Local - Testing upgrade Twilio CLI (2)
         run: |
-         npm install twilio-cli@{previous-version}
+         npm install twilio-cli@{version}
           npm install twilio-cli
           node .github/asserts/validate_tests.js
           
