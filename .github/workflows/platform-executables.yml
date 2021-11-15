@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          npm install
+          make install
           if [ "$RUNNER_OS" == "macOS" ]; then
             brew install makensis
           fi

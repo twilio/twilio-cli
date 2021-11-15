@@ -23,7 +23,7 @@ jobs:
 
       - name: generate linux tarball
         run: |
-          npm cache clear & npm install
+          make install
           npm install -g @oclif/dev-cli
           oclif-dev pack --targets=linux-x64
 
