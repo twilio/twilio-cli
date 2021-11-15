@@ -24,6 +24,7 @@ jobs:
       - name: generate linux tarball
         run: |
           make install
+          npm list @twilio/cli-core
           npm install -g @oclif/dev-cli
           oclif-dev pack --targets=linux-x64
 
