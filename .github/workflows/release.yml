@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
-      - run: npm install
+      - run: make install
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -54,7 +54,7 @@ jobs:
       - name: Run git and npm update
         run: |
           git pull
-          npm install
+          make install
       - name: Semantic Release runs
         id: semantic-release
         run: npx semantic-release -t \${version}
@@ -77,7 +77,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git pull
-          npm install
+          make install
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -98,7 +98,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git pull
-          npm install
+          make install
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -118,7 +118,7 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git pull
-          npm install
+          make install
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"

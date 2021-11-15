@@ -8,7 +8,7 @@ RUN npm install && \
 
 FROM centos:latest
 # library need to generate rpm package
-RUN yum install -y rpm-build rpmdevtools gcc rpm-sign pinentry && \
+RUN yum install -y rpm-build rpmdevtools gcc rpm-sign pinentry make && \
     curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
     yum install -y nodejs
 # add package need to build rpm
