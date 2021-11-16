@@ -10,7 +10,7 @@ on:
         required: true
       formula:
           description: 'Formula to release in homebrew'
-          default: twilio
+          default: twiliorc
       pre-release:
         description: 'Homebrew release type'
         default: 'false'
