@@ -126,6 +126,7 @@
     },
     "update": {
       "s3": {
+        "xz": true,
         "bucket": "twilio-cli-prod"
       }
     },
