@@ -1,4 +1,17 @@
-## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
+---------------------------
+**Frontline**
+- Added  to User's resource
+
+**Messaging**
+- Added GET vetting API
+
+**Verify**
+- Add  to the attempts API.
+- Allow to update  from  to  or  and viceversa for Verify Push
+- Add  as a valid  value for Verify Push
+
+**Twiml**
+- Add supported SSML children to , , , , , and .## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
 
 
 ### Library - Features
