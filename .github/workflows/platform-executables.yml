@@ -29,14 +29,17 @@ jobs:
             artifact_name: deb/${{ github.event.inputs.formula }}_${{ needs.get-tag.outputs.TAG_NAME }}-1_amd64.deb
             asset_name: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.deb
             command_name: sudo npx oclif-dev pack:deb
+            download_cmd: sudo dpkg -i
           - os: macos-latest
             artifact_name: win/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
             asset_name: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
             command_name: npx oclif-dev pack:win
+            download_cmd: start
           - os: macos-latest
             artifact_name: macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
             asset_name: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.pkg
             command_name: npx oclif-dev pack:macos
+            download_cmd: sudo installer -pkg 
 
     steps:
       - uses: actions/checkout@v2
@@ -46,6 +49,16 @@ jobs:
             brew install makensis
           fi
           ${{ matrix.command_name }}
+      - name: Perform sanity test on binaries
+        run: |
+            "${{matrix.download_cmd}} ${{matrix.artifact_name}}"
+            node src/asserts/validate_tests.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE: dist/${{ matrix.artifact_name }}
+          ASSET_NAME: ${{ matrix.asset_name }}
+          TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
+          REPO_NAME: twilio/twilio-cli 
       - name: Upload binaries to release
         run: node .github/scripts/update-platform-executables.js
         env:
