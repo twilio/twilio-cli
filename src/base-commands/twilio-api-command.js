@@ -117,6 +117,7 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
   // 'list' commands get limit flags for specifying the result set size.
   if (NewCommandClass.actionDefinition.commandName === 'list') {
     cmdFlags = Object.assign(cmdFlags, TwilioClientCommand.limitFlags);
+    cmdFlags = Object.assign(cmdFlags, TwilioClientCommand.noHeader);
   }
 
   // Class statics
