@@ -20,10 +20,10 @@ jobs:
       -  name: Global - Testing installation of Twilio CLI (1)
          run: |
           brew tap twilio/brew && brew install twilio@${{ github.event.inputs.version }}
-          node src/asserts/validate_tests.js
+          node test/asserts/validate_tests.js
       - name: Global - Testing upgrade Twilio CLI (2)
         run: |
           brew tap twilio/brew && brew install twilio@${{ github.event.inputs.version }}
           brew upgrade twilio
-          node src/asserts/validate_tests.js
+          node test/asserts/validate_tests.js
           
