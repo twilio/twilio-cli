@@ -31,7 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          npm install
+          make install
+          npm list @twilio/cli-core
           if [ "$RUNNER_OS" == "macOS" ]; then
             brew install makensis
           fi
