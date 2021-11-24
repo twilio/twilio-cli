@@ -20,19 +20,19 @@ jobs:
       -  name: Global - Testing installation of Twilio CLI (1)
          run: |
           npm make install -g twilio-cli@${{ github.event.inputs.version }}
-          node src/asserts/validate_tests.js
+          node test/asserts/validate_tests.js
       - name: Global - Testing upgrade Twilio CLI (2)
         run: |
          npm make install -g twilio-cli@${{ github.event.inputs.version }}
             npm install -g twilio-cli
-            node src/asserts/validate_tests.js
+            node test/asserts/validate_tests.js
       - name: Local - Testing installation of Twilio CLI (1)
         run: |
          npm install twilio-cli
-         node src/asserts/validate_tests.js
+         node test/asserts/validate_tests.js
       - name: Local - Testing upgrade Twilio CLI (2)
         run: |
          npm install twilio-cli@${{ github.event.inputs.version }}
           npm install twilio-cli
-          node src/asserts/validate_tests.js
+          node test/asserts/validate_tests.js
           
