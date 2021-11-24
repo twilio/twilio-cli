@@ -1,4 +1,37 @@
-## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
+## [2.34.0](https://github.com/twilio/twilio-cli/compare/2.33.0...2.34.0) (2021-11-18)
+
+
+### Library - Fixes
+
+* Added changes for lcov ([#319](https://github.com/twilio/twilio-cli/issues/319)) ([43cc6ad](https://github.com/twilio/twilio-cli/commit/43cc6adefea72c08f63bea1574fab35ffa6ded54))
+* Disable hyperlinks in Ubuntu ([#329](https://github.com/twilio/twilio-cli/issues/329)) ([14f7cb3](https://github.com/twilio/twilio-cli/commit/14f7cb3560a02091550d5f26c86bfd19ca8a1607))
+* reverting changes for the RPM build ([#326](https://github.com/twilio/twilio-cli/issues/326)) ([c9eaad8](https://github.com/twilio/twilio-cli/commit/c9eaad8e9cbdf0d36e5d7662daee55dfa4608f1d))
+* updating release steps to fetch latest dependencies ([#332](https://github.com/twilio/twilio-cli/issues/332)) ([ece2b9f](https://github.com/twilio/twilio-cli/commit/ece2b9f397ffd18d74f90c38e17e74c920ca8548))
+
+
+### Library - Features
+
+* adding workflow for apt release ([#320](https://github.com/twilio/twilio-cli/issues/320)) ([bdfab17](https://github.com/twilio/twilio-cli/commit/bdfab17174a232a1cb2891f709ca24d34104eea1))
+
+
+### Library - Chores
+
+* update slack alerts color ([#336](https://github.com/twilio/twilio-cli/issues/336)) ([ba5ee89](https://github.com/twilio/twilio-cli/commit/ba5ee89ca59b283e5370327c3ca3494a8b2aec84))
+
+---------------------------
+**Frontline**
+- Added  to User's resource
+
+**Messaging**
+- Added GET vetting API
+
+**Verify**
+- Add  to the attempts API.
+- Allow to update  from  to  or  and viceversa for Verify Push
+- Add  as a valid  value for Verify Push
+
+**Twiml**
+- Add supported SSML children to , , , , , and .## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
 
 
 ### Library - Features
