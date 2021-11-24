@@ -29,7 +29,7 @@ DIR=\$(get_script_dir)
 export ${('UPDATE_INSTRUCTIONS')}="update with \\"sudo apt update && sudo apt install ${pjson.oclif.bin}\\""
 \$DIR/node \$DIR/run "\$@"
 `,
-control: (arch, debVersion) => `Package: ${pjson.oclif.bin}
+  control: (arch, debVersion) => `Package: ${pjson.oclif.bin}
 Version: ${debVersion}
 Section: main
 Priority: standard
@@ -42,9 +42,9 @@ APT::FTPArchive::Release::Origin "${pjson.author}";
 APT::FTPArchive::Release::Suite "stable";
 }
 `,
-postinst: () => `#!/usr/bin/env bash 
+  postinst: () => `#!/usr/bin/env bash
 cd /usr/lib/twilio-cli
-eval $(node -p "require('./package').scripts.postinstall")
+PATH=$PATH:$PWD/bin eval $(PATH=$PATH:$PWD/bin node -p "require('./package').scripts.postinstall")
 `
 }
 
@@ -86,7 +86,7 @@ eval $(node -p "require('./package').scripts.postinstall")
     for (const a of arch) {
       await build(a);
       await qq.x(`apt-ftparchive packages ${debArch(a)}/ >> Packages`, {cwd: dist});
-    } 
+    }
     await qq.x('gzip -c Packages > Packages.gz', {cwd: dist});
     await qq.x('bzip2 -k Packages', {cwd: dist});
     await qq.x('xz -k Packages', {cwd: dist});
@@ -101,7 +101,7 @@ eval $(node -p "require('./package').scripts.postinstall")
     }
     await qq.x(`aws s3 cp ${dist} s3://${pjson.oclif.update.s3.bucket}/apt --recursive --acl public-read`);
   }
-  // importing secret key 
+  // importing secret key
   const importGPG  = async() => {
     let key  = process.env.GPG_SIGNING_KEY;
     const buff = Buffer.from(key, 'base64');
@@ -111,7 +111,7 @@ eval $(node -p "require('./package').scripts.postinstall")
     await qq.x(`gpg --import --batch --yes ${keyPath}`);
   }
 
-(async () => {  
+(async () => {
   importGPG();
   const archStr = process.argv[2];
   const arches = archStr.split(",");
