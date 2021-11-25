@@ -1,0 +1,68 @@
+name: Platform Executable Sanity testing
+on:
+ push:
+  branches:
+  - platform_exec_test
+#   workflow_dispatch:
+#     inputs:
+#       formula:
+#         description: 'Artifact Prefix'
+#         default: twilio
+# jobs:
+# on:
+#   # push:
+#   #  branches: [platform_exec_test]
+#   workflow_dispatch:
+#    inputs:
+#       formula:
+#         description: 'Artifact Prefix'
+#         default: twilio
+#     #  workflows: ["Platform Executable Release"]
+#     #  branches: [main, platform_exec_test]
+#     #  types:
+#     #    - completed
+  
+jobs:
+  get-tag:
+    runs-on: ubuntu-latest
+    outputs:
+     TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
+    steps:
+     - uses: actions/checkout@v2
+     - name: Getting latest tag
+       id: get-tag
+       run: |
+        git fetch --prune --unshallow
+        echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+  platform-exec-test:
+    name: Test for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: [get-tag]
+    strategy:
+     matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: deb/twilio_${{ needs.get-tag.outputs.TAG_NAME }}-1_amd64.deb
+            asset_name: twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
+            download_cmd: sudo dpkg -i
+          - os: macos-latest
+            artifact_name: win/twilio-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
+            asset_name: twilio-${{ needs.get-tag.outputs.TAG_NAME }}.exe
+            command_name: npx oclif-dev pack:win
+            download_cmd: start
+          - os: macos-latest
+            artifact_name: macos/twilio-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+            asset_name: twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+            command_name: npx oclif-dev pack:macos
+            download_cmd: sudo installer -pkg
+    steps:
+       - name: Checkout cli repo
+         uses: actions/checkout@v2
+       - name: Perform sanity test on binaries
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+           gh release download ${{matrix.asset_name}}
+          # ${{matrix.download_cmd}} ${{matrix.asset_name}}
+          # node src/asserts/validate_tests.js
+         

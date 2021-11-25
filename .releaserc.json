@@ -1,12 +1,16 @@
 {
   "branches": [
-    "main",
+    "main", "platform_exec_test",
     {
       "name": "release_feature_branch",
       "prerelease": "rc"
     },
     {
       "name": "main",
+      "prerelease": "draft"
+    },
+    {
+      "name": "platform_exec_test",
       "prerelease": "draft"
     }
   ],
@@ -62,7 +66,12 @@
         "changelogFile": "CHANGES.md"
       }
     ],
-    "@semantic-release/npm",
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],
     [
       "@semantic-release/github",
       {
