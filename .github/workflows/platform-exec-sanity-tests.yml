@@ -1,27 +1,13 @@
 name: Platform Executable Sanity testing
 on:
- push:
-  branches:
-  - platform_exec_test
-#   workflow_dispatch:
-#     inputs:
-#       formula:
-#         description: 'Artifact Prefix'
-#         default: twilio
-# jobs:
-# on:
-#   # push:
-#   #  branches: [platform_exec_test]
-#   workflow_dispatch:
-#    inputs:
-#       formula:
-#         description: 'Artifact Prefix'
-#         default: twilio
-#     #  workflows: ["Platform Executable Release"]
-#     #  branches: [main, platform_exec_test]
-#     #  types:
-#     #    - completed
-  
+  workflow_dispatch:
+  workflow_run:
+    # wait for Platform Executable Release to complete
+    workflows: ["Platform Executable Release"]
+    branches: [main]
+    types:
+      - completed
+ 
 jobs:
   get-tag:
     runs-on: ubuntu-latest
@@ -39,30 +25,48 @@ jobs:
     runs-on: ${{ matrix.os }}
     needs: [get-tag]
     strategy:
+     fail-fast: false
      matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: deb/twilio_${{ needs.get-tag.outputs.TAG_NAME }}-1_amd64.deb
-            asset_name: twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
-            download_cmd: sudo dpkg -i
+            extension_type: '.deb'
+            cmds_to_execute: sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
           - os: macos-latest
-            artifact_name: win/twilio-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
-            asset_name: twilio-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-            command_name: npx oclif-dev pack:win
-            download_cmd: start
-          - os: macos-latest
-            artifact_name: macos/twilio-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
-            asset_name: twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg
-            command_name: npx oclif-dev pack:macos
-            download_cmd: sudo installer -pkg
+            extension_type: '.pkg'
+            cmds_to_execute: sudo installer -pkg twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg -target ~/
     steps:
        - name: Checkout cli repo
          uses: actions/checkout@v2
-       - name: Perform sanity test on binaries
+       - name: Perform sanity install and test on binaries
          env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          run: |
-           gh release download ${{matrix.asset_name}}
-          # ${{matrix.download_cmd}} ${{matrix.asset_name}}
-          # node src/asserts/validate_tests.js
+            gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*${{matrix.extension_type}}'
+            ${{matrix.cmds_to_execute}}
+            ls
+            twilio --version
+            twilio api --help
+  platform-exec-test-Windows:
+     name: Test for Windows
+     runs-on: windows-latest
+     needs: [get-tag]  
+     steps:
+       - name: Checkout cli repo
+         uses: actions/checkout@v2
+       - name: Perform sanity install and tests on Windows
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+            gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.exe'
+            ls
+            iwr -useb get.scoop.sh | iex
+            scoop install gsudo
+            ./twilio-${{ needs.get-tag.outputs.TAG_NAME }}.exe /S
+            sleep 100
+            $env:Path += ";C:\Program Files (x86)\twilio-cli\bin"
+            $Env:Path
+            cd C:\"Program Files (x86)\twilio-cli"
+            dir
+            twilio --version
+            twilio api --help
          
