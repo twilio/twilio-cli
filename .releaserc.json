@@ -8,10 +8,6 @@
     {
       "name": "main",
       "prerelease": "draft"
-    },
-    {
-      "name": "platform_exec_test",
-      "prerelease": "draft"
     }
   ],
   "plugins": [

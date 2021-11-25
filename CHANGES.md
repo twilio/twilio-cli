@@ -1,44 +1,37 @@
-## [2.34.0](https://github.com/shrutiburman/twilio-cli/compare/2.33.1...2.34.0) (2021-11-25)
-
-
-### Library - Chores
-
-* workflows in rpm build ([579457f](https://github.com/shrutiburman/twilio-cli/commit/579457f23107e24f98f5c88ea6249531f88de0e6))
-
-
-### Library - Features
-
-* added a separate workflow for sanity checks ([3e22951](https://github.com/shrutiburman/twilio-cli/commit/3e22951605839b78a3d33d24ff06dcf4ad031cee))
-* added a separate workflow for sanity checks ([514b0aa](https://github.com/shrutiburman/twilio-cli/commit/514b0aad6f975ad7a834bcb60d03db862c784757))
-* added a separate workflow for sanity checks , trigger from release ([53354cb](https://github.com/shrutiburman/twilio-cli/commit/53354cb3e4cc2a11ffe658d0b5b7cd11716892c6))
-
-### [2.33.1](https://github.com/shrutiburman/twilio-cli/compare/2.33.0...2.33.1) (2021-11-24)
+## [2.34.0](https://github.com/twilio/twilio-cli/compare/2.33.0...2.34.0) (2021-11-18)
 
 
 ### Library - Fixes
 
-* Added changes for lcov ([#319](https://github.com/shrutiburman/twilio-cli/issues/319)) ([43cc6ad](https://github.com/shrutiburman/twilio-cli/commit/43cc6adefea72c08f63bea1574fab35ffa6ded54))
-* Disable hyperlinks in Ubuntu ([#329](https://github.com/shrutiburman/twilio-cli/issues/329)) ([14f7cb3](https://github.com/shrutiburman/twilio-cli/commit/14f7cb3560a02091550d5f26c86bfd19ca8a1607))
-* PE separate job for testing ([3a65720](https://github.com/shrutiburman/twilio-cli/commit/3a65720e235fd65125a1868966b0bb17e58af929))
-* PE separate job for testing, dummy cmd node ([eae7365](https://github.com/shrutiburman/twilio-cli/commit/eae7365cd69a2c49dcc92d6715ec5b25cdcebd05))
-* PE separate job for testing, proper names ([0953843](https://github.com/shrutiburman/twilio-cli/commit/095384356f86a216eb61e96ffd141d4e15c8b0a1))
-* PE try dummy job ([d99709d](https://github.com/shrutiburman/twilio-cli/commit/d99709d272802bee6dbee018ae83905bc4c0ca4d))
-* PE try dummy job , syntax corrected ([9eb34af](https://github.com/shrutiburman/twilio-cli/commit/9eb34af02501cbe8a55fabeec26598d6a0250828))
-* PE try dummy job , syntax corrected ([7d7ff03](https://github.com/shrutiburman/twilio-cli/commit/7d7ff03d60cbb5142f82910f00751a39f9652e3f))
-* PE try dummy job with a release ([5ce0cf1](https://github.com/shrutiburman/twilio-cli/commit/5ce0cf1597cd4f3422222638b1f4906882fc6792))
-* PE try dummy job with a release trying orig now ([cb1194e](https://github.com/shrutiburman/twilio-cli/commit/cb1194e1ef3d7ccb40724d6f4590d28eb3234f4b))
-* PE use asset name now ([ce1f55c](https://github.com/shrutiburman/twilio-cli/commit/ce1f55c99e5c22c08a068b97a793769b1c2964b6))
-* reverting changes for the RPM build ([#326](https://github.com/shrutiburman/twilio-cli/issues/326)) ([c9eaad8](https://github.com/shrutiburman/twilio-cli/commit/c9eaad8e9cbdf0d36e5d7662daee55dfa4608f1d))
-* test platform execs , default the tag ([19c54ee](https://github.com/shrutiburman/twilio-cli/commit/19c54ee5f95157bdf1229740b70eb89906f7a4a8))
+* Added changes for lcov ([#319](https://github.com/twilio/twilio-cli/issues/319)) ([43cc6ad](https://github.com/twilio/twilio-cli/commit/43cc6adefea72c08f63bea1574fab35ffa6ded54))
+* Disable hyperlinks in Ubuntu ([#329](https://github.com/twilio/twilio-cli/issues/329)) ([14f7cb3](https://github.com/twilio/twilio-cli/commit/14f7cb3560a02091550d5f26c86bfd19ca8a1607))
+* reverting changes for the RPM build ([#326](https://github.com/twilio/twilio-cli/issues/326)) ([c9eaad8](https://github.com/twilio/twilio-cli/commit/c9eaad8e9cbdf0d36e5d7662daee55dfa4608f1d))
+* updating release steps to fetch latest dependencies ([#332](https://github.com/twilio/twilio-cli/issues/332)) ([ece2b9f](https://github.com/twilio/twilio-cli/commit/ece2b9f397ffd18d74f90c38e17e74c920ca8548))
+
+
+### Library - Features
+
+* adding workflow for apt release ([#320](https://github.com/twilio/twilio-cli/issues/320)) ([bdfab17](https://github.com/twilio/twilio-cli/commit/bdfab17174a232a1cb2891f709ca24d34104eea1))
 
 
 ### Library - Chores
 
-* package json url ([986552f](https://github.com/shrutiburman/twilio-cli/commit/986552f7597bdef0ec3bbfca712584f5c9d63e70))
-* package json url ([4fd2ebc](https://github.com/shrutiburman/twilio-cli/commit/4fd2ebc55f63db5ecda8e1c7e64741bf79908fc3))
-* PE try release only ubuntu ([5d713a3](https://github.com/shrutiburman/twilio-cli/commit/5d713a3990d6429e9bbe3a7b84fc19fce7ae062c))
+* update slack alerts color ([#336](https://github.com/twilio/twilio-cli/issues/336)) ([ba5ee89](https://github.com/twilio/twilio-cli/commit/ba5ee89ca59b283e5370327c3ca3494a8b2aec84))
 
-## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
+---------------------------
+**Frontline**
+- Added  to User's resource
+
+**Messaging**
+- Added GET vetting API
+
+**Verify**
+- Add  to the attempts API.
+- Allow to update  from  to  or  and viceversa for Verify Push
+- Add  as a valid  value for Verify Push
+
+**Twiml**
+- Add supported SSML children to , , , , , and .## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
 
 
 ### Library - Features
