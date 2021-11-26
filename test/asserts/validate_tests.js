@@ -1,5 +1,3 @@
-global.TextEncoder = require('util').TextEncoder;
-global.TextDecoder = require('util').TextDecoder;
 const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
