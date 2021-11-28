@@ -1,0 +1,29 @@
+name: Delete draft tagged release
+on:
+  workflow_dispatch:
+   inputs:
+      tag-name:
+        description: 'Tag name to delete'
+
+jobs:   
+  delete-draft-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete draft release oclif
+        uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          delete_release: true
+          tag_name: ${{github.event.inputs.tag-name}}
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+           ref: ${{ steps.extract_branch.outputs.branch }}
+           fetch-depth: 0 
+      - name: Undo Push
+        run: |
+          bash .github/scripts/revert-commit-draft-release.sh "${{ steps.extract_branch.outputs.branch }}" 

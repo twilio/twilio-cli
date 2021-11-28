@@ -1,0 +1,29 @@
+name: CLI Tests on brew installations
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to use for running test cases'
+        required: true
+
+jobs:
+  test:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 14.x, 10.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+         node-version: ${{ matrix.node-version }}
+      -  name: Global - Testing installation of Twilio CLI (1)
+         run: |
+          brew tap twilio/brew && brew install twilio@${{ github.event.inputs.version }}
+          node test/asserts/validate_tests.js
+      - name: Global - Testing upgrade Twilio CLI (2)
+        run: |
+          brew tap twilio/brew && brew install twilio@${{ github.event.inputs.version }}
+          brew upgrade twilio
+          node test/asserts/validate_tests.js
+          
