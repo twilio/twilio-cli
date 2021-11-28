@@ -1,0 +1,72 @@
+name: Platform Executable Sanity testing
+on:
+  workflow_dispatch:
+  workflow_run:
+    # wait for Platform Executable Release to complete
+    workflows: ["Platform Executable Release"]
+    branches: [main]
+    types:
+      - completed
+ 
+jobs:
+  get-tag:
+    runs-on: ubuntu-latest
+    outputs:
+     TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
+    steps:
+     - uses: actions/checkout@v2
+     - name: Getting latest tag
+       id: get-tag
+       run: |
+        git fetch --prune --unshallow
+        echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+  platform-exec-test:
+    name: Test for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: [get-tag]
+    strategy:
+     fail-fast: false
+     matrix:
+        include:
+          - os: ubuntu-latest
+            extension_type: '.deb'
+            cmds_to_execute: sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
+          - os: macos-latest
+            extension_type: '.pkg'
+            cmds_to_execute: sudo installer -pkg twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg -target ~/
+    steps:
+       - name: Checkout cli repo
+         uses: actions/checkout@v2
+       - name: Perform sanity install and test on binaries
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+            gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*${{matrix.extension_type}}'
+            ${{matrix.cmds_to_execute}}
+            ls
+            twilio --version
+            twilio api --help
+  platform-exec-test-Windows:
+     name: Test for Windows
+     runs-on: windows-latest
+     needs: [get-tag]  
+     steps:
+       - name: Checkout cli repo
+         uses: actions/checkout@v2
+       - name: Perform sanity install and tests on Windows
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+            gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.exe'
+            ls
+            iwr -useb get.scoop.sh | iex
+            scoop install gsudo
+            ./twilio-${{ needs.get-tag.outputs.TAG_NAME }}.exe /S
+            sleep 100
+            $env:Path += ";C:\Program Files (x86)\twilio-cli\bin"
+            $Env:Path
+            cd C:\"Program Files (x86)\twilio-cli"
+            dir
+            twilio --version
+            twilio api --help
+         
