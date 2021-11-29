@@ -6,7 +6,7 @@
       "prerelease": "rc"
     },
     {
-      "name": "main",
+      "name": "draft-release-main",
       "prerelease": "draft"
     }
   ],
