@@ -1,3 +1,19 @@
+## [2.35.0-draft.1](https://github.com/twilio/twilio-cli/compare/2.34.0...2.35.0-draft.1) (2021-11-29)
+
+
+### Library - Features
+
+* adding windows package signing configurations ([#341](https://github.com/twilio/twilio-cli/issues/341)) ([7b9abb1](https://github.com/twilio/twilio-cli/commit/7b9abb18843e307f59f5dbc5410bdbf522828c1e))
+* Enable a draft release for npm and homebrew for sanity testing ([#338](https://github.com/twilio/twilio-cli/issues/338)) ([9899fdf](https://github.com/twilio/twilio-cli/commit/9899fdf066873d211dc436e39aedeec95d387304))
+* platform executables sanity testing ([#342](https://github.com/twilio/twilio-cli/issues/342)) ([369c152](https://github.com/twilio/twilio-cli/commit/369c152b16c79883b03e9a9ff43f937a25aeb30d))
+
+
+### Library - Fixes
+
+* apt postinst script  ([#343](https://github.com/twilio/twilio-cli/issues/343)) ([f405c9f](https://github.com/twilio/twilio-cli/commit/f405c9f84b99f0489b789f549a5106156b102eee))
+* update vulnerable dependencies packages ([#340](https://github.com/twilio/twilio-cli/issues/340)) ([f9eec20](https://github.com/twilio/twilio-cli/commit/f9eec200457c70754f1e2b9068a0ae678a70f985))
+* Updated draft ([9e81234](https://github.com/twilio/twilio-cli/commit/9e812346a8e538e274397885508097bc6e3f9e01))
+
 ## [2.34.0](https://github.com/twilio/twilio-cli/compare/2.33.0...2.34.0) (2021-11-18)
 
 
