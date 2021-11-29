@@ -114,10 +114,16 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
     });
   }
 
+  if (
+    NewCommandClass.actionDefinition.commandName === 'list' ||
+    NewCommandClass.actionDefinition.commandName === 'fetch'
+  ) {
+    cmdFlags = Object.assign(cmdFlags, TwilioClientCommand.noHeader);
+  }
+
   // 'list' commands get limit flags for specifying the result set size.
   if (NewCommandClass.actionDefinition.commandName === 'list') {
     cmdFlags = Object.assign(cmdFlags, TwilioClientCommand.limitFlags);
-    cmdFlags = Object.assign(cmdFlags, TwilioClientCommand.noHeader);
   }
 
   // Class statics
