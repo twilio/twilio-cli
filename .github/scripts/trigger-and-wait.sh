@@ -91,6 +91,7 @@ trigger_workflow() {
 
 wait_for_workflow_to_finish() {
   # Find the id of the last build
+  sleep "${wait_interval}" # Let workflow be triggered before fetching the latest workflow
   last_workflow=$(curl -X GET "https://api.github.com/repos/${INPUT_OWNER}/${INPUT_REPO}/actions/workflows/${INPUT_WORKFLOW_FILE_NAME}/runs" \
     -H 'Accept: application/vnd.github.antiope-preview+json' \
     -H "Authorization: Bearer ${INPUT_GITHUB_TOKEN}" | jq '[.workflow_runs[]] | first')
