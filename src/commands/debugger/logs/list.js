@@ -120,6 +120,7 @@ DebuggerLogsList.flags = {
   }),
   ...DebuggerLogsList.PropertyFlags,
   ...TwilioClientCommand.flags,
+  ...TwilioClientCommand.noHeader,
 };
 
 module.exports = DebuggerLogsList;
