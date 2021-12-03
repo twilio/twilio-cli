@@ -4,10 +4,6 @@
     {
       "name": "release_feature_branch",
       "prerelease": "rc"
-    },
-    {
-      "name": "main",
-      "prerelease": "draft"
     }
   ],
   "plugins": [

@@ -1,20 +1,15 @@
 name: Windows Executable Release
 on:
   workflow_dispatch:
-    inputs:
-      formula:
-        description: 'Artifact Prefix'
-        default: twilio
   workflow_run:
   # wait for Cli Release to complete, when it completes, start this workflow
     workflows: ["Cli Release"]
     branches: [main]
     types:
       - completed
-    inputs:
-      formula:
-        description: 'Artifact Prefix'
-        default: twilio
+env:
+  FORMULA_NAME: 'twilio'
+  
 jobs:
   get-tag:
     runs-on: macos-latest
@@ -39,8 +34,8 @@ jobs:
      - name: upload artifact
        uses: actions/upload-artifact@v2
        with:
-        name: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-        path: dist/win/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
+        name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
+        path: dist/win/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
         retention-days: 1
 
   sign-windows-release:
@@ -58,18 +53,18 @@ jobs:
        id: download
        uses: actions/download-artifact@v2
        with:
-         name: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
+         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
      - name: 'Echo download path'
        run: ls ${{steps.download.outputs.download-path}}
      - name: Code Sign The Executable
        run: |
-          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f certificate\certificate.pfx /p '${{ secrets.WINDOWS_CERTIFICATE_PASS }}' /t http://timestamp.digicert.com ${{steps.download.outputs.download-path}}/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
+          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f certificate\certificate.pfx /p '${{ secrets.WINDOWS_CERTIFICATE_PASS }}' /t http://timestamp.digicert.com ${{steps.download.outputs.download-path}}/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
      - name: Upload binaries to release
        run: node .github/scripts/update-platform-executables.js
        env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILE: ${{steps.download.outputs.download-path}}\${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
-        ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
+        FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
+        ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
         REPO_NAME: twilio/twilio-cli
 

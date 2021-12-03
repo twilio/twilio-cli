@@ -38,7 +38,7 @@ jobs:
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: docker-release.yml
-      - name: Wait for Oclif Release
+      - name: Wait for Oclif, Homebrew and Scoop Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
