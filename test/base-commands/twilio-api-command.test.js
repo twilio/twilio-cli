@@ -133,6 +133,7 @@ describe('base-commands', () => {
         expect(Object.keys(NewCommandClass.flags)).to.include('start-time-before');
         expect(Object.keys(NewCommandClass.flags)).to.include('limit');
         expect(Object.keys(NewCommandClass.flags)).to.include('no-limit');
+        expect(Object.keys(NewCommandClass.flags)).to.include('no-header');
       });
 
       test.it('checks the help document url', () => {
@@ -140,6 +141,7 @@ describe('base-commands', () => {
         expect(NewCommandClass.id).to.equal('api:core:calls:create');
         expect(NewCommandClass.description).to.equal(fakeResource.actions.create.description);
         expect(NewCommandClass.docLink).to.equal('https://twilio.com/docs/usage/api');
+        expect(Object.keys(NewCommandClass.flags)).not.to.include('no-header');
       });
 
       test.it('checks the help document url', () => {

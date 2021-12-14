@@ -81,6 +81,29 @@ describe('debugger:logs:list', () => {
       .it('streams and then quits', (ctx) => {
         expect(ctx.stdout.match(INFO_LOG.error_code)).to.have.length(1);
         expect(ctx.stdout.match(WARN_LOG.alert_text)).to.have.length(1);
+        expect(ctx.stdout).to.contain('Date Created');
+      });
+
+    testConfig
+      .nock('https://monitor.twilio.com', (api) => {
+        api
+          .get('/v1/Alerts')
+          .query(true)
+          .times(2)
+          .reply(200, { alerts: [INFO_LOG, WARN_LOG, INFO_LOG] })
+          .get('/v1/Alerts')
+          .query(true)
+          .reply(404, { code: 999, message: 'Some random error' });
+      })
+      .twilioCommand(DebuggerLogsList, ['--streaming', '--no-header'])
+      .catch(/999.*Some random error/)
+      .it('streams and then quits and displays with --no-header', (ctx) => {
+        expect(ctx.stdout).not.to.contain('Date Created');
+        expect(ctx.stdout).not.to.contain('Log Level');
+        expect(ctx.stdout).not.to.contain('Error Code');
+        expect(ctx.stdout).not.to.contain('Alert Text');
+        expect(ctx.stdout.match(INFO_LOG.error_code)).to.have.length(1);
+        expect(ctx.stdout.match(WARN_LOG.alert_text)).to.have.length(1);
       });
 
     testConfig

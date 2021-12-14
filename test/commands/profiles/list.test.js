@@ -88,6 +88,27 @@ describe('commands', () => {
           expect(ctx.stdout.match(/true/g)).to.have.length(1);
           expect(ctx.stdout).to.match(/profile1.*true/);
           expect(ctx.stderr).to.equal('');
+          expect(ctx.stdout).to.contain('ID');
+        });
+
+      test
+        .do((ctx) => {
+          ctx.userConfig = new ConfigData();
+          ctx.userConfig.addProfile('profile1', constants.FAKE_ACCOUNT_SID);
+          ctx.userConfig.addProfile('profile2', constants.FAKE_ACCOUNT_SID);
+          ctx.userConfig.activeProfile = 'profile1';
+        })
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCommand(ProfilesList, ['--no-header'])
+        .it('list with --no-header', (ctx) => {
+          expect(ctx.stdout).not.to.contain('ID');
+          expect(ctx.stdout).not.to.contain('Account SID');
+          expect(ctx.stdout).not.to.contain('Active');
+          expect(ctx.stdout).to.contain('profile1');
+          expect(ctx.stdout).to.contain('profile2');
+          expect(ctx.stdout).to.contain(constants.FAKE_ACCOUNT_SID);
         });
 
       test
