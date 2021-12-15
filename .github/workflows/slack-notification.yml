@@ -42,14 +42,22 @@ jobs:
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
-      - name: Wait for Platform Executables Release
+      - name: Wait for debian executables Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_WORKFLOW_FILE_NAME: platform-executables.yml
+          INPUT_WORKFLOW_FILE_NAME: debian-executable-release.yml
+      - name: Wait for windows executables Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
       - name: Wait for RPM Build
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: rpmbuild.yml
+      - name: Wait for macos executables Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
   notify-complete-success:
     needs: [ wait-for-releases ]
     name: Notify Release Completed
