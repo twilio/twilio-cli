@@ -212,11 +212,11 @@ jobs:
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Invoke Platform Executables workflow
+      - name: Invoke debian executable workflow
         if: ${{needs.release.outputs.tag-name != ''}}
         run: node .github/scripts/trigger-workflow.js
         env:
-          WORKFLOW_NAME: 'platform-executables.yml'
+          WORKFLOW_NAME: 'debian-executable-release.yml'
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
       
       - name: Invoke macos package release workflow

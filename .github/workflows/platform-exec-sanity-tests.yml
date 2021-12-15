@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   workflow_run:
     # wait for Platform Executable Release to complete
-    workflows: ["Platform Executable Release"]
+    workflows: ["Debian Executable Release", "Macos Executable Release"]
     branches: [main]
     types:
       - completed
