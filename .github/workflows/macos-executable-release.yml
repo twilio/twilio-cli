@@ -31,6 +31,7 @@ jobs:
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
         FILE_PATH: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
     - name: Upload binaries to release
+      if: always()
       run: node .github/scripts/update-platform-executables.js
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
