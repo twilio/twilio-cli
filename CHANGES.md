@@ -1,3 +1,27 @@
+## [2.36.0](https://github.com/twilio/twilio-cli/compare/2.35.0...2.36.0) (2021-12-16)
+
+
+### Library - Features
+
+* Add flag no header for fetch and list commands. ([#344](https://github.com/twilio/twilio-cli/issues/344)) ([d26f504](https://github.com/twilio/twilio-cli/commit/d26f504594e4d34eb1244f36e10ef1088f1beaad))
+* added notarization changes ([#349](https://github.com/twilio/twilio-cli/issues/349)) ([2a8102e](https://github.com/twilio/twilio-cli/commit/2a8102e623c3f6730ae8e221e5cdf39fcdb6b58c))
+
+
+### Library - Fixes
+
+* Add delay before checking latest workflow id ([#348](https://github.com/twilio/twilio-cli/issues/348)) ([a072f8c](https://github.com/twilio/twilio-cli/commit/a072f8c114a2e43af556d0a1d296cb4a83fe4a4c))
+* Pin plugin-help to 3.2.17 ([#353](https://github.com/twilio/twilio-cli/issues/353)) ([d5c0a65](https://github.com/twilio/twilio-cli/commit/d5c0a65b83e02a2727ff35dbcf909e0c0c715e85))
+* Poll workflow status for Scoop/HomeBrew ([#355](https://github.com/twilio/twilio-cli/issues/355)) ([eeff221](https://github.com/twilio/twilio-cli/commit/eeff221bc02739aebe6f73f74af62a5889164e42))
+* releaserc json ([892c7f1](https://github.com/twilio/twilio-cli/commit/892c7f15b8dcf0f191052926638558978741bb5c))
+* updating windows release workflow ([#347](https://github.com/twilio/twilio-cli/issues/347)) ([608bff4](https://github.com/twilio/twilio-cli/commit/608bff4092210cef42bfe9c765bbce0fc46c06ca))
+
+
+### Library - Chores
+
+* change semantic-release command in github action steps ([#351](https://github.com/twilio/twilio-cli/issues/351)) ([f8e1723](https://github.com/twilio/twilio-cli/commit/f8e17231c9a0f59070000806b3576b719d985c5a))
+* Debian release fix ([#354](https://github.com/twilio/twilio-cli/issues/354)) ([fc4170e](https://github.com/twilio/twilio-cli/commit/fc4170e1310a558210ccb037498f2ef5469a8140))
+* update vulnerable dependencies ([#352](https://github.com/twilio/twilio-cli/issues/352)) ([a810c1a](https://github.com/twilio/twilio-cli/commit/a810c1aad1a71d1e597850a136d3a088329d1cb9))
+
 ## [2.35.0](https://github.com/twilio/twilio-cli/compare/2.34.0...2.35.0) (2021-12-02)
 
 
