@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "version": "2.35.0",
+  "version": "2.36.0",
   "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for documentation.",
   "keywords": [
     "oclif"
@@ -35,13 +35,13 @@
     "version": "oclif-dev readme && git add README.md"
   },
   "dependencies": {
-    "@oclif/color": "^0.1.2",
-    "@oclif/command": "^1.7.0",
-    "@oclif/config": "^1.16.0",
-    "@oclif/plugin-autocomplete": "^0.2.0",
-    "@oclif/plugin-help": "^3.2.2",
+    "@oclif/color": "^1.0.0",
+    "@oclif/command": "^1.8.15",
+    "@oclif/config": "^1.18.2",
+    "@oclif/plugin-autocomplete": "^1.0.0",
+    "@oclif/plugin-help": "3.2.17",
     "@oclif/plugin-plugins": "^1.8.3",
-    "@oclif/plugin-warn-if-update-available": "^1.7.0",
+    "@oclif/plugin-warn-if-update-available": "^2.0.2",
     "@sendgrid/mail": "^7.2.1",
     "@twilio/cli-core": "^5.30.0",
     "chalk": "^4.1.0",
@@ -118,7 +118,8 @@
       ]
     },
     "macos": {
-      "identifier": "com.twilio.cli"
+      "identifier": "com.twilio.cli",
+      "sign": "Developer ID Installer: Twilio, Inc."
     },
     "update": {
       "s3": {
