@@ -3,12 +3,52 @@ on:
   workflow_dispatch:
   workflow_run:
     # wait for Platform Executable Release to complete
-    workflows: ["Debian Executable Release", "Macos Executable Release"]
+    workflows: ["Debian Executable Release", "Macos Executable Release", "Windows Executable Release"]
     branches: [main]
     types:
       - completed
  
 jobs:
+  get-branch:
+    name: Get Current Branch Name
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.outputs.branch }}
+    steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+  wait-for-releases:
+    name: Wait for Platform executables Release to complete
+    runs-on: ubuntu-latest
+    needs: [get-branch]
+    env:
+      INPUT_OWNER: twilio
+      INPUT_REPO: twilio-cli
+      INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      INPUT_REF: ${{ needs.get-branch.outputs.branch }}
+      INPUT_WAITING_INTERVAL: 10
+      INPUT_PROPAGATE_FAILURE: true
+      INPUT_TRIGGER_WORKFLOW: false
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - name: Wait for Oclif, Homebrew and Scoop Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
+      - name: Wait for debian executables Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: debian-executable-release.yml
+      - name: Wait for windows executables Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
+      - name: Wait for macos executables Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
   get-tag:
     runs-on: ubuntu-latest
     outputs:
@@ -23,7 +63,7 @@ jobs:
   platform-exec-test:
     name: Test for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    needs: [get-tag]
+    needs: [get-tag, wait-for-releases]
     strategy:
      fail-fast: false
      matrix:
