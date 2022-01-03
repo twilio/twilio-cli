@@ -1,3 +1,10 @@
+### [2.36.1](https://github.com/twilio/twilio-cli/compare/2.36.0...2.36.1) (2021-12-30)
+
+
+### Library - Fixes
+
+* wait for executables release to finish before sanity test ([bf6e8ca](https://github.com/twilio/twilio-cli/commit/bf6e8cac81638cb1b022087ebf42170e4ba342d8))
+
 ## [2.36.0](https://github.com/twilio/twilio-cli/compare/2.35.0...2.36.0) (2021-12-16)
 
 
