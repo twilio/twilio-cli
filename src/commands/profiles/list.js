@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const { BaseCommand } = require('@twilio/cli-core').baseCommands;
+const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 
 class ProfilesList extends BaseCommand {
   async run() {
@@ -42,6 +42,6 @@ class ProfilesList extends BaseCommand {
 }
 
 ProfilesList.description = 'show what profiles you have configured';
-ProfilesList.flags = BaseCommand.flags;
+ProfilesList.flags = { ...BaseCommand.flags, ...TwilioClientCommand.noHeader };
 
 module.exports = ProfilesList;

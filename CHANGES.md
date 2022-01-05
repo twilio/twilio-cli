@@ -1,3 +1,152 @@
+### [2.36.1](https://github.com/twilio/twilio-cli/compare/2.36.0...2.36.1) (2021-12-30)
+
+
+### Library - Fixes
+
+* wait for executables release to finish before sanity test ([bf6e8ca](https://github.com/twilio/twilio-cli/commit/bf6e8cac81638cb1b022087ebf42170e4ba342d8))
+
+## [2.36.0](https://github.com/twilio/twilio-cli/compare/2.35.0...2.36.0) (2021-12-16)
+
+
+### Library - Features
+
+* Add flag no header for fetch and list commands. ([#344](https://github.com/twilio/twilio-cli/issues/344)) ([d26f504](https://github.com/twilio/twilio-cli/commit/d26f504594e4d34eb1244f36e10ef1088f1beaad))
+* added notarization changes ([#349](https://github.com/twilio/twilio-cli/issues/349)) ([2a8102e](https://github.com/twilio/twilio-cli/commit/2a8102e623c3f6730ae8e221e5cdf39fcdb6b58c))
+
+
+### Library - Fixes
+
+* Add delay before checking latest workflow id ([#348](https://github.com/twilio/twilio-cli/issues/348)) ([a072f8c](https://github.com/twilio/twilio-cli/commit/a072f8c114a2e43af556d0a1d296cb4a83fe4a4c))
+* Pin plugin-help to 3.2.17 ([#353](https://github.com/twilio/twilio-cli/issues/353)) ([d5c0a65](https://github.com/twilio/twilio-cli/commit/d5c0a65b83e02a2727ff35dbcf909e0c0c715e85))
+* Poll workflow status for Scoop/HomeBrew ([#355](https://github.com/twilio/twilio-cli/issues/355)) ([eeff221](https://github.com/twilio/twilio-cli/commit/eeff221bc02739aebe6f73f74af62a5889164e42))
+* releaserc json ([892c7f1](https://github.com/twilio/twilio-cli/commit/892c7f15b8dcf0f191052926638558978741bb5c))
+* updating windows release workflow ([#347](https://github.com/twilio/twilio-cli/issues/347)) ([608bff4](https://github.com/twilio/twilio-cli/commit/608bff4092210cef42bfe9c765bbce0fc46c06ca))
+
+
+### Library - Chores
+
+* change semantic-release command in github action steps ([#351](https://github.com/twilio/twilio-cli/issues/351)) ([f8e1723](https://github.com/twilio/twilio-cli/commit/f8e17231c9a0f59070000806b3576b719d985c5a))
+* Debian release fix ([#354](https://github.com/twilio/twilio-cli/issues/354)) ([fc4170e](https://github.com/twilio/twilio-cli/commit/fc4170e1310a558210ccb037498f2ef5469a8140))
+* update vulnerable dependencies ([#352](https://github.com/twilio/twilio-cli/issues/352)) ([a810c1a](https://github.com/twilio/twilio-cli/commit/a810c1aad1a71d1e597850a136d3a088329d1cb9))
+
+## [2.35.0](https://github.com/twilio/twilio-cli/compare/2.34.0...2.35.0) (2021-12-02)
+
+
+### Library - Features
+
+* adding windows package signing configurations ([#341](https://github.com/twilio/twilio-cli/issues/341)) ([7b9abb1](https://github.com/twilio/twilio-cli/commit/7b9abb18843e307f59f5dbc5410bdbf522828c1e))
+* Enable a draft release for npm and homebrew for sanity testing ([#338](https://github.com/twilio/twilio-cli/issues/338)) ([9899fdf](https://github.com/twilio/twilio-cli/commit/9899fdf066873d211dc436e39aedeec95d387304))
+* platform executables sanity testing ([#342](https://github.com/twilio/twilio-cli/issues/342)) ([369c152](https://github.com/twilio/twilio-cli/commit/369c152b16c79883b03e9a9ff43f937a25aeb30d))
+
+
+### Library - Fixes
+
+* apt postinst script  ([#343](https://github.com/twilio/twilio-cli/issues/343)) ([f405c9f](https://github.com/twilio/twilio-cli/commit/f405c9f84b99f0489b789f549a5106156b102eee))
+* remove ngrok from force dependencies ([#346](https://github.com/twilio/twilio-cli/issues/346)) ([3080312](https://github.com/twilio/twilio-cli/commit/3080312e1e3bc049a275e63dd998005d82dc2a6a))
+* update vulnerable dependencies packages ([#340](https://github.com/twilio/twilio-cli/issues/340)) ([f9eec20](https://github.com/twilio/twilio-cli/commit/f9eec200457c70754f1e2b9068a0ae678a70f985))
+
+
+### Library - Chores
+
+* Trigger scoop repo workflow through release ([#345](https://github.com/twilio/twilio-cli/issues/345)) ([7c674cf](https://github.com/twilio/twilio-cli/commit/7c674cfba9a444b45ca0411fe3400a65fc894622))
+
+---------------------------
+**Conversations**
+- Add  resource
+
+**Flex**
+- Adding  and  objects to Flex Configuration
+
+**Messaging**
+- Update us_app_to_person endpoints to remove beta feature flag based access
+
+**Supersim**
+- Add IP Commands resource
+
+**Verify**
+- Add optional  parameter to the create access token endpoint.
+
+**Video**
+- Add maxParticipantDuration param to Rooms
+
+**Twiml**
+- Unrevert Add supported SSML children to , , , , , and .
+- Revert Add supported SSML children to , , , , , and .## [2.34.0](https://github.com/twilio/twilio-cli/compare/2.33.0...2.34.0) (2021-11-18)
+
+
+### Library - Fixes
+
+* Added changes for lcov ([#319](https://github.com/twilio/twilio-cli/issues/319)) ([43cc6ad](https://github.com/twilio/twilio-cli/commit/43cc6adefea72c08f63bea1574fab35ffa6ded54))
+* Disable hyperlinks in Ubuntu ([#329](https://github.com/twilio/twilio-cli/issues/329)) ([14f7cb3](https://github.com/twilio/twilio-cli/commit/14f7cb3560a02091550d5f26c86bfd19ca8a1607))
+* reverting changes for the RPM build ([#326](https://github.com/twilio/twilio-cli/issues/326)) ([c9eaad8](https://github.com/twilio/twilio-cli/commit/c9eaad8e9cbdf0d36e5d7662daee55dfa4608f1d))
+* updating release steps to fetch latest dependencies ([#332](https://github.com/twilio/twilio-cli/issues/332)) ([ece2b9f](https://github.com/twilio/twilio-cli/commit/ece2b9f397ffd18d74f90c38e17e74c920ca8548))
+
+
+### Library - Features
+
+* adding workflow for apt release ([#320](https://github.com/twilio/twilio-cli/issues/320)) ([bdfab17](https://github.com/twilio/twilio-cli/commit/bdfab17174a232a1cb2891f709ca24d34104eea1))
+
+
+### Library - Chores
+
+* update slack alerts color ([#336](https://github.com/twilio/twilio-cli/issues/336)) ([ba5ee89](https://github.com/twilio/twilio-cli/commit/ba5ee89ca59b283e5370327c3ca3494a8b2aec84))
+
+---------------------------
+**Frontline**
+- Added  to User's resource
+
+**Messaging**
+- Added GET vetting API
+
+**Verify**
+- Add  to the attempts API.
+- Allow to update  from  to  or  and viceversa for Verify Push
+- Add  as a valid  value for Verify Push
+
+**Twiml**
+- Add supported SSML children to , , , , , and .## [2.33.0](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0) (2021-11-04)
+
+
+### Library - Features
+
+* Added the tests and sonarcloud jobs ([#312](https://github.com/twilio/twilio-cli/issues/312)) ([bfc7d57](https://github.com/twilio/twilio-cli/commit/bfc7d573919c6beb23acd9844a923cbf3fb885d4))
+
+
+### Library - Fixes
+
+* Fixing the release issue ([#313](https://github.com/twilio/twilio-cli/issues/313)) ([b893be6](https://github.com/twilio/twilio-cli/commit/b893be61f0ca1543b8f8c5d0728ea1b7fcdfdbed))
+* Pin peer dependency semantic-release ([#318](https://github.com/twilio/twilio-cli/issues/318)) ([00ac1d8](https://github.com/twilio/twilio-cli/commit/00ac1d8809b8c410445be67a7dc6f5154c2452de))
+
+
+### Library - Chores
+
+* Add xz compression for tarballs ([#321](https://github.com/twilio/twilio-cli/issues/321)) ([9bd5494](https://github.com/twilio/twilio-cli/commit/9bd5494264600ace8bd27752a1da59fecf53eda9))
+
+---------------------------
+**Library - Chore**
+- [PR #46](https://github.com/twilio/twilio-oai/pull/46): migrate from travis over to gh actions. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+**Api**
+- Updated  property to be treated as PII
+
+**Messaging**
+- Added a new enum for brand registration status named DELETED **(breaking change)**
+- Add a new K12_EDUCATION use case in us_app_to_person_usecase api transaction
+- Added a new enum for brand registration status named IN_REVIEW
+
+**Serverless**
+- Add node14 as a valid Build runtime
+
+**Verify**
+- Fix typos in Verify Push Factor documentation for the  parameter.
+- Added  on verification creation
+- Make  parameter public for Verification resource and  parameter public for Service resource. **(breaking change)**### [2.32.1](https://github.com/twilio/twilio-cli/compare/2.32.0...2.32.1) (2021-10-19)
+
+
+### Library - Fixes
+
+* Revert "Resolve security vulnerability ([#306](https://github.com/twilio/twilio-cli/issues/306))" ([#315](https://github.com/twilio/twilio-cli/issues/315)) ([#316](https://github.com/twilio/twilio-cli/issues/316)) ([53a2ded](https://github.com/twilio/twilio-cli/commit/53a2ded1a89d22bcf18fd2602c89646a4287eb3c))
+
 ## [2.33.0-rc.2](https://github.com/twilio/twilio-cli/compare/2.33.0-rc.1...2.33.0-rc.2) (2021-11-12)
 
 
@@ -74,6 +223,89 @@
 
 **Video**
 - Add  to create room### [2.30.1](https://github.com/twilio/twilio-cli/compare/2.30.0...2.30.1) (2021-09-24)
+
+
+### Library - Fixes
+
+* Add aws session token ([#294](https://github.com/twilio/twilio-cli/issues/294)) ([8cfac65](https://github.com/twilio/twilio-cli/commit/8cfac65755e445ff4c6c579704d4109fd4b859da))
+* Fork docker release workflow ([#295](https://github.com/twilio/twilio-cli/issues/295)) ([c669c06](https://github.com/twilio/twilio-cli/commit/c669c0626e6a2aaacb638be2f9badc1f4c1acdbe))
+* Hide tests showing non-deterministic behaviour ([#293](https://github.com/twilio/twilio-cli/issues/293)) ([75aa40c](https://github.com/twilio/twilio-cli/commit/75aa40c6671aac6c4e1be72b6c10cd443fbc7893))
+
+## [2.32.0](https://github.com/twilio/twilio-cli/compare/2.31.0...2.32.0) (2021-10-19)
+
+
+### Library - Features
+
+* Added the slack notifications for Github actions ([#304](https://github.com/twilio/twilio-cli/issues/304)) ([8a14fdb](https://github.com/twilio/twilio-cli/commit/8a14fdb8afb650f1e656b4a3fd9e6b2186c835ff))
+
+
+### Library - Fixes
+
+* Pin node version to 14.18.1 in Dockerfile ([#310](https://github.com/twilio/twilio-cli/issues/310)) ([0588491](https://github.com/twilio/twilio-cli/commit/058849189a2d54695655f5f7b00b8a15eae90148))
+
+---------------------------
+**Api**
+- Corrected enum values for  values in  response. **(breaking change)**
+- Clarify  values in  response.
+
+**Messaging**
+- Add PUT and List brand vettings api
+- Removes beta feature flag based visibility for us_app_to_person_registered and usecase field.Updates test cases to add POLITICAL usecase. **(breaking change)**
+- Add brand_feedback as optional field to BrandRegistrations
+
+**Video**
+- Add  to create room## [2.31.0](https://github.com/twilio/twilio-cli/compare/2.30.2...2.31.0) (2021-10-07)
+
+
+### Library - Chores
+
+* Replaced the community actions with the scripts ([#298](https://github.com/twilio/twilio-cli/issues/298)) ([316aeb6](https://github.com/twilio/twilio-cli/commit/316aeb6cc98beab8c145d9be1b93f381aea56cfb))
+
+
+### Library - Fixes
+
+* Added the following changes: ([#301](https://github.com/twilio/twilio-cli/issues/301)) ([c69e226](https://github.com/twilio/twilio-cli/commit/c69e2261429eac4068854f3012d709d8e8f7841a))
+
+---------------------------
+**Library - Fix**
+- [PR #44](https://github.com/twilio/twilio-oai/pull/44): fix naming of params. Thanks to [@shwetha-manvinkurke](https://github.com/shwetha-manvinkurke)!
+
+**Api**
+- Add  attribute to  response.
+- Add  resource
+
+**Conversations**
+- Added attachment parameters in configuration for  type of push notifications
+
+**Flex**
+- Adding  object to Flex Configuration
+
+**Numbers**
+- Add API endpoint for Bundle ReplaceItems resource
+- Add API endpoint for Bundle Copies resource
+
+**Serverless**
+- Add domain_base field to Service response
+
+**Taskrouter**
+- Add  Header based on ETag for Worker Delete **(breaking change)**
+- Add  Header based on Etag for Reservation Update
+- Add  Header based on ETag for Worker Update
+- Add  Header based on ETag for Worker Delete
+- Add  as Response Header to Worker
+
+**Trunking**
+- Added  property on Trunks.
+
+**Verify**
+- Document new pilot  channel.### [2.30.2](https://github.com/twilio/twilio-cli/compare/2.30.1...2.30.2) (2021-09-24)
+
+
+### Library - Fixes
+
+* replaceAll bug ([#297](https://github.com/twilio/twilio-cli/issues/297)) ([3e85ed2](https://github.com/twilio/twilio-cli/commit/3e85ed2b1223aa5111bcd4690fb55ae5e5dae26a))
+
+### [2.30.1](https://github.com/twilio/twilio-cli/compare/2.30.0...2.30.1) (2021-09-24)
 
 
 ### Library - Fixes

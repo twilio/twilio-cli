@@ -26,6 +26,9 @@ describe('commands', () => {
       setUpTest(['--properties', 'phoneNumber']).it('runs incoming-phone-number:list with custom properties', (ctx) => {
         expect(ctx.stdout).to.equal('Phone Number\n+12095551212\n');
       });
+      setUpTest(['--no-header']).it('runs incoming-phone-number:list --no-header', (ctx) => {
+        expect(ctx.stdout).to.equal('PN123  +12095551212  my phone #\n');
+      });
     });
   });
 });
