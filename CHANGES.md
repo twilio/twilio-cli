@@ -147,6 +147,90 @@
 
 * Revert "Resolve security vulnerability ([#306](https://github.com/twilio/twilio-cli/issues/306))" ([#315](https://github.com/twilio/twilio-cli/issues/315)) ([#316](https://github.com/twilio/twilio-cli/issues/316)) ([53a2ded](https://github.com/twilio/twilio-cli/commit/53a2ded1a89d22bcf18fd2602c89646a4287eb3c))
 
+## [2.33.0-rc.2](https://github.com/twilio/twilio-cli/compare/2.33.0-rc.1...2.33.0-rc.2) (2021-11-12)
+
+
+### Library - Fixes
+
+* Hardcoding the name of the first part of the package ([#327](https://github.com/twilio/twilio-cli/issues/327)) ([67b44cb](https://github.com/twilio/twilio-cli/commit/67b44cb59bbaf69a80bb0de02fe73c526e728034)), closes [#313](https://github.com/twilio/twilio-cli/issues/313) [#312](https://github.com/twilio/twilio-cli/issues/312) [#318](https://github.com/twilio/twilio-cli/issues/318) [#289](https://github.com/twilio/twilio-cli/issues/289) [#287](https://github.com/twilio/twilio-cli/issues/287) [#284](https://github.com/twilio/twilio-cli/issues/284) [#286](https://github.com/twilio/twilio-cli/issues/286) [#285](https://github.com/twilio/twilio-cli/issues/285) [#294](https://github.com/twilio/twilio-cli/issues/294) [#295](https://github.com/twilio/twilio-cli/issues/295) [#293](https://github.com/twilio/twilio-cli/issues/293) [#297](https://github.com/twilio/twilio-cli/issues/297) [#298](https://github.com/twilio/twilio-cli/issues/298) [#301](https://github.com/twilio/twilio-cli/issues/301) [#304](https://github.com/twilio/twilio-cli/issues/304) [#310](https://github.com/twilio/twilio-cli/issues/310) [#306](https://github.com/twilio/twilio-cli/issues/306) [#315](https://github.com/twilio/twilio-cli/issues/315) [#316](https://github.com/twilio/twilio-cli/issues/316) [#289](https://github.com/twilio/twilio-cli/issues/289) [#281](https://github.com/twilio/twilio-cli/issues/281) [#298](https://github.com/twilio/twilio-cli/issues/298) [#287](https://github.com/twilio/twilio-cli/issues/287) [#284](https://github.com/twilio/twilio-cli/issues/284) [#304](https://github.com/twilio/twilio-cli/issues/304) [#312](https://github.com/twilio/twilio-cli/issues/312) [#286](https://github.com/twilio/twilio-cli/issues/286) [#285](https://github.com/twilio/twilio-cli/issues/285) [#283](https://github.com/twilio/twilio-cli/issues/283) [#294](https://github.com/twilio/twilio-cli/issues/294) [#285](https://github.com/twilio/twilio-cli/issues/285) [#279](https://github.com/twilio/twilio-cli/issues/279) [#301](https://github.com/twilio/twilio-cli/issues/301) [#280](https://github.com/twilio/twilio-cli/issues/280) [#313](https://github.com/twilio/twilio-cli/issues/313) [#295](https://github.com/twilio/twilio-cli/issues/295) [#293](https://github.com/twilio/twilio-cli/issues/293) [#310](https://github.com/twilio/twilio-cli/issues/310) [#318](https://github.com/twilio/twilio-cli/issues/318) [#297](https://github.com/twilio/twilio-cli/issues/297) [#306](https://github.com/twilio/twilio-cli/issues/306) [#315](https://github.com/twilio/twilio-cli/issues/315) [#316](https://github.com/twilio/twilio-cli/issues/316) [#321](https://github.com/twilio/twilio-cli/issues/321)
+* Update release feature branch ([#330](https://github.com/twilio/twilio-cli/issues/330)) ([5878348](https://github.com/twilio/twilio-cli/commit/5878348a8ae9a8f5ba0c42a176f114ec841cb688)), closes [#257](https://github.com/twilio/twilio-cli/issues/257) [#259](https://github.com/twilio/twilio-cli/issues/259) [#262](https://github.com/twilio/twilio-cli/issues/262) [#264](https://github.com/twilio/twilio-cli/issues/264) [#265](https://github.com/twilio/twilio-cli/issues/265) [#266](https://github.com/twilio/twilio-cli/issues/266) [#267](https://github.com/twilio/twilio-cli/issues/267) [#269](https://github.com/twilio/twilio-cli/issues/269) [#270](https://github.com/twilio/twilio-cli/issues/270) [#273](https://github.com/twilio/twilio-cli/issues/273) [#275](https://github.com/twilio/twilio-cli/issues/275) [#261](https://github.com/twilio/twilio-cli/issues/261) [#268](https://github.com/twilio/twilio-cli/issues/268) [#274](https://github.com/twilio/twilio-cli/issues/274) [#272](https://github.com/twilio/twilio-cli/issues/272) [#278](https://github.com/twilio/twilio-cli/issues/278)
+* Updated cli-core version with the latest rc tag. ([abe116e](https://github.com/twilio/twilio-cli/commit/abe116e87e1ec261ee6fc22ba33a84577fb0f194))
+
+## [2.33.0-rc.1](https://github.com/twilio/twilio-cli/compare/2.32.1...2.33.0-rc.1) (2021-11-03)
+
+
+### Library - Features
+
+* Merging main into release-feature-branch ([#322](https://github.com/twilio/twilio-cli/issues/322)) ([ef1f6d3](https://github.com/twilio/twilio-cli/commit/ef1f6d3add577a038bda57bd91e6b17bb309831b))
+
+
+### Library - Fixes
+
+* Changing repo names ([#324](https://github.com/twilio/twilio-cli/issues/324)) ([3ff79d2](https://github.com/twilio/twilio-cli/commit/3ff79d27a5402d7095eee1bb255863225c9bda68)), closes [#313](https://github.com/twilio/twilio-cli/issues/313) [#312](https://github.com/twilio/twilio-cli/issues/312) [#318](https://github.com/twilio/twilio-cli/issues/318) [#289](https://github.com/twilio/twilio-cli/issues/289) [#287](https://github.com/twilio/twilio-cli/issues/287) [#284](https://github.com/twilio/twilio-cli/issues/284) [#286](https://github.com/twilio/twilio-cli/issues/286) [#285](https://github.com/twilio/twilio-cli/issues/285) [#294](https://github.com/twilio/twilio-cli/issues/294) [#295](https://github.com/twilio/twilio-cli/issues/295) [#293](https://github.com/twilio/twilio-cli/issues/293) [#297](https://github.com/twilio/twilio-cli/issues/297) [#298](https://github.com/twilio/twilio-cli/issues/298) [#301](https://github.com/twilio/twilio-cli/issues/301) [#304](https://github.com/twilio/twilio-cli/issues/304) [#310](https://github.com/twilio/twilio-cli/issues/310) [#306](https://github.com/twilio/twilio-cli/issues/306) [#315](https://github.com/twilio/twilio-cli/issues/315) [#316](https://github.com/twilio/twilio-cli/issues/316) [#289](https://github.com/twilio/twilio-cli/issues/289) [#281](https://github.com/twilio/twilio-cli/issues/281) [#298](https://github.com/twilio/twilio-cli/issues/298) [#287](https://github.com/twilio/twilio-cli/issues/287) [#284](https://github.com/twilio/twilio-cli/issues/284) [#304](https://github.com/twilio/twilio-cli/issues/304) [#312](https://github.com/twilio/twilio-cli/issues/312) [#286](https://github.com/twilio/twilio-cli/issues/286) [#285](https://github.com/twilio/twilio-cli/issues/285) [#283](https://github.com/twilio/twilio-cli/issues/283) [#294](https://github.com/twilio/twilio-cli/issues/294) [#285](https://github.com/twilio/twilio-cli/issues/285) [#279](https://github.com/twilio/twilio-cli/issues/279) [#301](https://github.com/twilio/twilio-cli/issues/301) [#280](https://github.com/twilio/twilio-cli/issues/280) [#313](https://github.com/twilio/twilio-cli/issues/313) [#295](https://github.com/twilio/twilio-cli/issues/295) [#293](https://github.com/twilio/twilio-cli/issues/293) [#310](https://github.com/twilio/twilio-cli/issues/310) [#318](https://github.com/twilio/twilio-cli/issues/318) [#297](https://github.com/twilio/twilio-cli/issues/297) [#306](https://github.com/twilio/twilio-cli/issues/306) [#315](https://github.com/twilio/twilio-cli/issues/315) [#316](https://github.com/twilio/twilio-cli/issues/316) [#321](https://github.com/twilio/twilio-cli/issues/321)
+
+## [2.27.0-rc.1](https://github.com/shamantraghav/twilio-cli/compare/2.26.0...2.27.0-rc.1) (2021-10-27)
+
+
+### Library - Chores
+
+* **release:** set `package.json` to 2.30.0 [skip ci] ([c451e50](https://github.com/shamantraghav/twilio-cli/commit/c451e50810f0b17a5ba55147cc04a0751795bc02)), closes [#289](https://github.com/shamantraghav/twilio-cli/issues/289) [#287](https://github.com/shamantraghav/twilio-cli/issues/287) [#284](https://github.com/shamantraghav/twilio-cli/issues/284) [#286](https://github.com/shamantraghav/twilio-cli/issues/286) [#285](https://github.com/shamantraghav/twilio-cli/issues/285)
+* **release:** set `package.json` to 2.30.1 [skip ci] ([60207e0](https://github.com/shamantraghav/twilio-cli/commit/60207e0362772f3ff045b816195e34f42b8e2209)), closes [#294](https://github.com/shamantraghav/twilio-cli/issues/294) [#295](https://github.com/shamantraghav/twilio-cli/issues/295) [#293](https://github.com/shamantraghav/twilio-cli/issues/293)
+* **release:** set `package.json` to 2.30.2 [skip ci] ([e2143ca](https://github.com/shamantraghav/twilio-cli/commit/e2143cac602bbc07e1535727bd457a6b2346b0bd)), closes [#297](https://github.com/shamantraghav/twilio-cli/issues/297)
+* **release:** set `package.json` to 2.31.0 [skip ci] ([7b46f83](https://github.com/shamantraghav/twilio-cli/commit/7b46f83369fc0077d00ffe95f578f75b14b72eb6)), closes [#298](https://github.com/shamantraghav/twilio-cli/issues/298) [#301](https://github.com/shamantraghav/twilio-cli/issues/301)
+* **release:** set `package.json` to 2.32.0 [skip ci] ([4e0b6f2](https://github.com/shamantraghav/twilio-cli/commit/4e0b6f2e7b3ea4ee4baaed093c190fc509f389c3)), closes [#304](https://github.com/shamantraghav/twilio-cli/issues/304) [#310](https://github.com/shamantraghav/twilio-cli/issues/310)
+* **release:** set `package.json` to 2.32.1 [skip ci] ([943c3d6](https://github.com/shamantraghav/twilio-cli/commit/943c3d6aa899190aca27c0f836b1449579e18eb2)), closes [#306](https://github.com/shamantraghav/twilio-cli/issues/306) [#315](https://github.com/shamantraghav/twilio-cli/issues/315) [#316](https://github.com/shamantraghav/twilio-cli/issues/316)
+* Add docker workflow to github actions ([#289](https://github.com/shamantraghav/twilio-cli/issues/289)) ([7e9d233](https://github.com/shamantraghav/twilio-cli/commit/7e9d233a5299f0f108af97b3299d286c39bfa226))
+* Custom help implementation for displaying required flags ([#281](https://github.com/shamantraghav/twilio-cli/issues/281)) ([ecc315a](https://github.com/shamantraghav/twilio-cli/commit/ecc315a006761f9afbc05c9958ad683fa8bf56d7))
+* Replaced the community actions with the scripts ([#298](https://github.com/shamantraghav/twilio-cli/issues/298)) ([316aeb6](https://github.com/shamantraghav/twilio-cli/commit/316aeb6cc98beab8c145d9be1b93f381aea56cfb))
+* rotate sonarcloud token ([30f7bc7](https://github.com/shamantraghav/twilio-cli/commit/30f7bc7435795db73a5ef7f01d7328eaa316d6aa))
+
+
+### Library - Features
+
+* Added github actions for publish to s3 and trigger homebrew release ([#287](https://github.com/shamantraghav/twilio-cli/issues/287)) ([5d7acd6](https://github.com/shamantraghav/twilio-cli/commit/5d7acd6f9d04361d3b5a43ff9bfc5ae5c9d3be38))
+* Added the GitHub actions for cli ([#284](https://github.com/shamantraghav/twilio-cli/issues/284)) ([49e2376](https://github.com/shamantraghav/twilio-cli/commit/49e23764205487d132cf84cf7ad9ee7c11ca53d1))
+* Added the slack notifications for Github actions ([#304](https://github.com/shamantraghav/twilio-cli/issues/304)) ([8a14fdb](https://github.com/shamantraghav/twilio-cli/commit/8a14fdb8afb650f1e656b4a3fd9e6b2186c835ff))
+* Added the tests and sonarcloud jobs ([#312](https://github.com/shamantraghav/twilio-cli/issues/312)) ([bfc7d57](https://github.com/shamantraghav/twilio-cli/commit/bfc7d573919c6beb23acd9844a923cbf3fb885d4))
+* DII 47 hyperlinks in help ([#290](https://github.com/shamantraghav/twilio-cli/issues/290)) ([ce15661](https://github.com/shamantraghav/twilio-cli/commit/ce156611cea15af15dee6fefd9761f31e8754a19)), closes [#286](https://github.com/shamantraghav/twilio-cli/issues/286) [#285](https://github.com/shamantraghav/twilio-cli/issues/285)
+* link to our API docs when you --help ([#283](https://github.com/shamantraghav/twilio-cli/issues/283)) ([37a857d](https://github.com/shamantraghav/twilio-cli/commit/37a857d8ac587ec59d2912f9d2a00cfe77fcb5c3))
+
+
+### Library - Fixes
+
+* Add aws session token ([#294](https://github.com/shamantraghav/twilio-cli/issues/294)) ([8cfac65](https://github.com/shamantraghav/twilio-cli/commit/8cfac65755e445ff4c6c579704d4109fd4b859da))
+* Added missing require statement ([#285](https://github.com/shamantraghav/twilio-cli/issues/285)) ([10179cc](https://github.com/shamantraghav/twilio-cli/commit/10179ccfb757e8b289802d4e41c940bd3e4fc1b1))
+* Added the condition to check the tag regex ([#279](https://github.com/shamantraghav/twilio-cli/issues/279)) ([ce87562](https://github.com/shamantraghav/twilio-cli/commit/ce875622ad03ef31d9d702629d0a91fec089888d))
+* Added the following changes: ([#301](https://github.com/shamantraghav/twilio-cli/issues/301)) ([c69e226](https://github.com/shamantraghav/twilio-cli/commit/c69e2261429eac4068854f3012d709d8e8f7841a))
+* Fixing failing test on twilio-cli ([#280](https://github.com/shamantraghav/twilio-cli/issues/280)) ([01afb70](https://github.com/shamantraghav/twilio-cli/commit/01afb7006b127a067c02a94109c48f370a6b5379))
+* Fixing the release issue ([#313](https://github.com/shamantraghav/twilio-cli/issues/313)) ([b893be6](https://github.com/shamantraghav/twilio-cli/commit/b893be61f0ca1543b8f8c5d0728ea1b7fcdfdbed))
+* Fork docker release workflow ([#295](https://github.com/shamantraghav/twilio-cli/issues/295)) ([c669c06](https://github.com/shamantraghav/twilio-cli/commit/c669c0626e6a2aaacb638be2f9badc1f4c1acdbe))
+* Hide tests showing non-deterministic behaviour ([#293](https://github.com/shamantraghav/twilio-cli/issues/293)) ([75aa40c](https://github.com/shamantraghav/twilio-cli/commit/75aa40c6671aac6c4e1be72b6c10cd443fbc7893))
+* Pin node version to 14.18.1 in Dockerfile ([#310](https://github.com/shamantraghav/twilio-cli/issues/310)) ([0588491](https://github.com/shamantraghav/twilio-cli/commit/058849189a2d54695655f5f7b00b8a15eae90148))
+* Pin peer dependency semantic-release ([#318](https://github.com/shamantraghav/twilio-cli/issues/318)) ([00ac1d8](https://github.com/shamantraghav/twilio-cli/commit/00ac1d8809b8c410445be67a7dc6f5154c2452de))
+* replaceAll bug ([#297](https://github.com/shamantraghav/twilio-cli/issues/297)) ([3e85ed2](https://github.com/shamantraghav/twilio-cli/commit/3e85ed2b1223aa5111bcd4690fb55ae5e5dae26a))
+* Revert "Resolve security vulnerability ([#306](https://github.com/shamantraghav/twilio-cli/issues/306))" ([#315](https://github.com/shamantraghav/twilio-cli/issues/315)) ([#316](https://github.com/shamantraghav/twilio-cli/issues/316)) ([53a2ded](https://github.com/shamantraghav/twilio-cli/commit/53a2ded1a89d22bcf18fd2602c89646a4287eb3c))
+* Updated api definitions changelog in CHANGES.md ([3236031](https://github.com/shamantraghav/twilio-cli/commit/32360314cc5ec00f752138c4127c37d59669fe76))
+
+---------------------------
+**Api**
+- Corrected enum values for  values in  response. **(breaking change)**
+- Clarify  values in  response.
+
+**Messaging**
+- Add PUT and List brand vettings api
+- Removes beta feature flag based visibility for us_app_to_person_registered and usecase field.Updates test cases to add POLITICAL usecase. **(breaking change)**
+- Add brand_feedback as optional field to BrandRegistrations
+
+**Video**
+- Add  to create room### [2.30.1](https://github.com/twilio/twilio-cli/compare/2.30.0...2.30.1) (2021-09-24)
+
+
+### Library - Fixes
+
+* Add aws session token ([#294](https://github.com/twilio/twilio-cli/issues/294)) ([8cfac65](https://github.com/twilio/twilio-cli/commit/8cfac65755e445ff4c6c579704d4109fd4b859da))
+* Fork docker release workflow ([#295](https://github.com/twilio/twilio-cli/issues/295)) ([c669c06](https://github.com/twilio/twilio-cli/commit/c669c0626e6a2aaacb638be2f9badc1f4c1acdbe))
+* Hide tests showing non-deterministic behaviour ([#293](https://github.com/twilio/twilio-cli/issues/293)) ([75aa40c](https://github.com/twilio/twilio-cli/commit/75aa40c6671aac6c4e1be72b6c10cd443fbc7893))
+
 ## [2.32.0](https://github.com/twilio/twilio-cli/compare/2.31.0...2.32.0) (2021-10-19)
 
 
@@ -347,6 +431,11 @@
 ---------------------------
 **Messaging**
 - Add brand_type field to a2p brand_registration api
+
+[2021-07-29] Version 2.27.1-rc
+------------------------------
+**Library - Fix**
+- [PR #275](https://github.com/twilio/twilio-cli/pull/275): Update release-feature-branch with main. Thanks to [@ravali-rimmalapudi](https://github.com/ravali-rimmalapudi)!
 
 
 [2021-07-29] Version 2.27.0

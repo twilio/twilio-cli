@@ -2,7 +2,7 @@
   "branches": [
     "main",
     {
-      "name": "release_feature_branch",
+      "name": "release-feature-branch",
       "prerelease": "rc"
     }
   ],

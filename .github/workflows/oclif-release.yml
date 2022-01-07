@@ -25,7 +25,7 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            asset_name: ${{ github.event.inputs.formula }}-v${{ github.event.inputs.tag-name }}
+            asset_name: twilio-v${{ github.event.inputs.tag-name }}
             command_name: npx oclif-dev pack --xz
             publish: homebrew
     steps:
