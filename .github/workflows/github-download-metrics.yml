@@ -24,4 +24,4 @@ jobs:
           pip3 install datadog-api-client
           pip3 install requests
           pip3 install datetime
-          python3 .github/scripts/github_metrics.py
+          python3 .github/scripts/metrics/github_metrics.py

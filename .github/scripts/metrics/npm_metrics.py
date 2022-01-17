@@ -23,7 +23,7 @@ download_count_float=float(download_count['downloads'])
 body = MetricsPayload(
     series=[
         Series(
-            metric="npm.download.count",
+            metric="twilio_cli.npm_download.count",
             type="count",
             points=[Point([datetime.now().timestamp(), download_count_float])],
             tags=["test:npm"],

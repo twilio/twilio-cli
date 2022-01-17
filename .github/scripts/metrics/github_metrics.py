@@ -37,7 +37,7 @@ download_count_pkg_float=float(pkg_count)
 body_rpm = MetricsPayload(
     series=[
         Series(
-            metric="github.rpm.downloads_count",
+            metric="twilio_cli.github_rpm_downloads.count",
             type="count",
             points=[Point([datetime.now().timestamp(), download_count_rmp_float])],
             tags=["test:github"],
@@ -48,7 +48,7 @@ body_rpm = MetricsPayload(
 body_deb = MetricsPayload(
     series=[
         Series(
-            metric="github.deb.downloads_count",
+            metric="twilio_cli.github_deb_downloads.count",
             type="count",
             points=[Point([datetime.now().timestamp(), download_count_deb_float])],
             tags=["test:github"],
@@ -59,7 +59,7 @@ body_deb = MetricsPayload(
 body_exe = MetricsPayload(
     series=[
         Series(
-            metric="github.exe.downloads_count",
+            metric="twilio_cli.github_exe_downloads.count",
             type="count",
             points=[Point([datetime.now().timestamp(), download_count_exe_float])],
             tags=["test:github"],
@@ -70,7 +70,7 @@ body_exe = MetricsPayload(
 body_pkg = MetricsPayload(
     series=[
         Series(
-            metric="github.pkg.downloads_count",
+            metric="twilio_cli.github_pkg_downloads.count",
             type="count",
             points=[Point([datetime.now().timestamp(), download_count_pkg_float])],
             tags=["test:github"],
