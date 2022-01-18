@@ -1,3 +1,26 @@
+## [3.0.0](https://github.com/twilio/twilio-cli/compare/2.36.1...3.0.0) (2022-01-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Storing profiles in config file instead of keytar.
+
+### Library - Fixes
+
+* Run npm audit for only production dependencies ([#359](https://github.com/twilio/twilio-cli/issues/359)) ([92f41a7](https://github.com/twilio/twilio-cli/commit/92f41a70155b2593cf26500cd6a1fa8098328353))
+
+
+### Library - Features
+
+* Release feature branch ([#360](https://github.com/twilio/twilio-cli/issues/360)) ([6bfe20d](https://github.com/twilio/twilio-cli/commit/6bfe20d368f4de011f66e0fc4b7bfc3b6809d302))
+
+
+### Library - Chores
+
+* Bump dependency ([#363](https://github.com/twilio/twilio-cli/issues/363)) ([5808a81](https://github.com/twilio/twilio-cli/commit/5808a81d6800b30c92114323b2994574de43000f))
+* Update License ([#361](https://github.com/twilio/twilio-cli/issues/361)) ([3dbeda6](https://github.com/twilio/twilio-cli/commit/3dbeda6449d60cf63668395626579fe7bde8b8c7))
+* update macos release workflow ([#356](https://github.com/twilio/twilio-cli/issues/356)) ([84a836f](https://github.com/twilio/twilio-cli/commit/84a836f25dd80f6b8868c1ca3ec5d31bbdbc27ad))
+
 ---------------------------
 **Library - Feature**
 - [PR #51](https://github.com/twilio/twilio-oai/pull/51): add GitHub release step during deploy. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
