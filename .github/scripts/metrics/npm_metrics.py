@@ -35,4 +35,5 @@ configuration = Configuration()
 with ApiClient(configuration) as api_client:
     api_instance = MetricsApi(api_client)
     response = api_instance.submit_metrics(body=body)
+    print("Metric value: ",download_count_float)
     print("NPM metrics submission status: ",response)
