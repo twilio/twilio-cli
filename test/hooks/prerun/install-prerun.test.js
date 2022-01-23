@@ -34,6 +34,7 @@ describe('hooks', () => {
       test.it('warning when update command is run', () => {
         pluginFunc(update);
         expect(console.warn.calledWith(sinon.match('npm update'))).to.be.true;
+        expect(console.warn.calledWith(sinon.match('MORE INFO'))).to.be.true;
       });
     });
   });
