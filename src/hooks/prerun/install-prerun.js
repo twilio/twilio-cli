@@ -3,8 +3,8 @@ const chalk = require('chalk');
 
 const urlUtil = require('../../services/hyperlink-utility');
 
-const TWILIO_CLI_DOCS_LINK = 'https://www.twilio.com/docs/twilio-cli/quickstart';
-let UPDATE_ALERT = `Warning: Use '${chalk.bold('npm update twilio-cli')}' for npm based installations. `;
+const TWILIO_CLI_DOCS_LINK = 'https://twil.io/cli';
+let UPDATE_ALERT = '';
 
 module.exports = async function pluginPostRun(options) {
   if (options.Command.id === 'update') {
