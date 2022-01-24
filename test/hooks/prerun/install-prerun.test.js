@@ -28,12 +28,12 @@ describe('hooks', () => {
 
       test.it('no warning when other commands are run', () => {
         pluginFunc(pluginAvailable);
-        expect(console.warn.calledWith(sinon.match('npm update'))).to.be.false;
+        expect(console.warn.calledWith(sinon.match('MORE INFO'))).to.be.false;
       });
 
       test.it('warning when update command is run', () => {
         pluginFunc(update);
-        expect(console.warn.calledWith(sinon.match('npm update'))).to.be.true;
+        expect(console.warn.calledWith(sinon.match('MORE INFO'))).to.be.true;
       });
     });
   });
