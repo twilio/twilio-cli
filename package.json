@@ -99,7 +99,7 @@
     ],
     "warn-if-update-available": {
       "timeoutInDays": 45,
-      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>.",
+      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>. For more information: https://twil.io/cli ",
       "registry": "https://registry.npmjs.org"
     },
     "topics": {
