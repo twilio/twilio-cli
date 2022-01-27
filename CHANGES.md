@@ -1,4 +1,14 @@
-## [3.0.0](https://github.com/twilio/twilio-cli/compare/2.36.1...3.0.0) (2022-01-18)
+---------------------------
+**Insights**
+- Added new endpoint to fetch Conference Participant Summary
+- Added new endpoint to fetch Conference Summary
+
+**Messaging**
+- Add government_entity parameter to brand apis
+
+**Verify**
+- Add Access Token fetch endpoint to retrieve a previously created token.
+- Add Access Token payload to the Access Token creation endpoint, including a unique Sid, so it's addressable while it's TTL is valid.## [3.0.0](https://github.com/twilio/twilio-cli/compare/2.36.1...3.0.0) (2022-01-18)
 
 
 ### ⚠ BREAKING CHANGES
