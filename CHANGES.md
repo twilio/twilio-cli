@@ -1,3 +1,10 @@
+### [3.0.1](https://github.com/twilio/twilio-cli/compare/3.0.0...3.0.1) (2022-01-27)
+
+
+### Library - Chores
+
+* Add twilio docs link for twilio update ([#366](https://github.com/twilio/twilio-cli/issues/366)) ([8c36f69](https://github.com/twilio/twilio-cli/commit/8c36f69dd0ae5412e3f3de81a9880506f0acbb94))
+
 ---------------------------
 **Insights**
 - Added new endpoint to fetch Conference Participant Summary
