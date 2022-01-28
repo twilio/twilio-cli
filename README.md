@@ -9,6 +9,10 @@
 
 Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-cli/quickstart).
 
+## Architecture and Functional Overview
+
+Head over to the [Twilio CLI Comprehensive Document](https://github.com/twilio/twilio-cli/blob/CLI_doc/CLI_COMPREHENSIVE_DOC.md)
+
 ## Versioning
 
 `twilio-cli` uses a modified version of [Semantic Versioning](https://semver.org) for all changes. [See this document](VERSIONS.md) for details.
