@@ -146,24 +146,45 @@ Commands can have aliases. For example, “login” is an alias for “profile:a
 
 The CLI is self-documenting. All topics, commands, and their possible parameters with a short description of each can be discovered from the CLI itself using the “--help” flag. Topics and commands that correspond directly to resources and actions in API definitions will use the existing documentation present in the definitions. URLs to Twilio docs are present wherever official documentation is available.
 
-The format of the output can be controlled for commands that make API calls. Current output formats supported are:
-- Columnar (table), human-readable format
-- Raw JSON from the API response
-- Tab-separated values (TSV)
-- `--properties` option to specify which columns you'd like to display
- - This can be used with ‘list’, ‘fetch’ and ‘create’ commands. Note that the default list of properties varies by command and is subject to change with each release.
- - For example, to display only the Phone Number and SMS Url columns, you would pass `--properties "phoneNumber, smsUrl"`. 
- - The column names must match the JSON property names in the Twilio API.
-- ‘–silent’ flag to suppress output and logs 
-
+![](/assets/images/help.png)
 
 ### Command output
 
 All usable command output is sent to stdout. This would be the output directly related to the command the user runs (e.g. if you list phone numbers, the phone numbers are sent to stdout).
 
+The format of the output can be controlled for commands that make API calls. Current output formats supported are:
+- Columnar (table), human-readable format
+- Raw JSON from the API response
+- Tab-separated values (TSV)
+- `--properties` option to specify which columns you'd like to display
+  - This can be used with ‘list’, ‘fetch’ and ‘create’ commands. Note that the default list of properties varies by command and is subject to change with each release.
+  - For example, to display only the Phone Number and SMS Url columns, you would pass `--properties "phoneNumber, smsUrl"`. 
+  - The column names must match the JSON property names in the Twilio API.
+- ‘–silent’ flag to suppress output and logs 
+
+All debug, informational, warning, and error messages are sent to stderr. This allows the command output to be cleanly processed without additional textual messages getting in the way.
+
+A log level can be set to indicate what level of messages you’d like sent to stderr. The default is “info”.
+
+For any command that supports columnar and TSV output (any command that returns one or more resource objects), a list of properties can be specified to output. Each command should have a sane set of default columns for an 80 column terminal (e.g. the default display properties for incoming-phone-number are sid, phoneNumber, and friendlyName). 
+
+It is also possible to remove headers using the “no-header” flag. 
+
+![](/assets/images/command_output.png)
 
 ### Exit codes
 
+The CLI should return a 0 exit code for successful operations. For failures, it can return the Twilio API [error code](https://www.twilio.com/docs/verify/api/v1/error-codes). For failures not related to a failed Twilio API call, we can create unique error codes for the various failure states. Unix-based systems only support 8-bit exit status codes. Twilio API errors codes are outside of this range and hence we only use the first 2 digits for the API error code.
+
 ### Command input
 
+Typically, command input will be provided in the form of traditional Unix-style command line parameters, which means a single dash and single letter for shorthand notation or two dashes and kebab-case parameter names.
+
+![](/assets/images/command_input.png)
+
 #### Examples
+
+There is also support for piping. For example, you could find a phone number and purchase it, piping one command to the next:
+
+![](/assets/images/command_input_example.png)
+
