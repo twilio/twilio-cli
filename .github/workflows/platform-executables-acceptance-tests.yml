@@ -74,10 +74,10 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            extension_type: ".deb"
+            extension_type: '.deb'
             cmds_to_execute: sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
           - os: macos-latest
-            extension_type: ".pkg"
+            extension_type: '.pkg'
             cmds_to_execute: sudo installer -pkg twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg -target ~/
     steps:
       - name: Checkout cli repo
