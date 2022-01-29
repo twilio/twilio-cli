@@ -11,7 +11,7 @@ Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-c
 
 ## Architecture and Functional Overview
 
-Head over to the [Twilio CLI Comprehensive Document](https://github.com/twilio/twilio-cli/blob/CLI_doc/CLI_COMPREHENSIVE_DOC.md)
+Head over to the [CLI Architecture and Functional Overview](https://github.com/twilio/twilio-cli/blob/CLI_doc/architecture.md)
 
 ## Versioning
 
