@@ -1,4 +1,4 @@
-name: Cli Tests
+name: CLI Unit Tests
 on:
   push:
      branches: [ main ]
