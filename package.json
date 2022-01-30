@@ -31,7 +31,7 @@
     "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
-    "posttest": "npm run lint && npm audit --production",
+    "posttest": "npm run lint",
     "version": "oclif-dev readme && git add README.md"
   },
   "dependencies": {
