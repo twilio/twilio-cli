@@ -17,22 +17,42 @@ jobs:
         uses: actions/setup-node@v2
         with:
          node-version: ${{ matrix.node-version }}
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+         node-version: ${{ matrix.node-version }}
+      - name: Check for cached twilio installation 
+        run: | 
+         if ! command -v twilio > /dev/null; then twilio() { printf '%sCLI is not installed, all good. '; } else echo "CLI is installed already, Abort."; exit 1; fi
+         twilio --version
+      - name: Check Out Repo
+        uses: actions/checkout@v2
       -  name: Global - Testing installation of Twilio CLI (1)
          run: |
-          npm make install -g twilio-cli@${{ github.event.inputs.version }}
-          node test/asserts/validate_tests.js
+          npm install -g twilio-cli@${{ github.event.inputs.version }}
+          chmod +x ./.github/scripts/cmds-to-test.sh
+          ./.github/scripts/cmds-to-test.sh
+      
       - name: Global - Testing upgrade Twilio CLI (2)
         run: |
-         npm make install -g twilio-cli@${{ github.event.inputs.version }}
-            npm install -g twilio-cli
-            node test/asserts/validate_tests.js
-      - name: Local - Testing installation of Twilio CLI (1)
-        run: |
-         npm install twilio-cli
-         node test/asserts/validate_tests.js
-      - name: Local - Testing upgrade Twilio CLI (2)
+         npm install -g twilio-cli@latest
+            npm install -g twilio-cli@${{ github.event.inputs.version }}
+            chmod +x ./.github/scripts/cmds-to-test.sh
+            ./.github/scripts/cmds-to-test.sh
+  
+  test-local-installation:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 14.x, 10.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+         node-version: ${{ matrix.node-version }}
+      - name: Local - Testing upgrade Twilio CLI (3)
         run: |
          npm install twilio-cli@${{ github.event.inputs.version }}
-          npm install twilio-cli
-          node test/asserts/validate_tests.js
-          
+         

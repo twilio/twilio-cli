@@ -10,10 +10,10 @@ on:
         required: true
       formula:
           description: 'Formula to release in homebrew'
-          default: twilio
+          default: twiliodraft
       pre-release:
         description: 'Homebrew release type'
-        default: 'false'
+        default: 'true'
 jobs:
   oclif-release:
     name: Publish for ${{ matrix.os }}
@@ -69,23 +69,24 @@ jobs:
           INPUT_WAITING_INTERVAL: 10
           INPUT_INPUTS: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
           INPUT_PROPAGATE_FAILURE: true
-  scoop-release:
-    name: Trigger scoop release workflow
-    runs-on: ubuntu-latest
-    needs: [ oclif-release ]
-    steps:
-      - name: Checkout cli repo
-        uses: actions/checkout@v2
-      - name: Invoke Scoop workflow
-        run: source .github/scripts/trigger-and-wait.sh
-        env:
-          INPUT_OWNER: twilio
-          INPUT_REPO: scoop-twilio-cli
-          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          INPUT_WORKFLOW_FILE_NAME: update-release.yml
-          INPUT_WAITING_INTERVAL: 10
-          INPUT_INPUTS: '{ "version": "${{github.event.inputs.tag-name}}" }'
-          INPUT_PROPAGATE_FAILURE: true
+  # not enabling scoop since scoop testing is pending
+  # scoop-release:
+  #   name: Trigger scoop release workflow
+  #   runs-on: ubuntu-latest
+  #   needs: [ oclif-release ]
+  #   steps:
+  #     - name: Checkout cli repo
+  #       uses: actions/checkout@v2
+  #     - name: Invoke Scoop workflow
+  #       run: source .github/scripts/trigger-and-wait.sh
+  #       env:
+  #         INPUT_OWNER: twilio
+  #         INPUT_REPO: scoop-twilio-cli
+  #         INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  #         INPUT_WORKFLOW_FILE_NAME: update-release.yml
+  #         INPUT_WAITING_INTERVAL: 10
+  #         INPUT_INPUTS: '{ "version": "${{github.event.inputs.tag-name}}" }'
+  #         INPUT_PROPAGATE_FAILURE: true
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
     needs: [ home-brew-release ]
