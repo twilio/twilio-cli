@@ -5,11 +5,11 @@
   "keywords": [
     "oclif"
   ],
-  "homepage": "https://github.com/twilio/twilio-cli",
-  "bugs": "https://github.com/twilio/twilio-cli/issues",
+  "homepage": "https://github.com/shrutiburman/twilio-cli",
+  "bugs": "https://github.com/shrutiburman/twilio-cli/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/twilio/twilio-cli.git"
+    "url": "https://github.com/shrutiburman/twilio-cli.git"
   },
   "license": "MIT",
   "author": "Twilio @twilio",
@@ -139,7 +139,7 @@
     "update": {
       "s3": {
         "xz": true,
-        "bucket": "twilio-cli-prod"
+        "bucket": "mytrialbucketforcli"
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"

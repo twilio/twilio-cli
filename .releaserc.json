@@ -4,6 +4,10 @@
     {
       "name": "release-feature-branch",
       "prerelease": "rc"
+    },
+    {
+      "name": "draft-release-branch",
+      "prerelease": "draft"
     }
   ],
   "plugins": [
@@ -58,7 +62,13 @@
         "changelogFile": "CHANGES.md"
       }
     ],
+    [
       "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ]
+    ,
     [
       "@semantic-release/github",
       {

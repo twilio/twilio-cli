@@ -1,6 +1,6 @@
-name: Cli Release
+name: Cli Draft Release
 on:
-  workflow_dispatch:
+ workflow_dispatch:
     inputs:
       change-log:
         description: 'Open API Changelog.'
@@ -11,10 +11,10 @@ on:
         default: main
       homebrew-prerelease:
         description: 'HomeBrew prerelease'
-        default: 'false'
+        default: 'true'
       draft-release:
         description: 'Draft-release flag (true/false)'
-        default: 'false'
+        default: 'true'
 
 jobs:
   test:
@@ -48,7 +48,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [update-api-definitions-changelog]
     outputs:
-      tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
       draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
     steps:
       - name: Checkout cli
@@ -60,15 +59,7 @@ jobs:
           git pull
           make install
       - name: Semantic Release runs for draft release
-        if: ${{github.event.inputs.draft-release == 'true'}}
         id: semantic-release-draft
-        run: DEBUG=semantic-release:* $(npm bin)/semantic-release  -t \${version}
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Semantic Release runs
-        if: ${{github.event.inputs.draft-release != 'true'}}
-        id: semantic-release
         run: DEBUG=semantic-release:* $(npm bin)/semantic-release  -t \${version}
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
@@ -86,29 +77,28 @@ jobs:
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           INPUTS: '{ "version": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
       - name: Update release
-        if: ${{steps.semantic-release.outputs.TAG_NAME != ''}}
+        if: ${{steps.semantic-release-draft.outputs.TAG_NAME != ''}}
         run: node .github/scripts/update-release.js
         env:
-          TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
+          TAG_NAME: ${{steps.semantic-release-draft.outputs.TAG_NAME}}
           RELEASE_BODY: ${{github.event.inputs.change-log}}
           REPO_NAME: shrutiburman/twilio-cli
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
-  delete-draft-release:
-    if: ${{github.event.inputs.draft-release == 'true' && needs.release.outputs.draft-tag-name != ''}}
-    runs-on: ubuntu-latest
-    needs: [release]
-    steps:
-    - name: Delete draft release
-      if: ${{github.event.inputs.draft-release == 'true'}}
-      run: node .github/scripts/trigger-workflow.js
-      env:
-          WORKFLOW_NAME: '.github/workflows/delete-draft-tag-release.yml'
-          REPO_NAME: shrutiburman/twilio-cli
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
+          INPUTS: '{ "tag-name": "${{needs.release.outputs.tag-name}}" }'
+  # delete-draft-release:
+  #   if: ${{needs.release.outputs.draft-tag-name != ''}}
+  #   runs-on: ubuntu-latest
+  #   needs: [release]
+  #   steps:
+  #   - name: Delete draft release
+  #     run: node .github/scripts/trigger-workflow.js
+  #     env:
+  #         WORKFLOW_NAME: '.github/workflows/delete-draft-tag-release.yml'
+  #         REPO_NAME: shrutiburman/twilio-cli
+  #         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
   oclif-release:
     runs-on: ubuntu-latest
     needs: [release]
@@ -121,58 +111,72 @@ jobs:
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Invoke Oclif workflow
-        if: ${{needs.release.outputs.tag-name != '' && github.event.inputs.draft-release != 'true'}}
-        run: node .github/scripts/trigger-workflow.js
-        env:
-          WORKFLOW_NAME: 'oclif-release.yml'
-          REPO_NAME: shrutiburman/twilio-cli
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
       - name: Invoke Oclif workflow for draft release
-        if: ${{needs.release.outputs.tag-name != '' && github.event.inputs.draft-release == 'true'}}
+        if: ${{needs.release.outputs.draft-tag-name != '' && github.event.inputs.draft-release == 'true'}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'oclif-release.yml'
           REPO_NAME: shrutiburman/twilio-cli
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.draft-tag-name}}-draft", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
-  delete-draft-release-oclif:
+          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.draft-tag-name}}", "formula": "twiliodraft", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+  oclif-draft-test:
     runs-on: ubuntu-latest
-    if: ${{github.event.inputs.draft-release == 'true'}}
     needs: [oclif-release]
     steps:
-     - name: Delete draft release
-       run: node .github/scripts/trigger-workflow.js
-       env:
-        WORKFLOW_NAME: '.github/workflows/delete-draft-tag-release.yml'
-        REPO_NAME: shrutiburman/twilio-cli
-        REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
-
-  docker-release:
-    runs-on: ubuntu-latest
-    needs: [ release ]
-    steps:
-      - name: Checkout cli repo
-        uses: actions/checkout@v2
-      - run: |
-          git pull
-          make install
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Invoke Docker workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
+      - name: Wait for draft release to succeed
+        uses: lewagon/wait-on-check-action@v1.0.0
+        with:
+          ref: ${{steps.extract_branch.outputs.branch}}
+          check-name: 'Oclif Release'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+      - name: Run testing on release-draft
+        if: ${{ github.event.inputs.draft-release == 'true' }}
         run: node .github/scripts/trigger-workflow.js
         env:
-          WORKFLOW_NAME: 'docker-release.yml'
+          WORKFLOW_NAME: '.github/workflows/cli-test-homebrew.yml'
           REPO_NAME: shrutiburman/twilio-cli
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "version": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
+  # delete-draft-release-oclif:
+  #   runs-on: ubuntu-latest
+  #   if: ${{github.event.inputs.draft-release == 'true'}}
+  #   needs: [oclif-release]
+  #   steps:
+  #    - name: Delete draft release
+  #      run: node .github/scripts/trigger-workflow.js
+  #      env:
+  #       WORKFLOW_NAME: '.github/workflows/delete-draft-tag-release.yml'
+  #       REPO_NAME: shrutiburman/twilio-cli
+  #       REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
+
+  # docker-release:
+  #   runs-on: ubuntu-latest
+  #   needs: [ release ]
+  #   steps:
+  #     - name: Checkout cli repo
+  #       uses: actions/checkout@v2
+  #     - run: |
+  #         git pull
+  #         make install
+  #     - name: Extract branch name
+  #       id: extract_branch
+  #       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+  #     - name: Invoke Docker workflow
+  #       if: ${{needs.release.outputs.tag-name != ''}}
+  #       run: node .github/scripts/trigger-workflow.js
+  #       env:
+  #         WORKFLOW_NAME: 'docker-release.yml'
+  #         REPO_NAME: shrutiburman/twilio-cli
+  #         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  #         BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
   platform-executables-release:
     runs-on: ubuntu-latest
     needs: [ release ]
@@ -189,14 +193,14 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke debian executable workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
+        if: ${{needs.release.outputs.draft-tag-name != ''}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'debian-executable-release.yml'
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
       
       - name: Invoke macos package release workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
+        if: ${{needs.release.outputs.draft-tag-name != ''}}
         #TODO make changes to trigger-workflow script to accept multiple workflow names at once
         run: node .github/scripts/trigger-workflow.js
         env:
@@ -204,19 +208,19 @@ jobs:
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           
 
-  notify-complete-fail:
-    if: ${{ failure() || cancelled() }}
-    needs: [ release, oclif-release, platform-executables-release ]
-    name: Notify Release Failed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: "#ff3333"
-          SLACK_USERNAME: CLI Release Bot
-          SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'CLI Release workflow Failed'
+  # notify-complete-fail:
+  #   if: ${{ failure() || cancelled() }}
+  #   needs: [ release, oclif-release, platform-executables-release ]
+  #   name: Notify Release Failed
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Slack Notification
+  #       uses: rtCamp/action-slack-notify@v2
+  #       env:
+  #         SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+  #         SLACK_COLOR: "#ff3333"
+  #         SLACK_USERNAME: CLI Release Bot
+  #         SLACK_ICON_EMOJI: ":ship:"
+  #         SLACK_TITLE: "Twilio Cli"
+  #         SLACK_MESSAGE: 'CLI Release workflow Failed'
