@@ -26,7 +26,6 @@ jobs:
       -  name: Global - Testing installation of Twilio CLI (1)
          run: |
           brew tap twilio/brew && brew install twiliodraft
-          chmod +x ./.github/scripts/cmds-to-test.sh
           ./.github/scripts/cmds-to-test.sh
       # Todo: since its the first draft release, cannot upgrade with the formula
       # - name: Global - Testing upgrade Twilio CLI (2)

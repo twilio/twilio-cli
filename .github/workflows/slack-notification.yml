@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ get-branch ]
     env:
-      INPUT_OWNER: shrutiburman
+      INPUT_OWNER: twilio
       INPUT_REPO: twilio-cli
       INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       INPUT_REF: ${{ needs.get-branch.outputs.branch }}
@@ -49,7 +49,7 @@ jobs:
       - name: Wait for windows executables Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
+          INPUT_WORKFLOW_FILE_NAME: windows-executable-draft-release.yml
       - name: Wait for RPM Build
         run: source .github/scripts/trigger-and-wait.sh
         env:

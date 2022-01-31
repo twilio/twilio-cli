@@ -27,18 +27,22 @@ jobs:
     needs: [get-tag]
     steps:
      - uses: actions/checkout@v2
+     - name: Getting last sha
+       id: get-sha
+       run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
      - run: |
         make install
         brew install makensis
         npx oclif-dev pack:win
-
+        cd dist/win
+        sudo mv ${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-x86.exe ${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
+     
      - name: upload artifact
        uses: actions/upload-artifact@v2
        with:
         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
         path: dist/win/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
         retention-days: 1
-
   sign-windows-release:
     needs: [pack-windows-release, get-tag]
     runs-on: windows-latest
@@ -67,7 +71,7 @@ jobs:
         FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
         ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-        REPO_NAME: shrutiburman/twilio-cli
+        REPO_NAME: twilio/twilio-cli
 
   # notify-complete-fail:
   #   if: ${{ failure() || cancelled() }}

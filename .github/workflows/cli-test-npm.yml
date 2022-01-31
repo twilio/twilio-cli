@@ -32,14 +32,12 @@ jobs:
       -  name: Global - Testing installation of Twilio CLI (1)
          run: |
           npm install -g twilio-cli@${{ github.event.inputs.version }}
-          chmod +x ./.github/scripts/cmds-to-test.sh
           ./.github/scripts/cmds-to-test.sh
       
       - name: Global - Testing upgrade Twilio CLI (2)
         run: |
          npm install -g twilio-cli@latest
             npm install -g twilio-cli@${{ github.event.inputs.version }}
-            chmod +x ./.github/scripts/cmds-to-test.sh
             ./.github/scripts/cmds-to-test.sh
   
   test-local-installation:
