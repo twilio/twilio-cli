@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [get-branch]
     env:
-      INPUT_OWNER: twilio
+      INPUT_OWNER: shrutiburman
       INPUT_REPO: twilio-cli
       INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       INPUT_REF: ${{ needs.get-branch.outputs.branch }}
