@@ -105,7 +105,8 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
 
   // 'remove' commands have no response body and thus do not need display properties.
   if (NewCommandClass.actionDefinition.commandName !== 'remove') {
-    const defaultProperties = (resource && resource.defaultOutputProperties) || [];
+    const defaultProperties =
+      (action && action.defaultOutputProperties) || (resource && resource.defaultOutputProperties) || [];
 
     cmdFlags.properties = flags.string({
       // Camel-cased, CSV of the provided property list. Or just the SID.
