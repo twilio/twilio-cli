@@ -122,7 +122,7 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke Oclif workflow
-        if: ${{needs.release.outputs.tag-name != '' && github.event.inputs.draft-release != 'true'}}
+        if: ${{needs.release.outputs.tag-name != '' && github.event.inputs.draft-release != 'true' && steps.extract_branch.outputs.branch == 'main'}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'oclif-release.yml'
@@ -130,6 +130,15 @@ jobs:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+      - name: Invoke Oclif workflow for release candidate
+        if: ${{needs.release.outputs.tag-name != '' && github.event.inputs.draft-release != 'true' && steps.extract_branch.outputs.branch != 'main'}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'oclif-release.yml'
+          REPO_NAME: twilio/twilio-cli
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "formula": "twiliorc", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
       - name: Invoke Oclif workflow for draft release
         if: ${{needs.release.outputs.tag-name != '' && github.event.inputs.draft-release == 'true'}}
         run: node .github/scripts/trigger-workflow.js
@@ -213,20 +222,20 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke debian executable workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'debian-executable-release.yml'
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-      
+
       - name: Invoke macos package release workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
         #TODO make changes to trigger-workflow script to accept multiple workflow names at once
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'macos-executable-release.yml'
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-          
+
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
