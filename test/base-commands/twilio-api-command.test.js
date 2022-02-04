@@ -194,7 +194,7 @@ describe('base-commands', () => {
       });
       test.it('fallback to default output property at path level if not specified at operation level', () => {
         const NewCommandClass = getCommandClass(getFactorListActionDefinition);
-        expect(NewCommandClass.flags.properties.default).to.equal('sid,friendly_name,status');
+        expect(NewCommandClass.flags.properties.default).to.equal('sid,friendlyName,status');
       });
 
       test
