@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x]
+        node-version: [16.x, 14.x]
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: Run audit check
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=moderate --production
         # minimum vulnerability level that will cause the command to fail
         # audit reports with low severity would pass the test
   notify-complete-fail:
