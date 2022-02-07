@@ -65,7 +65,7 @@ jobs:
       - name: Invoke HomeBrew workflow
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: twilio
+          INPUT_OWNER: ${{ github.repository_owner }}
           INPUT_REPO: homebrew-brew
           INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: release.yml
@@ -87,7 +87,7 @@ jobs:
         if: ${{steps.extract_branch.outputs.branch == 'main'}}
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_OWNER: twilio
+          INPUT_OWNER: ${{ github.repository_owner }}
           INPUT_REPO: scoop-twilio-cli
           INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: update-release.yml

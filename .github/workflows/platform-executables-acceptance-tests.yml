@@ -11,7 +11,7 @@ on:
     types:
       - completed
 env:
-  INPUT_OWNER: twilio
+  INPUT_OWNER:  ${{ github.repository_owner }}
   INPUT_REPO: twilio-cli
   INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
   INPUT_WAITING_INTERVAL: 10
