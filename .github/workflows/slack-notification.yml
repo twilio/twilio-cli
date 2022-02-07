@@ -45,11 +45,11 @@ jobs:
       - name: Wait for debian executables Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_WORKFLOW_FILE_NAME: debian-executable-release.yml
+          INPUT_WORKFLOW_FILE_NAME: debian-draft-executable-release.yml
       - name: Wait for windows executables Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
-          INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
+          INPUT_WORKFLOW_FILE_NAME: windows-executable-draft-release.yml
       - name: Wait for RPM Build
         run: source .github/scripts/trigger-and-wait.sh
         env:
