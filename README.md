@@ -8,6 +8,10 @@
 ## Setup
 
 Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-cli/quickstart).
+  
+## Architecture and Functional Overview
+
+Head over to the [CLI Architecture and Functional Overview](https://github.com/twilio/twilio-cli/blob/main/ARCHITECTURE.md)
 
 ## Versioning
 
