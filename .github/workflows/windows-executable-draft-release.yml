@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
   workflow_run:
   # wait for Cli Release to complete, when it completes, start this workflow
-    workflows: ["Cli Release"]
-    branches: [main]
+    workflows: ["Cli Draft Release"]
+    branches: [draft-release-branch]
     types:
       - completed
 env:

@@ -7,7 +7,7 @@ on:
       [
         "Windows Executable Release",
       ]
-    branches: [main]
+    branches: [draft-release-branch]
     types:
       - completed
 env:
