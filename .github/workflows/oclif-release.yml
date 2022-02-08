@@ -48,9 +48,13 @@ jobs:
         id: sha256
         if: ${{matrix.publish == 'homebrew'}}
         run: |
-           npx oclif-dev publish
-           brew install coreutils
-           echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
+          npx oclif-dev publish
+          brew install coreutils
+          if [ "${{github.event.inputs.formula}}" == "twiliorc" ]; then
+            echo "::set-output name=sha256::$(sha256sum dist/channels/rc/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
+          else
+            echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
+          fi
   home-brew-release:
     name: Trigger homebrew release workflow
     runs-on: ubuntu-latest

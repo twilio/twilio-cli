@@ -5,13 +5,18 @@ on:
     # wait for Platform Executable Release to complete
     workflows:
       [
-        "Debian Executable Release",
-        "Macos Executable Release",
         "Windows Executable Release",
       ]
     branches: [main]
     types:
       - completed
+env:
+  INPUT_OWNER: twilio
+  INPUT_REPO: twilio-cli
+  INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  INPUT_WAITING_INTERVAL: 10
+  INPUT_PROPAGATE_FAILURE: true
+  INPUT_TRIGGER_WORKFLOW: false
 
 jobs:
   get-branch:
@@ -23,37 +28,6 @@ jobs:
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-  wait-for-releases:
-    name: Wait for Platform executables Release to complete
-    runs-on: ubuntu-latest
-    needs: [get-branch]
-    env:
-      INPUT_OWNER: twilio
-      INPUT_REPO: twilio-cli
-      INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-      INPUT_REF: ${{ needs.get-branch.outputs.branch }}
-      INPUT_WAITING_INTERVAL: 10
-      INPUT_PROPAGATE_FAILURE: true
-      INPUT_TRIGGER_WORKFLOW: false
-    steps:
-      - name: Checkout cli repo
-        uses: actions/checkout@v2
-      - name: Wait for Oclif, Homebrew and Scoop Release
-        run: source .github/scripts/trigger-and-wait.sh
-        env:
-          INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
-      - name: Wait for debian executables Release
-        run: source .github/scripts/trigger-and-wait.sh
-        env:
-          INPUT_WORKFLOW_FILE_NAME: debian-draft-executable-release.yml
-      - name: Wait for windows executables Release
-        run: source .github/scripts/trigger-and-wait.sh
-        env:
-          INPUT_WORKFLOW_FILE_NAME: windows-executable-draft-release.yml
-      - name: Wait for macos executables Release
-        run: source .github/scripts/trigger-and-wait.sh
-        env:
-          INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
   get-tag:
     runs-on: ubuntu-latest
     outputs:
@@ -65,40 +39,54 @@ jobs:
         run: |
           git fetch --prune --unshallow
           echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
-  platform-exec-test:
-    name: Test for ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    needs: [get-tag, wait-for-releases]
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-latest
-            extension_type: '.deb'
-            cmds_to_execute: sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
-          - os: macos-latest
-            extension_type: '.pkg'
-            cmds_to_execute: sudo installer -pkg twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg -target ~/
+
+  wait-for-oclif-releases:
+    name: Wait for oclif platform executables Release to complete
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: [ get-branch, get-tag ]
+    outputs:
+      FAILURE_TAG_OCLIF: ${{ steps.failure_oclif.outputs.FAILURE_TAG_OCLIF }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
-      - name: Perform install and test binaries
+      - name: Wait for Oclif Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
+          INPUT_REF: ${{ needs.get-branch.outputs.branch }}
+      - name: Perform install and test on binaries
+        id: oclif_acceptance_run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*${{matrix.extension_type}}'
-          ${{matrix.cmds_to_execute}}
+          gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.deb'
+          sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
           ls
           twilio --version
           twilio api --help
-  platform-exec-test-Windows:
-    name: Test for Windows
+      - name: setup oclif failure output
+        if: failure() || cancelled()
+        id: failure_oclif
+        run: echo '::set-output name=FAILURE_TAG_OCLIF::true'
+
+  wait-for-windows-releases:
+    name: Wait for windows platform executables Release to complete
     runs-on: windows-latest
-    needs: [get-tag]
+    needs: [ get-branch, get-tag ]
+    continue-on-error: true
+    outputs:
+      FAILURE_TAG_WINDOWS: ${{ steps.failure_windows.outputs.FAILURE_TAG_WINDOWS }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
-      - name: Perform install and test the Windows executable
+      - name: Wait for windows executables Release
+        run: bash .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
+          INPUT_REF: ${{ needs.get-branch.outputs.branch }}
+      - name: Perform acceptance install and tests on Windows
+        id: windows_acceptance_run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -114,3 +102,88 @@ jobs:
           dir
           twilio --version
           twilio api --help
+      - name: setup windows failure output
+        if: failure() || cancelled()
+        id: failure_windows
+        run: echo '::set-output name=FAILURE_TAG_WINDOWS::true'
+
+  wait-for-macos-releases:
+    name: Wait for macos platform executables Release to complete
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: [ get-branch, get-tag ]
+    outputs:
+      FAILURE_TAG_MACOS: ${{ steps.failure_macos.outputs.FAILURE_TAG_MACOS }}
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - name: Wait for macos executables Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
+          INPUT_REF: ${{ needs.get-branch.outputs.branch }}
+      - name: Perform acceptance install and test on binaries
+        id: macos_acceptance_run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.pkg'
+          sudo installer -pkg twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg -target ~/
+          ls
+          twilio --version
+          twilio api --help
+      - name: setup macos failure output
+        if: failure() || cancelled()
+        id: failure_macos
+        run: echo '::set-output name=FAILURE_TAG_MACOS::true'
+
+  wait-for-debian-releases:
+    name: Wait for debian platform executables Release to complete
+    runs-on: ubuntu-latest
+    needs: [ get-branch, get-tag ]
+    continue-on-error: true
+    outputs:
+      FAILURE_TAG_DEBIAN: ${{ steps.failure_debian.outputs.FAILURE_TAG_DEBIAN }}
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - name: Wait for debian executables Release
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: debian-executable-release.yml
+          INPUT_REF: ${{ needs.get-branch.outputs.branch }}
+      - name: Perform acceptance install and test on binaries
+        id: debian_acceptance_run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.deb'
+          sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
+          ls
+          twilio --version
+          twilio api --help
+      - name: setup debian failure output
+        if: failure() || cancelled()
+        id: failure_debian
+        run: echo '::set-output name=FAILURE_TAG_DEBIAN::true'
+
+  notify-complete-fail:
+    needs: [wait-for-oclif-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases]
+    name: Notify Release Failed
+    runs-on: ubuntu-latest
+    if: ${{ ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) || ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) || ( needs.wait-for-oclif-releases.outputs.FAILURE_TAG_OCLIF  == 'true' ) || ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true') }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+          SLACK_COLOR: "#ff3333"
+          SLACK_USERNAME: CLI Release Bot
+          SLACK_ICON_EMOJI: ":ship:"
+          SLACK_TITLE: "Twilio Cli"
+          SLACK_MESSAGE: 'CLI acceptance workflow Failed'
+      - name: Fail in case all jobs failed
+        if: ${{ ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) && ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) && ( needs.wait-for-oclif-releases.outputs.FAILURE_TAG_OCLIF  == 'true' ) && ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true') }}
+        run:
+          exit 1

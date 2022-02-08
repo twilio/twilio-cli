@@ -58,6 +58,37 @@ describe('base-commands', () => {
         },
       };
 
+      // where default output is property is defined at operation level.
+      const createNewFactorActionDefinition = {
+        domainName: 'verify',
+        commandName: 'post',
+        path: '/v2/Services/{ServiceSid}/Entities/{Identity}/Factors',
+        resource: fakeResource,
+        actionName: 'post',
+        action: {
+          parameters: [
+            { name: 'Identity', in: 'path', schema: { type: 'string' } },
+            { name: 'ServiceSid', in: 'path', schema: { type: 'string' } },
+          ],
+          defaultOutputProperties: ['sid', 'binding'],
+        },
+      };
+
+      const getFactorListActionDefinition = {
+        domainName: 'verify',
+        commandName: 'list',
+        path: '/v2/Services/{ServiceSid}/Entities/{Identity}/Factors',
+        resource: fakeResource,
+        actionName: 'get',
+        action: {
+          parameters: [
+            { name: 'Identity', in: 'path', schema: { type: 'string' } },
+            { name: 'ServiceSid', in: 'path', schema: { type: 'string' } },
+            { name: 'PageSize', in: 'query', schema: { type: 'integer' } },
+          ],
+        },
+      };
+
       const syncMapItemUpdateActionDefinition = {
         domainName: 'sync',
         commandName: 'update',
@@ -155,6 +186,15 @@ describe('base-commands', () => {
 
         expect(NewCommandClass.id).to.equal('api:core:calls:remove');
         expect(NewCommandClass.flags.properties).to.be.undefined;
+      });
+
+      test.it('check default output property propagation at operation level', () => {
+        const NewCommandClass = getCommandClass(createNewFactorActionDefinition);
+        expect(NewCommandClass.flags.properties.default).to.equal('sid,binding');
+      });
+      test.it('fallback to default output property at path level if not specified at operation level', () => {
+        const NewCommandClass = getCommandClass(getFactorListActionDefinition);
+        expect(NewCommandClass.flags.properties.default).to.equal('sid,friendlyName,status');
       });
 
       test
