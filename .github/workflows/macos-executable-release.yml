@@ -29,6 +29,7 @@ jobs:
         APPLE_ID: ${{ secrets.APPLE_ID}}
         APPLE_ID_APP_PASSWORD: ${{ secrets.APPLE_ID_APP_PASSWORD}}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
+        TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
         FILE_PATH: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
     - name: Upload binaries to release
       if: always()
