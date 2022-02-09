@@ -1,0 +1,23 @@
+name: Windows Executable Release
+on:
+ workflow_dispatch:
+    inputs:
+      dummy-input:
+        description: 'Trigger this workflow from draft-release-branch.'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 10.x]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - run: make install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run tests
+        run: npm test
