@@ -1,3 +1,28 @@
+## [3.1.0-draft.1](https://github.com/twilio/twilio-cli/compare/3.0.1...3.1.0-draft.1) (2022-02-09)
+
+
+### Library - Fixes
+
+* Added release candidate changes ([#379](https://github.com/twilio/twilio-cli/issues/379)) ([85b86c4](https://github.com/twilio/twilio-cli/commit/85b86c4191fea9fe6406290e2ec3c23f84553172))
+* changes for default output property ([#377](https://github.com/twilio/twilio-cli/issues/377)) ([980b059](https://github.com/twilio/twilio-cli/commit/980b0599bcb2edc9fe4da4929784e85455c61efe))
+* Cleaning travis code ([#380](https://github.com/twilio/twilio-cli/issues/380)) ([9e89e1a](https://github.com/twilio/twilio-cli/commit/9e89e1ad750bcf498d16256b7d056b7e33d09860))
+* Correct terminology in testing workflow ([#370](https://github.com/twilio/twilio-cli/issues/370)) ([84d5796](https://github.com/twilio/twilio-cli/commit/84d5796015056358d3da09b88e708ffa6c9cf684))
+* Fix profiles remove with environment variables set ([#376](https://github.com/twilio/twilio-cli/issues/376)) ([fb4c11a](https://github.com/twilio/twilio-cli/commit/fb4c11aeb70663956b086b5cab84b2603c5a2f1b))
+
+
+### Library - Features
+
+* Draft release workflow ([#374](https://github.com/twilio/twilio-cli/issues/374)) ([ccec988](https://github.com/twilio/twilio-cli/commit/ccec988abe422ded2ea3edb13e76dbcacb3c463a))
+
+
+### Library - Chores
+
+* Add back sonar scan ([#384](https://github.com/twilio/twilio-cli/issues/384)) ([dac332c](https://github.com/twilio/twilio-cli/commit/dac332cb4c61f540760ccf4d41a06a94d314cb4c))
+* Add link to docs with update notification ([#368](https://github.com/twilio/twilio-cli/issues/368)) ([b18e07b](https://github.com/twilio/twilio-cli/commit/b18e07b186c0e2ba99dea75262f63adedfd08640))
+* fix failing test ([#382](https://github.com/twilio/twilio-cli/issues/382)) ([3b3f384](https://github.com/twilio/twilio-cli/commit/3b3f384b296d0b8d1fae77c065c6b4ba0da7c5cd))
+* segregate single platform acceptance workflow ([#381](https://github.com/twilio/twilio-cli/issues/381)) ([966f6b4](https://github.com/twilio/twilio-cli/commit/966f6b44bf0106a5245b86766a89942e68d00e6a))
+* Separate npm audit and test workflows ([#378](https://github.com/twilio/twilio-cli/issues/378)) ([13d0ead](https://github.com/twilio/twilio-cli/commit/13d0ead89c5e6a00cd9548bc9d4baf334e6bee0a))
+
 ### [3.0.1](https://github.com/twilio/twilio-cli/compare/3.0.0...3.0.1) (2022-01-27)
 
 
