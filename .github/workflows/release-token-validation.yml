@@ -1,4 +1,4 @@
-name: Cli-core Release
+name: Cli Release Token Validation
 on:
   workflow_dispatch:
 
