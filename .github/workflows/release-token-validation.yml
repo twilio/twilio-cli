@@ -9,7 +9,7 @@ jobs:
       - name: Validate REPO_ACCESS_TOKEN 
         uses: actions/checkout@v2
         with:
-          repository: 'twilio/twilio-oai'
+          repository: 'github.repository_owner/twilio-oai'
           token:  ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Validate AWS tokens
         uses: aws-actions/configure-aws-credentials@v1
