@@ -35,7 +35,7 @@ jobs:
         run: npm test
   update-api-definitions-changelog:
     runs-on: ubuntu-latest
-#     needs: [test]
+    needs: [test]
     steps:
       - name: Checkout cli
         uses: actions/checkout@v2

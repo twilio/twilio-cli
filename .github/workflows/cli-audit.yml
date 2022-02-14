@@ -1,21 +1,20 @@
-name: CLI Unit Tests
+name: NPM Audit Check
 on:
   push:
-     branches: [ main ]
+    branches: [ main ]
   pull_request:
 
 jobs:
-  test:
+  audit:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x, 14.x, 10.x]
+        node-version: [16.x, 14.x]
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
         with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
       - run: make install
       - name: Use Node.js ${{ matrix.node-version }}
@@ -23,17 +22,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Run tests
-        run: npm test
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Run audit check
+        run: npm audit --audit-level=moderate --production
+        # minimum vulnerability level that will cause the command to fail
+        # audit reports with low severity would pass the test
   notify-complete-fail:
     if: ${{ failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
-    needs: [ test ]
-    name: Notify Test Failed
+    needs: [ audit ]
+    name: Notify Npm Audit Failed
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -46,6 +42,6 @@ jobs:
           SLACK_MSG_AUTHOR: twilio-dx
           SLACK_ICON_EMOJI: ':github:'
           SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'Cli tests failed'
+          SLACK_MESSAGE: 'Cli audit test failed'
           MSG_MINIMAL: actions url
           SLACK_FOOTER: Posted automatically using GitHub Actions

@@ -1,4 +1,106 @@
-### [3.0.1](https://github.com/twilio/twilio-cli/compare/3.0.0...3.0.1) (2022-01-27)
+## [3.1.0](https://github.com/twilio/twilio-cli/compare/3.0.1...3.1.0) (2022-02-10)
+
+
+### Library - Fixes
+
+* Added release candidate changes ([#379](https://github.com/twilio/twilio-cli/issues/379)) ([85b86c4](https://github.com/twilio/twilio-cli/commit/85b86c4191fea9fe6406290e2ec3c23f84553172))
+* changes for default output property ([#377](https://github.com/twilio/twilio-cli/issues/377)) ([980b059](https://github.com/twilio/twilio-cli/commit/980b0599bcb2edc9fe4da4929784e85455c61efe))
+* Cleaning travis code ([#380](https://github.com/twilio/twilio-cli/issues/380)) ([9e89e1a](https://github.com/twilio/twilio-cli/commit/9e89e1ad750bcf498d16256b7d056b7e33d09860))
+* Correct terminology in testing workflow ([#370](https://github.com/twilio/twilio-cli/issues/370)) ([84d5796](https://github.com/twilio/twilio-cli/commit/84d5796015056358d3da09b88e708ffa6c9cf684))
+* Fix profiles remove with environment variables set ([#376](https://github.com/twilio/twilio-cli/issues/376)) ([fb4c11a](https://github.com/twilio/twilio-cli/commit/fb4c11aeb70663956b086b5cab84b2603c5a2f1b))
+
+
+### Library - Chores
+
+* Add back sonar scan ([#384](https://github.com/twilio/twilio-cli/issues/384)) ([dac332c](https://github.com/twilio/twilio-cli/commit/dac332cb4c61f540760ccf4d41a06a94d314cb4c))
+* Add link to docs with update notification ([#368](https://github.com/twilio/twilio-cli/issues/368)) ([b18e07b](https://github.com/twilio/twilio-cli/commit/b18e07b186c0e2ba99dea75262f63adedfd08640))
+* fix failing test ([#382](https://github.com/twilio/twilio-cli/issues/382)) ([3b3f384](https://github.com/twilio/twilio-cli/commit/3b3f384b296d0b8d1fae77c065c6b4ba0da7c5cd))
+* segregate single platform acceptance workflow ([#381](https://github.com/twilio/twilio-cli/issues/381)) ([966f6b4](https://github.com/twilio/twilio-cli/commit/966f6b44bf0106a5245b86766a89942e68d00e6a))
+* Separate npm audit and test workflows ([#378](https://github.com/twilio/twilio-cli/issues/378)) ([13d0ead](https://github.com/twilio/twilio-cli/commit/13d0ead89c5e6a00cd9548bc9d4baf334e6bee0a))
+
+
+### Library - Test
+
+* Dummy draft workflow ([#387](https://github.com/twilio/twilio-cli/issues/387)) ([ae5ad5a](https://github.com/twilio/twilio-cli/commit/ae5ad5ad779cb7f20c317febd0c26beb7b637058))
+
+---------------------------
+**Api**
+- Add Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org
+Copyright: © 1999-2019 ImageMagick Studio LLC
+License: https://imagemagick.org/script/license.php
+Features: Cipher DPC Modules OpenMP 
+Delegates (built-in): bzlib djvu fftw fontconfig freetype jbig jng jpeg lcms lqr ltdl lzma openexr pangocairo png tiff webp wmf x xml zlib
+Usage: stream-im6.q16 [options ...] input-image raw-image
+
+Image Settings:
+  -authenticate password
+                       decipher image with this password
+  -channel type        apply option to select image channels
+  -colorspace type     alternate image colorspace
+  -compress type       type of pixel compression when writing the image
+  -define format:option
+                       define one or more image format options
+  -density geometry    horizontal and vertical density of the image
+  -depth value         image depth
+  -extract geometry    extract area from image
+  -identify            identify the format and characteristics of the image
+  -interlace type      type of image interlacing scheme
+  -interpolate method  pixel color interpolation method
+  -limit type value    pixel cache resource limit
+  -map components      one or more pixel components
+  -monitor             monitor progress
+  -quantize colorspace reduce colors in this colorspace
+  -quiet               suppress all warning messages
+  -regard-warnings     pay attention to warning messages
+  -respect-parentheses settings remain in effect until parenthesis boundary
+  -sampling-factor geometry
+                       horizontal and vertical sampling factor
+  -seed value          seed a new sequence of pseudo-random numbers
+  -set attribute value set an image attribute
+  -size geometry       width and height of image
+  -storage-type type   pixel storage type
+  -synchronize         synchronize image to storage device
+  -taint               declare the image as modified
+  -transparent-color color
+                       transparent color
+  -verbose             print detailed information about the image
+  -virtual-pixel method
+                       virtual pixel access method
+
+Miscellaneous Options:
+  -debug events        display copious debugging information
+  -help                print program options
+  -list type           print a list of supported option arguments
+  -log format          format of debugging information
+  -version             print version information
+
+By default, the image format of `file' is determined by its magic
+number.  To specify a particular image format, precede the filename
+with an image format name and a colon (i.e. ps:image) or specify the
+image type as the filename suffix (i.e. image.ps).  Specify 'file' as
+'-' for standard input or output. resource
+
+**Conversations**
+- Fixed DELETE request to accept sid_like params in Address Configuration resources **(breaking change)**
+- Expose Address Configuration resource for  and 
+
+**Fax**
+- Removed deprecated Programmable Fax Create and Update methods **(breaking change)**
+
+**Insights**
+- Rename  to  and remove  in conference participant summary **(breaking change)**
+
+**Numbers**
+- Expose valid_until filters as part of provisionally-approved compliance feature on the List Bundles resource
+
+**Supersim**
+- Fix typo in Fleet resource docs
+- Updated documentation for the Fleet resource indicating that fields related to commands have been deprecated and to use sms_command fields instead.
+- Add support for setting and reading  and  on Fleets resource for helper libraries
+- Changed  property in requests to create an SMS Command made to the /SmsCommands to accept SIM UniqueNames in addition to SIDs
+
+**Verify**
+- Update list attempts API to include new filters and response fields.### [3.0.1](https://github.com/twilio/twilio-cli/compare/3.0.0...3.0.1) (2022-01-27)
 
 
 ### Library - Chores
