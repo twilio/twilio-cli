@@ -1,4 +1,4 @@
-name: Platform Executable Acceptance Testing
+name: Acceptance Testing
 on:
   workflow_dispatch:
   workflow_run:
