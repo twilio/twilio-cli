@@ -64,7 +64,7 @@ jobs:
           REPO_NAME: ${{ github.repository_owner }}
         run: |
           brew tap $REPO_NAME/brew && brew install twilio
-          node test/asserts/validate_tests.js
+          ./.github/scripts/cmds-to-test.sh
       - name: Global - Testing upgrade Twilio CLI (2)
         if: ${{ github.respository != 'twilio/draft-release-branch' }}
         env:
@@ -72,7 +72,7 @@ jobs:
         run: |
           brew tap $REPO_NAME/brew && brew install twilio
           brew upgrade twilio
-          node test/asserts/validate_tests.js
+          ./.github/scripts/cmds-to-test.sh
       - name: Draft - Testing installation of Twilio CLI (1)
         if: ${{ github.respository == 'twilio/draft-release-branch' }}
         env:
