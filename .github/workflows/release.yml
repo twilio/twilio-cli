@@ -163,15 +163,6 @@ jobs:
           check-name: 'Oclif Release'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-      - name: Run sanity testing on release-draft
-        if: ${{ github.event.inputs.draft-release == 'true' }}
-        run: node .github/scripts/trigger-workflow.js
-        env:
-          WORKFLOW_NAME: '.github/workflows/cli-test-homebrew.yml'
-          REPO_NAME: ${{ github.repository }}
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-          INPUTS: '{ "version": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
   delete-draft-release-oclif:
     runs-on: ubuntu-latest
     if: ${{github.event.inputs.draft-release == 'true'}}
