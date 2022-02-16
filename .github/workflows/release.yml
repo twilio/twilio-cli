@@ -81,7 +81,7 @@ jobs:
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: '.github/workflows/cli-test-npm.yml'
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           INPUTS: '{ "version": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
@@ -91,7 +91,7 @@ jobs:
         env:
           TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
           RELEASE_BODY: ${{github.event.inputs.change-log}}
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
@@ -105,7 +105,7 @@ jobs:
       run: node .github/scripts/trigger-workflow.js
       env:
           WORKFLOW_NAME: '.github/workflows/delete-draft-tag-release.yml'
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
@@ -126,7 +126,7 @@ jobs:
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'oclif-release.yml'
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
@@ -135,7 +135,7 @@ jobs:
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'oclif-release.yml'
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "formula": "twiliorc", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
@@ -144,10 +144,25 @@ jobs:
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'oclif-release.yml'
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.draft-tag-name}}-draft", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+  oclif-draft-sanity-test:
+    runs-on: ubuntu-latest
+    if: ${{github.event.inputs.draft-release == 'true'}}
+    needs: [oclif-release]
+    steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Wait for draft release to succeed
+        uses: lewagon/wait-on-check-action@v1.0.0
+        with:
+          ref: ${{steps.extract_branch.outputs.branch}}
+          check-name: 'Oclif Release'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
   delete-draft-release-oclif:
     runs-on: ubuntu-latest
     if: ${{github.event.inputs.draft-release == 'true'}}
@@ -157,7 +172,7 @@ jobs:
        run: node .github/scripts/trigger-workflow.js
        env:
         WORKFLOW_NAME: '.github/workflows/delete-draft-tag-release.yml'
-        REPO_NAME: twilio/twilio-cli
+        REPO_NAME: ${{ github.repository }}
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
@@ -179,14 +194,21 @@ jobs:
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'docker-release.yml'
-          REPO_NAME: twilio/twilio-cli
+          REPO_NAME: ${{ github.repository }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+      - name: Run acceptance testing for docker release
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: '.github/workflows/cli-test-docker.yml'
+          REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
   platform-executables-release:
     runs-on: ubuntu-latest
     needs: [ release ]
     env:
-        REPO_NAME: twilio/twilio-cli
+        REPO_NAME: ${{ github.repository }}
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
     steps:
       - name: Checkout cli repo

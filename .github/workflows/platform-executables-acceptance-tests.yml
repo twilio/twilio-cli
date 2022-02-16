@@ -1,4 +1,4 @@
-name: Platform Executable Acceptance Testing
+name: Acceptance Testing
 on:
   workflow_dispatch:
   workflow_run:
@@ -11,7 +11,7 @@ on:
     types:
       - completed
 env:
-  INPUT_OWNER: twilio
+  INPUT_OWNER:  ${{ github.repository_owner }}
   INPUT_REPO: twilio-cli
   INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
   INPUT_WAITING_INTERVAL: 10
@@ -40,35 +40,58 @@ jobs:
           git fetch --prune --unshallow
           echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
 
-  wait-for-oclif-releases:
-    name: Wait for oclif platform executables Release to complete
-    runs-on: ubuntu-latest
+  wait-for-brew-releases:
+    name: Wait for brew Release to complete
+    runs-on: macos-11
     continue-on-error: true
     needs: [ get-branch, get-tag ]
+    strategy:
+      matrix:
+        node-version: [ 16.x, 14.x, 10.x ]
     outputs:
-      FAILURE_TAG_OCLIF: ${{ steps.failure_oclif.outputs.FAILURE_TAG_OCLIF }}
+      FAILURE_TAG_BREW: ${{ steps.failure_brew.outputs.FAILURE_TAG_BREW }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
-      - name: Wait for Oclif Release
+      - name: Wait for oclif executables Release
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
           INPUT_REF: ${{ needs.get-branch.outputs.branch }}
-      - name: Perform install and test on binaries
-        id: oclif_acceptance_run
+      - name: Global - Testing installation of Twilio CLI (1)
+        if: ${{ github.respository != 'twilio/draft-release-branch' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME: ${{ github.repository_owner }}
         run: |
-          gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.deb'
-          sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}.deb
-          ls
-          twilio --version
-          twilio api --help
-      - name: setup oclif failure output
+          brew tap $REPO_NAME/brew && brew install twilio
+          ./.github/scripts/cmds-to-test.sh
+      - name: Global - Testing upgrade Twilio CLI (2)
+        if: ${{ github.respository != 'twilio/draft-release-branch' }}
+        env:
+          REPO_NAME: ${{ github.repository_owner }}
+        run: |
+          brew tap $REPO_NAME/brew && brew install twilio
+          brew upgrade twilio
+          ./.github/scripts/cmds-to-test.sh
+      - name: Draft - Testing installation of Twilio CLI (1)
+        if: ${{ github.respository == 'twilio/draft-release-branch' }}
+        env:
+          REPO_NAME: ${{ github.repository_owner }}
+        run: |
+          brew tap $REPO_NAME/brew && brew install twiliodraft
+          ./.github/scripts/cmds-to-test.sh
+      - name: Draft - Testing upgrade Twilio CLI (2)
+        if: ${{ github.respository == 'twilio/draft-release-branch' }}
+        env:
+          REPO_NAME: ${{ github.repository_owner }}
+        run: |
+          brew tap $REPO_NAME/brew && brew install twiliodraft
+          brew upgrade twilio
+          ./.github/scripts/cmds-to-test.sh
+      - name: setup brew failure output
         if: failure() || cancelled()
-        id: failure_oclif
-        run: echo '::set-output name=FAILURE_TAG_OCLIF::true'
+        id: failure_brew
+        run: echo '::set-output name=FAILURE_TAG_BREW::true'
 
   wait-for-windows-releases:
     name: Wait for windows platform executables Release to complete
@@ -109,7 +132,7 @@ jobs:
 
   wait-for-macos-releases:
     name: Wait for macos platform executables Release to complete
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     continue-on-error: true
     needs: [ get-branch, get-tag ]
     outputs:
@@ -167,11 +190,40 @@ jobs:
         id: failure_debian
         run: echo '::set-output name=FAILURE_TAG_DEBIAN::true'
 
+  test-scoop-release:
+    name: Do scoop testing after release
+    runs-on: windows-latest
+    continue-on-error: true
+    needs: [ get-branch, get-tag ]
+    outputs:
+      FAILURE_TAG_SCOOP: ${{ steps.failure_scoop.outputs.FAILURE_TAG_SCOOP }}
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - name: Wait for Scoop release to finish
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_WORKFLOW_FILE_NAME: oclif-release.yml
+          INPUT_REF: ${{ needs.get-branch.outputs.branch }}
+      - name: Perform testing on scoop installations
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          iwr -useb get.scoop.sh | iex
+          scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
+          scoop install twilio
+          twilio --version
+          twilio api --help
+      - name: setup scoop failure output
+        if: failure() || cancelled()
+        id: failure_scoop
+        run: echo '::set-output name=FAILURE_TAG_SCOOP::true'
+
   notify-complete-fail:
-    needs: [wait-for-oclif-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases]
+    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release]
     name: Notify Release Failed
     runs-on: ubuntu-latest
-    if: ${{ ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) || ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) || ( needs.wait-for-oclif-releases.outputs.FAILURE_TAG_OCLIF  == 'true' ) || ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true') }}
+    if: ${{ ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) || ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) || ( needs.wait-for-brew-releases.outputs.FAILURE_TAG_BREW  == 'true' ) || ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true')  || ( needs.test-scoop-release.outputs.FAILURE_TAG_SCOOP == 'true') }}
     steps:
       - uses: actions/checkout@v2
       - name: Slack Notification
@@ -184,6 +236,6 @@ jobs:
           SLACK_TITLE: "Twilio Cli"
           SLACK_MESSAGE: 'CLI acceptance workflow Failed'
       - name: Fail in case all jobs failed
-        if: ${{ ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) && ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) && ( needs.wait-for-oclif-releases.outputs.FAILURE_TAG_OCLIF  == 'true' ) && ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true') }}
+        if: ${{ ( needs.wait-for-brew-releases.outputs.FAILURE_TAG_BREW == 'true' ) && ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) && ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) && ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true')  && ( needs.test-scoop-release.outputs.FAILURE_TAG_SCOOP == 'true')}}
         run:
           exit 1
