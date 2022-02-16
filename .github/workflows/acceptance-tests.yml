@@ -194,7 +194,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     outputs:
-      FAILURE_TAG_NPM: ${{ steps.test-npm-releases.FAILURE_TAG_NPM }}
+      FAILURE_TAG_NPM: ${{ steps.failure_npm.outputs.FAILURE_TAG_NPM }}
     strategy:
       matrix:
         node-version: [ 16.x, 14.x, 10.x, 12.x ]
@@ -225,7 +225,7 @@ jobs:
           .github/scripts/cmds-to-test.sh
       - name: setup debian failure output
         if: failure() || cancelled()
-        id: failure_debian
+        id: failure_npm
         run: echo '::set-output name=FAILURE_TAG_NPM::true'
 
   test-scoop-release:
