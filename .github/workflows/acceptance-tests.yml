@@ -49,7 +49,7 @@ jobs:
       matrix:
         node-version: [ 16.x, 14.x, 10.x ]
     outputs:
-      FAILURE_TAG_BREW: ${{ steps.failure_brew.outputs.FAILURE_TAG_BREW }}
+      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_brew.outputs.FAILURE_TAG_BREW }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -64,7 +64,7 @@ jobs:
           REPO_NAME: ${{ github.repository_owner }}
         run: |
           brew tap $REPO_NAME/brew && brew install twilio
-          ./.github/scripts/cmds-to-test.sh
+          .github/scripts/cmds-to-test.sh
       - name: Global - Testing upgrade Twilio CLI (2)
         if: ${{ github.respository != 'twilio/draft-release-branch' }}
         env:
@@ -72,14 +72,14 @@ jobs:
         run: |
           brew tap $REPO_NAME/brew && brew install twilio
           brew upgrade twilio
-          ./.github/scripts/cmds-to-test.sh
+          .github/scripts/cmds-to-test.sh
       - name: Draft - Testing installation of Twilio CLI (1)
         if: ${{ github.respository == 'twilio/draft-release-branch' }}
         env:
           REPO_NAME: ${{ github.repository_owner }}
         run: |
           brew tap $REPO_NAME/brew && brew install twiliodraft
-          ./.github/scripts/cmds-to-test.sh
+          .github/scripts/cmds-to-test.sh
       - name: Draft - Testing upgrade Twilio CLI (2)
         if: ${{ github.respository == 'twilio/draft-release-branch' }}
         env:
@@ -87,7 +87,7 @@ jobs:
         run: |
           brew tap $REPO_NAME/brew && brew install twiliodraft
           brew upgrade twilio
-          ./.github/scripts/cmds-to-test.sh
+          .github/scripts/cmds-to-test.sh
       - name: setup brew failure output
         if: failure() || cancelled()
         id: failure_brew
@@ -99,7 +99,7 @@ jobs:
     needs: [ get-branch, get-tag ]
     continue-on-error: true
     outputs:
-      FAILURE_TAG_WINDOWS: ${{ steps.failure_windows.outputs.FAILURE_TAG_WINDOWS }}
+      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_windows.outputs.FAILURE_TAG_WINDOWS }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -136,7 +136,7 @@ jobs:
     continue-on-error: true
     needs: [ get-branch, get-tag ]
     outputs:
-      FAILURE_TAG_MACOS: ${{ steps.failure_macos.outputs.FAILURE_TAG_MACOS }}
+      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_macos.outputs.FAILURE_TAG_MACOS }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -166,7 +166,7 @@ jobs:
     needs: [ get-branch, get-tag ]
     continue-on-error: true
     outputs:
-      FAILURE_TAG_DEBIAN: ${{ steps.failure_debian.outputs.FAILURE_TAG_DEBIAN }}
+      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_debian.outputs.FAILURE_TAG_DEBIAN }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -189,6 +189,48 @@ jobs:
         if: failure() || cancelled()
         id: failure_debian
         run: echo '::set-output name=FAILURE_TAG_DEBIAN::true'
+  test-npm-releases:
+    name: NPM acceptance testing
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    outputs:
+      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_npm.outputs.FAILURE_TAG_NPM }}
+    strategy:
+      matrix:
+        node-version: [ 16.x, 14.x, 10.x, 12.x ]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/checkout@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Check for cached twilio installation
+        run: |
+          if ! command -v twilio > /dev/null; then twilio() { printf '%sCLI is not installed, all good. '; } else echo "CLI is installed already, Abort."; exit 1; fi
+          twilio --version
+      - name: Node Install - Testing installation of Twilio CLI (1)
+        if: ${{ github.respository != 'twilio/draft-release-branch' }}
+        run: |
+          npm install -g twilio-cli
+          .github/scripts/cmds-to-test.sh
+      - name: NPM Update - Testing upgrade Twilio CLI (2)
+        if: ${{ github.respository != 'twilio/draft-release-branch' }}
+        run: |
+          npm update -g twilio-cli
+          .github/scripts/cmds-to-test.sh
+      - name: Node Install - Testing installation of Twilio CLI (1)
+        if: ${{ github.respository == 'twilio/draft-release-branch' }}
+        run: |
+          npm install -g twilio-cli@$(npm view twilio-cli dist-tags.draft-release-branch)
+          .github/scripts/cmds-to-test.sh
+      - name: NPM Update - Testing upgrade Twilio CLI (2)
+        if: ${{ github.respository == 'twilio/draft-release-branch' }}
+        run: |
+          npm update -g twilio-cli@$(npm view twilio-cli dist-tags.draft-release-branch)
+          .github/scripts/cmds-to-test.sh
+      - name: setup debian failure output
+        if: failure() || cancelled()
+        id: failure_npm
+        run: echo '::set-output name=FAILURE_TAG_NPM::true'
 
   test-scoop-release:
     name: Do scoop testing after release
@@ -196,7 +238,7 @@ jobs:
     continue-on-error: true
     needs: [ get-branch, get-tag ]
     outputs:
-      FAILURE_TAG_SCOOP: ${{ steps.failure_scoop.outputs.FAILURE_TAG_SCOOP }}
+      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_scoop.outputs.FAILURE_TAG_SCOOP }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -220,10 +262,10 @@ jobs:
         run: echo '::set-output name=FAILURE_TAG_SCOOP::true'
 
   notify-complete-fail:
-    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release]
+    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases]
     name: Notify Release Failed
     runs-on: ubuntu-latest
-    if: ${{ ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) || ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) || ( needs.wait-for-brew-releases.outputs.FAILURE_TAG_BREW  == 'true' ) || ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true')  || ( needs.test-scoop-release.outputs.FAILURE_TAG_SCOOP == 'true') }}
+    if: ${{ contains( needs.*.outputs.ACCEPTANCE_FAILURE_TAG, 'true' ) }}
     steps:
       - uses: actions/checkout@v2
       - name: Slack Notification
@@ -236,6 +278,6 @@ jobs:
           SLACK_TITLE: "Twilio Cli"
           SLACK_MESSAGE: 'CLI acceptance workflow Failed'
       - name: Fail in case all jobs failed
-        if: ${{ ( needs.wait-for-brew-releases.outputs.FAILURE_TAG_BREW == 'true' ) && ( needs.wait-for-macos-releases.outputs.FAILURE_TAG_MACOS == 'true' ) && ( needs.wait-for-windows-releases.outputs.FAILURE_TAG_WINDOWS == 'true' ) && ( needs.wait-for-debian-releases.outputs.FAILURE_TAG_DEBIAN == 'true')  && ( needs.test-scoop-release.outputs.FAILURE_TAG_SCOOP == 'true')}}
+        if: ${{ ( needs.test-npm-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && ( needs.wait-for-brew-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && ( needs.wait-for-macos-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && ( needs.wait-for-windows-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && ( needs.wait-for-debian-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true')  && ( needs.test-scoop-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true')}}
         run:
           exit 1
