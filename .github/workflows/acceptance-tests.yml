@@ -212,8 +212,8 @@ jobs:
           wget -qO- https://twilio-cli-prod.s3.amazonaws.com/twilio_pub.asc | sudo apt-key add - 
           sudo touch /etc/apt/sources.list.d/twilio.list
           echo 'deb https://twilio-cli-prod.s3.amazonaws.com/apt/ /' | sudo tee /etc/apt/sources.list.d/twilio.list
-          apt update
-          apt install -y twilio
+          sudo apt update
+          sudo apt install -y twilio
 
           ls
           twilio --version
@@ -221,11 +221,11 @@ jobs:
           .github/scripts/cmds-to-test.sh
       - name: APT upgrade twilio package
         run: |
-          apt-get install --only-upgrade twilio
+          sudo apt-get install --only-upgrade twilio
           .github/scripts/cmds-to-test.sh
       - name: APT downgrade twilio package
         run: |
-          apt-get install -y twilio@3.1.0-1
+          sudo apt-get install -y twilio@3.1.0-1
           twilio --version
           .github/scripts/cmds-to-test.sh
 
