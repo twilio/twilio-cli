@@ -225,7 +225,7 @@ jobs:
           .github/scripts/cmds-to-test.sh
       - name: APT downgrade twilio package
         run: |
-          sudo apt-get install -y twilio@3.1.0-1
+          sudo apt-get install -y twilio=3.1.0-1
           twilio --version
           .github/scripts/cmds-to-test.sh
 
