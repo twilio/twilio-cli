@@ -1,3 +1,11 @@
+## [3.1.0-draft.2](https://github.com/twilio/twilio-cli/compare/3.1.0-draft.1...3.1.0-draft.2) (2022-02-23)
+
+
+### Library - Chores
+
+* Add NPM acceptance test ([#398](https://github.com/twilio/twilio-cli/issues/398)) ([253293d](https://github.com/twilio/twilio-cli/commit/253293dd07b756ff53554ffa540b3449f3126ef8))
+* brew acceptance test ([f216846](https://github.com/twilio/twilio-cli/commit/f216846b718e77563eecdff715790a29e58b4e26))
+
 ## [3.1.0-draft.1](https://github.com/twilio/twilio-cli/compare/3.0.1...3.1.0-draft.1) (2022-02-09)
 
 
