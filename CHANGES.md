@@ -1,3 +1,18 @@
+## [3.2.0](https://github.com/twilio/twilio-cli/compare/3.1.0...3.2.0) (2022-02-24)
+
+
+### Library - Fixes
+
+* Added Scoop acceptance testing after release ([#395](https://github.com/twilio/twilio-cli/issues/395)) ([14c3cf5](https://github.com/twilio/twilio-cli/commit/14c3cf5759a0fc1d428298bc75f9f5b7a25d3bdb))
+* fix for failing rpm build ([#391](https://github.com/twilio/twilio-cli/issues/391)) ([9cfaa2c](https://github.com/twilio/twilio-cli/commit/9cfaa2c93cb8f1f3ce9f2ff1e40e84d48ceb69cc))
+
+
+### Library - Chores
+
+* Add NPM acceptance test ([#398](https://github.com/twilio/twilio-cli/issues/398)) ([d2be8e1](https://github.com/twilio/twilio-cli/commit/d2be8e1671812ef3e7e33642a8f19d481f257aac))
+* brew acceptance test ([88e6f4b](https://github.com/twilio/twilio-cli/commit/88e6f4bbc42bc68510f9d61387a466ed2746a396))
+* update support for earlier versions in apt ([#400](https://github.com/twilio/twilio-cli/issues/400)) ([09a6372](https://github.com/twilio/twilio-cli/commit/09a6372e393accdf931643319462f4aca0f688cf))
+
 ---------------------------
 **Api**
 - Add  to Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org
