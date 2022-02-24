@@ -44,14 +44,14 @@ notarize_and_staple() {
 }
 
 pack_macos() {
-  if ["$REPOSITORY_OWNER" == "twilio"]
-  then
+#  if [ "$REPOSITORY_OWNER" == "twilio" ]
+#  then
     import_certificate
     npx oclif-dev pack:macos
     notarize_and_staple
-  else
-    npx oclif-dev pack:macos
-  fi
+#  else
+#   npx oclif-dev pack:macos
+ # fi
 }
 
 make install
