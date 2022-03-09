@@ -47,7 +47,7 @@ jobs:
     needs: [ get-branch, get-tag ]
     strategy:
       matrix:
-        node-version: [ 16.x, 14.x, 10.x ]
+        node-version: [ 16.x, 14.x, 12.x, 10.x ]
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_brew.outputs.FAILURE_TAG_BREW }}
     steps:
