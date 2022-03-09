@@ -1,8 +1,8 @@
 {
     "path": {
        "topics":{
-           "debugger": "flex/end-user-guide/debugger",
-           "email":"/email",
+           "debugger": "usage/troubleshooting/debugging-your-application",
+           "email":"sendgrid",
            "feedback": "twilio-cli/quickstart#send-us-feedback",
            "phone-numbers": "twilio-cli/quickstart#list-your-phone-numbers",
            "plugins": "twilio-cli/plugins",
