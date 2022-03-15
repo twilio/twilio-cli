@@ -1,3 +1,12 @@
+### [3.2.1](https://github.com/twilio/twilio-cli/compare/3.2.0...3.2.1) (2022-03-10)
+
+
+### Library - Chores
+
+* Add nodev12 support  ([#406](https://github.com/twilio/twilio-cli/issues/406)) ([2ffdb75](https://github.com/twilio/twilio-cli/commit/2ffdb753036153c1d8a0603aff8711e47b645bc5))
+* fix apt acceptance test failure ([#409](https://github.com/twilio/twilio-cli/issues/409)) ([de74ae3](https://github.com/twilio/twilio-cli/commit/de74ae3f8461db43ea0fff54ab7f1dfa29462b4a))
+* fixing macos build issue ([3a0011a](https://github.com/twilio/twilio-cli/commit/3a0011a114f4e73e02482ad5158d6bba6c9c689b))
+
 ## [3.2.0](https://github.com/twilio/twilio-cli/compare/3.1.0...3.2.0) (2022-02-24)
 
 
