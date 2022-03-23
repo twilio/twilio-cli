@@ -21,6 +21,7 @@ jobs:
       - name: Wait for docker release to finish
         run: bash .github/scripts/trigger-and-wait.sh
         env:
+          INPUT_OWNER:  ${{ github.repository_owner }}
           INPUT_WORKFLOW_FILE_NAME: docker-release.yml
           INPUT_REF: ${{ needs.get-branch.outputs.branch }}
       - name: Login to Docker Hub
