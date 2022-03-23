@@ -115,7 +115,8 @@ jobs:
         run: |
           gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.exe'
           ls
-          iwr -useb get.scoop.sh | iex
+          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+          ./scoop.ps1 -RunAsAdmin
           scoop install gsudo
           ./twilio-${{ needs.get-tag.outputs.TAG_NAME }}.exe /S
           sleep 100
@@ -295,7 +296,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          iwr -useb get.scoop.sh | iex
+          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+          ./scoop.ps1 -RunAsAdmin
           scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
           scoop install twilio
           twilio --version
@@ -304,7 +306,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          iwr -useb get.scoop.sh | iex
+          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+          ./scoop.ps1 -RunAsAdmin
           scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
           scoop install twiliodraft
           twilio --version
