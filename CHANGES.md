@@ -1,3 +1,11 @@
+## [3.3.0](https://github.com/twilio/twilio-cli/compare/3.2.1...3.3.0) (2022-03-24)
+
+
+### Library - Fixes
+
+* Add input owner for docker test ([#411](https://github.com/twilio/twilio-cli/issues/411)) ([73be18f](https://github.com/twilio/twilio-cli/commit/73be18f5d0d6817795f95bc2e8feae0bce022c4e))
+* Fix scoop package manager installation ([#410](https://github.com/twilio/twilio-cli/issues/410)) ([82196c3](https://github.com/twilio/twilio-cli/commit/82196c30de822840057a74d7011f8b9be1dff627))
+
 ---------------------------
 **Api**
 - Change Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org
