@@ -80,4 +80,4 @@ twilio my-new-topic:my-new-command --help
 
 Once you have your plugin working, publish it to npmjs.org as a JavaScript package using `npm publish`. The `twilio plugins:install <npm package name>` command will download your package from NPM.
 
-If you want to keep your package private, then you can run `npm pack` to create a tarball and distribute that file. Running `twilio plugins:install <package.tar.gz>` will install the plugin from the file instead of looking on NPM.
+If you want to keep your package private, then you can run `npm pack` to create a tarball, host the tarball using a tool like [Twilio Assets](https://www.twilio.com/docs/runtime/assets), and distribute the URL to that tarball. Running `twilio plugins:install <url_to_package.tar.gz>` will install the plugin from the tarball file instead of looking on NPM.
