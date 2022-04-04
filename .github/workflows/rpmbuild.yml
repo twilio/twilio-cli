@@ -1,0 +1,69 @@
+name: RPM Build
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    # wait for Cli Release to complete, when it completes, start this workflow
+    workflows: ["Cli Release"]
+    branches: [main]
+    types:
+      - completed
+jobs:
+
+  rpmbuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout cli
+        uses: actions/checkout@v2
+
+      - name: get version
+        id: get-tag
+        run: |
+          echo "::set-output name=TAG_NAME::$(node -p -e "require('./package.json').version")"
+
+      - name: generate linux tarball
+        run: |
+          make install
+          npm install -g @oclif/dev-cli
+          oclif-dev pack --targets=linux-x64
+
+      - name: build rpm
+        uses: ./.github/actions/build-rpm
+        id: build_rpm
+        with:
+          spec_file: .github/rpm/twilio.spec
+          sources: |
+            dist/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}-linux-x64.tar.gz
+          variables: |
+            _version=${{ steps.get-tag.outputs.TAG_NAME }}
+          gpg_signing_key: ${{ secrets.GPG_SIGNING_KEY }}
+          gpg_signing_key_id: ${{ secrets.GPG_SIGNING_KEY_ID }}
+          gpg_signing_key_passphrase: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
+          gpg_pub_key: .github/rpm/gpg_pub.asc
+
+      - name: build_rpm outputs
+        run: |
+          echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
+          echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
+
+      - name: Upload rpm package to release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm.outputs.rpm_package_path }} --clobber
+  notify-complete-fail:
+    if: ${{ failure() || cancelled() }}
+    needs: [ rpmbuild ]
+    name: Notify Release Failed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+          SLACK_COLOR: "#ff3333"
+          SLACK_USERNAME: CLI Release Bot
+          SLACK_ICON_EMOJI: ":ship:"
+          SLACK_TITLE: "Twilio Cli"
+          SLACK_MESSAGE: 'RPM Build Failed'
+          MSG_MINIMAL: actions url

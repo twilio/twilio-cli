@@ -10,7 +10,10 @@ class ProfilesRemove extends TwilioClientCommand {
     const verdict = await this.confirmRemoveProfile();
     if (verdict === true) {
       const keyVerdict = await this.confirmRemoveKey();
-      const credentials = await this.deleteLocalKey(deleteProfile);
+      let credentials;
+      if (!this.userConfig.profiles[deleteProfile.id]) {
+        credentials = await this.deleteLocalKey(deleteProfile);
+      }
       await this.deleteRemoteKey(deleteProfile, keyVerdict, credentials);
       this.logger.info(`Deleted ${deleteProfile.id} profile.`);
       this.userConfig.removeProfile(deleteProfile);
@@ -28,12 +31,12 @@ class ProfilesRemove extends TwilioClientCommand {
         `The profile "${profileId}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`,
       );
     }
-    if (activeProfile.id === deleteProfile.id) {
+    if (activeProfile && activeProfile.id === deleteProfile.id) {
       this.logger.warn(
         'Are you sure you want to remove the active profile? Run "twilio profiles:use" to set another profile as active.',
       );
     }
-    if (this.userConfig.profiles.length === 1) {
+    if (this.userConfig.projects.length + Object.keys(this.userConfig.profiles).length === 1) {
       this.logger.warn(
         'Are you sure you want to remove the last profile? Run "twilio profiles:create" to create another profile.',
       );
@@ -54,7 +57,8 @@ class ProfilesRemove extends TwilioClientCommand {
   async deleteRemoteKey(profileDelete, keyVerdict, credentials) {
     if (keyVerdict === true) {
       try {
-        await this.twilioClient.api.keys(credentials.apiKey).remove();
+        const apiKey = profileDelete.apiKey || credentials.apiKey;
+        await this.twilioClient.api.keys(apiKey).remove();
         this.logger.info('The API Key has been deleted from The Twilio console.');
       } catch (error) {
         this.logger.error(

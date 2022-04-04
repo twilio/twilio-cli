@@ -1,0 +1,58 @@
+name: Docker Hub Release
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+      - name: Fetch tag
+        id: get-tag
+        run: |
+          git fetch --tags
+          echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: twilio/twilio-cli
+          tags: type=semver,pattern={{version}}, value= ${{ steps.get-tag.outputs.TAG_NAME }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+      - name: Image digest
+        run: |
+          echo ${{ steps.docker_build.outputs.digest }}
+  notify-complete-fail:
+    if: ${{ failure() || cancelled() }}
+    needs: [ build ]
+    name: Notify Release Failed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+          SLACK_COLOR: "#ff3333"
+          SLACK_USERNAME: CLI Release Bot
+          SLACK_ICON_EMOJI: ":ship:"
+          SLACK_TITLE: "Twilio Cli"
+          SLACK_MESSAGE: 'Twilio CLI Docker Release Failed'
+          MSG_MINIMAL: actions url

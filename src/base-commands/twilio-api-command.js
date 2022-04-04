@@ -105,13 +105,21 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
 
   // 'remove' commands have no response body and thus do not need display properties.
   if (NewCommandClass.actionDefinition.commandName !== 'remove') {
-    const defaultProperties = (resource && resource.defaultOutputProperties) || [];
+    const defaultProperties =
+      (action && action.defaultOutputProperties) || (resource && resource.defaultOutputProperties) || [];
 
     cmdFlags.properties = flags.string({
       // Camel-cased, CSV of the provided property list. Or just the SID.
       default: defaultProperties.map((prop) => camelCase(prop)).join(',') || 'sid',
       description: 'The properties you would like to display (JSON output always shows all properties).',
     });
+  }
+
+  if (
+    NewCommandClass.actionDefinition.commandName === 'list' ||
+    NewCommandClass.actionDefinition.commandName === 'fetch'
+  ) {
+    cmdFlags = Object.assign(cmdFlags, TwilioClientCommand.noHeader);
   }
 
   // 'list' commands get limit flags for specifying the result set size.

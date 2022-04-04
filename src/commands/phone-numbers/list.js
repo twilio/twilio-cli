@@ -19,6 +19,7 @@ NumberList.flags = {
   }),
   ...TwilioClientCommand.flags,
   ...TwilioClientCommand.accountSidFlag,
+  ...TwilioClientCommand.noHeader,
 };
 
 module.exports = NumberList;
