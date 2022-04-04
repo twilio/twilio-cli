@@ -31,6 +31,7 @@ jobs:
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
         FILE_PATH: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+        REPOSITORY_OWNER: ${{ github.repository_owner }}
     - name: Upload binaries to release
       if: always()
       run: node .github/scripts/update-platform-executables.js
@@ -39,7 +40,7 @@ jobs:
         FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
         ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.pkg
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-        REPO_NAME: twilio/twilio-cli
+        REPO_NAME: ${{ github.repository }}
 
   # notify-complete-fail:
   #   if: ${{ failure() || cancelled() }}

@@ -9,7 +9,7 @@ on:
       - completed
 env:
   FORMULA_NAME: 'twilio'
-  
+
 jobs:
   get-tag:
     runs-on: macos-latest
@@ -50,6 +50,7 @@ jobs:
      - uses: actions/checkout@v2
      - run: make install
      - name: import certificate
+       if: ${{ github.repository_owner == 'twilio' }}
        run: |
         New-Item -ItemType directory -Path certificate
         Set-Content -Path certificate\certificate.txt -Value '${{ secrets.WINDOWS_CERTIFICATE }}'
@@ -62,6 +63,7 @@ jobs:
      - name: 'Echo download path'
        run: ls ${{steps.download.outputs.download-path}}
      - name: Code Sign The Executable
+       if: ${{ github.repository_owner == 'twilio' }}
        run: |
           & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f certificate\certificate.pfx /p '${{ secrets.WINDOWS_CERTIFICATE_PASS }}' /t http://timestamp.digicert.com ${{steps.download.outputs.download-path}}/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
      - name: Upload binaries to release
@@ -71,7 +73,7 @@ jobs:
         FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
         ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-        REPO_NAME: twilio/twilio-cli
+        REPO_NAME: ${{ github.repository }}
 
   # notify-complete-fail:
   #   if: ${{ failure() || cancelled() }}

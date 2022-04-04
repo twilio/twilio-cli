@@ -1,12 +1,195 @@
-## [3.1.0-draft.2](https://github.com/twilio/twilio-cli/compare/3.1.0-draft.1...3.1.0-draft.2) (2022-02-23)
+## [3.3.0](https://github.com/twilio/twilio-cli/compare/3.2.1...3.3.0) (2022-03-24)
+
+
+### Library - Fixes
+
+* Add input owner for docker test ([#411](https://github.com/twilio/twilio-cli/issues/411)) ([73be18f](https://github.com/twilio/twilio-cli/commit/73be18f5d0d6817795f95bc2e8feae0bce022c4e))
+* Fix scoop package manager installation ([#410](https://github.com/twilio/twilio-cli/issues/410)) ([82196c3](https://github.com/twilio/twilio-cli/commit/82196c30de822840057a74d7011f8b9be1dff627))
+
+---------------------------
+**Api**
+- Change Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org
+Copyright: © 1999-2019 ImageMagick Studio LLC
+License: https://imagemagick.org/script/license.php
+Features: Cipher DPC Modules OpenMP 
+Delegates (built-in): bzlib djvu fftw fontconfig freetype jbig jng jpeg lcms lqr ltdl lzma openexr pangocairo png tiff webp wmf x xml zlib
+Usage: stream-im6.q16 [options ...] input-image raw-image
+
+Image Settings:
+  -authenticate password
+                       decipher image with this password
+  -channel type        apply option to select image channels
+  -colorspace type     alternate image colorspace
+  -compress type       type of pixel compression when writing the image
+  -define format:option
+                       define one or more image format options
+  -density geometry    horizontal and vertical density of the image
+  -depth value         image depth
+  -extract geometry    extract area from image
+  -identify            identify the format and characteristics of the image
+  -interlace type      type of image interlacing scheme
+  -interpolate method  pixel color interpolation method
+  -limit type value    pixel cache resource limit
+  -map components      one or more pixel components
+  -monitor             monitor progress
+  -quantize colorspace reduce colors in this colorspace
+  -quiet               suppress all warning messages
+  -regard-warnings     pay attention to warning messages
+  -respect-parentheses settings remain in effect until parenthesis boundary
+  -sampling-factor geometry
+                       horizontal and vertical sampling factor
+  -seed value          seed a new sequence of pseudo-random numbers
+  -set attribute value set an image attribute
+  -size geometry       width and height of image
+  -storage-type type   pixel storage type
+  -synchronize         synchronize image to storage device
+  -taint               declare the image as modified
+  -transparent-color color
+                       transparent color
+  -verbose             print detailed information about the image
+  -virtual-pixel method
+                       virtual pixel access method
+
+Miscellaneous Options:
+  -debug events        display copious debugging information
+  -help                print program options
+  -list type           print a list of supported option arguments
+  -log format          format of debugging information
+  -version             print version information
+
+By default, the image format of `file' is determined by its magic
+number.  To specify a particular image format, precede the filename
+with an image format name and a colon (i.e. ps:image) or specify the
+image type as the filename suffix (i.e. image.ps).  Specify 'file' as
+'-' for standard input or output. url parameter to non optional
+- Add  and  categories to  API
+
+**Chat**
+- Added v3 Channel update endpoint to support Public to Private channel migration
+
+**Flex**
+- Private Beta release of the Interactions API to support the upcoming release of Flex Conversations at the end of Q1 2022.
+- Adding  object to Flex Configuration
+
+**Media**
+- Add max_duration param to PlayerStreamer
+
+**Supersim**
+- Remove Commands resource, use SmsCommands resource instead **(breaking change)**
+
+**Taskrouter**
+- Add limits to  for Cumulative Statistics Endpoint
+
+**Video**
+- Change recording  type from  to  **(breaking change)**
+- Add  and  to composition
+- Add  and  to recording### [3.2.1](https://github.com/twilio/twilio-cli/compare/3.2.0...3.2.1) (2022-03-10)
 
 
 ### Library - Chores
 
-* Add NPM acceptance test ([#398](https://github.com/twilio/twilio-cli/issues/398)) ([253293d](https://github.com/twilio/twilio-cli/commit/253293dd07b756ff53554ffa540b3449f3126ef8))
-* brew acceptance test ([f216846](https://github.com/twilio/twilio-cli/commit/f216846b718e77563eecdff715790a29e58b4e26))
+* Add nodev12 support  ([#406](https://github.com/twilio/twilio-cli/issues/406)) ([2ffdb75](https://github.com/twilio/twilio-cli/commit/2ffdb753036153c1d8a0603aff8711e47b645bc5))
+* fix apt acceptance test failure ([#409](https://github.com/twilio/twilio-cli/issues/409)) ([de74ae3](https://github.com/twilio/twilio-cli/commit/de74ae3f8461db43ea0fff54ab7f1dfa29462b4a))
+* fixing macos build issue ([3a0011a](https://github.com/twilio/twilio-cli/commit/3a0011a114f4e73e02482ad5158d6bba6c9c689b))
 
-## [3.1.0-draft.1](https://github.com/twilio/twilio-cli/compare/3.0.1...3.1.0-draft.1) (2022-02-09)
+## [3.2.0](https://github.com/twilio/twilio-cli/compare/3.1.0...3.2.0) (2022-02-24)
+
+
+### Library - Fixes
+
+* Added Scoop acceptance testing after release ([#395](https://github.com/twilio/twilio-cli/issues/395)) ([14c3cf5](https://github.com/twilio/twilio-cli/commit/14c3cf5759a0fc1d428298bc75f9f5b7a25d3bdb))
+* fix for failing rpm build ([#391](https://github.com/twilio/twilio-cli/issues/391)) ([9cfaa2c](https://github.com/twilio/twilio-cli/commit/9cfaa2c93cb8f1f3ce9f2ff1e40e84d48ceb69cc))
+
+
+### Library - Chores
+
+* Add NPM acceptance test ([#398](https://github.com/twilio/twilio-cli/issues/398)) ([d2be8e1](https://github.com/twilio/twilio-cli/commit/d2be8e1671812ef3e7e33642a8f19d481f257aac))
+* brew acceptance test ([88e6f4b](https://github.com/twilio/twilio-cli/commit/88e6f4bbc42bc68510f9d61387a466ed2746a396))
+* update support for earlier versions in apt ([#400](https://github.com/twilio/twilio-cli/issues/400)) ([09a6372](https://github.com/twilio/twilio-cli/commit/09a6372e393accdf931643319462f4aca0f688cf))
+
+---------------------------
+**Api**
+- Add  to Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org
+Copyright: © 1999-2019 ImageMagick Studio LLC
+License: https://imagemagick.org/script/license.php
+Features: Cipher DPC Modules OpenMP 
+Delegates (built-in): bzlib djvu fftw fontconfig freetype jbig jng jpeg lcms lqr ltdl lzma openexr pangocairo png tiff webp wmf x xml zlib
+Usage: stream-im6.q16 [options ...] input-image raw-image
+
+Image Settings:
+  -authenticate password
+                       decipher image with this password
+  -channel type        apply option to select image channels
+  -colorspace type     alternate image colorspace
+  -compress type       type of pixel compression when writing the image
+  -define format:option
+                       define one or more image format options
+  -density geometry    horizontal and vertical density of the image
+  -depth value         image depth
+  -extract geometry    extract area from image
+  -identify            identify the format and characteristics of the image
+  -interlace type      type of image interlacing scheme
+  -interpolate method  pixel color interpolation method
+  -limit type value    pixel cache resource limit
+  -map components      one or more pixel components
+  -monitor             monitor progress
+  -quantize colorspace reduce colors in this colorspace
+  -quiet               suppress all warning messages
+  -regard-warnings     pay attention to warning messages
+  -respect-parentheses settings remain in effect until parenthesis boundary
+  -sampling-factor geometry
+                       horizontal and vertical sampling factor
+  -seed value          seed a new sequence of pseudo-random numbers
+  -set attribute value set an image attribute
+  -size geometry       width and height of image
+  -storage-type type   pixel storage type
+  -synchronize         synchronize image to storage device
+  -taint               declare the image as modified
+  -transparent-color color
+                       transparent color
+  -verbose             print detailed information about the image
+  -virtual-pixel method
+                       virtual pixel access method
+
+Miscellaneous Options:
+  -debug events        display copious debugging information
+  -help                print program options
+  -list type           print a list of supported option arguments
+  -log format          format of debugging information
+  -version             print version information
+
+By default, the image format of `file' is determined by its magic
+number.  To specify a particular image format, precede the filename
+with an image format name and a colon (i.e. ps:image) or specify the
+image type as the filename suffix (i.e. image.ps).  Specify 'file' as
+'-' for standard input or output. resource
+- Add A2P Registration Fee category () to usage records
+
+**Verify**
+- Remove outdated documentation commentary to contact sales. Product is already in public beta.
+
+
+---------------------------
+**Api**
+- Detected a bug and removed optional boolean include_soft_deleted parameter to retrieve soft deleted recordings. **(breaking change)**
+- Add optional boolean include_soft_deleted parameter to retrieve soft deleted recordings.
+
+**Numbers**
+- Unrevert valid_until and sort filter params added to List Bundles resource
+- Revert valid_until and sort filter params added to List Bundles resource
+- Update sorting params added to List Bundles resource in the previous release
+
+**Preview**
+- Moved  from preview to beta under  **(breaking change)**
+
+**Taskrouter**
+- Add  as Response Header to List of Task, Reservation & Worker
+
+**Verify**
+- Add optional  to factors.
+
+**Twiml**
+- Add new Polly Neural voices## [3.1.0](https://github.com/twilio/twilio-cli/compare/3.0.1...3.1.0) (2022-02-10)
 
 
 ### Library - Fixes
@@ -18,11 +201,6 @@
 * Fix profiles remove with environment variables set ([#376](https://github.com/twilio/twilio-cli/issues/376)) ([fb4c11a](https://github.com/twilio/twilio-cli/commit/fb4c11aeb70663956b086b5cab84b2603c5a2f1b))
 
 
-### Library - Features
-
-* Draft release workflow ([#374](https://github.com/twilio/twilio-cli/issues/374)) ([ccec988](https://github.com/twilio/twilio-cli/commit/ccec988abe422ded2ea3edb13e76dbcacb3c463a))
-
-
 ### Library - Chores
 
 * Add back sonar scan ([#384](https://github.com/twilio/twilio-cli/issues/384)) ([dac332c](https://github.com/twilio/twilio-cli/commit/dac332cb4c61f540760ccf4d41a06a94d314cb4c))
@@ -31,7 +209,89 @@
 * segregate single platform acceptance workflow ([#381](https://github.com/twilio/twilio-cli/issues/381)) ([966f6b4](https://github.com/twilio/twilio-cli/commit/966f6b44bf0106a5245b86766a89942e68d00e6a))
 * Separate npm audit and test workflows ([#378](https://github.com/twilio/twilio-cli/issues/378)) ([13d0ead](https://github.com/twilio/twilio-cli/commit/13d0ead89c5e6a00cd9548bc9d4baf334e6bee0a))
 
-### [3.0.1](https://github.com/twilio/twilio-cli/compare/3.0.0...3.0.1) (2022-01-27)
+
+### Library - Test
+
+* Dummy draft workflow ([#387](https://github.com/twilio/twilio-cli/issues/387)) ([ae5ad5a](https://github.com/twilio/twilio-cli/commit/ae5ad5ad779cb7f20c317febd0c26beb7b637058))
+
+---------------------------
+**Api**
+- Add Version: ImageMagick 6.9.10-23 Q16 x86_64 20190101 https://imagemagick.org
+Copyright: © 1999-2019 ImageMagick Studio LLC
+License: https://imagemagick.org/script/license.php
+Features: Cipher DPC Modules OpenMP 
+Delegates (built-in): bzlib djvu fftw fontconfig freetype jbig jng jpeg lcms lqr ltdl lzma openexr pangocairo png tiff webp wmf x xml zlib
+Usage: stream-im6.q16 [options ...] input-image raw-image
+
+Image Settings:
+  -authenticate password
+                       decipher image with this password
+  -channel type        apply option to select image channels
+  -colorspace type     alternate image colorspace
+  -compress type       type of pixel compression when writing the image
+  -define format:option
+                       define one or more image format options
+  -density geometry    horizontal and vertical density of the image
+  -depth value         image depth
+  -extract geometry    extract area from image
+  -identify            identify the format and characteristics of the image
+  -interlace type      type of image interlacing scheme
+  -interpolate method  pixel color interpolation method
+  -limit type value    pixel cache resource limit
+  -map components      one or more pixel components
+  -monitor             monitor progress
+  -quantize colorspace reduce colors in this colorspace
+  -quiet               suppress all warning messages
+  -regard-warnings     pay attention to warning messages
+  -respect-parentheses settings remain in effect until parenthesis boundary
+  -sampling-factor geometry
+                       horizontal and vertical sampling factor
+  -seed value          seed a new sequence of pseudo-random numbers
+  -set attribute value set an image attribute
+  -size geometry       width and height of image
+  -storage-type type   pixel storage type
+  -synchronize         synchronize image to storage device
+  -taint               declare the image as modified
+  -transparent-color color
+                       transparent color
+  -verbose             print detailed information about the image
+  -virtual-pixel method
+                       virtual pixel access method
+
+Miscellaneous Options:
+  -debug events        display copious debugging information
+  -help                print program options
+  -list type           print a list of supported option arguments
+  -log format          format of debugging information
+  -version             print version information
+
+By default, the image format of `file' is determined by its magic
+number.  To specify a particular image format, precede the filename
+with an image format name and a colon (i.e. ps:image) or specify the
+image type as the filename suffix (i.e. image.ps).  Specify 'file' as
+'-' for standard input or output. resource
+
+**Conversations**
+- Fixed DELETE request to accept sid_like params in Address Configuration resources **(breaking change)**
+- Expose Address Configuration resource for  and 
+
+**Fax**
+- Removed deprecated Programmable Fax Create and Update methods **(breaking change)**
+
+**Insights**
+- Rename  to  and remove  in conference participant summary **(breaking change)**
+
+**Numbers**
+- Expose valid_until filters as part of provisionally-approved compliance feature on the List Bundles resource
+
+**Supersim**
+- Fix typo in Fleet resource docs
+- Updated documentation for the Fleet resource indicating that fields related to commands have been deprecated and to use sms_command fields instead.
+- Add support for setting and reading  and  on Fleets resource for helper libraries
+- Changed  property in requests to create an SMS Command made to the /SmsCommands to accept SIM UniqueNames in addition to SIDs
+
+**Verify**
+- Update list attempts API to include new filters and response fields.### [3.0.1](https://github.com/twilio/twilio-cli/compare/3.0.0...3.0.1) (2022-01-27)
 
 
 ### Library - Chores
