@@ -161,13 +161,11 @@ describe('services', () => {
     });
     describe('getDocLink', () => {
       test.it('handles a simple core api', () => {
-        expect(getDocLink('api:core:accounts:create')).to.equal('https://twilio.com/docs/');
+        expect(getDocLink('api:core:accounts:create')).to.equal('https://twilio.com/docs/usage/api');
       });
 
       test.it('handles another topic', () => {
-        expect(getDocLink('debugger:logs:list')).to.equal(
-          'https://twilio.com/docs/usage/troubleshooting/debugging-your-application',
-        );
+        expect(getDocLink('debugger:logs:list')).to.equal('https://twilio.com/docs/flex/end-user-guide/debugger');
       });
       test.it('checks for an api which doesnt have a specific reference doc', () => {
         expect(getDocLink('api:ip:v1:credentials:create')).to.equal('https://twilio.com/docs/');
@@ -182,7 +180,7 @@ describe('services', () => {
       });
       test.it('handles an api with subroute url', () => {
         expect(getDocLink('api:chat:v2:credentials:list')).to.equal(
-          'https://twilio.com/docs/chat/rest/credential-resource',
+          'https://twilio.com/docs/chat/api/credential-resource',
         );
       });
       test.it('handles an api with subroute url', () => {

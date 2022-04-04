@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "version": "3.3.0",
+  "version": "3.0.0",
   "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for documentation.",
   "keywords": [
     "oclif"
@@ -31,7 +31,7 @@
     "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
-    "posttest": "npm run lint",
+    "posttest": "npm run lint && npm audit --production",
     "version": "oclif-dev readme && git add README.md"
   },
   "dependencies": {
@@ -99,7 +99,7 @@
     ],
     "warn-if-update-available": {
       "timeoutInDays": 45,
-      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>. For more information: https://twil.io/cli ",
+      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>.",
       "registry": "https://registry.npmjs.org"
     },
     "topics": {

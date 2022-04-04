@@ -7,7 +7,7 @@ BuildArch:      x86_64
 Buildroot:      %{_tmppath}/%{name}-%{version}-root
 
 License:        MIT
-URL:           https://github.com/twilio/twilio-cli
+#URL:           https://github.com/twilio/twilio-cli
 Source:        %{name}-v%{version}-linux-x64.tar.gz
 
 #BuildRequires:
@@ -34,18 +34,12 @@ rm -rf %{buildroot}/%{name}-%{version}
 mkdir -p %{buildroot}/usr/local/lib/%{name}
 mkdir -p %{buildroot}/usr/local/bin
 cp -a $RPM_BUILD_DIR/%{name}/* %{buildroot}/usr/local/lib/%{name}
+cd %{buildroot}
+ln -sf /usr/local/lib/twilio/bin/twilio /usr/local/bin/twilio
 
 %clean
 rm -rf %{buildroot}/%{name}-%{version}
 rm -rf $RPM_BUILD_DIR
-
-%post
-ln -sf /usr/local/lib/%{name}/bin/%{name} /usr/local/bin/%{name}
-cd /usr/local/lib/%{name}
-PATH=$PATH:$PWD/bin eval $(PATH=$PATH:$PWD/bin node -p "require('./package').scripts.postinstall")
-
-%postun
-rm -f /usr/local/bin/%{name}
 
 %files
 %defattr(-,root,root,-)

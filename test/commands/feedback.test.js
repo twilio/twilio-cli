@@ -16,7 +16,6 @@ describe('commands', () => {
       .it('runs feedback', (ctx) => {
         expect(ctx.stdout).to.contain('Ahoy! Thank you for using twilio-cli!');
         expect(ctx.stderr).to.equal('');
-        expect(ctx.stdout).to.contain('https://airtable.com/shrcFDU1gmKWOqZXe');
       });
   });
 });

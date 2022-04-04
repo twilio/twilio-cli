@@ -83,22 +83,6 @@ PATH=$PATH:$PWD/bin eval $(PATH=$PATH:$PWD/bin node -p "require('./package').scr
       await qq.x(`ln -s "../lib/${config.dirname}/bin/${config.bin}" "${workspace}/usr/bin/${pjson.oclif.bin}"`);
       await qq.x(`dpkg --build "${workspace}" "${qq.join(dist, debArch(arch), `${versionedDebBase}.deb`)}"`);
     }
-    try {
-      // fetch existing Packages file which needs to be modified for new version
-      await qq.x(`aws s3 cp s3://${pjson.oclif.update.s3.bucket}/apt/Packages Packages`, {cwd: dist, reject: false});
-      const content = readFileSync("Packages");
-      fs.readFile('Packages', function (err, data) {
-        if(err) throw err;
-        // check if version already exists
-        if(data.includes(`Version: ${debVersion}`)){
-          console.log('the version ${debVersion}` is already available');
-          return
-        }
-      });
-    }
-    catch(error) {
-      console.log(`Cannot retrieve Packages file due to error: ${error} `);
-    }
     for (const a of arch) {
       await build(a);
       await qq.x(`apt-ftparchive packages ${debArch(a)}/ >> Packages`, {cwd: dist});
