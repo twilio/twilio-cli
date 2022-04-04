@@ -31,7 +31,7 @@ class ProfilesRemove extends TwilioClientCommand {
         `The profile "${profileId}" does not exist. Run "twilio profiles:list" to see the list of configured profiles.`,
       );
     }
-    if (activeProfile.id === deleteProfile.id) {
+    if (activeProfile && activeProfile.id === deleteProfile.id) {
       this.logger.warn(
         'Are you sure you want to remove the active profile? Run "twilio profiles:use" to set another profile as active.',
       );

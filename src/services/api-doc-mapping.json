@@ -2,38 +2,38 @@
     "path": {
        "topics":{
           "api":{
-             "accounts": "usage/api/account",
-             "core": "usage/api",
-             "bulkexports": "usage/bulkexport",
-             "autopilot": "autopilot/api",
-             "chat": "chat/api",      
-             "conversations":  "conversations/api",
-             "events":  "events",
-             "fax":  "fax/api",
-             "flex":  "flex/developer",
-             "frontline":  "frontline/api",
-             "insights":  "voice/insights/api",
-             "lookups":  "lookup/api",
-             "messaging":  "sms",
-             "monitor": "usage/monitor-alert",
-             "notify": "notify/api",
-             "numbers": "phone-numbers/api",
-             "pricing": "voice/pricing",
-             "proxy": "proxy/api",
-             "serverless": "runtime",
-             "studio":  "studio",
-             "supersim":  "iot/supersim/api",
-             "sync":  "sync/api",
-             "taskrouter":  "taskrouter/api",
-             "trunking":  "sip-trunking/api",
-             "trusthub": "trust-hub/trusthub-rest-api",
-             "verify":  "verify/api",
-             "video":  "video",
-             "voice":  "voice", 
+             "accounts": "iam/",
+             "core": "",
+             "bulkexports": "usage/bulkexport/",
+             "autopilot": "autopilot/api/",
+             "chat": "chat/rest/",      
+             "conversations":  "conversations/api/",
+             "events":  "events/",
+             "fax":  "fax/api/",
+             "flex":  "flex/developer/",
+             "frontline":  "frontline/api/",
+             "insights":  "voice/insights/api/",
+             "lookups":  "lookup/api/",
+             "messaging":  "sms/",
+             "monitor": "usage/monitor-alert/",
+             "notify": "notify/api/",
+             "numbers": "phone-numbers/api/",
+             "pricing": "voice/pricing/",
+             "proxy": "proxy/api/",
+             "serverless": "runtime/",
+             "studio":  "studio/rest-api/v2/",
+             "supersim":  "iot/supersim/api/",
+             "sync":  "sync/api/",
+             "taskrouter":  "taskrouter/api/",
+             "trunking":  "sip-trunking/api/",
+             "trusthub": "trust-hub/trusthub-rest-api/",
+             "verify":  "verify/api/",
+             "video":  "video/api/",
+             "voice":  "voice/", 
              "wireless":  "iot/wireless/api"
            },
-           "debugger": "flex/end-user-guide/debugger",
-           "email":"/email",
+           "debugger": "usage/troubleshooting/debugging-your-application",
+           "email":"sendgrid",
            "feedback": "twilio-cli/quickstart#send-us-feedback",
            "phone-numbers": "twilio-cli/quickstart#list-your-phone-numbers",
            "plugins": "twilio-cli/plugins",
@@ -46,75 +46,204 @@
      }    
   },
   "subpath":{
-     "chat/v2":{
-       "credentials": "/credential-resource",
-       "services": "/service-resource",
-       "services-channels" : "/channel-resource",
-       "services-bindings": "/binding-resource" ,
-       "services-roles": "/role-resource",
-       "services-users": "user-resource"
-     },
-     "conversations/v1":{
-        "configuration": "/configuration-resource",
-        "conversation": "/conversation-resource",
-        "credentials": "/credential-resource",
-        "participant": "/participant-conversation-resource",
-        "roles" : "/role-resource",
-        "services": "/service-resource",
-        "users": "/user-resource"
-     },
-     "events/v1": {
-        "schemes": "/event-streams/schema-resource",
-        "sinks": "/event-streams/sink-resource",
-        "subscriptions": "/event-streams/subscription",
-        "types": "/event-streams/event-type-resource"
-    },
-    "fax/v1": {
-       "faxes": "/fax-resource"
-    },
-    "frontline/v1": {
-       "users": "/user-resource"
-    },
-    "notify/v1": {
-       "credentials": "/credential-resource",
-       "services": "/service-resource"
-    },
-    "proxy/v1": {
-       "services": "/service"
-    },
-    "serverless/v1": {
-       "services": "/functions-assets-api/api/service"
-    },
-    "studio/v2": {
-       "flows": "/rest-api/v2/flow"
-    },
-    "supersim/v1": {
-       "commands": "/command-resource",
-       "fleets": "/fleet-resource",
-       "network-access-profiles": "/networkaccessprofile-resource",
-       "networks": "/network-resource",
-       "sims": "/sim-resource",
-       "sms-commands": "/smscommand-resource",
-       "usage-records": "/usage-record-resource"
-    },
-    "sync/v1": {
-       "services": "/service"
-    },
-    "taskrouter/v1": {
-       "workspaces": "/workspace"
-    },
-    "trunking/v1": {
-       "trunks":"/trunk-resource"
-    },
-    "verify/v2": {
-       "services": "/service"
-    },
-    "voice/v1": {
-       "byoc-trunks": "/bring-your-own-carrier-byoc",
-       "connection-policies": "/bring-your-own-carrier-byoc/api/connectionpolicy-resource",
-       "dialing-permissions": "/api/dialingpermissions-settings-resource",
-       "ip-records": "/bring-your-own-carrier-byoc/api/iprecord-resource",
-       "source-ip-mappings": "/bring-your-own-carrier-byoc/api/sourceipmapping-resource"
-    }
+      "accounts/v1": {
+         "credentials": "credentials/api",
+         "credentials/aws": "credentials/api",
+         "credentials/public-keys": "credentialpublickey-resource",
+         "auth-tokens": "api/authtoken"
+      },
+      "core": {
+         "accounts": "iam/api/account",
+         "addresses": "usage/api/address",
+         "addresses/dependent-phone-numbers": "usage/api/address#list-dependent-pns",
+         "applications": "usage/api/applications",
+         "available-phone-numbers": "phone-numbers/api/availablephonenumber-resource",
+         "available-phone-numbers/local": "phone-numbers/api/availablephonenumberlocal-resource",
+         "available-phone-numbers/machine-to-machine": "phone-numbers/api/availablephonenumber-resource",
+         "available-phone-numbers/mobile": "phone-numbers/api/availablephonenumber-mobile-resource",
+         "available-phone-numbers/national": "phone-numbers/api/availablephonenumber-resource",
+         "available-phone-numbers/shared-cost": "phone-numbers/api/availablephonenumber-resource",
+         "available-phone-numbers/toll-free": "phone-numbers/api/availablephonenumber-tollfree-resource",
+         "available-phone-numbers/voip": "phone-numbers/api/availablephonenumber-resource",
+         "authorized-connect-apps": "iam/authorized-connect-apps/api",
+         "balance": "iam/api/account",
+         "calls": "voice/api/call-resource",
+         "calls/events": "voice/api/call-event-resource",
+         "calls/feedback": "voice/api/feedback-resource",
+         "calls/feedback-summary": "voice/api/feedbacksummary-resource",
+         "calls/notifications": "voice/api/call-resource",
+         "calls/payments": "voice/api/payment-resource",
+         "calls/recordings": "voice/api/recording",
+         "calls/siprec": "voice/api/siprec",
+         "conferences": "voice/api/conference-resource",
+         "conferences/participants": "voice/api/conference-participant-resource",
+         "conferences/recordings": "voice/api/conference-resource#conference-recordings",
+         "connect-apps": "iam/connect-apps/api",
+         "incoming-phone-numbers": "phone-numbers/api/incomingphonenumber-resource",
+         "incoming-phone-numbers/assigned-add-ons": "add-ons/api/add-on-management#incoming-phone-number-assigned-add-ons-api",
+         "incoming-phone-numbers/assigned-add-ons/extensions": "add-ons/api/add-on-management#phone-number-assigned-add-on-extensions",
+         "incoming-phone-numbers/local": "phone-numbers/api/incomingphonenumber-resource",
+         "incoming-phone-numbers/mobile": "phone-numbers/api/incomingphonenumber-resource",
+         "incoming-phone-numbers/toll-free": "phone-numbers/api/incomingphonenumber-resource",
+         "keys": "iam/keys/api-key",
+         "messages": "sms/api/message-resource",
+         "messages/feedback": "sms/api/message-feedback-resource",
+         "messages/media": "sms/api/media-resource",
+         "notifications": "notify/api/notification-resource",
+         "outgoing-caller-ids": "voice/api/outgoing-caller-ids",
+         "queues": "voice/api/queue-resource",
+         "queues/members": "voice/api/member-resource",
+         "recordings": "voice/api/recording",
+         "recordings/add-on-results": "add-ons/api/results",
+         "recordings/add-on-results/payloads": "add-ons/api/results",
+         "recording/transcriptions": "voice/api/recording",
+         "signing-keys": "iam/pkcv/account-and-key-management-api-keys",
+         "sip": "voice/sip/api",
+         "sip/credential-lists": "voice/sip/api/sip-credentiallist-resource",
+         "sip/credential-lists/credentials": "voice/sip/api/sip-credential-resource",
+         "sip/domains": "voice/sip/api/sip-domain-resource",
+         "sip/domains/auth": "voice/sip/api/sip-domain-resource",
+         "sip/domains/credential-list-mappings": "voice/sip/api/sip-domain-registration-credentiallistmapping-resource",
+         "sip/domains/ip-access-control-list-mappings": "voice/sip/api/sip-ipaccesscontrollistmapping-resource",
+         "sip/ip-access-control-lists": "voice/sip/api/sip-ipaccesscontrollist-resource",
+         "sms": "sms/api",
+         "sms/short-codes": "sms/api/short-code",
+         "tokens": "iam/access-tokens",
+         "transcriptions": "voice/api/recording-transcription",
+         "usage": "usage/api",
+         "usage/records": "usage/api/usage-record",
+         "usage/records/all-time": "usage/api/usage-record",
+         "usage/records/daily": "usage/api/usage-record",
+         "usage/records/last-month": "usage/api/usage-record",
+         "usage/records/monthly": "usage/api/usage-record",
+         "usage/records/this-month": "usage/api/usage-record",
+         "usage/records/today": "usage/api/usage-record",
+         "usage/records/yearly": "usage/api/usage-record",
+         "usage/records/yesterday": "usage/api/usage-record",
+         "usage/triggers": "usage/api/usage-trigger"
+      },
+      "chat/v2":{
+        "credentials": "credential-resource",
+        "services": "service-resource",
+        "services-channels" : "channel-resource",
+        "services-bindings": "binding-resource" ,
+        "services-roles": "role-resource",
+        "services-users": "user-resource"
+      },
+      "conversations/v1":{
+        "configuration": "configuration-resource",
+        "conversation": "conversation-resource",
+        "credentials": "credential-resource",
+        "participant-conversations": "participant-conversation-resource",
+        "roles" : "role-resource",
+        "services": "service-resource",
+        "users": "user-resource"
+      },
+      "events/v1": {
+        "schemas": "event-streams/schema-resource",
+        "sinks": "event-streams/sink-resource",
+        "subscriptions": "event-streams/subscription",
+        "types": "event-streams/event-type-resource"
+      },
+      "fax/v1": {
+        "faxes": "fax-resource"
+      },
+      "frontline/v1": {
+        "users": "user-resource"
+      },
+      "notify/v1": {
+        "credentials": "credential-resource",
+        "services": "service-resource"
+      },
+      "proxy/v1": {
+        "services": "service"
+      },
+      "serverless/v1": {
+        "services": "functions-assets-api/api/service"
+      },
+      "studio/v2": {
+        "flows": "flow"
+      },
+      "supersim/v1": {
+        "commands": "command-resource",
+        "fleets": "fleet-resource",
+        "network-access-profiles": "networkaccessprofile-resource",
+        "networks": "network-resource",
+        "sims": "sim-resource",
+        "sms-commands": "smscommand-resource",
+        "usage-records": "usage-record-resource"
+      },
+      "sync/v1": {
+        "services": "service"
+      },
+      "taskrouter/v1": {
+        "workspaces/workers": "worker",
+        "workspaces/workers/channels": "worker-channel",
+        "workspaces/workers/cumulative-statistics": "worker/statistics#fetch-cumulative-worker-statistics",
+        "workspaces/workers/real-time-statistics": "worker/statistics#fetch-real-time-worker-statistics",
+        "workspaces/workers/reservations": "worker-reservation",
+        "workspaces/workers/statistics:": "worker/statistics"
+      },
+      "trunking/v1": {
+        "trunks":"trunk-resource",
+        "trunks/credential-lists": "credentiallist-resource",
+        "trunks/ip-access-control-lists": "ipaccesscontrollist-resource",
+        "trunks/origination-urls": "originationurl-resource",
+        "trunks/phone-numbers": "phonenumber-resource",
+        "trunks/recording": "trunk-resource"
+      },
+      "verify/v2": {
+        "services": "service",
+        "services/access-tokens": "access-token",
+        "services/messaging-configurations": "service",
+        "services/rate-limits": "service-rate-limits",
+        "services/verification-check": "verification-check",
+        "services/verifications": "verification",
+        "services/webhooks": "webhooks"
+      },
+      "voice/v1": {
+        "archives/calls": "call-resource#delete-a-call-resource",
+        "byoc-trunks": "bring-your-own-carrier-byoc/api/byoctrunk-resource",
+        "connection-policies": "bring-your-own-carrier-byoc/api/connectionpolicy-resource",
+        "connection-policies/targets": "bring-your-own-carrier-byoc/api/connectionpolicytarget-resource",
+        "dialing-permissions": "api/dialingpermissions-settings-resource",
+        "dialing-permissions/bulk-country-updates": "api/dialingpermissions-bulkcountryupdate-resource",
+        "dialing-permissions/countries": "api/dialingpermissions-country-resource",
+        "dialing-permissions/countries/high-risk-special-prefixes": "dialingpermissions-highriskspecialprefix-resource",
+        "ip-records": "bring-your-own-carrier-byoc/api/iprecord-resource",
+        "settings": "api/dialingpermissions-settings-resource",
+        "source-ip-mappings": "bring-your-own-carrier-byoc/api/sourceipmapping-resource"
+      },
+      "video/v1": {
+         "composition-hooks": "composition-hooks",
+         "composition-settings": "compositions-resource",
+         "compositions": "compositions-resource",
+         "recording-settings": "recordings-resource",
+         "recordings": "recordings-resource",
+         "rooms": "rooms-resource",
+         "rooms/participants": "participants",
+         "rooms/participants/published-tracks": "publishedtrack",
+         "rooms/participants/subscribe-rules": "track-subscriptions#sl-resource",
+         "rooms/participants/subscribed-tracks": "track-subscriptions#st-resource",
+         "rooms/recording-rules": "recording-rules",
+         "rooms/recordings": "rooms-resource"
+      },
+      "autopilot/v1": {
+         "assistants": "assistant",
+         "assistants/defaults": "assistant/defaults",
+         "assistants/dialogues": "dialogue",
+         "assistants/field-types": "field-type",
+         "assistants/field-types/field-values": "field-value",
+         "assistants/model-builds": "model-build",
+         "assistants/queries": "query",
+         "assistants/restore": "assistant",
+         "assistants/style-sheet": "assistant/stylesheet",
+         "assistants/tasks": "task",
+         "assistants/tasks/actions": "task-action",
+         "assistants/tasks/fields": "task-field",
+         "assistants/tasks/samples": "task-sample",
+         "assistants/tasks/statistics": "task-statistics",
+         "assistants/webhooks": "event-webhooks"
+      }
     }
  }

@@ -70,6 +70,31 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('Deleted profile2');
           expect(ctx.stderr).to.contain('configuration saved');
         });
+
+      setup(['configProfile1'], { deleteKey: false })
+        .do((ctx) => {
+          process.env.TWILIO_ACCOUNT_SID = constants.FAKE_ACCOUNT_SID;
+          process.env.TWILIO_AUTH_TOKEN = constants.FAKE_API_SECRET;
+          return ctx.testCmd.run();
+        })
+        .it('run profiles:remove with environment variables set with profile in config', (ctx) => {
+          expect(ctx.stderr).to.contain('The API Key for configProfile1 profile still exists in The Twilio console');
+          expect(ctx.stderr).to.contain('Deleted configProfile1');
+          expect(ctx.stderr).to.contain('configuration saved');
+        });
+
+      setup(['profile1'], { deleteKey: false })
+        .do((ctx) => {
+          process.env.TWILIO_ACCOUNT_SID = constants.FAKE_ACCOUNT_SID;
+          process.env.TWILIO_AUTH_TOKEN = constants.FAKE_API_SECRET;
+          return ctx.testCmd.run();
+        })
+        .it('run profiles:remove with environment variables set with profile in keytar', (ctx) => {
+          expect(ctx.stderr).to.contain('The API Key for profile1 profile still exists in The Twilio console');
+          expect(ctx.stderr).to.contain('Deleted profile1');
+          expect(ctx.stderr).to.contain('configuration saved');
+        });
+
       setup(['configProfile2'], { deleteKey: false })
         .do((ctx) => ctx.testCmd.run())
         .it('run profiles:remove with a profile in config file but keep remote key', (ctx) => {
