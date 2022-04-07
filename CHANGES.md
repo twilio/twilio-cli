@@ -1,3 +1,24 @@
+### [3.3.1](https://github.com/twilio/twilio-cli/compare/3.3.0...3.3.1) (2022-04-07)
+
+
+### Library - Chores
+
+* bump minimist from 1.2.5 to 1.2.6 ([#412](https://github.com/twilio/twilio-cli/issues/412)) ([4577e7e](https://github.com/twilio/twilio-cli/commit/4577e7e85125e07986081416baa8443ddd9b78ff))
+* bump node-fetch from 2.6.5 to 2.6.7 ([#369](https://github.com/twilio/twilio-cli/issues/369)) ([aa5c00d](https://github.com/twilio/twilio-cli/commit/aa5c00d2d0db61a166fb7216c2162dfe91995ce8))
+* bump url-parse from 1.5.3 to 1.5.10 ([#403](https://github.com/twilio/twilio-cli/issues/403)) ([289ccf6](https://github.com/twilio/twilio-cli/commit/289ccf655a2fe5548622df3b43da98958b15210e))
+* remove outdated announcements ([91fd363](https://github.com/twilio/twilio-cli/commit/91fd3635af62695c671772128fbb298c478cabc3))
+
+
+### Library - Docs
+
+* Clarify how to privately share plugin code ([#408](https://github.com/twilio/twilio-cli/issues/408)) ([d71a846](https://github.com/twilio/twilio-cli/commit/d71a846c51bf03eafa5c0090a1c4043e27ad67e2))
+
+
+### Library - Fixes
+
+* acceptance workflow failures fix ([#415](https://github.com/twilio/twilio-cli/issues/415)) ([a907984](https://github.com/twilio/twilio-cli/commit/a907984533640584a16fecb2482fef89c64be0b0))
+* update the condition for running sonar scanner ([#413](https://github.com/twilio/twilio-cli/issues/413)) ([dd227e7](https://github.com/twilio/twilio-cli/commit/dd227e777e003f921d073586e09a00431ac18a2d))
+
 ---------------------------
 **Api**
 - Updated  visibility to private
