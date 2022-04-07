@@ -1,4 +1,13 @@
-## [3.3.0](https://github.com/twilio/twilio-cli/compare/3.2.1...3.3.0) (2022-03-24)
+---------------------------
+**Api**
+- Updated  visibility to private
+
+**Verify**
+- Verify List Attempts API summary endpoint added.
+- Update PII documentation for   property.
+
+**Voice**
+- make annotation parameter from /Calls API private## [3.3.0](https://github.com/twilio/twilio-cli/compare/3.2.1...3.3.0) (2022-03-24)
 
 
 ### Library - Fixes
