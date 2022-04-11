@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Delete branch
-      #   uses: dawidd6/action-delete-branch@v3
-      #   with:
-      #     github_token: ${{github.token}}
-      #     branches: 'draft-release-branch1'
-      # - name: Create new branch
-      #   uses: peterjgrainger/action-create-branch@v2.0.1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     branch: 'draft-release-branch1'
+      - name: Delete branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{github.token}}
+          branches: 'draft-release-branch1'
+      - name: Create new branch
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'draft-release-branch1'
       - name: Checkout CLI Repo with draft-release-branch1
         uses: actions/checkout@v2
         with:
