@@ -1,8 +1,8 @@
 name: GitHub Download Metrics
 
 on:
-  # schedule:
-  #   - cron: "30 3 * * *" #runs at 03:30 UTC or 09:00 IST everyday
+  schedule:
+    - cron: "30 3 * * *" #runs at 03:30 UTC or 09:00 IST everyday
   workflow_dispatch: 
  
 
