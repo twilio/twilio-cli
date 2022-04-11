@@ -8,6 +8,8 @@ with open('.github/workflows/oclif-release.yml', 'w') as file:
   file.write(filedata)
 
 
+
+
 with open('.github/workflows/slack-notification.yml', 'r') as file :
   filedata = file.read()
 
@@ -16,3 +18,4 @@ filedata = filedata.replace('windows-executable-release.yml', 'windows-executabl
 
 with open('.github/workflows/slack-notification.yml', 'w') as file:
   file.write(filedata)
+print("Draft changes are ready")
