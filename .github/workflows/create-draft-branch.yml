@@ -29,4 +29,12 @@ jobs:
           python-version: 3.8 
       - name: Execute py script 
         run: |
-          python3 .github/scripts/draft-release/draft.py  
+          python3 .github/scripts/draft-release/draft.py
+            - name: Commit and push changes
+        run: |
+          git config --global user.email "team_interfaces+github@twilio.com"
+          git config --global user.name "twilio-dx"
+
+          git add -A
+          git commit -m "Draft specific changes from the script"
+          git push   
