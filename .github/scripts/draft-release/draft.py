@@ -7,9 +7,6 @@ filedata = filedata.replace('default: \'false\'', 'default: \'true\'')
 with open('.github/workflows/oclif-release.yml', 'w') as file:
   file.write(filedata)
 
-
-
-
 with open('.github/workflows/slack-notification.yml', 'r') as file :
   filedata = file.read()
 
