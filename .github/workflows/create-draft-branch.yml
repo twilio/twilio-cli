@@ -15,9 +15,9 @@ jobs:
         with:
           branch: 'draft-release-branch1'
       - name: Checkout CLI Repo with draft-release-branch1
-         uses: actions/checkout@v2
-          with:
-            ref: draft-release-branch1
+        uses: actions/checkout@v2
+        with:
+          ref: draft-release-branch1
       - name: Setup python
         uses: actions/setup-python@v2
         with:
