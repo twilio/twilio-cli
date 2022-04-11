@@ -32,8 +32,8 @@ jobs:
           python3 .github/scripts/draft-release/draft.py      
       - name: Commit and push changes
         run: |
-          git config --global user.email "team_interfaces+github@twilio.com"
-          git config --global user.name "twilio-dx"
+          git config --global user.email "sraghav@twilio.com"
+          git config --global user.name "sr010"
           git add -A
           git commit -m "Draft specific changes from the script"
           git push   
