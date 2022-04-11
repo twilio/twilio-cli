@@ -2,14 +2,26 @@ name: Cli Draft Release
 on:
  workflow_dispatch:
     inputs:
-      dummy-input:
-        description: 'Trigger this workflow from draft-release-branch.'
+      change-log:
+        description: 'Open API Changelog.'
+      version-type:
+        description: 'Version to upgrade, Major: 0, Minor:1, Patch: 2'
+      homebrew-branch:
+        description: 'HomeBrew branch name'
+        default: main
+      homebrew-prerelease:
+        description: 'HomeBrew prerelease'
+        default: 'true'
+      draft-release:
+        description: 'Draft-release flag (true/false)'
+        default: 'true'
+
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 14.x, 12.x, 10.x]
+        node-version: [14.x, 10.x]
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -21,3 +33,167 @@ jobs:
           cache: 'npm'
       - name: Run tests
         run: npm test
+  update-api-definitions-changelog:
+    runs-on: ubuntu-latest
+#     needs: [test]
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+      - name: Update Changelog
+        run: |
+          bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
+  release:
+    runs-on: ubuntu-latest
+    needs: [update-api-definitions-changelog]
+    outputs:
+      draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Run git and npm update
+        run: |
+          git pull
+          make install
+      - name: Semantic Release runs for draft release
+        id: semantic-release-draft
+        run: DEBUG=semantic-release:* $(npm bin)/semantic-release  -t \${version}
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Run testing for release-draft
+        if: ${{ github.event.inputs.draft-release == 'true' && steps.semantic-release-draft.outputs.TAG_NAME != '' }}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: '.github/workflows/cli-test-npm.yml'
+          REPO_NAME: twilio/twilio-cli
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "version": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
+      - name: Update release
+        if: ${{steps.semantic-release-draft.outputs.TAG_NAME != ''}}
+        run: node .github/scripts/update-release.js
+        env:
+          TAG_NAME: ${{steps.semantic-release-draft.outputs.TAG_NAME}}
+          RELEASE_BODY: ${{github.event.inputs.change-log}}
+          REPO_NAME: twilio/twilio-cli
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
+  oclif-release:
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - run: |
+          git pull
+          make install
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Invoke Oclif workflow for draft release
+        if: ${{needs.release.outputs.draft-tag-name != '' && github.event.inputs.draft-release == 'true'}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'oclif-release.yml'
+          REPO_NAME: twilio/twilio-cli
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.draft-tag-name}}", "formula": "twiliodraft", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+  # oclif-draft-test:
+  #   runs-on: ubuntu-latest
+  #   needs: [oclif-release]
+  #   steps:
+  #     - name: Extract branch name
+  #       id: extract_branch
+  #       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+  #     - name: Wait for draft release to succeed
+  #       uses: lewagon/wait-on-check-action@v1.0.0
+  #       with:
+  #         ref: ${{steps.extract_branch.outputs.branch}}
+  #         check-name: 'Oclif Release'
+  #         repo-token: ${{ secrets.GITHUB_TOKEN }}
+  #         wait-interval: 10
+  #     - name: Run testing on release-draft
+  #       if: ${{ github.event.inputs.draft-release == 'true' }}
+  #       run: node .github/scripts/trigger-workflow.js
+  #       env:
+  #         WORKFLOW_NAME: '.github/workflows/cli-test-homebrew.yml'
+  #         REPO_NAME: twilio/twilio-cli
+  #         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  #         BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+  #         INPUTS: '{ "version": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
+
+  docker-release:
+    runs-on: ubuntu-latest
+    needs: [ release ]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - run: |
+          git pull
+          make install
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Invoke Docker workflow
+        if: ${{needs.release.outputs.tag-name != ''}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'docker-release.yml'
+          REPO_NAME: twilio/twilio-cli
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+  platform-executables-release:
+    runs-on: ubuntu-latest
+    needs: [ release ]
+    env: 
+        REPO_NAME: twilio/twilio-cli
+        REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - run: |
+          git pull
+          make install
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Invoke debian executable workflow
+        if: ${{needs.release.outputs.draft-tag-name != ''}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'debian-draft-executable-release.yml'
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+      
+      - name: Invoke macos package release workflow
+        if: ${{needs.release.outputs.draft-tag-name != ''}}
+        #TODO make changes to trigger-workflow script to accept multiple workflow names at once
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'macos-executable-release.yml'
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          
+  notify-complete-fail:
+    if: ${{ failure() || cancelled() }}
+    needs: [ release, oclif-release, platform-executables-release ]
+    name: Notify Release Failed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+          SLACK_COLOR: "#ff3333"
+          SLACK_USERNAME: CLI Draft Release Bot
+          SLACK_ICON_EMOJI: ":ship:"
+          SLACK_TITLE: "Twilio Cli - Draft Release"
+          SLACK_MESSAGE: 'CLI Draft Release workflow Failed'

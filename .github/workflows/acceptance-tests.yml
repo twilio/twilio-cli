@@ -304,6 +304,7 @@ jobs:
           twilio api --help
       # enable on draft branch or with an isDraft flag
       # - name: Draft - Perform testing on scoop installations
+      # - name: Perform testing on scoop installations
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   run: |
@@ -313,6 +314,19 @@ jobs:
       #     scoop install twiliodraft
       #     twilio --version
       #     twilio api --help
+      #     scoop install twilio
+      #     twilio --version
+      #     twilio api --help
+      - name: Draft - Perform testing on scoop installations
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+          ./scoop.ps1 -RunAsAdmin
+          scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
+          scoop install twiliodraft
+          twilio --version
+          twilio api --help
       - name: setup scoop failure output
         if: failure() || cancelled()
         id: failure_scoop
