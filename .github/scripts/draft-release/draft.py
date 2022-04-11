@@ -1,8 +1,6 @@
 with open('.github/workflows/oclif-release.yml', 'r') as file :
   filedata = file.read()
 
-print(filedata)
-
 filedata = filedata.replace('default: twilio', 'default: twiliodraft')
 filedata = filedata.replace('default: \'false\'', 'default: \'true\'')
 
