@@ -1,7 +1,7 @@
 name: CLI Unit Tests
 on:
   push:
-     branches: [ main ]
+    branches: [ main ]
   pull_request:
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x, 14.x, 10.x]
+        node-version: [ 16.x, 14.x, 12.x, 10.x ]
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -27,9 +27,11 @@ jobs:
         run: npm test
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
+        if: (github.event_name == 'pull_request' || github.ref_type == 'branch') && !github.event.pull_request.head.repo.fork && matrix.node-version == '16.x'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   notify-complete-fail:
     if: ${{ failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     needs: [ test ]

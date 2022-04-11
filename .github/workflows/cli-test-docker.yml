@@ -1,0 +1,44 @@
+name: Docker acceptance testing
+on:
+  workflow_dispatch:
+
+jobs:
+  get-branch:
+    name: Get Current Branch Name
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.outputs.branch }}
+    steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+  test:
+     runs-on: ubuntu-latest
+     needs: [ get-branch ]
+     steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+      - name: Wait for docker release to finish
+        run: bash .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER:  ${{ github.repository_owner }}
+          INPUT_WORKFLOW_FILE_NAME: docker-release.yml
+          INPUT_REF: ${{ needs.get-branch.outputs.branch }}
+          INPUT_REPO: twilio-cli
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_PROPAGATE_FAILURE: true
+          INPUT_TRIGGER_WORKFLOW: false
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Check running containers
+        run: docker ps -a
+      - name: Test for an older version and upgrade to latest
+        run: |
+         docker run --rm twilio/twilio-cli:2.36.1 /bin/bash -c "twilio api:accounts --help && twilio" && docker pull twilio/twilio-cli:latest && docker run --rm twilio/twilio-cli:latest /bin/bash -c "twilio api:accounts --help && twilio"
+      - name: Test for the latest release
+        run: |
+         docker run --rm twilio/twilio-cli /bin/bash -c "twilio api:accounts --help && twilio" 
