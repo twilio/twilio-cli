@@ -13,4 +13,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'draft-release-branch'  
+          branch: 'draft-release-branch1'
+      - name: Checkout CLI Repo with draft-release-branch1
+         uses: actions/checkout@v2
+          with:
+          ref: draft-release-branch1
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 
+      - name: Execute py script 
+        run: |
+          python3 .github/scripts/draft-release/draft.py  
