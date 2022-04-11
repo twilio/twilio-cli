@@ -22,6 +22,7 @@ jobs:
       - name: Checkout CLI Repo with draft-release-branch1
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
           ref: draft-release-branch1
       - name: Setup python
         uses: actions/setup-python@v2
