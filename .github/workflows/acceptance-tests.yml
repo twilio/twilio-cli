@@ -44,7 +44,6 @@ jobs:
     name: Wait for brew Release to complete
     runs-on: macos-11
     continue-on-error: true
-    needs: [ get-branch, get-tag ]
     strategy:
       matrix:
         node-version: [ 16.x, 14.x, 12.x, 10.x ]
@@ -284,7 +283,6 @@ jobs:
     name: Do scoop testing after release
     runs-on: windows-latest
     continue-on-error: true
-    needs: [ get-branch, get-tag ]
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_scoop.outputs.FAILURE_TAG_SCOOP }}
     steps:
@@ -308,17 +306,17 @@ jobs:
           scoop install twilio
           twilio --version
           twilio api --help
-      # enable on draft branch or with an isDraft flag
-      # - name: Draft - Perform testing on scoop installations
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
-      #     ./scoop.ps1 -RunAsAdmin
-      #     scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
-      #     scoop install twiliodraft
-      #     twilio --version
-      #     twilio api --help
+       - name: Draft - Perform testing on scoop installations
+          if: ${{ github.respository == 'twilio/draft-release-branch' }}
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+           (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+           ./scoop.ps1 -RunAsAdmin
+           scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
+           scoop install twiliodraft
+           twilio --version
+           twilio api --help
       - name: setup scoop failure output
         if: failure() || cancelled()
         id: failure_scoop
