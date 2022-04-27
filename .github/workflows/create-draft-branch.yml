@@ -1,0 +1,40 @@
+name: Create Draft Branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete draft release branch from previous release
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{github.token}}
+          branches: 'draft-release-branch' 
+      - name: Create new draft release branch
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'draft-release-branch'
+      - name: Checkout CLI Repo with draft-release-branch
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          ref: draft-release-branch
+      - name: Setup python to run py script
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 
+      - name: Execute py script to make changes for the draft release branch
+        run: |
+          python3 .github/scripts/draft-release/draft_changes.py      
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "team_interfaces+github@twilio.com"
+          git config --global user.name "twilio-dx"
+          git add -A
+          git commit -m "Draft specific changes from the script"
+          git push   
