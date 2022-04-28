@@ -1,6 +1,7 @@
 const ALLOWED_ORGS = ['@twilio/', '@twilio-labs/', '@dabblelab/plugin-autopilot'];
 
 const PLUGIN_COMMANDS = {
+  '@twilio-labs/plugin-dev-phone': ['dev-phone'],
   '@twilio-labs/plugin-flex': ['flex'],
   '@twilio-labs/plugin-rtc': ['rtc'],
   '@twilio-labs/plugin-serverless': ['serverless'],
