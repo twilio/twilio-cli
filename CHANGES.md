@@ -1,3 +1,15 @@
+### [3.3.3](https://github.com/twilio/twilio-cli/compare/3.3.2...3.3.3) (2022-05-05)
+
+
+### Library - Fixes
+
+* acceptance testing for brew and scoop releases ([#417](https://github.com/twilio/twilio-cli/issues/417)) ([2239160](https://github.com/twilio/twilio-cli/commit/223916004f7843ed55e26f4f0f3ef93657231c47))
+
+
+### Library - Chores
+
+* add dev phone to plugin commands (418) ([ed0455e](https://github.com/twilio/twilio-cli/commit/ed0455e2efda38aa4d575ff5cb15657bcff54dd1))
+
 ### [3.3.2](https://github.com/twilio/twilio-cli/compare/3.3.1...3.3.2) (2022-04-21)
 
 ---------------------------
