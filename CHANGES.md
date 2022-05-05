@@ -1,4 +1,16 @@
-### [3.3.3](https://github.com/twilio/twilio-cli/compare/3.3.2...3.3.3) (2022-05-05)
+---------------------------
+**Library - Fix**
+- [PR #56](https://github.com/twilio/twilio-oai/pull/56): add class_name property to twilio vendor extension. Thanks to [@charan678](https://github.com/charan678)!
+
+**Conversations**
+- Expose query parameter  in list operation on Address Configurations resource
+
+**Supersim**
+- Add  and  fields to Super SIM UsageRecords API response.
+- Change ESimProfiles  parameter to optional to enable Activation Code download method support **(breaking change)**
+
+**Verify**
+- Deprecate  parameter in create and update service.### [3.3.3](https://github.com/twilio/twilio-cli/compare/3.3.2...3.3.3) (2022-05-05)
 
 
 ### Library - Fixes
