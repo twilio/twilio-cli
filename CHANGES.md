@@ -1,3 +1,5 @@
+### [3.4.1](https://github.com/twilio/twilio-cli/compare/3.4.0...3.4.1) (2022-05-19)
+
 ---------------------------
 **Library - Fix**
 - [PR #57](https://github.com/twilio/twilio-oai/pull/57): add parent field to twilio vendor extensions. Thanks to [@charan678](https://github.com/charan678)!
