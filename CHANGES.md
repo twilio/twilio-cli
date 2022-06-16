@@ -1,3 +1,5 @@
+### [3.4.2](https://github.com/twilio/twilio-cli/compare/3.4.1...3.4.2) (2022-06-16)
+
 ---------------------------
 **Lookups**
 - Adding support for Lookup V2 API
