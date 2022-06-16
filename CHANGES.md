@@ -1,4 +1,14 @@
-### [3.4.1](https://github.com/twilio/twilio-cli/compare/3.4.0...3.4.1) (2022-05-19)
+---------------------------
+**Lookups**
+- Adding support for Lookup V2 API
+
+**Studio**
+- Corrected PII labels to be 30 days and added context to be PII
+
+**Twiml**
+- Add  attribute, nested  and  elements to  noun.
+- Add support for new Amazon Polly voices (Q2 2022) for  verb
+- Add support for  noun### [3.4.1](https://github.com/twilio/twilio-cli/compare/3.4.0...3.4.1) (2022-05-19)
 
 ---------------------------
 **Library - Fix**
