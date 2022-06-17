@@ -27,7 +27,7 @@ class ConfigSet extends BaseCommand {
     }
     if (isError) {
       throw new TwilioCliError(
-        `No configuration is added to set. Run "twilio configs:set --help" to see how to set a configurations.`,
+        `No configuration is added to set. Run "twilio config:set --help" to see how to set a configurations.`,
       );
     }
     if (isUserConfigUpdated) {
