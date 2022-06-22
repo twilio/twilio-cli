@@ -117,7 +117,7 @@ describe('commands', () => {
 
       createConfig([], {})
         .do((ctx) => ctx.testCmd.run())
-        .catch(/No configuration is added to set. Run "twilio configs:set --help" to see how to set a configurations./)
+        .catch(/No configuration is added to set. Run "twilio config:set --help" to see how to set a configurations./)
         .it('runs config:set ,should throw error as there are no configurations/flags provided.');
     });
   });
