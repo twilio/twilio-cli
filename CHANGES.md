@@ -1,3 +1,15 @@
+## [3.5.0](https://github.com/twilio/twilio-cli/compare/3.4.2...3.5.0) (2022-06-30)
+
+
+### Library - Chores
+
+* bump semver-regex from 3.1.3 to 3.1.4 ([#422](https://github.com/twilio/twilio-cli/issues/422)) ([5043d4e](https://github.com/twilio/twilio-cli/commit/5043d4e868b13285ad614ce5cd1bd3062375815c))
+
+
+### Library - Fixes
+
+* correct a typo in config:set error messaging ([#424](https://github.com/twilio/twilio-cli/issues/424)) ([d581fbb](https://github.com/twilio/twilio-cli/commit/d581fbb681a6f1532d5bc8dbd7219993a425515c))
+
 ---------------------------
 **Library - Chore**
 - [PR #64](https://github.com/twilio/twilio-oai/pull/64): adding the preview spec back. Thanks to [@shrutiburman](https://github.com/shrutiburman)!
