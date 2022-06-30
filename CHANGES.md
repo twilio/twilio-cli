@@ -1,4 +1,21 @@
-### [3.4.2](https://github.com/twilio/twilio-cli/compare/3.4.1...3.4.2) (2022-06-16)
+---------------------------
+**Library - Chore**
+- [PR #64](https://github.com/twilio/twilio-oai/pull/64): adding the preview spec back. Thanks to [@shrutiburman](https://github.com/shrutiburman)!
+- [PR #61](https://github.com/twilio/twilio-oai/pull/61): drop unneeded class names. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added  to  API.
+
+**Insights**
+- Added  field in call summary
+- Added new endpoint to fetch/create/update Call Annotations
+
+**Verify**
+- Remove  beta flag and set maturity to  for Verify TOTP properties and parameters. **(breaking change)**
+- Changed summary param  to  to be consistent with list attempts API **(breaking change)**
+
+**Twiml**
+- Add  to ### [3.4.2](https://github.com/twilio/twilio-cli/compare/3.4.1...3.4.2) (2022-06-16)
 
 ---------------------------
 **Lookups**
