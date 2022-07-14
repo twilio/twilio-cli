@@ -1,4 +1,22 @@
-## [3.5.0](https://github.com/twilio/twilio-cli/compare/3.4.2...3.5.0) (2022-06-30)
+---------------------------
+**Library - Test**
+- [PR #67](https://github.com/twilio/twilio-oai/pull/67): Adding misc as PR type. Thanks to [@rakatyal](https://github.com/rakatyal)!
+
+**Library - Fix**
+- [PR #63](https://github.com/twilio/twilio-oai/pull/63): move the className extension to the operation when necessary. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Conversations**
+- Allowed to use  as part of Participant's resource **(breaking change)**
+
+**Lookups**
+- Remove  from the lookup response **(breaking change)**
+
+**Supersim**
+- Add support for  resource to helper libraries
+
+**Verify**
+- Changed summary param  to  to be consistent with list attempts API **(breaking change)**
+- Make  optional on Verification check to support  attempts.## [3.5.0](https://github.com/twilio/twilio-cli/compare/3.4.2...3.5.0) (2022-06-30)
 
 
 ### Library - Chores
