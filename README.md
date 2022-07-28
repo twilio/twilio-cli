@@ -40,7 +40,7 @@ You can review the docs on [available plugins and how to install them](https://w
 
 Please file a [GitHub issue](https://github.com/twilio/twilio-cli/issues) in this repository for any issues/bugs.
 
-We’d love to hear from you. Any time you have feedback you’d like to send us, fill the [CLI Feedback form](https://airtable.com/shrcFDU1gmKWOqZXe) or just run: the `twilio feedback` command.  
+We’d love to hear from you. Any time you have feedback you’d like to send us, fill the [CLI Feedback form](https://airtable.com/shrcFDU1gmKWOqZXe) or just run:  the `twilio feedback` command.  
 
 ## License
 
