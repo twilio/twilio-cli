@@ -1,11 +1,11 @@
-name: NPM Audit Check
+name: Audit check job
 on:
   schedule:
-    - cron: '05 12 * * *'
-    - cron: '05 12 * * 3'
+    - cron: '30 14 * * *'
+    - cron: '30 14 * * 3'
 jobs:
   audit-prod:
-    if: github.event.schedule == '05 12 * * *'
+    if: github.event.schedule == '30 14 * * *'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -25,7 +25,7 @@ jobs:
       - name: Run audit check
         run: npm audit --production
       - name: Notify Npm Audit Failed
-        if: ${{ failure() && github.ref == 'refs/heads/schedule-npm-audits' }}
+        if: ${{ failure() && github.ref == 'refs/heads/main' }}
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
@@ -34,12 +34,12 @@ jobs:
           SLACK_MSG_AUTHOR: twilio-dx
           SLACK_ICON_EMOJI: ':github:'
           SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'Cli audit test failed for production dependencies'
+          SLACK_MESSAGE: 'Cli daily production audit test failed'
           MSG_MINIMAL: actions url
           SLACK_FOOTER: Posted automatically using GitHub Actions
 
   audit-dev:
-    if: github.event.schedule == '05 12 * * 3'
+    if: github.event.schedule == '30 14 * * 3'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -60,7 +60,7 @@ jobs:
         run: npm audit --dev
 
       - name: Notify Npm Audit Failed
-        if: ${{ failure() && github.ref == 'refs/heads/schedule-npm-audits' }}
+        if: ${{ failure() && github.ref == 'refs/heads/main' }}
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
@@ -69,6 +69,6 @@ jobs:
           SLACK_MSG_AUTHOR: twilio-dx
           SLACK_ICON_EMOJI: ':github:'
           SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'Cli audit test failed for dev dependencies'
+          SLACK_MESSAGE: 'Cli weekly dev audit test failed'
           MSG_MINIMAL: actions url
           SLACK_FOOTER: Posted automatically using GitHub Actions
