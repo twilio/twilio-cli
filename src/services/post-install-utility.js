@@ -7,6 +7,10 @@ const AUTOCOMLETE_WARNING = `If you’re using autocomplete, you’ll need to ru
   'twilio autocomplete',
 )}' after the install and then open a new terminal window. The CLI needs to re-build its cache.`;
 
+const UPDATE_PROFILE_WARNING = `Profiles exist with API keys in system keychain. Please reconfigure profile using ${chalk.bold(
+  'twilio profiles:create',
+)} to add profiles to the config file.`;
+
 class PostInstallDisplayManager {
   constructor(configDir, userConfig) {
     configureEnv();
@@ -44,6 +48,10 @@ class PostInstallDisplayManager {
 
     if (!this.hasPreConfiguredProfiles()) {
       this.displayGrid();
+    }
+
+    if (this.hasProjects()) {
+      console.warn(chalk.yellowBright(` » ${UPDATE_PROFILE_WARNING}`));
     }
     console.warn(chalk.yellowBright(` » ${AUTOCOMLETE_WARNING}`));
   }
