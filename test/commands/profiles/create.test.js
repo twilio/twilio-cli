@@ -11,7 +11,7 @@ const helpMessages = require('../../../src/services/messaging/help-messages');
 describe('commands', () => {
   describe('profiles', () => {
     describe('create', () => {
-      const createTest = (commandArgs = [], { profileId = 'default', addProjects = [], removeCred = true } = {}) =>
+      const createTest = (commandArgs = [], { profileId = 'default', addProjects = [] } = {}) =>
         test
           .twilioFakeProfile(ConfigData)
           .do((ctx) => {
@@ -39,11 +39,6 @@ describe('commands', () => {
                 overwrite: true,
               });
             ctx.testCmd.inquirer.prompt = fakePrompt;
-          })
-          .do((ctx) => {
-            ctx.testCmd.secureStorage.removeCredentials = () => {
-              return removeCred;
-            };
           });
 
       const mockSuccess = (api) => {
@@ -81,7 +76,6 @@ describe('commands', () => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved profile1.');
-          expect(ctx.stderr).to.contain('Deleted key from keytar.');
           expect(ctx.stderr).to.contain('configuration saved');
           expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret in Config.`);
           expect(ctx.stderr).to.contain(
@@ -96,7 +90,6 @@ describe('commands', () => {
           expect(ctx.stdout).to.equal('');
           expect(ctx.stderr).to.contain(helpMessages.AUTH_TOKEN_NOT_SAVED);
           expect(ctx.stderr).to.contain('Saved profile1.');
-          expect(ctx.stderr).to.contain('Could not delete profile1 key from keytar.');
           expect(ctx.stderr).to.contain('configuration saved');
           expect(ctx.stderr).to.contain(`Created API Key ${constants.FAKE_API_KEY} and stored the secret in Config.`);
           expect(ctx.stderr).to.contain(
