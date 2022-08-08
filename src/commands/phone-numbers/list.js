@@ -1,4 +1,4 @@
-const { flags } = require('@oclif/command');
+const { Flags: flags } = require('@oclif/core');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 
 class NumberList extends TwilioClientCommand {

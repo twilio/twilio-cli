@@ -2,7 +2,7 @@
 const chalk = require('chalk');
 const supportsHyperlinks = require('supports-hyperlinks');
 const hyperlinker = require('hyperlinker');
-const { Command } = require('@oclif/command');
+const { Command } = require('@oclif/core');
 
 class Feedback extends Command {
   async run() {

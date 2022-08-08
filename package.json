@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "@oclif/color": "^1.0.1",
-    "@oclif/command": "^1.8.15",
-    "@oclif/config": "^1.18.2",
+    "@oclif/core": "^1.13.1",
     "@oclif/plugin-autocomplete": "^1.0.0",
     "@oclif/plugin-help": "3.2.17",
     "@oclif/plugin-plugins": "^1.8.3",
