@@ -57,8 +57,8 @@
   "devDependencies": {
     "@actions/core": "^1.0.0",
     "@actions/github": "^2.2.0",
-    "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.6",
+    "@oclif/core": "1.13.3",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
