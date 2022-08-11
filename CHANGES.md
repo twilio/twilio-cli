@@ -1,3 +1,10 @@
+### [4.0.1](https://github.com/twilio/twilio-cli/compare/4.0.0...4.0.1) (2022-08-11)
+
+
+### Library - Chores
+
+* updated commit msg ([6390c78](https://github.com/twilio/twilio-cli/commit/6390c788cb730aa9ea3dcbf261115d81fec779dd))
+
 ## [4.0.0](https://github.com/twilio/twilio-cli/compare/3.6.0...4.0.0) (2022-08-11)
 
 
