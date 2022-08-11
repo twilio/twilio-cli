@@ -1,4 +1,21 @@
-## [3.6.0](https://github.com/twilio/twilio-cli/compare/3.5.0...3.6.0) (2022-07-14)
+## [4.0.0](https://github.com/twilio/twilio-cli/compare/3.6.0...4.0.0) (2022-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* node engines support 14.x+
+
+### Library - Chores
+
+* update dependencies ([#430](https://github.com/twilio/twilio-cli/issues/430)) ([bc4703d](https://github.com/twilio/twilio-cli/commit/bc4703d6eb0210183ce92491188325f82e91d212))
+
+
+### Library - Fixes
+
+* add node engine support from 14.x+ ([ef520fd](https://github.com/twilio/twilio-cli/commit/ef520fd5ca9eaba14ef134a10173fa6050a61929))
+* cleanup keytar and port command ([#436](https://github.com/twilio/twilio-cli/issues/436)) ([d00f7ee](https://github.com/twilio/twilio-cli/commit/d00f7ee019b14ae38abda86eb4c910ac3e4b3ff7))
+
+---------------------------   **Library - Feature**   - [PR #72](https://github.com/twilio/twilio-oai/pull/72): Addition of spec files for preview domain. Thanks to [@AsabuHere](https://github.com/AsabuHere)!      **Routes**   - Inbound Proccessing Region API - Public GA      **Supersim**   - Allow updating  on a Fleet## [3.6.0](https://github.com/twilio/twilio-cli/compare/3.5.0...3.6.0) (2022-07-14)
 
 ---------------------------
 **Library - Test**
