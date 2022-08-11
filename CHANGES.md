@@ -1,4 +1,4 @@
-## [3.6.0](https://github.com/twilio/twilio-cli/compare/3.5.0...3.6.0) (2022-07-14)
+---------------------------   **Library - Feature**   - [PR #72](https://github.com/twilio/twilio-oai/pull/72): Addition of spec files for preview domain. Thanks to [@AsabuHere](https://github.com/AsabuHere)!      **Routes**   - Inbound Proccessing Region API - Public GA      **Supersim**   - Allow updating  on a Fleet## [3.6.0](https://github.com/twilio/twilio-cli/compare/3.5.0...3.6.0) (2022-07-14)
 
 ---------------------------
 **Library - Test**
