@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-const { Plugin } = require('@oclif/config');
+const { Plugin } = require('@oclif/core');
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { OutputFormats } = require('@twilio/cli-core').services.outputFormats;
