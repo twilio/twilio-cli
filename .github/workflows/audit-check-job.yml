@@ -1,0 +1,74 @@
+name: Audit check job
+on:
+  schedule:
+    - cron: '30 14 * * *'
+    - cron: '30 14 * * 3'
+jobs:
+  audit-prod:
+    if: github.event.schedule == '30 14 * * *'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x, 16.x, 14.x]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: make install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run audit check
+        run: npm audit --production
+      - name: Notify Npm Audit Failed
+        if: ${{ failure() && github.ref == 'refs/heads/main' }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+          SLACK_COLOR: 'danger'
+          SLACK_USERNAME: CLI Github Actions
+          SLACK_MSG_AUTHOR: twilio-dx
+          SLACK_ICON_EMOJI: ':github:'
+          SLACK_TITLE: "Twilio Cli"
+          SLACK_MESSAGE: 'Cli daily production audit test failed'
+          MSG_MINIMAL: actions url
+          SLACK_FOOTER: Posted automatically using GitHub Actions
+
+  audit-dev:
+    if: github.event.schedule == '30 14 * * 3'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [ 18.x, 16.x, 14.x ]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: make install
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Run audit check
+        run: npm audit --dev
+
+      - name: Notify Npm Audit Failed
+        if: ${{ failure() && github.ref == 'refs/heads/main' }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+          SLACK_COLOR: 'warning'
+          SLACK_USERNAME: CLI Github Actions
+          SLACK_MSG_AUTHOR: twilio-dx
+          SLACK_ICON_EMOJI: ':github:'
+          SLACK_TITLE: "Twilio Cli"
+          SLACK_MESSAGE: 'Cli weekly dev audit test failed'
+          MSG_MINIMAL: actions url
+          SLACK_FOOTER: Posted automatically using GitHub Actions

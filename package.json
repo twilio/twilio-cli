@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "version": "3.6.0",
+  "version": "4.0.1",
   "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for documentation.",
   "keywords": [
     "oclif"
