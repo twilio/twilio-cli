@@ -1,7 +1,7 @@
 const { URL } = require('url');
 
 const chalk = require('chalk');
-const { flags } = require('@oclif/command');
+const { Flags: flags } = require('@oclif/core');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 
