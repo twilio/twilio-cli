@@ -88,6 +88,7 @@
     "commands": "./src/commands",
     "bin": "twilio",
     "scope": "twilio",
+    "topicSeparator": " ",
     "plugins": [
       "@oclif/plugin-autocomplete",
       "@oclif/plugin-help",
