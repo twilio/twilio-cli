@@ -1,3 +1,18 @@
+## [4.1.0](https://github.com/twilio/twilio-cli/compare/4.0.1...4.1.0) (2022-08-25)
+
+
+### Library - Features
+
+* added audit cronjob ([#437](https://github.com/twilio/twilio-cli/issues/437)) ([0ffd3e1](https://github.com/twilio/twilio-cli/commit/0ffd3e1895cbc6fb591cff7ad27f8a0c08602070))
+
+
+### Library - Chores
+
+* bump file-type from 14.7.1 to 16.5.4 ([#426](https://github.com/twilio/twilio-cli/issues/426)) ([3577303](https://github.com/twilio/twilio-cli/commit/35773036174a3c8012789dccba11629ce16e4b2e))
+* update macos failing script ([7c5b231](https://github.com/twilio/twilio-cli/commit/7c5b231a3eea0e0ac70f56d8737c94eaf66fb846))
+* update macos failing script ([#452](https://github.com/twilio/twilio-cli/issues/452)) ([0e09e6e](https://github.com/twilio/twilio-cli/commit/0e09e6ed35de6b48d4253aa582ca3bdb487485bb))
+* update macos failing script ([#453](https://github.com/twilio/twilio-cli/issues/453)) ([9a95b91](https://github.com/twilio/twilio-cli/commit/9a95b91a11a95c6c34ee52171e324c70f9c987d8))
+
 ---------------------------
 **Library - Test**
 - [PR #73](https://github.com/twilio/twilio-oai/pull/73): add test-docker rule. Thanks to [@beebzz](https://github.com/beebzz)!
