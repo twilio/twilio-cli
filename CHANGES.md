@@ -1,4 +1,16 @@
-### [4.0.1](https://github.com/twilio/twilio-cli/compare/4.0.0...4.0.1) (2022-08-11)
+---------------------------
+**Library - Test**
+- [PR #73](https://github.com/twilio/twilio-oai/pull/73): add test-docker rule. Thanks to [@beebzz](https://github.com/beebzz)!
+
+**Api**
+- Remove  from scheduling params and remove optimize parameters. **(breaking change)**
+
+**Routes**
+- Remove Duplicate Create Method - Update Method will work even if Inbound Processing Region is currently empty/404. **(breaking change)**
+
+**Twiml**
+- Add new Polly Neural voices
+- Add new languages to SSML .### [4.0.1](https://github.com/twilio/twilio-cli/compare/4.0.0...4.0.1) (2022-08-11)
 
 
 ### Library - Chores
