@@ -10,7 +10,11 @@ class ProfilesRemove extends TwilioClientCommand {
     const verdict = await this.confirmRemoveProfile();
     if (verdict === true) {
       const keyVerdict = await this.confirmRemoveKey();
-      await this.deleteRemoteKey(deleteProfile, keyVerdict);
+      let credentials;
+      if (!this.userConfig.profiles[deleteProfile.id]) {
+        credentials = await this.deleteLocalKey(deleteProfile);
+      }
+      await this.deleteRemoteKey(deleteProfile, keyVerdict, credentials);
       this.logger.info(`Deleted ${deleteProfile.id} profile.`);
       this.userConfig.removeProfile(deleteProfile);
     } else {
@@ -39,10 +43,21 @@ class ProfilesRemove extends TwilioClientCommand {
     }
   }
 
-  async deleteRemoteKey(profileDelete, keyVerdict) {
+  async deleteLocalKey(profileDelete) {
+    const credentials = this.secureStorage.getCredentials(profileDelete.id);
+    const removed = await this.secureStorage.removeCredentials(profileDelete.id);
+    if (removed === true) {
+      this.logger.info('Deleted local key.');
+    } else {
+      this.logger.warn('Could not delete local key.');
+    }
+    return credentials;
+  }
+
+  async deleteRemoteKey(profileDelete, keyVerdict, credentials) {
     if (keyVerdict === true) {
       try {
-        const { apiKey } = profileDelete;
+        const apiKey = profileDelete.apiKey || credentials.apiKey;
         await this.twilioClient.api.keys(apiKey).remove();
         this.logger.info('The API Key has been deleted from The Twilio console.');
       } catch (error) {

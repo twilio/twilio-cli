@@ -38,6 +38,7 @@ describe('services', () => {
 
       displayManager.displayMessage();
       expect(console.warn.calledWith(sinon.match('twilio autocomplete'))).to.be.true;
+      expect(console.warn.calledWith(sinon.match('twilio profiles:port'))).to.be.true;
       expect(console.log.called).to.be.false; // Grid shouldn't be displayed
     });
 

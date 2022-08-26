@@ -37,13 +37,7 @@ describe('commands', () => {
         return test
           .do((ctx) => {
             ctx.userConfig = new ConfigData();
-            ctx.userConfig.addProfile(
-              'default',
-              constants.FAKE_ACCOUNT_SID,
-              '',
-              constants.FAKE_API_KEY,
-              constants.FAKE_API_SECRET,
-            );
+            ctx.userConfig.addProfile('default', constants.FAKE_ACCOUNT_SID);
             ctx.userConfig.setActiveProfile('default');
 
             if (promptAcked) {
