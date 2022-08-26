@@ -3,13 +3,13 @@ const chalk = require('chalk');
 const { Config } = require('@twilio/cli-core').services.config;
 const { configureEnv } = require('@twilio/cli-core');
 
-const PORT_WARNING = `Profiles exist with API keys in system keychain. Please run ${chalk.bold(
-  'twilio profiles:port',
-)} to port all keys to the config file`;
-
 const AUTOCOMLETE_WARNING = `If you’re using autocomplete, you’ll need to run '${chalk.bold(
   'twilio autocomplete',
 )}' after the install and then open a new terminal window. The CLI needs to re-build its cache.`;
+
+const UPDATE_PROFILE_WARNING = `Profiles exist with API keys in system keychain. Please reconfigure profile using ${chalk.bold(
+  'twilio profiles:create',
+)} to add profiles to the config file.`;
 
 class PostInstallDisplayManager {
   constructor(configDir, userConfig) {
@@ -51,7 +51,7 @@ class PostInstallDisplayManager {
     }
 
     if (this.hasProjects()) {
-      console.warn(chalk.yellowBright(` » ${PORT_WARNING}`));
+      console.warn(chalk.yellowBright(` » ${UPDATE_PROFILE_WARNING}`));
     }
     console.warn(chalk.yellowBright(` » ${AUTOCOMLETE_WARNING}`));
   }
@@ -59,6 +59,5 @@ class PostInstallDisplayManager {
 
 module.exports = {
   PostInstallDisplayManager,
-  PORT_WARNING,
   AUTOCOMLETE_WARNING,
 };
