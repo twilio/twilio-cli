@@ -88,6 +88,8 @@
     "commands": "./src/commands",
     "bin": "twilio",
     "scope": "twilio",
+    "additionalHelpFlags": ["-h"],
+    "additionalVersionFlags": ["-v"],
     "plugins": [
       "@oclif/plugin-autocomplete",
       "@oclif/plugin-help",
