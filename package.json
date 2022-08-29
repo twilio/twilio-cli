@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "@oclif/color": "^1.0.1",
-    "@oclif/command": "^1.8.15",
     "@oclif/core": "^1.13.1",
     "@oclif/plugin-autocomplete": "^1.0.0",
     "@oclif/plugin-plugins": "^1.8.3",
@@ -60,7 +59,7 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@twilio/cli-test": "^2.1.0",
+    "@twilio/cli-test": "3.0.0",
     "aws-sdk": "^2.757.0",
     "chai": "^4.2.0",
     "conventional-changelog-conventionalcommits": "^4.6.0",
