@@ -10,35 +10,8 @@ const urlUtil = require('../hyperlink-utility');
 const { getDocLink } = require('../twilio-api');
 
 const { dim } = chalk;
-/**
- * Extended functionality from @oclif/plugin-help.
- * Link: https://github.com/oclif/plugin-help
- * author: onuzbee
- */
-class TwilioCommandHelp extends CommandHelp {
-  /*
-   * flags(flags) {
-   *   if (flags.length === 0) return '';
-   *
-   *   const optionalFlags = flags.filter((f) => !f.required);
-   *   const optionalBody = this.flagHelpLabel(optionalFlags);
-   *   const requiredFlags = flags.filter((f) => f.required);
-   *   const requiredBody = this.flagHelpLabel(requiredFlags);
-   *
-   *   const returnList = [chalk.bold('OPTIONS')];
-   *
-   *   if (requiredFlags.length > 0) {
-   *     returnList.push(chalk.bold('REQUIRED FLAGS'));
-   *     returnList.push(indent(requiredBody, 2));
-   *   }
-   *
-   *   returnList.push(chalk.bold('OPTIONAL FLAGS'));
-   *   returnList.push(indent(optionalBody, 2));
-   *   return returnList.join('\n');
-   * }
-   * Override parent functionality
-   */
 
+class TwilioCommandHelp extends CommandHelp {
   flags(flags) {
     if (flags.length === 0) return '';
     return flags.map((flag) => {
@@ -55,6 +28,10 @@ class TwilioCommandHelp extends CommandHelp {
     });
   }
 
+  /**
+   * Extended functionality from @oclif/core/plugin-help.
+   * Link: https://github.com/oclif/core/blob/29f76feb04e067b084009946e54cd840da683932/src/help/command.ts#L75
+   */
   sections() {
     return [
       {
