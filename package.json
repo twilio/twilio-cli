@@ -95,7 +95,6 @@
     ],
     "plugins": [
       "@oclif/plugin-autocomplete",
-      "@oclif/plugin-help",
       "@oclif/plugin-plugins",
       "@oclif/plugin-warn-if-update-available",
       "@oclif/plugin-update",
