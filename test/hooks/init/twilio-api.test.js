@@ -1,8 +1,9 @@
 const { expect, test } = require('@twilio/cli-test');
+const { fake } = require('sinon');
 
 const pluginFunc = require('../../../src/hooks/init/twilio-api');
 
-const getFakeConfig = () => ({ plugins: [] });
+const getFakeConfig = () => ({ plugins: [], loadCommands: fake.returns({}), loadTopics: fake.returns({}) });
 
 describe('hooks', () => {
   describe('init', () => {

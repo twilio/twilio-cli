@@ -156,4 +156,6 @@ module.exports = function twilioApi() {
   twilioApiPlugin.tag = 'latest';
   twilioApiPlugin.type = 'core';
   this.config.plugins.push(twilioApiPlugin);
+  this.config.loadCommands(twilioApiPlugin);
+  this.config.loadTopics(twilioApiPlugin);
 };
