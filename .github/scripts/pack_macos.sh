@@ -30,7 +30,7 @@ notarize_and_staple() {
     notarization_status=$(jq -r .status $RUNNER_TEMP/notarization_log.json)
     notarization_id=$(jq -r .id $RUNNER_TEMP/notarization_log.json)
     echo "for notarization id ${notarization_id} the status is ${notarization_status}"
-    if [${notarization_status} = "Accepted"]
+    if [ "${notarization_status}" = "Accepted" ]
     then
       xcrun stapler staple "$FILE_PATH"
       spctl --assess -vv --type install "$FILE_PATH"

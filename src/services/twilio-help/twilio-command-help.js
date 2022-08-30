@@ -1,38 +1,93 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const CommandHelp = require('@oclif/plugin-help/lib/command.js');
-const list = require('@oclif/plugin-help/lib/list');
+const { CommandHelp } = require('@oclif/core');
+// const list = require('@oclif/plugin-help/lib/list');
 const chalk = require('chalk');
 const indent = require('indent-string');
-const util = require('@oclif/plugin-help/lib/util');
 const stripAnsi = require('strip-ansi');
+const { compact } = require('@oclif/core/lib/config/util');
 
 const urlUtil = require('../hyperlink-utility');
 const { getDocLink } = require('../twilio-api');
-/**
- * Extended functionality from @oclif/plugin-help.
- * Link: https://github.com/oclif/plugin-help
- * author: onuzbee
- */
-class TwilioCommandHelp extends CommandHelp.default {
-  // Override parent functionality
+
+const { dim } = chalk;
+
+class TwilioCommandHelp extends CommandHelp {
   flags(flags) {
     if (flags.length === 0) return '';
+    return flags.map((flag) => {
+      const left = this.flagHelpLabel(flag);
+      let right = flag.summary || flag.description || '';
+      if (flag.type === 'option' && flag.default) {
+        right = `[default: ${flag.default}] ${right}`;
+      }
+      if (flag.required) right = `${right}`;
+      if (flag.type === 'option' && flag.options && !flag.helpValue && !this.opts.showFlagOptionsInTitle) {
+        right += `\n<options: ${flag.options.join('|')}>`;
+      }
+      return [left, dim(right.trim())];
+    });
+  }
 
-    const optionalFlags = flags.filter((f) => !f.required);
-    const optionalBody = this.generateFlagsOutput(optionalFlags);
-    const requiredFlags = flags.filter((f) => f.required);
-    const requiredBody = this.generateFlagsOutput(requiredFlags);
+  /**
+   * Extended functionality from @oclif/core/plugin-help.
+   * Link: https://github.com/oclif/core/blob/29f76feb04e067b084009946e54cd840da683932/src/help/command.ts#L75
+   */
+  sections() {
+    return [
+      {
+        header: this.opts.usageHeader || 'USAGE',
+        generate: () => this.usage(),
+      },
+      {
+        header: 'ARGUMENTS',
+        generate: ({ args }, header) => [{ header, body: this.args(args) }],
+      },
+      {
+        header: 'FLAGS',
+        generate: ({ flags }, header) => {
+          const { mainFlags, flagGroups } = this.groupFlags(flags);
+          const flagSections = [];
+          const optionalFlags = flags.filter((f) => !f.required);
+          const optionalBody = this.flags(optionalFlags);
+          const requiredFlags = flags.filter((f) => f.required);
+          const requiredBody = this.flags(requiredFlags);
 
-    const returnList = [chalk.bold('OPTIONS')];
+          if (requiredFlags.length > 0) {
+            flagSections.push({ header: chalk.bold('REQUIRED FLAGS'), body: requiredBody });
+          }
+          flagSections.push({ header: chalk.bold('OPTIONAL FLAGS'), body: optionalBody });
 
-    if (requiredFlags.length > 0) {
-      returnList.push(chalk.bold('REQUIRED FLAGS'));
-      returnList.push(indent(requiredBody, 2));
-    }
-
-    returnList.push(chalk.bold('OPTIONAL FLAGS'));
-    returnList.push(indent(optionalBody, 2));
-    return returnList.join('\n');
+          for (const [name, flags1] of Object.entries(flagGroups)) {
+            const body = this.flags(flags1);
+            if (body) flagSections.push({ header: `${name.toUpperCase()} ${header}`, body });
+          }
+          return (0, compact)(flagSections);
+        },
+      },
+      {
+        header: 'DESCRIPTION',
+        generate: () => this.description(),
+      },
+      {
+        header: 'ALIASES',
+        generate: ({ cmd }) => this.aliases(cmd.aliases),
+      },
+      {
+        header: 'EXAMPLES',
+        generate: ({ cmd }) => {
+          const examples = cmd.examples || cmd.example;
+          return this.examples(examples);
+        },
+      },
+      {
+        header: 'FLAG DESCRIPTIONS',
+        generate: ({ flags }) => this.flagsDescriptions(flags),
+      },
+      {
+        header: 'MORE INFO',
+        generate: ({ docs }) => this.docs(),
+      },
+    ];
   }
 
   // To add the API help document url
@@ -47,76 +102,9 @@ class TwilioCommandHelp extends CommandHelp.default {
     if (hyperLink.isSupported) {
       listOfDetails.push(chalk.bold(hyperLink.url));
     } else {
-      listOfDetails.push(chalk.bold('MORE INFO'));
       listOfDetails.push(indent(helpDoc, 2));
     }
     return listOfDetails.join('\n');
-  }
-
-  // overriding to include docs()
-  generate() {
-    const cmd = this.command;
-    const flags = util.sortBy(
-      Object.entries(cmd.flags || {})
-        .filter(([, v]) => !v.hidden)
-        .map(([k, v]) => {
-          v.name = k;
-          return v;
-        }),
-      (f) => [!f.char, f.char, f.name],
-    );
-    const args = (cmd.args || []).filter((a) => !a.hidden);
-    let output = util
-      .compact([
-        this.usage(flags),
-        this.args(args),
-        this.flags(flags),
-        this.description(),
-        this.aliases(cmd.aliases),
-        this.examples(cmd.examples || cmd.example),
-        this.docs(),
-      ])
-      .join('\n\n');
-    if (this.opts.stripAnsi) output = stripAnsi(output);
-    return output;
-  }
-
-  /**
-   *   Forked and refactored from oclif default implementation.
-   *   Link: https://github.com/oclif/plugin-help/blob/master/src/command.ts#L125-L154
-   */
-  generateFlagsOutput(flags) {
-    return list.renderList(
-      flags.map((flag) => {
-        let left = flag.helpLabel;
-        if (!left) {
-          const label = [];
-          if (flag.char) label.push(`-${flag.char[0]}`);
-          if (flag.name) {
-            if (flag.type === 'boolean' && flag.allowNo) {
-              label.push(`--[no-]${flag.name.trim()}`);
-            } else {
-              label.push(`--${flag.name.trim()}`);
-            }
-          }
-          left = label.join(', ');
-        }
-        if (flag.type === 'option') {
-          let value = flag.helpValue || flag.name;
-          if (!flag.helpValue && flag.options) {
-            value = flag.options.join('|');
-          }
-          if (!value.includes('|')) value = chalk.underline(value);
-          left += `=${value}`;
-        }
-        let right = flag.description || '';
-        if (flag.type === 'option' && flag.default) {
-          right = `[default: ${flag.default}] ${right}`;
-        }
-        return [left, chalk.dim(right.trim())];
-      }),
-      { stripAnsi: this.opts.stripAnsi, maxWidth: this.opts.maxWidth - 2 },
-    );
   }
 }
 
