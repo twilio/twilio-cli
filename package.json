@@ -28,11 +28,11 @@
     "postinstall": "node welcome.js",
     "lint": "eslint --ext js --ext jsx src/ test/",
     "lint:fix": "npm run lint -- --fix",
-    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap && git checkout -- package-lock.json",
+    "prepack": "oclif manifest && oclif readme && npm shrinkwrap && git checkout -- package-lock.json",
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
     "posttest": "npm run lint",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif readme && git add README.md"
   },
   "dependencies": {
     "@oclif/color": "^1.0.1",
@@ -55,7 +55,7 @@
   "devDependencies": {
     "@actions/core": "^1.0.0",
     "@actions/github": "^2.2.0",
-    "@oclif/test": "^1.2.6",
+    "@oclif/test": "^2.1.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
@@ -78,7 +78,8 @@
     "tmp": "^0.2.1",
     "ts-node": "^10.9.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "oclif": "^3"
   },
   "optionalDependencies": {
     "ngrok": "^3.2.7"
