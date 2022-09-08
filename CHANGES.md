@@ -1,4 +1,19 @@
-## [4.1.0](https://github.com/twilio/twilio-cli/compare/4.0.1...4.1.0) (2022-08-25)
+---------------------------
+**Flex**
+- Removed redundant  status from Flex Interactions flow **(breaking change)**
+- Adding  and  to Flex Configuration
+
+**Messaging**
+- Add create, list and get tollfree verification API
+
+**Verify**
+- Verify SafeList API endpoints added.
+
+**Video**
+- Add  API
+
+**Twiml**
+- Update  value  to ## [4.1.0](https://github.com/twilio/twilio-cli/compare/4.0.1...4.1.0) (2022-08-25)
 
 
 ### Library - Features
