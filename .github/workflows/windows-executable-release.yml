@@ -5,6 +5,15 @@ env:
   FORMULA_NAME: 'twilio'
 
 jobs:
+  get-sha:
+    runs-on: macos-latest
+    outputs:
+      SHA_SHORT: ${{steps.get-sha.outputs.SHA_SHORT}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Getting latest sha
+        id: get-sha
+        run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
   get-tag:
     runs-on: macos-latest
     outputs:
@@ -18,22 +27,22 @@ jobs:
         echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
   pack-windows-release:
     runs-on: macos-latest
-    needs: [get-tag]
+    needs: [get-tag, get-sha]
     steps:
      - uses: actions/checkout@v2
      - run: |
         make install
         brew install makensis
-        npx oclif-dev pack:win
+        npx oclif pack:win
      - name: upload artifact
        uses: actions/upload-artifact@v2
        with:
         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-        path: dist/win/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
+        path: dist/win32/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
         retention-days: 1
 
   sign-windows-release:
-    needs: [pack-windows-release, get-tag]
+    needs: [pack-windows-release, get-tag, get-sha]
     runs-on: windows-latest
     steps:
      - uses: actions/checkout@v2
@@ -59,7 +68,7 @@ jobs:
        run: node .github/scripts/update-platform-executables.js
        env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
+        FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
         ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
         REPO_NAME: ${{ github.repository }}

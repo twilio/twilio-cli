@@ -47,10 +47,10 @@ pack_macos() {
 #  if [ "$REPOSITORY_OWNER" == "twilio" ]
 #  then
     import_certificate
-    npx oclif-dev pack:macos
+    npx oclif pack:macos
     notarize_and_staple
 #  else
-#   npx oclif-dev pack:macos
+#   npx oclif pack:macos
  # fi
 }
 

@@ -17,8 +17,19 @@ jobs:
        run: |
         git fetch --prune --unshallow
         echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+  get-sha:
+    runs-on: macos-11
+    outputs:
+      SHA_SHORT: ${{steps.get-sha.outputs.SHA_SHORT}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Getting short sha
+        id: get-sha
+        run: |
+          git fetch --prune --unshallow
+          echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
   pack-macos:
-    needs: [get-tag]
+    needs: [get-tag, get-sha]
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v2
@@ -29,17 +40,28 @@ jobs:
         APPLE_ID: ${{ secrets.APPLE_ID}}
         APPLE_ID_APP_PASSWORD: ${{ secrets.APPLE_ID_APP_PASSWORD}}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
-        FILE_PATH: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+        FILE_PATH: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}.pkg
         REPOSITORY_OWNER: ${{ github.repository_owner }}
-    - name: Upload binaries to release
+    - name: Upload binaries to release - arm64
       if: always()
       run: node .github/scripts/update-platform-executables.js
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
-        ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+        FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
+        ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-arm64.pkg
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
         REPO_NAME: ${{ github.repository }}
+    - name: Upload binaries to release - x64
+        if: always()
+        run: |
+          node .github/scripts/update-platform-executables.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.pkg
+          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg
+          TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
+          REPO_NAME: ${{ github.repository }}
+
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
