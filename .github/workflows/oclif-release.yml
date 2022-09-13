@@ -36,7 +36,6 @@ jobs:
           if [ "$RUNNER_OS" == "macOS" ]; then
             brew install makensis
           fi
-          npm install -g @oclif/dev-cli
           ${{ matrix.command_name }}
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1
@@ -58,7 +57,7 @@ jobs:
           elif [ "${{github.event.inputs.formula}}" == "twiliodraft" ]; then
             echo "::set-output name=sha256::$(sha256sum dist/channels/draft/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
           else
-            echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}-${{ steps.get-sha.outputs.SHA_SHORT }}.tar.gz | awk '{print $1}')"
+            echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
           fi
   home-brew-release:
     name: Trigger homebrew release workflow
