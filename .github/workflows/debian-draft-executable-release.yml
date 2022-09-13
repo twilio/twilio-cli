@@ -18,7 +18,7 @@ jobs:
          echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
       - run: |
           make install
-          sudo $(npm bin)/oclif-dev pack:deb
+          sudo $(npm bin)/oclif pack:deb
           cd dist/deb
           sudo mv ${{ github.event.inputs.formula }}_$(awk -F- '{print $1}' <<< ${{ steps.get-tag.outputs.TAG_NAME }})-1_amd64.deb ${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}-1_amd64.deb
 
