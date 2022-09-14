@@ -1,4 +1,4 @@
-const { flags } = require('@oclif/command');
+const { Flags: flags } = require('@oclif/core');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const sgMail = require('@sendgrid/mail');

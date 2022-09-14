@@ -1,6 +1,6 @@
 const os = require('os');
 
-const { flags } = require('@oclif/command');
+const { Flags: flags } = require('@oclif/core');
 const { BaseCommand, TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { CliRequestClient } = require('@twilio/cli-core').services;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
