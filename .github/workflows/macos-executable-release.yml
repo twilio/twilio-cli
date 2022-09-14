@@ -52,10 +52,10 @@ jobs:
         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
         REPO_NAME: ${{ github.repository }}
     - name: Upload binaries to release - x64
-        if: always()
-        run: |
+      if: always()
+      run: |
           node .github/scripts/update-platform-executables.js
-        env:
+      env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.pkg
           ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg

@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Getting last sha
-          id: get-sha
-          run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
+        id: get-sha
+        run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
       - name: Getting latest tag
         id: get-tag
         run: |
