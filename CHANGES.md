@@ -1,4 +1,46 @@
-## [4.1.0](https://github.com/twilio/twilio-cli/compare/4.0.1...4.1.0) (2022-08-25)
+## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to oclif v2
+
+### Library - Features
+
+* oclif v2 migration ([#466](https://github.com/twilio/twilio-cli/issues/466)) ([a9d57dc](https://github.com/twilio/twilio-cli/commit/a9d57dc8698b2f3eb0457486c2d7d2f5f7d785de))
+
+## [4.2.0](https://github.com/twilio/twilio-cli/compare/4.1.0...4.2.0) (2022-09-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* add node engine support from 14.x+
+
+### Library - Fixes
+
+* add node engine support from 14.x+ ([6de712f](https://github.com/twilio/twilio-cli/commit/6de712f071a0cfe81fead89527fb62226b504798))
+
+
+### Library - Chores
+
+* fix workflow for duplicate release ([#456](https://github.com/twilio/twilio-cli/issues/456)) ([8bf9188](https://github.com/twilio/twilio-cli/commit/8bf9188b99d5af09dc9e2ed3dc701ad1ddec0b00))
+
+---------------------------
+**Flex**
+- Removed redundant  status from Flex Interactions flow **(breaking change)**
+- Adding  and  to Flex Configuration
+
+**Messaging**
+- Add create, list and get tollfree verification API
+
+**Verify**
+- Verify SafeList API endpoints added.
+
+**Video**
+- Add  API
+
+**Twiml**
+- Update  value  to ## [4.1.0](https://github.com/twilio/twilio-cli/compare/4.0.1...4.1.0) (2022-08-25)
 
 
 ### Library - Features

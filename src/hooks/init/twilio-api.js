@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 const { URL } = require('url');
 
-const { Plugin } = require('@oclif/config');
+const { Plugin } = require('@oclif/core');
 const { logger } = require('@twilio/cli-core').services.logging;
 const { TwilioApiBrowser } = require('@twilio/cli-core').services.TwilioApi;
 
@@ -156,4 +156,6 @@ module.exports = function twilioApi() {
   twilioApiPlugin.tag = 'latest';
   twilioApiPlugin.type = 'core';
   this.config.plugins.push(twilioApiPlugin);
+  this.config.loadCommands(twilioApiPlugin);
+  this.config.loadTopics(twilioApiPlugin);
 };

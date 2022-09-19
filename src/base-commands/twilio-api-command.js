@@ -4,11 +4,11 @@
  * is free of TODO's.
  */
 
-const { flags } = require('@oclif/command');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { doesObjectHaveProperty } = require('@twilio/cli-core').services.JSUtils;
 const { logger } = require('@twilio/cli-core').services.logging;
 const { camelCase } = require('@twilio/cli-core').services.namingConventions;
+const { Flags: flags } = require('@oclif/core');
 
 const { ApiCommandRunner, getActionDescription, getFlagConfig, getDocLink } = require('../services/twilio-api');
 

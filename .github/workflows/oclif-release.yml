@@ -48,6 +48,8 @@ jobs:
         id: sha256
         if: ${{matrix.publish == 'homebrew'}}
         run: |
+          make clean
+          make install
           npx oclif-dev publish
           brew install coreutils
           if [ "${{github.event.inputs.formula}}" == "twiliorc" ]; then

@@ -1,6 +1,6 @@
 const querystring = require('querystring');
 
-const { flags: oclifFlags } = require('@oclif/command');
+const { Flags: oclifFlags } = require('@oclif/core');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { sleep } = require('@twilio/cli-core').services.JSUtils;

@@ -1,6 +1,6 @@
 const { TwilioCliError } = require('@twilio/cli-core/src/services/error');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
-const { flags } = require('@oclif/command');
+const { Flags: flags } = require('@oclif/core');
 const { camelCase } = require('@twilio/cli-core').services.namingConventions;
 
 const { availableConfigs, getFromEnvironment } = require('../../services/config-utility');

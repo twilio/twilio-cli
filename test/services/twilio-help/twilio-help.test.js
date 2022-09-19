@@ -50,15 +50,13 @@ const testHelp = test
 describe('should log help', () => {
   testHelp.commandHelp([], true).it('Should display required flags', (ctx) => {
     expect(ctx.commandHelp).to.contain('api:testHelp');
-    expect(ctx.commandHelp).to.contain('OPTIONS');
-    expect(ctx.commandHelp).to.contain('REQUIRED FLAGS\n  -f, --foo=foo');
+    expect(ctx.commandHelp).to.contain('REQUIRED FLAGS\n  -f, --foo=');
     expect(ctx.commandHelp).to.contain('OPTIONAL FLAGS');
     expect(ctx.commandHelp).to.contain('USAGE');
   });
 
   testHelp.commandHelp([]).it('Should not display required flags if not configured', (ctx) => {
     expect(ctx.commandHelp).to.contain('api:testHelp');
-    expect(ctx.commandHelp).to.contain('OPTIONS');
     expect(ctx.commandHelp).to.not.contain('REQUIRED FLAGS');
     expect(ctx.commandHelp).to.contain('OPTIONAL FLAGS');
     expect(ctx.commandHelp).to.contain('USAGE');
@@ -67,7 +65,6 @@ describe('should log help', () => {
   testHelp.commandHelp([], false, true).it('Should not display Options in case no flags configured', (ctx) => {
     expect(ctx.commandHelp).to.contain('api:testHelp');
     expect(ctx.commandHelp).to.contain('USAGE');
-    expect(ctx.commandHelp).to.not.contain('OPTIONS');
     expect(ctx.commandHelp).to.not.contain('REQUIRED FLAGS');
     expect(ctx.commandHelp).to.not.contain('OPTIONAL FLAGS');
   });
