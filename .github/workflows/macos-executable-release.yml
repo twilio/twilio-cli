@@ -40,7 +40,8 @@ jobs:
         APPLE_ID: ${{ secrets.APPLE_ID}}
         APPLE_ID_APP_PASSWORD: ${{ secrets.APPLE_ID_APP_PASSWORD}}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
-        FILE_PATH: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}.pkg
+        FILE_PATH_ARM64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
+        FILE_PATH_X64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.pkg
         REPOSITORY_OWNER: ${{ github.repository_owner }}
     - name: Upload binaries to release - arm64
       if: always()
@@ -60,7 +61,7 @@ jobs:
           FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.pkg
           ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg
           TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-          REPO_NAME: ${{ github.repository }}
+          REPO_NAME: ${{ github.repository }} 
 
 
   notify-complete-fail:

@@ -1,3 +1,14 @@
+## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to oclif v2
+
+### Library - Features
+
+* oclif v2 migration ([#466](https://github.com/twilio/twilio-cli/issues/466)) ([a9d57dc](https://github.com/twilio/twilio-cli/commit/a9d57dc8698b2f3eb0457486c2d7d2f5f7d785de))
+
 ## [4.2.0](https://github.com/twilio/twilio-cli/compare/4.1.0...4.2.0) (2022-09-08)
 
 
