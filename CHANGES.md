@@ -1,4 +1,25 @@
-## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
+## [5.1.0](https://github.com/twilio/twilio-cli/compare/5.0.0...5.1.0) (2022-10-06)
+
+
+### Library - Fixes
+
+* windows executable workflow ([ac8e2ed](https://github.com/twilio/twilio-cli/commit/ac8e2eda4d18a2e19d699adba9e8a96a3b7f93ce))
+
+
+### Library - Chores
+
+* macos workflow fix ([#469](https://github.com/twilio/twilio-cli/issues/469)) ([a650621](https://github.com/twilio/twilio-cli/commit/a650621dbb5091eb10b7cc2d3c2f5cf90fd1101a))
+
+---------------------------
+**Library - Feature**
+- [PR #77](https://github.com/twilio/twilio-oai/pull/77): add helper libs semantic types configuration. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added  to  API.
+- Add AMD attributes to participant create request
+
+**Twiml**
+- Add AMD attributes to  and ## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
 
 
 ### ⚠ BREAKING CHANGES
