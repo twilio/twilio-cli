@@ -1,4 +1,13 @@
-## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
+---------------------------
+**Library - Feature**
+- [PR #77](https://github.com/twilio/twilio-oai/pull/77): add helper libs semantic types configuration. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added  to  API.
+- Add AMD attributes to participant create request
+
+**Twiml**
+- Add AMD attributes to  and ## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
 
 
 ### ⚠ BREAKING CHANGES
