@@ -8,7 +8,7 @@ Buildroot:      %{_tmppath}/%{name}-%{version}-root
 
 License:        MIT
 URL:           https://github.com/twilio/twilio-cli
-Source:        %{name}-v%{version}-linux-x64.tar.gz
+Source:        %{name}-linux-x64.tar.gz
 
 #BuildRequires:
 Requires:       bash

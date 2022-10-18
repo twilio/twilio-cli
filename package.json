@@ -148,7 +148,21 @@
     "update": {
       "s3": {
         "xz": true,
-        "bucket": "twilio-cli-prod"
+        "host": "https://github.com/twilio/twilio-cli/releases/latest/download/",
+        "templates": {
+          "target": {
+            "baseDir": "<%- bin %>",
+            "unversioned": "<%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
+            "versioned": "<%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
+            "manifest": "<%- platform %>-<%- arch %>"
+          },
+          "vanilla": {
+            "baseDir": "<%- bin %>",
+            "unversioned": "<%- bin %><%- ext %>",
+            "versioned": "<%- bin %>-<%- version %><%- ext %>",
+            "manifest": "version"
+          }
+        }
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"

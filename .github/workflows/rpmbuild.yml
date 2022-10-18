@@ -27,7 +27,7 @@ jobs:
         with:
           spec_file: .github/rpm/twilio.spec
           sources: |
-            dist/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}-linux-x64.tar.gz
+            dist/twilio-linux-x64.tar.gz
           variables: |
             _version=${{ steps.get-tag.outputs.TAG_NAME }}
           gpg_signing_key: ${{ secrets.GPG_SIGNING_KEY }}
