@@ -154,7 +154,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.pkg'
-          sudo installer -pkg twilio-${{ needs.get-tag.outputs.TAG_NAME }}.pkg -target ~/
+          sudo installer -pkg twilio-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg -target ~/
           ls
           twilio --version
           twilio api --help
