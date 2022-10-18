@@ -21,7 +21,7 @@ const updatePlatformExecutables = async () => {
       return;
     }
     if(!('FILE' in process.env) && !('DIRNAME' in process.env)){
-      core.setFailed(`Exiting, required param: FILE or DIRNAME is missing`);
+      core.setFailed(`Exiting, required params: FILE and DIRNAME are missing. Specify either of the two.`);
       return;
     }
     const github = new GitHub(process.env.GITHUB_TOKEN);
