@@ -1,3 +1,15 @@
+## [5.2.0](https://github.com/twilio/twilio-cli/compare/5.1.0...5.2.0) (2022-10-19)
+
+
+### Library - Chores
+
+* run acceptance test on macos x64 executable ([#472](https://github.com/twilio/twilio-cli/issues/472)) ([12097b3](https://github.com/twilio/twilio-cli/commit/12097b3b37fc4ed2e6ff6dec97f90d97f324d7a3))
+
+
+### Library - Fixes
+
+* specifying targets for oclif-dev pack ([#471](https://github.com/twilio/twilio-cli/issues/471)) ([f0dfea5](https://github.com/twilio/twilio-cli/commit/f0dfea5a88e61d26f03a6ffe3b4cd3b50f831969))
+
 ---------------------------
 **Library - Chore**
 - [PR #79](https://github.com/twilio/twilio-oai/pull/79): update mountName and className extensions. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
