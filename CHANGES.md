@@ -1,4 +1,23 @@
-## [5.2.0](https://github.com/twilio/twilio-cli/compare/5.1.0...5.2.0) (2022-10-19)
+---------------------------
+**Library - Fix**
+- [PR #80](https://github.com/twilio/twilio-oai/pull/80): update parent logic for handling of parents vs. containers. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added  and  to Message resource with public visibility as Beta
+- Add  and  resource
+
+**Proxy**
+- Remove FailOnParticipantConflict param from Proxy Session create and update and Proxy Participant create
+
+**Supersim**
+- Update SettingsUpdates resource to remove PackageSid
+
+**Taskrouter**
+- Add  query parameter to Workers and TaskQueues for sorting by
+- Add  query param for list reservations endpoint
+
+**Twiml**
+- Add  and  attributes to ## [5.2.0](https://github.com/twilio/twilio-cli/compare/5.1.0...5.2.0) (2022-10-19)
 
 
 ### Library - Chores
