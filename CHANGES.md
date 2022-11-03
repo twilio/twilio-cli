@@ -1,4 +1,82 @@
-## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
+### [5.2.1](https://github.com/twilio/twilio-cli/compare/5.2.0...5.2.1) (2022-11-02)
+
+---------------------------
+**Library - Fix**
+- [PR #80](https://github.com/twilio/twilio-oai/pull/80): update parent logic for handling of parents vs. containers. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added  and  to Message resource with public visibility as Beta
+- Add  and  resource
+
+**Proxy**
+- Remove FailOnParticipantConflict param from Proxy Session create and update and Proxy Participant create
+
+**Supersim**
+- Update SettingsUpdates resource to remove PackageSid
+
+**Taskrouter**
+- Add  query parameter to Workers and TaskQueues for sorting by
+- Add  query param for list reservations endpoint
+
+**Twiml**
+- Add  and  attributes to ## [5.2.0](https://github.com/twilio/twilio-cli/compare/5.1.0...5.2.0) (2022-10-19)
+
+
+### Library - Chores
+
+* run acceptance test on macos x64 executable ([#472](https://github.com/twilio/twilio-cli/issues/472)) ([12097b3](https://github.com/twilio/twilio-cli/commit/12097b3b37fc4ed2e6ff6dec97f90d97f324d7a3))
+
+
+### Library - Fixes
+
+* specifying targets for oclif-dev pack ([#471](https://github.com/twilio/twilio-cli/issues/471)) ([f0dfea5](https://github.com/twilio/twilio-cli/commit/f0dfea5a88e61d26f03a6ffe3b4cd3b50f831969))
+
+---------------------------
+**Library - Chore**
+- [PR #79](https://github.com/twilio/twilio-oai/pull/79): update mountName and className extensions. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Library - Fix**
+- [PR #78](https://github.com/twilio/twilio-oai/pull/78): updating property order for yaml files. Thanks to [@kridai](https://github.com/kridai)!
+
+**Api**
+- Make link shortening parameters public **(breaking change)**
+
+**Oauth**
+- added oauth JWKS endpoint
+- Get userinfo resource
+- OpenID discovery resource
+- Add new API for token endpoint
+
+**Supersim**
+- Add SettingsUpdates resource
+
+**Verify**
+- Update Verify Push endpoints to  maturity
+- Verify BYOT add Channels property to the Get Templates response
+
+**Twiml**
+- Add  attribute and  errorType to ## [5.1.0](https://github.com/twilio/twilio-cli/compare/5.0.0...5.1.0) (2022-10-06)
+
+
+### Library - Fixes
+
+* windows executable workflow ([ac8e2ed](https://github.com/twilio/twilio-cli/commit/ac8e2eda4d18a2e19d699adba9e8a96a3b7f93ce))
+
+
+### Library - Chores
+
+* macos workflow fix ([#469](https://github.com/twilio/twilio-cli/issues/469)) ([a650621](https://github.com/twilio/twilio-cli/commit/a650621dbb5091eb10b7cc2d3c2f5cf90fd1101a))
+
+---------------------------
+**Library - Feature**
+- [PR #77](https://github.com/twilio/twilio-oai/pull/77): add helper libs semantic types configuration. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Api**
+- Added  to  API.
+- Add AMD attributes to participant create request
+
+**Twiml**
+- Add AMD attributes to  and ## [5.0.0](https://github.com/twilio/twilio-cli/compare/4.2.0...5.0.0) (2022-09-19)
 
 
 ### ⚠ BREAKING CHANGES
