@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#set -euo pipefail
+
+if [ "$BUILDKITE_STEP_KEY" == "aws-login" ]
+then
+    echo '--- :buildkite: Getting Secrets from Admiral'
+
+    apk add --no-cache aws-cli
+    aws s3 cp s3://com-twilio-corp-us1-secrets/v1/buildkite-build-worker/jobs_dev_interfaces_aws_gpg_s3/latest aws_keys
+
+    export AWS_ACCESS_KEY_ID=$(jq '.AWS_ACCESS_KEY_ID' --raw-output < ./aws_keys)
+    export AWS_SECRET_ACCESS_KEY=$(jq '.AWS_SECRET_ACCESS_KEY' --raw-output < ./aws_keys)
+    export AWS_SESSION_TOKEN=$(jq '.AWS_SESSION_TOKEN' --raw-output < ./aws_keys)
+
+    rm aws_keys
+
+    apk add --no-cache aws-cli
+    aws s3 cp s3://com-twilio-corp-us1-secrets/v1/buildkite-build-worker/jobs_dev_interfaces_gpg_s3/latest gpg_keys
+    export GPG_SIGNING_KEY=$(jq '.GPG_SIGNING_KEY' --raw-output < ./gpg_keys)
+    export GPG_SIGNING_KEY_ID=$(jq '.GPG_SIGNING_KEY_ID' --raw-output < ./gpg_keys)
+    export GPG_SIGNING_KEY_PASSPHRASE=$(jq '.GPG_SIGNING_KEY_PASSPHRASE' --raw-output < ./gpg_keys)
+
+    rm gpg_keys
+fi

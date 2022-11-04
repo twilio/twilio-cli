@@ -1,0 +1,32 @@
+steps:
+  - label: "Generate linux tarball and Build Deb Package"
+    key: aws-login
+    command:
+      - npm cache clear & npm install
+      - npm install -g @oclif/dev-cli
+      - oclif-dev pack -t linux-x64,linux-arm
+      - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - unzip -qq awscliv2.zip
+      - apt update && apt install sudo
+      - sudo apt update && sudo apt install -y apt-utils
+      - sudo ./aws/install
+      - node .buildkite/pack-debian-apt.js x64,arm
+    plugins:
+      - docker#v3.8.0:
+          image: "node:14"
+          environment:
+            - "AWS_ACCESS_KEY_ID"
+            - "AWS_SECRET_ACCESS_KEY"
+            - "AWS_SESSION_TOKEN"
+            - "GPG_SIGNING_KEY"
+            - "GPG_SIGNING_KEY_ID"
+            - "GPG_SIGNING_KEY_PASSPHRASE"
+
+notify:
+  - slack:
+      channels:
+        - "#alerts-dev-interfaces"
+      message: "Twilio Cli- APT release failed"
+    if: |
+      build.state == "canceled" ||
+        build.state == "failed"
