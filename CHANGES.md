@@ -1,4 +1,39 @@
-### [5.2.1](https://github.com/twilio/twilio-cli/compare/5.2.0...5.2.1) (2022-11-02)
+### [5.2.2](https://github.com/twilio/twilio-cli/compare/5.2.1...5.2.2) (2022-11-17)
+
+
+### Library - Docs
+
+* Update arch doc to remove keytar ref ([#470](https://github.com/twilio/twilio-cli/issues/470)) ([d18c081](https://github.com/twilio/twilio-cli/commit/d18c081ce0052917e9ed5bd4c575f9889825e1f6))
+
+
+### Library - Chores
+
+* bump @actions/core in /.github/actions/build-rpm ([#447](https://github.com/twilio/twilio-cli/issues/447)) ([422c8fb](https://github.com/twilio/twilio-cli/commit/422c8fb96f20d73299fbeb5dc34ae339d41b507d))
+
+---------------------------
+**Api**
+- Set the Content resource to have public visibility as Preview
+
+**Flex**
+- Adding new parameter  to 'gooddata' response in version 
+
+**Insights**
+- Added  field in List Call Summary
+- Added  field in call summary
+
+
+---------------------------
+**Library - Fix**
+- [PR #81](https://github.com/twilio/twilio-oai/pull/81): add mount names when they cannot be derived from the path. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Flex**
+- Adding two new authorization API 'user_roles' and 'gooddata' in version 
+
+**Messaging**
+- Add new Campaign properties (MessageFlow, OptInMessage, OptInKeywords, OptOutMessage, OptOutKeywords, HelpMessage, HelpKeywords)
+
+**Twiml**
+- Add new speech models to .### [5.2.1](https://github.com/twilio/twilio-cli/compare/5.2.0...5.2.1) (2022-11-02)
 
 ---------------------------
 **Library - Fix**
