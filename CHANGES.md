@@ -1,4 +1,27 @@
-### [5.2.1](https://github.com/twilio/twilio-cli/compare/5.2.0...5.2.1) (2022-11-02)
+---------------------------
+**Api**
+- Set the Content resource to have public visibility as Preview
+
+**Flex**
+- Adding new parameter  to 'gooddata' response in version 
+
+**Insights**
+- Added  field in List Call Summary
+- Added  field in call summary
+
+
+---------------------------
+**Library - Fix**
+- [PR #81](https://github.com/twilio/twilio-oai/pull/81): add mount names when they cannot be derived from the path. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Flex**
+- Adding two new authorization API 'user_roles' and 'gooddata' in version 
+
+**Messaging**
+- Add new Campaign properties (MessageFlow, OptInMessage, OptInKeywords, OptOutMessage, OptOutKeywords, HelpMessage, HelpKeywords)
+
+**Twiml**
+- Add new speech models to .### [5.2.1](https://github.com/twilio/twilio-cli/compare/5.2.0...5.2.1) (2022-11-02)
 
 ---------------------------
 **Library - Fix**
