@@ -1,3 +1,5 @@
+### [5.2.3](https://github.com/twilio/twilio-cli/compare/5.2.2...5.2.3) (2022-12-01)
+
 ---------------------------
 **Flex**
 - Adding new  api in version 
