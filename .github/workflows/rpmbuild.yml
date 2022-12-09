@@ -108,6 +108,6 @@ jobs:
           SLACK_COLOR: "#ff3333"
           SLACK_USERNAME: CLI Release Bot
           SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli RC Release"
+          SLACK_TITLE: "Twilio Cli"
           SLACK_MESSAGE: 'RPM Build Failed'
           MSG_MINIMAL: actions url
