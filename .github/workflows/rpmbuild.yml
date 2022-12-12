@@ -14,12 +14,7 @@ jobs:
         id: get-tag
         run: |
           echo "::set-output name=TAG_NAME::$(node -p -e "require('./package.json').version")"
-
-      - name: Extract branch name
-        id: extract_branch
-        run: |
-          run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-
+          
       - name: process version and release
         if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
         id: process-release-version
@@ -27,24 +22,23 @@ jobs:
           releaseVersionString=${{ steps.get-tag.outputs.TAG_NAME}}
           echo "::set-output name=version::$(echo "$releaseVersionString" | cut -d- -f1)"
           echo "::set-output name=release::$(echo "$releaseVersionString" | cut -d- -f2-)"
-
+          
       - name: print version and release
         if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
         run: |
           echo rpm_package_version: ${{ steps.process-release-version.outputs.VERSION }}
           echo rpm_package_release: ${{ steps.process-release-version.outputs.RELEASE }}
-
+          
       - name: generate linux tarball
         run: |
           make install
           npm install -g @oclif/dev-cli
           oclif-dev pack --targets=linux-x64
-
-
+          
       - name: build rpm
         uses: ./.github/actions/build-rpm
         id: build_rpm
-        if: ${{steps.extract_branch.outputs.branch == 'main'}}
+        if: ${{ github.ref_name == 'main'}}
         with:
           spec_file: .github/rpm/twilio.spec
           sources: |
@@ -55,7 +49,6 @@ jobs:
           gpg_signing_key_id: ${{ secrets.GPG_SIGNING_KEY_ID }}
           gpg_signing_key_passphrase: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
           gpg_pub_key: .github/rpm/gpg_pub.asc
-
 
       - name: build rpm for rc release
         if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
@@ -75,39 +68,39 @@ jobs:
 
       - name: build_rpm outputs
         run: |
-          if [ "steps.extract_branch.outputs.branch" == "main" ]; then
+          if [ "${{ github.ref_name }}" == "main" ]; then
             echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
             echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
           else
             echo rpm_package_name: ${{ steps.build_rpm_rc_release.outputs.rpm_package_name }}
             echo rpm_package_path: ${{ steps.build_rpm_rc_release.outputs.rpm_package_path }}
           fi
-
       - name: Upload rpm package to release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ "steps.extract_branch.outputs.branch" == "main" ]; then
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            gh release create ${{ steps.get-tag.outputs.TAG_NAME }}
             gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm.outputs.rpm_package_path }} --clobber
           else
             gh release create ${{ steps.get-tag.outputs.TAG_NAME }}
             gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm_rc_release.outputs.rpm_package_path }} --clobber
           fi
-
-  notify-complete-fail:
-    if: ${{ failure() || cancelled() }}
-    needs: [ rpmbuild ]
-    name: Notify Release Failed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: "#ff3333"
-          SLACK_USERNAME: CLI Release Bot
-          SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'RPM Build Failed'
-          MSG_MINIMAL: actions url
+          
+#   notify-complete-fail:
+#     if: ${{ failure() || cancelled() }}
+#     needs: [ rpmbuild ]
+#     name: Notify Release Failed
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Slack Notification
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+#           SLACK_COLOR: "#ff3333"
+#           SLACK_USERNAME: CLI Release Bot
+#           SLACK_ICON_EMOJI: ":ship:"
+#           SLACK_TITLE: "Twilio Cli"
+#           SLACK_MESSAGE: 'RPM Build Failed'
+#           MSG_MINIMAL: actions url
