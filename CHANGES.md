@@ -1,3 +1,10 @@
+## [5.3.0](https://github.com/twilio/twilio-cli/compare/5.2.3...5.3.0) (2022-12-15)
+
+
+### Library - Features
+
+* Configuring RC release for rpm ([#478](https://github.com/twilio/twilio-cli/issues/478)) ([fcd625e](https://github.com/twilio/twilio-cli/commit/fcd625efd9cdbb2be2fc61da38f77fc19ac50560))
+
 ---------------------------
 **Api**
 - Add  param to address create and update
