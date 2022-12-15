@@ -14,7 +14,7 @@ jobs:
         id: get-tag
         run: |
           echo "::set-output name=TAG_NAME::$(node -p -e "require('./package.json').version")"
-          
+
       - name: process version and release
         if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
         id: process-release-version
@@ -22,13 +22,13 @@ jobs:
           releaseVersionString=${{ steps.get-tag.outputs.TAG_NAME}}
           echo "::set-output name=version::$(echo "$releaseVersionString" | cut -d- -f1)"
           echo "::set-output name=release::$(echo "$releaseVersionString" | cut -d- -f2-)"
-          
+
       - name: print version and release
         if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
         run: |
           echo rpm_package_version: ${{ steps.process-release-version.outputs.VERSION }}
           echo rpm_package_release: ${{ steps.process-release-version.outputs.RELEASE }}
-          
+
       - name: generate linux tarball
         run: |
           make install
@@ -80,13 +80,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "${{ github.ref_name }}" == "main" ]; then
-            gh release create ${{ steps.get-tag.outputs.TAG_NAME }}
             gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm.outputs.rpm_package_path }} --clobber
           else
-            gh release create ${{ steps.get-tag.outputs.TAG_NAME }}
             gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm_rc_release.outputs.rpm_package_path }} --clobber
           fi
-          
+
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
     needs: [ rpmbuild ]
