@@ -1,4 +1,33 @@
-### [5.2.3](https://github.com/twilio/twilio-cli/compare/5.2.2...5.2.3) (2022-12-01)
+---------------------------
+**Api**
+- Add  param to address create and update
+- Make  optional for user defined message subscription **(breaking change)**
+
+**Flex**
+- Flex Conversations is now Generally Available
+- Adding the ie1 mapping for authorization api, updating service base uri and base url response attribute **(breaking change)**
+- Change web channels to GA and library visibility to public
+- Changing the uri for authorization api from using Accounts to Insights **(breaking change)**
+
+**Media**
+- Gate Twilio Live endpoints behind beta_feature for EOS
+
+**Messaging**
+- Mark  as a required field for Campaign Creation **(breaking change)**
+
+**Oauth**
+- updated openid discovery endpoint uri **(breaking change)**
+- Added device code authorization endpoint
+
+**Supersim**
+- Allow filtering the SettingsUpdates resource by 
+
+**Twiml**
+- Add new Polly Neural voices
+- Add tr-TR, ar-AE, yue-CN, fi-FI languages to SSML  element.
+- Add x-amazon-jyutping, x-amazon-pinyin, x-amazon-pron-kana, x-amazon-yomigana alphabets to SSML  element.
+- Rename  value for SSML   attribute to . **(breaking change)**
+- Rename  attribute to  in SSML  element. **(breaking change)**### [5.2.3](https://github.com/twilio/twilio-cli/compare/5.2.2...5.2.3) (2022-12-01)
 
 ---------------------------
 **Flex**
