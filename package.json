@@ -9,7 +9,7 @@
   "bugs": "https://github.com/twilio/twilio-cli/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/twilio/twilio-cli.git"
+    "url": "https://github.com/shrutiburman/twilio-cli.git"
   },
   "license": "MIT",
   "author": "Twilio @twilio",
@@ -142,13 +142,12 @@
       ]
     },
     "macos": {
-      "identifier": "com.twilio.cli",
-      "sign": "Developer ID Installer: Twilio, Inc."
+      "identifier": "com.twilio.cli"
     },
     "update": {
       "s3": {
         "xz": true,
-        "bucket": "twilio-cli-prod"
+        "bucket": "twilio-cli-dev"
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"

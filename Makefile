@@ -28,5 +28,5 @@ docker-push:
 
 # make owner=username generate-fork-pipeline-changes
 generate-fork-pipeline-changes:
-	git co main
+	git checkout main
 	node .github/scripts/create-fork-pipeline-changes.js $(PWD) $(owner)
