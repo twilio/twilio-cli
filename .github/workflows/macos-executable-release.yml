@@ -7,7 +7,7 @@ on:
         default: twilio
 jobs:
   get-tag:
-    runs-on: macos-11
+    runs-on: macos-12
     outputs:
      TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
     steps:
@@ -30,7 +30,7 @@ jobs:
           echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
   pack-macos:
     needs: [get-tag, get-sha]
-    runs-on: macos-11
+    runs-on: macos-12
     steps:
     - uses: actions/checkout@v2
     - run: source .github/scripts/pack_macos.sh
