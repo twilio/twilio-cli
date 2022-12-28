@@ -50,7 +50,6 @@ pack_macos() {
 #  then
     import_certificate
     #npx oclif pack:macos
-    pkgbuild
     npm install -g @oclif/dev-cli
     oclif-dev pack:macos
     notarize_and_staple "$FILE_PATH_ARM64"
