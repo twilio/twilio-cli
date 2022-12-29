@@ -89,11 +89,6 @@
         "successCmd": "echo '::set-output name=TAG_NAME::${nextRelease.version}'"
       }
     ],
-    [
-      "@semantic-release/npm",
-      {
-        "npmPublish": false
-      }
-    ]
+    "@semantic-release/npm"
   ]
 }

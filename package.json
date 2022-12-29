@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "version": "5.0.0",
+  "version": "5.3.1",
   "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for documentation.",
   "keywords": [
     "oclif"
@@ -9,7 +9,7 @@
   "bugs": "https://github.com/twilio/twilio-cli/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shrutiburman/twilio-cli.git"
+    "url": "https://github.com/twilio/twilio-cli.git"
   },
   "license": "MIT",
   "author": "Twilio @twilio",
@@ -55,13 +55,13 @@
   "devDependencies": {
     "@actions/core": "^1.0.0",
     "@actions/github": "^2.2.0",
-    "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^2.1.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@twilio/cli-test": "3.0.0",
     "aws-sdk": "^2.443.0",
+    "@oclif/dev-cli": "^1.22.2",
     "chai": "^4.3.4",
     "conventional-changelog-conventionalcommits": "^4.6.0",
     "eslint": "^7.27.0",
@@ -72,7 +72,6 @@
     "mocha": "^10.0.0",
     "nock": "^13.0.2",
     "nyc": "^15.1.0",
-    "oclif": "3.4.3",
     "proxyquire": "^2.1.3",
     "semantic-release": "^19.0.3",
     "sinon": "^10.0.0",
@@ -80,7 +79,8 @@
     "tmp": "^0.2.1",
     "ts-node": "^10.9.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "oclif": "^3"
   },
   "optionalDependencies": {
     "ngrok": "^3.2.7"
@@ -148,7 +148,7 @@
     "update": {
       "s3": {
         "xz": true,
-        "bucket": "twilio-cli-dev"
+        "bucket": "twilio-cli-prod"
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"

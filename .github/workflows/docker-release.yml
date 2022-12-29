@@ -26,7 +26,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: shrutiburman/twilio-cli
+          images: twilio/twilio-cli
           tags: type=semver,pattern={{version}}, value= ${{ steps.get-tag.outputs.TAG_NAME }}
       - name: Build and push
         id: docker_build
