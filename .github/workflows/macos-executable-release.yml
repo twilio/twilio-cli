@@ -60,7 +60,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
-          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg
           TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
           REPO_NAME: ${{ github.repository }}
 
