@@ -48,8 +48,9 @@ pack_macos() {
 #  if [ "$REPOSITORY_OWNER" == "twilio" ]
 #  then
     import_certificate
-    npx oclif pack:macos
-    notarize_and_staple "$FILE_PATH_ARM64"
+    #npx oclif pack:macos
+    npx oclif-dev pack:macos
+#   notarize_and_staple "$FILE_PATH_ARM64"
     notarize_and_staple "$FILE_PATH_X64"
 #  else
 #   npx oclif pack:macos

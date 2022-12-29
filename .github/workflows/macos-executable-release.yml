@@ -40,28 +40,29 @@ jobs:
         APPLE_ID: ${{ secrets.APPLE_ID}}
         APPLE_ID_APP_PASSWORD: ${{ secrets.APPLE_ID_APP_PASSWORD}}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
-        FILE_PATH_ARM64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
-        FILE_PATH_X64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.pkg
+#        FILE_PATH_ARM64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
+        FILE_PATH_X64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
         REPOSITORY_OWNER: ${{ github.repository_owner }}
-    - name: Upload binaries to release - arm64
-      if: always()
-      run: node .github/scripts/update-platform-executables.js
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
-        ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-arm64.pkg
-        TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-        REPO_NAME: ${{ github.repository }}
+#    TODO: enable these when oclif pack : macos starts working fine
+#    - name: Upload binaries to release - arm64
+#      if: always()
+#      run: node .github/scripts/update-platform-executables.js
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
+#        ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-arm64.pkg
+#        TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
+#        REPO_NAME: ${{ github.repository }}
     - name: Upload binaries to release - x64
       if: always()
       run: |
           node .github/scripts/update-platform-executables.js
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.pkg
+          FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
           ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg
           TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-          REPO_NAME: ${{ github.repository }} 
+          REPO_NAME: ${{ github.repository }}
 
 
   notify-complete-fail:
