@@ -1,3 +1,25 @@
+## [5.1.0](https://github.com/shrutiburman/twilio-cli/compare/5.0.0...5.1.0) (2023-01-03)
+
+
+### Library - Features
+
+* sign macos package ([d07f1d8](https://github.com/shrutiburman/twilio-cli/commit/d07f1d8cca613c4f5751e7fc60bf21b34a170493))
+
+
+### Library - Fixes
+
+* change to macos 12 ([86d33e0](https://github.com/shrutiburman/twilio-cli/commit/86d33e0e65d2422d04aa2894d9c7589a4dee6507))
+* change to macos 12 ([f3174a9](https://github.com/shrutiburman/twilio-cli/commit/f3174a9ddc45829bdef1f8e011908b46431b549a))
+* package json value ([952037c](https://github.com/shrutiburman/twilio-cli/commit/952037cc1abccd6eb13abf50f6614dcb8b54e4bb))
+* try tarballs ([95c9b95](https://github.com/shrutiburman/twilio-cli/commit/95c9b95c7286697dc57ce2eeaad10c958465162b))
+
+
+### Library - Test
+
+* macos with oclif ([c9ec222](https://github.com/shrutiburman/twilio-cli/commit/c9ec2221c2076d650ff9c77f7f061374ec307cde))
+* macos with oclif ([8923322](https://github.com/shrutiburman/twilio-cli/commit/892332202d601934beb14a96fa162621c04155e5))
+* macos with oclif ([ae186e2](https://github.com/shrutiburman/twilio-cli/commit/ae186e2a812b7230f6b12b9c1ea1e19241468f21))
+
 ## [5.0.0](https://github.com/shrutiburman/twilio-cli/compare/4.1.0...5.0.0) (2022-12-28)
 
 
