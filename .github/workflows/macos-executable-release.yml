@@ -34,7 +34,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v3
-        with:
+      with:
           node-version: lts/*
           cache: yarn
     - run: source .github/scripts/pack_macos.sh
@@ -69,20 +69,20 @@ jobs:
           REPO_NAME: ${{ github.repository }}
 
 
-  notify-complete-fail:
-    if: ${{ failure() || cancelled() }}
-    needs: [pack-macos]
-    name: Notify Release Failed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: "#ff3333"
-          SLACK_USERNAME: CLI Release Bot
-          SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'Macos Executable Release Failed'
-          MSG_MINIMAL: actions url
+#   notify-complete-fail:
+#     if: ${{ failure() || cancelled() }}
+#     needs: [pack-macos]
+#     name: Notify Release Failed
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Slack Notification
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+#           SLACK_COLOR: "#ff3333"
+#           SLACK_USERNAME: CLI Release Bot
+#           SLACK_ICON_EMOJI: ":ship:"
+#           SLACK_TITLE: "Twilio Cli"
+#           SLACK_MESSAGE: 'Macos Executable Release Failed'
+#           MSG_MINIMAL: actions url
