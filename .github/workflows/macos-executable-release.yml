@@ -30,9 +30,13 @@ jobs:
           echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
   pack-macos:
     needs: [get-tag, get-sha]
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: yarn
     - run: source .github/scripts/pack_macos.sh
       env:
         OSX_INSTALLER_CERT_BASE64: ${{ secrets.OSX_INSTALLER_CERT_BASE64}}
