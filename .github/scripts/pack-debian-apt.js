@@ -58,7 +58,7 @@ PATH=$PATH:$PWD/bin eval $(PATH=$PATH:$PWD/bin node -p "require('./package').scr
     }
 
     if (process.platform !== 'linux') throw new Error('must be run from linux')
-    const debVersion = `${pjson.version.split('-')[0]}-1`;
+    const debVersion = `${pjson.version}-1`;
    //twilio-cli/dist/deb
     const dist =  qq.join(rootDir, 'dist','deb');
     await qq.rm(dist);
