@@ -27,6 +27,7 @@ docker-push:
 	docker push twilio/twilio-cli:latest
 
 # make owner=username generate-fork-pipeline-changes
+# test
 generate-fork-pipeline-changes:
 	git checkout main
 	node .github/scripts/create-fork-pipeline-changes.js $(PWD) $(owner)
