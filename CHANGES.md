@@ -1,4 +1,105 @@
-### [5.2.3](https://github.com/twilio/twilio-cli/compare/5.2.2...5.2.3) (2022-12-01)
+## [5.1.0](https://github.com/shrutiburman/twilio-cli/compare/5.0.0...5.1.0) (2023-01-03)
+
+
+### Library - Features
+
+* sign macos package ([d07f1d8](https://github.com/shrutiburman/twilio-cli/commit/d07f1d8cca613c4f5751e7fc60bf21b34a170493))
+
+
+### Library - Fixes
+
+* change to macos 12 ([86d33e0](https://github.com/shrutiburman/twilio-cli/commit/86d33e0e65d2422d04aa2894d9c7589a4dee6507))
+* change to macos 12 ([f3174a9](https://github.com/shrutiburman/twilio-cli/commit/f3174a9ddc45829bdef1f8e011908b46431b549a))
+* package json value ([952037c](https://github.com/shrutiburman/twilio-cli/commit/952037cc1abccd6eb13abf50f6614dcb8b54e4bb))
+* try tarballs ([95c9b95](https://github.com/shrutiburman/twilio-cli/commit/95c9b95c7286697dc57ce2eeaad10c958465162b))
+
+
+### Library - Test
+
+* macos with oclif ([c9ec222](https://github.com/shrutiburman/twilio-cli/commit/c9ec2221c2076d650ff9c77f7f061374ec307cde))
+* macos with oclif ([8923322](https://github.com/shrutiburman/twilio-cli/commit/892332202d601934beb14a96fa162621c04155e5))
+* macos with oclif ([ae186e2](https://github.com/shrutiburman/twilio-cli/commit/ae186e2a812b7230f6b12b9c1ea1e19241468f21))
+
+## [5.0.0](https://github.com/shrutiburman/twilio-cli/compare/4.1.0...5.0.0) (2022-12-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to oclif v2
+* add node engine support from 14.x+
+
+### Library - Docs
+
+* Update arch doc to remove keytar ref ([#470](https://github.com/shrutiburman/twilio-cli/issues/470)) ([d18c081](https://github.com/shrutiburman/twilio-cli/commit/d18c081ce0052917e9ed5bd4c575f9889825e1f6))
+
+
+### Library - Features
+
+* Configuring RC release for rpm ([#478](https://github.com/shrutiburman/twilio-cli/issues/478)) ([fcd625e](https://github.com/shrutiburman/twilio-cli/commit/fcd625efd9cdbb2be2fc61da38f77fc19ac50560))
+* oclif v2 migration ([#466](https://github.com/shrutiburman/twilio-cli/issues/466)) ([a9d57dc](https://github.com/shrutiburman/twilio-cli/commit/a9d57dc8698b2f3eb0457486c2d7d2f5f7d785de))
+
+
+### Library - Chores
+
+* bump @actions/core in /.github/actions/build-rpm ([#447](https://github.com/shrutiburman/twilio-cli/issues/447)) ([422c8fb](https://github.com/shrutiburman/twilio-cli/commit/422c8fb96f20d73299fbeb5dc34ae339d41b507d))
+* changes acc to the forked repo ([2f445f9](https://github.com/shrutiburman/twilio-cli/commit/2f445f93be8fb6313f9c687bab0039280c70e44d))
+* fix workflow for duplicate release ([#456](https://github.com/shrutiburman/twilio-cli/issues/456)) ([8bf9188](https://github.com/shrutiburman/twilio-cli/commit/8bf9188b99d5af09dc9e2ed3dc701ad1ddec0b00))
+* macos workflow fix ([#469](https://github.com/shrutiburman/twilio-cli/issues/469)) ([a650621](https://github.com/shrutiburman/twilio-cli/commit/a650621dbb5091eb10b7cc2d3c2f5cf90fd1101a))
+* **release:** set `package.json` to 4.2.0 [skip ci] ([df00986](https://github.com/shrutiburman/twilio-cli/commit/df00986454d59f9c0bb9b22cc7b505dfa88e8b82)), closes [#456](https://github.com/shrutiburman/twilio-cli/issues/456)
+* **release:** set `package.json` to 5.0.0 [skip ci] ([81f3228](https://github.com/shrutiburman/twilio-cli/commit/81f3228e99ac10f39d403553637bb7ae53afe3e5)), closes [#466](https://github.com/shrutiburman/twilio-cli/issues/466)
+* **release:** set `package.json` to 5.1.0 [skip ci] ([5a240b3](https://github.com/shrutiburman/twilio-cli/commit/5a240b34de977a41b92a09d13524a439249bfeeb)), closes [#469](https://github.com/shrutiburman/twilio-cli/issues/469)
+* **release:** set `package.json` to 5.2.0 [skip ci] ([88f8011](https://github.com/shrutiburman/twilio-cli/commit/88f8011fc375155a8d90d1000fa7d26d485b155f)), closes [#472](https://github.com/shrutiburman/twilio-cli/issues/472) [#471](https://github.com/shrutiburman/twilio-cli/issues/471)
+* **release:** set `package.json` to 5.2.1 [skip ci] ([26e4119](https://github.com/shrutiburman/twilio-cli/commit/26e4119a7a798e7399b17ef7b8fa1d4763697e42))
+* **release:** set `package.json` to 5.2.2 [skip ci] ([7bfa7aa](https://github.com/shrutiburman/twilio-cli/commit/7bfa7aab7e51329a5b8337b14358c66156a5af2c)), closes [#470](https://github.com/shrutiburman/twilio-cli/issues/470) [#447](https://github.com/shrutiburman/twilio-cli/issues/447)
+* **release:** set `package.json` to 5.2.3 [skip ci] ([9cb1ab5](https://github.com/shrutiburman/twilio-cli/commit/9cb1ab543224c0cb3aa77687c5eb94ababf11fa9))
+* **release:** set `package.json` to 5.3.0 [skip ci] ([75fd239](https://github.com/shrutiburman/twilio-cli/commit/75fd23948e3602041fd9ea30ddcec9da80bbd3ff)), closes [#478](https://github.com/shrutiburman/twilio-cli/issues/478)
+* run acceptance test on macos x64 executable ([#472](https://github.com/shrutiburman/twilio-cli/issues/472)) ([12097b3](https://github.com/shrutiburman/twilio-cli/commit/12097b3b37fc4ed2e6ff6dec97f90d97f324d7a3))
+
+
+### Library - Fixes
+
+* add node engine support from 14.x+ ([6de712f](https://github.com/shrutiburman/twilio-cli/commit/6de712f071a0cfe81fead89527fb62226b504798))
+* reduce time ([5e722c0](https://github.com/shrutiburman/twilio-cli/commit/5e722c0a8dd27c19c2ff2b4ba6930740d66d3f6b))
+* specifying targets for oclif-dev pack ([#471](https://github.com/shrutiburman/twilio-cli/issues/471)) ([f0dfea5](https://github.com/shrutiburman/twilio-cli/commit/f0dfea5a88e61d26f03a6ffe3b4cd3b50f831969))
+* windows executable workflow ([ac8e2ed](https://github.com/shrutiburman/twilio-cli/commit/ac8e2eda4d18a2e19d699adba9e8a96a3b7f93ce))
+
+## [5.3.0](https://github.com/twilio/twilio-cli/compare/5.2.3...5.3.0) (2022-12-15)
+
+
+### Library - Features
+
+* Configuring RC release for rpm ([#478](https://github.com/twilio/twilio-cli/issues/478)) ([fcd625e](https://github.com/twilio/twilio-cli/commit/fcd625efd9cdbb2be2fc61da38f77fc19ac50560))
+
+---------------------------
+**Api**
+- Add  param to address create and update
+- Make  optional for user defined message subscription **(breaking change)**
+
+**Flex**
+- Flex Conversations is now Generally Available
+- Adding the ie1 mapping for authorization api, updating service base uri and base url response attribute **(breaking change)**
+- Change web channels to GA and library visibility to public
+- Changing the uri for authorization api from using Accounts to Insights **(breaking change)**
+
+**Media**
+- Gate Twilio Live endpoints behind beta_feature for EOS
+
+**Messaging**
+- Mark  as a required field for Campaign Creation **(breaking change)**
+
+**Oauth**
+- updated openid discovery endpoint uri **(breaking change)**
+- Added device code authorization endpoint
+
+**Supersim**
+- Allow filtering the SettingsUpdates resource by 
+
+**Twiml**
+- Add new Polly Neural voices
+- Add tr-TR, ar-AE, yue-CN, fi-FI languages to SSML  element.
+- Add x-amazon-jyutping, x-amazon-pinyin, x-amazon-pron-kana, x-amazon-yomigana alphabets to SSML  element.
+- Rename  value for SSML   attribute to . **(breaking change)**
+- Rename  attribute to  in SSML  element. **(breaking change)**### [5.2.3](https://github.com/twilio/twilio-cli/compare/5.2.2...5.2.3) (2022-12-01)
 
 ---------------------------
 **Flex**

@@ -21,6 +21,7 @@ import_certificate() {
     security list-keychains -d user -s $OSX_KEYCHAIN login.keychain
     #security import $CERTIFICATE_PATH -k $KEYCHAIN_PATH -A -P $OSX_INSTALLER_CERT_PASSWORD -T /usr/bin/codesign -T /usr/bin/security
     security find-identity
+    echo "done importing certs"
 }
 notarize_and_staple() {
     FILE_PATH="$1"
@@ -48,8 +49,9 @@ pack_macos() {
 #  if [ "$REPOSITORY_OWNER" == "twilio" ]
 #  then
     import_certificate
-    npx oclif pack:macos
-    notarize_and_staple "$FILE_PATH_ARM64"
+    yarn pack:macos
+#    npx oclif-dev pack:macos
+#   notarize_and_staple "$FILE_PATH_ARM64"
     notarize_and_staple "$FILE_PATH_X64"
 #  else
 #   npx oclif pack:macos
