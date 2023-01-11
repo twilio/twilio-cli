@@ -10,24 +10,10 @@ jobs:
       - name: checkout cli
         uses: actions/checkout@v2
 
-      - name: fetch version
+      - name: get version
         id: get-tag
         run: |
           echo "::set-output name=TAG_NAME::$(node -p -e "require('./package.json').version")"
-
-      - name: process version and release
-        if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
-        id: process-release-version
-        run: |
-          releaseVersionString=${{ steps.get-tag.outputs.TAG_NAME}}
-          echo "::set-output name=version::$(echo "$releaseVersionString" | cut -d- -f1)"
-          echo "::set-output name=release::$(echo "$releaseVersionString" | cut -d- -f2-)"
-
-      - name: print version and release
-        if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
-        run: |
-          echo rpm_package_version: ${{ steps.process-release-version.outputs.VERSION }}
-          echo rpm_package_release: ${{ steps.process-release-version.outputs.RELEASE }}
 
       - name: generate linux tarball
         run: |
@@ -38,7 +24,6 @@ jobs:
       - name: build rpm
         uses: ./.github/actions/build-rpm
         id: build_rpm
-        if: ${{ github.ref_name == 'main'}}
         with:
           spec_file: .github/rpm/twilio.spec
           sources: |
@@ -50,40 +35,16 @@ jobs:
           gpg_signing_key_passphrase: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
           gpg_pub_key: .github/rpm/gpg_pub.asc
 
-      - name: build rpm for rc release
-        if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
-        uses: ./.github/actions/build-rpm
-        id: build_rpm_rc_release
-        with:
-          spec_file: .github/rpm/twiliorc.spec
-          sources: |
-            dist/channels/rc/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}/twilio-v${{ steps.get-tag.outputs.TAG_NAME }}-linux-x64.tar.gz
-          variables: |
-            _version=${{ steps.process-release-version.outputs.version }}
-            _release=${{ steps.process-release-version.outputs.release }}
-          gpg_signing_key: ${{ secrets.GPG_SIGNING_KEY }}
-          gpg_signing_key_id: ${{ secrets.GPG_SIGNING_KEY_ID }}
-          gpg_signing_key_passphrase: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
-          gpg_pub_key: .github/rpm/gpg_pub.asc
-
       - name: build_rpm outputs
         run: |
-          if [ "${{ github.ref_name }}" == "main" ]; then
-            echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
-            echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
-          else
-            echo rpm_package_name: ${{ steps.build_rpm_rc_release.outputs.rpm_package_name }}
-            echo rpm_package_path: ${{ steps.build_rpm_rc_release.outputs.rpm_package_path }}
-          fi
+          echo rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}
+          echo rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}
+
       - name: Upload rpm package to release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ "${{ github.ref_name }}" == "main" ]; then
-            gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm.outputs.rpm_package_path }} --clobber
-          else
-            gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm_rc_release.outputs.rpm_package_path }} --clobber
-          fi
+        run: gh release upload ${{ steps.get-tag.outputs.TAG_NAME }} ${{ steps.build_rpm.outputs.rpm_package_path }} --clobber
+
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
