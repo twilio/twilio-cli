@@ -1,3 +1,16 @@
+### [5.3.2](https://github.com/twilio/twilio-cli/compare/5.3.1...5.3.2) (2023-01-12)
+
+
+### Library - Fixes
+
+* macos workflow fix ([#484](https://github.com/twilio/twilio-cli/issues/484)) ([a31bf6b](https://github.com/twilio/twilio-cli/commit/a31bf6b573cfee62acb7626ffeeac47c7fe30f2c))
+
+
+### Library - Chores
+
+* bump json5 from 2.2.1 to 2.2.2 ([#483](https://github.com/twilio/twilio-cli/issues/483)) ([829d229](https://github.com/twilio/twilio-cli/commit/829d229184d7be99bcc7eb16c31a943c93106cd9))
+* enable rc support in apt releases ([#485](https://github.com/twilio/twilio-cli/issues/485)) ([ee4cd96](https://github.com/twilio/twilio-cli/commit/ee4cd9611841662a9e91b19a74b6004281c6ba28))
+
 ---------------------------
 **Conversations**
 - Add support for creating Multi-Channel Rich Content Messages
