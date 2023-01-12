@@ -1,4 +1,12 @@
-### [5.3.1](https://github.com/twilio/twilio-cli/compare/5.3.0...5.3.1) (2022-12-29)
+---------------------------
+**Conversations**
+- Add support for creating Multi-Channel Rich Content Messages
+
+**Lookups**
+- Changed the no data message for match postal code from  to  in identity match package
+
+**Messaging**
+- Add update/edit tollfree verification API### [5.3.1](https://github.com/twilio/twilio-cli/compare/5.3.0...5.3.1) (2022-12-29)
 
 ---------------------------
 **Library - Fix**
