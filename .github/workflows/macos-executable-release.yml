@@ -47,11 +47,6 @@ jobs:
           fi
           echo "FILE_PATH_X64 set to $file_path_x64"
           
-     - name: set-file-path outputs
-       run: |
-         echo FILE_PATH_X64: ${{ steps.set-file-path.outputs.FILE_PATH_X64 }}
-        
-  
   pack-macos:
     needs: [get-tag, get-sha, set-file-path]
     runs-on: macos-11
