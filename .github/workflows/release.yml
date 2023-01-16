@@ -156,16 +156,11 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke platform executable workflow
+#    TODO: add condition to run this step for release candidates once all the above workflows are configured for rc
         if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: ${{ matrix.executable_workflow }}
-          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-      - name: Invoke platform executable workflow for rc release
-        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch != 'main'}}
-        run: node .github/scripts/trigger-workflow.js
-        env:
-          WORKFLOW_NAME: macos-executable-release.yml
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
 
   notify-complete-fail:
