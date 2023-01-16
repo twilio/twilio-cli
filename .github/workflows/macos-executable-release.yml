@@ -28,8 +28,32 @@ jobs:
         run: |
           git fetch --prune --unshallow
           echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
-  pack-macos:
+  set-file-path:
     needs: [get-tag, get-sha]
+    runs-on: macos-11
+    outputs:
+     FILE_PATH_X64: ${{steps.set-file-path.outputs.FILE_PATH_X64}}
+    steps:
+     - uses: actions/checkout@v2
+     - name: Setting file path
+       id: set-file-path
+       run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            file_path_x64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+            echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
+          else
+            file_path_x64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.${{ needs.get-sha.outputs.SHA_SHORT }}.pkg
+            echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
+          fi
+          echo "FILE_PATH_X64 set to $file_path_x64"
+          
+     - name: set-file-path outputs
+       run: |
+         echo FILE_PATH_X64: ${{ steps.set-file-path.outputs.FILE_PATH_X64 }}
+        
+  
+  pack-macos:
+    needs: [get-tag, get-sha, set-file-path]
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v2
@@ -41,7 +65,7 @@ jobs:
         APPLE_ID_APP_PASSWORD: ${{ secrets.APPLE_ID_APP_PASSWORD}}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
 #        FILE_PATH_ARM64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
-        FILE_PATH_X64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+        FILE_PATH_X64: ${{ needs.set-file-path.outputs.FILE_PATH_X64 }}
         REPOSITORY_OWNER: ${{ github.repository_owner }}
 #    TODO: enable these when oclif pack : macos starts working fine
 #    - name: Upload binaries to release - arm64
@@ -59,11 +83,10 @@ jobs:
           node .github/scripts/update-platform-executables.js
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+          FILE: ${{ needs.set-file-path.outputs.FILE_PATH_X64 }}
           ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg
           TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
           REPO_NAME: ${{ github.repository }}
-
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
