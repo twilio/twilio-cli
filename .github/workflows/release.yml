@@ -156,7 +156,7 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke platform executable workflow
-#    TODO: add condition to run this step for release candidates once all the above workflows are configured for rc
+#    TODO: modify condition to run this step for release candidates once all the above workflows are configured for rc
         if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
         run: node .github/scripts/trigger-workflow.js
         env:
