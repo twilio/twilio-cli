@@ -42,13 +42,14 @@ jobs:
           if [ "${{ github.ref_name }}" == "main" ]; then
             file_path_x64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
             file_path_arm64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
-            echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
           else
             file_path_x64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.${{ needs.get-sha.outputs.SHA_SHORT }}.pkg
             file_path_arm64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
-            echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
           fi
+          echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
+          echo "FILE_PATH_ARM64=$file_path_arm64" >> $GITHUB_OUTPUT
           echo "FILE_PATH_X64 set to $file_path_x64"
+          echo "FILE_PATH_ARM64 set to $file_path_arm64"
           
   pack-macos:
     needs: [get-tag, get-sha, set-file-path]
