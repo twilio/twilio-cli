@@ -33,6 +33,7 @@ jobs:
     runs-on: macos-11
     outputs:
      FILE_PATH_X64: ${{steps.set-file-path.outputs.FILE_PATH_X64}}
+     FILE_PATH_ARM64: ${{steps.set-file-path.outputs.FILE_PATH_ARM64}}
     steps:
      - uses: actions/checkout@v2
      - name: Setting file path
@@ -40,9 +41,11 @@ jobs:
        run: |
           if [ "${{ github.ref_name }}" == "main" ]; then
             file_path_x64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
+            file_path_arm64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
             echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
           else
             file_path_x64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.${{ needs.get-sha.outputs.SHA_SHORT }}.pkg
+            file_path_arm64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
             echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
           fi
           echo "FILE_PATH_X64 set to $file_path_x64"
@@ -59,7 +62,7 @@ jobs:
         APPLE_ID: ${{ secrets.APPLE_ID}}
         APPLE_ID_APP_PASSWORD: ${{ secrets.APPLE_ID_APP_PASSWORD}}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
-#        FILE_PATH_ARM64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
+#        FILE_PATH_ARM64: ${{ needs.set-file-path.outputs.FILE_PATH_ARM64 }}
         FILE_PATH_X64: ${{ needs.set-file-path.outputs.FILE_PATH_X64 }}
         REPOSITORY_OWNER: ${{ github.repository_owner }}
 #    TODO: enable these when oclif pack : macos starts working fine
@@ -68,7 +71,7 @@ jobs:
 #      run: node .github/scripts/update-platform-executables.js
 #      env:
 #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        FILE: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
+#        FILE: ${{ needs.set-file-path.outputs.FILE_PATH_ARM64 }}
 #        ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-arm64.pkg
 #        TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
 #        REPO_NAME: ${{ github.repository }}
