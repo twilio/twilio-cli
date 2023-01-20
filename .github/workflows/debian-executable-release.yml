@@ -19,15 +19,31 @@ jobs:
         run: |
          git fetch --prune --unshallow
          echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+      - name: process version and release
+        if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
+        id: process-release-version
+        run: |
+          releaseVersionString=${{ steps.get-tag.outputs.TAG_NAME}}
+          echo "::set-output name=version::$(echo "$releaseVersionString" | cut -d- -f1)"
+          echo "::set-output name=release::$(echo "$releaseVersionString" | cut -d- -f2-)"
+      - name: Setting file path
+        id: set-file-path
+        run: |
+          if [[ ${{ steps.get-tag.outputs.TAG_NAME }} == *"rc"* ]]; then
+            file_path=dist/deb/${{ github.event.inputs.formula }}_${{ steps.process-release-version.outputs.VERSION }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
+          else
+            file_path=dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
+          fi
+          echo "FILE_PATH=$file_path" >> $GITHUB_OUTPUT
       - run: |
           make install
-          sudo chown -R 1001:121 "/root/.npm"
+          sudo chown -R 1001:123 "/root/.npm"
           sudo $(npm bin)/oclif pack:deb
       - name: Upload binaries to release
         run: node .github/scripts/update-platform-executables.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE: dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
+          FILE: ${{ steps.set-file-path.outputs.FILE_PATH }}
           ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}.deb
           TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
           REPO_NAME: ${{ github.repository }}
