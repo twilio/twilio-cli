@@ -36,7 +36,7 @@ jobs:
           echo "FILE_PATH=$file_path" >> $GITHUB_OUTPUT
       - run: |
           make install
-          sudo chown -R 1001:123 "/root/.npm"
+          sudo chown -R 1001:121 "/root/.npm"
           sudo $(npm bin)/oclif pack:deb
       - name: Upload binaries to release
         run: node .github/scripts/update-platform-executables.js
