@@ -9,13 +9,11 @@ jobs:
     steps:
     - name: Check Out Repo
       uses: actions/checkout@v2
-      
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        role-to-assume: ${{ secrets.AWS_ACCESS_ROLE}}
         aws-region: us-east-1
 
     - name: generate linux tarball
@@ -29,7 +27,7 @@ jobs:
         GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY}}
         GPG_SIGNING_KEY_ID: ${{ secrets.GPG_SIGNING_KEY_ID }}
         GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
-      run: | 
+      run: |
         node .github/scripts/pack-debian-apt.js x64,arm
 
   notify-complete-fail:

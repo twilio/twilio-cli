@@ -6,7 +6,7 @@ jobs:
   token-validation:
     runs-on: ubuntu-latest
     steps:
-      - name: Validate REPO_ACCESS_TOKEN 
+      - name: Validate REPO_ACCESS_TOKEN
         uses: actions/checkout@v2
         with:
           repository: '${{ github.repository_owner }}/twilio-oai'
@@ -14,7 +14,5 @@ jobs:
       - name: Validate AWS tokens
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          role-to-assume: ${{ secrets.AWS_ACCESS_ROLE}}
           aws-region: us-east-1
