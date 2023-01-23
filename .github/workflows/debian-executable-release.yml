@@ -22,10 +22,10 @@ jobs:
       - name: process version and release
         if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
         id: process-release-version
-        run: | 
+        run: |
           releaseVersionString=${{ steps.get-tag.outputs.TAG_NAME}}
           echo "::set-output name=version::$(echo "$releaseVersionString" | cut -d- -f1)"
-          echo "::set-output name=release::$(echo "$releaseVersionString" | cut -d- -f2-)"
+
       - name: Setting file path
         id: set-file-path
         run: |
