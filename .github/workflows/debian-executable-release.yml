@@ -40,7 +40,7 @@ jobs:
           echo "FILE_PATH_ARMEL=$file_path_armel" >> $GITHUB_OUTPUT
       - run: |
           make install
-          sudo chown -R 1001:123 "/root/.npm"
+          sudo chown -R 1001:121 "/root/.npm"
           sudo $(npm bin)/oclif pack:deb
           ls dist/deb
           
