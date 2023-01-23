@@ -22,28 +22,44 @@ jobs:
       - name: process version and release
         if: contains(steps.get-tag.outputs.TAG_NAME, 'rc' )
         id: process-release-version
-        run: |
+        run: | 
           releaseVersionString=${{ steps.get-tag.outputs.TAG_NAME}}
           echo "::set-output name=version::$(echo "$releaseVersionString" | cut -d- -f1)"
+          echo "::set-output name=release::$(echo "$releaseVersionString" | cut -d- -f2-)"
       - name: Setting file path
         id: set-file-path
         run: |
           if [[ ${{ steps.get-tag.outputs.TAG_NAME }} == *"rc"* ]]; then
-            file_path=dist/deb/${{ github.event.inputs.formula }}_${{ steps.process-release-version.outputs.VERSION }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
+            file_path_amd64=dist/deb/${{ github.event.inputs.formula }}_${{ steps.process-release-version.outputs.VERSION }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
+            file_path_armel=dist/deb/${{ github.event.inputs.formula }}_${{ steps.process-release-version.outputs.VERSION }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_armel.deb
           else
-            file_path=dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
+            file_path_amd64=dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
+            file_path_armel=dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_armel.deb
           fi
-          echo "FILE_PATH=$file_path" >> $GITHUB_OUTPUT
+          echo "FILE_PATH_AMD64=$file_path_amd64" >> $GITHUB_OUTPUT
+          echo "FILE_PATH_ARMEL=$file_path_armel" >> $GITHUB_OUTPUT
       - run: |
           make install
-          sudo chown -R 1001:121 "/root/.npm"
+          sudo chown -R 1001:123 "/root/.npm"
           sudo $(npm bin)/oclif pack:deb
-      - name: Upload binaries to release
+          ls dist/deb
+          
+      - name: Upload binaries to release - amd64
         run: node .github/scripts/update-platform-executables.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE: ${{ steps.set-file-path.outputs.FILE_PATH }}
-          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}.deb
+          FILE: ${{ steps.set-file-path.outputs.FILE_PATH_AMD64 }}
+          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-amd64.deb
+          TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
+          REPO_NAME: ${{ github.repository }}
+          
+          
+      - name: Upload binaries to release - armel
+        run: node .github/scripts/update-platform-executables.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE: ${{ steps.set-file-path.outputs.FILE_PATH_ARMEL }}
+          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-armel.deb
           TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
           REPO_NAME: ${{ github.repository }}
 
