@@ -1,4 +1,5 @@
 name: Slack Notification
+run-name: Slack Notification [${{ github.ref_name }}]
 
 on:
   workflow_dispatch:

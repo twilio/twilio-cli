@@ -1,4 +1,5 @@
 name: Debian Executable Release
+run-name: Debian Executable Release [${{ github.ref_name }}]
 on:
   workflow_dispatch:
     inputs:

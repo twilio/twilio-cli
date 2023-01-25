@@ -1,4 +1,5 @@
 name: NPM Audit Check
+run-name: NPM Audit Check [${{ github.ref_name }}]
 on:
   push:
     branches: [ main ]

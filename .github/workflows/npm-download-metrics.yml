@@ -1,10 +1,11 @@
 name: NPM Download Metrics
+run-name: NPM Download Metrics [${{ github.ref_name }}]
 
 on:
   schedule:
     - cron: "30 7 * * *" #runs at 07:30 UTC or 13:00 IST everyday
-  workflow_dispatch: 
- 
+  workflow_dispatch:
+
 
 jobs:
   build:
@@ -15,11 +16,11 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8 
-      - name: Execute py script 
+          python-version: 3.8
+      - name: Execute py script
         env:
           DD_SITE: datadoghq.com
-          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}   
+          DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
         run: |
           pip3 install datadog-api-client
           pip3 install requests

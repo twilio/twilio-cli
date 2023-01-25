@@ -1,4 +1,5 @@
 name: Macos Executable Release
+run-name: Macos Executable Release [${{ github.ref_name }}]
 on:
   workflow_dispatch:
     inputs:

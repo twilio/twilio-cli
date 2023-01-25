@@ -1,4 +1,5 @@
 name: RPM Build
+run-name: RPM Build [${{ github.ref_name }}]
 
 on:
   workflow_dispatch:
