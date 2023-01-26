@@ -1,4 +1,19 @@
-### [5.3.2](https://github.com/twilio/twilio-cli/compare/5.3.1...5.3.2) (2023-01-12)
+---------------------------
+**Library - Fix**
+- [PR #87](https://github.com/twilio/twilio-oai/pull/87): use long property descriptions if available. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #85](https://github.com/twilio/twilio-oai/pull/85): Nullable Page URLs. Thanks to [@claudiachua](https://github.com/claudiachua)!
+
+**Api**
+- Add  param to Application resource
+
+**Messaging**
+- Add new tollfree verification API property (ExternalReferenceId)]
+
+**Verify**
+- Add  parameter and channel  for sna/sms orchestration
+
+**Twiml**
+- Add support for  noun and  noun, nested  to  and  verb### [5.3.2](https://github.com/twilio/twilio-cli/compare/5.3.1...5.3.2) (2023-01-12)
 
 
 ### Library - Fixes
