@@ -3,18 +3,15 @@ run-name: Oclif Release [${{ github.ref_name }}]
 on:
   workflow_dispatch:
     inputs:
-      home-brew-branch:
-        description: 'Run workflow in home brew branch'
+      branch:
+        description: 'Run workflow in branch'
         default: main
       tag-name:
-        description: 'Tag to be released in Homebrew (Same as CLI latest tag name)'
+        description: 'Tag to be released (Same as CLI latest tag name)'
         required: true
       formula:
-          description: 'Formula to release in homebrew'
+          description: 'Formula to release'
           default: twilio
-      pre-release:
-        description: 'Homebrew release type'
-        default: 'false'
 jobs:
   oclif-release:
     name: Publish for ${{ matrix.os }}
@@ -74,7 +71,7 @@ jobs:
           INPUT_REPO: homebrew-brew
           INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: release.yml
-          INPUT_REF: ${{ github.event.inputs.home-brew-branch }}
+          INPUT_REF: ${{ github.event.inputs.branch }}
           INPUT_WAITING_INTERVAL: 10
           INPUT_INPUTS: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
           INPUT_PROPAGATE_FAILURE: true
