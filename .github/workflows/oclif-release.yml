@@ -80,7 +80,7 @@ jobs:
           INPUT_WORKFLOW_FILE_NAME: release.yml
           INPUT_REF: main # Always update main branch of homebrew-brew repo.
           INPUT_WAITING_INTERVAL: 10
-          INPUT_INPUTS: '{ "formula": "${{steps.release-flag.outputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
+          INPUT_INPUTS: '{ "formula": "${{steps.release-flag.outputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{steps.release-flag.outputs.pre-release}}" }'
           INPUT_PROPAGATE_FAILURE: true
   scoop-release:
     name: Trigger scoop release workflow
