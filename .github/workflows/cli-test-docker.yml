@@ -1,4 +1,5 @@
 name: Docker acceptance testing
+run-name: Docker acceptance testing [${{ github.ref_name }}]
 on:
   workflow_dispatch:
 
@@ -41,4 +42,4 @@ jobs:
          docker run --rm twilio/twilio-cli:2.36.1 /bin/bash -c "twilio api:accounts --help && twilio" && docker pull twilio/twilio-cli:latest && docker run --rm twilio/twilio-cli:latest /bin/bash -c "twilio api:accounts --help && twilio"
       - name: Test for the latest release
         run: |
-         docker run --rm twilio/twilio-cli /bin/bash -c "twilio api:accounts --help && twilio" 
+         docker run --rm twilio/twilio-cli /bin/bash -c "twilio api:accounts --help && twilio"

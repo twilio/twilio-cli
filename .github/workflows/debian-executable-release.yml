@@ -1,4 +1,5 @@
 name: Debian Executable Release
+run-name: Debian Executable Release [${{ github.ref_name }}]
 on:
   workflow_dispatch:
     inputs:
@@ -43,7 +44,7 @@ jobs:
           sudo chown -R 1001:121 "/root/.npm"
           sudo $(npm bin)/oclif pack:deb
           ls dist/deb
-          
+
       - name: Upload binaries to release - amd64
         run: node .github/scripts/update-platform-executables.js
         env:
@@ -52,8 +53,8 @@ jobs:
           ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-amd64.deb
           TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
           REPO_NAME: ${{ github.repository }}
-          
-          
+
+
       - name: Upload binaries to release - armel
         run: node .github/scripts/update-platform-executables.js
         env:

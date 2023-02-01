@@ -1,4 +1,5 @@
 name: Audit check job
+run-name: Audit check job [${{ github.ref_name }}]
 on:
   schedule:
     - cron: '30 14 * * *'
