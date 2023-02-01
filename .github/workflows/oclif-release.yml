@@ -9,9 +9,6 @@ on:
       tag-name:
         description: 'Tag to be released (Same as CLI latest tag name)'
         required: true
-      formula:
-          description: 'Formula to release'
-          default: twilio
 jobs:
   oclif-release:
     name: Publish for ${{ matrix.os }}
@@ -42,6 +39,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
+      - name: Set release flag
+        id: release-flag
+        run: |
+          if echo ${{ github.event.inputs.tag-name }} | grep -Eq "rc"; then
+            echo '::set-output name=pre-release::true'
+            echo '::set-output name=formula::twiliorc'
+          else
+            echo '::set-output name=pre-release::false'
+            echo '::set-output name=formula::twilio'
+          fi
       - name: Publish assests to s3 and calculate sha of oclif dev pack
         id: sha256
         if: ${{matrix.publish == 'homebrew'}}
@@ -50,9 +57,9 @@ jobs:
           make install
           npx oclif-dev publish
           brew install coreutils
-          if [ "${{github.event.inputs.formula}}" == "twiliorc" ]; then
+          if [ "${{steps.release-flag.outputs.formula}}" == "twiliorc" ]; then
             echo "::set-output name=sha256::$(sha256sum dist/channels/rc/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
-          elif [ "${{github.event.inputs.formula}}" == "twiliodraft" ]; then
+          elif [ "${{steps.release-flag.outputs.formula}}" == "twiliodraft" ]; then
             echo "::set-output name=sha256::$(sha256sum dist/channels/draft/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
           else
             echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
@@ -71,9 +78,9 @@ jobs:
           INPUT_REPO: homebrew-brew
           INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           INPUT_WORKFLOW_FILE_NAME: release.yml
-          INPUT_REF: ${{ github.event.inputs.branch }}
+          INPUT_REF: main # Always update main branch of homebrew-brew repo.
           INPUT_WAITING_INTERVAL: 10
-          INPUT_INPUTS: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
+          INPUT_INPUTS: '{ "formula": "${{steps.release-flag.outputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
           INPUT_PROPAGATE_FAILURE: true
   scoop-release:
     name: Trigger scoop release workflow
