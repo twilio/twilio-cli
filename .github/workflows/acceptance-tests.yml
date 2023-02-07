@@ -1,4 +1,5 @@
 name: Acceptance Testing
+run-name: Acceptance Testing [${{ github.ref_name }}]
 on:
   workflow_dispatch:
   workflow_run:
@@ -117,7 +118,7 @@ jobs:
         run: |
           gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.exe'
           ls
-          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1')
           ./scoop.ps1 -RunAsAdmin
           scoop install gsudo
           ./twilio-${{ needs.get-tag.outputs.TAG_NAME }}.exe /S
@@ -207,12 +208,12 @@ jobs:
         env:
           INPUT_WORKFLOW_FILE_NAME: apt-release.yml
           INPUT_REF: ${{ needs.get-branch.outputs.branch }}
-      - name: Perform acceptance install and test on apt package 
+      - name: Perform acceptance install and test on apt package
         id: apt_acceptance_run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          wget -qO- https://twilio-cli-prod.s3.amazonaws.com/twilio_pub.asc | sudo apt-key add - 
+          wget -qO- https://twilio-cli-prod.s3.amazonaws.com/twilio_pub.asc | sudo apt-key add -
           sudo touch /etc/apt/sources.list.d/twilio.list
           echo 'deb https://twilio-cli-prod.s3.amazonaws.com/apt/ /' | sudo tee /etc/apt/sources.list.d/twilio.list
           sudo apt update
@@ -300,7 +301,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+          (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1')
           ./scoop.ps1 -RunAsAdmin
           scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
           scoop install twilio
@@ -311,7 +312,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-           (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1') 
+           (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1')
            ./scoop.ps1 -RunAsAdmin
            scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
            scoop install twiliodraft
@@ -340,11 +341,11 @@ jobs:
           SLACK_MESSAGE: 'CLI acceptance workflow Failed'
       - name: Fail in case all jobs failed
         if: |
-          ${{ ( needs.test-npm-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && 
-          ( needs.wait-for-brew-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && 
-          ( needs.wait-for-macos-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && 
-          ( needs.wait-for-windows-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) && 
-          ( needs.wait-for-debian-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true') && 
+          ${{ ( needs.test-npm-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+          ( needs.wait-for-brew-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+          ( needs.wait-for-macos-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+          ( needs.wait-for-windows-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+          ( needs.wait-for-debian-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
           ( needs.test-scoop-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true')}}
           ( needs.test-apt-release.outputs.ACCEPTANCE_FAILURE_TAG} == 'true')}}
         run:

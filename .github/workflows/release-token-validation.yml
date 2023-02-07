@@ -1,4 +1,5 @@
 name: Cli Release Token Validation
+run-name: Cli Release Token Validation [${{ github.ref_name }}]
 on:
   workflow_dispatch:
 
@@ -6,7 +7,7 @@ jobs:
   token-validation:
     runs-on: ubuntu-latest
     steps:
-      - name: Validate REPO_ACCESS_TOKEN 
+      - name: Validate REPO_ACCESS_TOKEN
         uses: actions/checkout@v2
         with:
           repository: '${{ github.repository_owner }}/twilio-oai'

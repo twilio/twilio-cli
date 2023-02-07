@@ -1,4 +1,5 @@
 name: CLI Tests on npm installations
+run-name: CLI Tests on npm installations [${{ github.ref_name }}]
 on:
   workflow_dispatch:
     inputs:
@@ -35,4 +36,4 @@ jobs:
          npm install twilio-cli@${{ github.event.inputs.version }}
           npm install twilio-cli
           node test/asserts/validate_tests.js
-          
+

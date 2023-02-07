@@ -1,4 +1,5 @@
 name: Cli Release
+run-name: Cli Release [${{ github.ref_name }}]
 on:
   workflow_dispatch:
     inputs:
@@ -6,12 +7,9 @@ on:
         description: 'Open API Changelog.'
       version-type:
         description: 'Version to upgrade, Major: 0, Minor:1, Patch: 2'
-      homebrew-branch:
-        description: 'HomeBrew branch name'
+      branch:
+        description: 'Branch name'
         default: main
-      homebrew-prerelease:
-        description: 'HomeBrew prerelease'
-        default: 'false'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -99,16 +97,7 @@ jobs:
           REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
-      - name: Invoke Oclif workflow for release candidate
-        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch != 'main'}}
-        run: node .github/scripts/trigger-workflow.js
-        env:
-          WORKFLOW_NAME: 'oclif-release.yml'
-          REPO_NAME: ${{ github.repository }}
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "formula": "twiliorc", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+          INPUTS: '{ "branch": "${{github.event.inputs.branch}}", "tag-name": "${{needs.release.outputs.tag-name}}" }'
 
   docker-release:
     runs-on: ubuntu-latest

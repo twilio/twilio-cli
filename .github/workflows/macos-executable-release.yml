@@ -1,4 +1,5 @@
 name: Macos Executable Release
+run-name: Macos Executable Release [${{ github.ref_name }}]
 on:
   workflow_dispatch:
     inputs:
@@ -44,17 +45,17 @@ jobs:
             file_path_arm64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
           else
             file_path_x64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
-            file_path_arm64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-arm64.pkg 
+            file_path_arm64=dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-arm64.pkg
           fi
           echo "FILE_PATH_X64=$file_path_x64" >> $GITHUB_OUTPUT
           echo "FILE_PATH_ARM64=$file_path_arm64" >> $GITHUB_OUTPUT
-          
+
      - name: set-file-path outputs
        run: |
          echo FILE_PATH_X64: ${{ steps.set-file-path.outputs.FILE_PATH_X64 }}
          echo FILE_PATH_ARM64: ${{ steps.set-file-path.outputs.FILE_PATH_ARM64 }}
-        
-  
+
+
   pack-macos:
     needs: [get-tag, get-sha, set-file-path]
     runs-on: macos-11

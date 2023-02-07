@@ -12,7 +12,7 @@ jobs:
         uses: dawidd6/action-delete-branch@v3
         with:
           github_token: ${{github.token}}
-          branches: 'draft-release-branch' 
+          branches: 'draft-release-branch'
       - name: Create new draft release branch
         uses: peterjgrainger/action-create-branch@v2.0.1
         env:
@@ -27,14 +27,14 @@ jobs:
       - name: Setup python to run py script
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8 
+          python-version: 3.8
       - name: Execute py script to make changes for the draft release branch
         run: |
-          python3 .github/scripts/draft-release/draft_changes.py      
+          python3 .github/scripts/draft-release/draft_changes.py
       - name: Commit and push changes
         run: |
           git config --global user.email "team_interfaces+github@twilio.com"
           git config --global user.name "twilio-dx"
           git add -A
           git commit -m "Draft specific changes from the script"
-          git push   
+          git push
