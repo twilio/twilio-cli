@@ -1,5 +1,5 @@
 name: 'Close stale issues'
-run-name: 'Close stale issues' [${{ github.ref_name }}]
+run-name: Close stale issues [${{ github.ref_name }}]
 on:
   schedule:
     - cron: '0 9 * * *'
