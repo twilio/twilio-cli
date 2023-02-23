@@ -1,3 +1,16 @@
+### [5.4.1](https://github.com/twilio/twilio-cli/compare/5.4.0...5.4.1) (2023-02-23)
+
+
+### Library - Chores
+
+* twilio-node version update ([#507](https://github.com/twilio/twilio-cli/issues/507)) ([7b45685](https://github.com/twilio/twilio-cli/commit/7b456855ea2f4a100733113afa2dea4e92109b15))
+
+
+### Library - Fixes
+
+* modify image name in debian acceptance test ([#505](https://github.com/twilio/twilio-cli/issues/505)) ([5733cd5](https://github.com/twilio/twilio-cli/commit/5733cd552447a9f889e29c0698e10ca42875b8b3))
+* using npx instead of npm bin ([#509](https://github.com/twilio/twilio-cli/issues/509)) ([235b97b](https://github.com/twilio/twilio-cli/commit/235b97b9d82689516409bf2186cc297c5d08bf56))
+
 ## [5.4.0](https://github.com/twilio/twilio-cli/compare/5.3.3...5.4.0) (2023-02-09)
 
 ---------------------------
