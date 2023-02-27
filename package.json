@@ -80,9 +80,7 @@
     "ts-node": "^10.9.1",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3",
-    "oclif": "^3"
-  },
-  "optionalDependencies": {
+    "oclif": "^3",
     "ngrok": "^3.2.7"
   },
   "engines": {
