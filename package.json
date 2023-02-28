@@ -83,7 +83,7 @@
     "oclif": "^3"
   },
   "optionalDependencies": {
-    "ngrok": "^3.2.7"
+    "ngrok": "^4.3.3"
   },
   "engines": {
     "node": ">=14.0.0"
