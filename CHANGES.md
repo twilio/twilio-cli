@@ -1,4 +1,12 @@
-### [5.4.1](https://github.com/twilio/twilio-cli/compare/5.4.0...5.4.1) (2023-02-23)
+---------------------------
+**Api**
+- Add new categories for whatsapp template
+
+**Lookups**
+- Remove  from the 
+
+**Supersim**
+- Add ESimProfile's  and  parameters to libraries### [5.4.1](https://github.com/twilio/twilio-cli/compare/5.4.0...5.4.1) (2023-02-23)
 
 
 ### Library - Chores
