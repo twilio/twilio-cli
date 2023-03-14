@@ -1,3 +1,16 @@
+### [5.4.2](https://github.com/twilio/twilio-cli/compare/5.4.1...5.4.2) (2023-03-14)
+
+
+### Library - Fixes
+
+* Changed default node version to 16 to support backward compatiblilty for flex plugin for macos .pkg ([#512](https://github.com/twilio/twilio-cli/issues/512)) ([4d793af](https://github.com/twilio/twilio-cli/commit/4d793af7a937a5ae1b0d62f62e7409e4ee760c01))
+* using node 16 versions for all releases ([#513](https://github.com/twilio/twilio-cli/issues/513)) ([be0dbf2](https://github.com/twilio/twilio-cli/commit/be0dbf2111a66090d3820c39d0e5aeaf414f9498))
+
+
+### Library - Chores
+
+* bump jsonwebtoken from 8.5.1 to 9.0.0 ([#514](https://github.com/twilio/twilio-cli/issues/514)) ([0f7ec42](https://github.com/twilio/twilio-cli/commit/0f7ec429fa8e1546b0b5e6c690e0b821e4470c78))
+
 ---------------------------
 **Api**
 - Add new categories for whatsapp template
