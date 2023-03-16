@@ -39,8 +39,12 @@ jobs:
     name: Notify Release Failed
     runs-on: ubuntu-latest
     steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - uses: actions/checkout@v2
       - name: Slack Notification
+        if: ${{steps.extract_branch.outputs.branch == 'main' }}
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
