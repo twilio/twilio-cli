@@ -74,7 +74,7 @@ async function run(): Promise<void> {
     const builtRpmFilePath = await runRpmbuild(
       buildRpmArgs(targetSpecFile, inputVariables)
     );
-    await exec.exec('export GPG_TTY=$(tty)');
+    await exec.exec('export', 'GPG_TTY', '=', '$(tty)');
     await exec.exec('rpmsign', ['--define', `_gpg_name ${gpgKeyId}`,'--define', `__gpg_sign_cmd %{__gpg} gpg --no-armor --batch --pinentry-mode loopback --no-tty --yes --passphrase=${passphrase} -u "%{_gpg_name}" -sbo %{__signature_filename} %{__plaintext_filename}`,  '--resign', builtRpmFilePath]);
     core.debug(`Done, result: ${builtRpmFilePath}`);
 
