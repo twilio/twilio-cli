@@ -1,3 +1,10 @@
+### [5.4.3](https://github.com/twilio/twilio-cli/compare/5.4.2...5.4.3) (2023-03-21)
+
+
+### Library - Chores
+
+* update package.json ([c41fc54](https://github.com/twilio/twilio-cli/commit/c41fc5430b49abbb2c41aa936bbbc45ab7fbd527))
+
 ### [5.4.2](https://github.com/twilio/twilio-cli/compare/5.4.1...5.4.2) (2023-03-14)
 
 
