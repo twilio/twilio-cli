@@ -1,3 +1,5 @@
+## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
+
 ---------------------------
 **Api**
 - Revert Corrected the data type for  in Available Phone Number Local, Mobile and TollFree resources
