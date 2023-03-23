@@ -1,4 +1,12 @@
-### [5.4.3](https://github.com/twilio/twilio-cli/compare/5.4.2...5.4.3) (2023-03-21)
+---------------------------
+**Api**
+- Revert Corrected the data type for  in Available Phone Number Local, Mobile and TollFree resources
+- Corrected the data type for  in Available Phone Number Local, Mobile and TollFree resources **(breaking change)**
+
+**Messaging**
+- Add  resource
+- Add new endpoint for GetDomainConfigByMessagingServiceSid
+- Remove  parameter and add  parameter to Link Shortening API **(breaking change)**### [5.4.3](https://github.com/twilio/twilio-cli/compare/5.4.2...5.4.3) (2023-03-21)
 
 
 ### Library - Chores
