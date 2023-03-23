@@ -60,12 +60,13 @@ jobs:
         env:
           INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
   notify-complete-success:
-    needs: [ wait-for-releases ]
+    needs: [ wait-for-releases, get-branch ]
     name: Notify Release Completed
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Slack Notification
+        if: ${{needs.get-branch.outputs.branch == 'main' }}
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEB_HOOK }}

@@ -329,8 +329,12 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ contains( needs.*.outputs.ACCEPTANCE_FAILURE_TAG, 'true' ) }}
     steps:
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - uses: actions/checkout@v2
       - name: Slack Notification
+        if: ${{steps.extract_branch.outputs.branch == 'main' }}
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
