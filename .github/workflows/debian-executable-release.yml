@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
       - name: Getting last sha
         id: get-sha
         run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
@@ -22,13 +26,23 @@ jobs:
       - run: |
           make install
           sudo chown -R 1001:121 "/root/.npm"
-          sudo $(npm bin)/oclif pack:deb
-      - name: Upload binaries to release
+          sudo npx oclif pack:deb
+
+      - name: Upload binaries to release - amd64
         run: node .github/scripts/update-platform-executables.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE: dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_amd64.deb
-          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}.deb
+          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-amd64.deb
+          TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
+          REPO_NAME: ${{ github.repository }}
+
+      - name: Upload binaries to release - armel
+        run: node .github/scripts/update-platform-executables.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE: dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_armel.deb
+          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-armel.deb
           TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
           REPO_NAME: ${{ github.repository }}
 

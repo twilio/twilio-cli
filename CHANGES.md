@@ -1,4 +1,80 @@
-### [5.3.2](https://github.com/twilio/twilio-cli/compare/5.3.1...5.3.2) (2023-01-12)
+## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
+
+---------------------------
+**Api**
+- Revert Corrected the data type for  in Available Phone Number Local, Mobile and TollFree resources
+- Corrected the data type for  in Available Phone Number Local, Mobile and TollFree resources **(breaking change)**
+
+**Messaging**
+- Add  resource
+- Add new endpoint for GetDomainConfigByMessagingServiceSid
+- Remove  parameter and add  parameter to Link Shortening API **(breaking change)**### [5.4.3](https://github.com/twilio/twilio-cli/compare/5.4.2...5.4.3) (2023-03-21)
+
+
+### Library - Chores
+
+* update package.json ([c41fc54](https://github.com/twilio/twilio-cli/commit/c41fc5430b49abbb2c41aa936bbbc45ab7fbd527))
+
+### [5.4.2](https://github.com/twilio/twilio-cli/compare/5.4.1...5.4.2) (2023-03-14)
+
+
+### Library - Fixes
+
+* Changed default node version to 16 to support backward compatiblilty for flex plugin for macos .pkg ([#512](https://github.com/twilio/twilio-cli/issues/512)) ([4d793af](https://github.com/twilio/twilio-cli/commit/4d793af7a937a5ae1b0d62f62e7409e4ee760c01))
+* using node 16 versions for all releases ([#513](https://github.com/twilio/twilio-cli/issues/513)) ([be0dbf2](https://github.com/twilio/twilio-cli/commit/be0dbf2111a66090d3820c39d0e5aeaf414f9498))
+
+
+### Library - Chores
+
+* bump jsonwebtoken from 8.5.1 to 9.0.0 ([#514](https://github.com/twilio/twilio-cli/issues/514)) ([0f7ec42](https://github.com/twilio/twilio-cli/commit/0f7ec429fa8e1546b0b5e6c690e0b821e4470c78))
+
+---------------------------
+**Api**
+- Add new categories for whatsapp template
+
+**Lookups**
+- Remove  from the 
+
+**Supersim**
+- Add ESimProfile's  and  parameters to libraries### [5.4.1](https://github.com/twilio/twilio-cli/compare/5.4.0...5.4.1) (2023-02-23)
+
+
+### Library - Chores
+
+* twilio-node version update ([#507](https://github.com/twilio/twilio-cli/issues/507)) ([7b45685](https://github.com/twilio/twilio-cli/commit/7b456855ea2f4a100733113afa2dea4e92109b15))
+
+
+### Library - Fixes
+
+* modify image name in debian acceptance test ([#505](https://github.com/twilio/twilio-cli/issues/505)) ([5733cd5](https://github.com/twilio/twilio-cli/commit/5733cd552447a9f889e29c0698e10ca42875b8b3))
+* using npx instead of npm bin ([#509](https://github.com/twilio/twilio-cli/issues/509)) ([235b97b](https://github.com/twilio/twilio-cli/commit/235b97b9d82689516409bf2186cc297c5d08bf56))
+
+## [5.4.0](https://github.com/twilio/twilio-cli/compare/5.3.3...5.4.0) (2023-02-09)
+
+---------------------------
+**Library - Feature**
+- [PR #88](https://github.com/twilio/twilio-oai/pull/88): add Page and PageToken parameters to read operations. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Lookups**
+- Add  package to the lookup response
+- Add  package to the lookup response### [5.3.3](https://github.com/twilio/twilio-cli/compare/5.3.2...5.3.3) (2023-01-26)
+
+---------------------------
+**Library - Fix**
+- [PR #87](https://github.com/twilio/twilio-oai/pull/87): use long property descriptions if available. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #85](https://github.com/twilio/twilio-oai/pull/85): Nullable Page URLs. Thanks to [@claudiachua](https://github.com/claudiachua)!
+
+**Api**
+- Add  param to Application resource
+
+**Messaging**
+- Add new tollfree verification API property (ExternalReferenceId)]
+
+**Verify**
+- Add  parameter and channel  for sna/sms orchestration
+
+**Twiml**
+- Add support for  noun and  noun, nested  to  and  verb### [5.3.2](https://github.com/twilio/twilio-cli/compare/5.3.1...5.3.2) (2023-01-12)
 
 
 ### Library - Fixes
