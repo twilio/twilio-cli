@@ -24,6 +24,8 @@ jobs:
           cache: 'npm'
       - name: Run audit check
         run: npm audit --production
+      - name: print logs
+        run: cat /home/runner/.npm/_logs/**debug.log
       - name: Notify Npm Audit Failed
         if: ${{ failure() && github.ref == 'refs/heads/main' }}
         uses: rtCamp/action-slack-notify@v2
