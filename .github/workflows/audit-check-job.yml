@@ -24,7 +24,8 @@ jobs:
           cache: 'npm'
       - name: Run audit check
         run: |
-          npm audit --production
+          npm audit --production >> output.txt
+          cat output.txt
           cat /home/runner/.npm/_logs/**debug.log
       - name: Notify Npm Audit Failed
         if: ${{ failure() && github.ref == 'refs/heads/main' }}
