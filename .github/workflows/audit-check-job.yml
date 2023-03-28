@@ -1,8 +1,8 @@
 name: Audit check job
 on:
-  schedule:
-    - cron: '30 14 * * *'
-    - cron: '30 14 * * 3'
+  workflow_dispatch:
+   
+    
 jobs:
   audit-prod:
     if: github.event.schedule == '30 14 * * *'
