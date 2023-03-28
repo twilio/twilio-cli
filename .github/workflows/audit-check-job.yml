@@ -21,17 +21,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Run audit check
-        run: |
-          npm audit --production >> output.txt
-          cat output.txt
-          cat /home/runner/.npm/_logs/**debug.log
       - name: Remove package lock json
         run: |
           rm package-lock.json
       - name: npm install
         run: |
           npm install
+      - name: Run audit check
+        run: |
+          npm audit --production >> output.txt
+          cat output.txt
+          cat /home/runner/.npm/_logs/**debug.log
       - name: Run audit check print
         if: ${{ failure() && github.ref == 'refs/heads/main' }}
         run: |
