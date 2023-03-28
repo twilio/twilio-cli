@@ -30,13 +30,6 @@ jobs:
       - name: Run audit check
         run: |
           npm audit --production >> output.txt
-          cat output.txt
-          cat /home/runner/.npm/_logs/**debug.log
-      - name: Run audit check print
-        if: ${{ failure() && github.ref == 'refs/heads/main' }}
-        run: |
-          cat output.txt
-          cat /home/runner/.npm/_logs/**debug.log
       - name: Notify Npm Audit Failed
         if: ${{ failure() && github.ref == 'refs/heads/main' }}
         uses: rtCamp/action-slack-notify@v2
