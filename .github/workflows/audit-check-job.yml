@@ -12,10 +12,10 @@ jobs:
         node-version: [18.x, 16.x, 14.x]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: main
+          ref: ${{ github.ref }}
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
