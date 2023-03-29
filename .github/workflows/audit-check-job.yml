@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: make install
       - name: Run audit check
         run: |
           npm audit --production
