@@ -20,9 +20,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: make install
       - name: Run audit check
         run: |
+          make install
           npm audit --production
       - name: Notify Npm Audit Failed
         if: ${{ failure() && github.ref == 'refs/heads/main' }}
