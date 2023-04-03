@@ -71,7 +71,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Invoke HomeBrew workflow
-        run: source .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_OWNER: ${{ github.repository_owner }}
           INPUT_REPO: homebrew-brew
@@ -93,7 +93,7 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke Scoop workflow
         if: ${{steps.extract_branch.outputs.branch == 'main'}}
-        run: source .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_OWNER: ${{ github.repository_owner }}
           INPUT_REPO: scoop-twilio-cli

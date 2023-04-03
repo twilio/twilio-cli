@@ -53,7 +53,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for oclif executables Release
-        run: source .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_OWNER: ${{ github.repository_owner }}
           INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
@@ -106,7 +106,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for windows executables Release
-        run: bash .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
           INPUT_REF: ${{ needs.get-branch.outputs.branch }}
@@ -144,7 +144,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for macos executables Release
-        run: source .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
           INPUT_REF: ${{ needs.get-branch.outputs.branch }}
@@ -174,7 +174,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for debian executables Release
-        run: source .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_WORKFLOW_FILE_NAME: debian-executable-release.yml
           INPUT_REF: ${{ needs.get-branch.outputs.branch }}
@@ -203,7 +203,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for apt Release
-        run: source .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_WORKFLOW_FILE_NAME: apt-release.yml
           INPUT_REF: ${{ needs.get-branch.outputs.branch }}
@@ -289,7 +289,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for Scoop release to finish
-        run: bash .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_WORKFLOW_FILE_NAME: update-release.yml
           INPUT_REF: main
