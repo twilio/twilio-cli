@@ -1,3 +1,10 @@
+### [5.5.2](https://github.com/twilio/twilio-cli/compare/5.5.1...5.5.2) (2023-04-04)
+
+
+### Library - Chores
+
+* update ([49e1e1f](https://github.com/twilio/twilio-cli/commit/49e1e1f9368d6f294f80ee5570ae7ce1d346ec40))
+
 ### [5.5.1](https://github.com/twilio/twilio-cli/compare/5.5.0...5.5.1) (2023-04-03)
 
 
