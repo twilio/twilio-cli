@@ -1,22 +1,3 @@
-### [5.5.2](https://github.com/twilio/twilio-cli/compare/5.5.1...5.5.2) (2023-04-04)
-
-
-### Library - Chores
-
-* update ([49e1e1f](https://github.com/twilio/twilio-cli/commit/49e1e1f9368d6f294f80ee5570ae7ce1d346ec40))
-
-### [5.5.1](https://github.com/twilio/twilio-cli/compare/5.5.0...5.5.1) (2023-04-03)
-
-
-### Library - Fixes
-
-* Swapping make install step to run after node setup in npm audit job ([#520](https://github.com/twilio/twilio-cli/issues/520)) ([0ed7d26](https://github.com/twilio/twilio-cli/commit/0ed7d26c5476a6e2005791b9541de10c87d2bbd8))
-
-
-### Library - Chores
-
-* ci ([3a60489](https://github.com/twilio/twilio-cli/commit/3a6048975f52242f5775ef4333bbe57cc1c0a9cc))
-
 ## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
 
 ---------------------------
