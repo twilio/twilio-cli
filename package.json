@@ -148,7 +148,7 @@
     "update": {
       "s3": {
         "xz": true,
-        "bucket": "twilio-cli-dev"
+        "bucket": "twilio-cli-prod"
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"
