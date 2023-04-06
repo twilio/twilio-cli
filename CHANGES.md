@@ -1,4 +1,18 @@
-## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
+---------------------------
+**Conversations**
+- Expose query parameters ,  and  in list operation on Conversations resource for sorting and filtering
+
+**Insights**
+- Added answered by filter in Call Summaries
+
+**Lookups**
+- Remove  package **(breaking change)**
+
+**Messaging**
+- Add support for  brand type and  campaign use case.
+- New Sole Proprietor Brands should be created with  brand type. Brand registration requests with  brand type will be rejected.
+- New Sole Proprietor Campaigns should be created with  campaign use case. Campaign registration requests with  campaign use case will be rejected.
+- Add Brand Registrations OTP API## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
 
 ---------------------------
 **Api**
