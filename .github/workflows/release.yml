@@ -90,7 +90,7 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke Oclif workflow
-        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'enable_rc_release_merge_test'}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: 'oclif-release.yml'
@@ -146,7 +146,7 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       - name: Invoke platform executable workflow
 #    TODO: modify condition to run this step for release candidates once all the above workflows are configured for rc
-        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'enable_rc_release_merge_test'}}
         run: node .github/scripts/trigger-workflow.js
         env:
           WORKFLOW_NAME: ${{ matrix.executable_workflow }}
