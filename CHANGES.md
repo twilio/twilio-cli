@@ -1,4 +1,130 @@
-### [5.3.1](https://github.com/twilio/twilio-cli/compare/5.3.0...5.3.1) (2022-12-29)
+## [5.6.0](https://github.com/twilio/twilio-cli/compare/5.5.0...5.6.0) (2023-04-06)
+
+
+### Library - Fixes
+
+* Swapping make install step to run after node setup in npm audit job ([#520](https://github.com/twilio/twilio-cli/issues/520)) ([0ed7d26](https://github.com/twilio/twilio-cli/commit/0ed7d26c5476a6e2005791b9541de10c87d2bbd8))
+
+
+### Library - Chores
+
+* ci ([3a60489](https://github.com/twilio/twilio-cli/commit/3a6048975f52242f5775ef4333bbe57cc1c0a9cc))
+* **release:** set `package.json` to 5.5.1 [skip ci] ([638f004](https://github.com/twilio/twilio-cli/commit/638f00487617b7596eb1d5f6dee0286579c9b39c)), closes [#520](https://github.com/twilio/twilio-cli/issues/520)
+* **release:** set `package.json` to 5.5.2 [skip ci] ([3aed7ed](https://github.com/twilio/twilio-cli/commit/3aed7ed449ef67c9fbd3e68465aa91e8ea85102b))
+* update ([49e1e1f](https://github.com/twilio/twilio-cli/commit/49e1e1f9368d6f294f80ee5570ae7ce1d346ec40))
+
+---------------------------
+**Conversations**
+- Expose query parameters ,  and  in list operation on Conversations resource for sorting and filtering
+
+**Insights**
+- Added answered by filter in Call Summaries
+
+**Lookups**
+- Remove  package **(breaking change)**
+
+**Messaging**
+- Add support for  brand type and  campaign use case.
+- New Sole Proprietor Brands should be created with  brand type. Brand registration requests with  brand type will be rejected.
+- New Sole Proprietor Campaigns should be created with  campaign use case. Campaign registration requests with  campaign use case will be rejected.
+- Add Brand Registrations OTP API## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
+
+---------------------------
+**Api**
+- Revert Corrected the data type for  in Available Phone Number Local, Mobile and TollFree resources
+- Corrected the data type for  in Available Phone Number Local, Mobile and TollFree resources **(breaking change)**
+
+**Messaging**
+- Add  resource
+- Add new endpoint for GetDomainConfigByMessagingServiceSid
+- Remove  parameter and add  parameter to Link Shortening API **(breaking change)**### [5.4.3](https://github.com/twilio/twilio-cli/compare/5.4.2...5.4.3) (2023-03-21)
+
+
+### Library - Chores
+
+* update package.json ([c41fc54](https://github.com/twilio/twilio-cli/commit/c41fc5430b49abbb2c41aa936bbbc45ab7fbd527))
+
+### [5.4.2](https://github.com/twilio/twilio-cli/compare/5.4.1...5.4.2) (2023-03-14)
+
+
+### Library - Fixes
+
+* Changed default node version to 16 to support backward compatiblilty for flex plugin for macos .pkg ([#512](https://github.com/twilio/twilio-cli/issues/512)) ([4d793af](https://github.com/twilio/twilio-cli/commit/4d793af7a937a5ae1b0d62f62e7409e4ee760c01))
+* using node 16 versions for all releases ([#513](https://github.com/twilio/twilio-cli/issues/513)) ([be0dbf2](https://github.com/twilio/twilio-cli/commit/be0dbf2111a66090d3820c39d0e5aeaf414f9498))
+
+
+### Library - Chores
+
+* bump jsonwebtoken from 8.5.1 to 9.0.0 ([#514](https://github.com/twilio/twilio-cli/issues/514)) ([0f7ec42](https://github.com/twilio/twilio-cli/commit/0f7ec429fa8e1546b0b5e6c690e0b821e4470c78))
+
+---------------------------
+**Api**
+- Add new categories for whatsapp template
+
+**Lookups**
+- Remove  from the 
+
+**Supersim**
+- Add ESimProfile's  and  parameters to libraries### [5.4.1](https://github.com/twilio/twilio-cli/compare/5.4.0...5.4.1) (2023-02-23)
+
+
+### Library - Chores
+
+* twilio-node version update ([#507](https://github.com/twilio/twilio-cli/issues/507)) ([7b45685](https://github.com/twilio/twilio-cli/commit/7b456855ea2f4a100733113afa2dea4e92109b15))
+
+
+### Library - Fixes
+
+* modify image name in debian acceptance test ([#505](https://github.com/twilio/twilio-cli/issues/505)) ([5733cd5](https://github.com/twilio/twilio-cli/commit/5733cd552447a9f889e29c0698e10ca42875b8b3))
+* using npx instead of npm bin ([#509](https://github.com/twilio/twilio-cli/issues/509)) ([235b97b](https://github.com/twilio/twilio-cli/commit/235b97b9d82689516409bf2186cc297c5d08bf56))
+
+## [5.4.0](https://github.com/twilio/twilio-cli/compare/5.3.3...5.4.0) (2023-02-09)
+
+---------------------------
+**Library - Feature**
+- [PR #88](https://github.com/twilio/twilio-oai/pull/88): add Page and PageToken parameters to read operations. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+
+**Lookups**
+- Add  package to the lookup response
+- Add  package to the lookup response### [5.3.3](https://github.com/twilio/twilio-cli/compare/5.3.2...5.3.3) (2023-01-26)
+
+---------------------------
+**Library - Fix**
+- [PR #87](https://github.com/twilio/twilio-oai/pull/87): use long property descriptions if available. Thanks to [@childish-sambino](https://github.com/childish-sambino)!
+- [PR #85](https://github.com/twilio/twilio-oai/pull/85): Nullable Page URLs. Thanks to [@claudiachua](https://github.com/claudiachua)!
+
+**Api**
+- Add  param to Application resource
+
+**Messaging**
+- Add new tollfree verification API property (ExternalReferenceId)]
+
+**Verify**
+- Add  parameter and channel  for sna/sms orchestration
+
+**Twiml**
+- Add support for  noun and  noun, nested  to  and  verb### [5.3.2](https://github.com/twilio/twilio-cli/compare/5.3.1...5.3.2) (2023-01-12)
+
+
+### Library - Fixes
+
+* macos workflow fix ([#484](https://github.com/twilio/twilio-cli/issues/484)) ([a31bf6b](https://github.com/twilio/twilio-cli/commit/a31bf6b573cfee62acb7626ffeeac47c7fe30f2c))
+
+
+### Library - Chores
+
+* bump json5 from 2.2.1 to 2.2.2 ([#483](https://github.com/twilio/twilio-cli/issues/483)) ([829d229](https://github.com/twilio/twilio-cli/commit/829d229184d7be99bcc7eb16c31a943c93106cd9))
+* enable rc support in apt releases ([#485](https://github.com/twilio/twilio-cli/issues/485)) ([ee4cd96](https://github.com/twilio/twilio-cli/commit/ee4cd9611841662a9e91b19a74b6004281c6ba28))
+
+---------------------------
+**Conversations**
+- Add support for creating Multi-Channel Rich Content Messages
+
+**Lookups**
+- Changed the no data message for match postal code from  to  in identity match package
+
+**Messaging**
+- Add update/edit tollfree verification API### [5.3.1](https://github.com/twilio/twilio-cli/compare/5.3.0...5.3.1) (2022-12-29)
 
 ---------------------------
 **Library - Fix**

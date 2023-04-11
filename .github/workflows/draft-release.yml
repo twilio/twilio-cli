@@ -60,7 +60,7 @@ jobs:
           make install
       - name: Semantic Release runs for draft release
         id: semantic-release-draft
-        run: DEBUG=semantic-release:* $(npm bin)/semantic-release  -t \${version}
+        run: DEBUG=semantic-release:* npx semantic-release  -t \${version}
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

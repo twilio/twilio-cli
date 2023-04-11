@@ -11,7 +11,12 @@ jobs:
       - name: checkout cli
         uses: actions/checkout@v2
 
-      - name: fetch version
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: get version
         id: get-tag
         run: |
           echo "::set-output name=TAG_NAME::$(node -p -e "require('./package.json').version")"

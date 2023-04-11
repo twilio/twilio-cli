@@ -1,7 +1,7 @@
 {
   "name": "twilio-cli",
-  "version": "5.3.1",
-  "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for documentation.",
+  "version": "5.6.0",
+  "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for don.",
   "keywords": [
     "oclif"
   ],
@@ -49,7 +49,7 @@
     "hyperlinker": "1.0.0",
     "inquirer": "^8.0.0",
     "supports-hyperlinks": "2.2.0",
-    "twilio": "^3.49.4",
+    "twilio": "^4.7.2",
     "untildify": "^4.0.0"
   },
   "devDependencies": {
@@ -83,7 +83,7 @@
     "oclif": "^3"
   },
   "optionalDependencies": {
-    "ngrok": "^3.2.7"
+    "ngrok": "^4.3.3"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -148,7 +148,7 @@
     "update": {
       "s3": {
         "xz": true,
-        "bucket": "twilio-cli-prod"
+        "bucket": "twilio-cli-assets-dev"
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"
