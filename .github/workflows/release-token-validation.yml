@@ -6,6 +6,8 @@ on:
 jobs:
   token-validation:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # Required for requesting the JWT
     steps:
       - name: Validate AWS tokens
         uses: aws-actions/configure-aws-credentials@v2
