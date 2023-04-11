@@ -1,3 +1,29 @@
+## [5.4.0-rc.1](https://github.com/twilio/twilio-cli/compare/5.3.1...5.4.0-rc.1) (2023-04-11)
+
+
+### Library - Fixes
+
+* macos workflow fix ([#484](https://github.com/twilio/twilio-cli/issues/484)) ([a31bf6b](https://github.com/twilio/twilio-cli/commit/a31bf6b573cfee62acb7626ffeeac47c7fe30f2c))
+
+
+### Library - Features
+
+* Adding steps to run mac os workflow for release candidates ([#490](https://github.com/twilio/twilio-cli/issues/490)) ([15a1d49](https://github.com/twilio/twilio-cli/commit/15a1d49cd8d66c2698a423d212a70ae0801d4ba3))
+* Enable rc workflow for debian ([#491](https://github.com/twilio/twilio-cli/issues/491)) ([81d8a59](https://github.com/twilio/twilio-cli/commit/81d8a5941489e9293bfffdda3b9eb012bf819528))
+* Enabling slack notifications only when triggered from main branch ([#515](https://github.com/twilio/twilio-cli/issues/515)) ([47093f6](https://github.com/twilio/twilio-cli/commit/47093f61463cffad742c8f1220379f88048f1002))
+* Enabling upload of deb files for armel for rc branch ([#494](https://github.com/twilio/twilio-cli/issues/494)) ([b6cde66](https://github.com/twilio/twilio-cli/commit/b6cde66f536d5b444c21d9b99a64bad4c76f9130))
+
+
+### Library - Chores
+
+* added branch name to workflow run name ([#500](https://github.com/twilio/twilio-cli/issues/500)) ([5328577](https://github.com/twilio/twilio-cli/commit/532857751b56dc76f24bc68dff9b010ae3195052))
+* bump json5 from 2.2.1 to 2.2.2 ([#483](https://github.com/twilio/twilio-cli/issues/483)) ([829d229](https://github.com/twilio/twilio-cli/commit/829d229184d7be99bcc7eb16c31a943c93106cd9))
+* correct workflow run name ([#503](https://github.com/twilio/twilio-cli/issues/503)) ([579cfd1](https://github.com/twilio/twilio-cli/commit/579cfd1ebd6c1e12a4b0944285bfff7db37301b0))
+* disable docker, scoop and homebrew release ([22322e8](https://github.com/twilio/twilio-cli/commit/22322e86fa7a1e436fa7069192fb65e1ed294f43))
+* enable rc support in apt releases ([#485](https://github.com/twilio/twilio-cli/issues/485)) ([ee4cd96](https://github.com/twilio/twilio-cli/commit/ee4cd9611841662a9e91b19a74b6004281c6ba28))
+* merging from aws-migration ([ff8837e](https://github.com/twilio/twilio-cli/commit/ff8837e8e4fb7c6e30e7e9847e6c58927c5111a5))
+* merging with main and changing s3 bucket ([d1b83c3](https://github.com/twilio/twilio-cli/commit/d1b83c3e579f6fc27a8307a55aeff03575c5f050))
+
 ## [5.6.0](https://github.com/twilio/twilio-cli/compare/5.5.0...5.6.0) (2023-04-06)
 
 
