@@ -12,5 +12,5 @@ jobs:
       - name: Validate AWS tokens
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::019364599908:role/git-hub-actions
+          role-to-assume: ${{ secrets.AWS_ACCESS_ROLE}}
           aws-region: us-east-1
