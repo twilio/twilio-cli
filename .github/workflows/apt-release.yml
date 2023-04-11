@@ -6,7 +6,8 @@ on:
 jobs:
   apt-build-release:
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write  # Required for requesting the JWT
     steps:
     - name: Check Out Repo
       uses: actions/checkout@v2
