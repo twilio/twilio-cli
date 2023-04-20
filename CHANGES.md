@@ -1,4 +1,10 @@
-## [5.6.0](https://github.com/twilio/twilio-cli/compare/5.5.0...5.6.0) (2023-04-06)
+---------------------------
+**Messaging**
+- Remove  and  from domain config endpoint **(breaking change)**
+- Add error_code and rejection_reason properties to tollfree verification API response
+
+**Numbers**
+- Added the new Eligibility API under version .## [5.6.0](https://github.com/twilio/twilio-cli/compare/5.5.0...5.6.0) (2023-04-06)
 
 
 ### Library - Fixes
