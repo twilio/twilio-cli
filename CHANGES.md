@@ -1,3 +1,5 @@
+## [5.7.0](https://github.com/twilio/twilio-cli/compare/5.6.0...5.7.0) (2023-04-20)
+
 ---------------------------
 **Messaging**
 - Remove  and  from domain config endpoint **(breaking change)**
