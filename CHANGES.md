@@ -1,4 +1,41 @@
-## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
+## [5.7.0](https://github.com/twilio/twilio-cli/compare/5.6.0...5.7.0) (2023-04-20)
+
+---------------------------
+**Messaging**
+- Remove  and  from domain config endpoint **(breaking change)**
+- Add error_code and rejection_reason properties to tollfree verification API response
+
+**Numbers**
+- Added the new Eligibility API under version .## [5.6.0](https://github.com/twilio/twilio-cli/compare/5.5.0...5.6.0) (2023-04-06)
+
+
+### Library - Fixes
+
+* Swapping make install step to run after node setup in npm audit job ([#520](https://github.com/twilio/twilio-cli/issues/520)) ([0ed7d26](https://github.com/twilio/twilio-cli/commit/0ed7d26c5476a6e2005791b9541de10c87d2bbd8))
+
+
+### Library - Chores
+
+* ci ([3a60489](https://github.com/twilio/twilio-cli/commit/3a6048975f52242f5775ef4333bbe57cc1c0a9cc))
+* **release:** set `package.json` to 5.5.1 [skip ci] ([638f004](https://github.com/twilio/twilio-cli/commit/638f00487617b7596eb1d5f6dee0286579c9b39c)), closes [#520](https://github.com/twilio/twilio-cli/issues/520)
+* **release:** set `package.json` to 5.5.2 [skip ci] ([3aed7ed](https://github.com/twilio/twilio-cli/commit/3aed7ed449ef67c9fbd3e68465aa91e8ea85102b))
+* update ([49e1e1f](https://github.com/twilio/twilio-cli/commit/49e1e1f9368d6f294f80ee5570ae7ce1d346ec40))
+
+---------------------------
+**Conversations**
+- Expose query parameters ,  and  in list operation on Conversations resource for sorting and filtering
+
+**Insights**
+- Added answered by filter in Call Summaries
+
+**Lookups**
+- Remove  package **(breaking change)**
+
+**Messaging**
+- Add support for  brand type and  campaign use case.
+- New Sole Proprietor Brands should be created with  brand type. Brand registration requests with  brand type will be rejected.
+- New Sole Proprietor Campaigns should be created with  campaign use case. Campaign registration requests with  campaign use case will be rejected.
+- Add Brand Registrations OTP API## [5.5.0](https://github.com/twilio/twilio-cli/compare/5.4.3...5.5.0) (2023-03-23)
 
 ---------------------------
 **Api**
