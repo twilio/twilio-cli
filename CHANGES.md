@@ -1,4 +1,9 @@
-## [5.7.0](https://github.com/twilio/twilio-cli/compare/5.6.0...5.7.0) (2023-04-20)
+---------------------------
+**Conversations**
+- Remove ,  and  query parameters from list operation on Conversations resource **(breaking change)**
+
+**Twiml**
+- Add support for new Amazon Polly voices (Q1 2023) for  verb## [5.7.0](https://github.com/twilio/twilio-cli/compare/5.6.0...5.7.0) (2023-04-20)
 
 ---------------------------
 **Messaging**
