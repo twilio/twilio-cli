@@ -1,3 +1,15 @@
+## [5.8.0](https://github.com/twilio/twilio-cli/compare/5.7.0...5.8.0) (2023-05-04)
+
+
+### Library - Fixes
+
+* Fix vulnerabilities in twilio-cli ([#530](https://github.com/twilio/twilio-cli/issues/530)) ([dced7e7](https://github.com/twilio/twilio-cli/commit/dced7e733e045f9c5ffd3ff311400d0bec8f1efc))
+
+
+### Library - Chores
+
+* bump http-cache-semantics from 4.1.0 to 4.1.1 ([#501](https://github.com/twilio/twilio-cli/issues/501)) ([b168a03](https://github.com/twilio/twilio-cli/commit/b168a03a7b53754e8ad5f352180e11b58a3fd7d2))
+
 ---------------------------
 **Conversations**
 - Remove ,  and  query parameters from list operation on Conversations resource **(breaking change)**
