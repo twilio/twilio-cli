@@ -1,4 +1,17 @@
-## [5.8.0](https://github.com/twilio/twilio-cli/compare/5.7.0...5.8.0) (2023-05-04)
+---------------------------
+**Conversations**
+- Added   parameter to Address Configuration endpoint, to support regional short code addresses
+- Added query parameters ,  and  in list Conversations resource for filtering
+
+**Insights**
+- Added annotations parameters to list summary api
+
+**Messaging**
+- Add GET domainByMessagingService endpoint to linkShortening service
+- Add  to link shortening domain_config properties
+
+**Numbers**
+- Add bulk_eligibility api under version .## [5.8.0](https://github.com/twilio/twilio-cli/compare/5.7.0...5.8.0) (2023-05-04)
 
 
 ### Library - Fixes
