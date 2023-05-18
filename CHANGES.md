@@ -1,3 +1,5 @@
+### [5.8.1](https://github.com/twilio/twilio-cli/compare/5.8.0...5.8.1) (2023-05-18)
+
 ---------------------------
 **Conversations**
 - Added   parameter to Address Configuration endpoint, to support regional short code addresses
