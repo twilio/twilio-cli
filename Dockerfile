@@ -1,4 +1,4 @@
-FROM node:16.20.0
+FROM node:18.16.0
 RUN apt-get update && apt-get install -y libsecret-1-dev
 
 RUN mkdir /twilio
