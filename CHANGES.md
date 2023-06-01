@@ -1,4 +1,12 @@
-### [5.8.1](https://github.com/twilio/twilio-cli/compare/5.8.0...5.8.1) (2023-05-18)
+---------------------------
+**Api**
+- Add  to create Conference Participant API
+
+**Intelligence**
+- First public beta release for Voice Intelligence APIs with client libraries
+
+**Messaging**
+- Add new  attribute to us_app_to_person resource. This attribute will provide additional information about campaign registration errors.### [5.8.1](https://github.com/twilio/twilio-cli/compare/5.8.0...5.8.1) (2023-05-18)
 
 ---------------------------
 **Conversations**
