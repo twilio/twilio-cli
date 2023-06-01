@@ -1,3 +1,11 @@
+### [5.8.2](https://github.com/twilio/twilio-cli/compare/5.8.1...5.8.2) (2023-06-01)
+
+
+### Library - Fixes
+
+* update docker node version ([#536](https://github.com/twilio/twilio-cli/issues/536)) ([c33c5b5](https://github.com/twilio/twilio-cli/commit/c33c5b5c39006ef74856b24b171c36579110d32f))
+* Update Dockerfile base image ([#535](https://github.com/twilio/twilio-cli/issues/535)) ([edee208](https://github.com/twilio/twilio-cli/commit/edee2080dfadfda7e1ef28734cb9ed8461caa68b))
+
 ---------------------------
 **Api**
 - Add  to create Conference Participant API
