@@ -5,4 +5,5 @@ RUN mkdir /twilio
 WORKDIR /twilio
 
 COPY . .
+RUN npm install
 RUN npm link
