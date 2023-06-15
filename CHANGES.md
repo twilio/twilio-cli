@@ -1,4 +1,10 @@
-### [5.8.2](https://github.com/twilio/twilio-cli/compare/5.8.1...5.8.2) (2023-06-01)
+---------------------------
+**Api**
+- Added  as conditional parameter
+- Removed  as optional field **(breaking change)**
+
+**Insights**
+- Added  to list summary output### [5.8.2](https://github.com/twilio/twilio-cli/compare/5.8.1...5.8.2) (2023-06-01)
 
 
 ### Library - Fixes
