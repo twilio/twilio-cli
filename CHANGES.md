@@ -1,3 +1,10 @@
+## [5.9.0](https://github.com/twilio/twilio-cli/compare/5.8.2...5.9.0) (2023-06-15)
+
+
+### Library - Fixes
+
+* Update Dockerfile for fixing the release failure ([#540](https://github.com/twilio/twilio-cli/issues/540)) ([29337c1](https://github.com/twilio/twilio-cli/commit/29337c16e2c07092b78b69cd4528fff35342b620))
+
 ---------------------------
 **Api**
 - Added  as conditional parameter
