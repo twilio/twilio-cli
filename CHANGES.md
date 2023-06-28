@@ -1,3 +1,5 @@
+## [5.10.0](https://github.com/twilio/twilio-cli/compare/5.9.0...5.10.0) (2023-06-28)
+
 ---------------------------
 **Lookups**
 - Add  package to the lookup response
