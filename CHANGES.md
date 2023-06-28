@@ -1,4 +1,12 @@
-## [5.9.0](https://github.com/twilio/twilio-cli/compare/5.8.2...5.9.0) (2023-06-15)
+---------------------------
+**Lookups**
+- Add  package to the lookup response
+
+**Numbers**
+- Add hosted_number_order under version .
+- Update properties in Porting and Bulk Porting APIs. **(breaking change)**
+- Added bulk Portability API under version .
+- Added Portability API under version .## [5.9.0](https://github.com/twilio/twilio-cli/compare/5.8.2...5.9.0) (2023-06-15)
 
 
 ### Library - Fixes
