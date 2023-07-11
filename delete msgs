@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Replace the placeholders with your actual Twilio account credentials and the account SID
-account_sid="AC6fcfffc961a437ce7fe5ae3bd464cc04"
-auth_token="c360e42f0187887b97fc8d3a06739733 "
+account_sid=""
+auth_token=" "
 
 # Get all messages from the account
 messages=$(curl -X GET -s -u $account_sid:$auth_token "https://api.twilio.com/2010-04-01/Accounts/$account_sid/Messages.json" | jq -r '.messages[] | .sid')
