@@ -1,3 +1,5 @@
+## [5.11.0](https://github.com/twilio/twilio-cli/compare/5.10.0...5.11.0) (2023-07-13)
+
 ---------------------------
 **Flex**
 - Adding  as optional parameter in Interactions API
