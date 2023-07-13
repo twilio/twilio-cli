@@ -1,4 +1,22 @@
-## [5.10.0](https://github.com/twilio/twilio-cli/compare/5.9.0...5.10.0) (2023-06-28)
+---------------------------
+**Flex**
+- Adding  as optional parameter in Interactions API
+
+**Messaging**
+- Making visiblity public for tollfree_verification API
+
+**Numbers**
+- Remove Sms capability property from HNO creation under version  of HNO API. **(breaking change)**
+- Update required properties in LOA creation under version  of Authorization document API. **(breaking change)**
+
+**Taskrouter**
+- Add api to fetch task queue statistics for multiple TaskQueues
+
+**Verify**
+- Add  optional parameter on Verification creation.
+
+**Twiml**
+- Add Google Voices and languages## [5.10.0](https://github.com/twilio/twilio-cli/compare/5.9.0...5.10.0) (2023-06-28)
 
 ---------------------------
 **Lookups**
