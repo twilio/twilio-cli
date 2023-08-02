@@ -37,7 +37,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16.x'
+        node-version: '18.x'
     - run: source .github/scripts/pack_macos.sh
       env:
         OSX_INSTALLER_CERT_BASE64: ${{ secrets.OSX_INSTALLER_CERT_BASE64}}

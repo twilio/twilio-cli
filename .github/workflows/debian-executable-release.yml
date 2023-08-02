@@ -14,7 +14,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Getting last sha
         id: get-sha
         run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
