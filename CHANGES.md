@@ -1,4 +1,33 @@
-## [5.11.0](https://github.com/twilio/twilio-cli/compare/5.10.0...5.11.0) (2023-07-13)
+---------------------------
+**Insights**
+- Normalize annotations parameters in list summary api to be prefixed
+
+**Numbers**
+- Change Bulk_hosted_sid from BHR to BH prefix in HNO and dependent under version  API's. **(breaking change)**
+- Added parameter target_account_sid to portability and account_sid to response body
+
+**Verify**
+- Remove beta feature flag to list attempts API.
+- Remove beta feature flag to verifications summary attempts API.
+
+
+---------------------------
+**Api**
+- Added ,  and  to  API.
+- Added  to  API.
+
+**Lookups**
+- Add new  package to the lookup response
+
+**Verify**
+- Documentation of list attempts API was improved by correcting  and  expected date format.
+- Documentation was improved by correcting  and  expected date format parameter on attempts summary API.
+- Documentation was improved by adding  as optional valid parameter on attempts summary API.
+
+**Twiml**
+- Added support for he-il inside of ssm_lang.json that was missing
+- Added support for he-il language in say.json that was missing
+- Add  and  attributes to .## [5.11.0](https://github.com/twilio/twilio-cli/compare/5.10.0...5.11.0) (2023-07-13)
 
 ---------------------------
 **Flex**
