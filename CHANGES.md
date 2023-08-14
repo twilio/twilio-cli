@@ -1,3 +1,10 @@
+## [5.12.0](https://github.com/twilio/twilio-cli/compare/5.11.0...5.12.0) (2023-08-14)
+
+
+### Library - Chores
+
+* using runner image node version ([#550](https://github.com/twilio/twilio-cli/issues/550)) ([cc9c0d8](https://github.com/twilio/twilio-cli/commit/cc9c0d8deb5b3728b479889e4f454a3bd42a8a00))
+
 ---------------------------
 **Insights**
 - Normalize annotations parameters in list summary api to be prefixed
