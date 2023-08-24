@@ -1,4 +1,4 @@
-## [5.12.0](https://github.com/twilio/twilio-cli/compare/5.11.0...5.12.0) (2023-08-14)
+---------------------------\n**Api**\n- Add new property  for SMS pumping protection feature only (public beta to be available soon): Include this parameter with a value of  to skip any kind of risk check on the respective message request\n\n**Flex**\n- Changing  path param to  in interaction channel participant update endpoint **(breaking change)**\n\n**Messaging**\n- Add Channel Sender api\n- Fixing country code docs and removing Zipwhip references\n\n**Numbers**\n- Request status changed in numbers/v2/BulkHostedNumberOrders **(breaking change)**\n- Add bulk hosting orders API under version /v2## [5.12.0](https://github.com/twilio/twilio-cli/compare/5.11.0...5.12.0) (2023-08-14)
 
 
 ### Library - Chores
