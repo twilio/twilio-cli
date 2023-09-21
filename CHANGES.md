@@ -1,4 +1,15 @@
-## [5.14.0](https://github.com/twilio/twilio-cli/compare/5.13.0...5.14.0) (2023-09-08)
+---------------------------
+**Conversations**
+- Enable conversation email bindings, email address configurations and email message subjects
+
+**Flex**
+- Adding  to Flex Configuration field 
+- Introducing new channel status as  in modify channel endpoint for leave functionality **(breaking change)**
+- Adding  to Flex Configuration
+
+**Taskrouter**
+- Add Update Queues, Workers, Workflow Real Time Statistics API to flex-rt-data-api-v2 endpoint
+- Add Update Workspace Real Time Statistics API to flex-rt-data-api-v2 endpoint## [5.14.0](https://github.com/twilio/twilio-cli/compare/5.13.0...5.14.0) (2023-09-08)
 
 ---------------------------
 **Api**
