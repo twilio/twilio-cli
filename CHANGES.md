@@ -1,4 +1,33 @@
-## [5.15.0](https://github.com/twilio/twilio-cli/compare/5.14.0...5.15.0) (2023-09-21)
+---------------------------
+**Accounts**
+- Updated Safelist metadata to correct the docs.
+- Add Global SafeList API changes
+
+**Api**
+- Added optional parameter  for create participant api
+
+**Flex**
+- Adding  to Flex Configuration
+
+**Intelligence**
+- Deleted  parameter from fetching transcript in v2 **(breaking change)**
+
+**Lookups**
+- Add new  package to the lookup response
+- Remove  package **(breaking change)**
+
+**Messaging**
+- Update US App To Person documentation with current  requirements
+
+**Taskrouter**
+- Remove beta_feature check on task_queue_bulk_real_time_statistics endpoint
+- Add  property to tasks
+- Updating  format from  to  in the response of bulk get endpoint of TaskQueue Real Time Statistics API **(breaking change)**
+
+
+---------------------------
+**Lookups**
+- Add test api support for Lookup v2## [5.15.0](https://github.com/twilio/twilio-cli/compare/5.14.0...5.15.0) (2023-09-21)
 
 ---------------------------
 **Conversations**
