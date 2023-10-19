@@ -1,3 +1,5 @@
+## [5.16.0](https://github.com/twilio/twilio-cli/compare/5.15.0...5.16.0) (2023-10-19)
+
 ---------------------------
 **Accounts**
 - Updated Safelist metadata to correct the docs.
