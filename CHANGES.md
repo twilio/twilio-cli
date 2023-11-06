@@ -1,4 +1,18 @@
-## [5.16.0](https://github.com/twilio/twilio-cli/compare/5.15.0...5.16.0) (2023-10-19)
+---------------------------
+**Flex**
+- Adding  for Email Manager
+
+**Intelligence**
+- Add text-generation operator (for example conversation summary) results to existing OperatorResults collection.
+
+**Messaging**
+- Add DELETE support to Tollfree Verification resource
+
+**Serverless**
+- Add node18 as a valid Build runtime
+
+**Verify**
+- Update Verify TOTP maturity to GA.## [5.16.0](https://github.com/twilio/twilio-cli/compare/5.15.0...5.16.0) (2023-10-19)
 
 ---------------------------
 **Accounts**
