@@ -1,3 +1,5 @@
+### [5.16.1](https://github.com/twilio/twilio-cli/compare/5.16.0...5.16.1) (2023-11-06)
+
 ---------------------------
 **Flex**
 - Adding  for Email Manager
