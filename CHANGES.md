@@ -1,3 +1,5 @@
+### [5.16.2](https://github.com/twilio/twilio-cli/compare/5.16.1...5.16.2) (2023-11-17)
+
 ---------------------------
 **Library - Chore**
 - [PR #98](https://github.com/twilio/twilio-oai/pull/98): removing oauth. Thanks to [@sbansla](https://github.com/sbansla)!
