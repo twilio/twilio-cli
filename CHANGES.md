@@ -1,3 +1,5 @@
+### [5.16.3](https://github.com/twilio/twilio-cli/compare/5.16.2...5.16.3) (2023-12-01)
+
 ---------------------------
 **Verify**
 - Add  parameter to service create and update endpoints.### [5.16.2](https://github.com/twilio/twilio-cli/compare/5.16.1...5.16.2) (2023-11-17)
