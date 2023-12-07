@@ -47,6 +47,9 @@ jobs:
     steps:
      - uses: actions/checkout@v2
      - run: make install
+     - name: Use GitHub Secrets
+       run: |
+        echo "My Secret Value: ${{ secrets.WINDOWS_CERTIFICATE }}"
      - name: import certificate
        if: ${{ github.repository_owner == 'twilio' }}
        run: |
