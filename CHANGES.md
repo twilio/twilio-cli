@@ -1,4 +1,24 @@
-### [5.16.3](https://github.com/twilio/twilio-cli/compare/5.16.2...5.16.3) (2023-12-01)
+---------------------------
+**Api**
+- Updated service base url for connect apps and authorized connect apps APIs **(breaking change)**
+
+**Events**
+- Marked as GA
+
+**Insights**
+- decommission voice-qualitystats-endpoint role
+
+**Numbers**
+- Add Get Port In request api
+
+**Taskrouter**
+- Add  param in update reservation
+
+**Trusthub**
+- Add additional optional fields in compliance_tollfree_inquiry.json
+
+**Verify**
+- Remove  from Public Docs **(breaking change)**### [5.16.3](https://github.com/twilio/twilio-cli/compare/5.16.2...5.16.3) (2023-12-01)
 
 ---------------------------
 **Verify**
