@@ -81,7 +81,8 @@ PATH=$PATH:$PWD/bin eval $(PATH=$PATH:$PWD/bin node -p "require('./package').scr
       await qq.chmod([workspace, 'usr/lib', config.dirname, 'bin', config.bin], 0o755);
       await qq.chmod([workspace, 'DEBIAN/postinst'], 0o755);
       await qq.x(`ln -s "../lib/${config.dirname}/bin/${config.bin}" "${workspace}/usr/bin/${pjson.oclif.bin}"`);
-      await qq.x(`dpkg --build "${workspace}" "${qq.join(dist, debArch(arch), `${versionedDebBase}.deb`)}"`);
+      // Use xz compression until Debian supports zstd (see issue #482)
+      await qq.x(`dpkg-deb -Zxz --build "${workspace}" "${qq.join(dist, debArch(arch), `${versionedDebBase}.deb`)}"`);
     }
     try {
       // fetch existing Packages file which needs to be modified for new version
