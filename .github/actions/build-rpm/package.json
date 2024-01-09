@@ -17,7 +17,7 @@
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@actions/exec": "^1.0.4",
-    "openpgp": "^5.0.0"
+    "openpgp": "^5.10.1"
   },
   "devDependencies": {
     "@types/node": "^16.4.10",
