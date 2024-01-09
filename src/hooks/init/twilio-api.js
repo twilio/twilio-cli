@@ -43,6 +43,13 @@ class TwilioRestApiPlugin extends Plugin {
     Object.keys(actionDefinition.resource.operations).forEach((methodName) => {
       actionDefinition.methodName = methodName;
       actionDefinition.actionName = METHOD_TO_ACTION_MAP[pathType][methodName];
+      if (
+        actionDefinition.actionName !== 'create' &&
+        pathType === 'list' &&
+        'delete' in actionDefinition.resource.operations
+      ) {
+        actionDefinition.actionName = METHOD_TO_ACTION_MAP.instance[methodName];
+      }
       this.scanAction(actionDefinition);
     }, this);
   }
