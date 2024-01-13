@@ -13,12 +13,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Getting last sha
         id: get-sha
-        run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
       - name: Getting latest tag
         id: get-tag
         run: |
          git fetch --prune --unshallow
-         echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+         echo "TAG_NAME=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_OUTPUT
       - run: |
           make install
           sudo chown -R 1001:121 "/root/.npm"
