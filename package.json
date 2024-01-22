@@ -35,7 +35,6 @@
     "version": "oclif readme && git add README.md"
   },
   "dependencies": {
-    "@oclif/color": "^1.0.1",
     "@oclif/core": "^1.16.0",
     "@oclif/plugin-autocomplete": "^1.3.0",
     "@oclif/plugin-plugins": "^2.1.0",
