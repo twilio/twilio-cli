@@ -61,7 +61,7 @@ class TwilioRestApiPlugin extends Plugin {
     };
 
     Object.keys(actionDefinition.domain.paths).forEach((pathName) => {
-      if(pathName === '/healthcheck') return;
+      if (pathName === '/healthcheck') return;
       const versionName = pathName.split('/')[1];
       const shortVersion = versionName.replace(/v/g, '');
 
