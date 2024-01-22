@@ -8,7 +8,7 @@ clean:
 
 install: githooks clean
 	rm -f package-lock.json
-	npm install --no-optional
+	npm install --omit=optional
 
 test:
 	npm test
