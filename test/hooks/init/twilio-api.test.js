@@ -29,8 +29,8 @@ describe('hooks', () => {
         expect(versionTopic.description).to.equal('version 1 of the API');
 
         const previewCommand = plugin.topics.find((t) => t.name === 'api:preview');
-
-        expect(previewCommand).to.equal(undefined);
+        expect(previewCommand.description).to.equal('resources under preview.twilio.com');
+        expect(previewCommand.name).to.equal('api:preview');
       });
     });
   });
