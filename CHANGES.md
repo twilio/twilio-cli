@@ -10,10 +10,15 @@
 
 * added missing file ([cd0fc69](https://github.com/twilio/twilio-cli/commit/cd0fc69504ba5771608b9645f98ca57d48598d9b))
 * added support for SafeList query params ([#565](https://github.com/twilio/twilio-cli/issues/565)) ([4294166](https://github.com/twilio/twilio-cli/commit/4294166929f36a345cf104180896a791db6f9ff8))
-* **release:** set `package.json` to 5.17.1 [skip ci] ([07792d7](https://github.com/twilio/twilio-cli/commit/07792d75dca90e65451c18999324786936698073)), closes [#578](https://github.com/twilio/twilio-cli/issues/578) [#565](https://github.com/twilio/twilio-cli/issues/565) [#565](https://github.com/twilio/twilio-cli/issues/565) [#573](https://github.com/twilio/twilio-cli/issues/573) [#578](https://github.com/twilio/twilio-cli/issues/578) [#573](https://github.com/twilio/twilio-cli/issues/573)
-* **release:** set `package.json` to 5.17.1 [skip ci] ([37b4183](https://github.com/twilio/twilio-cli/commit/37b4183ef4a2528aaf9aac0a44efe8b54ce85dad)), closes [#565](https://github.com/twilio/twilio-cli/issues/565) [#573](https://github.com/twilio/twilio-cli/issues/573) [#578](https://github.com/twilio/twilio-cli/issues/578)
 * upgraded cli-core version and skip healthcheck api ([#573](https://github.com/twilio/twilio-cli/issues/573)) ([b2ce3e5](https://github.com/twilio/twilio-cli/commit/b2ce3e5706067152c5f7de9194605c9b248265e2))
 
+**Oauth**
+- updated openid discovery endpoint uri **(breaking change)**
+- Added device code authorization endpoint
+- added oauth JWKS endpoint
+- Get userinfo resource
+- OpenID discovery resource
+- Add new API for token endpoint
 
 ## [5.17.0](https://github.com/twilio/twilio-cli/compare/5.16.3...5.17.0) (2023-12-14)
 
