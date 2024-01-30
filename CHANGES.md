@@ -1,3 +1,16 @@
+### [5.17.1](https://github.com/twilio/twilio-cli/compare/5.17.0...5.17.1) (2024-01-30)
+
+
+### Library - Chores
+
+* added support for SafeList query params ([#565](https://github.com/twilio/twilio-cli/issues/565)) ([4294166](https://github.com/twilio/twilio-cli/commit/4294166929f36a345cf104180896a791db6f9ff8))
+* upgraded cli-core version and skip healthcheck api ([#573](https://github.com/twilio/twilio-cli/issues/573)) ([b2ce3e5](https://github.com/twilio/twilio-cli/commit/b2ce3e5706067152c5f7de9194605c9b248265e2))
+
+
+### Library - Fixes
+
+* enabled npm publish ([#578](https://github.com/twilio/twilio-cli/issues/578)) ([ef9bfce](https://github.com/twilio/twilio-cli/commit/ef9bfce551b885035d8e7d05a95feeab25b1f21f))
+
 ## [5.17.0](https://github.com/twilio/twilio-cli/compare/5.16.3...5.17.0) (2023-12-14)
 
 ---------------------------
