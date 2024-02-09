@@ -1,4 +1,63 @@
-### [5.17.1](https://github.com/twilio/twilio-cli/compare/5.17.0...5.17.1) (2024-01-30)
+---------------------------
+**Library - Chore**
+- [PR #103](https://github.com/twilio/twilio-oai/pull/103): initiate cli release commit. Thanks to [@sbansla](https://github.com/sbansla)!
+
+**Api**
+- Updated service base url for connect apps and authorized connect apps APIs **(breaking change)**
+- Update documentation to reflect RiskCheck GA
+- Added optional parameter  for create participant api
+
+**Events**
+- Marked as GA
+
+**Flex**
+- Adding  to Flex Configuration
+- Adding  for Email Manager
+- Adding  to Flex Configuration
+
+**Insights**
+- add flag to restrict access to unapid customers
+- decommission voice-qualitystats-endpoint role
+
+**Intelligence**
+- Add text-generation operator (for example conversation summary) results to existing OperatorResults collection.
+
+**Lookups**
+- Remove  field from  and leave  **(breaking change)**
+- Remove carrier information from call forwarding package **(breaking change)**
+
+**Messaging**
+- Add update instance endpoints to us_app_to_person api
+- Add tollfree edit_allowed and edit_reason fields
+- Update Phone Number, Short Code, Alpha Sender, US A2P and Channel Sender documentation
+- Add DELETE support to Tollfree Verification resource
+
+**Numbers**
+- Add Get Port In request api
+
+**Push**
+- Migrated to new Push API V4 with Resilient Notification Delivery.
+
+**Serverless**
+- Add node18 as a valid Build runtime
+
+**Taskrouter**
+- Add  param in update reservation
+- Add container attribute to task_queue_bulk_real_time_statistics endpoint
+- Remove beta_feature check on task_queue_bulk_real_time_statistics endpoint
+
+**Trusthub**
+- Add optional field NotificationEmail to the POST /v1/ComplianceInquiries/Customers/Initialize API
+- Add additional optional fields in compliance_tollfree_inquiry.json
+- Rename did to tollfree_phone_number in compliance_tollfree_inquiry.json
+- Add new optional field notification_email to compliance_tollfree_inquiry.json
+
+**Verify**
+-  property added again to Public Docs **(breaking change)**
+- Remove  from Public Docs **(breaking change)**
+- Add  parameter to service create and update endpoints.
+- Add  optional parameter on Verification creation.
+- Update Verify TOTP maturity to GA.### [5.17.1](https://github.com/twilio/twilio-cli/compare/5.17.0...5.17.1) (2024-01-30)
 
 
 ### Library - Fixes
