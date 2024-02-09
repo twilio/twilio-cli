@@ -1,3 +1,5 @@
+## [5.18.0](https://github.com/twilio/twilio-cli/compare/5.17.1...5.18.0) (2024-02-09)
+
 ---------------------------
 **Library - Chore**
 - [PR #103](https://github.com/twilio/twilio-oai/pull/103): initiate cli release commit. Thanks to [@sbansla](https://github.com/sbansla)!
