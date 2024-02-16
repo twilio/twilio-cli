@@ -108,14 +108,14 @@ jobs:
        if: ${{ github.repository_owner == 'twilio' }}
        run: |
          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /sha1 ${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }} /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 ${{steps.download.outputs.download-path}}/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
-     - name: Upload binaries to release
-       run: node .github/scripts/update-platform-executables.js
-       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
-        ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-        TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-        REPO_NAME: ${{ github.repository }}
+     # - name: Upload binaries to release
+     #   run: node .github/scripts/update-platform-executables.js
+     #   env:
+     #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     #    FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
+     #    ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
+     #    TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
+     #    REPO_NAME: ${{ github.repository }}
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
