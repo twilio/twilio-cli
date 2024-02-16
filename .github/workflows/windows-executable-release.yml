@@ -4,7 +4,7 @@ on:
 env:
   FORMULA_NAME: 'twilio'
 
-jobs:  
+jobs:
   get-sha:
     runs-on: macos-latest
     outputs:
@@ -64,10 +64,10 @@ jobs:
 
 
      - name: Setup Certificate
-        run: |
-           echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > /d/Certificate_pkcs12.p12
-           cat  /d/Certificate_pkcs12.p12
-        shell: bash
+       run: |
+         echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > /d/Certificate_pkcs12.p12
+         cat  /d/Certificate_pkcs12.p12
+       shell: bash
 
      - name: Set variables
        id: variables
