@@ -6,7 +6,7 @@ const cliChangelogFilename = 'CHANGES.md';
 const updateChangeLog = async () => {
   try {
     console.log('Updating the CHANGES.md');
-    const changes = process.argv[2];
+    const changes = process.argv[2] + '\n\n';
     if (changes) {
       const data = fs.readFileSync(cliChangelogFilename);
       if (data.toString().includes(changes)) {
