@@ -1,3 +1,10 @@
+## [5.19.0](https://github.com/twilio/twilio-cli/compare/5.18.0...5.19.0) (2024-02-27)
+
+
+### Library - Chores
+
+* corrected changes.md identation ([#585](https://github.com/twilio/twilio-cli/issues/585)) ([9236f6e](https://github.com/twilio/twilio-cli/commit/9236f6e6e162f55696f4efe1229f9cb533a2e0d8))
+
 ---------------------------
 **Api**
 - remove feedback and feedback summary from call resource
