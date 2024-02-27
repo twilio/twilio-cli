@@ -1,3 +1,25 @@
+---------------------------
+**Api**
+- remove feedback and feedback summary from call resource
+
+**Flex**
+- Adding  to Interactions Channels Participant
+
+**Lookups**
+- Add new  package to the lookup response
+- Remove  package from the lookup response **(breaking change)**
+
+**Messaging**
+- Add tollfree multiple rejection reasons response array
+
+**Trusthub**
+- Add ENUM for businessRegistrationAuthority in compliance_registration. **(breaking change)**
+- Add new field in isIsvEmbed in compliance_registration.
+- Add additional optional fields in compliance_registration for Individual business type.
+
+**Twiml**
+- Add support for new Amazon Polly and Google voices (Q1 2024) for  verb
+
 ## [5.18.0](https://github.com/twilio/twilio-cli/compare/5.17.1...5.18.0) (2024-02-09)
 
 ---------------------------
