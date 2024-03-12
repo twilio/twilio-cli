@@ -1,3 +1,10 @@
+### [5.19.1](https://github.com/twilio/twilio-cli/compare/5.19.0...5.19.1) (2024-03-12)
+
+
+### Library - Chores
+
+* added digicert certificate for windows release ([#582](https://github.com/twilio/twilio-cli/issues/582)) ([ab43264](https://github.com/twilio/twilio-cli/commit/ab43264b0d143a23b428b429e5eda12e3020a2a0))
+
 ---------------------------
 **Api**
 - Correct precedence documentation for application_sid vs status_callback in message creation
