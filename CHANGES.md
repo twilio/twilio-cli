@@ -1,3 +1,27 @@
+---------------------------
+**Api**
+- Correct precedence documentation for application_sid vs status_callback in message creation
+- Mark MaxPrice as deprecated
+
+**Flex**
+- Making  visibility to public
+
+**Messaging**
+- Add new  attribute to the Brand Registration resource.
+- Mark  attribute as deprecated.
+- Mark  attribute as deprecated.
+- The new  attribute is expected to provide additional information about Brand registration failures and feedback (if any has been provided by The Campaign Registry). Consumers should use this attribute instead of  and .
+
+**Numbers**
+- Correcting mount_name for porting port in fetch API
+
+**Trusthub**
+- Add new field in statusCallbackUrl in compliance_registration.
+- Add new field in isvRegisteringForSelfOrTenant in compliance_registration.
+
+**Twiml**
+- Expanded description of Action parameter for Message verb
+
 ## [5.19.0](https://github.com/twilio/twilio-cli/compare/5.18.0...5.19.0) (2024-02-27)
 
 
