@@ -1,3 +1,5 @@
+### [5.19.2](https://github.com/twilio/twilio-cli/compare/5.19.1...5.19.2) (2024-04-01)
+
 ---------------------------
 **Api**
 - Add property  to conference participant resource
