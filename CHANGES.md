@@ -1,3 +1,26 @@
+---------------------------
+**Api**
+- Correct conference filtering by date_created and date_updated documentation, clarifying that times are UTC.
+
+**Flex**
+- Remove optional parameter from  and it to 
+
+**Lookups**
+- Add new  package to the lookup response
+
+**Messaging**
+- Cleanup api.messaging.next-gen from Messaging Services endpoints
+- Readd Sending-Window after fixing test failure
+
+**Verify**
+- Add  and  parameters to create, update, get and list of services endpoints
+
+**Voice**
+- Correct conference filtering by date_created and date_updated documentation, clarifying that times are UTC.
+
+**Twiml**
+- Add new  value  for  verb
+
 ### [5.19.2](https://github.com/twilio/twilio-cli/compare/5.19.1...5.19.2) (2024-04-01)
 
 ---------------------------
