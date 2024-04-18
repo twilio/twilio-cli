@@ -1,3 +1,5 @@
+### [5.19.4](https://github.com/twilio/twilio-cli/compare/5.19.3...5.19.4) (2024-04-18)
+
 ---------------------------
 **Flex**
 - Add header  to  API
