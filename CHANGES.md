@@ -1,3 +1,13 @@
+---------------------------
+**Flex**
+- Add header  to  API
+
+**Messaging**
+- Redeploy after failed pipeline
+
+**Numbers**
+- Add Delete Port In request phone number api and Add Delete Port In request api
+
 ### [5.19.3](https://github.com/twilio/twilio-cli/compare/5.19.2...5.19.3) (2024-04-04)
 
 ---------------------------
