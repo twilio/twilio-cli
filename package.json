@@ -40,7 +40,7 @@
     "@oclif/plugin-plugins": "^2.1.0",
     "@oclif/plugin-update": "^2.1.3",
     "@oclif/plugin-version": "^1.1.1",
-    "@oclif/plugin-warn-if-update-available": "^3.0.17",
+    "@oclif/plugin-warn-if-update-available": "^3.0.18",
     "@sendgrid/mail": "^8.0.0",
     "@twilio/cli-core": "^7.19.1",
     "chalk": "^4.1.2",
@@ -54,13 +54,13 @@
   "devDependencies": {
     "@actions/core": "^1.0.0",
     "@actions/github": "^6.0.0",
+    "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^2.1.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@twilio/cli-test": "3.0.0",
     "aws-sdk": "^2.1361.0",
-    "@oclif/dev-cli": "^1.22.2",
     "chai": "^4.3.4",
     "conventional-changelog-conventionalcommits": "^4.6.0",
     "eslint": "^7.27.0",
@@ -71,6 +71,7 @@
     "mocha": "^10.0.0",
     "nock": "^13.0.2",
     "nyc": "^15.1.0",
+    "oclif": "^4.10.9",
     "proxyquire": "^2.1.3",
     "semantic-release": "^19.0.3",
     "sinon": "^10.0.0",
@@ -78,8 +79,7 @@
     "tmp": "^0.2.1",
     "ts-node": "^10.9.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.3",
-    "oclif": "^4.10.6"
+    "typescript": "^4.4.3"
   },
   "optionalDependencies": {
     "ngrok": "^4.3.3"
