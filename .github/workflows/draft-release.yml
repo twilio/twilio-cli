@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 16.x, 14.x]
+        node-version: [18.x, 20.x, lts/* ]
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 16.x, 14.x]
+        node-version: [18.x, 20.x, lts/* ]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -35,4 +35,4 @@ jobs:
          npm install twilio-cli@${{ github.event.inputs.version }}
           npm install twilio-cli
           node test/asserts/validate_tests.js
-          
+
