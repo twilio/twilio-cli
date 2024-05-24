@@ -1,3 +1,11 @@
+## [5.20.0](https://github.com/twilio/twilio-cli/compare/5.19.4...5.20.0) (2024-05-24)
+
+
+### Library - Chores
+
+* bump cli-core version ([#594](https://github.com/twilio/twilio-cli/issues/594)) ([ddb58fc](https://github.com/twilio/twilio-cli/commit/ddb58fc014d1d327b6d3cf0ec100d5a039063f6c))
+* node18+ supported and lodash vulnerability fixed ([#592](https://github.com/twilio/twilio-cli/issues/592)) ([cdb75ff](https://github.com/twilio/twilio-cli/commit/cdb75ff855af83e1a386ecbdef70b352d7f10662))
+
 ---------------------------
 **Api**
 - Add ie1 as supported region for UserDefinedMessage and UserDefinedMessageSubscription.
