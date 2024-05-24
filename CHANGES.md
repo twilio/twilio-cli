@@ -1,3 +1,41 @@
+---------------------------
+**Api**
+- Add ie1 as supported region for UserDefinedMessage and UserDefinedMessageSubscription.
+
+**Flex**
+- Adding validated field to 
+- Corrected the data type for , , , ,  in Flex Configuration
+- Making  optional in Create Interactions endpoint
+
+**Intelligence**
+- Expose operator authoring apis to public visibility
+- Deleted  parameter from updating service in v2 **(breaking change)**
+- Add read_only_attached_operator_sids to v2 services
+
+**Numbers**
+- Add API endpoint for GET Porting Webhook Configurations By Account SID
+- Remove bulk portability api under version . **(breaking change)**
+- Removed porting_port_in_fetch.json files and move the content into porting_port_in.json files
+- Add API endpoint to deleting Webhook Configurations
+- Add Get Phone Number by Port in request SID and Phone Number SID api
+- Add Create Porting webhook configuration API
+- Added bundle_sid and losing_carrier_information fields to Create PortInRequest api to support Japan porting
+
+**Taskrouter**
+- Add back  property to tasks
+- Add back  property to tasks
+- Removing  property to tasks due to revert
+- Removing  property to tasks due to revert
+- Add  property to tasks
+- Add  property to tasks
+
+**Trusthub**
+- Add new field errors to bundle as part of public API response in customer_profile.json and trust_product.json **(breaking change)**
+- Add themeSetId field in compliance_tollfree_inquiry.
+
+**Verify**
+- Update  description on service docs
+
 ### [5.19.4](https://github.com/twilio/twilio-cli/compare/5.19.3...5.19.4) (2024-04-18)
 
 ---------------------------
