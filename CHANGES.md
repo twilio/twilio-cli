@@ -1,3 +1,13 @@
+---------------------------
+**Api**
+- Mark MaxPrice as obsolete
+
+**Lookups**
+- Update examples for 
+
+**Messaging**
+- List tollfree verifications on parent account and all sub-accounts
+
 ## [5.20.0](https://github.com/twilio/twilio-cli/compare/5.19.4...5.20.0) (2024-05-24)
 
 
