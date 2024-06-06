@@ -1,3 +1,10 @@
+## [5.20.1](https://github.com/twilio/twilio-cli/compare/5.20.0...5.20.1) (2024-06-06)
+
+
+### Library - Chores
+
+* changes for upgrading to actions/github 6.0.0 ([#596](https://github.com/twilio/twilio-cli/issues/596)) ([4b4a3d6](https://github.com/twilio/twilio-cli/commit/4b4a3d6db497a90b78d5acbcb23f6cd950908e19))
+
 ---------------------------
 **Api**
 - Mark MaxPrice as obsolete
