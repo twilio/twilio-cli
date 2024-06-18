@@ -1,3 +1,11 @@
+## [5.21.0](https://github.com/twilio/twilio-cli/compare/5.20.1...5.21.0) (2024-06-18)
+
+
+### Library - Chores
+
+* Update node version in Dockerfile ([#597](https://github.com/twilio/twilio-cli/issues/597)) ([5d96ef7](https://github.com/twilio/twilio-cli/commit/5d96ef7eba63f92c36a8ab79d3b8beef4b1eed2b))
+* upgrading to centos:stream9 ([#598](https://github.com/twilio/twilio-cli/issues/598)) ([8118332](https://github.com/twilio/twilio-cli/commit/8118332a1a082f156f43af198ed24795aaa90376))
+
 --------------------------
 
 **Library - Feature**
