@@ -16,7 +16,7 @@ jobs:
        id: get-tag
        run: |
         git fetch --prune --unshallow
-        echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+        echo "TAG_NAME=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_OUTPUT
   get-sha:
     runs-on: macos-11
     outputs:
@@ -27,7 +27,7 @@ jobs:
         id: get-sha
         run: |
           git fetch --prune --unshallow
-          echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
+          echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
   pack-macos:
     needs: [get-tag, get-sha]
     runs-on: macos-11
