@@ -38,6 +38,7 @@ class TwilioRestApiPlugin extends Plugin {
     actionDefinition.resource = actionDefinition.domain.paths[actionDefinition.path];
     actionDefinition.topicName = BASE_TOPIC_NAME + TOPIC_SEPARATOR + getTopicName(actionDefinition);
 
+    if (actionDefinition.resource.pathType === undefined) return;
     const pathType = actionDefinition.resource.pathType.toLowerCase();
 
     Object.keys(actionDefinition.resource.operations).forEach((methodName) => {
