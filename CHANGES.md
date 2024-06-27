@@ -1,3 +1,10 @@
+## [5.21.1](https://github.com/twilio/twilio-cli/compare/5.21.0...5.21.1) (2024-06-27)
+
+
+### Library - Chores
+
+* adding check for undefined pathType ([#599](https://github.com/twilio/twilio-cli/issues/599)) ([fd203c9](https://github.com/twilio/twilio-cli/commit/fd203c9eefcf026150fcdf846a478c048742bfb0))
+
 ## [5.21.0](https://github.com/twilio/twilio-cli/compare/5.20.1...5.21.0) (2024-06-18)
 
 
