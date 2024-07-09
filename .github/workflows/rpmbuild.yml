@@ -13,7 +13,7 @@ jobs:
       - name: get version
         id: get-tag
         run: |
-          echo "::set-output name=TAG_NAME::$(node -p -e "require('./package.json').version")"
+          echo "TAG_NAME=$(node -p -e "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: generate linux tarball
         run: |

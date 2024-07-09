@@ -38,7 +38,7 @@ jobs:
         id: get-tag
         run: |
           git fetch --prune --unshallow
-          echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+          echo "TAG_NAME=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_OUTPUT
 
   wait-for-brew-releases:
     name: Wait for brew Release to complete
@@ -93,7 +93,7 @@ jobs:
       - name: setup brew failure output
         if: failure() || cancelled()
         id: failure_brew
-        run: echo '::set-output name=FAILURE_TAG_BREW::true'
+        run: echo "FAILURE_TAG_BREW=true" >> $GITHUB_OUTPUT
 
   wait-for-windows-releases:
     name: Wait for windows platform executables Release to complete
@@ -131,7 +131,7 @@ jobs:
       - name: setup windows failure output
         if: failure() || cancelled()
         id: failure_windows
-        run: echo '::set-output name=FAILURE_TAG_WINDOWS::true'
+        run: echo "FAILURE_TAG_WINDOWS=true" >> $GITHUB_OUTPUT
 
   wait-for-macos-releases:
     name: Wait for macos platform executables Release to complete
@@ -161,7 +161,7 @@ jobs:
       - name: setup macos failure output
         if: failure() || cancelled()
         id: failure_macos
-        run: echo '::set-output name=FAILURE_TAG_MACOS::true'
+        run: echo "FAILURE_TAG_MACOS=true" >> $GITHUB_OUTPUT
 
   wait-for-debian-releases:
     name: Wait for debian platform executables Release to complete
@@ -191,7 +191,7 @@ jobs:
       - name: setup debian failure output
         if: failure() || cancelled()
         id: failure_debian
-        run: echo '::set-output name=FAILURE_TAG_DEBIAN::true'
+        run: echo "FAILURE_TAG_DEBIAN=true" >> $GITHUB_OUTPUT
   test-apt-release:
     name: Wait for apt release to complete
     runs-on: ubuntu-latest
@@ -235,7 +235,7 @@ jobs:
       - name: setup apt failure output
         if: failure() || cancelled()
         id: failure_apt
-        run: echo '::set-output name=FAILURE_TAG_APT::true'
+        run: echo "FAILURE_TAG_APT=true" >> $GITHUB_OUTPUT
   test-npm-releases:
     name: NPM acceptance testing
     runs-on: ubuntu-latest
@@ -277,7 +277,7 @@ jobs:
       - name: setup debian failure output
         if: failure() || cancelled()
         id: failure_npm
-        run: echo '::set-output name=FAILURE_TAG_NPM::true'
+        run: echo "FAILURE_TAG_NPM=true" >> $GITHUB_OUTPUT
 
   test-scoop-release:
     name: Do scoop testing after release
@@ -320,7 +320,7 @@ jobs:
       - name: setup scoop failure output
         if: failure() || cancelled()
         id: failure_scoop
-        run: echo '::set-output name=FAILURE_TAG_SCOOP::true'
+        run: echo "FAILURE_TAG_SCOOP=true" >> $GITHUB_OUTPUT
 
   notify-complete-fail:
     needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases, test-apt-release]
