@@ -1,3 +1,5 @@
+## [5.21.2](https://github.com/twilio/twilio-cli/compare/5.21.1...5.21.2) (2024-08-26)
+
 --------------------------
 **Library - Fix**
 - [PR #116](https://github.com/twilio/twilio-oai/pull/116): Removing pascal case rule for query and path params. Changing the spec files for orgs api. Thanks to [@AsabuHere](https://github.com/AsabuHere)!
