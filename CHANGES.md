@@ -1,3 +1,49 @@
+--------------------------
+**Library - Fix**
+- [PR #116](https://github.com/twilio/twilio-oai/pull/116): Removing pascal case rule for query and path params. Changing the spec files for orgs api. Thanks to [@AsabuHere](https://github.com/AsabuHere)!
+
+**Api**
+- Update documentation of  and  on the Message resource.
+- Remove generic parameters from  resource
+- Added public documentation for Payload Data retrieval API
+
+**Flex**
+- Adding update Flex User api
+
+**Insights**
+- Added 'branded', 'business_profile' and 'voice_integrity' fields in List Call Summary
+
+**Intelligence**
+- Add  array information to the Sentences v2 entity.
+- Add , , and  headers for Operator Results.
+- Change the path parameter when fetching an  from  to  to support searching by SID or by name
+- Add , , and  headers for Transcript and Service endpoints.
+
+**Messaging**
+- Adds two new channel senders api to add/remove channel senders to/from a messaging service
+- Extend ERC api to accept an optional attribute in request body to indicate CNP migration for an ERC
+
+**Numbers**
+- Modify visibility to public in bundle clone API
+- Add  field to Port In Request and Port In Phone Numbers Fetch APIs
+- Change properties docs for port in phone numbers api
+- Add is_test body param to the Bundle Create API
+- Change properties docs for port in api
+
+**Trusthub**
+- Add new field in themeSetId in compliance_inquiry.
+
+**Verify**
+- Update  description on verification docs
+
+
+--------------------------
+**Library - Chore**
+- [PR #114](https://github.com/twilio/twilio-oai/pull/114): remove empty models. Thanks to [@tiwarishubham635](https://github.com/tiwarishubham635)!
+
+**Intelligence**
+- Deprecate account flag api.twilio-intelligence.v2
+
 ## [5.21.1](https://github.com/twilio/twilio-cli/compare/5.21.0...5.21.1) (2024-06-27)
 
 
