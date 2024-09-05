@@ -42,7 +42,7 @@ jobs:
 
   wait-for-brew-releases:
     name: Wait for brew Release to complete
-    runs-on: macos-11
+    runs-on: macos-12
     continue-on-error: true
     strategy:
       matrix:
@@ -135,7 +135,7 @@ jobs:
 
   wait-for-macos-releases:
     name: Wait for macos platform executables Release to complete
-    runs-on: macos-11
+    runs-on: macos-12
     continue-on-error: true
     needs: [ get-branch, get-tag ]
     outputs:
