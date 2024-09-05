@@ -1,3 +1,5 @@
+## [5.22.0](https://github.com/twilio/twilio-cli/compare/5.21.2...5.22.0) (2024-09-05)
+
 --------------------------
 **Iam**
 - updated library_visibility public for new public apikeys
