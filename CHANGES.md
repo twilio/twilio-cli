@@ -1,3 +1,11 @@
+## [5.22.1](https://github.com/twilio/twilio-cli/compare/5.22.0...5.22.1) (2024-09-18)
+
+
+### Library - Chores
+
+* update to macos-12 ([#605](https://github.com/twilio/twilio-cli/issues/605)) ([661c8cc](https://github.com/twilio/twilio-cli/commit/661c8cc065010c396b95e1cc2f4ac594c2f22178))
+* upgrading to macos-12 as macos-11 support is dropped ([#604](https://github.com/twilio/twilio-cli/issues/604)) ([070a20d](https://github.com/twilio/twilio-cli/commit/070a20d060c30cb5dc59b4929cf33fb2ce0856e7))
+
 --------------------------
 **Intelligence**
 - Remove public from operator_type
