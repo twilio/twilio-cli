@@ -49,7 +49,7 @@ jobs:
       - run: make install
       - name: import Executable
         id: download
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
       - name: 'Echo download path'
