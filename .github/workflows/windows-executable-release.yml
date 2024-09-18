@@ -35,7 +35,7 @@ jobs:
         brew install makensis
         npx oclif pack:win
      - name: upload artifact
-       uses: actions/upload-artifact@v2
+       uses: actions/upload-artifact@v4
        with:
         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
         path: dist/win32/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
