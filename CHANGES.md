@@ -1,3 +1,11 @@
+--------------------------
+**Intelligence**
+- Remove public from operator_type
+- Update operator_type to include general-availablity and deprecated
+
+**Numbers**
+- Remove beta flag for bundle clone API
+
 ## [5.22.0](https://github.com/twilio/twilio-cli/compare/5.21.2...5.22.0) (2024-09-05)
 
 --------------------------
