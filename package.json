@@ -48,7 +48,7 @@
     "hyperlinker": "1.0.0",
     "inquirer": "^8.0.0",
     "supports-hyperlinks": "2.2.0",
-    "twilio": "^4.7.2",
+    "twilio": "^5.3.0",
     "untildify": "^4.0.0"
   },
   "devDependencies": {
