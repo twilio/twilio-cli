@@ -1,3 +1,23 @@
+## [5.22.2](https://github.com/twilio/twilio-cli/compare/5.22.1...5.22.2) (2024-09-25)
+
+
+### Library - Chores
+
+* bump download-artifact to v4 ([#608](https://github.com/twilio/twilio-cli/issues/608)) ([0515ece](https://github.com/twilio/twilio-cli/commit/0515ece9a927f1cf75a5742c65445d8297f4f065))
+* bump upload artifact to v4 ([#607](https://github.com/twilio/twilio-cli/issues/607)) ([59b87f7](https://github.com/twilio/twilio-cli/commit/59b87f7dbeb736d120a158aa8a36e1026ae4a5c0))
+
+--------------------------
+**Library - Chore**
+- [PR #121](https://github.com/twilio/twilio-oai/pull/121): content sdk changes moved to content v1 in internal open api repo. Thanks to [@sbansla](https://github.com/sbansla)!
+
+**Accounts**
+- Update docs and mounts.
+- Change library visibility to public
+- Enable consent and contact bulk upsert APIs in prod.
+
+**Serverless**
+- Add is_plugin parameter in deployments api to check if it is plugins deployment
+
 ## [5.22.1](https://github.com/twilio/twilio-cli/compare/5.22.0...5.22.1) (2024-09-18)
 
 
