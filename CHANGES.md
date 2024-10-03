@@ -1,3 +1,14 @@
+--------------------------
+**Messaging**
+- Add A2P external campaign CnpMigration flag
+
+**Numbers**
+- Add address sid to portability API
+
+**Verify**
+- Add  optional parameter on Verification check.
+- Add  optional parameter for Verification creation.
+
 ## [5.22.2](https://github.com/twilio/twilio-cli/compare/5.22.1...5.22.2) (2024-09-25)
 
 
