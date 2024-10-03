@@ -1,3 +1,10 @@
+## [5.22.3](https://github.com/twilio/twilio-cli/compare/5.22.2...5.22.3) (2024-10-03)
+
+
+### Library - Chores
+
+* add support to pass empty string params ([#609](https://github.com/twilio/twilio-cli/issues/609)) ([b1fce3a](https://github.com/twilio/twilio-cli/commit/b1fce3a29c6588c8e123eae3a5086a2b1bfa27fd))
+
 --------------------------
 **Messaging**
 - Add A2P external campaign CnpMigration flag
