@@ -1,3 +1,10 @@
+## [5.22.4](https://github.com/twilio/twilio-cli/compare/5.22.3...5.22.4) (2024-10-17)
+
+
+### Library - Chores
+
+* update lib versions for security vulnerabilities ([#612](https://github.com/twilio/twilio-cli/issues/612)) ([9410baf](https://github.com/twilio/twilio-cli/commit/9410baf5a4d4c49e54e832d999b78f3d50b2402b))
+
 --------------------------
 **Api**
 - Add response key  to fetch AvailablePhoneNumber resource by specific country.
