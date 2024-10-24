@@ -1,3 +1,10 @@
+## [5.22.5](https://github.com/twilio/twilio-cli/compare/5.22.4...5.22.5) (2024-10-24)
+
+
+### Library - Chores
+
+* bump cli-core version ([#613](https://github.com/twilio/twilio-cli/issues/613)) ([1b8bc14](https://github.com/twilio/twilio-cli/commit/1b8bc149536d4e958ed09bb49f4c7362b6657ab4))
+
 --------------------------
 **Conversations**
 - Expose ConversationWithParticipants resource that allows creating a conversation with participants
