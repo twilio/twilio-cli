@@ -1,3 +1,7 @@
+--------------------------
+**Conversations**
+- Expose ConversationWithParticipants resource that allows creating a conversation with participants
+
 ## [5.22.4](https://github.com/twilio/twilio-cli/compare/5.22.3...5.22.4) (2024-10-17)
 
 
