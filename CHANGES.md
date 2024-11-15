@@ -1,3 +1,5 @@
+## [5.22.6](https://github.com/twilio/twilio-cli/compare/5.22.5...5.22.6) (2024-11-15)
+
 --------------------------
 **Api**
 - Added  and  to  API.
