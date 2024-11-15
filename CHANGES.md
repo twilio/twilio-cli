@@ -1,3 +1,12 @@
+--------------------------
+**Api**
+- Added  and  to  API.
+- Add open-api file tag to realtime_transcriptions
+
+**Taskrouter**
+- Add  property to workers reservation
+- Add  property to task reservation
+
 ## [5.22.5](https://github.com/twilio/twilio-cli/compare/5.22.4...5.22.5) (2024-10-24)
 
 
