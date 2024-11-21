@@ -44,7 +44,7 @@ APT::FTPArchive::Release::Suite "stable";
 `,
   postinst: () => `#!/usr/bin/env bash
 cd /usr/lib/twilio-cli
-PATH=$PATH:$PWD/bin eval $(PATH=$PATH:$PWD/bin node -p "require('./package').scripts.postinstall")
+PATH=$PWD/bin:$PATH eval $(PATH=$PWD/bin:$PATH node -p "require('./package').scripts.postinstall")
 `
 }
 
