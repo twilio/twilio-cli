@@ -1,7 +1,6 @@
 const { logger } = require('@twilio/cli-core').services.logging;
 const chalk = require('chalk');
-
-const { isTwilioPlugin } = require('../services/plugins');
+const { isTwilioPlugin, isPluginInstalled } = require('../services/plugins');
 
 const AUTOCOMLETE_INSTALL_WARNING = `If you’re using autocomplete, you’ll need to run ${chalk.bold(
   'twilio autocomplete',
@@ -9,6 +8,11 @@ const AUTOCOMLETE_INSTALL_WARNING = `If you’re using autocomplete, you’ll ne
 
 module.exports = async function pluginInstall(options) {
   logger.warn(chalk.yellowBright(`${AUTOCOMLETE_INSTALL_WARNING}`));
+
+  if (isPluginInstalled(this.config, options.plugin.name)) {
+    logger.info(`Plugin ${options.plugin.name} is already installed.`);
+    return;
+  }
 
   if (!isTwilioPlugin(options.plugin.name)) {
     logger.warn('WARNING!!! You are attempting to install a plugin from an untrusted source.');
