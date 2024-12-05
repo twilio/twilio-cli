@@ -1,3 +1,5 @@
+## [5.22.7](https://github.com/twilio/twilio-cli/compare/5.22.6...5.22.7) (2024-12-05)
+
 --------------------------
 **Api**
 - Add optional parameter  to 
