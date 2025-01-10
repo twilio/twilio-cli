@@ -1,3 +1,12 @@
+## [5.22.8](https://github.com/twilio/twilio-cli/compare/5.22.7...5.22.8) (2025-01-10)
+
+
+### Library - Chores
+
+* update base64 --output flag to > ([#615](https://github.com/twilio/twilio-cli/issues/615)) ([7d8ce33](https://github.com/twilio/twilio-cli/commit/7d8ce33947603289a57aa58ddcdbe8734e19f17d))
+* upgarde to macos13 ([#614](https://github.com/twilio/twilio-cli/issues/614)) ([b14834a](https://github.com/twilio/twilio-cli/commit/b14834a17f644327bc22c67d44b681ad97304992))
+* upgrade to macos-13 in acceptance test ([#616](https://github.com/twilio/twilio-cli/issues/616)) ([32e52b3](https://github.com/twilio/twilio-cli/commit/32e52b31f4af9e53a2c0b159feb7f0a440db7069))
+
 --------------------------
 **Numbers**
 - Change beta feature flag to use v2/BulkHostedNumberOrders
