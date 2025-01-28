@@ -1,3 +1,5 @@
+## [5.22.10](https://github.com/twilio/twilio-cli/compare/5.22.9...5.22.10) (2025-01-28)
+
 ---------------------------
 **Api**
 - Add open-api file tag to  and .
