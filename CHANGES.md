@@ -1,3 +1,16 @@
+---------------------------
+**Api**
+- Add open-api file tag to  and .
+
+**Events**
+- Add support for subaccount subscriptions (beta)
+
+**Insights**
+- add new region to conference APIs
+
+**Lookups**
+- Add new  query parameter to the lookup request
+
 ## [5.22.9](https://github.com/twilio/twilio-cli/compare/5.22.8...5.22.9) (2025-01-13)
 
 ---------------------------
