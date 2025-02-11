@@ -1,3 +1,16 @@
+---------------------------
+**Api**
+- Change downstream url and change media type for file .
+
+**Intelligence**
+- Add json_results for Generative JSON operator results
+
+**Messaging**
+- Add DestinationAlphaSender API to support Country-Specific Alpha Senders
+
+**Video**
+- Change codec type from enum to case-insensitive enum in recording and room_recording apis
+
 ## [5.22.10](https://github.com/twilio/twilio-cli/compare/5.22.9...5.22.10) (2025-01-28)
 
 ---------------------------
