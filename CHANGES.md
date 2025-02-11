@@ -1,3 +1,5 @@
+## [5.22.11](https://github.com/twilio/twilio-cli/compare/5.22.10...5.22.11) (2025-02-11)
+
 ---------------------------
 **Api**
 - Change downstream url and change media type for file .
