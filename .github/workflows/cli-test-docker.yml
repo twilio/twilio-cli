@@ -19,7 +19,7 @@ jobs:
       - name: Check Out Repo
         uses: actions/checkout@v2
       - name: Wait for docker release to finish
-        run: bash .github/scripts/trigger-and-wait.sh
+        run: node .github/scripts/trigger-and-wait.js
         env:
           INPUT_OWNER:  ${{ github.repository_owner }}
           INPUT_WORKFLOW_FILE_NAME: docker-release.yml
@@ -41,4 +41,4 @@ jobs:
          docker run --rm twilio/twilio-cli:2.36.1 /bin/bash -c "twilio api:accounts --help && twilio" && docker pull twilio/twilio-cli:latest && docker run --rm twilio/twilio-cli:latest /bin/bash -c "twilio api:accounts --help && twilio"
       - name: Test for the latest release
         run: |
-         docker run --rm twilio/twilio-cli /bin/bash -c "twilio api:accounts --help && twilio" 
+         docker run --rm twilio/twilio-cli /bin/bash -c "twilio api:accounts --help && twilio"
