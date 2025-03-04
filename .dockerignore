@@ -9,3 +9,4 @@ coverage
 ZORK1.DAT
 *.glksave
 twilio-cli-*.tgz
+.git/
