@@ -85,7 +85,7 @@
     "ngrok": "^4.3.3"
   },
   "engines": {
-    "node": ">=18.17"
+    "node": ">=22.14.0"
   },
   "oclif": {
     "commands": "./src/commands",
