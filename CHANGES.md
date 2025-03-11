@@ -1,3 +1,16 @@
+--------------------------
+**Api**
+- Add the missing  field for  endpoints
+
+**Messaging**
+- Add missing enums for A2P and TF
+
+**Numbers**
+- add missing enum values to hosted_number_order_status
+
+**Twiml**
+- Convert Twiml Attribute  of type enum to string **(breaking change)**
+
 ## [5.22.12](https://github.com/twilio/twilio-cli/compare/5.22.11...5.22.12) (2025-02-20)
 
 ---------------------------
