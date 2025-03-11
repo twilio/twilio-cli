@@ -1,3 +1,10 @@
+## [5.23.0](https://github.com/twilio/twilio-cli/compare/5.22.12...5.23.0) (2025-03-11)
+
+
+### Library - Chores
+
+* ignoring .git folder in docker image ([#621](https://github.com/twilio/twilio-cli/issues/621)) ([f9c98eb](https://github.com/twilio/twilio-cli/commit/f9c98eb43b1aa93c2c2b546d4e0f86a4e071da37))
+
 --------------------------
 **Api**
 - Add the missing  field for  endpoints
