@@ -1,3 +1,15 @@
+## [5.23.1](https://github.com/twilio/twilio-cli/compare/5.23.0...5.23.1) (2025-03-28)
+
+--------------------------
+**Accounts**
+- Update Safelist API docs as part of prefix supoort
+
+**Flex**
+- Removing `first_name`, `last_name`, and `friendly_name` from the Flex User API
+
+**Messaging**
+- Add missing tests under transaction/phone_numbers and transaction/short_code
+
 ## [5.23.0](https://github.com/twilio/twilio-cli/compare/5.22.12...5.23.0) (2025-03-11)
 
 
