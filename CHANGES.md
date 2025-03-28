@@ -1,3 +1,10 @@
+## [5.23.1](https://github.com/twilio/twilio-cli/compare/5.23.0...5.23.1) (2025-03-28)
+
+
+### Library - Chores
+
+* Update CHANGES.md ([#624](https://github.com/twilio/twilio-cli/issues/624)) ([be2e639](https://github.com/twilio/twilio-cli/commit/be2e63919ac5c173422b7c663138c01f546f5068))
+
 5.23.1
 
 ## [5.23.1](https://github.com/twilio/twilio-cli/compare/5.23.0...5.23.1) (2025-03-28)
