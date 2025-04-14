@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 16.x, 14.x]
+        node-version: [18.x, 20.x, lts/* ]
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
@@ -60,7 +60,7 @@ jobs:
           make install
       - name: Semantic Release runs for draft release
         id: semantic-release-draft
-        run: DEBUG=semantic-release:* $(npm bin)/semantic-release  -t \${version}
+        run: DEBUG=semantic-release:* npx semantic-release  -t \${version}
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

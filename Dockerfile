@@ -1,8 +1,9 @@
-FROM node:14.18.1
+FROM node:18.17.0
 RUN apt-get update && apt-get install -y libsecret-1-dev
 
 RUN mkdir /twilio
 WORKDIR /twilio
 
 COPY . .
+RUN npm install
 RUN npm link

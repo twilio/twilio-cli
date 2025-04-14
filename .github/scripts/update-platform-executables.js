@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const { GitHub } = require('@actions/github');
+const github = require('@actions/github');
 const fs = require('fs');
 
 /**
@@ -15,12 +15,12 @@ const updatePlatformExecutables = async () => {
         return;
       }
     }
-    const github = new GitHub(process.env.GITHUB_TOKEN);
+    const octokit = new github.getOctokit(process.env.GITHUB_TOKEN);
     const [owner, repo] = process.env.REPO_NAME
       ? process.env.REPO_NAME.split('/')
       : [null, null];
     const tag = process.env.TAG_NAME;
-    const getReleaseResponse = await github.repos.getReleaseByTag({
+    const getReleaseResponse = await octokit.rest.repos.getReleaseByTag({
       owner,
       repo,
       tag
@@ -57,7 +57,7 @@ const updatePlatformExecutables = async () => {
     const file_bytes = fs.readFileSync(file);
 
     // Check for duplicates.
-    const assets = await github.repos.listAssetsForRelease(
+    const assets = await octokit.rest.repos.listReleaseAssets(
       {
         owner,
         repo,
@@ -69,7 +69,7 @@ const updatePlatformExecutables = async () => {
         core.debug(
           `An asset called ${assetName} already exists in release ${tag} so we'll overwrite it.`
         )
-        await github.repos.deleteReleaseAsset({
+        await octokit.rest.repos.deleteReleaseAsset({
           owner,
           repo,
           asset_id: duplicate_asset.id
@@ -85,7 +85,7 @@ const updatePlatformExecutables = async () => {
     }
 
     core.debug(`Uploading ${file} to ${assetName} in release ${tag}.`)
-    const uploaded_asset = await github.repos.uploadReleaseAsset(
+    const uploaded_asset = await octokit.rest.repos.uploadReleaseAsset(
       {
         url: oldUploadUrl,
         name: assetName,

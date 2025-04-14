@@ -38,11 +38,19 @@ class TwilioRestApiPlugin extends Plugin {
     actionDefinition.resource = actionDefinition.domain.paths[actionDefinition.path];
     actionDefinition.topicName = BASE_TOPIC_NAME + TOPIC_SEPARATOR + getTopicName(actionDefinition);
 
+    if (actionDefinition.resource.pathType === undefined) return;
     const pathType = actionDefinition.resource.pathType.toLowerCase();
 
     Object.keys(actionDefinition.resource.operations).forEach((methodName) => {
       actionDefinition.methodName = methodName;
       actionDefinition.actionName = METHOD_TO_ACTION_MAP[pathType][methodName];
+      if (
+        actionDefinition.actionName !== 'create' &&
+        pathType === 'list' &&
+        'delete' in actionDefinition.resource.operations
+      ) {
+        actionDefinition.actionName = METHOD_TO_ACTION_MAP.instance[methodName];
+      }
       this.scanAction(actionDefinition);
     }, this);
   }
@@ -54,6 +62,7 @@ class TwilioRestApiPlugin extends Plugin {
     };
 
     Object.keys(actionDefinition.domain.paths).forEach((pathName) => {
+      if (pathName === '/healthcheck') return;
       const versionName = pathName.split('/')[1];
       const shortVersion = versionName.replace(/v/g, '');
 

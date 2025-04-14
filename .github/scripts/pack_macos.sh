@@ -6,7 +6,7 @@ import_certificate() {
     CERTIFICATE=$RUNNER_TEMP/certificate.p12
     OSX_KEYCHAIN=$RUNNER_TEMP/app-signing.keychain-db
     # import certificate from secrets
-    echo -n "$OSX_INSTALLER_CERT_BASE64" | base64 --decode --output $CERTIFICATE
+    echo -n "$OSX_INSTALLER_CERT_BASE64" | base64 --decode > $CERTIFICATE
     # genrate random keychain password
     OSX_KEYCHAIN_PASSWORD=`openssl rand -hex 12`
     # create new keychain

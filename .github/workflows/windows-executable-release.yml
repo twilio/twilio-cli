@@ -35,7 +35,7 @@ jobs:
         brew install makensis
         npx oclif pack:win
      - name: upload artifact
-       uses: actions/upload-artifact@v2
+       uses: actions/upload-artifact@v4
        with:
         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
         path: dist/win32/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
@@ -45,33 +45,63 @@ jobs:
     needs: [pack-windows-release, get-tag, get-sha]
     runs-on: windows-latest
     steps:
-     - uses: actions/checkout@v2
-     - run: make install
-     - name: import certificate
-       if: ${{ github.repository_owner == 'twilio' }}
-       run: |
-        New-Item -ItemType directory -Path certificate
-        Set-Content -Path certificate\certificate.txt -Value '${{ secrets.WINDOWS_CERTIFICATE }}'
-        certutil -decode certificate\certificate.txt certificate\certificate.pfx
-     - name: import Executable
-       id: download
-       uses: actions/download-artifact@v2
-       with:
-         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-     - name: 'Echo download path'
-       run: ls ${{steps.download.outputs.download-path}}
-     - name: Code Sign The Executable
-       if: ${{ github.repository_owner == 'twilio' }}
-       run: |
-          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f certificate\certificate.pfx /p '${{ secrets.WINDOWS_CERTIFICATE_PASS }}' /t http://timestamp.digicert.com ${{steps.download.outputs.download-path}}/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
-     - name: Upload binaries to release
-       run: node .github/scripts/update-platform-executables.js
-       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
-        ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-        TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
-        REPO_NAME: ${{ github.repository }}
+      - uses: actions/checkout@v2
+      - run: make install
+      - name: import Executable
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
+      - name: 'Echo download path'
+        run: ls ${{steps.download.outputs.download-path}}
+
+      - name: Setup Certificate
+        run: |
+          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > /d/Certificate_pkcs12.p12
+        shell: bash
+
+      - name: Set variables
+        id: variables
+        run: |
+          dir
+          echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
+          echo "::set-output name=KEYPAIR_NAME::gt-standard-keypair"
+          echo "::set-output name=CERTIFICATE_NAME::gt-certificate"
+          echo "SM_HOST=${{ secrets.SM_HOST }}" >> "$GITHUB_ENV"
+          echo "SM_API_KEY=${{ secrets.SM_API_KEY }}" >> "$GITHUB_ENV"
+          echo "SM_CLIENT_CERT_FILE=D:\\Certificate_pkcs12.p12" >> "$GITHUB_ENV"
+          echo "SM_CLIENT_CERT_PASSWORD=${{ secrets.SM_CLIENT_CERT_PASSWORD }}" >> "$GITHUB_ENV"
+          echo "C:\Program Files (x86)\Windows Kits\10\App Certification Kit" >> $GITHUB_PATH
+          echo "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools" >> $GITHUB_PATH
+          echo "C:\Program Files\DigiCert\DigiCert Keylocker Tools" >> $GITHUB_PATH
+        shell: bash
+
+      - name: Setup Keylocker KSP on windows
+        run: |
+          curl -X GET  https://one.digicert.com/signingmanager/api-ui/v1/releases/Keylockertools-windows-x64.msi/download -H "x-api-key:%SM_API_KEY%" -o Keylockertools-windows-x64.msi
+          msiexec /i Keylockertools-windows-x64.msi /quiet /qn
+          smksp_registrar.exe list
+          smctl.exe keypair ls
+          C:\Windows\System32\certutil.exe -csp "DigiCert Signing Manager KSP" -key -user
+        shell: cmd
+
+      - name: Certificates Sync
+        run: |
+          smctl windows certsync
+        shell: cmd
+
+      - name: Code Sign The Executable
+        if: ${{ github.repository_owner == 'twilio' }}
+        run: |
+          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /sha1 ${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }} /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 ${{steps.download.outputs.download-path}}/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
+      - name: Upload binaries to release
+        run: node .github/scripts/update-platform-executables.js
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
+         ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
+         TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
+         REPO_NAME: ${{ github.repository }}
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
