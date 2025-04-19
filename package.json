@@ -1,6 +1,6 @@
 {
   "name": "twilio-cli",
-  "version": "5.22.10",
+  "version": "5.23.1",
   "description": "Unleash the power of Twilio from your command prompt. Visit https://twil.io/cli for don.",
   "keywords": [
     "oclif"
@@ -85,7 +85,7 @@
     "ngrok": "^4.3.3"
   },
   "engines": {
-    "node": ">=18.17"
+    "node": ">=20.18.3"
   },
   "oclif": {
     "commands": "./src/commands",

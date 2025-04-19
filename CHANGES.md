@@ -1,3 +1,71 @@
+## [5.23.1](https://github.com/twilio/twilio-cli/compare/5.23.0...5.23.1) (2025-03-28)
+
+
+### Library - Chores
+
+* Update CHANGES.md ([#624](https://github.com/twilio/twilio-cli/issues/624)) ([be2e639](https://github.com/twilio/twilio-cli/commit/be2e63919ac5c173422b7c663138c01f546f5068))
+
+5.23.1
+
+## [5.23.1](https://github.com/twilio/twilio-cli/compare/5.23.0...5.23.1) (2025-03-28)
+
+--------------------------
+**Accounts**
+- Update Safelist API docs as part of prefix supoort
+
+**Flex**
+- Removing `first_name`, `last_name`, and `friendly_name` from the Flex User API
+
+**Messaging**
+- Add missing tests under transaction/phone_numbers and transaction/short_code
+
+## [5.23.0](https://github.com/twilio/twilio-cli/compare/5.22.12...5.23.0) (2025-03-11)
+
+
+### Library - Chores
+
+* ignoring .git folder in docker image ([#621](https://github.com/twilio/twilio-cli/issues/621)) ([f9c98eb](https://github.com/twilio/twilio-cli/commit/f9c98eb43b1aa93c2c2b546d4e0f86a4e071da37))
+
+--------------------------
+**Api**
+- Add the missing  field for  endpoints
+
+**Messaging**
+- Add missing enums for A2P and TF
+
+**Numbers**
+- add missing enum values to hosted_number_order_status
+
+**Twiml**
+- Convert Twiml Attribute  of type enum to string **(breaking change)**
+
+## [5.22.12](https://github.com/twilio/twilio-cli/compare/5.22.11...5.22.12) (2025-02-20)
+
+---------------------------
+**Flex**
+- Adding Digital Transfers APIs under v1/Interactions
+
+**Numbers**
+- Convert webhook_type to ienum type in v1/Porting/Configuration/Webhook/{webhook_type}
+
+**Trusthub**
+- Changing TrustHub SupportingDocument status enum from lowercase to uppercase since kyc-orch returns status capitalized and rest proxy requires strict casing
+
+## [5.22.11](https://github.com/twilio/twilio-cli/compare/5.22.10...5.22.11) (2025-02-11)
+
+---------------------------
+**Api**
+- Change downstream url and change media type for file .
+
+**Intelligence**
+- Add json_results for Generative JSON operator results
+
+**Messaging**
+- Add DestinationAlphaSender API to support Country-Specific Alpha Senders
+
+**Video**
+- Change codec type from enum to case-insensitive enum in recording and room_recording apis
+
 ## [5.22.10](https://github.com/twilio/twilio-cli/compare/5.22.9...5.22.10) (2025-01-28)
 
 ---------------------------
