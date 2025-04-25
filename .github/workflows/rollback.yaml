@@ -13,6 +13,23 @@ on:
         default: ''
 
 jobs:
+  delete_github_release_and_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Delete GitHub Release and Tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ROLLBACK_VERSION: ${{ github.event.inputs.rollback_version }}
+        run: |
+          npm install @octokit/rest
+          node .github/scripts/delete-github-release-and-tag.js
+
   docker_hub_rollback:
     runs-on: ubuntu-latest
     steps:
