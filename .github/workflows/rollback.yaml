@@ -28,9 +28,10 @@ jobs:
           ROLLBACK_VERSION: ${{ github.event.inputs.rollback_version }}
         run: |
           npm install @octokit/rest
-          node .github/scripts/delete-github-release-and-tag.js
+          node .github/scripts/rollback/delete-github-release-and-tag.js
 
   docker_hub_rollback:
+    needs: delete_github_release_and_tag
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -46,6 +47,7 @@ jobs:
         run: docker push twilio/twilio-cli:latest # "If you wish to delete the rollback_version, handle it manually or via Docker Hub API."
 
   apt_rollback:
+    needs: delete_github_release_and_tag
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -67,4 +69,4 @@ jobs:
           GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
           ROLLBACK_VERSION: ${{ github.event.inputs.rollback_version }}
           SET_LATEST: ${{ github.event.inputs.set_latest }}
-        run: node .github/scripts/rollback-apt.js
+        run: node .github/scripts/rollback/rollback-apt.js
