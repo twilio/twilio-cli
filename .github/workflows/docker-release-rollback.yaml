@@ -1,13 +1,19 @@
-name: Docker Hub Release Rollback
+name: Rollback Release
+
 on:
   workflow_dispatch:
     inputs:
-      rollback_tag:
-        description: 'Tag to set as latest'
+      rollback_version:
+        description: 'Version to rollback (e.g., 2.32.1)'
         required: true
         default: ''
+      set_latest:
+        description: 'Version to set as latest (e.g., 2.31.0)'
+        required: true
+        default: ''
+
 jobs:
-  rollback:
+  docker_hub_rollback:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -15,9 +21,33 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Pull desired tag
-        run: docker pull twilio/twilio-cli:${{ github.event.inputs.rollback_tag }}
+      - name: Pull tag to be set as latest
+        run: docker pull twilio/twilio-cli:${{ github.event.inputs.set_latest }}
       - name: Tag as latest
-        run: docker tag twilio/twilio-cli:${{ github.event.inputs.rollback_tag }} twilio/twilio-cli:latest
+        run: docker tag twilio/twilio-cli:${{ github.event.inputs.set_latest }} twilio/twilio-cli:latest
       - name: Push latest
-        run: docker push twilio/twilio-cli:latest
+        run: docker push twilio/twilio-cli:latest # "If you wish to delete the rollback_version, handle it manually or via Docker Hub API."
+
+  apt_rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install APT tools
+        run: sudo apt-get update && sudo apt-get install -y apt-utils dpkg-dev gnupg
+      - name: Run APT rollback script
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_REGION: us-east-1
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          GPG_SIGNING_KEY_ID: ${{ secrets.GPG_SIGNING_KEY_ID }}
+          GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
+          ROLLBACK_VERSION: ${{ github.event.inputs.rollback_version }}
+          SET_LATEST: ${{ github.event.inputs.set_latest }}
+        run: node .github/scripts/rollback-apt.js
