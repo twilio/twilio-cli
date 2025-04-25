@@ -1,6 +1,3 @@
-// Requires: env variables GITHUB_TOKEN, REPO_OWNER, REPO_NAME, ROLLBACK_VERSION
-// Usage: node .github/scripts/delete-github-release-and-tag.js
-
 const { Octokit } = require('@octokit/rest');
 
 async function main() {
@@ -61,7 +58,6 @@ async function main() {
   }
 }
 
-// Run the script and catch errors
 main().catch(err => {
   console.error(err);
   process.exit(1);
