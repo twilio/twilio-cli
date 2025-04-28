@@ -32,21 +32,21 @@ jobs:
           npm install @octokit/rest
           node .github/scripts/rollback/delete-github-release-and-tag.js
 
-  docker_hub_rollback:
-    needs: delete_github_release_and_tag
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Pull tag to be set as latest
-        run: docker pull twilio/twilio-cli:${{ github.event.inputs.set_latest }}
-      - name: Tag as latest
-        run: docker tag twilio/twilio-cli:${{ github.event.inputs.set_latest }} twilio/twilio-cli:latest
-      - name: Push latest
-        run: docker push twilio/twilio-cli:latest # "If you wish to delete the rollback_version, handle it manually or via Docker Hub API."
+  # docker_hub_rollback:
+  #   needs: delete_github_release_and_tag
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Login to Docker Hub
+  #       uses: docker/login-action@v1
+  #       with:
+  #         username: ${{ secrets.DOCKER_HUB_USERNAME }}
+  #         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+  #     - name: Pull tag to be set as latest
+  #       run: docker pull twilio/twilio-cli:${{ github.event.inputs.set_latest }}
+  #     - name: Tag as latest
+  #       run: docker tag twilio/twilio-cli:${{ github.event.inputs.set_latest }} twilio/twilio-cli:latest
+  #     - name: Push latest
+  #       run: docker push twilio/twilio-cli:latest # "If you wish to delete the rollback_version, handle it manually or via Docker Hub API."
 
   apt_rollback:
     needs: delete_github_release_and_tag
