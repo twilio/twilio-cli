@@ -1,1 +1,13 @@
 name: Rollback Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      rollback_version:
+        description: 'Version to rollback (e.g., 2.32.1)'
+        required: true
+        default: ''
+      set_latest:
+        description: 'Version to set as latest (e.g., 2.31.0)'
+        required: true
+        default: ''
