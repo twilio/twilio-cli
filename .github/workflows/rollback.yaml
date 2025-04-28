@@ -72,5 +72,5 @@ jobs:
           ROLLBACK_VERSION: ${{ github.event.inputs.rollback_version }}
           SET_LATEST: ${{ github.event.inputs.set_latest }}
         run: |
-          npm install -g qqjs
+          npm install -g @oclif/dev-cli
           node .github/scripts/rollback/rollback-apt.js
