@@ -20,10 +20,10 @@ jobs:
         node-version: [ 20.x, 22.x, lts/* ]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - run: make install
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -34,7 +34,7 @@ jobs:
     needs: [test]
     steps:
       - name: Checkout cli
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Update Changelog
