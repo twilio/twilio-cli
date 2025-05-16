@@ -39,6 +39,7 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Update Changelog
         run: |
+          echo "CLI_CORE_TAG=${{ env.CLI_CORE_TAG }}"
           bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
 #  release:
 #    runs-on: ubuntu-latest
