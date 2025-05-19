@@ -12,9 +12,6 @@ on:
       homebrew-prerelease:
         description: 'HomeBrew prerelease'
         default: 'false'
-      tag-name:
-        description: 'Tag to be released in Homebrew (Same as CLI latest tag name)'
-        required: true
 jobs:
   test:
     runs-on: ubuntu-latest
