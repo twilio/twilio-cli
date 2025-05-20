@@ -45,7 +45,7 @@ jobs:
           cat $GITHUB_ENV
           bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
           make install
-          node .github/scripts/update-cli-core-version.js
+          node .github/scripts/update-cli-core-release-version.js
           git add package.json package-lock.json
           git commit -m "chore: update cli-core version"
           git push origin HEAD
