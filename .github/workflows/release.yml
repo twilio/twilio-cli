@@ -12,6 +12,9 @@ on:
       homebrew-prerelease:
         description: 'HomeBrew prerelease'
         default: 'false'
+      tag-name:
+        description: 'Cli-core tag to be released in Homebrew (Same as CLI latest tag name)'
+        required: true
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -77,6 +80,7 @@ jobs:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
+          CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
 #      - name: Extract branch name
 #        id: extract_branch
 #        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
