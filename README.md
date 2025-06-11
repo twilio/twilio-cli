@@ -36,6 +36,11 @@ You can review the docs on [available plugins and how to install them](https://w
 1. From the repo directory, run: `npm install`
 1. Run `./bin/run` from the repo directory to run the CLI.
 
+## Node 20 support update
+
+From version 6.0.0, the Twilio CLI will no longer support Node 18. If you are using Node 18, please upgrade to Node 20 or later.
+For more information, see the [Twilio-CLI Support Update: Node 18 Version Deprecation](https://www.twilio.com/docs/twilio-cli/getting-started/twilio-cli-support-update).
+
 ## Feedback
 
 Please file a [GitHub issue](https://github.com/twilio/twilio-cli/issues) in this repository for any issues/bugs.
