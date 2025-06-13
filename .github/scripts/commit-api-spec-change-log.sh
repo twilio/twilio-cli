@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Running update changelog script"
-changeLog="$1"
-versionType="$2"
+changeLog="${CHANGE_LOG}"
+versionType="${VERSION_TYPE}"
 echo "$changeLog"
 node .github/scripts/update-change-log.js "$changeLog"
 echo "Git configurations"
