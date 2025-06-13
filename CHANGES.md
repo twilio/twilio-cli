@@ -1,3 +1,36 @@
+## [6.0.0-rc.1](https://github.com/twilio/twilio-cli/compare/5.23.1...6.0.0-rc.1) (2025-06-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* RC Release commit
+
+### Library - Features
+
+* rc-release commit ([#644](https://github.com/twilio/twilio-cli/issues/644)) ([e747fd6](https://github.com/twilio/twilio-cli/commit/e747fd6fbc843b815afc5ebfbbf6e539801db8c3))
+* Update UPGRADE.md ([#645](https://github.com/twilio/twilio-cli/issues/645)) ([9869d74](https://github.com/twilio/twilio-cli/commit/9869d74ed5cc33bf0c2f60b9f9cde77609bcf7b7))
+
+
+### Library - Fixes
+
+* removed ngrok dependecy ([#635](https://github.com/twilio/twilio-cli/issues/635)) ([b20b8f4](https://github.com/twilio/twilio-cli/commit/b20b8f46959d3ba2b5656de55cba688e8057ef51))
+
+
+### Library - Chores
+
+* Add rollback.yaml ([#625](https://github.com/twilio/twilio-cli/issues/625)) ([5cd0035](https://github.com/twilio/twilio-cli/commit/5cd00350da492584b5c1efa5bf9b16c3852df3ad))
+* Create rollback.yaml ([#627](https://github.com/twilio/twilio-cli/issues/627)) ([e49dd51](https://github.com/twilio/twilio-cli/commit/e49dd512a97ab2eb2596cc847b1a23044115abef))
+* node lts version set ([#636](https://github.com/twilio/twilio-cli/issues/636)) ([cef5e9c](https://github.com/twilio/twilio-cli/commit/cef5e9c42a5329181e6591d1fb8a0faa51eabba8))
+* release test ([#629](https://github.com/twilio/twilio-cli/issues/629)) ([9167d28](https://github.com/twilio/twilio-cli/commit/9167d28975e0557f87c2717411611a73f133fd50))
+* test with rc version ([02d5730](https://github.com/twilio/twilio-cli/commit/02d573061b95a0b20c2796a0e768a627d3d488a7))
+* test with rc version ([929f204](https://github.com/twilio/twilio-cli/commit/929f20435b750cb71b1a4976ff3f6ccb71da6db0))
+* test with rc version ([3dd6710](https://github.com/twilio/twilio-cli/commit/3dd67109b377c48fc99a7fa939800dcf903fbce7))
+* update cli-core version ([b3b0b01](https://github.com/twilio/twilio-cli/commit/b3b0b0188fc25c2b5af0cb3cfdbccc8d075f5513))
+* update readme ([#637](https://github.com/twilio/twilio-cli/issues/637)) ([e50de64](https://github.com/twilio/twilio-cli/commit/e50de6436cdc2070a41a4fd3f4836ac4566b065e))
+* Update rollback.yaml ([#628](https://github.com/twilio/twilio-cli/issues/628)) ([d5e248a](https://github.com/twilio/twilio-cli/commit/d5e248a1a5281229d6cb02891616089a2454640c))
+* Upgrade guide node 20 ([#638](https://github.com/twilio/twilio-cli/issues/638)) ([2d41ce9](https://github.com/twilio/twilio-cli/commit/2d41ce931615201c95abeb816be9cae751e43574))
+* upgrade node version ([#622](https://github.com/twilio/twilio-cli/issues/622)) ([f83089f](https://github.com/twilio/twilio-cli/commit/f83089f68a0269cb0b6e542b54b7779d73a3fa26))
+
 --------------------------
 **Api**
 - Change DependentPhoneNumber `capabilities` type `object` and `date_created`, `date_updated` to `date_time<rfc2822>`
