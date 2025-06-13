@@ -176,7 +176,7 @@ jobs:
 
   notify-complete-fail:
     if: ${{ failure() || cancelled() }}
-    needs: [ oclif-release, docker-release, platform-executables-release ]
+    needs: [ release, oclif-release, platform-executables-release ]
     name: Notify Release Failed
     runs-on: ubuntu-latest
     steps:
