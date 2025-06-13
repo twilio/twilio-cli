@@ -32,65 +32,65 @@ jobs:
           cache: 'npm'
       - name: Run tests
         run: npm test
-  update-api-definitions-changelog:
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
-      - name: Checkout cli
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-      - name: Update Changelog
-        run: |
-          bash .github/scripts/commit-api-spec-change-log.sh '${{ github.event.inputs.change-log }}' ${{ github.event.inputs.version-type }}
-          make install
-          node .github/scripts/update-cli-core-release-version.js
-          git add package.json package-lock.json
-          git commit -m "chore: update cli-core version"
-          git push origin HEAD
-        env:
-          CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
+#  update-api-definitions-changelog:
+#    runs-on: ubuntu-latest
+#    needs: [test]
+#    steps:
+#      - name: Checkout cli
+#        uses: actions/checkout@v4
+#        with:
+#          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+#      - name: Update Changelog
+#        run: |
+#          bash .github/scripts/commit-api-spec-change-log.sh '${{ github.event.inputs.change-log }}' ${{ github.event.inputs.version-type }}
+#          make install
+#          node .github/scripts/update-cli-core-release-version.js
+#          git add package.json package-lock.json
+#          git commit -m "chore: update cli-core version"
+#          git push origin HEAD
+#        env:
+#          CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
   release:
     runs-on: ubuntu-latest
-    needs: [ update-api-definitions-changelog ]
+    needs: [ test ]
     outputs:
-      tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
-      draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
-    steps:
-      - name: Checkout cli
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-      - name: Run git and npm update
-        run: |
-          git pull
-          make install
-      - name: Semantic Release runs
-        id: semantic-release
-        run: DEBUG=semantic-release:* npx semantic-release  -t \${version}
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: verify release required
-        if: ${{steps.semantic-release.outputs.TAG_NAME == ''}}
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('There are no relevant changes, so no new version is released.')
-      - name: Update release
-        run:
-          node .github/scripts/update-release.js
-        env:
-          TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
-          RELEASE_BODY: ${{github.event.inputs.change-log}}
-          REPO_NAME: ${{ github.repository }}
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
-          CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
-      - name: Extract branch name
-        id: extract_branch
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      tag-name: "6.0.0-rc.1"
+#      draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
+#    steps:
+#      - name: Checkout cli
+#        uses: actions/checkout@v2
+#        with:
+#          persist-credentials: false
+#      - name: Run git and npm update
+#        run: |
+#          git pull
+#          make install
+#      - name: Semantic Release runs
+#        id: semantic-release
+#        run: DEBUG=semantic-release:* npx semantic-release  -t \${version}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#      - name: verify release required
+#        if: ${{steps.semantic-release.outputs.TAG_NAME == ''}}
+#        uses: actions/github-script@v3
+#        with:
+#          script: |
+#            core.setFailed('There are no relevant changes, so no new version is released.')
+#      - name: Update release
+#        run:
+#          node .github/scripts/update-release.js
+#        env:
+#          TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
+#          RELEASE_BODY: ${{github.event.inputs.change-log}}
+#          REPO_NAME: ${{ github.repository }}
+#          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          INPUTS: '{ "tag-name": "${{needs.release.outputs.draft-tag-name}}" }'
+#          CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
+#      - name: Extract branch name
+#        id: extract_branch
+#        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
   oclif-release:
     runs-on: ubuntu-latest
     needs: [release]
