@@ -56,11 +56,11 @@ jobs:
     outputs:
       tag-name: "6.0.0-rc.1"
 #      draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
-#    steps:
-#      - name: Checkout cli
-#        uses: actions/checkout@v2
-#        with:
-#          persist-credentials: false
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 #      - name: Run git and npm update
 #        run: |
 #          git pull
