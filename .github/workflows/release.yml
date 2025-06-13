@@ -42,7 +42,7 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Update Changelog
         run: |
-          bash .github/scripts/commit-api-spec-change-log.sh '${{ github.event.inputs.change-log }}' ${{ github.event.inputs.version-type }}
+          bash .github/scripts/commit-api-spec-change-log.sh
           make install
           node .github/scripts/update-cli-core-release-version.js
           git add package.json package-lock.json
@@ -50,6 +50,9 @@ jobs:
           git push origin HEAD
         env:
           CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
+          CHANGE_LOG: ${{ github.event.inputs.change-log }}
+          VERSION_TYPE: ${{ github.event.inputs.version-type }}
+          
   release:
     runs-on: ubuntu-latest
     needs: [ update-api-definitions-changelog ]
