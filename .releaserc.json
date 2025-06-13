@@ -2,7 +2,7 @@
   "branches": [
     "main",
     {
-      "name": "release-feature-branch",
+      "name": "rc-release",
       "prerelease": "rc"
     },
     {
@@ -71,7 +71,8 @@
     [
       "@semantic-release/github",
       {
-        "successComment": false
+        "successComment": false,
+        "npmPublish": false
       }
     ],
     [
