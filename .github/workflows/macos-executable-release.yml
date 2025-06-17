@@ -54,7 +54,7 @@ jobs:
           echo FILE_PATH_X64: ${{ steps.set-file-path.outputs.FILE_PATH_X64 }}
           echo FILE_PATH_ARM64: ${{ steps.set-file-path.outputs.FILE_PATH_ARM64 }}
   pack-macos:
-    needs: [get-tag, get-sha]
+    needs: [get-tag, get-sha, set-file-path]
     runs-on: macos-13
     steps:
     - uses: actions/checkout@v2

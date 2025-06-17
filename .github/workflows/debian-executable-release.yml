@@ -45,20 +45,20 @@ jobs:
           sudo chown -R 1001:121 "/root/.npm"
           sudo npx oclif pack:deb
 
-      - name: Upload binaries to release - amd64
-        run: node .github/scripts/update-platform-executables.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE: ${{ steps.set-file-path.outputs.FILE_PATH_AMD64 }}
-          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-amd64.deb
-          TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
-          REPO_NAME: ${{ github.repository }}
+#      - name: Upload binaries to release - amd64
+#        run: node .github/scripts/update-platform-executables.js
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          FILE: ${{ steps.set-file-path.outputs.FILE_PATH_AMD64 }}
+#          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-amd64.deb
+#          TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
+#          REPO_NAME: ${{ github.repository }}
 
       - name: Upload binaries to release - armel
         run: node .github/scripts/update-platform-executables.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE: dist/deb/${{ github.event.inputs.formula }}_${{ steps.get-tag.outputs.TAG_NAME }}.${{ steps.get-sha.outputs.SHA_SHORT }}-1_armel.deb
+          FILE: ${{ steps.set-file-path.outputs.FILE_PATH_AMD64 }}
           ASSET_NAME: ${{ github.event.inputs.formula }}-${{ steps.get-tag.outputs.TAG_NAME }}-armel.deb
           TAG_NAME: ${{ steps.get-tag.outputs.TAG_NAME }}
           REPO_NAME: ${{ github.repository }}
