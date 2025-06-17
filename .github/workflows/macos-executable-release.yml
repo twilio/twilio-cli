@@ -80,8 +80,8 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE: ${{ needs.set-file-path.outputs.FILE_PATH_X64 }}
-          ASSET_NAME: ${{ github.event.inputs.formula }}-${{ needs.get-tag.outputs.TAG_NAME }}-x64.pkg
-          TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
+          ASSET_NAME: "twilio-6.0.0-rc.1-x64.pkg"
+          TAG_NAME: "6.0.0-rc.1"
           REPO_NAME: ${{ github.repository }}
 
 
