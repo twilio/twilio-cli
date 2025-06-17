@@ -30,7 +30,7 @@ jobs:
           echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
   set-file-path:
     needs: [get-tag, get-sha]
-    runs-on: macos-11
+    runs-on: macos-13
     outputs:
       FILE_PATH_X64: ${{steps.set-file-path.outputs.FILE_PATH_X64}}
       FILE_PATH_ARM64: ${{steps.set-file-path.outputs.FILE_PATH_ARM64}}
@@ -54,7 +54,7 @@ jobs:
           echo FILE_PATH_X64: ${{ steps.set-file-path.outputs.FILE_PATH_X64 }}
           echo FILE_PATH_ARM64: ${{ steps.set-file-path.outputs.FILE_PATH_ARM64 }}
   pack-macos:
-    needs: [get-tag, get-sha, set-file-path]
+    needs: [set-file-path]
     runs-on: macos-13
     steps:
     - uses: actions/checkout@v2
