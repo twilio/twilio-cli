@@ -9,7 +9,7 @@ jobs:
   get-tag:
     runs-on: macos-13
     outputs:
-     TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
+     TAG_NAME: "6.0.0-rc.1"
     steps:
      - uses: actions/checkout@v2
      - name: Getting latest tag
