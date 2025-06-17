@@ -157,7 +157,7 @@ jobs:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
     strategy:
       matrix:
-        executable_workflow: ['debian-executable-release.yml', 'macos-executable-release.yml']
+        executable_workflow: ['macos-executable-release.yml', 'rpmbuild.yml']
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
