@@ -33,7 +33,7 @@ module.exports = async function commandNotFound(options) {
 
       logger.warn(`Installed plugin ${pluginName}"!`);
       logger.warn('Please try running the command again');
-      this.exit(0);
+      return;
     }
   }
 };

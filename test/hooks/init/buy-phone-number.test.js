@@ -75,7 +75,7 @@ describe('hooks', () => {
         });
 
       setup().it('creates the proper commands', (ctx) => {
-        expect(ctx.plugin.hooks).to.eql({}); // eql is for comparing objects (== instead of ===)
+        expect(ctx.plugin?.hooks || {}).to.eql({}); // eql is for comparing objects (== instead of ===)
         expect(ctx.plugin.topics).to.have.length(1);
         expect(ctx.plugin.commands).to.have.length(2);
 

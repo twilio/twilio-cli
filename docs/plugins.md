@@ -15,7 +15,7 @@ Start by cloning [this repo of an example debugger plugin](https://github.com/tw
 
 Once it's cloned, you can poke around to get a sense for the organization and even copy and adapt it for your own plugin use case.
 
-Your plugin directory should following the naming convention `plugin-<my-spectacular-plugin>`.
+Your plugin directory should follow the naming convention `plugin-<my-spectacular-plugin>`.
 
 Remember to update the `package.json` fields if you start building your own plugin off of this one:
 * name
@@ -26,14 +26,13 @@ Remember to update the `package.json` fields if you start building your own plug
 
 And run `npm install`.
 
-
 ## 3. Add your [topics](https://oclif.io/docs/topics) and [commands](https://oclif.io/docs/commands)
 
 Commands go in the `src/commands` folder and should inherit from one of our command base classes.
 
 ### TwilioClientCommand
 
-Inherit from `TwilioClientCommand` if your command will need to make Twilio API calls. You will be provided with a `this.twilioClient` to make API calls using the Node.js helper library for Twilio. The client object will already have the necessary credentials and account SID. Just start calling the API. You are also given an `this.httpClient` to make requests to other API's, but you'll need to manage any necessary credentials yourself.
+Inherit from `TwilioClientCommand` if your command will need to make Twilio API calls. You will be provided with a `this.twilioClient` to make API calls using the Node.js helper library for Twilio. The client object will already have the necessary credentials and account SID. Just start calling the API. You are also given an `this.httpClient` to make requests to other APIs, but you'll need to manage any necessary credentials yourself.
 
 ### TwilioBaseCommand
 
@@ -46,29 +45,31 @@ Finally, the CLI will warn the user if the plugin is hosted outside of the [twil
 
 ### Flags
 
-To create flags for your spectacular plugin, you will need the following import: `const { flags } = require('@oclif/command');`
-
-Additionally, you will need to copy the base class' flags:
-```javascript
-MySpectacularPlugin.flags = Object.assign({'fave-dessert': flag.string({'description': 'Your favorite dessert', required: true})}, TwilioClientCommand.flags)
+To create flags for your plugin, use the following import:
+```js
+const { Flags } = require('@oclif/core');
+```
+And define your flags like this:
+```js
+MySpectacularPlugin.flags = {
+  ...TwilioClientCommand.flags,
+  'fave-dessert': Flags.string({ description: 'Your favorite dessert', required: true }),
+};
 ```
 
 ## 4. Test your plugin with the CLI
 
-You are probably using NPM if you develop a twilio-cli plugin, so install it if you have not already done so:
-
-`npm install -g twilio-cli`
-
-Follow the set-up instructions in the [twilio-cli Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart). The Quickstart also includes instructions for homebrew installation.
-
-For testing, "install" the plugin referencing your plugin's local development folder by linking to your plugin.
-
-Run this command from the CLI folder. This assumes the CLI and your plugin folders are siblings of each other (perhaps in a `~/Projects` folder):
+For local development, clone both the CLI and your plugin repositories. After running `npm install` in both, link your plugin to your local CLI using:
 
 ```
 ./bin/run plugins:link ../plugin-<my-spectacular-plugin>
 ```
 
+or, if using npm scripts:
+
+```
+npm run plugins:link ../plugin-<my-spectacular-plugin>
+```
 
 Now, you can run your plugin command from the CLI:
 
@@ -76,7 +77,17 @@ Now, you can run your plugin command from the CLI:
 twilio my-new-topic:my-new-command --help
 ```
 
-## 5. Publish your plugin to NPM
+## 5. Testing your plugin
+
+Install the latest compatible version of `@oclif/test` for use with `@oclif/core@^4`:
+
+```
+npm install --save-dev @oclif/test
+```
+
+Refer to the [oclif test documentation](https://oclif.github.io/docs/testing/) for up-to-date testing patterns and helpers.
+
+## 6. Publish your plugin to NPM
 
 Once you have your plugin working, publish it to npmjs.org as a JavaScript package using `npm publish`. The `twilio plugins:install <npm package name>` command will download your package from NPM.
 
