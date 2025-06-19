@@ -20,7 +20,7 @@ exports.isTwilioPlugin = (pluginName) => {
 };
 
 exports.isPluginInstalled = (config, pluginName) => {
-  return config.plugins.find((p) => p.name === pluginName);
+  return Array.isArray(config?.plugins) && config.plugins.find((p) => p.name === pluginName);
 };
 
 exports.getSupportedPlugin = (commandId) => {
