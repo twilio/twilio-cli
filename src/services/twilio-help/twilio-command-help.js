@@ -4,7 +4,6 @@ const { CommandHelp } = require('@oclif/core');
 const chalk = require('chalk');
 const indent = require('indent-string');
 const stripAnsi = require('strip-ansi');
-const { compact } = require('@oclif/core/lib/config/util');
 
 const urlUtil = require('../hyperlink-utility');
 const { getDocLink } = require('../twilio-api');
@@ -61,7 +60,7 @@ class TwilioCommandHelp extends CommandHelp {
             const body = this.flags(flags1);
             if (body) flagSections.push({ header: `${name.toUpperCase()} ${header}`, body });
           }
-          return (0, compact)(flagSections);
+          return flagSections.filter(Boolean);
         },
       },
       {

@@ -1,6 +1,6 @@
 const querystring = require('querystring');
 
-const { Flags: oclifFlags } = require('@oclif/core');
+const { Flags } = require('@oclif/core');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const { sleep } = require('@twilio/cli-core').services.JSUtils;
@@ -97,24 +97,24 @@ DebuggerLogsList.description = `Show a list of log events generated for the acco
 Argg, this is only a subset of the log events and live tailing isn't quite ready! Think this is a killer feature? Let us know here: https://airtable.com/shrcFDU1gmKWOqZXe`;
 
 DebuggerLogsList.PropertyFlags = {
-  'log-level': oclifFlags.enum({
+  'log-level': Flags.string({
     options: ['error', 'warning', 'notice', 'debug'],
     description: 'Only show log events for this log level',
   }),
-  'start-date': oclifFlags.string({
+  'start-date': Flags.string({
     description: 'Only show log events on or after this date',
   }),
-  'end-date': oclifFlags.string({
+  'end-date': Flags.string({
     description: 'Only show log events on or before this date',
   }),
 };
 
 DebuggerLogsList.flags = {
-  properties: oclifFlags.string({
+  properties: Flags.string({
     default: 'dateCreated, logLevel, errorCode, alertText',
     description: 'The event properties you would like to display (JSON output always shows all properties)',
   }),
-  streaming: oclifFlags.boolean({
+  streaming: Flags.boolean({
     char: 's',
     description: 'Continuously stream incoming log events',
   }),

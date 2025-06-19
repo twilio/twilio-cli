@@ -47,7 +47,7 @@ NumberUpdate.PropertyFlags = {
   'sms-url': flags.string({
     description: 'The URL that Twilio should request when somebody sends an SMS to the new phone number.',
   }),
-  'sms-method': flags.enum({
+  'sms-method': flags.string({
     options: ['GET', 'POST'],
     description: 'The HTTP method Twilio will use when making requests to the SmsUrl.',
   }),
@@ -55,14 +55,14 @@ NumberUpdate.PropertyFlags = {
     description:
       'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl.',
   }),
-  'sms-fallback-method': flags.enum({
+  'sms-fallback-method': flags.string({
     options: ['GET', 'POST'],
     description: 'The HTTP method that should be used to request the SmsFallbackUrl.',
   }),
   'voice-url': flags.string({
     description: 'The URL that Twilio should request when somebody dials the phone number.',
   }),
-  'voice-method': flags.enum({
+  'voice-method': flags.string({
     options: ['GET', 'POST'],
     description: 'The HTTP method Twilio will use when making requests to the VoiceUrl.',
   }),
@@ -70,7 +70,7 @@ NumberUpdate.PropertyFlags = {
     description:
       'A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by VoiceUrl.',
   }),
-  'voice-fallback-method': flags.enum({
+  'voice-fallback-method': flags.string({
     options: ['GET', 'POST'],
     description: 'The HTTP method Twilio will use when requesting the VoiceFallbackUrl.',
   }),

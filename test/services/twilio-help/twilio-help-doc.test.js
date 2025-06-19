@@ -32,7 +32,7 @@ const testHelp = test
         const help = ctx.help.formatCommand(dummyHelpCommand);
         ctx.commandHelp = stripAnsi(help)
           .split('\n')
-          .map((s) => s.trimRight())
+          .map((s) => s.trimEnd())
           .join('\n');
       },
     };
