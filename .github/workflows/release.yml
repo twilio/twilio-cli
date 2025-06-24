@@ -42,7 +42,7 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Update Changelog
         run: |
-          bash .github/scripts/commit-api-spec-change-log.sh "${{ github.event.inputs.change-log }}" ${{ github.event.inputs.version-type }}
+          bash .github/scripts/commit-api-spec-change-log.sh '${{ github.event.inputs.change-log }}'' ${{ github.event.inputs.version-type }}
           make install
           node .github/scripts/update-cli-core-release-version.js
           git add package.json package-lock.json
