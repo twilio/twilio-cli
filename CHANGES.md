@@ -1,3 +1,68 @@
+--------------------------
+**Api**
+- Change DependentPhoneNumber `capabilities` type `object` and `date_created`, `date_updated` to `date_time<rfc2822>`
+- Updated the `Default` value from 0 to 1 in the Recordings Resource `channels` property
+
+**Serverless**
+- Update `ienum` type level in Logs api
+
+**Verify**
+- Update Channel list in Verify Attempst API
+- Update `ienum` type for Conversion_Status in Verify Attempts API
+
+**Twiml**
+- Add `us2` to the list of supported values for the region attribute in the `<Conference>` TwiML noun.
+
+
+--------------------------
+**Api**
+- Added several usage category enums to `usage_record` API
+
+**Numbers**
+- Update the porting documentation
+
+**Verify**
+- Update `ienum` type for Channels in Verify Attempts API
+
+
+--------------------------
+**Accounts**
+- Changes to add date_of_consent param in Bulk Consent API
+
+**Api**
+- Change `friendly_name`, `date_created` and `date_updated` properties to type `string`.
+
+**Twiml**
+- Update twiml definition for `<ConversationRelay>` and `<Assistant>`
+
+
+--------------------------
+**Api**
+- Add `response_key` for `Usage Triggers` fetch endpoint.
+
+**Flex**
+- Add Update Interaction API
+- Adding `webhook_ttid` as optional parameter in Interactions API
+
+**Serverless**
+- Add node22 as a valid Build runtime
+- Add node20 as a valid Build runtime
+
+**Video**
+- removed `transcribe_participants_on_connect` and `transcriptions_configuration` from the room resource **(breaking change)**
+- Added `transcribe_participants_on_connect` and `transcriptions_configuration` to the room resource
+
+
+--------------------------
+**Library - Chore**
+- [PR #131](https://github.com/twilio/twilio-oai/pull/131): Trigger cli core release. Thanks to [@sbansla](https://github.com/sbansla)!
+
+**Library - Fix**
+- [PR #130](https://github.com/twilio/twilio-oai/pull/130): added a commit to trigger cli-core release. Thanks to [@sbansla](https://github.com/sbansla)!
+
+**Studio**
+- Add documentation for parent_step_sid field in Step resource
+
 ## [5.23.1](https://github.com/twilio/twilio-cli/compare/5.23.0...5.23.1) (2025-03-28)
 
 
