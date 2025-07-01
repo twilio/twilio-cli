@@ -1,3 +1,98 @@
+## [6.0.0](https://github.com/twilio/twilio-cli/compare/5.23.1...6.0.0) (2025-06-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* node 20 update
+
+### Library - Features
+
+* Breaking change commit ([#651](https://github.com/twilio/twilio-cli/issues/651)) ([e7d15dd](https://github.com/twilio/twilio-cli/commit/e7d15ddf575a7c62ecf5d5e398c25d6e7599dfb0))
+
+
+### Library - Fixes
+
+* removed ngrok dependecy ([#635](https://github.com/twilio/twilio-cli/issues/635)) ([b20b8f4](https://github.com/twilio/twilio-cli/commit/b20b8f46959d3ba2b5656de55cba688e8057ef51))
+
+
+### Library - Chores
+
+* Add rollback.yaml ([#625](https://github.com/twilio/twilio-cli/issues/625)) ([5cd0035](https://github.com/twilio/twilio-cli/commit/5cd00350da492584b5c1efa5bf9b16c3852df3ad))
+* Create rollback.yaml ([#627](https://github.com/twilio/twilio-cli/issues/627)) ([e49dd51](https://github.com/twilio/twilio-cli/commit/e49dd512a97ab2eb2596cc847b1a23044115abef))
+* node lts version set ([#636](https://github.com/twilio/twilio-cli/issues/636)) ([cef5e9c](https://github.com/twilio/twilio-cli/commit/cef5e9c42a5329181e6591d1fb8a0faa51eabba8))
+* release ([#652](https://github.com/twilio/twilio-cli/issues/652)) ([99fb955](https://github.com/twilio/twilio-cli/commit/99fb95500c45a83a8e6372efeca069a8885ba7a7))
+* release test ([#629](https://github.com/twilio/twilio-cli/issues/629)) ([9167d28](https://github.com/twilio/twilio-cli/commit/9167d28975e0557f87c2717411611a73f133fd50))
+* update cli-core version ([a1f54d9](https://github.com/twilio/twilio-cli/commit/a1f54d95c56295d74602d8f63830fcf6de42685e))
+* update readme ([#637](https://github.com/twilio/twilio-cli/issues/637)) ([e50de64](https://github.com/twilio/twilio-cli/commit/e50de6436cdc2070a41a4fd3f4836ac4566b065e))
+* Update rollback.yaml ([#628](https://github.com/twilio/twilio-cli/issues/628)) ([d5e248a](https://github.com/twilio/twilio-cli/commit/d5e248a1a5281229d6cb02891616089a2454640c))
+* Upgrade guide node 20 ([#638](https://github.com/twilio/twilio-cli/issues/638)) ([2d41ce9](https://github.com/twilio/twilio-cli/commit/2d41ce931615201c95abeb816be9cae751e43574))
+* upgrade node version ([#622](https://github.com/twilio/twilio-cli/issues/622)) ([f83089f](https://github.com/twilio/twilio-cli/commit/f83089f68a0269cb0b6e542b54b7779d73a3fa26))
+
+--------------------------
+**Api**
+- Change DependentPhoneNumber `capabilities` type `object` and `date_created`, `date_updated` to `date_time<rfc2822>`
+- Updated the `Default` value from 0 to 1 in the Recordings Resource `channels` property
+
+**Serverless**
+- Update `ienum` type level in Logs api
+
+**Verify**
+- Update Channel list in Verify Attempst API
+- Update `ienum` type for Conversion_Status in Verify Attempts API
+
+**Twiml**
+- Add `us2` to the list of supported values for the region attribute in the `<Conference>` TwiML noun.
+
+
+--------------------------
+**Api**
+- Added several usage category enums to `usage_record` API
+
+**Numbers**
+- Update the porting documentation
+
+**Verify**
+- Update `ienum` type for Channels in Verify Attempts API
+
+
+--------------------------
+**Accounts**
+- Changes to add date_of_consent param in Bulk Consent API
+
+**Api**
+- Change `friendly_name`, `date_created` and `date_updated` properties to type `string`.
+
+**Twiml**
+- Update twiml definition for `<ConversationRelay>` and `<Assistant>`
+
+
+--------------------------
+**Api**
+- Add `response_key` for `Usage Triggers` fetch endpoint.
+
+**Flex**
+- Add Update Interaction API
+- Adding `webhook_ttid` as optional parameter in Interactions API
+
+**Serverless**
+- Add node22 as a valid Build runtime
+- Add node20 as a valid Build runtime
+
+**Video**
+- removed `transcribe_participants_on_connect` and `transcriptions_configuration` from the room resource **(breaking change)**
+- Added `transcribe_participants_on_connect` and `transcriptions_configuration` to the room resource
+
+
+--------------------------
+**Library - Chore**
+- [PR #131](https://github.com/twilio/twilio-oai/pull/131): Trigger cli core release. Thanks to [@sbansla](https://github.com/sbansla)!
+
+**Library - Fix**
+- [PR #130](https://github.com/twilio/twilio-oai/pull/130): added a commit to trigger cli-core release. Thanks to [@sbansla](https://github.com/sbansla)!
+
+**Studio**
+- Add documentation for parent_step_sid field in Step resource
+
 ## [5.23.1](https://github.com/twilio/twilio-cli/compare/5.23.0...5.23.1) (2025-03-28)
 
 
