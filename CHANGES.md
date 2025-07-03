@@ -1,3 +1,11 @@
+## [6.0.1](https://github.com/twilio/twilio-cli/compare/6.0.0...6.0.1) (2025-07-03)
+
+
+### Library - Chores
+
+* update cli-core version ([a046543](https://github.com/twilio/twilio-cli/commit/a046543d325287958b0e0bbaf6ccdaf88b767a57))
+* update oclif/plugin-update ([#650](https://github.com/twilio/twilio-cli/issues/650)) ([feb93df](https://github.com/twilio/twilio-cli/commit/feb93df73049d784fa884461b360a553fc550ea0))
+
 --------------------------
 **Bulkexports**
 - Changed the type of details field to be a list of objects instead of a single object
