@@ -1,3 +1,10 @@
+## [6.0.3](https://github.com/twilio/twilio-cli/compare/6.0.2...6.0.3) (2025-07-10)
+
+
+### Library - Chores
+
+* update cli-core version ([1ad38dd](https://github.com/twilio/twilio-cli/commit/1ad38ddb81d8938d80575071d767bab58b389a74))
+
 ## [6.0.2](https://github.com/twilio/twilio-cli/compare/6.0.1...6.0.2) (2025-07-10)
 
 
