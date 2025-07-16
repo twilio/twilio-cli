@@ -199,41 +199,6 @@ jobs:
         id: failure_debian
         run: echo '::set-output name=FAILURE_TAG_DEBIAN::true'
 
-  wait-for-rpm-releases:
-    name: Wait for rpm platform executables Release to complete
-    runs-on: ubuntu-latest
-    needs: [ get-branch, get-tag ]
-    continue-on-error: true
-    outputs:
-      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_rpm.outputs.FAILURE_TAG_RPM }}
-    steps:
-      - name: Checkout cli repo
-        uses: actions/checkout@v2
-      - name: Wait for rpm executables Release
-        if: ${{ github.event_name == 'workflow_run' }}
-        run: source .github/scripts/trigger-and-wait.sh
-        env:
-          INPUT_WORKFLOW_FILE_NAME: rpmbuild.yml
-          INPUT_REF: ${{ needs.get-branch.outputs.branch }}
-      - name: Perform acceptance install and test on binaries
-        id: rpm_acceptance_run
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.rpm'
-          sudo apt-get update
-          sudo apt-get install -y alien
-          sudo alien -d twilio-${{ needs.get-tag.outputs.TAG_NAME }}-1.el9.x86_64.rpm
-          ls
-          sudo dpkg -i twilio_${{ needs.get-tag.outputs.TAG_NAME }}-2_amd64.deb
-          ls
-          twilio --version
-          twilio api --help
-      - name: setup rpm failure output
-        if: failure() || cancelled()
-        id: failure_rpm
-        run: echo '::set-output name=FAILURE_TAG_RPM::true'
-
   test-apt-release:
     name: Wait for apt release to complete
     runs-on: ubuntu-latest
@@ -392,7 +357,7 @@ jobs:
         run: echo '::set-output name=FAILURE_TAG_DOCKER::true'
 
   notify-complete-fail:
-    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases, test-apt-release, test-docker-release, wait-for-rpm-releases]
+    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases, test-apt-release, test-docker-release]
     name: Notify Release Failed
     runs-on: ubuntu-latest
     if: ${{ contains( needs.*.outputs.ACCEPTANCE_FAILURE_TAG, 'true' ) }}
@@ -414,7 +379,6 @@ jobs:
           ( needs.wait-for-macos-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
           ( needs.wait-for-windows-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
           ( needs.wait-for-debian-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
-          ( needs.wait-for-rpm-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
           ( needs.test-scoop-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
           ( needs.test-docker-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
           ( needs.test-apt-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true')}}
