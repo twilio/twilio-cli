@@ -225,7 +225,7 @@ jobs:
           sudo apt-get install -y alien
           sudo alien -d twilio-${{ needs.get-tag.outputs.TAG_NAME }}-1.el9.x86_64.rpm
           ls
-          sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}-1.el9.x86_64.deb
+          sudo dpkg -i twilio_${{ needs.get-tag.outputs.TAG_NAME }}-2_amd64.deb
           ls
           twilio --version
           twilio api --help
