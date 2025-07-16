@@ -55,7 +55,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for oclif executables Release
-        if: ${{ github.event_name != 'workflow_run' }}
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_OWNER: ${{ github.repository_owner }}
@@ -109,7 +109,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for windows executables Release
-        if: ${{ github.event_name != 'workflow_run' }}
+        if: ${{ github.event_name == 'workflow_run' }}
         run: bash .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
@@ -148,7 +148,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for macos executables Release
-        if: ${{ github.event_name != 'workflow_run' }}
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
@@ -179,7 +179,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for debian executables Release
-        if: ${{ github.event_name != 'workflow_run' }}
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: debian-executable-release.yml
@@ -209,7 +209,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for apt Release
-        if: ${{ github.event_name != 'workflow_run' }}
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: apt-release.yml
@@ -296,7 +296,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for Scoop release to finish
-        if: ${{ github.event_name != 'workflow_run' }}
+        if: ${{ github.event_name == 'workflow_run' }}
         run: bash .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: update-release.yml
