@@ -221,7 +221,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release download ${{ needs.get-tag.outputs.TAG_NAME }} --pattern '*.rpm'
-          sudo yum install -y twilio-${{ needs.get-tag.outputs.TAG_NAME }}-1.el9.x86_64.rpm
+          sudo apt-get update
+          sudo apt-get install -y alien
+          sudo alien -d twilio-${{ needs.get-tag.outputs.TAG_NAME }}-1.el9.x86_64.rpm
+          ls
+          sudo dpkg -i twilio-${{ needs.get-tag.outputs.TAG_NAME }}-1.el9.x86_64.deb
           ls
           twilio --version
           twilio api --help
