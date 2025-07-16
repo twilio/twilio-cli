@@ -340,6 +340,9 @@ jobs:
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
+      - run: |
+          git pull
+          make install
       - name: Run acceptance testing for docker release
         run: node .github/scripts/trigger-workflow.js
         env:
