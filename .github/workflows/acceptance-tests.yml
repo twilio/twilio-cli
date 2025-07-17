@@ -11,7 +11,8 @@ on:
     types:
       - completed
   schedule:
-    - cron: '0 0 * * *'     # runs daily at midnight UTC
+    - cron: '30 4 * * *'     # runs daily at 10 AM IST (4:30 AM UTC)
+    - cron: '30 12 * * *'    # runs daily at 6 PM IST (12:30 PM UTC)
 env:
   INPUT_OWNER:  ${{ github.repository_owner }}
   INPUT_REPO: twilio-cli
