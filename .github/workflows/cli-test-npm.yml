@@ -14,7 +14,7 @@ jobs:
         node-version: [20.x, 22.x, lts/* ]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
          node-version: ${{ matrix.node-version }}
       -  name: Global - Testing installation of Twilio CLI (1)
