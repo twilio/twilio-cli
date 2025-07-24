@@ -1,3 +1,11 @@
+## [6.1.0](https://github.com/twilio/twilio-cli/compare/6.0.3...6.1.0) (2025-07-24)
+
+
+### Library - Chores
+
+* schedule daily run for acceptance tests ([#656](https://github.com/twilio/twilio-cli/issues/656)) ([2cc8fef](https://github.com/twilio/twilio-cli/commit/2cc8fefdff5debc3240e712b5e912958a1b3e335))
+* update cli-core version ([829900c](https://github.com/twilio/twilio-cli/commit/829900c713a89118682dde01587f88796cef0b74))
+
 --------------------------
 **Events**
 - Remove `SinkSid` parameter when updating subscriptions. **(breaking change)**
