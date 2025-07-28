@@ -8,11 +8,6 @@ const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const IncomingPhoneNumberHelper = require('../../services/resource-helpers/api/v2010/incoming-phone-number');
 
 class NumberUpdate extends TwilioClientCommand {
-  constructor(argv, config) {
-    super(argv, config);
-    this.ngrok = null;
-  }
-
   async run() {
     await super.run();
 
@@ -20,44 +15,16 @@ class NumberUpdate extends TwilioClientCommand {
     const phoneNumber = await helper.findPhoneNumber(this.args['phone-number']);
 
     const props = this.parseProperties();
-    this.tunnels = {};
 
     const localHostProps = NumberUpdate.UrlFlags.filter((propName) => this.isLocalhostUrl(props, propName));
     const hasLocalHostProp = localHostProps.length > 0;
 
     if (hasLocalHostProp) {
-      const promptId = 'ngrok-warning';
-
-      if (!this.userConfig.isPromptAcked(promptId)) {
-        await this.confirmTunnelCreation();
-        this.userConfig.ackPrompt(promptId);
-        const configSavedMessage = await this.configFile.save(this.userConfig);
-        this.logger.info(configSavedMessage);
-      }
-
-      if (!this.ngrok) {
-        this.ngrok = await this.install('ngrok');
-      }
-
-      /*
-       * Create each tunnel. Note that we can't parallelize this since we're only creating 1 tunnel
-       * per port and we don't yet know the unique set of ports.
-       */
-      for (const propName of localHostProps) {
-        // eslint-disable-next-line no-await-in-loop
-        await this.createTunnel(props, propName);
-      }
+      throw new TwilioCliError('Localhost URLs are not allowed for this operation.');
     }
 
     const results = await this.updateResource(this.twilioClient.incomingPhoneNumbers, phoneNumber.sid, props);
     this.output(results);
-
-    if (hasLocalHostProp) {
-      this.logger.info(`ngrok is running. Open ${chalk.bold(this.ngrok.getUrl())} to view tunnel activity.`);
-      this.logger.info('Press CTRL-C to exit.');
-      this.logger.debug('Tunnels:');
-      this.logger.debug(this.tunnels);
-    }
   }
 
   isLocalhostUrl(props, propName) {
@@ -68,71 +35,6 @@ class NumberUpdate extends TwilioClientCommand {
     }
 
     return false;
-  }
-
-  async createTunnel(props, propName) {
-    const url = new URL(props[propName]);
-    const isHttps = url.protocol === 'https:';
-    const urlPort = url.port || (isHttps ? '443' : '80');
-    let newBaseUrl = this.tunnels[urlPort];
-
-    // Create a new tunnel if one does not yet exist for this port.
-    if (!newBaseUrl) {
-      const newTunnel = {
-        /* eslint-disable camelcase */
-        proto: 'http',
-        addr: isHttps ? `https://${url.host}` : urlPort,
-        host_header: url.host,
-        bind_tls: true, // https only
-        onLogEvent: (message) => this.logger.debug(`ngrok: ${message}`),
-        /* eslint-enable camelcase */
-      };
-
-      try {
-        newBaseUrl = await this.ngrok.connect(newTunnel);
-      } catch (error) {
-        this.logger.debug(`ngrok response: ${JSON.stringify(error)}`);
-        if (isHttps && error.details.err.includes('too many colons in address')) {
-          // We don't have a current ngrok version downloaded
-          throw new TwilioCliError(
-            'Installed version of ngrok does not support tunnels to https endpoints. ' +
-              'To update ngrok: 1) uninstall the Twilio CLI, ' +
-              '2) remove any zip files in ~/.ngrok, ' +
-              '3) reinstall the CLI',
-          );
-        } else {
-          throw new TwilioCliError((error.details && error.details.err) || error);
-        }
-      }
-
-      this.tunnels[urlPort] = newBaseUrl;
-    }
-
-    // Build the new prop value using the tunnel URL.
-    // eslint-disable-next-line require-atomic-updates
-    props[propName] = newBaseUrl + url.pathname + url.search;
-  }
-
-  async confirmTunnelCreation() {
-    this.logger.warn('WARNING: Detected localhost URL.');
-    this.logger.warn(
-      'For convenience, we will automatically create an encrypted tunnel using the 3rd-party service https://ngrok.io',
-    );
-    this.logger.warn('While running, this will expose your computer to the internet.');
-    this.logger.warn('Please exit this command after testing.');
-
-    const confirm = await this.inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'affirmative',
-        message: 'Do you want to proceed?',
-        default: false,
-      },
-    ]);
-
-    if (!confirm.affirmative) {
-      throw new TwilioCliError('Cancelled');
-    }
   }
 }
 
