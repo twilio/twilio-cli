@@ -312,6 +312,8 @@ jobs:
         run: |
           (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1')
           ./scoop.ps1 -RunAsAdmin
+          scoop uninstall 7zip -q  
+          scoop install 7zip@25.00 # pinning last stable version
           scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
           scoop install twilio
           twilio --version
