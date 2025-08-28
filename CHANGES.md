@@ -1,3 +1,11 @@
+## [6.1.1](https://github.com/twilio/twilio-cli/compare/6.1.0...6.1.1) (2025-08-28)
+
+
+### Library - Chores
+
+* pin stable version of 7zip for scoop testing ([#658](https://github.com/twilio/twilio-cli/issues/658)) ([4e65df1](https://github.com/twilio/twilio-cli/commit/4e65df1d7cf5b1cfe825a30f1eaf3b778deb2f23))
+* update cli-core version ([1731db7](https://github.com/twilio/twilio-cli/commit/1731db71c8d18fc7d0bc1de1eefd8199c3dc41e6))
+
 --------------------------
 **Studio**
 - Add `type` to Step resource APIs
