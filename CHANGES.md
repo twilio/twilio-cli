@@ -1,3 +1,34 @@
+--------------------------
+**Studio**
+- Add `type` to Step resource APIs
+
+**Verify**
+- Allow to update all passkeys parameters in the service update
+
+
+--------------------------
+**Accounts**
+- Update beta feature flag for consent and contact bulk upsert APIs
+
+**Api**
+- Add multiple missing usage categories to usage records and usage triggers api
+- Add `channels-whatsapp-template-marketing` and `channels-whatsapp-template-utility` to usage categories
+
+**Conversations**
+- Fix `state` spelling for `initializing` enum value
+- Update `state` to include `intializing` for ServiceConversationWithParticipants and ConversationWithParticipants
+
+**Flex**
+- Adding new optional parameter `identity` to `web_channels` API in version `v2`
+
+**Trusthub**
+- Add required Permissions to the ComplianceInquiries API
+
+**Verify**
+- Add passkeys support to Verify API creating and updating services.
+- Update `ienum` type for Factor creation
+- Add passkeys as challenge and factor type
+
 ## [6.1.0](https://github.com/twilio/twilio-cli/compare/6.0.3...6.1.0) (2025-07-24)
 
 
