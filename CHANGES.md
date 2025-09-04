@@ -1,3 +1,10 @@
+## [6.2.0](https://github.com/twilio/twilio-cli/compare/6.1.1...6.2.0) (2025-09-04)
+
+
+### Library - Chores
+
+* update cli-core version ([e367255](https://github.com/twilio/twilio-cli/commit/e36725588d085efb58404f0991fcb9a26fcd58b6))
+
 --------------------------
 **Api**
 - Remove usage category enum from usage record and usage triggers API **(breaking change)**
