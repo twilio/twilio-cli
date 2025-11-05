@@ -5,5 +5,7 @@ RUN mkdir /twilio
 WORKDIR /twilio
 
 COPY . .
+COPY ../twilio-cli-core ./twilio-cli-core
 RUN npm install
 RUN npm link
+#CMD ["bash"]
