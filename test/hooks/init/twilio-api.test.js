@@ -15,7 +15,6 @@ describe('hooks', () => {
         expect(ctx.stderr).to.be.empty; // Think conflicting command flag warnings
 
         const plugin = ctx.config.plugins[0];
-
         expect(plugin.hooks).to.eql({}); // eql is for comparing objects (== instead of ===)
         expect(plugin.topics.length).to.be.greaterThan(20);
 
