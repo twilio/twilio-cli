@@ -1,7 +1,7 @@
 version: 1.0.{build}
 image: Visual Studio 2022
-build:
-  verbosity: minimal
+#build:
+#  verbosity: minimal
 environment:
   nodejs_version: LTS
 cache:
@@ -18,4 +18,4 @@ test_script:
   - echo y | .\bin\run watch
   - npm test
 
-#build: off
+build: off
