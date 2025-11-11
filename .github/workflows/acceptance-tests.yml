@@ -10,6 +10,9 @@ on:
     branches: [main]
     types:
       - completed
+  schedule:
+    - cron: '30 4 * * *'     # runs daily at 10 AM IST (4:30 AM UTC)
+    - cron: '30 12 * * *'    # runs daily at 6 PM IST (12:30 PM UTC)
 env:
   INPUT_OWNER:  ${{ github.repository_owner }}
   INPUT_REPO: twilio-cli
@@ -46,13 +49,14 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        node-version: [ 18.x, 20.x, 22.x, lts/* ]
+        node-version: [ 20.x, 22.x, lts/* ]
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_brew.outputs.FAILURE_TAG_BREW }}
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for oclif executables Release
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_OWNER: ${{ github.repository_owner }}
@@ -106,6 +110,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for windows executables Release
+        if: ${{ github.event_name == 'workflow_run' }}
         run: bash .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: windows-executable-release.yml
@@ -144,6 +149,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for macos executables Release
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: macos-executable-release.yml
@@ -174,6 +180,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for debian executables Release
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: debian-executable-release.yml
@@ -192,6 +199,7 @@ jobs:
         if: failure() || cancelled()
         id: failure_debian
         run: echo '::set-output name=FAILURE_TAG_DEBIAN::true'
+
   test-apt-release:
     name: Wait for apt release to complete
     runs-on: ubuntu-latest
@@ -203,6 +211,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for apt Release
+        if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: apt-release.yml
@@ -244,7 +253,7 @@ jobs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_npm.outputs.FAILURE_TAG_NPM }}
     strategy:
       matrix:
-        node-version: [ 18.x, 20.x, 22.x, lts/* ]
+        node-version: [ 20.x, 22.x, lts/* ]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v2
@@ -289,6 +298,7 @@ jobs:
       - name: Checkout cli repo
         uses: actions/checkout@v2
       - name: Wait for Scoop release to finish
+        if: ${{ github.event_name == 'workflow_run' }}
         run: bash .github/scripts/trigger-and-wait.sh
         env:
           INPUT_WORKFLOW_FILE_NAME: update-release.yml
@@ -302,6 +312,8 @@ jobs:
         run: |
           (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1')
           ./scoop.ps1 -RunAsAdmin
+          scoop uninstall 7zip -q  
+          scoop install 7zip@25.00 # pinning last stable version
           scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
           scoop install twilio
           twilio --version
@@ -322,8 +334,33 @@ jobs:
         id: failure_scoop
         run: echo '::set-output name=FAILURE_TAG_SCOOP::true'
 
+  test-docker-release:
+    name: Docker acceptance testing
+    runs-on: ubuntu-latest
+    needs: get-branch
+    continue-on-error: true
+    outputs:
+      ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_docker.outputs.FAILURE_TAG_DOCKER }}
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@v2
+      - run: |
+          git pull
+          make install
+      - name: Run acceptance testing for docker release
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: '.github/workflows/cli-test-docker.yml'
+          REPO_NAME: ${{ github.repository }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{needs.get-branch.outputs.branch}}
+      - name: setup docker failure output
+        if: failure() || cancelled()
+        id: failure_docker
+        run: echo '::set-output name=FAILURE_TAG_DOCKER::true'
+
   notify-complete-fail:
-    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases, test-apt-release]
+    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases, test-apt-release, test-docker-release]
     name: Notify Release Failed
     runs-on: ubuntu-latest
     if: ${{ contains( needs.*.outputs.ACCEPTANCE_FAILURE_TAG, 'true' ) }}
@@ -345,7 +382,8 @@ jobs:
           ( needs.wait-for-macos-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
           ( needs.wait-for-windows-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
           ( needs.wait-for-debian-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
-          ( needs.test-scoop-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true')}}
-          ( needs.test-apt-release.outputs.ACCEPTANCE_FAILURE_TAG} == 'true')}}
+          ( needs.test-scoop-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
+          ( needs.test-docker-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
+          ( needs.test-apt-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true')}}
         run:
           exit 1
