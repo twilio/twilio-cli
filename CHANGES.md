@@ -1,3 +1,11 @@
+## [6.2.1](https://github.com/twilio/twilio-cli/compare/6.2.0...6.2.1) (2025-11-20)
+
+
+### Library - Chores
+
+* fix test ([#667](https://github.com/twilio/twilio-cli/issues/667)) ([48309ae](https://github.com/twilio/twilio-cli/commit/48309ae77db4be6f45d55bb41f64513953dc3715))
+* update cli-core version ([e0eea1c](https://github.com/twilio/twilio-cli/commit/e0eea1c72291da20e9731e23897189eb6ba1fd4e))
+
 --------------------------
 **Memory**
 - # Memory API Changes
