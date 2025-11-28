@@ -95,10 +95,32 @@ jobs:
         id: find_signtool
         shell: pwsh
         run: |
-          $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+          $root = "C:\Program Files (x86)\Windows Kits\10\bin"
+
+          # Prefer x86 signtool
+          $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
+            Where-Object { $_.FullName -match '\\x86\\' } |
+            Sort-Object FullName |
+            Select-Object -First 1
+
+          # If no x86, try x64
+          if (-not $signtool) {
+            $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
+              Where-Object { $_.FullName -match '\\x64\\' } |
+              Sort-Object FullName |
+              Select-Object -First 1
+          }
+
+          # As a last resort, any signtool (but avoid arm64 if possible)
+          if (-not $signtool) {
+            $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
+              Where-Object { $_.FullName -notmatch '\\arm64\\' } |
+              Sort-Object FullName |
+              Select-Object -First 1
+          }
 
           if (-not $signtool) {
-            Write-Error "signtool.exe not found under 'C:\Program Files (x86)\Windows Kits\10\bin'"
+            Write-Error "signtool.exe not found under '$root'"
             exit 1
           }
 
