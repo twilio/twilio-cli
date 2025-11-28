@@ -90,7 +90,7 @@ jobs:
           smctl windows certsync
         shell: cmd
 
-      # NEW: find signtool.exe dynamically
+      # find signtool.exe dynamically
       - name: Find signtool.exe
         id: find_signtool
         shell: pwsh
