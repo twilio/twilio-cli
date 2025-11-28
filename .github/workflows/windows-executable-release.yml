@@ -90,10 +90,33 @@ jobs:
           smctl windows certsync
         shell: cmd
 
+      # NEW: find signtool.exe dynamically
+      - name: Find signtool.exe
+        id: find_signtool
+        shell: pwsh
+        run: |
+          $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+
+          if (-not $signtool) {
+            Write-Error "signtool.exe not found under 'C:\Program Files (x86)\Windows Kits\10\bin'"
+            exit 1
+          }
+
+          Write-Host "Found signtool at $($signtool.FullName)"
+          "path=$($signtool.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
       - name: Code Sign The Executable
         if: ${{ github.repository_owner == 'twilio' }}
+        shell: pwsh
         run: |
-          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /sha1 ${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }} /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 ${{steps.download.outputs.download-path}}/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
+          $signtool = '${{ steps.find_signtool.outputs.path }}'
+          & $signtool sign `
+            /sha1 '${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }}' `
+            /tr http://timestamp.digicert.com `
+            /td SHA256 `
+            /fd SHA256 `
+            '${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe'
+
       - name: Upload binaries to release
         run: node .github/scripts/update-platform-executables.js
         env:
