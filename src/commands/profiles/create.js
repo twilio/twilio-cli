@@ -50,13 +50,13 @@ class ProfilesCreate extends BaseCommand {
     if (this.region && !this.edge) {
       throw new TwilioCliError(
         'The --edge flag is required when --region is specified.\n\n' +
-        'Regional endpoints require both region and edge location.\n' +
-        'Example: twilio profiles:create --region au1 --edge sydney\n\n' +
-        'Valid edge locations by region:\n' +
-        '  au1: sydney\n' +
-        '  ie1: dublin\n' +
-        '  jp1: tokyo\n\n' +
-        'For a complete list, visit: https://www.twilio.com/docs/global-infrastructure/edge-locations'
+          'Regional endpoints require both region and edge location.\n' +
+          'Example: twilio profiles:create --region au1 --edge sydney\n\n' +
+          'Valid edge locations by region:\n' +
+          '  au1: sydney\n' +
+          '  ie1: dublin\n' +
+          '  jp1: tokyo\n\n' +
+          'For a complete list, visit: https://www.twilio.com/docs/global-infrastructure/edge-locations',
       );
     }
   }
@@ -222,7 +222,7 @@ class ProfilesCreate extends BaseCommand {
         errorMsg += '\nEnsure you are using region-specific credentials:';
         errorMsg += '\n1. Log into the Twilio Console';
         errorMsg += '\n2. Navigate to Account > API Keys & Tokens section';
-        errorMsg += '\n3. Use the Auth Token for the ' + this.region.toUpperCase() + ' region located below the API Keys';
+        errorMsg += `\n3. Use the Auth Token for the ${this.region.toUpperCase()} region located below the API Keys`;
         errorMsg += '\n\nRegion-specific Auth Tokens are different from your default (US) Auth Token.';
       }
 
