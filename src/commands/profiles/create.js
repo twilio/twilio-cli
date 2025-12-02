@@ -44,6 +44,21 @@ class ProfilesCreate extends BaseCommand {
   loadArguments() {
     this.force = this.flags.force;
     this.region = this.flags.region;
+    this.edge = this.flags.edge;
+
+    // Validate edge is provided when region is specified
+    if (this.region && !this.edge) {
+      throw new TwilioCliError(
+        'The --edge flag is required when --region is specified.\n\n' +
+        'Regional endpoints require both region and edge location.\n' +
+        'Example: twilio profiles:create --region au1 --edge sydney\n\n' +
+        'Valid edge locations by region:\n' +
+        '  au1: sydney\n' +
+        '  ie1: dublin\n' +
+        '  jp1: tokyo\n\n' +
+        'For a complete list, visit: https://www.twilio.com/docs/global-infrastructure/edge-locations'
+      );
+    }
   }
 
   async loadProfileId() {
@@ -186,6 +201,7 @@ class ProfilesCreate extends BaseCommand {
       this.twilioClient = require('twilio')(this.accountSid, this.authToken, {
         httpClient: new CliRequestClient(this.id, this.logger),
         region: this.region,
+        edge: this.edge,
       });
     }
     return this.twilioClient;
@@ -198,7 +214,19 @@ class ProfilesCreate extends BaseCommand {
       await twilioClient.api.accounts(this.accountSid).fetch();
       return true;
     } catch (error) {
-      this.logger.error('Could not validate the provided credentials. Not saving.');
+      let errorMsg = 'Could not validate the provided credentials. Not saving.';
+
+      // Add regional guidance for 20003 errors
+      if (this.region && (error.code === 20003 || error.code === '20003')) {
+        errorMsg += `\n\nYou are creating a profile for region "${this.region}".`;
+        errorMsg += '\nEnsure you are using region-specific credentials:';
+        errorMsg += '\n1. Log into the Twilio Console';
+        errorMsg += '\n2. Navigate to Account > API Keys & Tokens section';
+        errorMsg += '\n3. Use the Auth Token for the ' + this.region.toUpperCase() + ' region located below the API Keys';
+        errorMsg += '\n\nRegion-specific Auth Tokens are different from your default (US) Auth Token.';
+      }
+
+      this.logger.error(errorMsg);
       this.logger.debug(error);
       return false;
     }
@@ -233,7 +261,7 @@ class ProfilesCreate extends BaseCommand {
       this.logger.debug(error);
       throw new TwilioCliError('Could not create an API Key.');
     }
-    this.userConfig.addProfile(this.profileId, this.accountSid, this.region, apiKey.sid, apiKey.secret);
+    this.userConfig.addProfile(this.profileId, this.accountSid, this.region, this.edge, apiKey.sid, apiKey.secret);
     const configSavedMessage = await this.configFile.save(this.userConfig);
 
     this.logger.info(
@@ -260,6 +288,9 @@ ProfilesCreate.flags = {
   }),
   region: flags.string({
     description: 'Twilio region to use.',
+  }),
+  edge: flags.string({
+    description: 'Twilio edge location to use. Required when --region is specified.',
   }),
   ...TwilioClientCommand.flags, // Yes! We _do_ want the same flags as TwilioClientCommand
 };

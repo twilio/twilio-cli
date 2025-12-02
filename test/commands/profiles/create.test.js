@@ -208,8 +208,8 @@ describe('commands', () => {
         .catch(/Could not create an API Key/)
         .it('fails to create an API key');
 
-      createTest(['--region', 'dev'])
-        .nock('https://api.dev.twilio.com', mockSuccess)
+      createTest(['--region', 'dev', '--edge', 'sydney'])
+        .nock('https://api.sydney.dev.twilio.com', mockSuccess)
         .do(async (ctx) => ctx.testCmd.run())
         .it('supports other regions', (ctx) => {
           expect(ctx.stdout).to.equal('');
