@@ -1,13 +1,3 @@
-## Unreleased
-
-### Library - Fixes
-
-* Add required `--edge` flag to profiles:create command when `--region` is specified
-* Add validation in loadArguments() with helpful error message showing valid edge locations by region
-* Update validateCredentials() to provide region-specific guidance for 20003 authentication failures
-* Pass edge parameter to getTwilioClient() and userConfig.addProfile() in saveCredentials()
-* Update test suite to include --edge flag when using --region flag
-
 ## [6.2.1](https://github.com/twilio/twilio-cli/compare/6.2.0...6.2.1) (2025-11-20)
 
 
