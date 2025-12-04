@@ -9,6 +9,25 @@ const helpMessages = require('../../services/messaging/help-messages');
 
 const SKIP_VALIDATION = 'skip-parameter-validation';
 
+/*
+ * REGION_EDGE_MAP: Temporary mapping for Phase 1 migration
+ * Phase 1: Support api.twilio.com and api.region.edge.twilio.com, deprecate api.region.twilio.com
+ * Phase 2: Will deprecate api.region.edge.twilio.com and restore api.region.twilio.com
+ * This mapping auto-fills edge when only region is provided, with deprecation warning
+ * Aligns with cli-core's buildClient() behavior (see @twilio/cli-core/src/base-commands/twilio-client-command.js)
+ */
+const REGION_EDGE_MAP = {
+  au1: 'sydney',
+  br1: 'sao-paulo',
+  de1: 'frankfurt',
+  ie1: 'dublin',
+  jp1: 'tokyo',
+  jp2: 'osaka',
+  sg1: 'singapore',
+  us1: 'ashburn',
+  us2: 'umatilla',
+};
+
 class ProfilesCreate extends BaseCommand {
   constructor(argv, config) {
     super(argv, config);
@@ -46,18 +65,29 @@ class ProfilesCreate extends BaseCommand {
     this.region = this.flags.region;
     this.edge = this.flags.edge;
 
-    // Validate edge is provided when region is specified
+    /*
+     * Phase 1 Migration: Auto-map edge from region if not explicitly provided
+     * When region is specified without edge, automatically set edge using REGION_EDGE_MAP
+     * and show deprecation warning. This is a temporary behavior during Phase 1 migration
+     * where api.region.twilio.com is being deprecated in favor of api.edge.region.twilio.com.
+     */
     if (this.region && !this.edge) {
-      throw new TwilioCliError(
-        'The --edge flag is required when --region is specified.\n\n' +
-          'Regional endpoints require both region and edge location.\n' +
-          'Example: twilio profiles:create --region au1 --edge sydney\n\n' +
-          'Valid edge locations by region:\n' +
-          '  au1: sydney\n' +
-          '  ie1: dublin\n' +
-          '  jp1: tokyo\n\n' +
-          'For a complete list, visit: https://www.twilio.com/docs/global-infrastructure/edge-locations',
-      );
+      if (REGION_EDGE_MAP[this.region]) {
+        this.logger.warn('Deprecation Warning: Setting default `edge` for provided `region`');
+        this.edge = REGION_EDGE_MAP[this.region];
+      } else {
+        // For unmapped regions, require explicit --edge flag
+        throw new TwilioCliError(
+          `The --edge flag is required for region "${this.region}".\n\n` +
+            'Regional endpoints require both region and edge location.\n' +
+            `Example: twilio profiles:create --region ${this.region} --edge <edge-location>\n\n` +
+            'Valid edge locations by region:\n' +
+            '  au1: sydney\n' +
+            '  ie1: dublin\n' +
+            '  jp1: tokyo\n\n' +
+            'For a complete list, visit: https://www.twilio.com/docs/global-infrastructure/edge-locations',
+        );
+      }
     }
   }
 
@@ -290,7 +320,7 @@ ProfilesCreate.flags = {
     description: 'Twilio region to use.',
   }),
   edge: flags.string({
-    description: 'Twilio edge location to use. Required when --region is specified.',
+    description: 'Twilio edge location to use. Auto-detected from region if not specified.',
   }),
   ...TwilioClientCommand.flags, // Yes! We _do_ want the same flags as TwilioClientCommand
 };
