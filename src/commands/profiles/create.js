@@ -75,19 +75,12 @@ class ProfilesCreate extends BaseCommand {
       if (REGION_EDGE_MAP[this.region]) {
         this.logger.warn('Deprecation Warning: Setting default `edge` for provided `region`');
         this.edge = REGION_EDGE_MAP[this.region];
-      } else {
-        // For unmapped regions, require explicit --edge flag
-        throw new TwilioCliError(
-          `The --edge flag is required for region "${this.region}".\n\n` +
-            'Regional endpoints require both region and edge location.\n' +
-            `Example: twilio profiles:create --region ${this.region} --edge <edge-location>\n\n` +
-            'Valid edge locations by region:\n' +
-            '  au1: sydney\n' +
-            '  ie1: dublin\n' +
-            '  jp1: tokyo\n\n' +
-            'For a complete list, visit: https://www.twilio.com/docs/global-infrastructure/edge-locations',
-        );
       }
+      /*
+       * For unmapped regions, edge remains undefined
+       * This avoids breaking customers with unmapped regions
+       * Full error handling will be added in next release with MVR
+       */
     }
   }
 
@@ -247,7 +240,7 @@ class ProfilesCreate extends BaseCommand {
       let errorMsg = 'Could not validate the provided credentials. Not saving.';
 
       // Add regional guidance for 20003 errors
-      if (this.region && (error.code === 20003 || error.code === '20003')) {
+      if (this.region && error.data && (error.data.code === 20003 || error.data.code === '20003')) {
         errorMsg += `\n\nYou are creating a profile for region "${this.region}".`;
         errorMsg += '\nEnsure you are using region-specific credentials:';
         errorMsg += '\n1. Log into the Twilio Console';

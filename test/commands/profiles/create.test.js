@@ -226,9 +226,13 @@ describe('commands', () => {
         });
 
       createTest(['--region', 'unknown-region'])
+        .nock('https://api.unknown-region.twilio.com', mockSuccess)
         .do(async (ctx) => ctx.testCmd.run())
-        .catch(/The --edge flag is required for region/)
-        .it('requires --edge for unmapped regions');
+        .it('allows unmapped regions without edge', (ctx) => {
+          expect(ctx.stdout).to.equal('');
+          expect(ctx.stderr).to.contain('configuration saved');
+          expect(ctx.stderr).not.to.contain('Deprecation Warning');
+        });
     });
   });
 });
