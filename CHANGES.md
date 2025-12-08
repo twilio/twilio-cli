@@ -1,3 +1,17 @@
+## [6.2.2](https://github.com/twilio/twilio-cli/compare/6.2.1...6.2.2) (2025-12-08)
+
+
+### Library - Fixes
+
+* Require --edge flag when --region is specified in profiles:create ([#669](https://github.com/twilio/twilio-cli/issues/669)) ([c2e25ca](https://github.com/twilio/twilio-cli/commit/c2e25ca597623da3c4ec56d52167ca755c82c1f8)), closes [twilio-cli-core#296](https://github.com/twilio/twilio-cli-core/issues/296)
+
+
+### Library - Chores
+
+* add trusted publisher ([#670](https://github.com/twilio/twilio-cli/issues/670)) ([33bfce3](https://github.com/twilio/twilio-cli/commit/33bfce3c3e2519ead90ac22c7fe40e00aa774d9e))
+* dynamically find correct signtool for windows ([#668](https://github.com/twilio/twilio-cli/issues/668)) ([8d61cdc](https://github.com/twilio/twilio-cli/commit/8d61cdcb2ecfa46740fed3a5ac81f22461069e10))
+* update cli-core version ([96dea6b](https://github.com/twilio/twilio-cli/commit/96dea6b8e1fcc65ef9852fbfe488836dab7bf747))
+
 ## [6.2.1](https://github.com/twilio/twilio-cli/compare/6.2.0...6.2.1) (2025-11-20)
 
 
