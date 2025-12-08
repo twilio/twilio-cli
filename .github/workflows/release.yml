@@ -68,7 +68,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
 
       # Ensure npm 11.5.1 or later is installed
       - name: Update npm
@@ -82,6 +81,7 @@ jobs:
         run: DEBUG=semantic-release:* npx semantic-release  -t \${version}
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true # required for OIDC
       - name: verify release required
         if: ${{steps.semantic-release.outputs.TAG_NAME == ''}}
