@@ -55,7 +55,7 @@ jobs:
     needs: [ update-api-definitions-changelog ]
     permissions:
       id-token: write  # Required for OIDC
-      contents: read
+      contents: write
     outputs:
       tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
       draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
