@@ -15,6 +15,11 @@ on:
       tag-name:
         description: 'Cli-core tag to be released in Homebrew (Same as CLI latest tag name)'
         required: true
+
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -61,6 +66,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
       - name: Run git and npm update
         run: |
           git pull
@@ -71,6 +84,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true # required for OIDC
       - name: verify release required
         if: ${{steps.semantic-release.outputs.TAG_NAME == ''}}
         uses: actions/github-script@v3
