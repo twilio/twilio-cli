@@ -45,7 +45,7 @@ jobs:
 
   wait-for-brew-releases:
     name: Wait for brew Release to complete
-    runs-on: macos-13
+    runs-on: macos-latest
     continue-on-error: true
     strategy:
       matrix:
@@ -140,7 +140,7 @@ jobs:
 
   wait-for-macos-releases:
     name: Wait for macos platform executables Release to complete
-    runs-on: macos-13
+    runs-on: macos-latest
     continue-on-error: true
     needs: [ get-branch, get-tag ]
     outputs:
@@ -312,7 +312,7 @@ jobs:
         run: |
           (New-Object System.Net.WebClient).DownloadFile('https://get.scoop.sh', 'scoop.ps1')
           ./scoop.ps1 -RunAsAdmin
-          scoop uninstall 7zip -q  
+          scoop uninstall 7zip -q
           scoop install 7zip@25.00 # pinning last stable version
           scoop bucket add twilio-scoop https://github.com/twilio/scoop-twilio-cli
           scoop install twilio
