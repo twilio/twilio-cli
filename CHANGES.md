@@ -1,3 +1,11 @@
+## [6.2.3](https://github.com/twilio/twilio-cli/compare/6.2.2...6.2.3) (2026-01-07)
+
+
+### Library - Chores
+
+* update cli-core version ([dfbc6c7](https://github.com/twilio/twilio-cli/commit/dfbc6c70890af156f07cde9bf14b29d3c3333925))
+* use macos-latest image ([#671](https://github.com/twilio/twilio-cli/issues/671)) ([f80afaa](https://github.com/twilio/twilio-cli/commit/f80afaa36358c22d12877cfbd8efd234e73bc81a))
+
 --------------------------
 **Api**
 - Added optional parameter `clientNotificationUrl` for create call api
