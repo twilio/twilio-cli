@@ -1,3 +1,8 @@
+--------------------------
+**Api**
+- Added optional parameter `clientNotificationUrl` for create call api
+- Added optional parameter `clientNotificationUrl` for create participant api
+
 ## [6.2.2](https://github.com/twilio/twilio-cli/compare/6.2.1...6.2.2) (2025-12-08)
 
 
