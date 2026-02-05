@@ -9,25 +9,6 @@ const helpMessages = require('../../services/messaging/help-messages');
 
 const SKIP_VALIDATION = 'skip-parameter-validation';
 
-/*
- * REGION_EDGE_MAP: Temporary mapping for Phase 1 migration
- * Phase 1: Support api.twilio.com and api.region.edge.twilio.com, deprecate api.region.twilio.com
- * Phase 2: Will deprecate api.region.edge.twilio.com and restore api.region.twilio.com
- * This mapping auto-fills edge when only region is provided, with deprecation warning
- * Aligns with cli-core's buildClient() behavior (see @twilio/cli-core/src/base-commands/twilio-client-command.js)
- */
-const REGION_EDGE_MAP = {
-  au1: 'sydney',
-  br1: 'sao-paulo',
-  de1: 'frankfurt',
-  ie1: 'dublin',
-  jp1: 'tokyo',
-  jp2: 'osaka',
-  sg1: 'singapore',
-  us1: 'ashburn',
-  us2: 'umatilla',
-};
-
 class ProfilesCreate extends BaseCommand {
   constructor(argv, config) {
     super(argv, config);
@@ -64,24 +45,6 @@ class ProfilesCreate extends BaseCommand {
     this.force = this.flags.force;
     this.region = this.flags.region;
     this.edge = this.flags.edge;
-
-    /*
-     * Phase 1 Migration: Auto-map edge from region if not explicitly provided
-     * When region is specified without edge, automatically set edge using REGION_EDGE_MAP
-     * and show deprecation warning. This is a temporary behavior during Phase 1 migration
-     * where api.region.twilio.com is being deprecated in favor of api.edge.region.twilio.com.
-     */
-    if (this.region && !this.edge) {
-      if (REGION_EDGE_MAP[this.region]) {
-        this.logger.warn('Deprecation Warning: Setting default `edge` for provided `region`');
-        this.edge = REGION_EDGE_MAP[this.region];
-      }
-      /*
-       * For unmapped regions, edge remains undefined
-       * This avoids breaking customers with unmapped regions
-       * Full error handling will be added in next release with MVR
-       */
-    }
   }
 
   async loadProfileId() {
