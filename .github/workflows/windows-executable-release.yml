@@ -92,7 +92,7 @@ jobs:
 
       - name: Certificates Sync
         run: |
-          smctl windows certsync --keypair-alias=c1d53dc0-2930-43a7-b052-389564550c95
+          smctl windows certsync
         shell: cmd
 
       - name: List certificates in DigiCert ONE
@@ -143,7 +143,7 @@ jobs:
         run: |
           $signtool = '${{ steps.find_signtool.outputs.path }}'
           & $signtool sign `
-            /sha1 '${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }}' `
+            /a
             /tr http://timestamp.digicert.com `
             /td SHA256 `
             /fd SHA256 `
