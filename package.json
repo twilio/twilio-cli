@@ -145,7 +145,21 @@
     "update": {
       "s3": {
         "xz": true,
-        "bucket": "twilio-cli-prod"
+        "bucket": "twilio-cli-prod",
+        "templates": {
+          "target": {
+            "baseDir": "<%- bin %>",
+            "unversioned": "channels/<%- channel === 'stable' ? 'latest' : channel %>/<%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
+            "versioned": "channels/<%- channel === 'stable' ? 'latest' : channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %><%- ext %>",
+            "manifest": "channels/<%- channel === 'stable' ? 'latest' : channel %>/<%- platform %>-<%- arch %>"
+          },
+          "vanilla": {
+            "unversioned": "channels/<%- channel === 'stable' ? 'latest' : channel %>/<%- bin %><%- ext %>",
+            "versioned": "channels/<%- channel === 'stable' ? 'latest' : channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %><%- ext %>",
+            "baseDir": "<%- bin %>",
+            "manifest": "channels/<%- channel === 'stable' ? 'latest' : channel %>/version"
+          }
+        }
       }
     },
     "helpClass": "./src/services/twilio-help/custom-help"
