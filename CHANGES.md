@@ -1,3 +1,16 @@
+## [6.2.4](https://github.com/twilio/twilio-cli/compare/6.2.3...6.2.4) (2026-02-18)
+
+
+### Library - Fixes
+
+* regional endpoint processing ([#677](https://github.com/twilio/twilio-cli/issues/677)) ([fcd5b5a](https://github.com/twilio/twilio-cli/commit/fcd5b5ae76362d95868213910b3cdb56cfbdfb02))
+
+
+### Library - Chores
+
+* Remove deprecated edge mapping test case ([607de5a](https://github.com/twilio/twilio-cli/commit/607de5ac33460947956245404b4995eb9a985d14))
+* update cli-core version ([12d96cf](https://github.com/twilio/twilio-cli/commit/12d96cf4257d70203f9d997e868a7ddce7118c26))
+
 ## [6.2.3](https://github.com/twilio/twilio-cli/compare/6.2.2...6.2.3) (2026-01-07)
 
 

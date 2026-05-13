@@ -216,15 +216,6 @@ describe('commands', () => {
           expect(ctx.stderr).to.contain('configuration saved');
         });
 
-      createTest(['--region', 'au1'])
-        .nock('https://api.sydney.au1.twilio.com', mockSuccess)
-        .do(async (ctx) => ctx.testCmd.run())
-        .it('auto-maps edge from region with deprecation warning', (ctx) => {
-          expect(ctx.stdout).to.equal('');
-          expect(ctx.stderr).to.contain('Deprecation Warning: Setting default `edge` for provided `region`');
-          expect(ctx.stderr).to.contain('configuration saved');
-        });
-
       createTest(['--region', 'unknown-region'])
         .nock('https://api.unknown-region.twilio.com', mockSuccess)
         .do(async (ctx) => ctx.testCmd.run())
