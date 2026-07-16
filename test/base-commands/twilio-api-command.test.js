@@ -260,6 +260,46 @@ describe('base-commands', () => {
           expect(ctx.stderr).to.contain('success');
         });
 
+      test.it('handles remove action with response body (202 Accepted)', () => {
+        const removeWithBodyDefinition = {
+          domainName: 'memory',
+          commandName: 'remove',
+          path: '/v1/Stores/{StoreId}/Observations/{ObservationId}',
+          actionName: 'remove',
+          action: {
+            parameters: [
+              { name: 'StoreId', in: 'path', schema: { type: 'string' } },
+              { name: 'ObservationId', in: 'path', schema: { type: 'string' } },
+            ],
+            responses: {
+              202: {
+                content: { 'application/json': { schema: { type: 'object' } } },
+              },
+            },
+          },
+        };
+        const NewCommandClass = getCommandClass(removeWithBodyDefinition);
+
+        expect(NewCommandClass.id).to.equal('api:memory:v1:stores:observations:remove');
+        expect(NewCommandClass.flags.properties).to.exist;
+        expect(NewCommandClass.flags.properties.default).to.equal('sid');
+      });
+
+      test
+        .twilioFakeProfile(ConfigData)
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCreateCommand(getCommandClass(callRemoveActionDefinition), ['--sid', fakeCallResponse.sid])
+        .do((ctx) => {
+          ctx.testCmd.twilioApi = { remove: sinon.stub().returns({ message: 'Accepted' }) };
+          return ctx.testCmd.run();
+        })
+        .it('displays response body when remove returns an object', (ctx) => {
+          expect(ctx.stdout).to.contain('Accepted');
+          expect(ctx.stderr).to.not.contain('success');
+        });
+
       test
         .twilioFakeProfile(ConfigData)
         .twilioCliEnv(Config)
