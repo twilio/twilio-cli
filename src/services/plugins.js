@@ -1,5 +1,14 @@
 const ALLOWED_ORGS = ['@twilio/', '@twilio-labs/', '@dabblelab/plugin-autopilot'];
 
+/*
+ * Trusted hosts for URL/tarball-based plugin installs, which carry no npm
+ * package name to match against ALLOWED_ORGS. A host matches if it equals an
+ * entry exactly or is a subdomain of one (e.g. cli.twilio.world).
+ */
+const ALLOWED_HOSTS = ['twilio.world'];
+
+const isAllowedHost = (hostname) => ALLOWED_HOSTS.some((host) => hostname === host || hostname.endsWith(`.${host}`));
+
 const PLUGIN_COMMANDS = {
   '@twilio-labs/plugin-dev-phone': ['dev-phone'],
   '@twilio-labs/plugin-flex': ['flex'],
@@ -12,7 +21,15 @@ const PLUGIN_COMMANDS = {
   '@dabblelab/plugin-autopilot': ['autopilot'],
 };
 
-exports.isTwilioPlugin = (pluginName) => {
+exports.isTwilioPlugin = (pluginName, pluginUrl) => {
+  if (pluginUrl !== undefined) {
+    try {
+      return isAllowedHost(new URL(pluginUrl).hostname);
+    } catch (error) {
+      return false;
+    }
+  }
+
   if (pluginName === undefined) {
     return false;
   }
