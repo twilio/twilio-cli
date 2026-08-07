@@ -41,14 +41,22 @@ describe('commands', () => {
             ctx.testCmd.inquirer.prompt = fakePrompt;
           });
 
-      const mockSuccess = (api) => {
+      const mockCredentialValidation = (api) => {
         api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
           sid: constants.FAKE_ACCOUNT_SID,
         });
-        api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(200, {
-          sid: constants.FAKE_API_KEY,
-          secret: constants.FAKE_API_SECRET,
-        });
+      };
+
+      const mockKeyCreation = (api) => {
+        api
+          .post('/v1/Keys', (body) => {
+            const params = typeof body === 'string' ? Object.fromEntries(new URLSearchParams(body)) : body;
+            return params.AccountSid === constants.FAKE_ACCOUNT_SID && Boolean(params.FriendlyName);
+          })
+          .reply(201, {
+            sid: constants.FAKE_API_KEY,
+            secret: constants.FAKE_API_SECRET,
+          });
       };
 
       afterEach(() => {
@@ -56,7 +64,8 @@ describe('commands', () => {
       });
 
       createTest()
-        .nock('https://api.twilio.com', mockSuccess)
+        .nock('https://api.twilio.com', mockCredentialValidation)
+        .nock('https://iam.twilio.com', mockKeyCreation)
         .do((ctx) => ctx.testCmd.run())
         .it('runs profiles:create', (ctx) => {
           expect(ctx.stdout).to.equal('');
@@ -70,7 +79,8 @@ describe('commands', () => {
         });
 
       createTest([], { profileId: 'profile1', addProjects: ['profile1'] })
-        .nock('https://api.twilio.com', mockSuccess)
+        .nock('https://api.twilio.com', mockCredentialValidation)
+        .nock('https://iam.twilio.com', mockKeyCreation)
         .do((ctx) => ctx.testCmd.run())
         .it('runs profiles:create with existing profile in Projects', (ctx) => {
           expect(ctx.stdout).to.equal('');
@@ -84,7 +94,8 @@ describe('commands', () => {
         });
 
       createTest([], { profileId: 'profile1', addProjects: ['profile1'], removeCred: false })
-        .nock('https://api.twilio.com', mockSuccess)
+        .nock('https://api.twilio.com', mockCredentialValidation)
+        .nock('https://iam.twilio.com', mockKeyCreation)
         .do((ctx) => ctx.testCmd.run())
         .it('runs profiles:create with existing profile in Projects with Keytar remove failed', (ctx) => {
           expect(ctx.stdout).to.equal('');
@@ -148,7 +159,8 @@ describe('commands', () => {
         .it('fails for invalid Auth Tokens');
 
       createTest(['--skip-parameter-validation'])
-        .nock('https://api.twilio.com', mockSuccess)
+        .nock('https://api.twilio.com', mockCredentialValidation)
+        .nock('https://iam.twilio.com', mockKeyCreation)
         .do((ctx) => {
           const fakePrompt = ctx.testCmd.inquirer.prompt;
           fakePrompt.onFirstCall().resolves({
@@ -200,7 +212,9 @@ describe('commands', () => {
           api.get(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}.json`).reply(200, {
             sid: constants.FAKE_ACCOUNT_SID,
           });
-          api.post(`/2010-04-01/Accounts/${constants.FAKE_ACCOUNT_SID}/Keys.json`).reply(500, {
+        })
+        .nock('https://iam.twilio.com', (api) => {
+          api.post('/v1/Keys').reply(500, {
             error: 'oops',
           });
         })
@@ -209,7 +223,8 @@ describe('commands', () => {
         .it('fails to create an API key');
 
       createTest(['--region', 'dev', '--edge', 'sydney'])
-        .nock('https://api.sydney.dev.twilio.com', mockSuccess)
+        .nock('https://api.sydney.dev.twilio.com', mockCredentialValidation)
+        .nock('https://iam.sydney.dev.twilio.com', mockKeyCreation)
         .do(async (ctx) => ctx.testCmd.run())
         .it('supports other regions', (ctx) => {
           expect(ctx.stdout).to.equal('');
@@ -217,7 +232,8 @@ describe('commands', () => {
         });
 
       createTest(['--region', 'unknown-region'])
-        .nock('https://api.unknown-region.twilio.com', mockSuccess)
+        .nock('https://api.unknown-region.twilio.com', mockCredentialValidation)
+        .nock('https://iam.unknown-region.twilio.com', mockKeyCreation)
         .do(async (ctx) => ctx.testCmd.run())
         .it('allows unmapped regions without edge', (ctx) => {
           expect(ctx.stdout).to.equal('');
