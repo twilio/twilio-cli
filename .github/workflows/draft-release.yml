@@ -198,13 +198,13 @@ jobs:
     name: Notify Release Failed
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: "#ff3333"
-          SLACK_USERNAME: CLI Draft Release Bot
-          SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli - Draft Release"
-          SLACK_MESSAGE: 'CLI Draft Release workflow Failed'
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+#      - name: Slack Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+#          SLACK_COLOR: "#ff3333"
+#          SLACK_USERNAME: CLI Draft Release Bot
+#          SLACK_ICON_EMOJI: ":ship:"
+#          SLACK_TITLE: "Twilio Cli - Draft Release"
+#          SLACK_MESSAGE: 'CLI Draft Release workflow Failed'
