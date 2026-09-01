@@ -14,15 +14,25 @@ const {
   getDocLink,
 } = require('../../services/twilio-api');
 
+/*
+ * Maps the operation action name (as stored in path.operations by api-browser.js)
+ * to the CLI command verb. api-browser.js maps HTTP methods to action names:
+ *   PUT  → 'update',  PATCH → 'patch'
+ * So this map uses those action names as keys.
+ */
 const METHOD_TO_ACTION_MAP = {
   list: {
     get: 'list',
     post: 'create',
+    update: 'update',
+    patch: 'patch',
   },
   instance: {
     delete: 'remove',
     get: 'fetch',
     post: 'update',
+    update: 'update',
+    patch: 'patch',
   },
 };
 

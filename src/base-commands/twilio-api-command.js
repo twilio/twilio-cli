@@ -39,7 +39,12 @@ class TwilioApiCommand extends TwilioClientCommand {
     const response = await runner.run();
 
     if (isRemoveCommand(this.constructor.actionDefinition)) {
-      logger.info(response ? 'The resource was deleted successfully' : 'Failed to delete the resource');
+      if (response && typeof response === 'object') {
+        // API returned a body (e.g. 202 Accepted) — display it like any other response.
+        this.output(response, this.flags.properties);
+      } else {
+        logger.info(response ? 'The resource was deleted successfully' : 'Failed to delete the resource');
+      }
       return;
     }
 
@@ -103,8 +108,15 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
     }
   });
 
-  // 'remove' commands have no response body and thus do not need display properties.
-  if (NewCommandClass.actionDefinition.commandName !== 'remove') {
+  /*
+   * Add --properties for all non-remove commands, and for remove commands whose
+   * spec defines a response body (i.e. at least one response has a content entry).
+   */
+  const removeHasResponseBody =
+    NewCommandClass.actionDefinition.commandName === 'remove' &&
+    Object.values(action.responses || {}).some((r) => r.content);
+
+  if (NewCommandClass.actionDefinition.commandName !== 'remove' || removeHasResponseBody) {
     const defaultProperties =
       (action && action.defaultOutputProperties) || (resource && resource.defaultOutputProperties) || [];
 
