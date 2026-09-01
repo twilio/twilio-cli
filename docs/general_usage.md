@@ -190,5 +190,6 @@ Substitute X.X.X below with the desired version.
 * When listing resources, only the first 50 records will be displayed, by default. Use the `--limit` flag to modify this behavior.
   * You can filter these results based on date, to, from, etc. to further limit the results.
   * Pass the `--help` flag to the command for details on which fields you may filter by.
+* Usage of `application/json` in request body is not supported for `twilio-cli`. As of July 2024, no active development is in place for adding this feature.
 
 [Global Infrastructure]: https://www.twilio.com/docs/global-infrastructure
