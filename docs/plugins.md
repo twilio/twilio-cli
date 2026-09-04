@@ -55,26 +55,23 @@ MySpectacularPlugin.flags = Object.assign({'fave-dessert': flag.string({'descrip
 
 ## 4. Test your plugin with the CLI
 
-You are probably using NPM if you develop a twilio-cli plugin, so install it if you have not already done so:
-
-`npm install -g twilio-cli`
-
-Follow the set-up instructions in the [twilio-cli Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart). The Quickstart also includes instructions for homebrew installation.
+Follow the installation and set-up instructions in the [twilio-cli Quickstart](https://www.twilio.com/docs/twilio-cli/quickstart).
 
 For testing, "install" the plugin referencing your plugin's local development folder by linking to your plugin.
 
-Run this command from the CLI folder. This assumes the CLI and your plugin folders are siblings of each other (perhaps in a `~/Projects` folder):
-
 ```
-./bin/run plugins:link ../plugin-<my-spectacular-plugin>
+twilio plugins:link ../plugin-<my-spectacular-plugin>
 ```
-
 
 Now, you can run your plugin command from the CLI:
 
 ```
 twilio my-new-topic:my-new-command --help
 ```
+
+To verify which plugins you have installed and linked, run `twilio plugins`. Any linked plugins will display "link" next to them.
+
+To unlink your plugin, run `twilio plugins:unlink <plugin-name>`. This uninstalls the plugin, so you will need to install it again if you want to use the public, non-development version.
 
 ## 5. Publish your plugin to NPM
 
