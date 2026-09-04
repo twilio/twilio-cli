@@ -8,7 +8,7 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
-  - npm install
+  - npm ci --loglevel=error
 test_script:
   - .\bin\run --version
   - .\bin\run --help
