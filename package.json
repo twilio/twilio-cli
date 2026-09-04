@@ -53,8 +53,8 @@
     "untildify": "^4.0.0"
   },
   "devDependencies": {
-    "@actions/core": "^1.0.0",
-    "@actions/github": "^6.0.0",
+    "@actions/core": "^2.0.0",
+    "@actions/github": "^9.0.0",
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^2.1.1",
     "@semantic-release/changelog": "^6.0.1",
