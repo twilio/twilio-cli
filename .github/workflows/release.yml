@@ -20,18 +20,27 @@ permissions:
   id-token: write  # Required for OIDC
   contents: write
 
+env:
+  ARTIFACTORY_URL: ${{ vars.ARTIFACTORY_URL }}
+
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
+    if: github.repository_owner == 'twilio'
+    permissions:
+      contents: read
+      id-token: write
     strategy:
       matrix:
-        node-version: [ 20.x, 22.x, lts/* ]
+        node-version: [ 22.x, lts/* ]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Artifactory OIDC Auth
+        uses: twilio/sdk-actions/artifactory-oidc@23b656b843d2a3461cf38e4fd466c07a822d5fc0 # v1
       - run: make install
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -63,13 +72,13 @@ jobs:
       draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
     steps:
       - name: Checkout cli
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           persist-credentials: false
-      - name: Use Node 20
-        uses: actions/setup-node@v4
+      - name: Use Node 22
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          node-version: '20'
+          node-version: '22'
 
       # Ensure npm 11.5.1 or later is installed
       - name: Update npm
@@ -188,13 +197,13 @@ jobs:
     name: Notify Release Failed
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: "#ff3333"
-          SLACK_USERNAME: CLI Release Bot
-          SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'CLI Release workflow Failed'
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+#      - name: Slack Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+#          SLACK_COLOR: "#ff3333"
+#          SLACK_USERNAME: CLI Release Bot
+#          SLACK_ICON_EMOJI: ":ship:"
+#          SLACK_TITLE: "Twilio Cli"
+#          SLACK_MESSAGE: 'CLI Release workflow Failed'
