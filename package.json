@@ -45,7 +45,7 @@
     "@sendgrid/mail": "^8.1.4",
     "@twilio/cli-core": "8.3.2",
     "chalk": "^4.1.2",
-    "file-type": "^16.5.4",
+    "file-type": "^21.3.1",
     "hyperlinker": "1.0.0",
     "inquirer": "^8.0.0",
     "supports-hyperlinks": "2.2.0",
