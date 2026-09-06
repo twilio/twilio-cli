@@ -17,7 +17,7 @@ jobs:
      needs: [ get-branch ]
      steps:
       - name: Check Out Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Wait for docker release to finish
         run: bash .github/scripts/trigger-and-wait.sh
         env:
@@ -30,7 +30,7 @@ jobs:
           INPUT_PROPAGATE_FAILURE: true
           INPUT_TRIGGER_WORKFLOW: false
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
@@ -41,4 +41,4 @@ jobs:
          docker run --rm twilio/twilio-cli:2.36.1 /bin/bash -c "twilio api:accounts --help && twilio" && docker pull twilio/twilio-cli:latest && docker run --rm twilio/twilio-cli:latest /bin/bash -c "twilio api:accounts --help && twilio"
       - name: Test for the latest release
         run: |
-         docker run --rm twilio/twilio-cli /bin/bash -c "twilio api:accounts --help && twilio" 
+         docker run --rm twilio/twilio-cli /bin/bash -c "twilio api:accounts --help && twilio"
