@@ -15,6 +15,9 @@ jobs:
       - uses: twilio/sdk-actions/npm-lockfile-hygiene@0375437914d535a5fb178bdbfdb5d51bdde2616e # v1
         with:
           package-manager: npm
+      # Needs no install, so a dropped ejs override fails before anything else runs.
+      - name: Verify ejs override (CVE-2023-29827)
+        run: node .github/scripts/verify-ejs-override.js
 
   test:
     needs: [lockfile-hygiene]
@@ -41,6 +44,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      # Re-checked post-install: catches a nested ejs 3.x copy that the
+      # lockfile check alone would not see.
+      - name: Verify installed ejs (CVE-2023-29827)
+        run: node .github/scripts/verify-ejs-override.js
       - name: Run tests
         run: npm test
 #      - name: SonarCloud Scan
