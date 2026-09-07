@@ -31,6 +31,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Verify ejs override (CVE-2023-29827)
+        run: node .github/scripts/verify-ejs-override.js
       - name: Run audit check
         run: npm audit --audit-level=moderate --production
         # minimum vulnerability level that will cause the command to fail
