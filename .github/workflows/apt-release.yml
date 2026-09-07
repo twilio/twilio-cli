@@ -4,7 +4,7 @@ on:
 
 jobs:
   apt-build-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
 
     steps:
     - name: Check Out Repo
@@ -35,10 +35,11 @@ jobs:
 #    if: ${{ failure() || cancelled() }}
 #    needs: [ apt-build-release ]
 #    name: Notify Release Failed
-#    runs-on: ubuntu-latest
+#    runs-on: ubuntu-x64
 #    steps:
 #      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 #      - name: Slack Notification
+#        # TODO: not whitelisted as of now
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
 #          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}

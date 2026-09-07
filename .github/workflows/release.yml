@@ -47,11 +47,11 @@ jobs:
       - name: Run tests
         run: npm test
   update-api-definitions-changelog:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [test]
     steps:
       - name: Checkout cli
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Update Changelog
@@ -65,7 +65,7 @@ jobs:
         env:
           CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [ update-api-definitions-changelog ]
     outputs:
       tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
@@ -115,11 +115,11 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
   oclif-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [release]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - run: |
           git pull
           make install
@@ -145,29 +145,30 @@ jobs:
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
           INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "formula": "twiliorc", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
 
-  docker-release:
-    runs-on: ubuntu-latest
-    needs: [ release ]
-    steps:
-      - name: Checkout cli repo
-        uses: actions/checkout@v2
-      - run: |
-          git pull
-          make install
-      - name: Extract branch name
-        id: extract_branch
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      - name: Invoke Docker workflow
-        if: ${{needs.release.outputs.tag-name != ''}}
-        run: node .github/scripts/trigger-workflow.js
-        env:
-          WORKFLOW_NAME: 'docker-release.yml'
-          REPO_NAME: ${{ github.repository }}
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+  # Deferred: docker-release.yml still has unpinned docker/* actions; re-enable once that's hardened.
+  # docker-release:
+  #   runs-on: ubuntu-latest
+  #   needs: [ release ]
+  #   steps:
+  #     - name: Checkout cli repo
+  #       uses: actions/checkout@v2
+  #     - run: |
+  #         git pull
+  #         make install
+  #     - name: Extract branch name
+  #       id: extract_branch
+  #       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+  #     - name: Invoke Docker workflow
+  #       if: ${{needs.release.outputs.tag-name != ''}}
+  #       run: node .github/scripts/trigger-workflow.js
+  #       env:
+  #         WORKFLOW_NAME: 'docker-release.yml'
+  #         REPO_NAME: ${{ github.repository }}
+  #         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+  #         BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
 
   platform-executables-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [ release ]
     env:
         REPO_NAME: ${{ github.repository }}
@@ -177,7 +178,7 @@ jobs:
         executable_workflow: ['debian-executable-release.yml', 'macos-executable-release.yml', 'rpmbuild.yml', 'windows-executable-release.yml', 'apt-release.yml']
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - run: |
           git pull
           make install
@@ -191,14 +192,15 @@ jobs:
           WORKFLOW_NAME: ${{ matrix.executable_workflow }}
           BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
 
-  notify-complete-fail:
-    if: ${{ failure() || cancelled() }}
-    needs: [ release, oclif-release, platform-executables-release ]
-    name: Notify Release Failed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+#  notify-complete-fail:
+#    if: ${{ failure() || cancelled() }}
+#    needs: [ release, oclif-release, platform-executables-release ]
+#    name: Notify Release Failed
+#    runs-on: ubuntu-x64
+#    steps:
+#      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 #      - name: Slack Notification
+#        # TODO: not whitelisted as of now
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
 #          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}

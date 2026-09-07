@@ -29,7 +29,7 @@ jobs:
             command_name: npx oclif-dev pack --xz -t darwin-arm64,darwin-x64,linux-arm,linux-x64,win32-x64,win32-x86
             publish: homebrew
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - run: |
           make install
           npm list @twilio/cli-core
@@ -61,11 +61,11 @@ jobs:
           fi
   home-brew-release:
     name: Trigger homebrew release workflow
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [oclif-release]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Invoke HomeBrew workflow
         run: source .github/scripts/trigger-and-wait.sh
         env:
@@ -79,11 +79,11 @@ jobs:
           INPUT_PROPAGATE_FAILURE: true
   scoop-release:
     name: Trigger scoop release workflow
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [ oclif-release ]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -98,20 +98,21 @@ jobs:
           INPUT_WAITING_INTERVAL: 10
           INPUT_INPUTS: '{ "version": "${{github.event.inputs.tag-name}}" }'
           INPUT_PROPAGATE_FAILURE: true
-  notify-complete-fail:
-    if: ${{ failure() || cancelled() }}
-    needs: [ home-brew-release ]
-    name: Notify Release Failed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: "#ff3333"
-          SLACK_USERNAME: CLI Release Bot
-          SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'Oclif Release Workflow Failed'
-          MSG_MINIMAL: actions url
+#  notify-complete-fail:
+#    if: ${{ failure() || cancelled() }}
+#    needs: [ home-brew-release ]
+#    name: Notify Release Failed
+#    runs-on: ubuntu-x64
+#    steps:
+#      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+#      - name: Slack Notification
+#        # TODO: not whitelisted as of now
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+#          SLACK_COLOR: "#ff3333"
+#          SLACK_USERNAME: CLI Release Bot
+#          SLACK_ICON_EMOJI: ":ship:"
+#          SLACK_TITLE: "Twilio Cli"
+#          SLACK_MESSAGE: 'Oclif Release Workflow Failed'
+#          MSG_MINIMAL: actions url
