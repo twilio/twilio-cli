@@ -1,0 +1,48 @@
+name: Local Action Policy Test
+
+# Purpose: confirm that a locally-referenced action (uses: ./path) is exempt
+# from this repo's Actions security policy (allowed_actions=selected,
+# sha_pinning_required=true), which blocks most other workflows in this repo.
+# Uses ./.github/actions/build-rpm with a throwaway package, not the real CLI build.
+on:
+  push:
+    branches: [chore/oss-publishing-node22-ci-updates]
+
+jobs:
+  build-rpm-smoke-test:
+    runs-on: ubuntu-x64
+    steps:
+      - name: checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: create throwaway package to feed the rpm build
+        run: |
+          rm -rf /tmp/rpm-smoke-test
+          mkdir -p /tmp/rpm-smoke-test/twilio/bin
+          echo '{"name":"twilio","version":"0.0.1-smoke","scripts":{"postinstall":"echo noop"}}' > /tmp/rpm-smoke-test/twilio/package.json
+          : > /tmp/rpm-smoke-test/twilio/README.md
+          : > /tmp/rpm-smoke-test/twilio/LICENSE
+          printf '#!/bin/sh\necho smoke-test\n' > /tmp/rpm-smoke-test/twilio/bin/twilio
+          chmod +x /tmp/rpm-smoke-test/twilio/bin/twilio
+          tar -czf twilio-v0.0.1-smoke-linux-x64.tar.gz -C /tmp/rpm-smoke-test twilio
+
+      - name: build rpm via local action
+        uses: ./.github/actions/build-rpm
+        id: build_rpm
+        with:
+          spec_file: .github/rpm/twilio.spec
+          sources: |
+            twilio-v0.0.1-smoke-linux-x64.tar.gz
+          variables: |
+            _version=0.0.1-smoke
+          gpg_signing_key: ${{ secrets.GPG_SIGNING_KEY }}
+          gpg_signing_key_id: ${{ secrets.GPG_SIGNING_KEY_ID }}
+          gpg_signing_key_passphrase: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
+          gpg_pub_key: .github/rpm/gpg_pub.asc
+
+      - name: report result
+        if: always()
+        run: |
+          echo "Reaching this step proves the run passed the org's Actions allow-list / SHA-pinning gate."
+          echo "rpm_package_name: ${{ steps.build_rpm.outputs.rpm_package_name }}"
+          echo "rpm_package_path: ${{ steps.build_rpm.outputs.rpm_package_path }}"
