@@ -4,7 +4,7 @@
     "twilio-mocha"
   ],
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": 2020
   },
   "rules": {
     "global-require": "off",
