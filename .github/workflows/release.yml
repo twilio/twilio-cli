@@ -44,6 +44,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      # Release gate: never publish a build whose ejs has slipped back to 3.x.
+      - name: Verify ejs override (CVE-2023-29827)
+        run: node .github/scripts/verify-ejs-override.js
       - name: Run tests
         run: npm test
   update-api-definitions-changelog:
