@@ -15,23 +15,29 @@ const {
 } = require('../../services/twilio-api');
 
 /*
- * Maps the operation action name (as stored in path.operations by api-browser.js)
- * to the CLI command verb. api-browser.js maps HTTP methods to action names:
- *   PUT  → 'update',  PATCH → 'patch'
- * So this map uses those action names as keys.
+ * Maps an operation's HTTP method (as stored in path.operations by
+ * api-browser.js, keyed by method name) to the CLI command verb, based on the
+ * resource's x-twilio.pathType.
+ *
+ * A list-type resource's PUT maps to 'create', not 'update': list-type paths with
+ * a PUT and no POST (bulk upsert, singleton settings) use PUT as their only write
+ * verb, which is semantically a create/upsert on the collection, not an update of
+ * an existing single resource. TwilioApiClient.create() falls back to sending PUT
+ * on the wire when the resource has no POST operation, so this only changes the
+ * CLI-facing command name, not what's actually sent over HTTP.
  */
 const METHOD_TO_ACTION_MAP = {
   list: {
     get: 'list',
     post: 'create',
-    update: 'update',
+    put: 'create',
     patch: 'patch',
   },
   instance: {
     delete: 'remove',
     get: 'fetch',
     post: 'update',
-    update: 'update',
+    put: 'update',
     patch: 'patch',
   },
 };
