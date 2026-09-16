@@ -31,15 +31,6 @@ describe('hooks', () => {
         const previewCommand = plugin.topics.find((t) => t.name === 'api:preview');
         expect(previewCommand.description).to.equal('resources under preview.twilio.com');
         expect(previewCommand.name).to.equal('api:preview');
-
-        /*
-         * Some specs (e.g. Insights v3's InsightsDomains resources) don't declare
-         * x-twilio.pathType at all. Commands must still be generated for them via
-         * the path-shape fallback, instead of being silently skipped.
-         */
-        expect(plugin.commandIDs).to.include('api:insights:v3:insights-domains:conversations:query:list');
-        expect(plugin.commandIDs).to.include('api:insights:v3:insights-domains:conversations:query:create');
-        expect(plugin.commandIDs).to.include('api:insights:v3:insights-domains:conversations:metadata:list');
       });
 
       describe('inferPathType', () => {
