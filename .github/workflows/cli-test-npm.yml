@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x, 22.x, lts/* ]
+        node-version: [ 22.x, lts/* ]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
          node-version: ${{ matrix.node-version }}
       -  name: Global - Testing installation of Twilio CLI (1)
@@ -35,4 +35,3 @@ jobs:
          npm install twilio-cli@${{ github.event.inputs.version }}
           npm install twilio-cli
           node test/asserts/validate_tests.js
-

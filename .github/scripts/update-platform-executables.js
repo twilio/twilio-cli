@@ -1,12 +1,10 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
 const fs = require('fs');
 
 /**
  * Functionality from svenstaro/upload-release-action.
  * Link: https://github.com/svenstaro/upload-release-action
  */
-const updatePlatformExecutables = async () => {
+const updatePlatformExecutables = async (core, github) => {
   try {
     const requiredParams = ['GITHUB_TOKEN', 'REPO_NAME', 'TAG_NAME', 'ASSET_NAME', 'FILE'];
     for (const param of requiredParams) {
@@ -15,7 +13,7 @@ const updatePlatformExecutables = async () => {
         return;
       }
     }
-    const octokit = new github.getOctokit(process.env.GITHUB_TOKEN);
+    const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
     const [owner, repo] = process.env.REPO_NAME
       ? process.env.REPO_NAME.split('/')
       : [null, null];
@@ -103,6 +101,10 @@ const updatePlatformExecutables = async () => {
   }
 }
 (async () => {
-  await updatePlatformExecutables();
+  // @actions/core (v2+) and @actions/github (v7+) are ESM-only; this file
+  // stays CommonJS, so import them dynamically instead of require().
+  const core = await import('@actions/core');
+  const github = await import('@actions/github');
+  await updatePlatformExecutables(core, github);
 })();
 
