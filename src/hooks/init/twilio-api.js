@@ -15,25 +15,45 @@ const {
 } = require('../../services/twilio-api');
 
 /*
- * Maps the operation action name (as stored in path.operations by api-browser.js)
- * to the CLI command verb. api-browser.js maps HTTP methods to action names:
- *   PUT  → 'update',  PATCH → 'patch'
- * So this map uses those action names as keys.
+ * Maps an operation's HTTP method (as stored in path.operations by
+ * api-browser.js, keyed by method name) to the CLI command verb, based on the
+ * resource's x-twilio.pathType.
+ *
+ * A list-type resource's PUT maps to 'create', not 'update': list-type paths with
+ * a PUT and no POST (bulk upsert, singleton settings) use PUT as their only write
+ * verb, which is semantically a create/upsert on the collection, not an update of
+ * an existing single resource. TwilioApiClient.create() falls back to sending PUT
+ * on the wire when the resource has no POST operation, so this only changes the
+ * CLI-facing command name, not what's actually sent over HTTP.
  */
 const METHOD_TO_ACTION_MAP = {
   list: {
     get: 'list',
     post: 'create',
-    update: 'update',
+    put: 'create',
     patch: 'patch',
   },
   instance: {
     delete: 'remove',
     get: 'fetch',
     post: 'update',
-    update: 'update',
+    put: 'update',
     patch: 'patch',
   },
+};
+
+/*
+ * Some specs don't declare x-twilio.pathType at all - a spec-authoring gap
+ * rather than an intentional omission. Rather than generating no commands
+ * whatsoever for such a resource, infer list vs instance from the path shape,
+ * the same way twilio-oai-generator's PathUtils.isInstanceOperation does for
+ * every other Twilio SDK: a path ending in a `{parameter}` placeholder (after
+ * dropping any trailing legacy '.json' suffix) is an instance path; anything
+ * else is a list-type (collection) path.
+ */
+const inferPathType = (path) => {
+  const withoutJsonSuffix = path.endsWith('.json') ? path.slice(0, -'.json'.length) : path;
+  return withoutJsonSuffix.endsWith('}') ? 'instance' : 'list';
 };
 
 // Implement an oclif plugin that can provide dynamically created commands at runtime.
@@ -48,8 +68,8 @@ class TwilioRestApiPlugin extends Plugin {
     actionDefinition.resource = actionDefinition.domain.paths[actionDefinition.path];
     actionDefinition.topicName = BASE_TOPIC_NAME + TOPIC_SEPARATOR + getTopicName(actionDefinition);
 
-    if (actionDefinition.resource.pathType === undefined) return;
-    const pathType = actionDefinition.resource.pathType.toLowerCase();
+    const declaredPathType = actionDefinition.resource.pathType;
+    const pathType = (declaredPathType || inferPathType(actionDefinition.path)).toLowerCase();
 
     Object.keys(actionDefinition.resource.operations).forEach((methodName) => {
       actionDefinition.methodName = methodName;
@@ -178,3 +198,6 @@ module.exports = function twilioApi() {
   this.config.loadCommands(twilioApiPlugin);
   this.config.loadTopics(twilioApiPlugin);
 };
+
+module.exports.TwilioRestApiPlugin = TwilioRestApiPlugin;
+module.exports.inferPathType = inferPathType;
