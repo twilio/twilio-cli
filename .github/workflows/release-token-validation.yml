@@ -4,20 +4,17 @@ on:
 
 jobs:
   token-validation:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     steps:
-      # Disabled: requires AWS credentials; re-enable once creds are restored.
-      # A stub step is kept since a job requires 'steps' or 'uses'.
-      - run: echo "Token validation disabled pending AWS credential fix; see commented-out steps below."
-    #   - name: Validate REPO_ACCESS_TOKEN
-    #     uses: actions/checkout@v2
-    #     with:
-    #       repository: '${{ github.repository_owner }}/twilio-oai'
-    #       token:  ${{ secrets.REPO_ACCESS_TOKEN }}
-    #   - name: Validate AWS tokens
-    #     uses: aws-actions/configure-aws-credentials@v1
-    #     with:
-    #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #       aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-    #       aws-region: us-east-1
+       - name: Validate REPO_ACCESS_TOKEN
+         uses: actions/checkout@v2
+         with:
+           repository: '${{ github.repository_owner }}/twilio-oai'
+           token:  ${{ secrets.REPO_ACCESS_TOKEN }}
+       - name: Validate AWS tokens
+         uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1
+         with:
+           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+           aws-region: us-east-1

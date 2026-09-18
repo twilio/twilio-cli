@@ -6,7 +6,7 @@ env:
 
 jobs:
   get-sha:
-    runs-on: macos-latest
+    runs-on: macos-x64
     outputs:
       SHA_SHORT: ${{steps.get-sha.outputs.SHA_SHORT}}
     steps:
@@ -15,7 +15,7 @@ jobs:
         id: get-sha
         run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
   get-tag:
-    runs-on: macos-latest
+    runs-on: macos-x64
     outputs:
      TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
     steps:
@@ -26,7 +26,7 @@ jobs:
         git fetch --prune --unshallow
         echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
   pack-windows-release:
-    runs-on: macos-latest
+    runs-on: macos-x64
     needs: [get-tag, get-sha]
     steps:
      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -43,7 +43,7 @@ jobs:
 
   sign-windows-release:
     needs: [pack-windows-release, get-tag, get-sha]
-    runs-on: windows-latest
+    runs-on: windows-latest-large
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - run: make install

@@ -37,70 +37,67 @@ jobs:
             brew install makensis
           fi
           ${{ matrix.command_name }}
-      # Disabled: requires AWS credentials; re-enable once creds are restored.
-      # - name: Configure AWS credentials from Test account
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-      #     aws-region: us-east-1
-      # - name: Publish assests to s3 and calculate sha of oclif dev pack
-      #   id: sha256
-      #   if: ${{matrix.publish == 'homebrew'}}
-      #   run: |
-      #     make clean
-      #     make install
-      #     npx oclif-dev publish
-      #     brew install coreutils
-      #     if [ "${{github.event.inputs.formula}}" == "twiliorc" ]; then
-      #       echo "::set-output name=sha256::$(sha256sum dist/channels/rc/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
-      #     elif [ "${{github.event.inputs.formula}}" == "twiliodraft" ]; then
-      #       echo "::set-output name=sha256::$(sha256sum dist/channels/draft/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
-      #     else
-      #       echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
-      #     fi
-  # Disabled: depends on the sha256 output from the AWS publish step above, which no longer runs; re-enable once creds are restored.
-  # home-brew-release:
-  #   name: Trigger homebrew release workflow
-  #   runs-on: ubuntu-x64
-  #   needs: [oclif-release]
-  #   steps:
-  #     - name: Checkout cli repo
-  #       uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-  #     - name: Invoke HomeBrew workflow
-  #       run: source .github/scripts/trigger-and-wait.sh
-  #       env:
-  #         INPUT_OWNER: ${{ github.repository_owner }}
-  #         INPUT_REPO: homebrew-brew
-  #         INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-  #         INPUT_WORKFLOW_FILE_NAME: release.yml
-  #         INPUT_REF: ${{ github.event.inputs.home-brew-branch }}
-  #         INPUT_WAITING_INTERVAL: 10
-  #         INPUT_INPUTS: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
-  #         INPUT_PROPAGATE_FAILURE: true
-  # Disabled: depends on oclif-release's sha256/AWS-published artifacts, which no longer run; re-enable once creds are restored.
-  # scoop-release:
-  #   name: Trigger scoop release workflow
-  #   runs-on: ubuntu-x64
-  #   needs: [ oclif-release ]
-  #   steps:
-  #     - name: Checkout cli repo
-  #       uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-  #     - name: Extract branch name
-  #       id: extract_branch
-  #       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-  #     - name: Invoke Scoop workflow
-  #       if: ${{steps.extract_branch.outputs.branch == 'main'}}
-  #       run: source .github/scripts/trigger-and-wait.sh
-  #       env:
-  #         INPUT_OWNER: ${{ github.repository_owner }}
-  #         INPUT_REPO: scoop-twilio-cli
-  #         INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-  #         INPUT_WORKFLOW_FILE_NAME: update-release.yml
-  #         INPUT_WAITING_INTERVAL: 10
-  #         INPUT_INPUTS: '{ "version": "${{github.event.inputs.tag-name}}" }'
-  #         INPUT_PROPAGATE_FAILURE: true
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+      - name: Publish assests to s3 and calculate sha of oclif dev pack
+        id: sha256
+        if: ${{matrix.publish == 'homebrew'}}
+        run: |
+          make clean
+          make install
+          npx oclif-dev publish
+          brew install coreutils
+          if [ "${{github.event.inputs.formula}}" == "twiliorc" ]; then
+            echo "::set-output name=sha256::$(sha256sum dist/channels/rc/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
+          elif [ "${{github.event.inputs.formula}}" == "twiliodraft" ]; then
+            echo "::set-output name=sha256::$(sha256sum dist/channels/draft/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
+          else
+            echo "::set-output name=sha256::$(sha256sum dist/${{ matrix.asset_name }}/${{ matrix.asset_name }}.tar.gz | awk '{print $1}')"
+          fi
+  home-brew-release:
+    name: Trigger homebrew release workflow
+    runs-on: ubuntu-x64
+    needs: [oclif-release]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 #v4
+      - name: Invoke HomeBrew workflow
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER: ${{ github.repository_owner }}
+          INPUT_REPO: homebrew-brew
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: release.yml
+          INPUT_REF: ${{ github.event.inputs.home-brew-branch }}
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_INPUTS: '{ "formula": "${{github.event.inputs.formula}}", "version": "${{github.event.inputs.tag-name}}", "sha": "${{needs.oclif-release.outputs.sha256}}", "pre-release": "${{github.event.inputs.pre-release}}" }'
+          INPUT_PROPAGATE_FAILURE: true
+  scoop-release:
+    name: Trigger scoop release workflow
+    runs-on: ubuntu-x64
+    needs: [ oclif-release ]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Invoke Scoop workflow
+        if: ${{steps.extract_branch.outputs.branch == 'main'}}
+        run: source .github/scripts/trigger-and-wait.sh
+        env:
+          INPUT_OWNER: ${{ github.repository_owner }}
+          INPUT_REPO: scoop-twilio-cli
+          INPUT_GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          INPUT_WORKFLOW_FILE_NAME: update-release.yml
+          INPUT_WAITING_INTERVAL: 10
+          INPUT_INPUTS: '{ "version": "${{github.event.inputs.tag-name}}" }'
+          INPUT_PROPAGATE_FAILURE: true
 #  notify-complete-fail:
 #    if: ${{ failure() || cancelled() }}
 #    needs: [ home-brew-release ]
@@ -109,7 +106,6 @@ jobs:
 #    steps:
 #      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 #      - name: Slack Notification
-#        # TODO: not whitelisted as of now
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
 #          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}

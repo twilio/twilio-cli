@@ -114,37 +114,36 @@ jobs:
       - name: Extract branch name
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-  # Disabled: triggers oclif-release.yml, which requires AWS credentials; re-enable once creds are restored.
-  # oclif-release:
-  #   runs-on: ubuntu-x64
-  #   needs: [release]
-  #   steps:
-  #     - name: Checkout cli repo
-  #       uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-  #     - run: |
-  #         git pull
-  #         make install
-  #     - name: Extract branch name
-  #       id: extract_branch
-  #       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-  #     - name: Invoke Oclif workflow
-  #       if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
-  #       run: node .github/scripts/trigger-workflow.js
-  #       env:
-  #         WORKFLOW_NAME: 'oclif-release.yml'
-  #         REPO_NAME: ${{ github.repository }}
-  #         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-  #         BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-  #         INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
-  #     - name: Invoke Oclif workflow for release candidate
-  #       if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch != 'main'}}
-  #       run: node .github/scripts/trigger-workflow.js
-  #       env:
-  #         WORKFLOW_NAME: 'oclif-release.yml'
-  #         REPO_NAME: ${{ github.repository }}
-  #         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-  #         BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
-  #         INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "formula": "twiliorc", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+  oclif-release:
+    runs-on: ubuntu-x64
+    needs: [release]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - run: |
+          git pull
+          make install
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Invoke Oclif workflow
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'oclif-release.yml'
+          REPO_NAME: ${{ github.repository }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
+      - name: Invoke Oclif workflow for release candidate
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch != 'main'}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'oclif-release.yml'
+          REPO_NAME: ${{ github.repository }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "home-brew-branch": "${{github.event.inputs.homebrew-branch}}", "tag-name": "${{needs.release.outputs.tag-name}}", "formula": "twiliorc", "pre-release": "${{github.event.inputs.homebrew-prerelease}}"}'
 
   # Deferred: docker-release.yml still has unpinned docker/* actions; re-enable once that's hardened.
   # docker-release:
@@ -176,8 +175,7 @@ jobs:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
     strategy:
       matrix:
-        # 'apt-release.yml' removed: it requires AWS credentials; re-add once creds are restored.
-        executable_workflow: ['debian-executable-release.yml', 'macos-executable-release.yml', 'rpmbuild.yml', 'windows-executable-release.yml']
+        executable_workflow: ['debian-executable-release.yml', 'macos-executable-release.yml', 'rpmbuild.yml', 'windows-executable-release.yml', 'apt-release.yml']
     steps:
       - name: Checkout cli repo
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4

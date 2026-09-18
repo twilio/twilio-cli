@@ -6,33 +6,29 @@ jobs:
   apt-build-release:
     runs-on: ubuntu-x64
     steps:
-      # Disabled: requires AWS credentials; re-enable once creds are restored.
-      # This workflow's sole purpose is AWS/S3 publishing, so its real steps are
-      # deferred below. A stub step is kept since a job requires 'steps' or 'uses'.
-      - run: echo "Apt Release disabled pending AWS credential fix; see commented-out steps below."
-    # - name: Check Out Repo
-    #   uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-    # - name: Configure AWS credentials
-    #   uses: aws-actions/configure-aws-credentials@ff717079ee2060e4bcee96c4779b553acc87447c # v4
-    #   with:
-    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-    #     aws-region: us-east-1
-    #
-    # - name: generate linux tarball
-    #   run: |
-    #     npm cache clear & npm install
-    #     npm install -g @oclif/dev-cli
-    #     oclif-dev pack -t linux-x64,linux-arm
-    #
-    # - name: Build Deb Package
-    #   env:
-    #     GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY}}
-    #     GPG_SIGNING_KEY_ID: ${{ secrets.GPG_SIGNING_KEY_ID }}
-    #     GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
-    #   run: |
-    #     node .github/scripts/pack-debian-apt.js x64,arm
+     - name: Check Out Repo
+       uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+     - name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1
+       with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+         aws-region: us-east-1
+
+     - name: generate linux tarball
+       run: |
+         npm cache clear & npm install
+         npm install -g @oclif/dev-cli
+         oclif-dev pack -t linux-x64,linux-arm
+
+     - name: Build Deb Package
+       env:
+         GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY}}
+         GPG_SIGNING_KEY_ID: ${{ secrets.GPG_SIGNING_KEY_ID }}
+         GPG_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}
+       run: |
+         node .github/scripts/pack-debian-apt.js x64,arm
 
 #  notify-complete-fail:
 #    if: ${{ failure() || cancelled() }}
