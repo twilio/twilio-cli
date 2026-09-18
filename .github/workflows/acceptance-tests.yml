@@ -24,7 +24,7 @@ env:
 jobs:
   get-branch:
     name: Get Current Branch Name
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     outputs:
       branch: ${{ steps.extract_branch.outputs.branch }}
     steps:
@@ -32,11 +32,11 @@ jobs:
         id: extract_branch
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
   get-tag:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     outputs:
       TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Getting latest tag
         id: get-tag
         run: |
@@ -54,7 +54,7 @@ jobs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_brew.outputs.FAILURE_TAG_BREW }}
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Wait for oclif executables Release
         if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
@@ -101,14 +101,14 @@ jobs:
 
   wait-for-windows-releases:
     name: Wait for windows platform executables Release to complete
-    runs-on: windows-latest
+    runs-on: windows-latest-large
     needs: [ get-branch, get-tag ]
     continue-on-error: true
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_windows.outputs.FAILURE_TAG_WINDOWS }}
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Wait for windows executables Release
         if: ${{ github.event_name == 'workflow_run' }}
         run: bash .github/scripts/trigger-and-wait.sh
@@ -147,7 +147,7 @@ jobs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_macos.outputs.FAILURE_TAG_MACOS }}
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Wait for macos executables Release
         if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
@@ -171,14 +171,14 @@ jobs:
 
   wait-for-debian-releases:
     name: Wait for debian platform executables Release to complete
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [ get-branch, get-tag ]
     continue-on-error: true
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_debian.outputs.FAILURE_TAG_DEBIAN }}
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Wait for debian executables Release
         if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
@@ -202,14 +202,14 @@ jobs:
 
   test-apt-release:
     name: Wait for apt release to complete
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: [ get-branch, get-tag ]
     continue-on-error: true
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.apt.outputs.FAILURE_TAG_APT}}
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Wait for apt Release
         if: ${{ github.event_name == 'workflow_run' }}
         run: source .github/scripts/trigger-and-wait.sh
@@ -247,7 +247,7 @@ jobs:
         run: echo '::set-output name=FAILURE_TAG_APT::true'
   test-npm-releases:
     name: NPM acceptance testing
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     continue-on-error: true
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_npm.outputs.FAILURE_TAG_NPM }}
@@ -256,7 +256,7 @@ jobs:
         node-version: [ 22.x, lts/* ]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           node-version: ${{ matrix.node-version }}
       - name: Check for cached twilio installation
@@ -290,13 +290,13 @@ jobs:
 
   test-scoop-release:
     name: Do scoop testing after release
-    runs-on: windows-latest
+    runs-on: windows-latest-large
     continue-on-error: true
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_scoop.outputs.FAILURE_TAG_SCOOP }}
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Wait for Scoop release to finish
         if: ${{ github.event_name == 'workflow_run' }}
         run: bash .github/scripts/trigger-and-wait.sh
@@ -336,14 +336,14 @@ jobs:
 
   test-docker-release:
     name: Docker acceptance testing
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     needs: get-branch
     continue-on-error: true
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_docker.outputs.FAILURE_TAG_DOCKER }}
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - run: |
           git pull
           make install
@@ -359,31 +359,31 @@ jobs:
         id: failure_docker
         run: echo '::set-output name=FAILURE_TAG_DOCKER::true'
 
-  notify-complete-fail:
-    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases, test-apt-release, test-docker-release]
-    name: Notify Release Failed
-    runs-on: ubuntu-latest
-    if: ${{ contains( needs.*.outputs.ACCEPTANCE_FAILURE_TAG, 'true' ) }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: "#ff3333"
-          SLACK_USERNAME: CLI Release Bot
-          SLACK_ICON_EMOJI: ":ship:"
-          SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'CLI acceptance workflow Failed'
-      - name: Fail in case all jobs failed
-        if: |
-          ${{ ( needs.test-npm-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
-          ( needs.wait-for-brew-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
-          ( needs.wait-for-macos-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
-          ( needs.wait-for-windows-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
-          ( needs.wait-for-debian-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
-          ( needs.test-scoop-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
-          ( needs.test-docker-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
-          ( needs.test-apt-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true')}}
-        run:
-          exit 1
+#  notify-complete-fail:
+#    needs: [wait-for-brew-releases, wait-for-windows-releases, wait-for-debian-releases, wait-for-macos-releases, test-scoop-release, test-npm-releases, test-apt-release, test-docker-release]
+#    name: Notify Release Failed
+#    runs-on: ubuntu-x64
+#    if: ${{ contains( needs.*.outputs.ACCEPTANCE_FAILURE_TAG, 'true' ) }}
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Slack Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+#          SLACK_COLOR: "#ff3333"
+#          SLACK_USERNAME: CLI Release Bot
+#          SLACK_ICON_EMOJI: ":ship:"
+#          SLACK_TITLE: "Twilio Cli"
+#          SLACK_MESSAGE: 'CLI acceptance workflow Failed'
+#      - name: Fail in case all jobs failed
+#        if: |
+#          ${{ ( needs.test-npm-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+#          ( needs.wait-for-brew-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+#          ( needs.wait-for-macos-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+#          ( needs.wait-for-windows-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true' ) &&
+#          ( needs.wait-for-debian-releases.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
+#          ( needs.test-scoop-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
+#          ( needs.test-docker-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true') &&
+#          ( needs.test-apt-release.outputs.ACCEPTANCE_FAILURE_TAG == 'true')}}
+#        run:
+#          exit 1

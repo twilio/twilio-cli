@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-x64
     steps:
        - name: Validate REPO_ACCESS_TOKEN
-         uses: actions/checkout@v2
+         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
          with:
            repository: '${{ github.repository_owner }}/twilio-oai'
            token:  ${{ secrets.REPO_ACCESS_TOKEN }}

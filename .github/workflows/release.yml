@@ -96,7 +96,7 @@ jobs:
           NPM_CONFIG_PROVENANCE: true # required for OIDC
       - name: verify release required
         if: ${{steps.semantic-release.outputs.TAG_NAME == ''}}
-        uses: actions/github-script@v3
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 #v9
         with:
           script: |
             core.setFailed('There are no relevant changes, so no new version is released.')
