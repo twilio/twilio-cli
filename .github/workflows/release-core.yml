@@ -1,0 +1,167 @@
+# Reusable release chain: publish, then fan out to oclif and the platform
+# executable builds.
+#
+# Called from two entry points, because the release prep (changelog +
+# @twilio/cli-core bump) and the release can no longer happen in a single run
+# (the prep must land via PR):
+#   * release.yml             - dispatch with no prep changes to propose
+#   * release-on-prep-merge.yml - after a release-prep PR merges to main
+name: Cli Release Core
+
+on:
+  workflow_call:
+    inputs:
+      change-log:
+        description: 'Open API Changelog.'
+        type: string
+        default: ''
+      cli-core-tag:
+        # The @twilio/cli-core version that cli-core just published, which this
+        # release pins in package.json. Unrelated to twilio-cli's own version:
+        # cli-core is on the 8.x line, twilio-cli on the 6.x line.
+        description: 'The @twilio/cli-core version to depend on, e.g. 8.3.4'
+        type: string
+        required: true
+      homebrew-branch:
+        type: string
+        default: main
+      homebrew-prerelease:
+        type: string
+        default: 'false'
+    outputs:
+      tag-name:
+        value: ${{ jobs.release.outputs.tag-name }}
+
+permissions:
+  id-token: write
+  contents: write
+
+env:
+  ARTIFACTORY_URL: ${{ vars.ARTIFACTORY_URL }}
+
+jobs:
+  release:
+    runs-on: ubuntu-x64
+    outputs:
+      tag-name: ${{ steps.semantic-release.outputs.TAG_NAME }}
+      draft-tag-name: ${{ steps.semantic-release-draft.outputs.TAG_NAME }}
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+      - name: Use Node 22
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: '22'
+
+      # Ensure npm 11.5.1 or later is installed
+      - name: Update npm
+        run: npm install -g npm@latest
+      - name: Run git and npm update
+        run: |
+          git pull
+          make install
+      - name: Semantic Release runs
+        id: semantic-release
+        run: DEBUG=semantic-release:* npx semantic-release  -t \${version}
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true # required for OIDC
+      - name: verify release required
+        if: ${{steps.semantic-release.outputs.TAG_NAME == ''}}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 #v9
+        with:
+          script: |
+            core.setFailed('There are no relevant changes, so no new version is released.')
+
+      # @semantic-release/git used to commit CHANGES.md + package.json straight
+      # to main. The branch ruleset rejects that, so the plugin is gone and the
+      # same commit is proposed as an auto-merging PR instead.
+      - name: Propose release commit as a PR
+        if: ${{ steps.semantic-release.outputs.TAG_NAME != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          TAG_NAME: ${{ steps.semantic-release.outputs.TAG_NAME }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No release commit to propose."
+            exit 0
+          fi
+          git remote set-url origin \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          message="chore(release): set \`package.json\` to ${TAG_NAME} [skip ci]"
+          bash .github/scripts/open-pr.sh \
+            "release-${TAG_NAME}" \
+            "$message" \
+            "$message" \
+            "Version bump and changelog for the \`${TAG_NAME}\` release, which is already published to npm and tagged. Merging this keeps \`main\` in sync with the published version."
+
+      - name: Update release
+        run:
+          node .github/scripts/update-release.js
+        env:
+          TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
+          RELEASE_BODY: ${{ inputs.change-log }}
+          REPO_NAME: ${{ github.repository }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUTS: '{ "tag-name": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
+          CLI_CORE_TAG: ${{ inputs.cli-core-tag }}
+
+  oclif-release:
+    runs-on: ubuntu-x64
+    needs: [release]
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - run: |
+          git pull
+          make install
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "branch=${GITHUB_REF#refs/heads/}" >> "$GITHUB_OUTPUT"
+      - name: Invoke Oclif workflow
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'oclif-release.yml'
+          REPO_NAME: ${{ github.repository }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "home-brew-branch": "${{ inputs.homebrew-branch }}", "tag-name": "${{needs.release.outputs.tag-name}}", "pre-release": "${{ inputs.homebrew-prerelease }}"}'
+      - name: Invoke Oclif workflow for release candidate
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch != 'main'}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: 'oclif-release.yml'
+          REPO_NAME: ${{ github.repository }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}
+          INPUTS: '{ "home-brew-branch": "${{ inputs.homebrew-branch }}", "tag-name": "${{needs.release.outputs.tag-name}}", "formula": "twiliorc", "pre-release": "${{ inputs.homebrew-prerelease }}"}'
+
+  platform-executables-release:
+    runs-on: ubuntu-x64
+    needs: [ release ]
+    env:
+        REPO_NAME: ${{ github.repository }}
+        REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+    strategy:
+      matrix:
+        executable_workflow: ['debian-executable-release.yml', 'macos-executable-release.yml', 'rpmbuild.yml', 'windows-executable-release.yml', 'apt-release.yml']
+    steps:
+      - name: Checkout cli repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - run: |
+          git pull
+          make install
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "branch=${GITHUB_REF#refs/heads/}" >> "$GITHUB_OUTPUT"
+      - name: Invoke platform executable workflow
+        if: ${{needs.release.outputs.tag-name != '' && steps.extract_branch.outputs.branch == 'main'}}
+        run: node .github/scripts/trigger-workflow.js
+        env:
+          WORKFLOW_NAME: ${{ matrix.executable_workflow }}
+          BRANCH_NAME: ${{steps.extract_branch.outputs.branch}}

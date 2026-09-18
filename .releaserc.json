@@ -81,19 +81,9 @@
       }
     ],
     [
-      "@semantic-release/git",
-      {
-        "assets": [
-          "CHANGES.md",
-          "package.json"
-        ],
-        "message": "chore(release): set `package.json` to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-      }
-    ],
-    [
       "@semantic-release/exec",
       {
-        "successCmd": "echo '::set-output name=TAG_NAME::${nextRelease.version}'"
+        "successCmd": "echo \"TAG_NAME=${nextRelease.version}\" >> \"$GITHUB_OUTPUT\""
       }
     ]
   ]

@@ -1,0 +1,70 @@
+# Second half of the release, run once a release-prep PR merges to main.
+#
+# The prep changes can no longer push to main (the org branch ruleset requires
+# a PR), so release.yml proposes them as a PR and stops. Merging that PR lands
+# here and runs the actual release.
+name: Cli Release On Prep Merge
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'CHANGES.md'
+      - 'package.json'
+  # Also dispatchable, to re-run a release or to override the homebrew settings,
+  # which are dispatch-only preferences and cannot be recovered from a commit.
+  workflow_dispatch:
+    inputs:
+      homebrew-branch:
+        description: 'HomeBrew branch name'
+        default: main
+      homebrew-prerelease:
+        description: 'HomeBrew prerelease'
+        default: 'false'
+
+permissions:
+  id-token: write
+  contents: write
+
+env:
+  ARTIFACTORY_URL: ${{ vars.ARTIFACTORY_URL }}
+
+jobs:
+  derive-inputs:
+    runs-on: ubuntu-x64
+    # Only release-prep commits start a release. Notably this skips the
+    # "chore(release): set package.json ..." commit, so releases don't loop.
+    if: >-
+      github.repository_owner == 'twilio' &&
+      (github.event_name == 'workflow_dispatch' ||
+       startsWith(github.event.head_commit.message, 'oaiFeat:') ||
+       startsWith(github.event.head_commit.message, 'oaiFix:') ||
+       startsWith(github.event.head_commit.message, 'chore: update cli-core version'))
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      change-log: ${{ steps.derive.outputs.change-log }}
+      cli-core-tag: ${{ steps.derive.outputs.cli-core-tag }}
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          # The changelog is derived by diffing the prep commit against its
+          # parent, so both commits must be present.
+          fetch-depth: 2
+      - name: Derive release inputs from the prep commit
+        id: derive
+        run: bash .github/scripts/release-inputs-from-commit.sh "$COMMIT_SHA"
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+
+  release:
+    needs: [ derive-inputs ]
+    uses: ./.github/workflows/release-core.yml
+    secrets: inherit
+    with:
+      change-log: ${{ needs.derive-inputs.outputs.change-log }}
+      cli-core-tag: ${{ needs.derive-inputs.outputs.cli-core-tag }}
+      homebrew-branch: ${{ github.event.inputs.homebrew-branch || 'main' }}
+      homebrew-prerelease: ${{ github.event.inputs.homebrew-prerelease || 'false' }}
