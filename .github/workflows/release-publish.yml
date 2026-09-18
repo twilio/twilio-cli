@@ -1,27 +1,15 @@
-# Reusable release chain: publish, then fan out to oclif and the platform
-# executable builds.
+# Stage 3 of 3: publish the release that the release PR just landed, then fan
+# out to oclif and the platform executable builds.
 #
-# Called from two entry points, because the release prep (changelog +
-# @twilio/cli-core bump) and the release can no longer happen in a single run
-# (the prep must land via PR):
-#   * release.yml             - dispatch with no prep changes to propose
-#   * release-on-prep-merge.yml - after a release-prep PR merges to main
-name: Cli Release Core
+# Runs on the merge commit, which already contains the version in package.json
+# and the notes in CHANGES.md. semantic-release therefore tags and publishes a
+# commit that genuinely contains the version it claims, which is what makes the
+# git tag and the npm provenance attestation trustworthy.
+name: Cli Release Publish
 
 on:
   workflow_call:
     inputs:
-      change-log:
-        description: 'Open API Changelog.'
-        type: string
-        default: ''
-      cli-core-tag:
-        # The @twilio/cli-core version that cli-core just published, which this
-        # release pins in package.json. Unrelated to twilio-cli's own version:
-        # cli-core is on the 8.x line, twilio-cli on the 6.x line.
-        description: 'The @twilio/cli-core version to depend on, e.g. 8.3.4'
-        type: string
-        required: true
       homebrew-branch:
         type: string
         default: main
@@ -50,6 +38,8 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           persist-credentials: false
+          # Needed to find the previous tag and the release-prep commit.
+          fetch-depth: 0
       - name: Use Node 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
@@ -62,6 +52,18 @@ jobs:
         run: |
           git pull
           make install
+      - name: Check package.json still matches the version to be released
+        run: |
+          fileName="$GITHUB_WORKSPACE/.github/scripts/verify-release-version.js"
+          node -e "require('$fileName').verifyReleaseVersion().catch(e => { console.error(e.message); process.exit(1); })"
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Recover the release inputs for the release notes
+        id: release-inputs
+        run: bash .github/scripts/release-inputs-for-publish.sh
+
       - name: Semantic Release runs
         id: semantic-release
         run: DEBUG=semantic-release:* npx semantic-release  -t \${version}
@@ -76,39 +78,17 @@ jobs:
           script: |
             core.setFailed('There are no relevant changes, so no new version is released.')
 
-      # @semantic-release/git used to commit CHANGES.md + package.json straight
-      # to main. The branch ruleset rejects that, so the plugin is gone and the
-      # same commit is proposed as an auto-merging PR instead.
-      - name: Propose release commit as a PR
-        if: ${{ steps.semantic-release.outputs.TAG_NAME != '' }}
-        env:
-          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          TAG_NAME: ${{ steps.semantic-release.outputs.TAG_NAME }}
-        run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "No release commit to propose."
-            exit 0
-          fi
-          git remote set-url origin \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          message="chore(release): set \`package.json\` to ${TAG_NAME} [skip ci]"
-          bash .github/scripts/open-pr.sh \
-            "release-${TAG_NAME}" \
-            "$message" \
-            "$message" \
-            "Version bump and changelog for the \`${TAG_NAME}\` release, which is already published to npm and tagged. Merging this keeps \`main\` in sync with the published version."
-
       - name: Update release
         run:
           node .github/scripts/update-release.js
         env:
           TAG_NAME: ${{steps.semantic-release.outputs.TAG_NAME}}
-          RELEASE_BODY: ${{ inputs.change-log }}
+          RELEASE_BODY: ${{ steps.release-inputs.outputs.change-log }}
           REPO_NAME: ${{ github.repository }}
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUTS: '{ "tag-name": "${{ steps.semantic-release-draft.outputs.TAG_NAME }}" }'
-          CLI_CORE_TAG: ${{ inputs.cli-core-tag }}
+          CLI_CORE_TAG: ${{ steps.release-inputs.outputs.cli-core-tag }}
 
   oclif-release:
     runs-on: ubuntu-x64

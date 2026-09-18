@@ -68,19 +68,16 @@ jobs:
           VERSION_TYPE: ${{ github.event.inputs.version-type }}
           CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-  # When there was nothing new to prepare, main is already up to date and we
-  # release straight away. When a prep PR *was* opened, the release instead runs
-  # from release-on-prep-merge.yml once that PR merges.
-  release:
+  # When there was nothing new to prepare, main is already up to date and we go
+  # straight to preparing the release PR. When a prep PR *was* opened, that
+  # happens instead from release-on-prep-merge.yml once the prep PR merges.
+  prepare-release:
     needs: [ update-api-definitions-changelog ]
     if: needs.update-api-definitions-changelog.outputs.prep-pr-opened == 'false'
-    uses: ./.github/workflows/release-core.yml
+    uses: ./.github/workflows/release-prepare.yml
     secrets: inherit
     with:
       change-log: ${{ github.event.inputs.change-log }}
-      cli-core-tag: ${{ github.event.inputs.tag-name }}
-      homebrew-branch: ${{ github.event.inputs.homebrew-branch }}
-      homebrew-prerelease: ${{ github.event.inputs.homebrew-prerelease }}
 
   summarize:
     needs: [ update-api-definitions-changelog ]
@@ -96,7 +93,7 @@ jobs:
             echo "so the changelog and cli-core version bump were proposed as a PR instead of pushed."
             echo
             echo "**The release has not run yet.** Approve and merge that PR and the"
-            echo "\`Cli Release On Prep Merge\` workflow will publish the release."
+            echo "\`Cli Release On Prep Merge\` workflow will open the release PR."
           } >> "$GITHUB_STEP_SUMMARY"
 
 #  notify-complete-fail:

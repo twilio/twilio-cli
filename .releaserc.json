@@ -62,12 +62,6 @@
       }
     ],
     [
-      "@semantic-release/changelog",
-      {
-        "changelogFile": "CHANGES.md"
-      }
-    ],
-    [
       "@semantic-release/npm",
       {
         "npmPublish": true,

@@ -45,7 +45,6 @@ jobs:
       id-token: write
     outputs:
       change-log: ${{ steps.derive.outputs.change-log }}
-      cli-core-tag: ${{ steps.derive.outputs.cli-core-tag }}
     steps:
       - name: Checkout cli
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -59,12 +58,9 @@ jobs:
         env:
           COMMIT_SHA: ${{ github.sha }}
 
-  release:
+  prepare-release:
     needs: [ derive-inputs ]
-    uses: ./.github/workflows/release-core.yml
+    uses: ./.github/workflows/release-prepare.yml
     secrets: inherit
     with:
       change-log: ${{ needs.derive-inputs.outputs.change-log }}
-      cli-core-tag: ${{ needs.derive-inputs.outputs.cli-core-tag }}
-      homebrew-branch: ${{ github.event.inputs.homebrew-branch || 'main' }}
-      homebrew-prerelease: ${{ github.event.inputs.homebrew-prerelease || 'false' }}
