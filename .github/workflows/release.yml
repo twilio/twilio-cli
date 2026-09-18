@@ -58,9 +58,14 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
       - name: Update Changelog
         id: prep
+        # Inputs are passed through env, not interpolated into the command, so
+        # a value containing shell metacharacters cannot inject commands into
+        # this step (which holds GH_TOKEN).
         run: |
-          bash .github/scripts/commit-api-spec-change-log.sh '${{ github.event.inputs.change-log }}' ${{ github.event.inputs.version-type }}
+          bash .github/scripts/commit-api-spec-change-log.sh "$CHANGE_LOG" "$VERSION_TYPE"
         env:
+          CHANGE_LOG: ${{ github.event.inputs.change-log }}
+          VERSION_TYPE: ${{ github.event.inputs.version-type }}
           CLI_CORE_TAG: ${{ github.event.inputs.tag-name }}
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
   # When there was nothing new to prepare, main is already up to date and we

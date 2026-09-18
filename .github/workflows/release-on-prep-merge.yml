@@ -55,7 +55,9 @@ jobs:
           fetch-depth: 2
       - name: Derive release inputs from the prep commit
         id: derive
-        run: bash .github/scripts/release-inputs-from-commit.sh "${{ github.sha }}"
+        run: bash .github/scripts/release-inputs-from-commit.sh "$COMMIT_SHA"
+        env:
+          COMMIT_SHA: ${{ github.sha }}
 
   release:
     needs: [ derive-inputs ]
