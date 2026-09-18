@@ -18,7 +18,7 @@ const updateCliCoreReleaseVersion = async () => {
     // Write the updated object back to package.json
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), 'utf8');
 
-    console.info(`Updated package.json: Set twilio-cli to '${cliCoreTagVersion}'`);
+    console.info(`Updated package.json: Set twilio-cli-core to '${cliCoreTagVersion}'`);
   } catch (error) {
     console.error(`Failed to update package.json: ${error.message}`);
   }
