@@ -4,17 +4,17 @@ on:
 
 jobs:
   token-validation:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     steps:
-      - name: Validate REPO_ACCESS_TOKEN 
-        uses: actions/checkout@v2
-        with:
-          repository: '${{ github.repository_owner }}/twilio-oai'
-          token:  ${{ secrets.REPO_ACCESS_TOKEN }}
-      - name: Validate AWS tokens
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          AWS_REGION: us-east-1
-        run: aws sts get-caller-identity
+       - name: Validate REPO_ACCESS_TOKEN
+         uses: actions/checkout@v2
+         with:
+           repository: '${{ github.repository_owner }}/twilio-oai'
+           token:  ${{ secrets.REPO_ACCESS_TOKEN }}
+       - name: Validate AWS tokens
+         uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1
+         with:
+           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+           aws-region: us-east-1

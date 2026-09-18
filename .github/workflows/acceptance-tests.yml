@@ -45,11 +45,11 @@ jobs:
 
   wait-for-brew-releases:
     name: Wait for brew Release to complete
-    runs-on: macos-latest
+    runs-on: macos-x64
     continue-on-error: true
     strategy:
       matrix:
-        node-version: [ 20.x, 22.x, lts/* ]
+        node-version: [ 22.x, lts/* ]
     outputs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_brew.outputs.FAILURE_TAG_BREW }}
     steps:
@@ -140,7 +140,7 @@ jobs:
 
   wait-for-macos-releases:
     name: Wait for macos platform executables Release to complete
-    runs-on: macos-latest
+    runs-on: macos-x64
     continue-on-error: true
     needs: [ get-branch, get-tag ]
     outputs:
@@ -253,7 +253,7 @@ jobs:
       ACCEPTANCE_FAILURE_TAG: ${{ steps.failure_npm.outputs.FAILURE_TAG_NPM }}
     strategy:
       matrix:
-        node-version: [ 20.x, 22.x, lts/* ]
+        node-version: [ 22.x, lts/* ]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/checkout@v2

@@ -6,18 +6,18 @@ on:
 jobs:
   audit-prod:
     if: github.event.schedule == '30 14 * * *'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     strategy:
       fail-fast: false
       matrix:
-        node-version: [ 20.x, 22.x, lts/* ]
+        node-version: [ 22.x, lts/* ]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -40,19 +40,19 @@ jobs:
 
   audit-dev:
     if: github.event.schedule == '30 14 * * 3'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
     strategy:
       fail-fast: false
       matrix:
-        node-version: [ 20.x, 22.x, lts/* ]
+        node-version: [  22.x, lts/* ]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
       - run: make install
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'

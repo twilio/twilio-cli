@@ -37,14 +37,16 @@ jobs:
             brew install makensis
           fi
           ${{ matrix.command_name }}
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
       - name: Publish assests to s3 and calculate sha of oclif dev pack
         id: sha256
         if: ${{matrix.publish == 'homebrew'}}
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          AWS_REGION: us-east-1
         run: |
           make clean
           make install
@@ -63,7 +65,7 @@ jobs:
     needs: [oclif-release]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 #v4
       - name: Invoke HomeBrew workflow
         run: source .github/scripts/trigger-and-wait.sh
         env:
@@ -104,7 +106,6 @@ jobs:
 #    steps:
 #      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 #      - name: Slack Notification
-#        # TODO: not whitelisted as of now
 #        uses: rtCamp/action-slack-notify@v2
 #        env:
 #          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
