@@ -10,7 +10,7 @@ const AUTOCOMLETE_INSTALL_WARNING = `If you’re using autocomplete, you’ll ne
 module.exports = async function pluginInstall(options) {
   logger.warn(chalk.yellowBright(`${AUTOCOMLETE_INSTALL_WARNING}`));
 
-  if (!isTwilioPlugin(options.plugin.name)) {
+  if (!isTwilioPlugin(options.plugin.name, options.plugin.url)) {
     logger.warn('WARNING!!! You are attempting to install a plugin from an untrusted source.');
     logger.warn('It could contain malicious software or in other ways compromise your system.');
 
