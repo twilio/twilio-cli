@@ -1,3 +1,27 @@
+## 7.0.0 (2026-09-22)
+
+* chore: Add keypair alias to certsync command ([0e205f6](https://github.com/twilio/twilio-cli/commit/0e205f6))
+* chore: Add verbose flag to certsync and list certificates step (#683) ([0ce807d](https://github.com/twilio/twilio-cli/commit/0ce807d)), closes [#683](https://github.com/twilio/twilio-cli/issues/683)
+* chore: new api fixes (#715) ([7fdb1a6](https://github.com/twilio/twilio-cli/commit/7fdb1a6)), closes [#715](https://github.com/twilio/twilio-cli/issues/715) [#716](https://github.com/twilio/twilio-cli/issues/716)
+* chore: Simplify certsync command in workflow ([a5ef6dd](https://github.com/twilio/twilio-cli/commit/a5ef6dd))
+* chore: support latest oss publishing guidelines (#706) ([9ca3277](https://github.com/twilio/twilio-cli/commit/9ca3277)), closes [#706](https://github.com/twilio/twilio-cli/issues/706) [#709](https://github.com/twilio/twilio-cli/issues/709) [#710](https://github.com/twilio/twilio-cli/issues/710) [#709](https://github.com/twilio/twilio-cli/issues/709)
+* chore: update cli-core version (#723) ([edf0166](https://github.com/twilio/twilio-cli/commit/edf0166)), closes [#723](https://github.com/twilio/twilio-cli/issues/723)
+* chore: Update keypair alias in certsync command ([105e8a6](https://github.com/twilio/twilio-cli/commit/105e8a6))
+* chore: Update pipeline github actions with sha (#717) ([f4f0974](https://github.com/twilio/twilio-cli/commit/f4f0974)), closes [#717](https://github.com/twilio/twilio-cli/issues/717)
+* chore: update process since direct push not allowed (#718) ([0a0ce97](https://github.com/twilio/twilio-cli/commit/0a0ce97)), closes [#718](https://github.com/twilio/twilio-cli/issues/718)
+* fix: make the release prepare stage actually work (ESM import + tagFormat) (#720) ([60ec634](https://github.com/twilio/twilio-cli/commit/60ec634)), closes [#720](https://github.com/twilio/twilio-cli/issues/720) [#719](https://github.com/twilio/twilio-cli/issues/719) [#719](https://github.com/twilio/twilio-cli/issues/719) [#713](https://github.com/twilio/twilio-cli/issues/713)
+* fix: pin cli-core before regenerating the lockfile (#722) ([5670e09](https://github.com/twilio/twilio-cli/commit/5670e09)), closes [#722](https://github.com/twilio/twilio-cli/issues/722)
+* fix: publish the release from the commit that contains the version (#719) ([162c694](https://github.com/twilio/twilio-cli/commit/162c694)), closes [#719](https://github.com/twilio/twilio-cli/issues/719)
+* feat: add API standards support — new spec handling, twilio-node v6 compatibility (#705) ([85b3e14](https://github.com/twilio/twilio-cli/commit/85b3e14)), closes [#705](https://github.com/twilio/twilio-cli/issues/705)
+* feat: require Node.js 22.0.0 or later (#713) ([d4840ad](https://github.com/twilio/twilio-cli/commit/d4840ad)), closes [#713](https://github.com/twilio/twilio-cli/issues/713)
+
+### BREAKING CHANGE
+
+* The minimum supported Node.js version is now 22.0.0.
+Node.js 18 and 20 are no longer supported. Consumers running an earlier
+runtime must upgrade to Node.js 22 or later before installing this version.
+
+
 ## [6.2.4](https://github.com/twilio/twilio-cli/compare/6.2.3...6.2.4) (2026-02-18)
 
 
