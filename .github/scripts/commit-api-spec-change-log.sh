@@ -26,9 +26,8 @@ versionType="${2:-}"
 echo "Running update changelog script"
 echo "$changeLog"
 node .github/scripts/update-change-log.js "$changeLog"
-
-make install
 node .github/scripts/update-cli-core-release-version.js
+make install
 
 prepPrOpened=false
 if [ -n "$(git status --porcelain)" ]; then
