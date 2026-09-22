@@ -30,6 +30,9 @@ jobs:
     needs: [get-tag, get-sha]
     steps:
      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+     - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+       with:
+        node-version: '22'
      - run: |
         make install
         brew install makensis

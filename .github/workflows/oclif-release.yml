@@ -24,12 +24,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-latest
+          - os: macos-x64
             asset_name: twilio-v${{ github.event.inputs.tag-name }}
             command_name: npx oclif-dev pack --xz -t darwin-arm64,darwin-x64,linux-arm,linux-x64,win32-x64,win32-x86
             publish: homebrew
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: '22'
       - run: |
           make install
           npm list @twilio/cli-core
