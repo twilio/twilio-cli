@@ -38,7 +38,7 @@ jobs:
        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
        with:
         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-        path: dist/win32/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
+        path: dist/win32/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.exe
         retention-days: 1
 
   sign-windows-release:
@@ -147,13 +147,13 @@ jobs:
             /tr http://timestamp.digicert.com `
             /td SHA256 `
             /fd SHA256 `
-            '${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe'
+            '${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.exe'
 
       - name: Upload binaries to release
         run: node .github/scripts/update-platform-executables.js
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
+         FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.exe
          ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
          TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
          REPO_NAME: ${{ github.repository }}
