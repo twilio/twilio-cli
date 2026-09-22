@@ -60,7 +60,7 @@ jobs:
 
       - name: Setup Certificate
         run: |
-          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
+          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '\r' | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
         shell: bash
 
       - name: Set variables
