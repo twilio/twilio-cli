@@ -27,8 +27,18 @@ echo "Running update changelog script"
 echo "$changeLog"
 node .github/scripts/update-change-log.js "$changeLog"
 
-make install
+# The cli-core pin has to land in package.json *before* make install, because
+# make install regenerates package-lock.json (`rm -f package-lock.json &&
+# npm install`). The other way round leaves the lockfile describing the
+# previous cli-core version, and npm ci then rejects the pair:
+#
+#   Invalid: lock file's @twilio/cli-core@8.3.2 does not satisfy
+#            @twilio/cli-core@9.0.1
+#
+# update-cli-core-release-version.js only touches package.json with fs, so it
+# does not need anything installed to run first.
 node .github/scripts/update-cli-core-release-version.js
+make install
 
 prepPrOpened=false
 if [ -n "$(git status --porcelain)" ]; then
