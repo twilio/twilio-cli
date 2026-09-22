@@ -30,6 +30,14 @@ jobs:
     needs: [get-tag, get-sha]
     steps:
      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+     # oclif picks the Node it bundles into the executables from the Node that
+     # runs the pack, and skips win32-x86 and linux-arm above Node 24. Without
+     # this the job inherited the runner default, which GitHub moved to 24, so
+     # the shipped binaries silently tracked the runner image. Every other
+     # workflow in this repo pins 22.
+     - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+       with:
+        node-version: '22'
      - run: |
         make install
         brew install makensis
@@ -38,7 +46,7 @@ jobs:
        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
        with:
         name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
-        path: dist/win32/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.exe
+        path: dist/win32/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
         retention-days: 1
 
   sign-windows-release:
@@ -147,13 +155,13 @@ jobs:
             /tr http://timestamp.digicert.com `
             /td SHA256 `
             /fd SHA256 `
-            '${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.exe'
+            '${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe'
 
       - name: Upload binaries to release
         run: node .github/scripts/update-platform-executables.js
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x64.exe
+         FILE: ${{steps.download.outputs.download-path}}\${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe
          ASSET_NAME: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
          TAG_NAME: ${{ needs.get-tag.outputs.TAG_NAME }}
          REPO_NAME: ${{ github.repository }}
