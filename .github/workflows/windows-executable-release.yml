@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Getting latest sha
         id: get-sha
-        run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
   get-tag:
     runs-on: macos-x64
     outputs:
@@ -24,7 +24,7 @@ jobs:
        id: get-tag
        run: |
         git fetch --prune --unshallow
-        echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+        echo "TAG_NAME=$(git describe --tags $(git rev-list --tags --max-count=1))" >> "$GITHUB_OUTPUT"
   pack-windows-release:
     runs-on: macos-x64
     needs: [get-tag, get-sha]
@@ -60,24 +60,32 @@ jobs:
 
       - name: Setup Certificate
         run: |
-          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > /d/Certificate_pkcs12.p12
+          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
         shell: bash
 
       - name: Set variables
         id: variables
         run: |
           dir
-          echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
-          echo "::set-output name=KEYPAIR_NAME::gt-standard-keypair"
-          echo "::set-output name=CERTIFICATE_NAME::gt-certificate"
+          echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+          echo "KEYPAIR_NAME=gt-standard-keypair" >> "$GITHUB_OUTPUT"
+          echo "CERTIFICATE_NAME=gt-certificate" >> "$GITHUB_OUTPUT"
           echo "SM_HOST=${{ secrets.SM_HOST }}" >> "$GITHUB_ENV"
           echo "SM_API_KEY=${{ secrets.SM_API_KEY }}" >> "$GITHUB_ENV"
-          echo "SM_CLIENT_CERT_FILE=D:\\Certificate_pkcs12.p12" >> "$GITHUB_ENV"
+          echo "SM_CLIENT_CERT_FILE=${{ runner.temp }}\\Certificate_pkcs12.p12" >> "$GITHUB_ENV"
           echo "SM_CLIENT_CERT_PASSWORD=${{ secrets.SM_CLIENT_CERT_PASSWORD }}" >> "$GITHUB_ENV"
           echo "C:\Program Files (x86)\Windows Kits\10\App Certification Kit" >> $GITHUB_PATH
           echo "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools" >> $GITHUB_PATH
           echo "C:\Program Files\DigiCert\DigiCert Keylocker Tools" >> $GITHUB_PATH
         shell: bash
+
+      - name: Code signing with Software Trust Manager
+        id: SSMClientToolSetup
+        uses: digicert/code-signing-software-trust-action@fae23a455ba4bde62b64fd7cb2f81ade788f5a95 # v1.2.1
+        env:
+          SM_API_KEY: ${{ env.SM_API_KEY }}
+          SM_CLIENT_CERT_PASSWORD: ${{ env.SM_CLIENT_CERT_PASSWORD }}
+          SM_CLIENT_CERT_FILE: ${{ env.SM_CLIENT_CERT_FILE }}
 
       - name: Setup Keylocker KSP on windows
         run: |
@@ -95,7 +103,7 @@ jobs:
 
       - name: Certificates Sync
         run: |
-          smctl windows certsync --keypair-alias=c1d53dc0-2930-43a7-b052-389564550c95
+          smctl windows certsync
         shell: cmd
 
       - name: List certificates in DigiCert ONE
