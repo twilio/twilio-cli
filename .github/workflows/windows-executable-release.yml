@@ -60,7 +60,11 @@ jobs:
 
       - name: Setup Certificate
         run: |
-          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '\r' | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
+          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '[:space:]' | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
+          # Identify the decoded file so it can be compared against the local
+          # copy. A hash of a password-protected container is safe to log.
+          echo "size:   $(wc -c < "${RUNNER_TEMP}/Certificate_pkcs12.p12") bytes"
+          echo "sha256: $(sha256sum "${RUNNER_TEMP}/Certificate_pkcs12.p12" | cut -d' ' -f1)"
         shell: bash
 
       - name: Set variables
