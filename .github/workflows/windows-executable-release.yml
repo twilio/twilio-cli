@@ -59,12 +59,24 @@ jobs:
         run: ls ${{steps.download.outputs.download-path}}
 
       - name: Setup Certificate
+        env:
+          P12PASS: ${{ secrets.SM_CLIENT_CERT_PASSWORD }}
         run: |
-          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '[:space:]' | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
-          # Identify the decoded file so it can be compared against the local
-          # copy. A hash of a password-protected container is safe to log.
-          echo "size:   $(wc -c < "${RUNNER_TEMP}/Certificate_pkcs12.p12") bytes"
-          echo "sha256: $(sha256sum "${RUNNER_TEMP}/Certificate_pkcs12.p12" | cut -d' ' -f1)"
+          P12="${RUNNER_TEMP}/Certificate_pkcs12.p12"
+          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '[:space:]' | base64 --decode > "$P12"
+          echo "size: $(wc -c < "$P12") bytes"
+
+          # Does the decoded container actually open with the password secret?
+          # Only the verdict is printed, never the contents.
+          if openssl pkcs12 -in "$P12" -nokeys -passin env:P12PASS >/dev/null 2>&1; then
+            echo "p12 opens with SM_CLIENT_CERT_PASSWORD: YES"
+          elif openssl pkcs12 -legacy -in "$P12" -nokeys -passin env:P12PASS >/dev/null 2>&1; then
+            echo "p12 opens with SM_CLIENT_CERT_PASSWORD: YES (needs -legacy)"
+          else
+            echo "p12 opens with SM_CLIENT_CERT_PASSWORD: NO"
+            echo "--- openssl error ---"
+            openssl pkcs12 -in "$P12" -nokeys -passin env:P12PASS 2>&1 | head -5 || true
+          fi
         shell: bash
 
       - name: Set variables
