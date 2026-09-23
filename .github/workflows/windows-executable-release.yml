@@ -58,25 +58,19 @@ jobs:
       - name: 'Echo download path'
         run: ls ${{steps.download.outputs.download-path}}
 
+      # SM_CLIENT_CERT_FILE_B64 must hold base64 of a PKCS#12 exported with
+      # LEGACY encryption. smctl is written in Go, and Go only parses PBES1
+      # (3DES/RC2, SHA-1 MAC) - it cannot read OpenSSL 3's default AES-256
+      # containers. A modern .p12 makes smctl report "client certificate path
+      # or password is incorrect", leaves the session at 1FA, and signing then
+      # fails with SignerSign() 0x8009002D. Re-export with:
+      #   openssl pkcs12 -export -legacy \
+      #     -certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -macalg sha1 \
+      #     -in client.pem -out Certificate_pkcs12.p12
+      # The tr strips any line wrapping, which otherwise breaks base64 --decode.
       - name: Setup Certificate
-        env:
-          P12PASS: ${{ secrets.SM_CLIENT_CERT_PASSWORD }}
         run: |
-          P12="${RUNNER_TEMP}/Certificate_pkcs12.p12"
-          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '[:space:]' | base64 --decode > "$P12"
-          echo "size: $(wc -c < "$P12") bytes"
-
-          # Does the decoded container actually open with the password secret?
-          # Only the verdict is printed, never the contents.
-          if openssl pkcs12 -in "$P12" -nokeys -passin env:P12PASS >/dev/null 2>&1; then
-            echo "p12 opens with SM_CLIENT_CERT_PASSWORD: YES"
-          elif openssl pkcs12 -legacy -in "$P12" -nokeys -passin env:P12PASS >/dev/null 2>&1; then
-            echo "p12 opens with SM_CLIENT_CERT_PASSWORD: YES (needs -legacy)"
-          else
-            echo "p12 opens with SM_CLIENT_CERT_PASSWORD: NO"
-            echo "--- openssl error ---"
-            openssl pkcs12 -in "$P12" -nokeys -passin env:P12PASS 2>&1 | head -5 || true
-          fi
+          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '[:space:]' | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
         shell: bash
 
       - name: Set variables
@@ -112,10 +106,8 @@ jobs:
           C:\Windows\System32\certutil.exe -csp "DigiCert Signing Manager KSP" -key -user
         shell: cmd
 
-      # The KSP that signtool loads is a separate component from smctl and may
-      # read credentials from DigiCert's credential store rather than the
-      # environment. REST hash-signing with these same credentials succeeds,
-      # so the credentials are good - they may just not reach the KSP.
+      # Put the API key and client-cert password in the OS credential store,
+      # which is where the Keylocker KSP looks for them.
       - name: Save credentials for the KSP
         continue-on-error: true
         shell: cmd
@@ -182,22 +174,12 @@ jobs:
           Write-Host "Found signtool at $($signtool.FullName)"
           "path=$($signtool.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
-      # Diagnostic: DigiCert's own signer reports real errors, unlike
-      # signtool's opaque NTE_FAIL. Non-fatal so signtool still runs.
-      - name: Sign with smctl (diagnostic)
-        if: ${{ github.repository_owner == 'twilio' }}
-        continue-on-error: true
-        shell: cmd
-        run: |
-          smctl sign --verbose --keypair-alias=key_1446579873 --input "${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe"
-
       - name: Code Sign The Executable
         if: ${{ github.repository_owner == 'twilio' }}
         shell: pwsh
         run: |
           $signtool = '${{ steps.find_signtool.outputs.path }}'
           & $signtool sign `
-            /v /debug `
             /sha1 '${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }}' `
             /tr http://timestamp.digicert.com `
             /td SHA256 `
