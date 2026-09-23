@@ -112,6 +112,18 @@ jobs:
           C:\Windows\System32\certutil.exe -csp "DigiCert Signing Manager KSP" -key -user
         shell: cmd
 
+      # The KSP that signtool loads is a separate component from smctl and may
+      # read credentials from DigiCert's credential store rather than the
+      # environment. REST hash-signing with these same credentials succeeds,
+      # so the credentials are good - they may just not reach the KSP.
+      - name: Save credentials for the KSP
+        continue-on-error: true
+        shell: cmd
+        run: |
+          smctl credentials --help
+          smctl credentials save --help
+          smctl credentials save %SM_API_KEY% %SM_CLIENT_CERT_PASSWORD% --cert-file "%SM_CLIENT_CERT_FILE%"
+
       - name: Keylocker healthcheck
         run: |
           smctl healthcheck
