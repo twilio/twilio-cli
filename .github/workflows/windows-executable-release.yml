@@ -172,6 +172,15 @@ jobs:
           Write-Host "Found signtool at $($signtool.FullName)"
           "path=$($signtool.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
+      # Diagnostic: DigiCert's own signer reports real errors, unlike
+      # signtool's opaque NTE_FAIL. Non-fatal so signtool still runs.
+      - name: Sign with smctl (diagnostic)
+        if: ${{ github.repository_owner == 'twilio' }}
+        continue-on-error: true
+        shell: cmd
+        run: |
+          smctl sign --verbose --keypair-alias=key_1446579873 --input "${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-x86.exe"
+
       - name: Code Sign The Executable
         if: ${{ github.repository_owner == 'twilio' }}
         shell: pwsh
