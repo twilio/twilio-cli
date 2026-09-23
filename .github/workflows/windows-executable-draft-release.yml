@@ -16,12 +16,12 @@ jobs:
     outputs:
      TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
     steps:
-     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+     - uses: actions/checkout@v2
      - name: Getting latest tag
        id: get-tag
        run: |
         git fetch --prune --unshallow
-        echo "TAG_NAME=$(git describe --tags $(git rev-list --tags --max-count=1))" >> "$GITHUB_OUTPUT"
+        echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
   pack-windows-release:
     runs-on: macos-x64
     needs: [get-tag]
@@ -29,7 +29,7 @@ jobs:
      - uses: actions/checkout@v2
      - name: Getting last sha
        id: get-sha
-       run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+       run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
      - run: |
         make install
         brew install makensis
@@ -45,13 +45,13 @@ jobs:
         retention-days: 1
   sign-windows-release:
     needs: [pack-windows-release, get-tag]
-    runs-on: windows-latest-large
+    runs-on: windows-latest
     steps:
      - uses: actions/checkout@v2
      - run: make install
      - name: import Executable
        id: download
-       uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+       uses: actions/download-artifact@v2
        with:
          name: ${{env.FORMULA_NAME}}-${{ needs.get-tag.outputs.TAG_NAME }}.exe
      - name: 'Echo download path'
@@ -59,32 +59,24 @@ jobs:
 
      - name: Setup Certificate
        run: |
-         echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
+         echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > /d/Certificate_pkcs12.p12
        shell: bash
 
      - name: Set variables
        id: variables
        run: |
          dir
-         echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
-         echo "KEYPAIR_NAME=gt-standard-keypair" >> "$GITHUB_OUTPUT"
-         echo "CERTIFICATE_NAME=gt-certificate" >> "$GITHUB_OUTPUT"
+         echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
+         echo "::set-output name=KEYPAIR_NAME::gt-standard-keypair"
+         echo "::set-output name=CERTIFICATE_NAME::gt-certificate"
          echo "SM_HOST=${{ secrets.SM_HOST }}" >> "$GITHUB_ENV"
          echo "SM_API_KEY=${{ secrets.SM_API_KEY }}" >> "$GITHUB_ENV"
-         echo "SM_CLIENT_CERT_FILE=${{ runner.temp }}\\Certificate_pkcs12.p12" >> "$GITHUB_ENV"
+         echo "SM_CLIENT_CERT_FILE=D:\\Certificate_pkcs12.p12" >> "$GITHUB_ENV"
          echo "SM_CLIENT_CERT_PASSWORD=${{ secrets.SM_CLIENT_CERT_PASSWORD }}" >> "$GITHUB_ENV"
          echo "C:\Program Files (x86)\Windows Kits\10\App Certification Kit" >> $GITHUB_PATH
          echo "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools" >> $GITHUB_PATH
          echo "C:\Program Files\DigiCert\DigiCert Keylocker Tools" >> $GITHUB_PATH
        shell: bash
-
-     - name: Code signing with Software Trust Manager
-       id: SSMClientToolSetup
-       uses: digicert/code-signing-software-trust-action@fae23a455ba4bde62b64fd7cb2f81ade788f5a95 # v1.2.1
-       env:
-         SM_API_KEY: ${{ env.SM_API_KEY }}
-         SM_CLIENT_CERT_PASSWORD: ${{ env.SM_CLIENT_CERT_PASSWORD }}
-         SM_CLIENT_CERT_FILE: ${{ env.SM_CLIENT_CERT_FILE }}
 
      - name: Setup Keylocker KSP on windows
        run: |
@@ -100,59 +92,10 @@ jobs:
          smctl windows certsync
        shell: cmd
 
-     - name: List certificates in DigiCert ONE
-       run: |
-         smctl certificate ls
-       shell: cmd
-
-     # find signtool.exe dynamically
-     - name: Find signtool.exe
-       id: find_signtool
-       shell: pwsh
-       run: |
-         $root = "C:\Program Files (x86)\Windows Kits\10\bin"
-
-         # Prefer x86 signtool
-         $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
-           Where-Object { $_.FullName -match '\\x86\\' } |
-           Sort-Object FullName |
-           Select-Object -First 1
-
-         # If no x86, try x64
-         if (-not $signtool) {
-           $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
-             Where-Object { $_.FullName -match '\\x64\\' } |
-             Sort-Object FullName |
-             Select-Object -First 1
-         }
-
-         # As a last resort, any signtool (but avoid arm64 if possible)
-         if (-not $signtool) {
-           $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
-             Where-Object { $_.FullName -notmatch '\\arm64\\' } |
-             Sort-Object FullName |
-             Select-Object -First 1
-         }
-
-         if (-not $signtool) {
-           Write-Error "signtool.exe not found under '$root'"
-           exit 1
-         }
-
-         Write-Host "Found signtool at $($signtool.FullName)"
-         "path=$($signtool.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-
      - name: Code Sign The Executable
        if: ${{ github.repository_owner == 'twilio' }}
-       shell: pwsh
        run: |
-         $signtool = '${{ steps.find_signtool.outputs.path }}'
-         & $signtool sign `
-           /sha1 '${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }}' `
-           /tr http://timestamp.digicert.com `
-           /td SHA256 `
-           /fd SHA256 `
-           '${{ steps.download.outputs.download-path }}\${{ env.FORMULA_NAME }}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe'
+          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /sha1 ${{ secrets.SM_CODE_SIGNING_CERT_SHA1_HASH }} /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 ${{steps.download.outputs.download-path}}/${{env.FORMULA_NAME}}-v${{ needs.get-tag.outputs.TAG_NAME }}-x86.exe
      - name: Upload binaries to release
        run: node .github/scripts/update-platform-executables.js
        env:
