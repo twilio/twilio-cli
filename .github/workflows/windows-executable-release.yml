@@ -143,8 +143,11 @@ jobs:
         run: |
           $root = "C:\Program Files (x86)\Windows Kits\10\bin"
 
-          # Prefer x64 signtool: the DigiCert Keylocker KSP is x64-only, and a
-          # 32-bit signtool cannot load it (SignerSign() fails with NTE_FAIL).
+          # Prefer x64 signtool, matching the x64 Keylocker KSP it loads. x86
+          # signed successfully in the past, so this is not known to be
+          # required - but x64 is the combination verified working today.
+          # signtool's own architecture does not affect the signature; the
+          # released artifact is the x86 build either way.
           $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
             Where-Object { $_.FullName -match '\\x64\\' } |
             Sort-Object FullName -Descending |
