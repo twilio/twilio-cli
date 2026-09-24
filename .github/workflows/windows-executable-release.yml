@@ -109,17 +109,9 @@ jobs:
       # Put the API key and client-cert password in the OS credential store,
       # which is where the Keylocker KSP looks for them.
       - name: Save credentials for the KSP
-        continue-on-error: true
         shell: cmd
         run: |
           smctl credentials save %SM_API_KEY% %SM_CLIENT_CERT_PASSWORD%
-
-      - name: Keylocker healthcheck
-        run: |
-          smctl healthcheck
-          smctl keypair ls
-        shell: cmd
-        continue-on-error: true
 
       - name: List certificates in DigiCert ONE
         run: |
