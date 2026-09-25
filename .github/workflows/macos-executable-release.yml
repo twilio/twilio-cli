@@ -56,9 +56,14 @@ jobs:
           if [ -f "$FILE_PATH_X64" ]; then
             echo "Package already built, releasing it as is."
           else
-            echo "Package missing, building it without signing."
-            make install
+            echo "Package missing, rebuilding it without a signing identity."
+            # oclif-dev passes `--sign` to pkgbuild whenever `oclif.macos.sign`
+            # is set, and pkgbuild hard-fails when that identity is missing or
+            # expired. Drop it so an unsigned .pkg can still be produced.
+            npm pkg delete oclif.macos.sign
+            [ -d node_modules ] || make install
             npx oclif-dev pack:macos
+            git checkout -- package.json
           fi
 #    TODO: enable these when oclif pack : macos starts working fine
 #    - name: Upload binaries to release - arm64
