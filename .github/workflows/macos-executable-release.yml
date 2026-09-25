@@ -31,9 +31,15 @@ jobs:
   pack-macos:
     needs: [get-tag, get-sha]
     runs-on: macos-x64
+    env:
+      FILE_PATH_X64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
     steps:
     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-    - run: source .github/scripts/pack_macos.sh
+    # Signing/notarization is best-effort: if it fails we still want the .pkg
+    # to be built and attached to the release, just unsigned.
+    - id: pack-sign
+      continue-on-error: true
+      run: source .github/scripts/pack_macos.sh
       env:
         OSX_INSTALLER_CERT_BASE64: ${{ secrets.OSX_INSTALLER_CERT_BASE64}}
         OSX_INSTALLER_CERT_PASSWORD: ${{ secrets.OSX_INSTALLER_CERT_PASSWORD}}
@@ -41,8 +47,19 @@ jobs:
         APPLE_ID_APP_PASSWORD: ${{ secrets.APPLE_ID_APP_PASSWORD}}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID}}
 #        FILE_PATH_ARM64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}-${{ needs.get-sha.outputs.SHA_SHORT }}-arm64.pkg
-        FILE_PATH_X64: dist/macos/${{ github.event.inputs.formula }}-v${{ needs.get-tag.outputs.TAG_NAME }}.pkg
         REPOSITORY_OWNER: ${{ github.repository_owner }}
+    - name: Fall back to an unsigned package
+      if: steps.pack-sign.outcome == 'failure'
+      run: |
+          echo "::warning title=macOS signing/notarization failed::Releasing an unsigned package. See the previous step's logs."
+          echo ":warning: Signing/notarization failed - \`$FILE_PATH_X64\` is being released **unsigned and un-notarized**." >> "$GITHUB_STEP_SUMMARY"
+          if [ -f "$FILE_PATH_X64" ]; then
+            echo "Package already built, releasing it as is."
+          else
+            echo "Package missing, building it without signing."
+            make install
+            npx oclif-dev pack:macos
+          fi
 #    TODO: enable these when oclif pack : macos starts working fine
 #    - name: Upload binaries to release - arm64
 #      if: always()
