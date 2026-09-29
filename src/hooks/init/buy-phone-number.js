@@ -185,4 +185,6 @@ module.exports = function buyPhoneNumbers() {
   plugin.tag = 'latest';
   plugin.type = 'core';
   this.config.plugins.push(plugin);
+  this.config.loadCommands(plugin);
+  this.config.loadTopics(plugin);
 };
