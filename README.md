@@ -9,7 +9,22 @@ Currently, Node 22+ is supported. We support the [LTS versions](https://nodejs.o
 ## Setup
 
 Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-cli/quickstart).
-  
+
+## Verifying the RPM release
+
+RPM packages are signed with Twilio's GPG key. `yum install`/`dnf install` of a downloaded `.rpm`
+does not check that signature by default, so verify it yourself if you want to confirm the package
+came from Twilio and was not modified:
+
+```bash
+sudo rpm --import https://raw.githubusercontent.com/twilio/twilio-cli/main/.github/rpm/gpg_pub.asc
+rpm -K twilio-<version>-1.el9.x86_64.rpm
+# twilio-<version>-1.el9.x86_64.rpm: digests signatures OK
+```
+
+`digests signatures OK` means the signature matched. Without the key imported, `rpm -K` reports
+`digests SIGNATURES NOT OK` — the signature is present but rpm has no key to check it against.
+
 ## Architecture and Functional Overview
 
 Head over to the [CLI Architecture and Functional Overview](https://github.com/twilio/twilio-cli/blob/main/ARCHITECTURE.md)

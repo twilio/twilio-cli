@@ -44,7 +44,6 @@ async function run(): Promise<void> {
     key = buff.toString("utf8");
     // Importing private key
     await gpg.importKey(key);
-    const privateKey = await gpg.readPrivateKey(key);
     if (passphrase) {
       core.info('Configuring GnuPG agent');
       await gpg.configureAgent(gpg.agentConfig);
@@ -74,7 +73,8 @@ async function run(): Promise<void> {
     const builtRpmFilePath = await runRpmbuild(
       buildRpmArgs(targetSpecFile, inputVariables)
     );
-    await exec.exec('rpmsign', ['--define', `_gpg_name ${gpgKeyId}`,'--define', `__gpg_sign_cmd %{__gpg} gpg --no-armor --batch --pinentry-mode loopback --no-tty --yes --passphrase=${passphrase} -u "%{_gpg_name}" -sbo %{__signature_filename} %{__plaintext_filename}`,  '--resign', builtRpmFilePath]);
+    // RSA/SHA256 is pinned so the signature stays readable by rpm 4.11+ (RHEL 8, Amazon Linux 2)
+    await exec.exec('rpmsign', ['--define', `_gpg_name ${gpgKeyId}`, '--define', '_gpg_digest_algo sha256', '--define', `__gpg_sign_cmd %{__gpg} gpg --no-armor --batch --pinentry-mode loopback --no-tty --yes --passphrase=${passphrase} --digest-algo sha256 -u "%{_gpg_name}" -sbo %{__signature_filename} %{__plaintext_filename}`,  '--resign', builtRpmFilePath]);
     core.debug(`Done, result: ${builtRpmFilePath}`);
 
     const builtRpmFileName = path.basename(builtRpmFilePath);
