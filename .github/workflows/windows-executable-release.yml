@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Getting latest sha
         id: get-sha
-        run: echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
   get-tag:
     runs-on: macos-x64
     outputs:
@@ -24,7 +24,7 @@ jobs:
        id: get-tag
        run: |
         git fetch --prune --unshallow
-        echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
+        echo "TAG_NAME=$(git describe --tags $(git rev-list --tags --max-count=1))" >> "$GITHUB_OUTPUT"
   pack-windows-release:
     runs-on: macos-x64
     needs: [get-tag, get-sha]
@@ -58,26 +58,44 @@ jobs:
       - name: 'Echo download path'
         run: ls ${{steps.download.outputs.download-path}}
 
+      # SM_CLIENT_CERT_FILE_B64 must hold base64 of a PKCS#12 exported with
+      # LEGACY encryption. smctl is written in Go, and Go only parses PBES1
+      # (3DES/RC2, SHA-1 MAC) - it cannot read OpenSSL 3's default AES-256
+      # containers. A modern .p12 makes smctl report "client certificate path
+      # or password is incorrect", leaves the session at 1FA, and signing then
+      # fails with SignerSign() 0x8009002D. Re-export with:
+      #   openssl pkcs12 -export -legacy \
+      #     -certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -macalg sha1 \
+      #     -in client.pem -out Certificate_pkcs12.p12
+      # The tr strips any line wrapping, which otherwise breaks base64 --decode.
       - name: Setup Certificate
         run: |
-          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | base64 --decode > /d/Certificate_pkcs12.p12
+          echo "${{ secrets.SM_CLIENT_CERT_FILE_B64 }}" | tr -d '[:space:]' | base64 --decode > "${RUNNER_TEMP}/Certificate_pkcs12.p12"
         shell: bash
 
       - name: Set variables
         id: variables
         run: |
           dir
-          echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
-          echo "::set-output name=KEYPAIR_NAME::gt-standard-keypair"
-          echo "::set-output name=CERTIFICATE_NAME::gt-certificate"
+          echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+          echo "KEYPAIR_NAME=gt-standard-keypair" >> "$GITHUB_OUTPUT"
+          echo "CERTIFICATE_NAME=gt-certificate" >> "$GITHUB_OUTPUT"
           echo "SM_HOST=${{ secrets.SM_HOST }}" >> "$GITHUB_ENV"
           echo "SM_API_KEY=${{ secrets.SM_API_KEY }}" >> "$GITHUB_ENV"
-          echo "SM_CLIENT_CERT_FILE=D:\\Certificate_pkcs12.p12" >> "$GITHUB_ENV"
+          echo "SM_CLIENT_CERT_FILE=${{ runner.temp }}\\Certificate_pkcs12.p12" >> "$GITHUB_ENV"
           echo "SM_CLIENT_CERT_PASSWORD=${{ secrets.SM_CLIENT_CERT_PASSWORD }}" >> "$GITHUB_ENV"
           echo "C:\Program Files (x86)\Windows Kits\10\App Certification Kit" >> $GITHUB_PATH
           echo "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools" >> $GITHUB_PATH
           echo "C:\Program Files\DigiCert\DigiCert Keylocker Tools" >> $GITHUB_PATH
         shell: bash
+
+      - name: Code signing with Software Trust Manager
+        id: SSMClientToolSetup
+        uses: digicert/code-signing-software-trust-action@fae23a455ba4bde62b64fd7cb2f81ade788f5a95 # v1.2.1
+        env:
+          SM_API_KEY: ${{ env.SM_API_KEY }}
+          SM_CLIENT_CERT_PASSWORD: ${{ env.SM_CLIENT_CERT_PASSWORD }}
+          SM_CLIENT_CERT_FILE: ${{ env.SM_CLIENT_CERT_FILE }}
 
       - name: Setup Keylocker KSP on windows
         run: |
@@ -88,6 +106,13 @@ jobs:
           C:\Windows\System32\certutil.exe -csp "DigiCert Signing Manager KSP" -key -user
         shell: cmd
 
+      # Put the API key and client-cert password in the OS credential store,
+      # which is where the Keylocker KSP looks for them.
+      - name: Save credentials for the KSP
+        shell: cmd
+        run: |
+          smctl credentials save %SM_API_KEY% %SM_CLIENT_CERT_PASSWORD%
+
       - name: List certificates in DigiCert ONE
         run: |
           smctl certificate ls
@@ -95,7 +120,7 @@ jobs:
 
       - name: Certificates Sync
         run: |
-          smctl windows certsync --keypair-alias=c1d53dc0-2930-43a7-b052-389564550c95
+          smctl windows certsync
         shell: cmd
 
       - name: List certificates in DigiCert ONE
@@ -110,16 +135,16 @@ jobs:
         run: |
           $root = "C:\Program Files (x86)\Windows Kits\10\bin"
 
-          # Prefer x86 signtool
+          # Prefer x64 signtool, matching the x64 Keylocker KSP it loads.
           $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
-            Where-Object { $_.FullName -match '\\x86\\' } |
-            Sort-Object FullName |
+            Where-Object { $_.FullName -match '\\x64\\' } |
+            Sort-Object FullName -Descending |
             Select-Object -First 1
 
-          # If no x86, try x64
+          # If no x64, fall back to x86
           if (-not $signtool) {
             $signtool = Get-ChildItem $root -Recurse -Filter signtool.exe -ErrorAction SilentlyContinue |
-              Where-Object { $_.FullName -match '\\x64\\' } |
+              Where-Object { $_.FullName -match '\\x86\\' } |
               Sort-Object FullName |
               Select-Object -First 1
           }
