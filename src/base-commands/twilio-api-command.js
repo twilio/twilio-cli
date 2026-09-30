@@ -39,7 +39,12 @@ class TwilioApiCommand extends TwilioClientCommand {
     const response = await runner.run();
 
     if (isRemoveCommand(this.constructor.actionDefinition)) {
-      logger.info(response ? 'The resource was deleted successfully' : 'Failed to delete the resource');
+      if (response && typeof response === 'object') {
+        // API returned a body (e.g. 202 Accepted) — display it like any other response.
+        this.output(response, this.flags.properties);
+      } else {
+        logger.info(response ? 'The resource was deleted successfully' : 'Failed to delete the resource');
+      }
       return;
     }
 
@@ -66,6 +71,7 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
 
   // Parameters
   let cmdFlags = {};
+  const paramInsByFlagName = {};
   (action.parameters || []).forEach((param) => {
     const flagConfig = getFlagConfig(param, NewCommandClass.actionDefinition);
     const flagType = typeMap[param.schema.type];
@@ -90,12 +96,17 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
 
     if (flagType) {
       /*
-       * If the flag already exists, issue a warning. We're not equipped to
-       * handle such issues at the moment.
+       * A flag name can legitimately appear twice: some APIs require the same
+       * value in both the path and the request body (e.g. Memory's `idType`).
+       * That's an intentional dual-dispatch, not a conflict, so only warn when
+       * two parameters with the same flag name also share the same `in` -
+       * that's a genuine, unexpected duplicate we're not equipped to handle.
        */
-      if (cmdFlags[flagConfig.name]) {
+      const seenIns = paramInsByFlagName[flagConfig.name];
+      if (seenIns && seenIns.has(param.in)) {
         logger.warn(`The command "${commandId}" contains a conflicting flag: "--${flagConfig.name}"`);
       }
+      paramInsByFlagName[flagConfig.name] = (seenIns || new Set()).add(param.in);
 
       cmdFlags[flagConfig.name] = flagType(flagConfig);
     } else {
@@ -103,8 +114,15 @@ TwilioApiCommand.setUpNewCommandClass = (NewCommandClass) => {
     }
   });
 
-  // 'remove' commands have no response body and thus do not need display properties.
-  if (NewCommandClass.actionDefinition.commandName !== 'remove') {
+  /*
+   * Add --properties for all non-remove commands, and for remove commands whose
+   * spec defines a response body (i.e. at least one response has a content entry).
+   */
+  const removeHasResponseBody =
+    NewCommandClass.actionDefinition.commandName === 'remove' &&
+    Object.values(action.responses || {}).some((r) => r.content);
+
+  if (NewCommandClass.actionDefinition.commandName !== 'remove' || removeHasResponseBody) {
     const defaultProperties =
       (action && action.defaultOutputProperties) || (resource && resource.defaultOutputProperties) || [];
 

@@ -12,7 +12,7 @@ env:
 
 jobs:
   get-tag:
-    runs-on: macos-latest
+    runs-on: macos-x64
     outputs:
      TAG_NAME: ${{steps.get-tag.outputs.TAG_NAME}}
     steps:
@@ -23,7 +23,7 @@ jobs:
         git fetch --prune --unshallow
         echo "::set-output name=TAG_NAME::$(git describe --tags $(git rev-list --tags --max-count=1))"
   pack-windows-release:
-    runs-on: macos-latest
+    runs-on: macos-x64
     needs: [get-tag]
     steps:
      - uses: actions/checkout@v2

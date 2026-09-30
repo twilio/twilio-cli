@@ -1,4 +1,5 @@
 const { kebabCase } = require('@twilio/cli-core').services.namingConventions;
+const { logger } = require('@twilio/cli-core').services.logging;
 
 const urlUtil = require('../hyperlink-utility');
 const { TOPIC_SEPARATOR, BASE_TOPIC_NAME, CORE_TOPIC_NAME } = require('./get-topic-name');
@@ -9,6 +10,31 @@ const ACCOUNT_SID_FLAG = 'AccountSid';
 const UPDATE_PHONE_NUMBER_COMMAND = [BASE_TOPIC_NAME, CORE_TOPIC_NAME, 'incoming-phone-numbers', 'update'].join(
   TOPIC_SEPARATOR,
 );
+
+/*
+ * some specs (e.g. Monitor v2 Alarms) whose
+ * operation parameters are left as an unresolved `$ref` into
+ * `components.parameters` rather than the inline parameter object every other
+ * spec provides. Resolve it here, in place, so every downstream reader of this
+ * same parameter object (this function's caller included) sees the real thing.
+ */
+const resolveParameterRef = (parameter, actionDefinition) => {
+  if (!parameter || !parameter.$ref) {
+    return parameter;
+  }
+
+  const refName = parameter.$ref.split('/').pop();
+  const componentParameters = ((actionDefinition.domain || {}).components || {}).parameters || {};
+  const resolved = componentParameters[refName];
+
+  if (!resolved) {
+    logger.debug(`Could not resolve parameter ref '${parameter.$ref}'; falling back to '${refName}'`);
+    return Object.assign(parameter, { name: refName, schema: { type: 'string' } });
+  }
+
+  delete parameter.$ref;
+  return Object.assign(parameter, resolved);
+};
 
 const getFlagName = (paramName) => {
   return kebabCase(paramName.replace('<', 'Before').replace('>', 'After'));
@@ -42,6 +68,7 @@ const scanForUrl = (description) => {
  * @returns {Object} - Twilio CLI flag configuration
  */
 const getFlagConfig = (parameter, actionDefinition) => {
+  parameter = resolveParameterRef(parameter, actionDefinition);
   let flagName = getFlagName(parameter.name);
   let flagDescription = parameter.description || '';
 

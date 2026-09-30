@@ -56,7 +56,7 @@ class DebuggerLogsList extends TwilioClientCommand {
   }
 
   async getLogEvents(props) {
-    const logEvents = await this.twilioClient.monitor.alerts.list(props);
+    const logEvents = await this.twilioClient.monitor.v1.alerts.list(props);
 
     return this.filterLogEvents(logEvents);
   }

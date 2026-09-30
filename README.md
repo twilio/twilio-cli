@@ -4,12 +4,27 @@
  [![Learn with TwilioQuest](https://img.shields.io/static/v1?label=TwilioQuest&message=Learn%20to%20contribute%21&color=F22F46&labelColor=1f243c&style=flat-square&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAASFBMVEUAAAAZGRkcHBwjIyMoKCgAAABgYGBoaGiAgICMjIyzs7PJycnMzMzNzc3UoBfd3d3m5ubqrhfrMEDu7u739/f4vSb/3AD///9tbdyEAAAABXRSTlMAAAAAAMJrBrEAAAKoSURBVHgB7ZrRcuI6EESdyxXGYoNFvMD//+l2bSszRgyUYpFAsXOeiJGmj4NkuWx1Qeh+Ekl9DgEXOBwOx+Px5xyQhDykfgq4wG63MxxaR4ddIkg6Ul3g84vCIcjPBA5gmUMeXESrlukuoK33+33uID8TWeLAdOWsKpJYzwVMB7bOzYSGOciyUlXSn0/ABXTosJ1M1SbypZ4O4MbZuIDMU02PMbauhhHMHXbmebmALIiEbbbbbUrpF1gwE9kFfRNAJaP+FQEXCCTGyJ4ngDrjOFo3jEL5JdqjF/pueR4cCeCGgAtwmuRS6gDwaRiGvu+DMFwSBLTE3+jF8JyuV1okPZ+AC4hDFhCHyHQjdjPHUKFDlHSJkHQXMB3KpSwXNGJPcwwTdZiXlRN0gSp0zpWxNtM0beYE0nRH6QIbO7rawwXaBYz0j78gxjokDuv12gVeUuBD0MDi0OQCLvDaAho4juP1Q/jkAncXqIcCfd+7gAu4QLMACCLxpRsSuQh0igu0C9Svhi7weAGZg50L3IE3cai4IfkNZAC8dfdhsUD3CgKBVC9JE5ABAFzg4QL/taYPAAWrHdYcgfLaIgAXWJ7OV38n1LEF8tt2TH29E+QAoDoO5Ve/LtCQDmKM9kPbvCEBApK+IXzbcSJ0cIGF6e8gpcRhUDogWZ8JnaWjPXc/fNnBBUKRngiHgTUSivSzDRDgHZQOLvBQgf8rRt+VdBUUhwkU6VpJ+xcOwQUqZr+mR0kvBUgv6cB4+37hQAkXqE8PwGisGhJtN4xAHMzrsgvI7rccXqSvKh6jltGlrOHA3Xk1At3LC4QiPdX9/0ndHpGVvTjR4bZA1ypAKgVcwE5vx74ulwIugDt8e/X7JgfkucBMIAr26ndnB4UCLnDOqvteQsHlgX9N4A+c4cW3DXSPbwAAAABJRU5ErkJggg==)](https://twil.io/learn-open-source)
 
 ## Requirements
-Currently, Node 20+ is supported. We support the [LTS versions](https://nodejs.org/en/about/releases) of Node.
+Currently, Node 22+ is supported. We support the [LTS versions](https://nodejs.org/en/about/releases) of Node.
 
 ## Setup
 
 Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-cli/quickstart).
-  
+
+## Verifying the RPM release
+
+RPM packages are signed with Twilio's GPG key. `yum install`/`dnf install` of a downloaded `.rpm`
+does not check that signature by default, so verify it yourself if you want to confirm the package
+came from Twilio and was not modified:
+
+```bash
+sudo rpm --import https://raw.githubusercontent.com/twilio/twilio-cli/main/.github/rpm/gpg_pub.asc
+rpm -K twilio-<version>-1.el9.x86_64.rpm
+# twilio-<version>-1.el9.x86_64.rpm: digests signatures OK
+```
+
+`digests signatures OK` means the signature matched. Without the key imported, `rpm -K` reports
+`digests SIGNATURES NOT OK` — the signature is present but rpm has no key to check it against.
+
 ## Architecture and Functional Overview
 
 Head over to the [CLI Architecture and Functional Overview](https://github.com/twilio/twilio-cli/blob/main/ARCHITECTURE.md)
@@ -36,10 +51,11 @@ You can review the docs on [available plugins and how to install them](https://w
 1. From the repo directory, run: `npm install`
 1. Run `./bin/run` from the repo directory to run the CLI.
 
-## Node 20 support update
+## Node 22 update
 
-From version 6.0.0, the Twilio CLI will no longer support Node 18. If you are using Node 18, please upgrade to Node 20 or later.
-For more information, see the [Twilio-CLI Support Update: Node 18 Version Deprecation](https://www.twilio.com/docs/twilio-cli/getting-started/twilio-cli-support-update).
+From version 7.0.0, the Twilio CLI will no longer support Node 20. If you are using Node 20, please upgrade to Node 22 or later.
+For more information, see the [Twilio-CLI Support Update: Node 20 Version Deprecation](url)
+EDIT this- https://www.twilio.com/docs/twilio-cli/getting-started/twilio-cli-support-update
 
 ## Feedback
 

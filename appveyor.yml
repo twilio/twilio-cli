@@ -3,12 +3,13 @@ image: Visual Studio 2022
 environment:
   nodejs_version: LTS
 cache:
-  - '%AppData%\npm-cache -> appveyor.yml'
+  - '%AppData%\npm-cache -> appveyor.yml, package-lock.json'
   - node_modules -> package-lock.json
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
-  - npm install
+  - npm cache clean --force
+  - npm ci --loglevel=error
 test_script:
   - .\bin\run --version
   - .\bin\run --help

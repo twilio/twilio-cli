@@ -1,6 +1,7 @@
 const qq = require('qqjs');
 const pjson = require(`${process.cwd()}/package.json`);
 const fs = require('fs');
+const {execFileSync} = require('child_process');
 
 
 function debArch(arch) {
@@ -110,29 +111,70 @@ PATH=$PATH:$PWD/bin eval $(PATH=$PATH:$PWD/bin node -p "require('./package').scr
     const ftparchive = qq.join(rootDir, 'tmp', 'apt', 'apt-ftparchive.conf');
     await qq.write(ftparchive, scripts.ftparchive(config));
     await qq.x(`apt-ftparchive -c "${ftparchive}" release . > Release`, {cwd: dist});
-    const gpgKey = process.env.GPG_SIGNING_KEY_ID;
-    const passphrase = process.env.GPG_SIGNING_KEY_PASSPHRASE;
-    if (gpgKey) {
-      await qq.x(`gpg --digest-algo SHA512 --clearsign -u ${gpgKey} --batch --pinentry-mode loopback --passphrase ${passphrase} -o InRelease Release`, {cwd: dist});
-      await qq.x(`gpg --digest-algo SHA512 -abs -u ${gpgKey} --batch --pinentry-mode loopback --passphrase ${passphrase} -o Release.gpg Release`, {cwd: dist});
-    }
+    signRelease(dist);
     await qq.x(`aws s3 cp ${dist} s3://${pjson.oclif.update.s3.bucket}/apt --recursive --acl public-read`);
   }
-  // importing secret key
-  const importGPG  = async() => {
-    let key  = process.env.GPG_SIGNING_KEY;
-    const buff = Buffer.from(key, 'base64');
-    key = buff.toString("utf8");
-    const keyPath = `key.pgp`;
-    fs.writeFileSync(keyPath, key);
-    await qq.x(`gpg --import --batch --yes ${keyPath}`);
+
+  // Keys that sign the APT metadata. apt accepts the repository when any one signature is from a
+  // key the user trusts, so signing with both keeps installs that trust the legacy Ed25519 key
+  // working while new installs pick up the RSA key from twilio_pub.asc. Drop the legacy entry
+  // (and its secrets) once users have had time to import the RSA key.
+  const signingKeys = () => [
+    {
+      key: process.env.GPG_RSA_SIGNING_KEY,
+      id: process.env.GPG_RSA_SIGNING_KEY_ID,
+      passphrase: process.env.GPG_RSA_SIGNING_KEY_PASSPHRASE,
+    },
+    {
+      key: process.env.GPG_SIGNING_KEY,
+      id: process.env.GPG_SIGNING_KEY_ID,
+      passphrase: process.env.GPG_SIGNING_KEY_PASSPHRASE,
+    },
+  ].filter((k) => k.id);
+
+  // importing secret keys; each passphrase is cached in gpg-agent so one gpg call can sign with all keys
+  const importSigningKeys = () => {
+    const keys = signingKeys();
+    if (keys.length === 0) return;
+    const gpgconf = (dir) => execFileSync('gpgconf', ['--list-dirs', dir]).toString().trim();
+    const gnupgHome = gpgconf('homedir');
+    fs.mkdirSync(gnupgHome, {recursive: true, mode: 0o700});
+    fs.appendFileSync(`${gnupgHome}/gpg-agent.conf`, 'allow-preset-passphrase\n');
+    // the agent picks up the new config when gpg restarts it
+    execFileSync('gpgconf', ['--kill', 'gpg-agent']);
+    const presetPassphrase = `${gpgconf('libexecdir')}/gpg-preset-passphrase`;
+    for (const {key, id, passphrase} of keys) {
+      execFileSync('gpg', ['--import', '--batch', '--yes'], {input: Buffer.from(key, 'base64')});
+      if (!passphrase) continue;
+      const keygrips = execFileSync('gpg', ['--batch', '--with-colons', '--with-keygrip', '--list-secret-keys', id])
+        .toString()
+        .split('\n')
+        .filter((line) => line.startsWith('grp:'))
+        .map((line) => line.split(':')[9]);
+      for (const keygrip of keygrips) {
+        execFileSync(presetPassphrase, ['--preset', keygrip], {input: passphrase});
+      }
+    }
   }
 
-(async () => {
-  importGPG();
-  const archStr = process.argv[2];
-  const arches = archStr.split(",");
-  await packDebian(arches);
-})();
+  const signRelease = (dir) => {
+    const keys = signingKeys();
+    if (keys.length === 0) return;
+    const signers = keys.flatMap(({id}) => ['-u', id]);
+    const gpgSign = (args) => execFileSync('gpg', ['--batch', '--yes', '--digest-algo', 'SHA512', ...signers, ...args], {cwd: dir, stdio: 'inherit'});
+    gpgSign(['--clearsign', '-o', 'InRelease', 'Release']);
+    gpgSign(['-abs', '-o', 'Release.gpg', 'Release']);
+  }
+
+module.exports = {importSigningKeys, signRelease};
+
+if (require.main === module) {
+  (async () => {
+    importSigningKeys();
+    const archStr = process.argv[2];
+    const arches = archStr.split(",");
+    await packDebian(arches);
+  })();
+}
 
 

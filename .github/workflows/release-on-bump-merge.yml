@@ -1,0 +1,35 @@
+# Entry point for stage 3: a release PR just merged, so publish it.
+name: Cli Release On Bump Merge
+
+on:
+  push:
+    branches: [ main ]
+  # Dispatchable so a release that failed after its PR merged can be retried
+  # without opening another PR, and to override the homebrew settings, which
+  # are dispatch-only preferences and cannot be recovered from a commit.
+  workflow_dispatch:
+    inputs:
+      homebrew-branch:
+        description: 'HomeBrew branch name'
+        default: main
+      homebrew-prerelease:
+        description: 'HomeBrew prerelease'
+        default: 'false'
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  publish:
+    # Only release PRs publish. Everything else that lands on main is ignored,
+    # which is also what stops a release from triggering another release.
+    if: >-
+      github.repository_owner == 'twilio' &&
+      (github.event_name == 'workflow_dispatch' ||
+       startsWith(github.event.head_commit.message, 'chore(release):'))
+    uses: ./.github/workflows/release-publish.yml
+    secrets: inherit
+    with:
+      homebrew-branch: ${{ github.event.inputs.homebrew-branch || 'main' }}
+      homebrew-prerelease: ${{ github.event.inputs.homebrew-prerelease || 'false' }}

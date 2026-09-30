@@ -1,6 +1,7 @@
 const sinon = require('sinon');
 const { expect, test } = require('@twilio/cli-test');
 const { Config, ConfigData } = require('@twilio/cli-core').services.config;
+const { logger } = require('@twilio/cli-core').services.logging;
 
 const { fakeResource, fakeCallResponse } = require('./twilio-api-command.fixtures');
 const TwilioApiCommand = require('../../src/base-commands/twilio-api-command');
@@ -105,6 +106,43 @@ describe('base-commands', () => {
         },
       };
 
+      /**
+       * Some APIs require the same value in both a path segment and the request
+       * body (e.g. Memory's `idType` in `/Identifiers/{idType}`). That's an
+       * intentional dual-dispatch, not a conflict.
+       * @type {{domainName: string, commandName: string, path: string, actionName: string, action: {parameters: [{name: string, in: string, schema: {type: string}},{name: string, in: string, schema: {type: string}}]}}}
+       */
+      const dualDispatchActionDefinition = {
+        domainName: 'memory',
+        commandName: 'patch',
+        path: '/v1/Stores/{storeId}/Profiles/{profileId}/Identifiers/{idType}',
+        actionName: 'patch',
+        action: {
+          parameters: [
+            { name: 'idType', in: 'path', schema: { type: 'string' } },
+            { name: 'idType', in: 'query', schema: { type: 'string' } },
+          ],
+        },
+      };
+
+      /**
+       * Two parameters that share both a flag name AND an `in` location is a
+       * genuine, unexpected duplicate the CLI isn't equipped to resolve.
+       * @type {{domainName: string, commandName: string, path: string, actionName: string, action: {parameters: [{name: string, in: string, schema: {type: string}},{name: string, in: string, schema: {type: string}}]}}}
+       */
+      const genuineConflictActionDefinition = {
+        domainName: 'widgets',
+        commandName: 'create',
+        path: '/v1/Widgets',
+        actionName: 'create',
+        action: {
+          parameters: [
+            { name: 'DisplayName', in: 'query', schema: { type: 'string' } },
+            { name: 'DisplayName', in: 'query', schema: { type: 'string' } },
+          ],
+        },
+      };
+
       const callApiHelpDoc = {
         domainName: 'sync',
         commandName: 'services',
@@ -155,6 +193,32 @@ describe('base-commands', () => {
         expect(Object.keys(NewCommandClass.flags).length).to.equal(
           NUMBER_OF_PARAMS_FOR_CALL_CREATE + NUMBER_OF_BASE_COMMAND_FLAGS,
         );
+      });
+
+      test.it('does not warn when a path and body parameter share a flag name by design', () => {
+        const warnSpy = sinon.spy(logger, 'warn');
+
+        try {
+          const NewCommandClass = getCommandClass(dualDispatchActionDefinition);
+
+          expect(warnSpy.called).to.be.false;
+          expect(Object.keys(NewCommandClass.flags)).to.include('id-type');
+        } finally {
+          warnSpy.restore();
+        }
+      });
+
+      test.it('warns when two parameters genuinely share a flag name and location', () => {
+        const warnSpy = sinon.spy(logger, 'warn');
+
+        try {
+          getCommandClass(genuineConflictActionDefinition);
+
+          expect(warnSpy.calledOnce).to.be.true;
+          expect(warnSpy.firstCall.args[0]).to.contain('--display-name');
+        } finally {
+          warnSpy.restore();
+        }
       });
 
       test.it('checks that parameters with inequalities convert to the correct flag names', () => {
@@ -258,6 +322,46 @@ describe('base-commands', () => {
         .it('deletes a call', (ctx) => {
           expect(ctx.stdout).to.be.empty;
           expect(ctx.stderr).to.contain('success');
+        });
+
+      test.it('handles remove action with response body (202 Accepted)', () => {
+        const removeWithBodyDefinition = {
+          domainName: 'memory',
+          commandName: 'remove',
+          path: '/v1/Stores/{StoreId}/Observations/{ObservationId}',
+          actionName: 'remove',
+          action: {
+            parameters: [
+              { name: 'StoreId', in: 'path', schema: { type: 'string' } },
+              { name: 'ObservationId', in: 'path', schema: { type: 'string' } },
+            ],
+            responses: {
+              202: {
+                content: { 'application/json': { schema: { type: 'object' } } },
+              },
+            },
+          },
+        };
+        const NewCommandClass = getCommandClass(removeWithBodyDefinition);
+
+        expect(NewCommandClass.id).to.equal('api:memory:v1:stores:observations:remove');
+        expect(NewCommandClass.flags.properties).to.exist;
+        expect(NewCommandClass.flags.properties.default).to.equal('sid');
+      });
+
+      test
+        .twilioFakeProfile(ConfigData)
+        .twilioCliEnv(Config)
+        .stdout()
+        .stderr()
+        .twilioCreateCommand(getCommandClass(callRemoveActionDefinition), ['--sid', fakeCallResponse.sid])
+        .do((ctx) => {
+          ctx.testCmd.twilioApi = { remove: sinon.stub().returns({ message: 'Accepted' }) };
+          return ctx.testCmd.run();
+        })
+        .it('displays response body when remove returns an object', (ctx) => {
+          expect(ctx.stdout).to.contain('Accepted');
+          expect(ctx.stderr).to.not.contain('success');
         });
 
       test

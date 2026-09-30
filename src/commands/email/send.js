@@ -2,7 +2,6 @@ const { Flags: flags } = require('@oclif/core');
 const { BaseCommand } = require('@twilio/cli-core').baseCommands;
 const { TwilioCliError } = require('@twilio/cli-core').services.error;
 const sgMail = require('@sendgrid/mail');
-const FileType = require('file-type');
 
 const emailUtilities = require('../../services/email-utility');
 const { readFileOrStdIn, readFile } = require('../../services/file-io');
@@ -89,8 +88,10 @@ class Send extends BaseCommand {
   }
 
   async createAttachmentArray(fileInfo) {
+    // file-type is ESM-only, so it must be loaded via a dynamic import from this CommonJS file.
+    const { fileTypeFromBuffer } = await import('file-type');
     // readFile and readFileOrStdIn return a base64 encoded string
-    const type = await FileType.fromBuffer(Buffer.from(fileInfo.content, DEFAULT_ENCODING));
+    const type = await fileTypeFromBuffer(Buffer.from(fileInfo.content, DEFAULT_ENCODING));
 
     return [
       {

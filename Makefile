@@ -9,6 +9,7 @@ clean:
 install: githooks clean
 	rm -f package-lock.json
 	npm install --omit=optional
+	node .github/scripts/restore-lockfile-registry.js
 
 test:
 	npm test

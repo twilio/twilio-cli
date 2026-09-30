@@ -1,0 +1,92 @@
+# Stage 2 of 3: decide the next version and propose it as a release PR.
+#
+# Nothing is published here. semantic-release is asked what the next version
+# would be (dry run), that version is written into package.json and CHANGES.md,
+# and the result goes up as a PR. The release itself happens once that PR
+# merges, from release-on-bump-merge.yml.
+#
+# The order matters: the commit that gets tagged and published must already
+# contain the version it claims. Publishing first and syncing main afterwards
+# leaves the tag and the npm provenance attestation pointing at a commit whose
+# package.json still holds the previous version.
+name: Cli Release Prepare
+
+on:
+  workflow_call:
+    inputs:
+      change-log:
+        description: 'Api-definitions changelog, appended to the GitHub release notes'
+        type: string
+        default: ''
+    outputs:
+      version:
+        value: ${{ jobs.prepare.outputs.version }}
+      prepared:
+        value: ${{ jobs.prepare.outputs.prepared }}
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  ARTIFACTORY_URL: ${{ vars.ARTIFACTORY_URL }}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-x64
+    if: github.repository_owner == 'twilio'
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      version: ${{ steps.prepare.outputs.version }}
+      prepared: ${{ steps.prepare.outputs.prepared }}
+    steps:
+      - name: Checkout cli
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          # semantic-release needs the tags and history to work out the version.
+          fetch-depth: 0
+      - name: Artifactory OIDC Auth
+        uses: twilio/sdk-actions/artifactory-oidc@23b656b843d2a3461cf38e4fd466c07a822d5fc0 # v1
+      - run: make install
+      - name: Use Node 22
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: '22'
+      - name: Work out the next version and update package.json and CHANGES.md
+        id: prepare
+        run: |
+          fileName="$GITHUB_WORKSPACE/.github/scripts/prepare-release.js"
+          node -e "require('$fileName').prepareRelease()"
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Propose the release as a PR
+        if: steps.prepare.outputs.prepared == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          VERSION: ${{ steps.prepare.outputs.version }}
+          CHANGE_LOG: ${{ inputs.change-log }}
+        run: |
+          message="chore(release): set \`package.json\` to ${VERSION}"
+          body="Prepares the \`${VERSION}\` release. **Nothing is published yet.**
+
+          Merging this PR tags and publishes \`${VERSION}\` from the merge commit, so the
+          git tag and the npm provenance attestation both point at a commit that
+          actually contains this version.
+          "
+          if [ -n "$CHANGE_LOG" ]; then
+            body="${body}
+          <details><summary>Api-definitions changelog</summary>
+
+          ${CHANGE_LOG}
+
+          </details>
+          "
+          fi
+          bash .github/scripts/open-pr.sh "release-${VERSION}" "$message" "$message" "$body"
+      - name: Say what happens next
+        if: steps.prepare.outputs.prepared != 'true'
+        run: echo "::notice::No relevant changes, so there is nothing to release."

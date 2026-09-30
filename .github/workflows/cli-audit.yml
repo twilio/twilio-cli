@@ -4,21 +4,30 @@ on:
     branches: [ main ]
   pull_request:
 
+env:
+  ARTIFACTORY_URL: ${{ vars.ARTIFACTORY_URL }}
+
 jobs:
   audit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-x64
+    if: github.repository_owner == 'twilio'
+    permissions:
+      contents: read
+      id-token: write
     strategy:
       fail-fast: false
       matrix:
-        node-version: [ 20.x, 22.x, lts/* ]
+        node-version: [ 22.x, lts/* ]
     steps:
       - name: Checkout cli repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
+      - name: Artifactory OIDC Auth
+        uses: twilio/sdk-actions/artifactory-oidc@23b656b843d2a3461cf38e4fd466c07a822d5fc0 # v1
       - run: make install
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -26,22 +35,22 @@ jobs:
         run: npm audit --audit-level=moderate --production
         # minimum vulnerability level that will cause the command to fail
         # audit reports with low severity would pass the test
-  notify-complete-fail:
-    if: ${{ failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
-    needs: [ audit ]
-    name: Notify Npm Audit Failed
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
-          SLACK_COLOR: 'danger'
-          SLACK_USERNAME: CLI Github Actions
-          SLACK_MSG_AUTHOR: twilio-dx
-          SLACK_ICON_EMOJI: ':github:'
-          SLACK_TITLE: "Twilio Cli"
-          SLACK_MESSAGE: 'Cli audit test failed'
-          MSG_MINIMAL: actions url
-          SLACK_FOOTER: Posted automatically using GitHub Actions
+#  notify-complete-fail:
+#    if: ${{ failure() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+#    needs: [ audit ]
+#    name: Notify Npm Audit Failed
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+#      - name: Slack Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.ALERT_SLACK_WEB_HOOK }}
+#          SLACK_COLOR: 'danger'
+#          SLACK_USERNAME: CLI Github Actions
+#          SLACK_MSG_AUTHOR: twilio-dx
+#          SLACK_ICON_EMOJI: ':github:'
+#          SLACK_TITLE: "Twilio Cli"
+#          SLACK_MESSAGE: 'Cli audit test failed'
+#          MSG_MINIMAL: actions url
+#          SLACK_FOOTER: Posted automatically using GitHub Actions
