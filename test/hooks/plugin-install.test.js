@@ -28,6 +28,18 @@ const getUndefinedPlugin = () => ({
   },
 });
 
+const getTrustedUrlPlugin = () => ({
+  plugin: {
+    url: 'https://twilio.world/cli/plugin/abc-123',
+  },
+});
+
+const getUntrustedUrlPlugin = () => ({
+  plugin: {
+    url: 'https://evil.example.com/plugin.tgz',
+  },
+});
+
 describe('hooks', () => {
   describe('plugin-install', () => {
     before(() => {
@@ -59,6 +71,17 @@ describe('hooks', () => {
       expect(ctx.stderr).to.contain('twilio autocomplete');
       await pluginFunc.call(ctx, getTwilioLabsPlugin());
       expect(ctx.stderr).to.contain('twilio autocomplete');
+    });
+
+    test.stderr().it('outputs nothing when a trusted url plugin is installed', async (ctx) => {
+      await pluginFunc.call(ctx, getTrustedUrlPlugin());
+      expect(ctx.stderr).to.not.contain('WARNING');
+    });
+
+    test.stderr().it('warning when an untrusted url plugin is installed', async (ctx) => {
+      ctx.exit = sinon.stub().resolves(1);
+      await pluginFunc.call(ctx, getUntrustedUrlPlugin());
+      expect(ctx.stderr).to.contain('WARNING');
     });
   });
 });
