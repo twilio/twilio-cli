@@ -78,6 +78,20 @@ describe('hooks', () => {
       expect(ctx.stderr).to.not.contain('WARNING');
     });
 
+    test.stderr().it('warns and confirms before installing HTTP URLs on trusted subdomains', async (ctx) => {
+      ctx.exit = sinon.stub().resolves(1);
+      inquirer.prompt.resetHistory();
+
+      await pluginFunc.call(ctx, {
+        plugin: { url: 'http://play.dev.twilio.world/plugin.tgz' },
+      });
+
+      expect(ctx.stderr).to.contain('untrusted source');
+      expect(inquirer.prompt.calledOnce).to.be.true;
+      expect(inquirer.prompt.firstCall.args[0][0].message).to.equal('Are you sure you want to continue?');
+      expect(ctx.exit.calledOnceWithExactly(1)).to.be.true;
+    });
+
     test.stderr().it('warning when an untrusted url plugin is installed', async (ctx) => {
       ctx.exit = sinon.stub().resolves(1);
       await pluginFunc.call(ctx, getUntrustedUrlPlugin());
