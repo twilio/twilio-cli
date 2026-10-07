@@ -1,3 +1,210 @@
+--------------------------
+**Audiences**
+- **Added 1 new path(s)**:
+- `/preview/Cohorts/{cohortId}/Operations` (AdminListCohortOperations)
+- **Content updates**:
+- Updated description for `AdminListSnapshotOperations`
+- **Content updates**:
+- Updated description for `AdminListCohortSnapshots`
+- Updated description for `AdminFetchCohortSnapshot`
+- Updated schema description for `Criteria`
+- Added properties to `OperationPayload`: cohortId
+- Removed properties from `OperationPayload`: audienceId
+- Updated schema description for `OperationResult`
+- Added properties to `OperationResult`: cohortId
+- Removed properties from `OperationResult`: audienceId
+- Updated schema description for `Record`
+- Updated schema description for `Cohort`
+- ...and 3 more changes
+- Minor updates (formatting, metadata)
+- **Content updates**:
+- Updated schema description for `CohortOperationResult`
+- Updated schema description for `PartitionCount`
+
+**Conversations**
+- Add `traitExtractionStrategyIds` and `observationExtractionStrategyIds` to the Conversations v2 Admin Configuration schema.
+- Align the Conversations v2 Capabilities list and create contracts with the backend `domainId` field.
+
+**Data-ingress**
+- Minor updates (formatting, metadata)
+- Add support for Hubspot connector
+- Minor updates (formatting, metadata)
+- Add support for Hubspot connector
+
+**Knowledge**
+- **Routing updates**:
+- Changed `downstreamServiceName` from `memora-domain` to `enterprise-knowledge-domain` for all operations
+
+**Memory**
+- The `source` field on observations and conversation summaries, and the `source` filter
+- on `ListProfileObservations`, now also accept forward slashes (`/`). The pattern is
+- `^[a-zA-Z0-9 _./-]+$`. This is additive and backwards compatible: every previously
+- valid value is still accepted.
+- `UpdateStore`, `UpdateTraitGroup`, and `UpdateDataMapping` now require a body with at least one property. An empty `{}` gets a 400.
+
+**Messaging**
+- Add opt-out configuration admin endpoints (`GET/PUT/DELETE /v1/Accounts/{AccountSid}/OptOuts/{OptOutSid}/...`) to the messaging admin-api (dev-us1 and stage-us1 only)
+- Add create opt-out configuration endpoint (`POST /v1/Accounts/{AccountSid}/OptOuts`) to the messaging admin-api (dev-us1 and stage-us1 only)
+- Add update messaging service endpoint (`PUT /v1/Accounts/{AccountSid}/Services/{MessagingServiceSid}`) to the messaging admin-api (dev-us1 and stage-us1 only)
+- Add WhatsApp display name change support to Sender API: `pending_display_name`, `pending_display_name_status` and `pending_display_name_status_date` on fetch, and `display_name_status` on update and partial update
+
+**Routes**
+- Set SDK and docs visibility of `GET`/`POST` `/v3/ShortCodes/{isoCountryCode}/{shortCode}` to `public`, maturity to `ga`
+
+
+--------------------------
+**Twiml**
+- Add `audio_format` and `sample_rate` to Stream for HDCodec
+
+**Api**
+- # API Changes
+- Simplified the `criteria` field description.
+- Moved `readOnly` on the snapshot count fields (`profileCount`, `partitionCount`) from the shared schema to the response usage sites, so the counts stay read-only in responses (no change for API consumers).
+- Renamed 3 `Get*` operations to `Fetch*` to match the operationId standard: `FetchCohort`, `FetchSnapshot`, `FetchOperation`.
+- Removed the unused `ExpressionId` schema and made the operation error example cohort-native, so no `aud_` identifiers remain in the spec.
+- Kept `libraryVisibility: hidden` across the whole surface (info, path items, and operations).
+- Removed the deprecated header-based-versioning unified specs, consolidating audiences onto the path-based `api.twilio.com/v1` surface.
+- Published the unified audiences spec at `api.twilio.com/v1`.
+- Fixed the Cohort operation response mapping in the unified audiences API.
+- Migrated the unified audiences spec to the Cohort surface (Audiences renamed to Cohorts).
+- Switched `downstreamServiceName` to `audiences-domain`.
+- Added the `api.unified.version.preview` beta feature.
+- Made the unified APIs available in prod us1.
+- Fixed example values.
+- Added the initial version of the audiences API to the unified APIs.
+- Deployed the audiences-domain OAS to the dev edge.
+- Added the prod-us1 realm to the audiences public API.
+- Changed the `storeType` enum from `MEMORA` to `TWILIO`.
+- Added the stage-us1 realm and `x-rate-limit` to the audiences API.
+- Added the initial audiences endpoints.
+- Add `TwimlProcessStatusCallbackEvents` parameter to CreateTwimlProcess endpoint
+- Add `twiml_process` resource alongside `twiml_session` (`twiml_session` is deprecated and will be removed in a future release)
+
+**Audiences**
+- Minor updates (formatting, metadata)
+- **Content updates**:
+- Updated summary for `AdminFetchRecord`
+- Updated summary for `AdminFetchCohort`
+- Updated summary for `AdminFetchCohortSnapshot`
+- Updated summary for `AdminFetchCohortOperation`
+- Updated schema description for `ResourceLabels`
+- **Content updates**:
+- Updated schema description for `Criteria`
+- Minor updates (formatting, metadata)
+- Minor updates (formatting, metadata)
+- **Content updates**:
+- Updated description for `CreateCohort`
+- Updated description for `ListCohortSnapshots`
+- Updated description for `CreateCohortSnapshot`
+- Updated description for `FetchCohortSnapshot`
+- Updated description for `ListCohortSnapshotProfiles`
+- Updated schema description for `Criteria`
+- Updated schema description for `Cohort`
+- Updated schema description for `CohortSnapshot`
+- Updated schema description for `CohortOperationResult`
+- Updated schema description for `CohortOperation`
+- Minor updates (formatting, metadata)
+- **Content updates**:
+- Updated summary for `FetchCohort`
+- Updated summary for `FetchCohortSnapshot`
+- Updated summary for `FetchCohortOperation`
+- Updated schema description for `ResourceLabels`
+
+**Capabilities**
+- Add a feature-gated preview endpoint to create Capabilities.
+
+**Conversations**
+- Add the feature-gated Capabilities list and create endpoints to Conversations v2.
+
+**Data-ingress**
+- Minor updates (formatting, metadata)
+- **Added 16 new path(s)**:
+- `/v1/DataSyncs/{syncId}` (FetchDataSync)
+- `/v1/CloudAppSources/{sourceId}/Objects` (ListCloudAppObjects)
+- `/v1/WarehouseSources/{sourceId}/Preview` (CreateWarehousePreview)
+- `/v1/WarehouseSources/{sourceId}/Preview/{operationId}` (FetchWarehousePreview)
+- `/v1/DataSample/{operationId}` (FetchDataSample)
+- `/v1/ControlPlane/CloudAppSources/{sourceId}` (FetchCloudAppSource, PatchCloudAppSource, DeleteCloudAppSource)
+- `/v1/ControlPlane/CloudAppSources/{sourceId}/Datasets` (ListCloudAppDatasets, CreateCloudAppDataset)
+- `/v1/ControlPlane/CloudAppSources/{sourceId}/Datasets/{datasetId}` (FetchCloudAppDataset, PatchCloudAppDataset, DeleteCloudAppDataset)
+- `/v1/ControlPlane/WarehouseSources/{sourceId}` (FetchWarehouseSource, PatchWarehouseSource, DeleteWarehouseSource)
+- `/v1/ControlPlane/WarehouseSources/{sourceId}/Datasets` (ListWarehouseDatasets, CreateWarehouseDataset)
+- ...and 6 more paths
+- **Removed 31 path(s)**:
+- `/v1/DataSyncs/{SyncId}` (FetchDataSync)
+- `/v1/CloudAppSources/{SourceId}/Objects` (ListCloudAppObjects)
+- `/v1/WarehouseSources/{SourceId}/Preview` (CreateWarehousePreview)
+- `/v1/WarehouseSources/{SourceId}/Preview/{OperationId}` (FetchWarehousePreview)
+- `/v1/DataSample/{OperationId}` (FetchDataSample)
+- `/v1/ControlPlane/CloudAppSources/{SourceId}` (FetchCloudAppSource, PatchCloudAppSource, DeleteCloudAppSource)
+- `/v1/ControlPlane/CloudAppSources/{SourceId}/Datasets` (ListCloudAppDatasets, CreateCloudAppDataset)
+- `/v1/ControlPlane/CloudAppSources/{SourceId}/Datasets/{DatasetId}` (FetchCloudAppDataset, PatchCloudAppDataset, DeleteCloudAppDataset)
+- `/v1/ControlPlane/WarehouseSources/{SourceId}` (FetchWarehouseSource, PatchWarehouseSource, DeleteWarehouseSource)
+- `/v1/ControlPlane/WarehouseSources/{SourceId}/Datasets` (ListWarehouseDatasets, CreateWarehouseDataset)
+- ...and 21 more paths
+
+**Destinations**
+- **Content updates**:
+- Removed `GET` from the `method` enum on the `webhook` destination type's config options
+- **Content updates**:
+- Added `CDP` to the `categories` enum on `DestinationType`
+- Enable admin APIs for stage-us1 and prod-ie1 realms
+- **Content updates**:
+- Updated description for `CreateDestination`
+- Updated description for `UpdateDestination`
+- Updated description for `DeleteDestination`
+- Updated schema description for `CredentialInput`
+- Updated schema description for `DestinationCredentialOptions`
+- **Content updates**:
+- Updated description for `ListDestinationTypes`
+- Updated description for `GetDestinationType`
+- Updated description for `CreateDestination`
+- Updated description for `UpdateDestination`
+- Made `ListDestinationTypes` and `GetDestinationType` unauthenticated (`security: []`).
+- Removed `iamOperation`, `addAuthorizationHeader`, and `betaFeature` from these operations.
+
+**Iam**
+- Removed user_context from the POST /v1/actions/post_login (PostLoginActionRequest) webhook payload; the login email is read from authentication_context.methods
+- Replaced acr and completed_factors with authentication_context (acr, amr, methods) on the POST /v1/actions/post_login (PostLoginActionRequest) webhook payload
+- Made request_context and request_context.ip_address required on the POST /v1/actions/post_login (PostLoginActionRequest) webhook payload
+
+**Intelligence**
+- Added optional `rule.operators[]` parameter override field to `POST /v3/RuleExecutions
+- Change Summary in `POST /v3/RuleExecutions`
+
+**Knowledge**
+- **Content updates**:
+- Added properties to `WebSourceDetails`: errors
+- **Routing updates**:
+- Changed `downstreamServiceName` from `memora-domain` to `enterprise-knowledge-domain` for all operations
+
+**Memory**
+- **Added 2 new path(s)**:
+- `/v1/ControlPlane/TraitExtractionStrategies` (AdminListTraitExtractionStrategies)
+- `/v1/ControlPlane/TraitExtractionStrategies/{traitStrategyId}` (AdminFetchTraitExtractionStrategy)
+- No path changes (schema description only)
+- Clarified the `DataMappingCore` description: the PATCH body requires at least one field.
+- **Added 2 new path(s)** for Observation Extraction Strategies:
+- `/v1/ControlPlane/ObservationExtractionStrategies` (ListObservationExtractionStrategies, CreateObservationExtractionStrategy)
+- `/v1/ControlPlane/ObservationExtractionStrategies/{observationExtractionStrategyId}` (FetchObservationExtractionStrategy, UpdateObservationExtractionStrategy, DeleteObservationExtractionStrategy)
+- **Content updates**:
+- Updated `CreateObservationExtractionStrategyInput` description to document that at least one of `allowedCategories`/`prohibitedCategories` must be provided with a non-empty list
+- **Added 1 new path(s)** for Profile:
+- `/v1/Stores/{storeId}/Profiles/BulkDeletions` (CreateProfilesBulkDeletion)
+- `UpdateStore`, `UpdateTraitGroup`, `UpdateDataMapping`, and `UpdateTraitExtractionStrategy` now require a body with at least one property. An empty `{}` gets a 400.
+
+**Routes**
+- Add `GET`/`POST` `/v3/ShortCodes/{isoCountryCode}/{shortCode}` to assign and fetch the Inbound Processing Region for short codes
+
+**Verify**
+- Add `aaguid` and `date_last_approved` to passkeys factors `metadata`.
+
+**Voice**
+- Add typed Recording AccountDefaultConfiguration public API endpoints.
+
+**Webhooks**
+- **Changed**: `GET /v1/Webhooks/Settings` now documents each item as the full `Setting` rather than `SettingSummary`, adding `auth`, `signature`, `connection` and `edgeZones` to the list response. The service already returned these fields; only the schema understated them. Additive for consumers — no field is removed or renamed. The now-unreferenced `SettingSummary` schema is removed.
+
 ## 7.0.0 (2026-09-22)
 
 * chore: Add keypair alias to certsync command ([0e205f6](https://github.com/twilio/twilio-cli/commit/0e205f6))
