@@ -1,3 +1,13 @@
+## 7.1.0 (2026-10-07)
+
+* oaiFeat: Updated api definitions changelog in CHANGES.md (#731) ([010290b](https://github.com/twilio/twilio-cli/commit/010290b)), closes [#731](https://github.com/twilio/twilio-cli/issues/731)
+* Trust twilio.world hosts for URL-based plugin installs (#703) (#730) ([bc36e36](https://github.com/twilio/twilio-cli/commit/bc36e36)), closes [#703](https://github.com/twilio/twilio-cli/issues/703) [#730](https://github.com/twilio/twilio-cli/issues/730) [#703](https://github.com/twilio/twilio-cli/issues/703)
+* fix: pin the packing jobs to Node 22 (#725) ([4dfc2a4](https://github.com/twilio/twilio-cli/commit/4dfc2a4)), closes [#725](https://github.com/twilio/twilio-cli/issues/725)
+* fix: repair Windows code signing (#727) ([05fe7e7](https://github.com/twilio/twilio-cli/commit/05fe7e7)), closes [#727](https://github.com/twilio/twilio-cli/issues/727) [PKCS#12](https://github.com/PKCS/issues/12) [PKCS#12](https://github.com/PKCS/issues/12)
+* fix: restore the aws-sdk devDependency (#726) ([4895795](https://github.com/twilio/twilio-cli/commit/4895795)), closes [#726](https://github.com/twilio/twilio-cli/issues/726) [#705](https://github.com/twilio/twilio-cli/issues/705) [#705](https://github.com/twilio/twilio-cli/issues/705)
+* fix: sign RPM and APT packages with an RSA-4096 key (#728) ([bcc38b0](https://github.com/twilio/twilio-cli/commit/bcc38b0)), closes [#728](https://github.com/twilio/twilio-cli/issues/728) [#712](https://github.com/twilio/twilio-cli/issues/712)
+
+
 --------------------------
 **Audiences**
 - **Added 1 new path(s)**:
