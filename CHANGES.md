@@ -1,3 +1,8 @@
+## 7.2.0 (2026-10-13)
+
+* oaiFeat: Updated api definitions changelog in CHANGES.md (#734) ([ea6c014](https://github.com/twilio/twilio-cli/commit/ea6c014)), closes [#734](https://github.com/twilio/twilio-cli/issues/734)
+
+
 ---------------------------
 **Library - Fix**
 - [PR #167](https://github.com/twilio/twilio-oai/pull/167): upgrade version. Thanks to [@shrutiburman](https://github.com/shrutiburman)!
