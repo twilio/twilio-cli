@@ -25,7 +25,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Fail on lockfile versions younger than 2 days
-        run: node .github/scripts/check-lockfile-age.js origin/${{ github.base_ref }} 2
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: node .github/scripts/check-lockfile-age.js "origin/$BASE_REF" 2
 
   test:
     needs: [lockfile-hygiene]
