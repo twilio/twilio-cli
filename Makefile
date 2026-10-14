@@ -6,9 +6,12 @@ githooks:
 clean:
 	rm -rf node_modules
 
+# Internal Artifactory blocks versions younger than 2 days for CI, never resolve anything newer.
+MIN_AGE_CUTOFF=$(shell node -e "console.log(new Date(Date.now() - 2 * 24 * 3600 * 1000).toISOString())")
+
 install: githooks clean
 	rm -f package-lock.json
-	npm install --omit=optional
+	npm install --omit=optional --before="$(MIN_AGE_CUTOFF)"
 	node .github/scripts/restore-lockfile-registry.js
 
 test:
