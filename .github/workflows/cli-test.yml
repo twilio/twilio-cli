@@ -16,6 +16,19 @@ jobs:
         with:
           package-manager: npm
 
+  # Internal Artifactory blocks versions younger than 2 days for CI; catch them on the PR.
+  lockfile-age:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-x64
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+      - name: Fail on lockfile versions younger than 2 days
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: node .github/scripts/check-lockfile-age.js "origin/$BASE_REF" 2
+
   test:
     needs: [lockfile-hygiene]
     runs-on: ubuntu-x64

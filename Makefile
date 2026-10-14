@@ -6,9 +6,11 @@ githooks:
 clean:
 	rm -rf node_modules
 
+# Internal Artifactory blocks versions younger than 2 days for CI; the script avoids resolving
+# anything newer, except our own @twilio/* packages.
 install: githooks clean
 	rm -f package-lock.json
-	npm install --omit=optional
+	node .github/scripts/install-with-min-age.js
 	node .github/scripts/restore-lockfile-registry.js
 
 test:
