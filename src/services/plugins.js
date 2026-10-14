@@ -24,7 +24,8 @@ const PLUGIN_COMMANDS = {
 exports.isTwilioPlugin = (pluginName, pluginUrl) => {
   if (pluginUrl !== undefined) {
     try {
-      return isAllowedHost(new URL(pluginUrl).hostname);
+      const url = new URL(pluginUrl);
+      return url.protocol === 'https:' && isAllowedHost(url.hostname);
     } catch (error) {
       return false;
     }

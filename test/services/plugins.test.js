@@ -26,6 +26,21 @@ describe('services', () => {
         expect(isTwilioPlugin(undefined, 'https://cli.twilio.world/plugin.tgz')).to.be.true;
       });
 
+      it('trusts HTTPS URLs on nested allowed subdomains', () => {
+        expect(isTwilioPlugin(undefined, 'https://play.dev.twilio.world/plugin.tgz')).to.be.true;
+        expect(isTwilioPlugin(undefined, 'https://cli.stage.twilio.world/plugin.tgz')).to.be.true;
+      });
+
+      ['http:', 'ftp:', 'git+https:'].forEach((protocol) => {
+        it(`does not trust ${protocol} URLs on allowed hosts`, () => {
+          for (const host of ['twilio.world', 'play.twilio.world', 'play.dev.twilio.world']) {
+            const url = `${protocol}//${host}/plugin.tgz`;
+            expect(isTwilioPlugin(undefined, url)).to.be.false;
+            expect(isTwilioPlugin('@twilio/debugger', url)).to.be.false;
+          }
+        });
+      });
+
       it('does not trust a url on a disallowed host', () => {
         expect(isTwilioPlugin(undefined, 'https://evil.example.com/plugin.tgz')).to.be.false;
       });
