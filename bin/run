@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+require('../src/services/distrusted-intermediates').install();
 const oclif = require('@oclif/core')
 require('@twilio/cli-core').configureEnv();
 
