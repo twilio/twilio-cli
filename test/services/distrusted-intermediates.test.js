@@ -42,7 +42,7 @@ describe('services', () => {
         distrusted.install();
         const error = tls.checkServerIdentity('example.com', { raw });
         expect(error.code).to.equal('ERR_TLS_CERT_DISTRUSTED');
-        expect(error.message).to.contain('example.com');
+        expect(error.message).to.equal('Your certificate chain contains a distrusted intermediate certificate');
       } finally {
         tls.checkServerIdentity = original;
       }

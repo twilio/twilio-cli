@@ -52,7 +52,7 @@ const install = () => {
   const original = tls.checkServerIdentity;
   tls.checkServerIdentity = (hostname, cert) => {
     if (containsDistrusted(cert)) {
-      const error = new Error(`Certificate chain for ${hostname} contains a distrusted intermediate certificate`);
+      const error = new Error('Your certificate chain contains a distrusted intermediate certificate');
       error.code = 'ERR_TLS_CERT_DISTRUSTED';
       return error;
     }
