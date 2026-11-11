@@ -1,3 +1,162 @@
+---------------------------
+**Twiml**
+- Add ElevenLabs voices to `<Say>` verb.
+- Add `partialPromptOnHangup`, `eagerEotThreshold`, `asrSmartFormat`, `ttsTextNormalization`, `ttsLanguageTextNormalization`, `elevenlabsLanguageTextNormalization`, `includeInPrompt`, `customerName`, `applicationReconnect`, `echoPromptFiltering`, `turnDetection` attributes to `<ConversationRelay>`, and `hints`, `asrSmartFormat`, `ttsTextNormalization`, `ttsLanguageTextNormalization` attributes to `<Language>`
+
+**Api**
+- # API Changes
+- Simplified the `criteria` field description.
+- Moved `readOnly` on the snapshot count fields (`profileCount`, `partitionCount`) from the shared schema to the response usage sites, so the counts stay read-only in responses (no change for API consumers).
+- Renamed 3 `Get*` operations to `Fetch*` to match the operationId standard: `FetchCohort`, `FetchSnapshot`, `FetchOperation`.
+- Removed the unused `ExpressionId` schema and made the operation error example cohort-native, so no `aud_` identifiers remain in the spec.
+- Kept `libraryVisibility: hidden` across the whole surface (info, path items, and operations).
+- Removed the deprecated header-based-versioning unified specs, consolidating audiences onto the path-based `api.twilio.com/v1` surface.
+- Published the unified audiences spec at `api.twilio.com/v1`.
+- Fixed the Cohort operation response mapping in the unified audiences API.
+- Migrated the unified audiences spec to the Cohort surface (Audiences renamed to Cohorts).
+- Switched `downstreamServiceName` to `audiences-domain`.
+- Added the `api.unified.version.preview` beta feature.
+- Made the unified APIs available in prod us1.
+- Fixed example values.
+- Added the initial version of the audiences API to the unified APIs.
+- Deployed the audiences-domain OAS to the dev edge.
+- Added the prod-us1 realm to the audiences public API.
+- Changed the `storeType` enum from `MEMORA` to `TWILIO`.
+- Added the stage-us1 realm and `x-rate-limit` to the audiences API.
+- Added the initial audiences endpoints.
+- # API Changes
+- Enabled the Redaction Configurations and Redaction Catalog resources in prod-us1.
+- Enabled the Redaction Configurations and Redaction Catalog resources in stage-us1.
+- Added the Redaction Configurations resource (`/v1/RedactionConfigurations`) as a private beta in dev-us1, gated by the `api.redaction.enabled` beta feature.
+- Added the Redaction Catalog resource (`/v1/RedactionCatalog`), under the same beta feature. It is restricted to One Console.
+- Add `ApplicationSid` parameter to TwimlSession and TwimlProcess Create endpoints
+
+**Audiences**
+- **Content updates**:
+- Updated description for `AdminFetchRecord`
+- Updated description for `AdminListCohorts`
+- Updated description for `AdminListCohortSnapshots`
+- Updated description for `AdminFetchCohortOperation`
+- Updated description for `AdminListSnapshotOperations`
+- Updated schema description for `OperationStatus`
+- Added properties to `Cohort`: tags
+- Removed properties from `Cohort`: labels
+- Added properties to `CohortSnapshot`: tags
+- Removed properties from `CohortSnapshot`: labels
+- **Content updates**:
+- Updated description for `ListCohorts`
+- Updated description for `CreateCohort`
+- Updated description for `UpdateCohort`
+- Updated description for `ListCohortSnapshots`
+- Updated description for `CreateCohortSnapshot`
+- Updated description for `FetchCohortOperation`
+- Updated schema description for `OperationStatus`
+- Added properties to `Cohort`: tags
+- Removed properties from `Cohort`: labels
+- Added properties to `CohortSnapshot`: tags
+- ...and 8 more changes
+- Minor updates (formatting, metadata)
+- Minor updates (formatting, metadata)
+
+**Conversations**
+- Enable the Imports endpoints (list, create, fetch, cancel) and the Import Outcomes list endpoint in prod-us1
+- Add GET /v2/Imports/{ImportId}/Outcomes to list an import's per-resource outcomes (dev-us1 and stage-us1)
+- Add `EMAIL` to the Conversations v2 Communication channel enum.
+
+**Deletions**
+- Enable the User Data Deletions API in the `stage-us1` realm.
+
+**Destinations**
+- Enable Replay admin APIs for prod-us1 and prod-ie1 realms
+
+**Iam**
+- Raised the most permissions in a POST /v1/Account/AuthorizedApps section, and in a part of the PUT /v1/Organization/AgentsRegistration/Permissions request, to 2000 for MCP agents; the limit of other consents is unchanged
+- Lowered the most permissions in a POST /v1/Account/AuthorizedApps section to 150, which is what an XMS policy holds
+- Made the GET and PUT /v1/Organization/AgentsRegistration/Permissions routes available in stage-us1 and prod-us1
+- Added the MCP agent consent fields to GET /v1/Account/AuthorizedApps: agent, account, organization, sections (the offered permissions per context) and redirect, and a 401 body with redirect when the account's organization has not registered or enabled the agent (code 25110, with organization_sid) or the account has no organization (code 25111). oauth_app_sid, client_sid, consent_state and app_permissions are now nullable, since an MCP agent response does not use them
+- Added sections (at least 1) with permissionSelectionMode (ALL_READ, ALL_READ_WRITE, SPECIFIC) and permissions (at most 200) to the POST /v1/Account/AuthorizedApps request, and response_mode and form_params to its 201 response
+- Made the /v1/Organization/AgentsRegistration routes available in stage-us1 and prod-us1
+- Added created_by (the name of the user who registered the agent) and created_by_sid to the /v1/Organization/AgentsRegistration responses; both are null for a registration made before the user was recorded
+- Moved the POST /v1/actions/post_login (PostLoginActionRequest) webhook payload to camelCase (accountSid, nodeId, actionId, userContext, authenticationContext, requestContext, ipAddress, userAgent, requestId, clientId, identifierType); replaced timestamp with the RFC 3339 sentAt, made authorizationDetails a JSON array, made completedAt an RFC 3339 string, and added userContext (isFirstLogin, user) with the CIAM id at userContext.user.userId
+- Added the optional type, agent, account, organization, sections, last_used and expires_at to the iam.v1.consent responses of the GET /v1/Account/AuthorizedApps and GET /v1/Organization/AuthorizedApps lists, for MCP connections. The list shows an MCP connection beside the OAuth applications, and deleting it revokes the whole connection
+- Added a 404 to PUT /v1/Account/AuthorizedApps/{consentSid} for an MCP connection, which cannot be updated
+- Added the GET and PUT /v1/Organization/AgentsRegistration/Permissions routes for what any agent may do in the caller's organization (dev-us1)
+- Renamed the properties of the /v1/Organization/AgentsRegistration responses to snake_case (registration_sid, friendly_name, client_url, date_created, date_updated), as the other IAM responses are; the request bodies keep clientUrl and enabled
+- Fixed the pagination meta of the GET /v1/Organization/AgentsRegistration response: it is mapped from the service's snake_case fields, as in the other IAM list routes, so key, pageSize and the tokens are no longer null
+- Added the /v1/Organization/AgentsRegistration routes (list, register, fetch, enable or disable, remove) for the MCP agents an organization lets its users connect (dev-us1)
+
+**Instrumentation**
+- # API Changes
+- Initial read-only admin-api spec for the Behavioral Events (events-domain) One Admin console: event producers (list, fetch), write keys (list), event schemas (list, fetch). dev-us1 and stage-us1 only.
+- **Control Plane create, update and attach are synchronous** (`dev-us1`), matching the deployed service:
+- CreateEventProducer returns `201` with the event producer (`ETag`, `Idempotent-Replayed`), not `202` with an operation
+- PatchEventProducer returns `200` with the event producer (`ETag`), not `202`; `If-Match` is its only header parameter
+- AttachEventProducerSchemaVersion returns `201` with the attachment (`Idempotent-Replayed`), not `202`
+- **Replaced the Control Plane with the private-beta API** (`/v1/ControlPlane/…`), enabled in `dev-us1` only:
+- Removed the EventSources, Datasets, EventSources EventSchemas and AutoInstrumentationRules operations
+- Added `/v1/ControlPlane/EventProducers` (CreateEventProducer, ListEventProducers)
+- Added `/v1/ControlPlane/EventProducers/{producerId}` (FetchEventProducer, PatchEventProducer, DeleteEventProducer)
+- Added `/v1/ControlPlane/EventProducers/{producerId}/WriteKeys` (CreateWriteKey, ListWriteKeys)
+- Added `/v1/ControlPlane/EventProducers/{producerId}/WriteKeys/{writeKey}` (DeleteWriteKey)
+- Added `/v1/ControlPlane/EventProducers/{producerId}/EventSchemas` (AttachEventProducerSchemaVersion, ListEventProducerSchemaAttachments)
+- Added `/v1/ControlPlane/EventProducers/{producerId}/EventSchemas/{schemaId}/Versions/{version}` (DetachEventProducerSchemaVersion)
+- Added `/v1/ControlPlane/EventSchemas` (CreateEventSchema, ListEventSchemas)
+- Added `/v1/ControlPlane/EventSchemas/{schemaId}` (FetchEventSchema, PatchEventSchema, DeleteEventSchema)
+- Added `/v1/ControlPlane/EventSchemas/{schemaId}/Versions` (ListEventSchemaVersions)
+- Added `/v1/ControlPlane/EventSchemas/{schemaId}/Versions/{version}` (FetchEventSchemaVersion, DeleteEventSchemaVersion)
+- Updated `/v1/ControlPlane/Operations/{operationId}` (FetchControlPlaneOperationStatus) to the new operation shape; now `dev-us1` only
+
+**Knowledge**
+- **Added 1 new path(s)**:
+- `/v2/ControlPlane/KnowledgeMigrations/{accountSid}/Limits` (AdminFetchKnowledgeMigrationLimits)
+- **Content updates**:
+- `AdminListKnowledgeMigrations`: the `state` query parameter is optional; without it the list returns every account with knowledge bases
+- Added properties to `MigrationSummary`: knowledgeBaseCount
+- **Added 7 new path(s)**:
+- `/v2/ControlPlane/KnowledgeMigrations` (AdminListKnowledgeMigrations)
+- `/v2/ControlPlane/KnowledgeMigrations/{accountSid}` (AdminFetchKnowledgeMigration)
+- `/v2/ControlPlane/KnowledgeMigrations/{accountSid}/History` (AdminListKnowledgeMigrationHistory)
+- `/v2/ControlPlane/KnowledgeMigrations/{accountSid}/Readiness` (AdminFetchKnowledgeMigrationReadiness)
+- `/v2/ControlPlane/KnowledgeMigrations/{accountSid}/Runs` (AdminListKnowledgeMigrationRuns)
+- `/v2/ControlPlane/KnowledgeMigrations/{accountSid}/Transitions` (AdminListKnowledgeMigrationTransitions, AdminCreateKnowledgeMigrationTransition)
+- `/v2/ControlPlane/KnowledgeMigrations/{accountSid}/Transitions/{transitionId}` (AdminFetchKnowledgeMigrationTransition)
+
+**Lookups**
+- Add test api support for Lookup Bulk Jobs endpoints
+
+**Memory**
+- No path changes (schema only)
+- Added optional `dataAsOf` to the `Store` schema returned by `AdminFetchStore`.
+- Added optional `dataAsOf` to the `Store` schema returned by `FetchStore`.
+- Added `FetchProfileOperation` (`GET /v1/ProfileOperations/{operationId}`) to check the status and
+- progress of an asynchronous profile operation. The response includes a `Retry-After` header with
+- the minimum number of seconds to wait before polling again. The endpoint is hidden from the
+- helper libraries and gated behind the `api.memory.2026Q3` beta feature.
+- The `202` responses of `UpdateProfilesBulk` and `CreateProfilesImportV2` now return `operationId`,
+- `createdAt` and `statusUrl` (behind the `api.memory.2026Q3` beta feature), plus the `Operation-Id`,
+- `Location` and `Retry-After` response headers. Use `statusUrl` with `FetchProfileOperation` to
+- track the operation.
+- Additive and backwards compatible: existing request and response fields are unchanged.
+
+**Messaging**
+- Add data access policy admin endpoints (`GET/PUT /v1/Accounts/{AccountSid}/DataAccessPolicy`) to the messaging admin-api, backed by `postflight-messaging-api` (dev-us1 and stage-us1 only)
+- Enable data access policy admin endpoints (`GET/PUT /v1/Accounts/{AccountSid}/DataAccessPolicy`) in prod-us1 and prod-ie1
+
+**Segment**
+- # API Changes
+- Add read-only Cob routes: `GET /v1/Segment/Cob/Whoami`, `/Records`, `/Audits`, `/Audits/{Family}/{Name}`
+- Add `GET /v1/Whoami` (One Admin identity check for the Segment oneadmin-gateway)
+
+**Trusthub**
+- Make id, sessionId and sessionToken required and non-nullable in the A2P embedded session response. **(breaking change)**
+
+**Voice**
+- Add internal console ProvisioningStatus endpoint.
+
+**Webhooks**
+- **Changed**: Rule `prefix` and `value` are limited to 1000 characters. A `prefix` must end with `/` and a `value` must not.
+- API maturity level changed from `beta` to `ga`. Library visibility changed from `private` to `public`.
+
 ## 7.2.0 (2026-10-13)
 
 * oaiFeat: Updated api definitions changelog in CHANGES.md (#734) ([ea6c014](https://github.com/twilio/twilio-cli/commit/ea6c014)), closes [#734](https://github.com/twilio/twilio-cli/issues/734)
