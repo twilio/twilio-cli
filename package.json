@@ -88,6 +88,16 @@
     "argparse": "^2.0.1",
     "@oclif/core": {
       "globby": "^7.1.1"
+    },
+    "@oclif/plugin-update": {
+      "@oclif/core": {
+        "minimatch": "^11.0.1"
+      }
+    },
+    "@oclif/plugin-warn-if-update-available": {
+      "@oclif/core": {
+        "minimatch": "^11.0.1"
+      }
     }
   },
   "engines": {
