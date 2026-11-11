@@ -1,3 +1,9 @@
+## 7.3.0 (2026-11-11)
+
+* oaiFeat: Updated api definitions changelog in CHANGES.md (#740) ([5830473](https://github.com/twilio/twilio-cli/commit/5830473)), closes [#740](https://github.com/twilio/twilio-cli/issues/740)
+* fix: clear npm audit moderate findings (minimatch, undici, qs, follow-redirects) (#741) ([5381520](https://github.com/twilio/twilio-cli/commit/5381520)), closes [#741](https://github.com/twilio/twilio-cli/issues/741)
+
+
 ---------------------------
 **Twiml**
 - Add ElevenLabs voices to `<Say>` verb.
