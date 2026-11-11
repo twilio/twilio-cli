@@ -19,7 +19,8 @@ for (const field of ['dependencies', 'devDependencies', 'optionalDependencies', 
 try {
   fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
   console.log(`stage 1: third-party packages only, --before=${cutoff}`);
-  npm(`--before=${cutoff}`);
+  // Skip lifecycle scripts: postinstall (welcome.js) needs @twilio/cli-core, which stage 1 leaves out.
+  npm('--ignore-scripts', `--before=${cutoff}`);
 } finally {
   fs.writeFileSync('package.json', original);
 }
