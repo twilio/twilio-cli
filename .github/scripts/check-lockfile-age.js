@@ -4,7 +4,7 @@ const fs = require('fs');
 const { execFileSync } = require('child_process');
 
 const baseRef = process.argv[2] || 'origin/main';
-const minDays = Number(process.argv[3] || 2);
+const minDays = Number(process.env.MIN_AGE_DAYS || 2);
 const cutoff = Date.now() - minDays * 24 * 3600 * 1000;
 
 const versionsOf = text => {
