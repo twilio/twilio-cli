@@ -17,13 +17,19 @@ jobs:
           package-manager: npm
 
   # Internal Artifactory blocks versions younger than 2 days for CI; catch them on the PR.
+  # Our own packages skip the age rule but must already be available in Artifactory.
   lockfile-age:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-x64
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
+      - name: Artifactory OIDC Auth
+        uses: twilio/sdk-actions/artifactory-oidc@23b656b843d2a3461cf38e4fd466c07a822d5fc0 # v1
       - name: Fail on lockfile versions younger than 2 days
         env:
           BASE_REF: ${{ github.base_ref }}
