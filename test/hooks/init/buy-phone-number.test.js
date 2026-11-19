@@ -10,6 +10,8 @@ const TEST_PHONE_NUMBER = '+12345678901';
 const TEST_AREA_CODE = '123';
 
 const getFakeConfig = () => ({
+  loadCommands: sinon.fake(),
+  loadTopics: sinon.fake(),
   plugins: [
     {
       name: 'api-cli-commands',
@@ -125,12 +127,22 @@ describe('hooks', () => {
           expect(ctx.stderr).to.contain('successfully purchased');
         });
 
+      test.it('registers the buy commands and topic with the CLI config', () => {
+        const ctx = { config: getFakeConfig() };
+        pluginFunc.call(ctx);
+        const plugin = ctx.config.plugins[1];
+
+        expect(ctx.config.loadCommands.calledOnceWithExactly(plugin)).to.be.true;
+        expect(ctx.config.loadTopics.calledOnceWithExactly(plugin)).to.be.true;
+      });
+
       test.stderr().it('does nothing if the API commands plugin is not found', (ctx) => {
         ctx.config = getFakeConfig();
         ctx.config.plugins[0].name = 'not the API command plugins';
         pluginFunc.call(ctx);
 
         expect(ctx.config.plugins).to.have.length(1);
+        expect(ctx.config.loadCommands.called).to.be.false;
         expect(ctx.stderr).to.contain('Twilio API Plugin');
       });
 
