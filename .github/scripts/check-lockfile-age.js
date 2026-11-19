@@ -7,8 +7,6 @@ const baseRef = process.argv[2] || 'origin/main';
 const minDays = Number(process.env.MIN_AGE_DAYS || 2);
 const cutoff = Date.now() - minDays * 24 * 3600 * 1000;
 
-const TWILIO_OWNED = /^(@twilio\/|twilio$)/;
-
 const versionsOf = text => {
   const out = new Map();
   for (const [path, info] of Object.entries(JSON.parse(text).packages || {})) {
@@ -35,7 +33,6 @@ const tooNew = [];
 const times = new Map();
 for (const [path, version] of changed) {
   const name = nameOf(path);
-  if (TWILIO_OWNED.test(name)) continue;
   if (!times.has(name)) {
     try {
       times.set(name, JSON.parse(execFileSync('npm', ['view', name, 'time', '--json', '--registry', 'https://registry.npmjs.org/'], { encoding: 'utf8', maxBuffer: 1 << 26 })));
