@@ -18,7 +18,7 @@ const pkg = JSON.parse(original);
 const twilioPackages = {};
 for (const field of ['dependencies', 'devDependencies', 'optionalDependencies', 'peerDependencies']) {
   for (const [name, range] of Object.entries(pkg[field] || {})) {
-    if (!name.startsWith('@twilio/')) continue;
+    if (!/^(@twilio\/|twilio$)/.test(name)) continue;
     twilioPackages[name] = range;
     delete pkg[field][name];
   }
